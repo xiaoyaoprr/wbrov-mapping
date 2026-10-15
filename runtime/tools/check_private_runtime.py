@@ -32,7 +32,7 @@ from typing import Any, Dict, Iterable, List, Mapping, MutableMapping, Optional,
 
 SCHEMA_VERSION = 3
 PACKAGE_KIND = "wbrov-private-rtabmap-runtime"
-EXPECTED_PRIVATE_ROOT = "/home/exocean/.cache/wbrov_mapping_builds/gravity_constrained_production_v1_20260912"
+EXPECTED_PRIVATE_ROOT = '/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/deploy8_20261015_r3'
 MANIFEST_NAME = "runtime-manifest.json"
 MAX_MANIFEST_BYTES = 32 * 1024 * 1024
 MAX_TREE_ENTRIES = 100000
@@ -41,43 +41,40 @@ MAX_MAPS_RECORDS = 1000000
 READELF = "/usr/bin/readelf"
 LDD = "/usr/bin/ldd"
 
-SOURCE_HASHES: Dict[str, str] = {
-    "rtabmap_core/CMakeLists.txt":
-        "9d11b078e265cbf55b6f55564fa9bb255bce513e41fad66aa39aa2a5291f189d",
-    "rtabmap_core/corelib/include/rtabmap/core/Parameters.h":
-        "e1c1dd63bc8be54f9a3033ce8caf0c1671c27bdeb2ba43c0951ef8216e9e087b",
-    "rtabmap_core/corelib/include/rtabmap/core/DBDriver.h":
-        "b356683ffbd4201721e10a6665880862cc699d37794bb9527abbd2ec44b933eb",
-    "rtabmap_core/corelib/src/DBDriver.cpp":
-        "bf6667683ac68cb4c0ffd7344fff5ffbce3888fd8023affb88309140cda70b91",
-    "rtabmap_core/corelib/include/rtabmap/core/DBDriverSqlite3.h":
-        "0a0c42db53cbeaffe4af958a0e6eb0d092108274f1425998628ac2b15de8862c",
-    "rtabmap_core/corelib/src/DBDriverSqlite3.cpp":
-        "fb0e6cde7bc7f1470374cc5ce9518d80b92bce48e0ae32f1c1688f80beaf142e",
-    "rtabmap_core/corelib/include/rtabmap/core/Memory.h":
-        "99a6c1d70cfcc6f8f0537040440962b0625bead8d4eb51677219443d56510c23",
-    "rtabmap_core/corelib/src/Memory.cpp":
-        "ec5f623b71890df86eecd0ebdc5aa2bcbfc3ccfaa0a0e1b14e0bdb7b444e812f",
-    "rtabmap_core/corelib/src/Rtabmap.cpp":
-        "0923313c0fdec9bc746e346016415c7bd2d0549b230c2279e383db8261037ddc",
-    "rtabmap_core/corelib/include/rtabmap/core/Rtabmap.h":
-        "8e37f5e7a91496ace9d8a172e7bfec0cee1e4860fb06a9fc2de86e7179d5c0b1",
-    "rtabmap_ros/rtabmap_slam/src/CoreWrapper.cpp":
-        "de41a6608d3d47b4ce2763159f0594cecfb4439f328f853ced63595498e92a05",
-    "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/CoreWrapper.h":
-        "268ddfe5263c30696293dedebb650df5b9671786a3a838639c84df0610a9f0b8",
-    "rtabmap_ros/rtabmap_slam/src/CoreNode.cpp":
-        "ee64bddc87e3e35b5d063fbe5f0dd4fb37ccc26e23479ce78bf131a6f2a0d851",
-    "rtabmap_ros/rtabmap_odom/src/OdometryROS.cpp":
-        "7f17a68d58985bc620a303b1437f5df422d001fc3555b3c4c558e27c0ad2aeee",
-    "rtabmap_ros/rtabmap_odom/include/rtabmap_odom/OdometryROS.h":
-        "5f56ae4da35a441085c68f7b2b727a9d5437bb42795bae461f5f637c0c3d3d29",
-    "rtabmap_ros/rtabmap_conversions/src/MsgConversion.cpp":
-        "ef9e331097a1aa4893b510c2aae7193a664b806eeca4a7019321809b9178eefa",
+SOURCE_HASHES = {
+    "rtabmap_core/CMakeLists.txt": "9d11b078e265cbf55b6f55564fa9bb255bce513e41fad66aa39aa2a5291f189d",
+    "rtabmap_core/corelib/include/rtabmap/core/DBDriver.h": "b356683ffbd4201721e10a6665880862cc699d37794bb9527abbd2ec44b933eb",
+    "rtabmap_core/corelib/include/rtabmap/core/DBDriverSqlite3.h": "0a0c42db53cbeaffe4af958a0e6eb0d092108274f1425998628ac2b15de8862c",
     "rtabmap_core/corelib/include/rtabmap/core/ImageInputReceipt.h": "9c0a7fb9d4775d4b5184b3114b3eb40b0e94f3d29f0484325df17e182de04cfe",
-    "rtabmap_core/corelib/src/optimizer/OptimizerG2O.cpp": "e7e6a4fb2c2ba8fac1f9f7b891ec7e872394ef711ff244ce5dc213d8e12198fc",
+    "rtabmap_core/corelib/include/rtabmap/core/Memory.h": "99a6c1d70cfcc6f8f0537040440962b0625bead8d4eb51677219443d56510c23",
+    "rtabmap_core/corelib/include/rtabmap/core/Parameters.h": "e1c1dd63bc8be54f9a3033ce8caf0c1671c27bdeb2ba43c0951ef8216e9e087b",
+    "rtabmap_core/corelib/include/rtabmap/core/Rtabmap.h": "6df7a708295d8ab9c3b0f0daf344f291a337d49f9ae7071453940cf3fc690c0d",
     "rtabmap_core/corelib/include/rtabmap/core/optimizer/OptimizerG2O.h": "75ff6492cb7016e1f3f1a4d0012ad33000d9334da5eb9b2a1ba1da0e9cf4f752",
+    "rtabmap_core/corelib/src/DBDriver.cpp": "bf6667683ac68cb4c0ffd7344fff5ffbce3888fd8023affb88309140cda70b91",
+    "rtabmap_core/corelib/src/DBDriverSqlite3.cpp": "fb0e6cde7bc7f1470374cc5ce9518d80b92bce48e0ae32f1c1688f80beaf142e",
+    "rtabmap_core/corelib/src/EarlyGravityCertificate.h": "143cf85afb1503bcdaf25a91abdf7baaea27f689c11ee9f65f801f8606715bca",
+    "rtabmap_core/corelib/src/Memory.cpp": "ec5f623b71890df86eecd0ebdc5aa2bcbfc3ccfaa0a0e1b14e0bdb7b444e812f",
+    "rtabmap_core/corelib/src/Rtabmap.cpp": "87d4848b4222ac7076c475cc8eabbfab0cbdf7b987d57c4f8e8e78d53d4fad08",
+    "rtabmap_core/corelib/src/early_component_gate.inc": "b48274b3ad7c6e61a0dda7dfbe5e3630f5d54c6a636cf00176e96335af152713",
+    "rtabmap_core/corelib/src/early_shadow_guard.inc": "240682e319bc57cb45f840c874e02b7d737e2d87fbd429f11941bace1a2192d4",
+    "rtabmap_core/corelib/src/odometry/DepthGeometryRecovery.h": "ac904ee5a0e3c9c6de35c4b049f39828f79636a92a3d4b0c81f59bd2cb17c76a",
+    "rtabmap_core/corelib/src/odometry/OdometryF2M.cpp": "6529a78d285aece8408795384c7b0f1ddb5956a2ad966facf018fcceadd80bbc",
+    "rtabmap_core/corelib/src/optimizer/OptimizerG2O.cpp": "e7e6a4fb2c2ba8fac1f9f7b891ec7e872394ef711ff244ce5dc213d8e12198fc",
+    "rtabmap_core/corelib/src/optimizer_trace.inc": "ca20901de5d2856aa0e45586c7f9e4cbfdd595ed84dd435d9d0bcd66518adc53",
+    "rtabmap_core/corelib/src/recovery_geometry.inc": "c28a5c4b7ccaa9f533ac18da9056939f024fde241b31b7de017df265a3d43992",
     "rtabmap_core/corelib/src/safe_gravity_residual.inc": "ac88ab9dbfcfb934a32ee840ad1a793d1282c195a44a949274801e110b070a24",
+    "rtabmap_core/corelib/src/visual_recovery.inc": "7088ef53d0b13a6634af9e79b018f684dd8ea217a34f0287339860f60f2cde62",
+    "rtabmap_ros/rtabmap_conversions/src/MsgConversion.cpp": "ef9e331097a1aa4893b510c2aae7193a664b806eeca4a7019321809b9178eefa",
+    "rtabmap_ros/rtabmap_odom/include/rtabmap_odom/OdometryROS.h": "5f56ae4da35a441085c68f7b2b727a9d5437bb42795bae461f5f637c0c3d3d29",
+    "rtabmap_ros/rtabmap_odom/src/OdometryROS.cpp": "7f17a68d58985bc620a303b1437f5df422d001fc3555b3c4c558e27c0ad2aeee",
+    "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/CoreWrapper.h": "7628d97bf8a225451d2fb33f97d8e3bd79baf8ddb672daef032e4b8f51a68362",
+    "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/GlobalPublicationGate.h": "daedd4e70da4b7d207285d8f303ba9e114b8b006fe5f7e46ed1e8f528637bf51",
+    "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/JumpQuarantineGate.h": "a24d09c476743889db76171ef5f19393ad7c053549441de48eb9c4bb9236e0ca",
+    "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/ManagedImuEpochBuffer.h": "7b72f4071377c8e66bdc4d2c6daaab654be0802cdeba19142022575aa2a5d22f",
+    "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/MappingContinuityGate.h": "d5f43d0bc9585c46b15eea755c1b3125b16b4f1425c86aedf11fbb26324d2a60",
+    "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/SubmapPublisher.h": "3148830766e326c564ffee354473a2445ad990f56c14431480a7aee539abc797",
+    "rtabmap_ros/rtabmap_slam/src/CoreNode.cpp": "ee64bddc87e3e35b5d063fbe5f0dd4fb37ccc26e23479ce78bf131a6f2a0d851",
+    "rtabmap_ros/rtabmap_slam/src/CoreWrapper.cpp": "a81a7a86f9e6de56271e40246ecaf47169ed90f4abc476511f02480da4661730"
 }
 
 ENTRYPOINTS = {
@@ -90,12 +87,9 @@ ENTRYPOINTS = {
 }
 
 RUNTIME_HELPERS = {
-    "safe_reloc_ipc_engine": "libexec/safe_reloc_ipc_engine.py",
-    "safe_reloc_engine_core": "libexec/safe_reloc_engine_core.py",
-    "write_process_identity": "libexec/write_process_identity.py",
-    "corner_recovery_consumer": "libexec/wbrov_corner_recovery/consumer.py",
     "corner_recovery_config_renderer": "libexec/wbrov_corner_recovery/render_config.py",
     "corner_recovery_config_template": "libexec/wbrov_corner_recovery/production_config_template.json",
+    "corner_recovery_consumer": "libexec/wbrov_corner_recovery/consumer.py",
     "corner_recovery_module_bridge_status": "libexec/wbrov_corner_recovery/bridge_status.py",
     "corner_recovery_module_core_pixel_consumer": "libexec/wbrov_corner_recovery/core_pixel_consumer.py",
     "corner_recovery_module_core_pixel_join": "libexec/wbrov_corner_recovery/core_pixel_join.py",
@@ -108,6 +102,14 @@ RUNTIME_HELPERS = {
     "corner_recovery_module_tag_pixel_record": "libexec/wbrov_corner_recovery/tag_pixel_record.py",
     "corner_recovery_module_verified_corners": "libexec/wbrov_corner_recovery/verified_corners.py",
     "corner_recovery_module_verified_pixel_observer": "libexec/wbrov_corner_recovery/verified_pixel_observer.py",
+    "safe_reloc_engine_core": "libexec/safe_reloc_engine_core.py",
+    "safe_reloc_ipc_engine": "libexec/safe_reloc_ipc_engine.py",
+    "submap_display_graph_display_geometry": "libexec/graph_display_geometry.py",
+    "submap_display_rtabmap_graph_display": "libexec/rtabmap_graph_display.py",
+    "submap_display_rtabmap_submap_display": "libexec/rtabmap_submap_display.py",
+    "submap_display_submap_display_geometry": "libexec/submap_display_geometry.py",
+    "submap_display_submap_rviz_config": "libexec/submap_rviz_config.py",
+    "write_process_identity": "libexec/write_process_identity.py"
 }
 
 # Bytes staged by the independently reviewed ARM observer/frontend/engine
@@ -115,19 +117,31 @@ RUNTIME_HELPERS = {
 # build outputs, so bind them explicitly as well as through the final payload
 # hashes recorded below.
 AUXILIARY_INPUT_HASHES = {
-    "header_health_observer":
-        "a04aa06117bae16265f4d836406af274b1de105dff9c53e3a6b6bad7c0886018",
-    "safe_reloc_gid_frontend":
-        "a09155c9aa28dcf297c3373b27730ab0775ba9b50ebef1d00cc8d855611e39bd",
-    "safe_reloc_ipc_engine":
-        "e0568a37c397f99e1ae492119c6f3a41f763708ce4122e47024fa5e1c2611ba9",
-    "safe_reloc_engine_core":
-        "314314f138e4057c1b5e074cc31fc98e3c3652bfab26cb0fb9551e3d6464f555",
-    "write_process_identity":
-        "06b99b3f26955770a6bb3cfb7c6054f8e2fef6655c90ce513e4371d9161143f5",
-    "corner_recovery_consumer": "90f113846771fa9cbe3f698f9c2392e248f4cbaa223383fb1273f042be7fad12",
     "corner_recovery_config_renderer": "74957100aa6f959868b55efa5c8effadb536342f7774e95fb1099aa3a9ca620e",
     "corner_recovery_config_template": "32646c8505394de531af3041fad50578ee7ab57ccfca2f0e23cf87efe2165063",
+    "corner_recovery_consumer": "6b7b4b44526c3e9b472b0772531ec4292725ecbe83e7c30d1c27354d8dcee36f",
+    "corner_recovery_module_bridge_status": "fbb02cf5795781f10b53f3099dcd2649944bde6a53f9175a14ef8ad843adc78f",
+    "corner_recovery_module_core_pixel_consumer": "6a003bbf0e60163bd77ee10775f0690b06818fd1325ccdb39cc9bba0b7f85f80",
+    "corner_recovery_module_core_pixel_join": "5b0bc22205258afde156ce3e1e4d0047fbddedb8f159b2a76380428c04db8d4d",
+    "corner_recovery_module_decoded_pixel_metadata": "acb9f4778160b7fadac4db7fa1a3443a5f08cd238f634aba7a02704aab903bfc",
+    "corner_recovery_module_edge_refinement": "2b030f5a6948290d62cb972b9b21be9df26f2de99d588e59ffc6d4cf34abdb33",
+    "corner_recovery_module_live_bridge": "bab7692e263412ffd01c87a8db0849d934c217301fb4025b434e9521db62c8a2",
+    "corner_recovery_module_managed_graph_state": "896826dfd4cd0c119513bb82fed10731ad70c5c638547ab30114722dbeea6de1",
+    "corner_recovery_module_measured_bridge": "b035c7b9a1cdb8979e7c9d4011a20cf70c1b78a7e6993fdc90cbb3900d1030fa",
+    "corner_recovery_module_message_info_executor": "fa4658355deb48d46e47595059ed151087322017bc3148c7ad64cdf6806797f0",
+    "corner_recovery_module_tag_pixel_record": "d0dcf6bdc59f8f9522cacfa64bb7087c8ebb9e6ecbfac574632a38034f73db93",
+    "corner_recovery_module_verified_corners": "e0a54d003d6f987e55e45f54cafea538a58ebb06e563e9daf1d19e4265bb9b72",
+    "corner_recovery_module_verified_pixel_observer": "b8114d17f2da6a3115960d6c34dd0d49df09c696682176698add679002cb7f3d",
+    "header_health_observer": "a04aa06117bae16265f4d836406af274b1de105dff9c53e3a6b6bad7c0886018",
+    "safe_reloc_engine_core": "314314f138e4057c1b5e074cc31fc98e3c3652bfab26cb0fb9551e3d6464f555",
+    "safe_reloc_gid_frontend": "a09155c9aa28dcf297c3373b27730ab0775ba9b50ebef1d00cc8d855611e39bd",
+    "safe_reloc_ipc_engine": "e0568a37c397f99e1ae492119c6f3a41f763708ce4122e47024fa5e1c2611ba9",
+    "submap_display_graph_display_geometry": "5bd28861322e8c98afedd9d61b313a2f740d143ebfd5e48429f39ba7025977df",
+    "submap_display_rtabmap_graph_display": "125772c67130460b82a6f6a38e0a764d41995314c327a7975ec709471403c238",
+    "submap_display_rtabmap_submap_display": "843a002677a2cba18b796f43815e57ff3b0956fd47c7e1929864db0d6e03efdc",
+    "submap_display_submap_display_geometry": "21827d469bde4ab74e2892b79e7819ffb9b33d1e982274df6608cd7bd3bf69b0",
+    "submap_display_submap_rviz_config": "b07466ecf249349c9048391f834e6f49ee8a21d8e269b7781a667c88a21e791a",
+    "write_process_identity": "06b99b3f26955770a6bb3cfb7c6054f8e2fef6655c90ce513e4371d9161143f5"
 }
 
 REQUIRED_COMPONENT_KEYS = {

@@ -1,0 +1,92 @@
+{
+  "schema": "wbrov.repository-deploy8-record.v1",
+  "status": "deployed",
+  "production_switched": true,
+  "runtime": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-e14fc23acd43991952aa0c9e7de0716f9eadf027959cedca07a1ddc16ea193a1",
+  "runtime_manifest_sha256": "dd256165c38309d273df910a5abb36ebce903777fd627b5d003899abecd29ca1",
+  "desktop_entry": "/home/exocean/Desktop/机器人键盘遥控/8-水下遥控开灯加建图_一键启动",
+  "desktop_sha256": "f44d584c2b48b4bf22b04a1ab1575e3e2d9907e324824ea5c1d94a20263d9e20",
+  "backup": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/deploy8_display_hotfix/backup",
+  "hardware_started": false,
+  "field_validated": false,
+  "known_limitations": [
+    "Recorded non-Tag recovery not passed",
+    "Strict replay source timing not passed"
+  ],
+  "before": {
+    "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh": "474b5eace456779613016d2ce9bf1121d0ae285a703446c2e4933d62a5945ae6",
+    "/home/exocean/Desktop/机器人键盘遥控/.tools/run_water_mapping_with_light.sh": "499209d2035acafcd8e0a9bb87b6ec70acc338e675c38bd29a331f5e1ce13f85"
+  },
+  "after": {
+    "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh": "bcae85036302f6775fc0af975b95fbbf978298d072169220a155900018f8bbab",
+    "/home/exocean/Desktop/机器人键盘遥控/.tools/run_water_mapping_with_light.sh": "5c548be86d75b7213c7b894793ca3f353fc0d6a4a53a866969487859ef614082"
+  },
+  "steps": [
+    {
+      "name": "installed_mapping_syntax",
+      "returncode": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "installed_outer_syntax",
+      "returncode": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "installed_camera_profile",
+      "returncode": 0,
+      "log_sha256": "64378a400dcd43be4d18c9584289759c4c864649321e2541fa7ca06949f4e5ba"
+    },
+    {
+      "name": "installed_runtime_tree",
+      "returncode": 0,
+      "log_sha256": "e51ae358c54dcad9fe6c2ddb7ebac56dfa43204806fd1e8a47752c1ac574d741"
+    },
+    {
+      "name": "installed_outer_readonly",
+      "returncode": 0,
+      "log_sha256": "edc69500f41b0adb33f158b829b9b73c6045c9e25479aa68bf9c54025035c7f2"
+    }
+  ],
+  "protected_unchanged": true,
+  "host_recorded_at": "2026-10-15T12:21:33.943478+00:00",
+  "raw_receipt_sha256": "2a589f8b1227563a5ceb79f8d064a9e85b7b4914e3456833bdd75cba9d8d9c06",
+  "candidate_native_receipt_sha256": "dbc56b4b3457405084641d9cf690b2d995bb5baf03c6b5fa42cac2d307cb9b49",
+  "runtime_regular_files": 577,
+  "protected_files_checked": 6,
+  "runtime_checker_change": "Only frozen source/helper identities and build-root metadata changed; verifier functions/classes are identical.",
+  "source_files": {
+    "launch/deployed_20261015/start_rtabmap_calib_ab.sh": {
+      "sha256": "bcae85036302f6775fc0af975b95fbbf978298d072169220a155900018f8bbab",
+      "installed_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh"
+    },
+    "launch/deployed_20261015/run_water_mapping_with_light.sh": {
+      "sha256": "5c548be86d75b7213c7b894793ca3f353fc0d6a4a53a866969487859ef614082",
+      "installed_path": "/home/exocean/Desktop/机器人键盘遥控/.tools/run_water_mapping_with_light.sh"
+    },
+    "runtime/tools/check_private_runtime.py": {
+      "sha256": "f91e2878d3c168869249d76fd9398b9608786b6739bbe17fbb1cb9c815f62bc3",
+      "installed_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-e14fc23acd43991952aa0c9e7de0716f9eadf027959cedca07a1ddc16ea193a1/tools/check_private_runtime.py"
+    }
+  },
+  "supervisor_test": {
+    "status": "passed",
+    "log_sha256": "71fa58fa50024b2ab8a270cded5d44eb5f358ab31ed14057965a21ea010e20ff"
+  },
+  "rollback_script_sha256": "8a80481da740a4f7e50112686fef342a6b668a3784ae9cf76b25f5cd0e959a81",
+  "rollback_transition_sha256": "c95ec9ab484b63bd620ca570ff9acea82f3c696aad267348780d251f0ffa45ef",
+  "initial_file_deployment": {
+    "after": {
+      "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh": "474b5eace456779613016d2ce9bf1121d0ae285a703446c2e4933d62a5945ae6",
+      "/home/exocean/Desktop/机器人键盘遥控/.tools/run_water_mapping_with_light.sh": "499209d2035acafcd8e0a9bb87b6ec70acc338e675c38bd29a331f5e1ce13f85"
+    },
+    "before": {
+      "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh": "11add56b077460965211da6cead6de308e655ebe548a2c6bdd133a60f4a4c828",
+      "/home/exocean/Desktop/机器人键盘遥控/.tools/run_water_mapping_with_light.sh": "becacbb36abbbef3919895f95cfb622a789a46c7997dd34f62fa8950956b0089"
+    },
+    "backup": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/deploy8_20261015_r3/backup",
+    "raw_receipt_sha256": "dd5ae5ad816e0fa17aac0514a601b2879f431aabd4dbc41e7be1da093dc825ba"
+  },
+  "display_startup_record": "startup-display-check.json",
+  "full_entry_after_fix_validated": false
+}

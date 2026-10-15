@@ -1,0 +1,107 @@
+{
+  "schema": "wbrov.display-startup-fix.v1",
+  "status": "deployed_with_targeted_regression_passed",
+  "observed_failure": {
+    "run": "/home/exocean/maps/rtabmap_calibration_ab/custom_20261008_114348",
+    "launcher_sha256": "474b5eace456779613016d2ce9bf1121d0ae285a703446c2e4933d62a5945ae6",
+    "error": "ModuleNotFoundError: No module named 'submap_display_geometry'",
+    "cause": "prepare_visualization_runtime omitted a dependency imported by the updated graph display.",
+    "rviz_reached": false,
+    "user_started_run": true
+  },
+  "fix": [
+    "Hash-check and copy submap_display_geometry.py alongside the per-run graph display.",
+    "Check the actual copied script before starting camera nodes.",
+    "Record the module hash and include submap display logs in startup failure output."
+  ],
+  "candidate_regression": {
+    "field_validated": false,
+    "hardware_started": false,
+    "launcher_sha256": "bcae85036302f6775fc0af975b95fbbf978298d072169220a155900018f8bbab",
+    "rviz_gui_started": false,
+    "status": "PASS",
+    "steps": [
+      {
+        "expected_returncode": 0,
+        "name": "copy_calib_ab_20260826",
+        "passed": true,
+        "returncode": 0
+      },
+      {
+        "expected_returncode": 1,
+        "name": "original_copy_reproduces_missing_module",
+        "passed": true,
+        "returncode": 1
+      },
+      {
+        "expected_returncode": 0,
+        "name": "copy_deploy8_display_hotfix",
+        "passed": true,
+        "returncode": 0
+      },
+      {
+        "expected_returncode": 0,
+        "name": "copied_bundle_imports_and_constructs_messages",
+        "passed": true,
+        "returncode": 0
+      },
+      {
+        "expected_returncode": 1,
+        "name": "missing_helper_rejected",
+        "passed": true,
+        "returncode": 1
+      },
+      {
+        "expected_returncode": 0,
+        "name": "actual_display_nodes_start_spin_shutdown",
+        "passed": true,
+        "returncode": 0
+      }
+    ]
+  },
+  "installed_regression": {
+    "field_validated": false,
+    "hardware_started": false,
+    "launcher_sha256": "bcae85036302f6775fc0af975b95fbbf978298d072169220a155900018f8bbab",
+    "rviz_gui_started": false,
+    "status": "PASS",
+    "steps": [
+      {
+        "expected_returncode": 0,
+        "name": "copy_calib_ab_20260826",
+        "passed": true,
+        "returncode": 0
+      },
+      {
+        "expected_returncode": 0,
+        "name": "copied_bundle_imports_and_constructs_messages",
+        "passed": true,
+        "returncode": 0
+      },
+      {
+        "expected_returncode": 1,
+        "name": "missing_helper_rejected",
+        "passed": true,
+        "returncode": 1
+      },
+      {
+        "expected_returncode": 0,
+        "name": "actual_display_nodes_start_spin_shutdown",
+        "passed": true,
+        "returncode": 0
+      }
+    ]
+  },
+  "native_smoke": {
+    "status": "PASS",
+    "actual_nodes_created": 2,
+    "timers_spun": true,
+    "clean_shutdown": true,
+    "hardware_started": false,
+    "ros_domain": 197
+  },
+  "hardware_started_by_validation": false,
+  "rviz_gui_started_by_validation": false,
+  "full_entry_after_fix_validated": false,
+  "field_validated": false
+}

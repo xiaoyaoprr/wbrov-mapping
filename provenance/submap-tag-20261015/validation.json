@@ -450,7 +450,7 @@
     "full_repository_build": false,
     "hardware_started": false
   },
-  "production_deployed": false,
+  "production_deployed": true,
   "hardware_started": false,
   "rviz_renderer_started": false,
   "field_validated": false,
@@ -464,5 +464,8 @@
     "recorded_recovery_revalidated": false,
     "production_files_unchanged": true,
     "hardware_started": false
-  }
+  },
+  "deployment_record": "deployment.json",
+  "deployment_scope": "File-only deployment and copied-display startup repair; isolated native ROS display-node smoke passed. Full desktop/camera chain after repair remains untested.",
+  "display_startup_record": "startup-display-check.json"
 }
