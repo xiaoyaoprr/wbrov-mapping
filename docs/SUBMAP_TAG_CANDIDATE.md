@@ -27,6 +27,7 @@
 | 项目 | 结果与边界 |
 | --- | --- |
 | Jetson 原生编译 | Core、F2M、Wrapper 编译和链接通过，三个 CTest 门控通过；使用隔离目录与已校验父运行环境 |
+| 仓库测试入口补验 | 对提交 `601b051` 的原样源码，在 Jetson 独立目录运行 `tests/native/CMakeLists.txt`，启用深度几何选项；配置、编译和 5 项 CTest 全部通过，并重新核对候选运行包的 576 个文件 |
 | 原生恢复事务 | 合成 76 秒连续子图在末端取得三个旧图锚点后通过准备/观察/提交检查；测试选定候选 ID，不代表录制检索成功 |
 | Tag 和显示 | 13 项显示规则、10 项 ACK、25 项 Tag 测试通过；Tag 中三个真实 OpenCV 测试在 Jetson 上执行，没有跳过；真实 ROS 节点和 DDS 消息检查通过 |
 | 最终 Tag 回放 | 1200 帧、60.78 秒，采纳 47 帧；主图 9 节点，四个临时子图分别 14、11、5、8 节点；主图 Tag 为 3、4，局部 Tag 为 1、2、10 |
@@ -59,7 +60,7 @@ cmake --build build/mapping-tests --config Release
 ctest --test-dir build/mapping-tests -C Release --output-on-failure
 ```
 
-有 Eigen/OpenCV 时可加 `-DWBROV_TEST_DEPTH_GEOMETRY=ON`。Core 和 Wrapper 的集成夹具也在 `tests/native`；它们需要整套匹配的 Core/ROS 编译环境和独立输出目录，未加入默认无硬件测试。此处新增 CMake 入口尚未在 Windows 编译，已有 Jetson 证据针对相同测试源码的隔离构建。
+有 Eigen/OpenCV 时可加 `-DWBROV_TEST_DEPTH_GEOMETRY=ON`。上述 CMake 入口已在 Jetson AArch64 上按 Release 配置并开启该选项，5 项测试通过；逐文件来源及日志摘要见 [native-entry-check.json](../provenance/submap-tag-20261015/native-entry-check.json)。这次补验未启动 ROS、相机或控制进程，也不包含整个 SLAM 的全新构建。Core 和 Wrapper 的集成夹具也在 `tests/native`；它们需要整套匹配的 Core/ROS 编译环境和独立输出目录，未加入默认无硬件测试。
 
 `tests/recorded_replay/replay_single_map.py` 保留了实际使用的回放驱动，绑定已有 Jetson 运行回执及录制数据路径。仓库不包含录制数据或动态库；它不是任意机器上可直接运行的演示脚本。
 

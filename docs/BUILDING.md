@@ -2,6 +2,8 @@
 
 仓库包含初始设备归档和后续主图/子图候选源码。候选曾在 Jetson 隔离目录完成增量原生编译与录制回放，证据见 [候选更新说明](SUBMAP_TAG_CANDIDATE.md)；整个仓库的全新环境构建尚未验证，也未进行实时相机或水下测试。
 
+仓库提供的 `tests/native/CMakeLists.txt` 已使用提交 `601b051` 的原样源码在 Jetson AArch64 上补验：Release 配置，开启 `WBROV_TEST_DEPTH_GEOMETRY`，5 项独立 CTest 全部通过。该结果只覆盖这些几何和门控测试，不等同于完整 Core/ROS 构建或录制数据接回主图成功。
+
 ## 环境与依赖
 
 - Ubuntu 22.04、ROS 2 Humble、CMake、C/C++ 编译器和 Python 3.10。

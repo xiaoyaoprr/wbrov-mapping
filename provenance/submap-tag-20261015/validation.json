@@ -453,5 +453,16 @@
   "production_deployed": false,
   "hardware_started": false,
   "rviz_renderer_started": false,
-  "field_validated": false
+  "field_validated": false,
+  "repository_jetson_check": {
+    "record": "native-entry-check.json",
+    "status": "passed",
+    "source_commit": "601b0515a3c6a87381bd342f67dd01b1fd7c0523",
+    "standalone_ctest_passed": 5,
+    "candidate_runtime_files_verified": 576,
+    "full_repository_build": false,
+    "recorded_recovery_revalidated": false,
+    "production_files_unchanged": true,
+    "hardware_started": false
+  }
 }

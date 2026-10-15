@@ -1,0 +1,62 @@
+{
+  "schema": "wbrov.repository-native-entry-check.v1",
+  "scope": "Five standalone C++ geometry/gate tests from committed sources; no ROS or full SLAM build.",
+  "platform": "aarch64",
+  "candidate_runtime_files_verified": 576,
+  "candidate_runtime_receipt_sha256": "dbc56b4b3457405084641d9cf690b2d995bb5baf03c6b5fa42cac2d307cb9b49",
+  "source_files": {
+    "tests/native/CMakeLists.txt": "94ceb1966b7a5bced7af4607e375e784a5f7e8b51a793d5af1d8241b011e69a0",
+    "tests/native/test_early_certificate.cpp": "ea495643e0ab99afe7c18c2a004876b20d2ed641703555ceb4c45735c38fdb11",
+    "tests/native/test_jump_gate.cpp": "0b843675406782fdda291c506c4a0f84e6d58bbe8b14791af5e64f824581f0c8",
+    "tests/native/test_global_publication_gate.cpp": "20132e2b36b2a3ca1626683d26a8490cc646d1db5ac4c1c2ed4ec8178172a6be",
+    "tests/native/test_mapping_continuity_gate.cpp": "be82f96b884db8815c127fdae6930fe54601e9c931cb023049ece9f3b33a2862",
+    "tests/native/test_depth_geometry.cpp": "6139adbe48ff798d5450bbd14f14ff5de7f839f692525c3f1150505c127bbf4b",
+    "src/rtabmap_core/corelib/src/EarlyGravityCertificate.h": "143cf85afb1503bcdaf25a91abdf7baaea27f689c11ee9f65f801f8606715bca",
+    "src/rtabmap_core/corelib/src/odometry/DepthGeometryRecovery.h": "ac904ee5a0e3c9c6de35c4b049f39828f79636a92a3d4b0c81f59bd2cb17c76a",
+    "src/rtabmap_ros/rtabmap_slam/include/rtabmap_slam/JumpQuarantineGate.h": "a24d09c476743889db76171ef5f19393ad7c053549441de48eb9c4bb9236e0ca",
+    "src/rtabmap_ros/rtabmap_slam/include/rtabmap_slam/GlobalPublicationGate.h": "daedd4e70da4b7d207285d8f303ba9e114b8b006fe5f7e46ed1e8f528637bf51",
+    "src/rtabmap_ros/rtabmap_slam/include/rtabmap_slam/MappingContinuityGate.h": "d5f43d0bc9585c46b15eea755c1b3125b16b4f1425c86aedf11fbb26324d2a60"
+  },
+  "steps": [
+    {
+      "name": "configure",
+      "returncode": 0,
+      "log_sha256": "1787e9bcfa7768a8e5fd4d846b07974264392244896cf18d7813f368fb59d9ab"
+    },
+    {
+      "name": "build",
+      "returncode": 0,
+      "log_sha256": "6fa6e9a801a77603e6a0eccd3879080ca93ea8162d1ec94fb59b868e45f154fe"
+    },
+    {
+      "name": "ctest",
+      "returncode": 0,
+      "log_sha256": "2d69ca474b4a8e64d203fd1ff1d485d0278400649c14a08134261876a2ef6cf5"
+    }
+  ],
+  "hardware_started": false,
+  "sqlite_opened": false,
+  "production_deployed": false,
+  "field_validated": false,
+  "status": "passed",
+  "production_files_unchanged": true,
+  "source_commit": "601b0515a3c6a87381bd342f67dd01b1fd7c0523",
+  "test_names": [
+    "early_certificate",
+    "jump_gate",
+    "global_publication_gate",
+    "mapping_continuity_gate",
+    "depth_geometry"
+  ],
+  "tests_passed": 5,
+  "tests_failed": 0,
+  "build_configuration": "Release; WBROV_TEST_DEPTH_GEOMETRY=ON; assertions enabled by target compile options",
+  "raw_receipt_sha256": "60da2848b53795141dfd08f0115117b4d46d8b7af9b2f24003d7d5fe7ab51849",
+  "postflight_sha256": "9931bde84d445b43c94630abb98dbab9e5a6a9f070e75b3bdff06cb97e127737",
+  "host_recorded_at": "2026-10-15T11:47:45.645137+00:00",
+  "device_reported_completed_utc": "2026-10-08T03:21:20Z",
+  "clock_note": "Device wall clock differs from the host date; this check did not adjust either clock. Test identity is bound to commit and file hashes.",
+  "robot_processes_after": 0,
+  "full_repository_build": false,
+  "recorded_recovery_revalidated": false
+}
