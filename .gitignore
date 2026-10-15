@@ -1,0 +1,39 @@
+# Local credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+credentials*
+
+# Device runs, maps and recordings
+*.db
+*.db-*
+*.sqlite*
+*.bag
+*.mcap
+*.svo
+*.svo2
+*.pcd
+*.ply
+runs/
+datasets/
+maps/
+logs/
+
+# Build products
+build/
+install/
+log/
+__pycache__/
+*.pyc
+*.o
+*.a
+*.so
+*.so.*
+*.dll
+*.exe
+.venv/
+

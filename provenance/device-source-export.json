@@ -1,0 +1,243 @@
+{
+  "scope": "read-only source/configuration export; no runtime execution or database access",
+  "files": [
+    {
+      "path": "launch/original/start_rtabmap_calib_ab.sh",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh",
+      "sha256": "11add56b077460965211da6cead6de308e655ebe548a2c6bdd133a60f4a4c828",
+      "bytes": 220034,
+      "mode": 448
+    },
+    {
+      "path": "provenance/device-runtime-manifest.json",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/runtime-manifest.json",
+      "sha256": "2e96038496f9a4b9903216a06d97ebbc06e31372a59fedaa04c1a89b20c87801",
+      "bytes": 629747,
+      "mode": 292
+    },
+    {
+      "path": "runtime/libexec/safe_reloc_engine_core.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/libexec/safe_reloc_engine_core.py",
+      "sha256": "314314f138e4057c1b5e074cc31fc98e3c3652bfab26cb0fb9551e3d6464f555",
+      "bytes": 42808,
+      "mode": 292
+    },
+    {
+      "path": "runtime/libexec/safe_reloc_ipc_engine.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/libexec/safe_reloc_ipc_engine.py",
+      "sha256": "e0568a37c397f99e1ae492119c6f3a41f763708ce4122e47024fa5e1c2611ba9",
+      "bytes": 40639,
+      "mode": 292
+    },
+    {
+      "path": "runtime/libexec/wbrov_corner_recovery/bridge_status.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/libexec/wbrov_corner_recovery/bridge_status.py",
+      "sha256": "a60531e90802895f66bd3291deaa79bc17de586ab6052b0fde159fa0cdfe5ad0",
+      "bytes": 2277,
+      "mode": 292
+    },
+    {
+      "path": "runtime/libexec/wbrov_corner_recovery/consumer.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/libexec/wbrov_corner_recovery/consumer.py",
+      "sha256": "90f113846771fa9cbe3f698f9c2392e248f4cbaa223383fb1273f042be7fad12",
+      "bytes": 8909,
+      "mode": 292
+    },
+    {
+      "path": "runtime/libexec/wbrov_corner_recovery/core_pixel_consumer.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/libexec/wbrov_corner_recovery/core_pixel_consumer.py",
+      "sha256": "445ef5b326abddd1aaf82e7e1bb14d0466af145c424f78be2a15b4c6fa21ba42",
+      "bytes": 17500,
+      "mode": 292
+    },
+    {
+      "path": "runtime/libexec/wbrov_corner_recovery/core_pixel_join.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/libexec/wbrov_corner_recovery/core_pixel_join.py",
+      "sha256": "5b0bc22205258afde156ce3e1e4d0047fbddedb8f159b2a76380428c04db8d4d",
+      "bytes": 5684,
+      "mode": 292
+    },
+    {
+      "path": "runtime/libexec/wbrov_corner_recovery/decoded_pixel_metadata.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/libexec/wbrov_corner_recovery/decoded_pixel_metadata.py",
+      "sha256": "acb9f4778160b7fadac4db7fa1a3443a5f08cd238f634aba7a02704aab903bfc",
+      "bytes": 1865,
+      "mode": 292
+    },
+    {
+      "path": "runtime/libexec/wbrov_corner_recovery/edge_refinement.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/libexec/wbrov_corner_recovery/edge_refinement.py",
+      "sha256": "2b030f5a6948290d62cb972b9b21be9df26f2de99d588e59ffc6d4cf34abdb33",
+      "bytes": 4657,
+      "mode": 292
+    },
+    {
+      "path": "runtime/libexec/wbrov_corner_recovery/live_bridge.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/libexec/wbrov_corner_recovery/live_bridge.py",
+      "sha256": "39717307a0266db0af6beb582f9614159f148507b28adff05d97b6b2f900fad5",
+      "bytes": 12230,
+      "mode": 292
+    },
+    {
+      "path": "runtime/libexec/wbrov_corner_recovery/managed_graph_state.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/libexec/wbrov_corner_recovery/managed_graph_state.py",
+      "sha256": "347fa9a404728b9a8d188f9f5d8abf5791f44d0b81e65cd6b04021f993dcc47a",
+      "bytes": 4090,
+      "mode": 292
+    },
+    {
+      "path": "runtime/libexec/wbrov_corner_recovery/measured_bridge.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/libexec/wbrov_corner_recovery/measured_bridge.py",
+      "sha256": "0ac9767830d58f5ffac43542901446e7bcd975ff671c7b950d98bf2ff6cb4473",
+      "bytes": 9890,
+      "mode": 292
+    },
+    {
+      "path": "runtime/libexec/wbrov_corner_recovery/message_info_executor.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/libexec/wbrov_corner_recovery/message_info_executor.py",
+      "sha256": "fa4658355deb48d46e47595059ed151087322017bc3148c7ad64cdf6806797f0",
+      "bytes": 3583,
+      "mode": 292
+    },
+    {
+      "path": "runtime/libexec/wbrov_corner_recovery/production_config_template.json",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/libexec/wbrov_corner_recovery/production_config_template.json",
+      "sha256": "32646c8505394de531af3041fad50578ee7ab57ccfca2f0e23cf87efe2165063",
+      "bytes": 1232,
+      "mode": 292
+    },
+    {
+      "path": "runtime/libexec/wbrov_corner_recovery/render_config.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/libexec/wbrov_corner_recovery/render_config.py",
+      "sha256": "74957100aa6f959868b55efa5c8effadb536342f7774e95fb1099aa3a9ca620e",
+      "bytes": 2261,
+      "mode": 292
+    },
+    {
+      "path": "runtime/libexec/wbrov_corner_recovery/tag_pixel_record.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/libexec/wbrov_corner_recovery/tag_pixel_record.py",
+      "sha256": "d0dcf6bdc59f8f9522cacfa64bb7087c8ebb9e6ecbfac574632a38034f73db93",
+      "bytes": 6906,
+      "mode": 292
+    },
+    {
+      "path": "runtime/libexec/wbrov_corner_recovery/verified_corners.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/libexec/wbrov_corner_recovery/verified_corners.py",
+      "sha256": "e0a54d003d6f987e55e45f54cafea538a58ebb06e563e9daf1d19e4265bb9b72",
+      "bytes": 4605,
+      "mode": 292
+    },
+    {
+      "path": "runtime/libexec/wbrov_corner_recovery/verified_pixel_observer.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/libexec/wbrov_corner_recovery/verified_pixel_observer.py",
+      "sha256": "b8114d17f2da6a3115960d6c34dd0d49df09c696682176698add679002cb7f3d",
+      "bytes": 2339,
+      "mode": 292
+    },
+    {
+      "path": "runtime/libexec/write_process_identity.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/libexec/write_process_identity.py",
+      "sha256": "06b99b3f26955770a6bb3cfb7c6054f8e2fef6655c90ce513e4371d9161143f5",
+      "bytes": 3532,
+      "mode": 292
+    },
+    {
+      "path": "runtime/tools/check_private_runtime.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/tools/check_private_runtime.py",
+      "sha256": "b51e22be24c60040a91d0a41cbf3f587410ea80ff6267ffd51d56d27b2e95096",
+      "bytes": 45389,
+      "mode": 365
+    },
+    {
+      "path": "runtime/tools/package_incremental_runtime.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/tools/package_incremental_runtime.py",
+      "sha256": "c575dbb3f02af2f43e855e2f605e4571c186c21386d7b63e1b2f750ac6622a16",
+      "bytes": 5076,
+      "mode": 365
+    },
+    {
+      "path": "runtime/tools/package_private_runtime.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/tools/package_private_runtime.py",
+      "sha256": "a88cc75d880ccd818b5cf2c18e476f0c3760566b7a761285318fae40ff5e3124",
+      "bytes": 41161,
+      "mode": 365
+    },
+    {
+      "path": "runtime/tools/runtime-env.sh",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b/tools/runtime-env.sh",
+      "sha256": "881790808f5059070a7072f76a12168ec9509755fe287ef38bd323e3abf55903",
+      "bytes": 613,
+      "mode": 365
+    },
+    {
+      "path": "src/apriltag/build_apriltag_multiview_anchors.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/apriltag_anchor_builder_exact/80612ee432f9655a1970739b432cebbc8f50627026abdea2e8b2c15a885771a6/build_apriltag_multiview_anchors.py",
+      "sha256": "80612ee432f9655a1970739b432cebbc8f50627026abdea2e8b2c15a885771a6",
+      "bytes": 54470,
+      "mode": 292
+    },
+    {
+      "path": "src/apriltag/detector/apriltag_landmark_node.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/apriltag_detector_rich/63481b730560e5037dec5671759fb4f751b2b695cbff841627590bf622242320/apriltag_landmark_node.py",
+      "sha256": "63481b730560e5037dec5671759fb4f751b2b695cbff841627590bf622242320",
+      "bytes": 42155,
+      "mode": 448
+    },
+    {
+      "path": "src/apriltag/detector/tag_pose_geometry.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/apriltag_detector_rich/63481b730560e5037dec5671759fb4f751b2b695cbff841627590bf622242320/tag_pose_geometry.py",
+      "sha256": "0a8d8d6fc977bb512e2d1f3cc638a3f188986cf6a1f966105e6c34ea9b69f810",
+      "bytes": 7016,
+      "mode": 292
+    },
+    {
+      "path": "src/apriltag/detector/tag_pose_guard.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/apriltag_detector_rich/63481b730560e5037dec5671759fb4f751b2b695cbff841627590bf622242320/tag_pose_guard.py",
+      "sha256": "dfd3bb8406281d6898b9dca9565f3b68ef2e5a6ecc850c020a70670554da6c45",
+      "bytes": 10760,
+      "mode": 292
+    },
+    {
+      "path": "src/apriltag/apriltag_keyframe_binder.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/apriltag_keyframe_binding/1b4262ede8f17dc15e03c7a9e93951136e2b77bf1b81f0f4a467e1fa5a56c41d/apriltag_keyframe_binder.py",
+      "sha256": "1b4262ede8f17dc15e03c7a9e93951136e2b77bf1b81f0f4a467e1fa5a56c41d",
+      "bytes": 18768,
+      "mode": 448
+    },
+    {
+      "path": "src/visualization/graph_display_geometry.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/visualization_runtime/pose_diagnostics_8fd48751b2b94ed6/graph_display_geometry.py",
+      "sha256": "5bd28861322e8c98afedd9d61b313a2f740d143ebfd5e48429f39ba7025977df",
+      "bytes": 6556,
+      "mode": 384
+    },
+    {
+      "path": "src/visualization/rtabmap_dense_graph_optimized.rviz",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/visualization_runtime/pose_diagnostics_8fd48751b2b94ed6/rtabmap_dense_graph_optimized.rviz",
+      "sha256": "10681fb0f960810a366864474e8b1d4d6e0939a2da1c5b846a14332b20cff139",
+      "bytes": 4603,
+      "mode": 384
+    },
+    {
+      "path": "src/visualization/rtabmap_graph_display.py",
+      "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/visualization_runtime/pose_diagnostics_8fd48751b2b94ed6/rtabmap_graph_display.py",
+      "sha256": "8fd48751b2b94ed6eba8e490b0d50fd59b8e5dc14900b30811cd9f8582e8901e",
+      "bytes": 13088,
+      "mode": 384
+    },
+    {
+      "path": "config/fastdds.xml",
+      "source_path": "/home/exocean/.cache/wbrov_dds_profiles/sha256-2ea911a3e61a1f9adc9afed60e44a4e3f57444ef4ffa3f0ebba410c584cd7a7f/fastdds.xml",
+      "sha256": "2ea911a3e61a1f9adc9afed60e44a4e3f57444ef4ffa3f0ebba410c584cd7a7f",
+      "bytes": 806,
+      "mode": 292
+    },
+    {
+      "path": "config/calibration/zed_opencv_calibration_40408468.yml",
+      "source_path": "/home/exocean/calibration/zedx_charuco/water_calib_trial_20260827_from_unique86/results/run_c2ce22daf28d/zed_opencv_calibration_40408468.yml",
+      "sha256": "d0a5f4486794add80330be1b89bea5aa890d3fed124456418ff1c98a59708389",
+      "bytes": 947,
+      "mode": 436
+    }
+  ]
+}

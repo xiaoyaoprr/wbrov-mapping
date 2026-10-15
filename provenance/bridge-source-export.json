@@ -1,0 +1,490 @@
+{
+  "schema": 1,
+  "method": "remote-read-only-source-export",
+  "files": [
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher/CMakeLists.txt",
+      "destination": "src/zed_rgbd_publisher/CMakeLists.txt",
+      "kind": "source",
+      "sha256": "1e1f68fd1de1376af063316b01670123ac39462eb0a3e8590b69653326075bb1",
+      "size": 1920
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher/capture_telemetry.hpp",
+      "destination": "src/zed_rgbd_publisher/capture_telemetry.hpp",
+      "kind": "source",
+      "sha256": "f33db42697111889c45a29c2d7cb7db90d3a89e5e2a74c9ecee970807120e9f6",
+      "size": 3489
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher/capture_telemetry_test.cpp",
+      "destination": "src/zed_rgbd_publisher/capture_telemetry_test.cpp",
+      "kind": "source",
+      "sha256": "3033aa56c1cd8f96cbf1ad2c4a391095b0cee1c24f32452ede2c91e4a2cbfdb2",
+      "size": 2401
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher/depth_range_filter.hpp",
+      "destination": "src/zed_rgbd_publisher/depth_range_filter.hpp",
+      "kind": "source",
+      "sha256": "57c5c1f18d180ff5718163a775b51d8d8bf20fd1f81b4cd8bbb6a3834a23f2d4",
+      "size": 2435
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher/depth_range_filter_test.cpp",
+      "destination": "src/zed_rgbd_publisher/depth_range_filter_test.cpp",
+      "kind": "source",
+      "sha256": "3bb025bc5361bbb3ee544eb33e124deb2f3a2b18d473998ae1779761aca844c2",
+      "size": 3956
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher/dual_stream_schedule.hpp",
+      "destination": "src/zed_rgbd_publisher/dual_stream_schedule.hpp",
+      "kind": "source",
+      "sha256": "673c03f48137f0f570ea3e5cecb77b0c5b224a85fc3040f0d5900772fd21ba9a",
+      "size": 1893
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher/dual_stream_schedule_test.cpp",
+      "destination": "src/zed_rgbd_publisher/dual_stream_schedule_test.cpp",
+      "kind": "source",
+      "sha256": "7bf1035a1e384888b5c10ffe6f62640e722161a01d703e208c437b5f2cf8c43c",
+      "size": 3257
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher/exact_odom_stamp_gate.hpp",
+      "destination": "src/zed_rgbd_publisher/exact_odom_stamp_gate.hpp",
+      "kind": "source",
+      "sha256": "444005822b8374f45ffad3bd02e17d64f4390a5a1d154c6bf6471b92ddac4d71",
+      "size": 2289
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher/exact_odom_stamp_gate_test.cpp",
+      "destination": "src/zed_rgbd_publisher/exact_odom_stamp_gate_test.cpp",
+      "kind": "source",
+      "sha256": "f34f61651f144498b229032acbf5e3272f1e4a968f9d842bb8a341a2bb974c69",
+      "size": 2079
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher/imu_frame_conversion.hpp",
+      "destination": "src/zed_rgbd_publisher/imu_frame_conversion.hpp",
+      "kind": "source",
+      "sha256": "318ccf82833c2e0a82dd02baaa8c972507e08657f30a7c584e09ce078d05a24c",
+      "size": 7438
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher/imu_frame_conversion_test.cpp",
+      "destination": "src/zed_rgbd_publisher/imu_frame_conversion_test.cpp",
+      "kind": "source",
+      "sha256": "9d936d40997b5ce92fe1543ca0241445f205c95e1e1a4684b2c9ebc77e142087",
+      "size": 5206
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher/map_frame_lifecycle.hpp",
+      "destination": "src/zed_rgbd_publisher/map_frame_lifecycle.hpp",
+      "kind": "source",
+      "sha256": "12a3919885440580650d86f70c1c2dc1499553f9899366d635a84a9ae5da7665",
+      "size": 10819
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher/map_frame_lifecycle_test.cpp",
+      "destination": "src/zed_rgbd_publisher/map_frame_lifecycle_test.cpp",
+      "kind": "source",
+      "sha256": "a01e2d005b3184eb3d65c1fa3ce2411978eeab61d8bed9154ea4a4e1e67a7957",
+      "size": 3616
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher/map_stamp_audit.hpp",
+      "destination": "src/zed_rgbd_publisher/map_stamp_audit.hpp",
+      "kind": "source",
+      "sha256": "cdac256295120c5870ac595da8f15174cb09af256a0efe2726c9010da3e6ea0f",
+      "size": 5204
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher/map_stamp_audit_test.cpp",
+      "destination": "src/zed_rgbd_publisher/map_stamp_audit_test.cpp",
+      "kind": "source",
+      "sha256": "2a63c9d2deaa532defc089df430acbbf39be350c4922d3c68c48e7f9b311bae3",
+      "size": 1835
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher/raw_calibration_audit.hpp",
+      "destination": "src/zed_rgbd_publisher/raw_calibration_audit.hpp",
+      "kind": "source",
+      "sha256": "1700307b2f40ef750040685942933e52653fec5da0d3200a886727280846d730",
+      "size": 6579
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher/raw_calibration_audit_test.cpp",
+      "destination": "src/zed_rgbd_publisher/raw_calibration_audit_test.cpp",
+      "kind": "source",
+      "sha256": "93ae0019de923b8df1afa5be9de1d26d204352fa2ed8dd063427cfb9efc1f159",
+      "size": 6763
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher/valid_odom_pose.hpp",
+      "destination": "src/zed_rgbd_publisher/valid_odom_pose.hpp",
+      "kind": "source",
+      "sha256": "efc9ebe6671d974b91fb0f3302a8fb64ea05f231c4f142fb7d8ecceb39b103ab",
+      "size": 522
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher/valid_odom_pose_test.cpp",
+      "destination": "src/zed_rgbd_publisher/valid_odom_pose_test.cpp",
+      "kind": "source",
+      "sha256": "fbee5ad0c6770638d40f1cc39ae68b1a97553a67a3e49fa09a244c5036c1008f",
+      "size": 513
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher/zed_rgbd_dual_stream_publisher.cpp",
+      "destination": "src/zed_rgbd_publisher/zed_rgbd_dual_stream_publisher.cpp",
+      "kind": "source",
+      "sha256": "fb12610ecebd91ee86315c3194549c480da022c106ec517937d26cdd543906b6",
+      "size": 61250
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/native/header_health_observer_native/CMakeLists.txt",
+      "destination": "src/native_helpers/header_health_observer_native/CMakeLists.txt",
+      "kind": "source",
+      "sha256": "f81415007ad8afaa4375bdca578f6199f30dd5625f89a0c2bb4c164c33748eb5",
+      "size": 1301
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/native/header_health_observer_native/header_health_fixture.cpp",
+      "destination": "src/native_helpers/header_health_observer_native/header_health_fixture.cpp",
+      "kind": "source",
+      "sha256": "0827e77dc242ed155d70761085301d3b77c94841491fef24e30769934f6e9884",
+      "size": 10897
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/native/header_health_observer_native/header_health_observer.cpp",
+      "destination": "src/native_helpers/header_health_observer_native/header_health_observer.cpp",
+      "kind": "source",
+      "sha256": "3fecd4f262f9bd46646ce715498eeb64e40a8eebeded83e44024285c8ee06b27",
+      "size": 37386
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/native/header_health_observer_native/rolling_header_metrics.hpp",
+      "destination": "src/native_helpers/header_health_observer_native/rolling_header_metrics.hpp",
+      "kind": "source",
+      "sha256": "878ee2e27be56a681ca4bed2d2a5d1f15a80c96fcd33fbcb3fd6b6084895ee5f",
+      "size": 23428
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/native/safe_reloc_gid_frontend_native/CMakeLists.txt",
+      "destination": "src/native_helpers/safe_reloc_gid_frontend_native/CMakeLists.txt",
+      "kind": "source",
+      "sha256": "1377ba2636e0688cf245e86aed64627939e7617bebc0192f8127818cecb99b44",
+      "size": 1348
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/native/safe_reloc_gid_frontend_native/safe_reloc_gid_fixture.cpp",
+      "destination": "src/native_helpers/safe_reloc_gid_frontend_native/safe_reloc_gid_fixture.cpp",
+      "kind": "source",
+      "sha256": "4931bbd49bd425024bbe0ac29bdad4fe01e29291a2048b95233ea7b4bc818f63",
+      "size": 15756
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/native/safe_reloc_gid_frontend_native/safe_reloc_gid_frontend.cpp",
+      "destination": "src/native_helpers/safe_reloc_gid_frontend_native/safe_reloc_gid_frontend.cpp",
+      "kind": "source",
+      "sha256": "e3f12cbc32c5c5634bb79908a897388f11c95306479c8cc3f5171a641ef882d5",
+      "size": 46616
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/native/safe_reloc_gid_frontend_native/safe_reloc_ipc.hpp",
+      "destination": "src/native_helpers/safe_reloc_gid_frontend_native/safe_reloc_ipc.hpp",
+      "kind": "source",
+      "sha256": "e5dac713ebfae0bb95092c9d81e0ac525f49b88a303631a4fd31df2f50ea1f02",
+      "size": 18584
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/authenticated_pixel_consumer_v4_20260910/message_info_adapter.cpp",
+      "destination": "src/native_helpers/message_info/message_info_adapter.cpp",
+      "kind": "source",
+      "sha256": "393e0f9dfd151ac91c37492fab0a426c46db8de0567aab45793e747471fce9a6",
+      "size": 2416
+    }
+  ],
+  "helper_binary_provenance": [
+    {
+      "entry": "bin/header_health_observer",
+      "manifest": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-9d417b11eeb4dc96a3ff8cb225e9e2949207c05f394fa37dbf6e7652bede57a0/runtime-manifest.json",
+      "manifest_sha256": "5a0204c30cba66ca99804bb785ec386a7cd163dba8cda6424dc2a6aa83068f0f",
+      "record": {
+        "baseline_manifest_sha256": "5fde1e9ba51064ad8120ed9043772a0a20fd1752a0ece7ef338698a26ff8e8c5",
+        "kind": "verified-baseline-reuse",
+        "source_dev": 66305,
+        "source_gid": 1000,
+        "source_ino": 2230226,
+        "source_mode": 365,
+        "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-db530365503b943a84436fd4bc304cb851e669c97eafaa29f25cddf570e52cf5/bin/header_health_observer",
+        "source_sha256": "a04aa06117bae16265f4d836406af274b1de105dff9c53e3a6b6bad7c0886018",
+        "source_uid": 1000
+      }
+    },
+    {
+      "entry": "bin/header_health_observer",
+      "manifest": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-db530365503b943a84436fd4bc304cb851e669c97eafaa29f25cddf570e52cf5/runtime-manifest.json",
+      "manifest_sha256": "5fde1e9ba51064ad8120ed9043772a0a20fd1752a0ece7ef338698a26ff8e8c5",
+      "record": {
+        "baseline_manifest_sha256": "85164c08b23d6c6d1dd508bdf29c267963309f0acf2a19b08f580d0f4d83a75b",
+        "kind": "verified-baseline-reuse",
+        "source_dev": 66305,
+        "source_gid": 1000,
+        "source_ino": 2106432,
+        "source_mode": 365,
+        "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-3cef73cb0c7e7d444ba75232040df417e4043a37ff1d07067088d967bd46de14/bin/header_health_observer",
+        "source_sha256": "a04aa06117bae16265f4d836406af274b1de105dff9c53e3a6b6bad7c0886018",
+        "source_uid": 1000
+      }
+    },
+    {
+      "entry": "bin/header_health_observer",
+      "manifest": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-3cef73cb0c7e7d444ba75232040df417e4043a37ff1d07067088d967bd46de14/runtime-manifest.json",
+      "manifest_sha256": "85164c08b23d6c6d1dd508bdf29c267963309f0acf2a19b08f580d0f4d83a75b",
+      "record": {
+        "kind": "rebuilt-repair-component",
+        "source_dev": 66305,
+        "source_gid": 1000,
+        "source_ino": 2101949,
+        "source_mode": 509,
+        "source_path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/build/native/header_health_observer_native/header_health_observer",
+        "source_sha256": "a04aa06117bae16265f4d836406af274b1de105dff9c53e3a6b6bad7c0886018",
+        "source_uid": 1000
+      }
+    },
+    {
+      "entry": "bin/safe_reloc_gid_frontend",
+      "manifest": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-9d417b11eeb4dc96a3ff8cb225e9e2949207c05f394fa37dbf6e7652bede57a0/runtime-manifest.json",
+      "manifest_sha256": "5a0204c30cba66ca99804bb785ec386a7cd163dba8cda6424dc2a6aa83068f0f",
+      "record": {
+        "baseline_manifest_sha256": "5fde1e9ba51064ad8120ed9043772a0a20fd1752a0ece7ef338698a26ff8e8c5",
+        "kind": "verified-baseline-reuse",
+        "source_dev": 66305,
+        "source_gid": 1000,
+        "source_ino": 2230231,
+        "source_mode": 365,
+        "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-db530365503b943a84436fd4bc304cb851e669c97eafaa29f25cddf570e52cf5/bin/safe_reloc_gid_frontend",
+        "source_sha256": "a09155c9aa28dcf297c3373b27730ab0775ba9b50ebef1d00cc8d855611e39bd",
+        "source_uid": 1000
+      }
+    },
+    {
+      "entry": "bin/safe_reloc_gid_frontend",
+      "manifest": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-db530365503b943a84436fd4bc304cb851e669c97eafaa29f25cddf570e52cf5/runtime-manifest.json",
+      "manifest_sha256": "5fde1e9ba51064ad8120ed9043772a0a20fd1752a0ece7ef338698a26ff8e8c5",
+      "record": {
+        "baseline_manifest_sha256": "85164c08b23d6c6d1dd508bdf29c267963309f0acf2a19b08f580d0f4d83a75b",
+        "kind": "verified-baseline-reuse",
+        "source_dev": 66305,
+        "source_gid": 1000,
+        "source_ino": 2106437,
+        "source_mode": 365,
+        "source_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-3cef73cb0c7e7d444ba75232040df417e4043a37ff1d07067088d967bd46de14/bin/safe_reloc_gid_frontend",
+        "source_sha256": "a09155c9aa28dcf297c3373b27730ab0775ba9b50ebef1d00cc8d855611e39bd",
+        "source_uid": 1000
+      }
+    },
+    {
+      "entry": "bin/safe_reloc_gid_frontend",
+      "manifest": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-3cef73cb0c7e7d444ba75232040df417e4043a37ff1d07067088d967bd46de14/runtime-manifest.json",
+      "manifest_sha256": "85164c08b23d6c6d1dd508bdf29c267963309f0acf2a19b08f580d0f4d83a75b",
+      "record": {
+        "kind": "rebuilt-repair-component",
+        "source_dev": 66305,
+        "source_gid": 1000,
+        "source_ino": 2101962,
+        "source_mode": 509,
+        "source_path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/build/native/safe_reloc_gid_frontend_native/safe_reloc_gid_frontend",
+        "source_sha256": "a09155c9aa28dcf297c3373b27730ab0775ba9b50ebef1d00cc8d855611e39bd",
+        "source_uid": 1000
+      }
+    }
+  ],
+  "helper_build_binaries": [
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/packages/sha256-45c214e94d4dd6198e398ada91e84943dac769ea4dc30e67bbbf6bc18a80a94c/bin/safe_reloc_gid_frontend",
+      "sha256": "28bd3e56e6bfd0b87801e6745e56a0dc4c267f2499239c7d2fd222166706d741",
+      "size": 1431616
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/packages/sha256-45c214e94d4dd6198e398ada91e84943dac769ea4dc30e67bbbf6bc18a80a94c/bin/header_health_observer",
+      "sha256": "a04aa06117bae16265f4d836406af274b1de105dff9c53e3a6b6bad7c0886018",
+      "size": 1696216
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/packages/sha256-b73ccf3327e269ad67dca8d2066e0a17975f419662b1dcb15d61399eae5deb08/bin/safe_reloc_gid_frontend",
+      "sha256": "37b79b35bec2467cc0fb36e46409ac7fb57767eba7160d173e42741c803eb9a2",
+      "size": 1431616
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/packages/sha256-b73ccf3327e269ad67dca8d2066e0a17975f419662b1dcb15d61399eae5deb08/bin/header_health_observer",
+      "sha256": "a04aa06117bae16265f4d836406af274b1de105dff9c53e3a6b6bad7c0886018",
+      "size": 1696216
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/packages/sha256-1fed2577680e26c9a2032d5ce1c35526dfcd35cd9821aa8e7edb9902573a42fb/bin/safe_reloc_gid_frontend",
+      "sha256": "28bd3e56e6bfd0b87801e6745e56a0dc4c267f2499239c7d2fd222166706d741",
+      "size": 1431616
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/packages/sha256-1fed2577680e26c9a2032d5ce1c35526dfcd35cd9821aa8e7edb9902573a42fb/bin/header_health_observer",
+      "sha256": "a04aa06117bae16265f4d836406af274b1de105dff9c53e3a6b6bad7c0886018",
+      "size": 1696216
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/packages/sha256-baeb38d28f5aeea64838d4889df5393e77c69b8d013007deceb9d916dcd5f590/bin/safe_reloc_gid_frontend",
+      "sha256": "28bd3e56e6bfd0b87801e6745e56a0dc4c267f2499239c7d2fd222166706d741",
+      "size": 1431616
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/packages/sha256-baeb38d28f5aeea64838d4889df5393e77c69b8d013007deceb9d916dcd5f590/bin/header_health_observer",
+      "sha256": "a04aa06117bae16265f4d836406af274b1de105dff9c53e3a6b6bad7c0886018",
+      "size": 1696216
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/build/native/safe_reloc_gid_frontend_native/safe_reloc_gid_frontend",
+      "sha256": "a09155c9aa28dcf297c3373b27730ab0775ba9b50ebef1d00cc8d855611e39bd",
+      "size": 1440344
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/build/native/header_health_observer_native/header_health_observer",
+      "sha256": "a04aa06117bae16265f4d836406af274b1de105dff9c53e3a6b6bad7c0886018",
+      "size": 1696216
+    }
+  ],
+  "verification": {
+    "publisher_source_manifest_matches_all_20_files": true,
+    "publisher_archived_binary_matches_launcher": true,
+    "native_existing_build_outputs_match_live_manifest": true,
+    "message_info_archived_source_and_binary_match": true,
+    "fresh_build_performed": false,
+    "fresh_tests_performed": false,
+    "hardware_started": false,
+    "gaps": [
+      "Target toolchain and proprietary ZED SDK are external dependencies.",
+      "Portable message_info CMake definition added during export and not compiled.",
+      "Build-directory provenance does not claim reproducible binary rebuilding or field validation."
+    ]
+  },
+  "generated_files": [
+    "src/native_helpers/message_info/CMakeLists.txt",
+    "src/native_helpers/BUILDING.md",
+    "src/zed_rgbd_publisher/BUILDING.md"
+  ],
+  "external_evidence_not_in_source_archive": [
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher_source_manifest.json",
+      "destination": "publisher/publisher_source_manifest.json",
+      "kind": "evidence",
+      "sha256": "85a15b01ba762183bafcad1d557a8ebb657e4396fe5dbbfb52b5df1a3ffec861",
+      "size": 4647
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher_build_result.json",
+      "destination": "publisher/publisher_build_result.json",
+      "kind": "evidence",
+      "sha256": "89fcd50585506fd73eeb06b858773e2aa293e658e9efe77881ac8ea8ee430d92",
+      "size": 458
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/build_publisher.py",
+      "destination": "publisher/build_publisher.py",
+      "kind": "evidence",
+      "sha256": "8414a479318db4598826bb45c578f5b39030a2cb3db464cab136740db5399928",
+      "size": 2526
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher_tests.log",
+      "destination": "publisher/publisher_tests.log",
+      "kind": "evidence",
+      "sha256": "3183df36307fad176917a16664f6163561aaad20535a98dffa97f1d413669693",
+      "size": 1321
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher_build_final.log",
+      "destination": "publisher/publisher_build_final.log",
+      "kind": "evidence",
+      "sha256": "cc76bda753b783efbf291a73e18b1c901723506ed737120af5330a8d465b8e68",
+      "size": 3462
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/production_gravity_integration_v1_20260912/publisher_configure.log",
+      "destination": "publisher/publisher_configure.log",
+      "kind": "evidence",
+      "sha256": "b9a44e795bd85b3fc090b6a0e39146bf84c08a4ff930b33188198768811a18c6",
+      "size": 2555
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/corner_point_production_adapter_20260912/MESSAGE_INFO_NO_RUNPATH_BUILD.json",
+      "destination": "message_info/MESSAGE_INFO_NO_RUNPATH_BUILD.json",
+      "kind": "evidence",
+      "sha256": "33c6815a73cc0f40c7084942af25dd61268a76d41fff44277d5a66792552b747",
+      "size": 538
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/corner_point_production_adapter_20260912/MESSAGE_INFO_NO_RUNPATH_COMMAND.json",
+      "destination": "message_info/MESSAGE_INFO_NO_RUNPATH_COMMAND.json",
+      "kind": "evidence",
+      "sha256": "2f557758bbb066b472b22de8bc3be066089771b1d4b5187791f74e2ca46a91f1",
+      "size": 7139
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/build/native/safe_reloc_gid_frontend_native/CMakeFiles/safe_reloc_gid_frontend.dir/flags.make",
+      "destination": "native_build/build/native/safe_reloc_gid_frontend_native/CMakeFiles/safe_reloc_gid_frontend.dir/flags.make",
+      "kind": "evidence",
+      "sha256": "4cf376d04349d5bd76a3463ef78c0f049aea212d2c8f5c16b8e24c32901701fc",
+      "size": 3296
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/build/native/safe_reloc_gid_frontend_native/CMakeFiles/safe_reloc_gid_frontend.dir/link.txt",
+      "destination": "native_build/build/native/safe_reloc_gid_frontend_native/CMakeFiles/safe_reloc_gid_frontend.dir/link.txt",
+      "kind": "evidence",
+      "sha256": "7d51b82c0f93e9ad2be5278bddb5f5e0bc2acd55cc14b76e8873bea73e5ea7ac",
+      "size": 7102
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/build/native/safe_reloc_gid_frontend_native/CMakeFiles/safe_reloc_gid_fixture.dir/flags.make",
+      "destination": "native_build/build/native/safe_reloc_gid_frontend_native/CMakeFiles/safe_reloc_gid_fixture.dir/flags.make",
+      "kind": "evidence",
+      "sha256": "4cf376d04349d5bd76a3463ef78c0f049aea212d2c8f5c16b8e24c32901701fc",
+      "size": 3296
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/build/native/safe_reloc_gid_frontend_native/CMakeFiles/safe_reloc_gid_fixture.dir/link.txt",
+      "destination": "native_build/build/native/safe_reloc_gid_frontend_native/CMakeFiles/safe_reloc_gid_fixture.dir/link.txt",
+      "kind": "evidence",
+      "sha256": "9ef569ac688432a81c1007ad4b44440338850a88ef2b361592443406b377c1f3",
+      "size": 7059
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/build/native/header_health_observer_native/CMakeFiles/header_health_observer.dir/flags.make",
+      "destination": "native_build/build/native/header_health_observer_native/CMakeFiles/header_health_observer.dir/flags.make",
+      "kind": "evidence",
+      "sha256": "22827b9ec875f863b2bc61aa08278028f1631081fc0e353231dafe188f6dd4b5",
+      "size": 3338
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/build/native/header_health_observer_native/CMakeFiles/header_health_observer.dir/link.txt",
+      "destination": "native_build/build/native/header_health_observer_native/CMakeFiles/header_health_observer.dir/link.txt",
+      "kind": "evidence",
+      "sha256": "68a6dad9acc92028b7d8d3866fe29d5f0bfcf2198aa45b36fd45a025769f0e71",
+      "size": 7564
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/build/native/header_health_observer_native/CMakeFiles/header_health_fixture.dir/flags.make",
+      "destination": "native_build/build/native/header_health_observer_native/CMakeFiles/header_health_fixture.dir/flags.make",
+      "kind": "evidence",
+      "sha256": "22827b9ec875f863b2bc61aa08278028f1631081fc0e353231dafe188f6dd4b5",
+      "size": 3338
+    },
+    {
+      "path": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/build/native/header_health_observer_native/CMakeFiles/header_health_fixture.dir/link.txt",
+      "destination": "native_build/build/native/header_health_observer_native/CMakeFiles/header_health_fixture.dir/link.txt",
+      "kind": "evidence",
+      "sha256": "83d015ed73da7e4b6cfa28696169d1d6f3e096d9b5ba0582d2c8c8af7da16af8",
+      "size": 7561
+    }
+  ]
+}

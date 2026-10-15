@@ -1,0 +1,2 @@
+# Preserve exported bytes so SHA-256 provenance remains valid on every OS.
+* -text

@@ -1,0 +1,30 @@
+{
+  "archive_date": "2026-10-15",
+  "timezone": "Asia/Shanghai",
+  "runtime_content_address": "168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b",
+  "launcher_sha256": "11add56b077460965211da6cead6de308e655ebe548a2c6bdd133a60f4a4c828",
+  "runtime_manifest_sha256": "2e96038496f9a4b9903216a06d97ebbc06e31372a59fedaa04c1a89b20c87801",
+  "source_export_entries_verified": 1633,
+  "core_manifest_source_pins_matched": 20,
+  "runtime_text_files_matched": 22,
+  "python_syntax_passed": 101,
+  "python_syntax_known_warnings": [
+    {
+      "path": "src/rtabmap_ros/rtabmap_util/scripts/gazebo_ground_truth.py",
+      "line": 23,
+      "error": "inconsistent use of tabs and spaces in indentation",
+      "inherited_upstream": true
+    }
+  ],
+  "forbidden_binary_or_recording_files": [],
+  "files_over_10_MiB": [],
+  "secret_pattern_candidate_count": 0,
+  "source_build_validated": false,
+  "hardware_started": false,
+  "remote_files_modified": false,
+  "active_database_read": false,
+  "notes": [
+    "Source/archive validation only. Historical build receipts do not constitute a fresh build or field validation.",
+    "Core/ROS non-pinned baseline files and local supplements are individually recorded."
+  ]
+}

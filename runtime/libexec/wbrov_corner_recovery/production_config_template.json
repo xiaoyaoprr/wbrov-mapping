@@ -1,0 +1,26 @@
+{
+  "fixture_mode": false,
+  "session_token": "REPLACED_PER_RUN",
+  "session_token_sha256": "REPLACED_PER_RUN",
+  "database_sha256": "REPLACED_PER_RUN",
+  "body_from_camera": [0, 0, 1, 0, -1, 0, 0, 0, 0, -1, 0, 0],
+  "camera_frame": "zed_left_camera_optical_frame",
+  "pending_max_age_s": 30,
+  "image_buffer_capacity": 128,
+  "tag_side_m": 0.08,
+  "min_tag_side_px": 8,
+  "frame_ready_topic": null,
+  "nodes": {
+    "detector": "verified_apriltag_pixel_observer",
+    "consumer": "authenticated_core_pixel_consumer",
+    "proposer": "safe_reloc_gid_frontend"
+  },
+  "sources": {
+    "core": {"topic": "/wbrov/accepted_image_input", "node": "rtabmap", "namespace": "/"},
+    "pixels": {"topic": "/apriltag/pixel_observations", "node": "verified_apriltag_pixel_observer", "namespace": "/"},
+    "rgb": {"topic": "/zed/mapping/rgb/image_rect_color", "node": "zed_rgbd_dual_stream_publisher", "namespace": "/"},
+    "camera_info": {"topic": "/zed/mapping/rgb/camera_info", "node": "zed_rgbd_dual_stream_publisher", "namespace": "/"},
+    "state": {"topic": "/wbrov/safe_relocalization/state", "node": "rtabmap", "namespace": "/"},
+    "status": {"topic": "/wbrov/safe_relocalization/status", "node": "rtabmap", "namespace": "/"}
+  }
+}

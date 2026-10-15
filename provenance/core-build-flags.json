@@ -1,0 +1,1908 @@
+{
+  "schema": 1,
+  "collection": "read-only named source-build metadata; no build or runtime process started",
+  "configs": [
+    {
+      "source": "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/CMakeCache.txt",
+      "exists": true,
+      "source_sha256": "9c5cf40b00d3818cdde5f5380761028e0de48e2d0051f1f5a060a68917b1da43",
+      "selected_flags": {
+        "BUILD_APP": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "BUILD_EXAMPLES": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "BUILD_OPENGV": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "BUILD_SHARED_LIBS": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "BUILD_TOOLS": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "BUILD_WITH_RPATH_NOT_RUNPATH": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "CMAKE_BUILD_TYPE": {
+          "type": "STRING",
+          "value": "Release"
+        },
+        "CMAKE_CXX_COMPILER": {
+          "type": "FILEPATH",
+          "value": "/usr/bin/c++"
+        },
+        "CMAKE_CXX_FLAGS": {
+          "type": "STRING",
+          "value": ""
+        },
+        "CMAKE_CXX_FLAGS_DEBUG": {
+          "type": "STRING",
+          "value": "-g"
+        },
+        "CMAKE_CXX_FLAGS_MINSIZEREL": {
+          "type": "STRING",
+          "value": "-Os -DNDEBUG"
+        },
+        "CMAKE_CXX_FLAGS_RELEASE": {
+          "type": "STRING",
+          "value": "-O3 -DNDEBUG"
+        },
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": {
+          "type": "STRING",
+          "value": "-O2 -g -DNDEBUG"
+        },
+        "CMAKE_C_COMPILER": {
+          "type": "FILEPATH",
+          "value": "/usr/bin/cc"
+        },
+        "CMAKE_C_FLAGS": {
+          "type": "STRING",
+          "value": ""
+        },
+        "CMAKE_C_FLAGS_DEBUG": {
+          "type": "STRING",
+          "value": "-g"
+        },
+        "CMAKE_C_FLAGS_MINSIZEREL": {
+          "type": "STRING",
+          "value": "-Os -DNDEBUG"
+        },
+        "CMAKE_C_FLAGS_RELEASE": {
+          "type": "STRING",
+          "value": "-O3 -DNDEBUG"
+        },
+        "CMAKE_C_FLAGS_RELWITHDEBINFO": {
+          "type": "STRING",
+          "value": "-O2 -g -DNDEBUG"
+        },
+        "CMAKE_INSTALL_PREFIX": {
+          "type": "PATH",
+          "value": "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/install"
+        },
+        "GTSAM_DIR": {
+          "type": "UNINITIALIZED",
+          "value": "/home/exocean/opt/rtabmap/opt/ros/humble/lib/cmake/GTSAM"
+        },
+        "GTSAM_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/home/exocean/opt/rtabmap/opt/ros/humble/lib/cmake/GTSAM/../../../include"
+        },
+        "OpenCV_DIR": {
+          "type": "UNINITIALIZED",
+          "value": "/usr/lib/cmake/opencv4"
+        },
+        "PCL_2D_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_COMMON_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_DIR": {
+          "type": "PATH",
+          "value": "/usr/lib/aarch64-linux-gnu/cmake/pcl"
+        },
+        "PCL_FEATURES_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_FILTERS_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_GEOMETRY_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_IO_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_KDTREE_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_ML_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_OCTREE_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_REGISTRATION_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_SAMPLE_CONSENSUS_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_SEARCH_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_SEGMENTATION_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_SURFACE_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_VISUALIZATION_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "Qt5Core_DIR": {
+          "type": "PATH",
+          "value": "/usr/lib/aarch64-linux-gnu/cmake/Qt5Core"
+        },
+        "Qt5Gui_DIR": {
+          "type": "PATH",
+          "value": "/usr/lib/aarch64-linux-gnu/cmake/Qt5Gui"
+        },
+        "Qt5OpenGL_DIR": {
+          "type": "PATH",
+          "value": "/usr/lib/aarch64-linux-gnu/cmake/Qt5OpenGL"
+        },
+        "Qt5PrintSupport_DIR": {
+          "type": "PATH",
+          "value": "/usr/lib/aarch64-linux-gnu/cmake/Qt5PrintSupport"
+        },
+        "Qt5Svg_DIR": {
+          "type": "PATH",
+          "value": "Qt5Svg_DIR-NOTFOUND"
+        },
+        "Qt5Widgets_DIR": {
+          "type": "PATH",
+          "value": "/usr/lib/aarch64-linux-gnu/cmake/Qt5Widgets"
+        },
+        "Qt5_DIR": {
+          "type": "PATH",
+          "value": "/usr/lib/aarch64-linux-gnu/cmake/Qt5"
+        },
+        "RTABMAP_QT_VERSION": {
+          "type": "STRING",
+          "value": "AUTO"
+        },
+        "WITH_ALICE_VISION": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_APRILTAG": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_CCCORELIB": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_CERES": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_CPUTSDF": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_CUDASIFT": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_CUVSLAM": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_CVSBA": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_DC1394": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_DEPTHAI": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_DVO": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_FASTCV": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_FLOAM": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_FLYCAPTURE2": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_FOVIS": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_FREENECT": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_FREENECT2": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_G2O": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_GRIDMAP": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_GTSAM": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_K4A": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_K4W2": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_LIBLAS": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_LIOSAM": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_LOAM": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_MADGWICK": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_MRPT": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_MSCKF_VIO": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_MYNTEYE": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_OCTOMAP": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_OKVIS": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_OPEN3D": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_OPENCHISEL": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_OPENGV": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_OPENMP": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_OPENNI": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_OPENNI2": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_OPENVINS": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_ORBBEC_SDK": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_ORB_OCTREE": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_ORB_SLAM": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_PDAL": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_POINTMATCHER": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_PYTHON": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_PYTHON_THREADING": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_QT": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_REALSENSE": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_REALSENSE2": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_REALSENSE_SLAM": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_TORCH": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_TORO": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_VERTIGO": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_VINS_FUSION": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_VISO2": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_XVSDK": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "WITH_ZED": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "WITH_ZEDOC": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "CMAKE_CXX_FLAGS_DEBUG-ADVANCED": {
+          "type": "INTERNAL",
+          "value": "1"
+        },
+        "CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED": {
+          "type": "INTERNAL",
+          "value": "1"
+        },
+        "CMAKE_CXX_FLAGS_RELEASE-ADVANCED": {
+          "type": "INTERNAL",
+          "value": "1"
+        },
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED": {
+          "type": "INTERNAL",
+          "value": "1"
+        },
+        "CMAKE_C_FLAGS_DEBUG-ADVANCED": {
+          "type": "INTERNAL",
+          "value": "1"
+        },
+        "CMAKE_C_FLAGS_MINSIZEREL-ADVANCED": {
+          "type": "INTERNAL",
+          "value": "1"
+        },
+        "CMAKE_C_FLAGS_RELEASE-ADVANCED": {
+          "type": "INTERNAL",
+          "value": "1"
+        },
+        "CMAKE_C_FLAGS_RELWITHDEBINFO-ADVANCED": {
+          "type": "INTERNAL",
+          "value": "1"
+        }
+      }
+    },
+    {
+      "source": "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/build/CMakeCache.txt",
+      "exists": true,
+      "source_sha256": "140836b7b858c3e865431deb3ff58e8fa2f783f76e876b8cd8c83cb97ce5ef26",
+      "selected_flags": {
+        "BUILD_TESTING": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "CMAKE_BUILD_TYPE": {
+          "type": "STRING",
+          "value": "Release"
+        },
+        "CMAKE_CXX_COMPILER": {
+          "type": "FILEPATH",
+          "value": "/usr/bin/c++"
+        },
+        "CMAKE_CXX_FLAGS": {
+          "type": "STRING",
+          "value": ""
+        },
+        "CMAKE_CXX_FLAGS_DEBUG": {
+          "type": "STRING",
+          "value": "-g"
+        },
+        "CMAKE_CXX_FLAGS_MINSIZEREL": {
+          "type": "STRING",
+          "value": "-Os -DNDEBUG"
+        },
+        "CMAKE_CXX_FLAGS_RELEASE": {
+          "type": "STRING",
+          "value": "-O3 -DNDEBUG"
+        },
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": {
+          "type": "STRING",
+          "value": "-O2 -g -DNDEBUG"
+        },
+        "CMAKE_INSTALL_PREFIX": {
+          "type": "PATH",
+          "value": "/usr/local"
+        },
+        "OpenCV_DIR": {
+          "type": "PATH",
+          "value": "/usr/lib/cmake/opencv4"
+        },
+        "PCL_2D_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_APPS_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_COMMON_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_DIR": {
+          "type": "PATH",
+          "value": "/usr/lib/aarch64-linux-gnu/cmake/pcl"
+        },
+        "PCL_FEATURES_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_FILTERS_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_GEOMETRY_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_IN_HAND_SCANNER_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_IO_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_KDTREE_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_KEYPOINTS_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_ML_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_MODELER_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_OCTREE_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_OUTOFCORE_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_PEOPLE_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_POINT_CLOUD_EDITOR_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_RECOGNITION_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_REGISTRATION_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_SAMPLE_CONSENSUS_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_SEARCH_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_SEGMENTATION_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_STEREO_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_SURFACE_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_TRACKING_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_VISUALIZATION_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "Qt5Core_DIR": {
+          "type": "PATH",
+          "value": "/usr/lib/aarch64-linux-gnu/cmake/Qt5Core"
+        },
+        "Qt5Gui_DIR": {
+          "type": "PATH",
+          "value": "/usr/lib/aarch64-linux-gnu/cmake/Qt5Gui"
+        },
+        "Qt5OpenGL_DIR": {
+          "type": "PATH",
+          "value": "/usr/lib/aarch64-linux-gnu/cmake/Qt5OpenGL"
+        },
+        "Qt5Widgets_DIR": {
+          "type": "PATH",
+          "value": "/usr/lib/aarch64-linux-gnu/cmake/Qt5Widgets"
+        },
+        "Qt5_DIR": {
+          "type": "PATH",
+          "value": "/usr/lib/aarch64-linux-gnu/cmake/Qt5"
+        },
+        "CMAKE_CXX_FLAGS_DEBUG-ADVANCED": {
+          "type": "INTERNAL",
+          "value": "1"
+        },
+        "CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED": {
+          "type": "INTERNAL",
+          "value": "1"
+        },
+        "CMAKE_CXX_FLAGS_RELEASE-ADVANCED": {
+          "type": "INTERNAL",
+          "value": "1"
+        },
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED": {
+          "type": "INTERNAL",
+          "value": "1"
+        }
+      }
+    },
+    {
+      "source": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/conversion_guard/build/CMakeCache.txt",
+      "exists": true,
+      "source_sha256": "4e388c623ae6de1ace8807af89aca9d179dced1cfcddda0d633b28cd5fb57c5c",
+      "selected_flags": {
+        "BUILD_TESTING": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "CMAKE_BUILD_TYPE": {
+          "type": "STRING",
+          "value": "Release"
+        },
+        "CMAKE_CXX_COMPILER": {
+          "type": "FILEPATH",
+          "value": "/usr/bin/c++"
+        },
+        "CMAKE_CXX_FLAGS": {
+          "type": "STRING",
+          "value": ""
+        },
+        "CMAKE_CXX_FLAGS_DEBUG": {
+          "type": "STRING",
+          "value": "-g"
+        },
+        "CMAKE_CXX_FLAGS_MINSIZEREL": {
+          "type": "STRING",
+          "value": "-Os -DNDEBUG"
+        },
+        "CMAKE_CXX_FLAGS_RELEASE": {
+          "type": "STRING",
+          "value": "-O3 -DNDEBUG"
+        },
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": {
+          "type": "STRING",
+          "value": "-O2 -g -DNDEBUG"
+        },
+        "CMAKE_C_COMPILER": {
+          "type": "FILEPATH",
+          "value": "/usr/bin/cc"
+        },
+        "CMAKE_C_FLAGS": {
+          "type": "STRING",
+          "value": ""
+        },
+        "CMAKE_C_FLAGS_DEBUG": {
+          "type": "STRING",
+          "value": "-g"
+        },
+        "CMAKE_C_FLAGS_MINSIZEREL": {
+          "type": "STRING",
+          "value": "-Os -DNDEBUG"
+        },
+        "CMAKE_C_FLAGS_RELEASE": {
+          "type": "STRING",
+          "value": "-O3 -DNDEBUG"
+        },
+        "CMAKE_C_FLAGS_RELWITHDEBINFO": {
+          "type": "STRING",
+          "value": "-O2 -g -DNDEBUG"
+        },
+        "CMAKE_INSTALL_PREFIX": {
+          "type": "PATH",
+          "value": "/usr/local"
+        },
+        "OpenCV_DIR": {
+          "type": "UNINITIALIZED",
+          "value": "/home/exocean/.cache/wbrov_control/dropout_20260905.ksKPBq"
+        },
+        "PCL_2D_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_APPS_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_COMMON_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_DIR": {
+          "type": "PATH",
+          "value": "/usr/lib/aarch64-linux-gnu/cmake/pcl"
+        },
+        "PCL_FEATURES_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_FILTERS_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_GEOMETRY_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_IN_HAND_SCANNER_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_IO_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_KDTREE_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_KEYPOINTS_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_ML_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_MODELER_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_OCTREE_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_OUTOFCORE_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_PEOPLE_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_POINT_CLOUD_EDITOR_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_RECOGNITION_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_REGISTRATION_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_SAMPLE_CONSENSUS_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_SEARCH_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_SEGMENTATION_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_STEREO_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_SURFACE_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_TRACKING_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "PCL_VISUALIZATION_INCLUDE_DIR": {
+          "type": "PATH",
+          "value": "/usr/include/pcl-1.12"
+        },
+        "Qt5Core_DIR": {
+          "type": "PATH",
+          "value": "/usr/lib/aarch64-linux-gnu/cmake/Qt5Core"
+        },
+        "Qt5Gui_DIR": {
+          "type": "PATH",
+          "value": "/usr/lib/aarch64-linux-gnu/cmake/Qt5Gui"
+        },
+        "Qt5OpenGL_DIR": {
+          "type": "PATH",
+          "value": "/usr/lib/aarch64-linux-gnu/cmake/Qt5OpenGL"
+        },
+        "Qt5Widgets_DIR": {
+          "type": "PATH",
+          "value": "/usr/lib/aarch64-linux-gnu/cmake/Qt5Widgets"
+        },
+        "Qt5_DIR": {
+          "type": "PATH",
+          "value": "/usr/lib/aarch64-linux-gnu/cmake/Qt5"
+        },
+        "CMAKE_CXX_FLAGS_DEBUG-ADVANCED": {
+          "type": "INTERNAL",
+          "value": "1"
+        },
+        "CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED": {
+          "type": "INTERNAL",
+          "value": "1"
+        },
+        "CMAKE_CXX_FLAGS_RELEASE-ADVANCED": {
+          "type": "INTERNAL",
+          "value": "1"
+        },
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED": {
+          "type": "INTERNAL",
+          "value": "1"
+        },
+        "CMAKE_C_FLAGS_DEBUG-ADVANCED": {
+          "type": "INTERNAL",
+          "value": "1"
+        },
+        "CMAKE_C_FLAGS_MINSIZEREL-ADVANCED": {
+          "type": "INTERNAL",
+          "value": "1"
+        },
+        "CMAKE_C_FLAGS_RELEASE-ADVANCED": {
+          "type": "INTERNAL",
+          "value": "1"
+        },
+        "CMAKE_C_FLAGS_RELWITHDEBINFO-ADVANCED": {
+          "type": "INTERNAL",
+          "value": "1"
+        }
+      }
+    }
+  ],
+  "command_metadata": [
+    {
+      "source": "/home/exocean/.cache/wbrov_mapping_builds/corner_point_production_adapter_20260912/RTABMAP_ENTRYPOINT_COMPILE_COMMAND.json",
+      "source_sha256": "f3ef3b00c5b756bd9f3504e6c9b9faf2425bf5a14eaf6816e283a33a9cdc0aee",
+      "value": [
+        "/usr/bin/c++",
+        "-DBOOST_ALL_NO_LIB",
+        "-DBOOST_DATE_TIME_DYN_LINK",
+        "-DBOOST_FILESYSTEM_DYN_LINK",
+        "-DBOOST_IOSTREAMS_DYN_LINK",
+        "-DBOOST_SERIALIZATION_DYN_LINK",
+        "-DBOOST_SYSTEM_DYN_LINK",
+        "-DDEFAULT_RMW_IMPLEMENTATION=rmw_fastrtps_cpp",
+        "-DDISABLE_PCAP",
+        "-DDISABLE_PNG",
+        "-DEIGEN_DENSEBASE_PLUGIN=\"grid_map_core/eigen_plugins/DenseBasePlugin.hpp\"",
+        "-DEIGEN_FUNCTORS_PLUGIN=\"grid_map_core/eigen_plugins/FunctorsPlugin.hpp\"",
+        "-DFASTCDR_DYN_LINK",
+        "-DPRE_ROS_IRON",
+        "-DPRE_ROS_JAZZY",
+        "-DPRE_ROS_KILTED",
+        "-DPRE_ROS_LYRICAL",
+        "-DQT_CORE_LIB",
+        "-DQT_GUI_LIB",
+        "-DQT_NO_DEBUG",
+        "-DQT_OPENGL_LIB",
+        "-DQT_WIDGETS_LIB",
+        "-DRCUTILS_ENABLE_FAULT_INJECTION",
+        "-DWITH_APRILTAG_MSGS",
+        "-DWITH_ARUCO_MSGS",
+        "-DWITH_ARUCO_OPENCV_MSGS",
+        "-DWITH_GRID_MAP_ROS",
+        "-DWITH_NAV2_MSGS",
+        "-DWITH_OCTOMAP_MSGS",
+        "-Dkiss_fft_scalar=double",
+        "-I/home/exocean/.cache/wbrov_mapping_builds/corner_point_production_adapter_20260912/include",
+        "-I/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/source/rtabmap_ros/rtabmap_conversions/include",
+        "-I/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/source/rtabmap_ros/rtabmap_costmap_plugins/include",
+        "-I/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/source/rtabmap_ros/rtabmap_odom/include",
+        "-I/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/source/rtabmap_ros/rtabmap_rviz_plugins/include",
+        "-I/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/source/rtabmap_ros/rtabmap_slam/include",
+        "-I/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/source/rtabmap_ros/rtabmap_sync/include",
+        "-I/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/source/rtabmap_ros/rtabmap_util/include",
+        "-I/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/source/rtabmap_ros/rtabmap_viz/include",
+        "-isystem",
+        "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/source/rtabmap_core/corelib/include",
+        "-isystem",
+        "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/source/rtabmap_core/utilite/include",
+        "-isystem",
+        "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/source/rtabmap_core/guilib/include",
+        "-isystem",
+        "/home/exocean/opt/rtabmap/opt/ros/humble/include/rtabmap-0.23",
+        "-isystem",
+        "/home/exocean/opt/rtabmap/usr/include",
+        "-isystem",
+        "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/vendor_shadow/include/pcl_ros",
+        "-isystem",
+        "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/vendor_shadow/include",
+        "-isystem",
+        "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/vendor_shadow/include/rtabmap_msgs",
+        "-isystem",
+        "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/vendor_shadow/include/apriltag_msgs",
+        "-isystem",
+        "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/vendor_shadow/include/aruco_msgs",
+        "-isystem",
+        "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/vendor_shadow/include/aruco_opencv_msgs",
+        "-isystem",
+        "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/vendor_shadow/include/nav2_msgs",
+        "-isystem",
+        "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/vendor_shadow/include/octomap_msgs",
+        "-isystem",
+        "/opt/ros/humble/include/cv_bridge",
+        "-isystem",
+        "/opt/ros/humble/include/rclcpp",
+        "-isystem",
+        "/opt/ros/humble/include/rclcpp_components",
+        "-isystem",
+        "/opt/ros/humble/include/image_geometry",
+        "-isystem",
+        "/opt/ros/humble/include/laser_geometry",
+        "-isystem",
+        "/opt/ros/humble/include",
+        "-isystem",
+        "/opt/ros/humble/include/message_filters",
+        "-isystem",
+        "/opt/ros/humble/include/nav_msgs",
+        "-isystem",
+        "/opt/ros/humble/include/pcl_conversions",
+        "-isystem",
+        "/opt/ros/humble/include/pcl_msgs",
+        "-isystem",
+        "/opt/ros/humble/include/sensor_msgs",
+        "-isystem",
+        "/opt/ros/humble/include/std_msgs",
+        "-isystem",
+        "/opt/ros/humble/include/pluginlib",
+        "-isystem",
+        "/opt/ros/humble/include/geometry_msgs",
+        "-isystem",
+        "/opt/ros/humble/include/rcutils",
+        "-isystem",
+        "/opt/ros/humble/include/rosbag2_cpp",
+        "-isystem",
+        "/opt/ros/humble/include/tf2",
+        "-isystem",
+        "/opt/ros/humble/include/visualization_msgs",
+        "-isystem",
+        "/opt/ros/humble/include/tf2_ros",
+        "-isystem",
+        "/opt/ros/humble/include/std_srvs",
+        "-isystem",
+        "/usr/include/eigen3",
+        "-isystem",
+        "/usr/include/pcl-1.12",
+        "-isystem",
+        "/usr/include/ni",
+        "-isystem",
+        "/usr/include/openni2",
+        "-isystem",
+        "/home/exocean/opt/rtabmap/opt/ros/humble/include/grid_map_core",
+        "-isystem",
+        "/home/exocean/opt/rtabmap/opt/ros/humble/include/filters",
+        "-isystem",
+        "/home/exocean/opt/rtabmap/opt/ros/humble/include/grid_map_msgs",
+        "-isystem",
+        "/home/exocean/opt/rtabmap/opt/ros/humble/include/nav2_msgs",
+        "-isystem",
+        "/usr/include/opencv4",
+        "-isystem",
+        "/opt/ros/humble/include/builtin_interfaces",
+        "-isystem",
+        "/opt/ros/humble/include/rosidl_runtime_c",
+        "-isystem",
+        "/opt/ros/humble/include/rosidl_typesupport_interface",
+        "-isystem",
+        "/opt/ros/humble/include/fastcdr",
+        "-isystem",
+        "/opt/ros/humble/include/rosidl_runtime_cpp",
+        "-isystem",
+        "/opt/ros/humble/include/rosidl_typesupport_fastrtps_cpp",
+        "-isystem",
+        "/opt/ros/humble/include/rmw",
+        "-isystem",
+        "/opt/ros/humble/include/rosidl_typesupport_fastrtps_c",
+        "-isystem",
+        "/opt/ros/humble/include/rosidl_typesupport_introspection_c",
+        "-isystem",
+        "/opt/ros/humble/include/rosidl_typesupport_introspection_cpp",
+        "-isystem",
+        "/opt/ros/humble/include/ament_index_cpp",
+        "-isystem",
+        "/opt/ros/humble/include/libstatistics_collector",
+        "-isystem",
+        "/opt/ros/humble/include/rcl",
+        "-isystem",
+        "/opt/ros/humble/include/rcl_interfaces",
+        "-isystem",
+        "/opt/ros/humble/include/rcl_logging_interface",
+        "-isystem",
+        "/opt/ros/humble/include/rcl_yaml_param_parser",
+        "-isystem",
+        "/opt/ros/humble/include/libyaml_vendor",
+        "-isystem",
+        "/opt/ros/humble/include/tracetools",
+        "-isystem",
+        "/opt/ros/humble/include/rcpputils",
+        "-isystem",
+        "/opt/ros/humble/include/statistics_msgs",
+        "-isystem",
+        "/opt/ros/humble/include/rosgraph_msgs",
+        "-isystem",
+        "/opt/ros/humble/include/rosidl_typesupport_cpp",
+        "-isystem",
+        "/opt/ros/humble/include/rosidl_typesupport_c",
+        "-isystem",
+        "/opt/ros/humble/include/class_loader",
+        "-isystem",
+        "/opt/ros/humble/include/composition_interfaces",
+        "-isystem",
+        "/opt/ros/humble/include/tf2_geometry_msgs",
+        "-isystem",
+        "/opt/ros/humble/include/rclcpp_action",
+        "-isystem",
+        "/opt/ros/humble/include/action_msgs",
+        "-isystem",
+        "/opt/ros/humble/include/unique_identifier_msgs",
+        "-isystem",
+        "/opt/ros/humble/include/rcl_action",
+        "-isystem",
+        "/opt/ros/humble/include/tf2_msgs",
+        "-isystem",
+        "/usr/include/vtk-9.1",
+        "-isystem",
+        "/usr/include/jsoncpp",
+        "-isystem",
+        "/usr/include/freetype2",
+        "-isystem",
+        "/usr/include/aarch64-linux-gnu/qt5",
+        "-isystem",
+        "/usr/include/aarch64-linux-gnu/qt5/QtOpenGL",
+        "-isystem",
+        "/usr/include/aarch64-linux-gnu/qt5/QtWidgets",
+        "-isystem",
+        "/usr/include/aarch64-linux-gnu/qt5/QtGui",
+        "-isystem",
+        "/usr/include/aarch64-linux-gnu/qt5/QtCore",
+        "-isystem",
+        "/usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++",
+        "-isystem",
+        "/opt/ros/humble/include/tf2_eigen",
+        "-isystem",
+        "/opt/ros/humble/include/image_transport",
+        "-isystem",
+        "/opt/ros/humble/include/stereo_msgs",
+        "-isystem",
+        "/opt/ros/humble/include/diagnostic_msgs",
+        "-isystem",
+        "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/vendor_shadow/include/filters",
+        "-isystem",
+        "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/vendor_shadow/include/grid_map_msgs",
+        "-isystem",
+        "/opt/ros/humble/include/rosbag2_storage",
+        "-O3",
+        "-DNDEBUG",
+        "-fPIC",
+        "-o",
+        "/home/exocean/.cache/wbrov_mapping_builds/corner_point_production_adapter_20260912/CoreNode.o",
+        "-c",
+        "/home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/source/rtabmap_ros/rtabmap_slam/src/CoreNode.cpp"
+      ]
+    },
+    {
+      "source": "/home/exocean/.cache/wbrov_mapping_builds/corner_point_production_adapter_20260912/FULL_LIBRARY_COMMANDS.json",
+      "source_sha256": "264e26e840cc8d04a4b31917012f6f39505a85124849ef6511ac922cb44a43e4",
+      "value": [
+        [
+          "/usr/bin/c++",
+          "-fPIC",
+          "-fmessage-length=0",
+          "-fopenmp",
+          "-std=c++17",
+          "-O3",
+          "-DNDEBUG",
+          "-shared",
+          "-Wl,-soname,librtabmap_core.so.0.23",
+          "-o",
+          "/home/exocean/.cache/wbrov_mapping_builds/corner_point_production_adapter_20260912/librtabmap_core.so.0.23.7",
+          "/home/exocean/.cache/wbrov_mapping_builds/corner_point_transaction_candidate_v2_20260912/Rtabmap.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/RtabmapThread.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/Statistics.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/Memory.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/DBDriver.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/DBDriverSqlite3.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/DBReader.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/Recovery.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/SensorCapture.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/SensorCaptureThread.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/Camera.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/CameraModel.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraFreenect.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraFreenect2.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraImages.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraK4W2.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraK4A.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraOpenni.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraOpenNI2.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraOpenNICV.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraRealSense.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraRealSense2.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraRGBDImages.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraStereoDC1394.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraStereoFlyCapture2.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraStereoImages.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraStereoVideo.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraStereoZed.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraStereoZedOC.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraStereoTara.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraVideo.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraMyntEye.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraDepthAI.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraSeerSense.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/camera/CameraOrbbecSDK.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/EpipolarGeometry.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/VisualWord.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/VWDictionary.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/BayesFilter.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/Parameters.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/Signature.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/Features2d.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/Transform.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/GeodeticCoords.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/util2d.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/util3d.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/util3d_filtering.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/util3d_mapping.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/util3d_transforms.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/util3d_registration.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/util3d_surface.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/util3d_features.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/util3d_correspondences.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/util3d_motion_estimation.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/rvl_codec.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/SensorData.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/Graph.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/Compression.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/Link.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/LaserScan.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/Optimizer.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/optimizer/OptimizerTORO.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/fixed_old_shadow_20260911/OptimizerG2O.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/optimizer/OptimizerGTSAM.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/optimizer/OptimizerCVSBA.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/optimizer/OptimizerCeres.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/Registration.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/RegistrationIcp.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/RegistrationVis.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/Odometry.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/OdometryThread.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/OdometryInfo.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/odometry/OdometryF2M.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/odometry/OdometryMono.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/odometry/OdometryF2F.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/odometry/OdometryFovis.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/odometry/OdometryViso2.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/odometry/OdometryDVO.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/odometry/OdometryOkvis.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/odometry/OdometryORBSLAM2.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/odometry/OdometryORBSLAM3.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/odometry/OdometryLOAM.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/odometry/OdometryFLOAM.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/odometry/OdometryLIOSAM.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/odometry/OdometryMSCKF.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/odometry/OdometryVINSFusion.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/odometry/OdometryOpenVINS.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/odometry/OdometryOpen3D.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/odometry/OdometryCuVSLAM.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/IMU.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/IMUThread.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/IMUFilter.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/imufilter/ComplementaryFilter.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/Stereo.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/StereoDense.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/StereoCameraModel.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/stereo/StereoBM.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/stereo/StereoSGBM.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/GlobalMap.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/LocalGridMaker.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/LocalGrid.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/global_map/OccupancyGrid.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/global_map/CloudMap.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/MarkerDetector.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/GlobalDescriptorExtractor.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/GainCompensator.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/rtflann/ext/lz4.c.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/rtflann/ext/lz4hc.c.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/FlannIndex.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/clams/discrete_depth_distortion_model_helpers.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/clams/discrete_depth_distortion_model.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/clams/frame_projector.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/clams/slam_calibrator.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/opencv/ORBextractor.cc.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/opencv/solvepnp.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/opencv/five-point.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/lidar/LidarVLP16.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/optimizer/toro3d/posegraph3.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/optimizer/toro3d/treeoptimizer3_iteration.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/optimizer/toro3d/treeoptimizer3.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/optimizer/toro3d/posegraph2.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/optimizer/toro3d/treeoptimizer2.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/optimizer/vertigo/g2o/edge_se2Switchable.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/optimizer/vertigo/g2o/edge_se3Switchable.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/optimizer/vertigo/g2o/edge_switchPrior.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/optimizer/vertigo/g2o/types_g2o_robust.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/optimizer/vertigo/g2o/vertex_switchLinear.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/global_map/OctoMap.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/corelib/src/CMakeFiles/rtabmap_core.dir/imufilter/MadgwickFilter.cpp.o",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/build/bin/librtabmap_utilite.so.0.23.7",
+          "/usr/lib/libopencv_highgui.so.4.8.0",
+          "/usr/lib/libopencv_stitching.so.4.8.0",
+          "/usr/lib/libopencv_photo.so.4.8.0",
+          "/usr/lib/libopencv_video.so.4.8.0",
+          "/usr/lib/libopencv_videoio.so.4.8.0",
+          "/usr/lib/libopencv_objdetect.so.4.8.0",
+          "/usr/lib/aarch64-linux-gnu/libpcl_surface.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_registration.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_segmentation.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_visualization.so",
+          "/usr/lib/libOpenNI.so",
+          "/usr/lib/aarch64-linux-gnu/libusb-1.0.so",
+          "/usr/lib/aarch64-linux-gnu/libflann_cpp.so",
+          "/usr/lib/aarch64-linux-gnu/libvtkRenderingVolumeOpenGL2-9.1.so.9.1.0",
+          "/home/exocean/opt/rtabmap/usr/lib/aarch64-linux-gnu/liboctomap.so.1.9.7",
+          "/usr/lib/aarch64-linux-gnu/libz.so",
+          "/usr/lib/aarch64-linux-gnu/libsqlite3.so",
+          "/usr/lib/aarch64-linux-gnu/libOpenNI2.so",
+          "/usr/lib/aarch64-linux-gnu/libdc1394.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/aarch64-linux-gnu/libg2o_solver_eigen.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/aarch64-linux-gnu/libg2o_solver_pcg.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/aarch64-linux-gnu/libg2o_types_slam2d.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/aarch64-linux-gnu/libg2o_types_sba.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/aarch64-linux-gnu/libg2o_solver_csparse.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/aarch64-linux-gnu/libg2o_csparse_extension.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/aarch64-linux-gnu/libg2o_solver_cholmod.so",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/pointmatcher_shadow/lib/aarch64-linux-gnu/libpointmatcher.a",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/aarch64-linux-gnu/libnabo.a",
+          "/home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/pointmatcher_shadow/lib/aarch64-linux-gnu/libyaml-cpp-pm.a",
+          "/usr/lib/aarch64-linux-gnu/libboost_program_options.so.1.74.0",
+          "/usr/local/zed/lib/libsl_zed.so",
+          "/usr/lib/aarch64-linux-gnu/libopenblas.so",
+          "/usr/lib/aarch64-linux-gnu/libusb-1.0.so",
+          "/usr/local/cuda/lib64/libcudart.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/aarch64-linux-gnu/libgtsam.so.4.2.0",
+          "/usr/lib/libopencv_imgcodecs.so.4.8.0",
+          "/usr/lib/libopencv_calib3d.so.4.8.0",
+          "/usr/lib/libopencv_features2d.so.4.8.0",
+          "/usr/lib/libopencv_flann.so.4.8.0",
+          "/usr/lib/libopencv_dnn.so.4.8.0",
+          "/usr/lib/libopencv_imgproc.so.4.8.0",
+          "/usr/lib/libopencv_core.so.4.8.0",
+          "/usr/lib/aarch64-linux-gnu/libpcl_features.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_filters.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_sample_consensus.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_ml.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_io.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_search.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_octree.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_kdtree.so",
+          "/usr/lib/libOpenNI.so",
+          "/usr/lib/aarch64-linux-gnu/libusb-1.0.so",
+          "/usr/lib/aarch64-linux-gnu/libvtkChartsCore-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkInteractionImage-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkIOGeometry-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libjsoncpp.so",
+          "/usr/lib/aarch64-linux-gnu/libvtkIOPLY-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkRenderingLOD-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkViewsContext2D-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkViewsCore-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkGUISupportQt-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkInteractionWidgets-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkFiltersModeling-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkInteractionStyle-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkFiltersExtraction-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkIOLegacy-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkIOCore-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkRenderingAnnotation-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkRenderingContext2D-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkRenderingFreeType-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libfreetype.so",
+          "/usr/lib/aarch64-linux-gnu/libvtkImagingSources-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkIOImage-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libQt5OpenGL.so.5.15.3",
+          "/usr/lib/aarch64-linux-gnu/libQt5Widgets.so.5.15.3",
+          "/usr/lib/aarch64-linux-gnu/libQt5Gui.so.5.15.3",
+          "/usr/lib/aarch64-linux-gnu/libQt5Core.so.5.15.3",
+          "/usr/lib/aarch64-linux-gnu/libpcl_common.so",
+          "/usr/lib/aarch64-linux-gnu/libboost_iostreams.so.1.74.0",
+          "-llz4",
+          "/usr/lib/aarch64-linux-gnu/libqhull_r.so.8.0.2",
+          "/usr/lib/aarch64-linux-gnu/libvtkRenderingOpenGL2-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkRenderingUI-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libGLEW.so",
+          "/usr/lib/aarch64-linux-gnu/libX11.so",
+          "/usr/lib/aarch64-linux-gnu/libvtkImagingMath-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkRenderingVolume-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkImagingCore-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkRenderingCore-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkCommonColor-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkFiltersGeometry-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkFiltersSources-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkFiltersGeneral-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkCommonComputationalGeometry-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkFiltersCore-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkCommonExecutionModel-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkCommonDataModel-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkCommonMisc-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkCommonTransforms-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkCommonMath-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkkissfft-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkCommonCore-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libtbb.so.12.5",
+          "/usr/lib/aarch64-linux-gnu/libvtksys-9.1.so.9.1.0",
+          "-ldl",
+          "/home/exocean/opt/rtabmap/usr/lib/aarch64-linux-gnu/liboctomath.so.1.9.7",
+          "/usr/lib/gcc/aarch64-linux-gnu/11/libgomp.so",
+          "/usr/lib/aarch64-linux-gnu/libpthread.a",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/aarch64-linux-gnu/libg2o_types_slam3d.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/aarch64-linux-gnu/libg2o_opengl_helper.so",
+          "/usr/lib/aarch64-linux-gnu/libGLU.so",
+          "/usr/lib/aarch64-linux-gnu/libGLX.so",
+          "/usr/lib/aarch64-linux-gnu/libOpenGL.so",
+          "/home/exocean/opt/rtabmap/usr/lib/aarch64-linux-gnu/libcxsparse.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/aarch64-linux-gnu/libg2o_core.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/aarch64-linux-gnu/libg2o_stuff.so",
+          "-lrt",
+          "/home/exocean/opt/rtabmap/usr/lib/aarch64-linux-gnu/libcholmod.so",
+          "/home/exocean/opt/rtabmap/usr/lib/aarch64-linux-gnu/libamd.so",
+          "/usr/lib/aarch64-linux-gnu/libcolamd.so.2.9.6",
+          "/home/exocean/opt/rtabmap/usr/lib/aarch64-linux-gnu/libcamd.so",
+          "/home/exocean/opt/rtabmap/usr/lib/aarch64-linux-gnu/libccolamd.so",
+          "/usr/lib/aarch64-linux-gnu/libblas.so",
+          "/usr/lib/aarch64-linux-gnu/liblapack.so",
+          "-lgomp",
+          "/usr/lib/aarch64-linux-gnu/libboost_system.so.1.74.0",
+          "/usr/lib/aarch64-linux-gnu/libboost_filesystem.so.1.74.0",
+          "/usr/lib/aarch64-linux-gnu/libboost_date_time.so.1.74.0",
+          "/usr/lib/aarch64-linux-gnu/libboost_serialization.so.1.74.0",
+          "/usr/lib/aarch64-linux-gnu/libboost_thread.so.1.74.0",
+          "/usr/lib/aarch64-linux-gnu/libboost_atomic.so.1.74.0",
+          "/usr/lib/aarch64-linux-gnu/libboost_regex.so.1.74.0",
+          "/usr/lib/aarch64-linux-gnu/libboost_timer.so.1.74.0",
+          "/usr/lib/aarch64-linux-gnu/libboost_chrono.so.1.74.0",
+          "-ltbb",
+          "-ltbbmalloc",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/aarch64-linux-gnu/libmetis-gtsam.so",
+          "-lm"
+        ],
+        [
+          "/usr/bin/c++",
+          "-fPIC",
+          "-O3",
+          "-DNDEBUG",
+          "-shared",
+          "-Wl,-soname,librtabmap_slam_plugins.so",
+          "-o",
+          "/home/exocean/.cache/wbrov_mapping_builds/corner_point_production_adapter_20260912/librtabmap_slam_plugins.so",
+          "/home/exocean/.cache/wbrov_mapping_builds/corner_point_transaction_candidate_v2_20260912/CoreWrapper.o",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libpcl_ros_tf.a",
+          "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-9d417b11eeb4dc96a3ff8cb225e9e2949207c05f394fa37dbf6e7652bede57a0/lib/librtabmap_util_plugins.so",
+          "/opt/ros/humble/lib/libvisualization_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libvisualization_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libvisualization_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libvisualization_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libvisualization_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libvisualization_msgs__rosidl_generator_py.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libapriltag_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libapriltag_msgs__rosidl_typesupport_introspection_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libapriltag_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libapriltag_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libapriltag_msgs__rosidl_typesupport_cpp.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libapriltag_msgs__rosidl_generator_py.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libaruco_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libaruco_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libaruco_msgs__rosidl_typesupport_introspection_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libaruco_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libaruco_msgs__rosidl_typesupport_cpp.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libaruco_msgs__rosidl_generator_py.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libaruco_opencv_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libaruco_opencv_msgs__rosidl_typesupport_introspection_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libaruco_opencv_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libaruco_opencv_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libaruco_opencv_msgs__rosidl_typesupport_cpp.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libaruco_opencv_msgs__rosidl_generator_py.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libnav2_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libnav2_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libnav2_msgs__rosidl_typesupport_introspection_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libnav2_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libnav2_msgs__rosidl_typesupport_cpp.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libnav2_msgs__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/libmessage_filters.so",
+          "/opt/ros/humble/lib/librosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/librmw.so",
+          "/opt/ros/humble/lib/librosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/librcutils.so",
+          "-ldl",
+          "-latomic",
+          "/opt/ros/humble/lib/librcpputils.so",
+          "/opt/ros/humble/lib/librosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/librosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/librosidl_runtime_c.so",
+          "/opt/ros/humble/lib/librosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/librosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libpcl_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libpcl_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libpcl_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libpcl_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libpcl_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libpcl_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libpcl_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libpcl_msgs__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/librclcpp.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_generator_py.so",
+          "/usr/lib/aarch64-linux-gnu/libpython3.10.so",
+          "/usr/lib/libOpenNI.so",
+          "/usr/lib/aarch64-linux-gnu/libOpenNI2.so",
+          "/usr/lib/aarch64-linux-gnu/libusb-1.0.so",
+          "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-9d417b11eeb4dc96a3ff8cb225e9e2949207c05f394fa37dbf6e7652bede57a0/lib/librtabmap_util.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libpcl_ros_tf.a",
+          "/usr/lib/aarch64-linux-gnu/libpcl_common.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libpcd_to_pointcloud_lib.so",
+          "/opt/ros/humble/lib/librcl_interfaces__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/librcl_interfaces__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/librcl_interfaces__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/librcl_interfaces__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/librcl_interfaces__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/librcl_interfaces__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/librcl_interfaces__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/librcl_interfaces__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/librosgraph_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/librosgraph_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/librosgraph_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/librosgraph_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/librosgraph_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/librosgraph_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/librosgraph_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/librosgraph_msgs__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/librcl_yaml_param_parser.so",
+          "/opt/ros/humble/lib/libstatistics_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libstatistics_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libstatistics_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libstatistics_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libstatistics_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libstatistics_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libstatistics_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libstatistics_msgs__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/libtracetools.so",
+          "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-9d417b11eeb4dc96a3ff8cb225e9e2949207c05f394fa37dbf6e7652bede57a0/lib/librtabmap_sync_plugins.so",
+          "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-9d417b11eeb4dc96a3ff8cb225e9e2949207c05f394fa37dbf6e7652bede57a0/lib/librtabmap_sync.so",
+          "/opt/ros/humble/lib/libcomponent_manager.so",
+          "/opt/ros/humble/lib/libcomposition_interfaces__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libcomposition_interfaces__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libcomposition_interfaces__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libcomposition_interfaces__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libcomposition_interfaces__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libcomposition_interfaces__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/libcomposition_interfaces__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libcomposition_interfaces__rosidl_generator_c.so",
+          "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-9d417b11eeb4dc96a3ff8cb225e9e2949207c05f394fa37dbf6e7652bede57a0/lib/librtabmap_conversions.so",
+          "/opt/ros/humble/lib/libcv_bridge.so",
+          "/opt/ros/humble/lib/libimage_geometry.so",
+          "/opt/ros/humble/lib/liblaser_geometry.so",
+          "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-9d417b11eeb4dc96a3ff8cb225e9e2949207c05f394fa37dbf6e7652bede57a0/lib/librtabmap_gui.so.0.23.7",
+          "/home/exocean/.cache/wbrov_mapping_builds/corner_point_production_adapter_20260912/librtabmap_core.so.0.23.7",
+          "/usr/lib/aarch64-linux-gnu/libpcl_apps.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_keypoints.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_tracking.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_recognition.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_stereo.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_outofcore.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_people.so",
+          "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-9d417b11eeb4dc96a3ff8cb225e9e2949207c05f394fa37dbf6e7652bede57a0/lib/librtabmap_utilite.so.0.23.7",
+          "/usr/lib/libopencv_gapi.so.4.8.0",
+          "/usr/lib/libopencv_ml.so.4.8.0",
+          "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-9d417b11eeb4dc96a3ff8cb225e9e2949207c05f394fa37dbf6e7652bede57a0/lib/librtabmap_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libstd_srvs__rosidl_typesupport_fastrtps_c.so",
+          "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-9d417b11eeb4dc96a3ff8cb225e9e2949207c05f394fa37dbf6e7652bede57a0/lib/librtabmap_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libstd_srvs__rosidl_typesupport_introspection_c.so",
+          "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-9d417b11eeb4dc96a3ff8cb225e9e2949207c05f394fa37dbf6e7652bede57a0/lib/librtabmap_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libstd_srvs__rosidl_typesupport_fastrtps_cpp.so",
+          "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-9d417b11eeb4dc96a3ff8cb225e9e2949207c05f394fa37dbf6e7652bede57a0/lib/librtabmap_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libstd_srvs__rosidl_typesupport_introspection_cpp.so",
+          "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-9d417b11eeb4dc96a3ff8cb225e9e2949207c05f394fa37dbf6e7652bede57a0/lib/librtabmap_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libstd_srvs__rosidl_typesupport_cpp.so",
+          "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-9d417b11eeb4dc96a3ff8cb225e9e2949207c05f394fa37dbf6e7652bede57a0/lib/librtabmap_msgs__rosidl_generator_py.so",
+          "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-9d417b11eeb4dc96a3ff8cb225e9e2949207c05f394fa37dbf6e7652bede57a0/lib/librtabmap_msgs__rosidl_typesupport_c.so",
+          "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-9d417b11eeb4dc96a3ff8cb225e9e2949207c05f394fa37dbf6e7652bede57a0/lib/librtabmap_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libstd_srvs__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/libstd_srvs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libstd_srvs__rosidl_generator_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libdiagnostic_updater.so",
+          "/opt/ros/humble/lib/libdiagnostic_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libdiagnostic_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libdiagnostic_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libdiagnostic_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libdiagnostic_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libdiagnostic_msgs__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/libdiagnostic_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libdiagnostic_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libstatic_transform_broadcaster_node.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/liboctomap_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/liboctomap_msgs__rosidl_typesupport_introspection_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/liboctomap_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/liboctomap_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/liboctomap_msgs__rosidl_typesupport_cpp.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/liboctomap_msgs__rosidl_generator_py.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/liboctomap_msgs__rosidl_typesupport_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/liboctomap_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libpcl_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libpcl_msgs__rosidl_generator_c.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_segmentation.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_ml.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_visualization.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_io.so",
+          "/usr/lib/aarch64-linux-gnu/libpng.so",
+          "/usr/lib/aarch64-linux-gnu/libz.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_surface.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_registration.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_features.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_filters.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_sample_consensus.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_search.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_kdtree.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_octree.so",
+          "/usr/lib/aarch64-linux-gnu/libpcl_common.so",
+          "/usr/lib/aarch64-linux-gnu/libboost_system.so.1.74.0",
+          "/usr/lib/aarch64-linux-gnu/libboost_filesystem.so.1.74.0",
+          "/usr/lib/aarch64-linux-gnu/libboost_date_time.so.1.74.0",
+          "/usr/lib/aarch64-linux-gnu/libboost_iostreams.so.1.74.0",
+          "/usr/lib/aarch64-linux-gnu/libboost_serialization.so.1.74.0",
+          "/usr/lib/aarch64-linux-gnu/libusb-1.0.so",
+          "/usr/lib/aarch64-linux-gnu/libvtkChartsCore-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkInteractionImage-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkIOGeometry-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libjsoncpp.so",
+          "/usr/lib/aarch64-linux-gnu/libvtkIOPLY-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkRenderingLOD-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkViewsContext2D-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkViewsCore-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkGUISupportQt-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkInteractionWidgets-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkFiltersModeling-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkInteractionStyle-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkFiltersExtraction-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkIOLegacy-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkIOCore-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkRenderingAnnotation-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkRenderingContext2D-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkRenderingFreeType-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libfreetype.so",
+          "/usr/lib/aarch64-linux-gnu/libvtkImagingSources-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkIOImage-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkImagingCore-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkRenderingOpenGL2-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkRenderingUI-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkRenderingCore-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkCommonColor-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkFiltersGeometry-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkFiltersSources-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkFiltersGeneral-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkCommonComputationalGeometry-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkFiltersCore-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkCommonExecutionModel-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkCommonDataModel-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkCommonMisc-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkCommonTransforms-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkCommonMath-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libvtkkissfft-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libGLEW.so",
+          "/usr/lib/aarch64-linux-gnu/libX11.so",
+          "/usr/lib/aarch64-linux-gnu/libQt5OpenGL.so.5.15.3",
+          "/usr/lib/aarch64-linux-gnu/libQt5Widgets.so.5.15.3",
+          "/usr/lib/aarch64-linux-gnu/libQt5Gui.so.5.15.3",
+          "/usr/lib/aarch64-linux-gnu/libQt5Core.so.5.15.3",
+          "/usr/lib/aarch64-linux-gnu/libvtkCommonCore-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libtbb.so.12.5",
+          "/usr/lib/aarch64-linux-gnu/libvtksys-9.1.so.9.1.0",
+          "/usr/lib/aarch64-linux-gnu/libflann_cpp.so",
+          "-llz4",
+          "/usr/lib/aarch64-linux-gnu/libqhull_r.so.8.0.2",
+          "-lm",
+          "/usr/lib/libopencv_highgui.so.4.8.0",
+          "/usr/lib/libopencv_videoio.so.4.8.0",
+          "/usr/lib/libopencv_imgcodecs.so.4.8.0",
+          "/opt/ros/humble/lib/libtf2_ros.so",
+          "/opt/ros/humble/lib/librclcpp_action.so",
+          "/opt/ros/humble/lib/librcl_action.so",
+          "/opt/ros/humble/lib/libtf2_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libtf2_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libtf2_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libtf2_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libtf2_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libtf2_msgs__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/libtf2_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libtf2_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libtf2.so",
+          "/usr/lib/aarch64-linux-gnu/liborocos-kdl.so",
+          "/opt/ros/humble/lib/aarch64-linux-gnu/libimage_transport.so",
+          "/opt/ros/humble/lib/libmessage_filters.so",
+          "/opt/ros/humble/lib/libstereo_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libstereo_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libstereo_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libstereo_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libstereo_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libstereo_msgs__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/libstereo_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libstereo_msgs__rosidl_generator_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libgrid_map_cv.so",
+          "/opt/ros/humble/lib/libcv_bridge.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libmean.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libparams.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libincrement.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libmedian.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libtransfer_function.so",
+          "/opt/ros/humble/lib/librclcpp.so",
+          "/opt/ros/humble/lib/liblibstatistics_collector.so",
+          "/opt/ros/humble/lib/librcl.so",
+          "/opt/ros/humble/lib/librcl_logging_spdlog.so",
+          "/opt/ros/humble/lib/librcl_logging_interface.so",
+          "/opt/ros/humble/lib/librcl_interfaces__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/librcl_interfaces__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/librcl_interfaces__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/librcl_interfaces__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/librcl_interfaces__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/librcl_interfaces__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/librcl_interfaces__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/librcl_interfaces__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/librcl_yaml_param_parser.so",
+          "/opt/ros/humble/lib/libyaml.so",
+          "/opt/ros/humble/lib/librosgraph_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/librosgraph_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/librosgraph_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/librosgraph_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/librosgraph_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/librosgraph_msgs__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/librosgraph_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/librosgraph_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libstatistics_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libstatistics_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libstatistics_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libstatistics_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libstatistics_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libstatistics_msgs__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/libstatistics_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libstatistics_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libtracetools.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libgrid_map_core.a",
+          "/usr/lib/libopencv_stitching.so.4.8.0",
+          "/usr/lib/libopencv_photo.so.4.8.0",
+          "/usr/lib/libopencv_video.so.4.8.0",
+          "/usr/lib/aarch64-linux-gnu/libopencv_aruco.so.4.5.4d",
+          "/usr/lib/libopencv_objdetect.so.4.8.0",
+          "/usr/lib/libopencv_calib3d.so.4.8.0",
+          "/usr/lib/libopencv_features2d.so.4.8.0",
+          "/usr/lib/libopencv_flann.so.4.8.0",
+          "/usr/lib/libopencv_dnn.so.4.8.0",
+          "/usr/lib/libopencv_imgproc.so.4.8.0",
+          "/usr/lib/libopencv_core.so.4.8.0",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libgrid_map_msgs__rosidl_generator_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libgrid_map_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libgrid_map_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libgrid_map_msgs__rosidl_typesupport_introspection_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libgrid_map_msgs__rosidl_typesupport_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libgrid_map_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libgrid_map_msgs__rosidl_typesupport_cpp.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libgrid_map_msgs__rosidl_generator_py.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libgrid_map_msgs__rosidl_typesupport_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libgrid_map_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libaction_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libaction_msgs__rosidl_generator_py.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libnav2_msgs__rosidl_generator_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libnav2_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libnav2_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libnav2_msgs__rosidl_typesupport_introspection_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libnav2_msgs__rosidl_typesupport_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libnav2_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libnav2_msgs__rosidl_typesupport_cpp.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libnav2_msgs__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/libnav_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libnav_msgs__rosidl_generator_py.so",
+          "/usr/lib/aarch64-linux-gnu/libyaml-cpp.so.0.7.0",
+          "/opt/ros/humble/lib/librosbag2_storage.so",
+          "/opt/ros/humble/lib/librosbag2_cpp.so",
+          "/opt/ros/humble/lib/librmw_implementation.so",
+          "/opt/ros/humble/lib/librosbag2_storage.so",
+          "/opt/ros/humble/lib/libament_index_cpp.so",
+          "/opt/ros/humble/lib/libclass_loader.so",
+          "/usr/lib/aarch64-linux-gnu/libconsole_bridge.so.1.0",
+          "/usr/lib/aarch64-linux-gnu/libtinyxml2.so",
+          "/usr/lib/aarch64-linux-gnu/libyaml-cpp.so.0.7.0",
+          "/opt/ros/humble/lib/libtf2.so",
+          "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/libgeometry_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libgeometry_msgs__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/libvisualization_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libvisualization_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libvisualization_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libvisualization_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libvisualization_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libvisualization_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libvisualization_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libvisualization_msgs__rosidl_generator_py.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libgrid_map_ros.so",
+          "/opt/ros/humble/lib/libmessage_filters.so",
+          "/opt/ros/humble/lib/librosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/librmw.so",
+          "/opt/ros/humble/lib/librosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/librcutils.so",
+          "/opt/ros/humble/lib/librcpputils.so",
+          "/opt/ros/humble/lib/librosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/librosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/librosidl_runtime_c.so",
+          "/opt/ros/humble/lib/librosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/librosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libpcl_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libpcl_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libpcl_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libpcl_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libpcl_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libpcl_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libpcl_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libpcl_msgs__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/librclcpp.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_generator_py.so",
+          "/usr/lib/libOpenNI.so",
+          "/usr/lib/aarch64-linux-gnu/libOpenNI2.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/libvisualization_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libvisualization_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libsensor_msgs__rosidl_generator_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libapriltag_msgs__rosidl_typesupport_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libapriltag_msgs__rosidl_generator_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libaruco_msgs__rosidl_typesupport_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libaruco_msgs__rosidl_generator_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libaruco_opencv_msgs__rosidl_typesupport_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libaruco_opencv_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libunique_identifier_msgs__rosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/librosidl_typesupport_fastrtps_c.so",
+          "/opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libunique_identifier_msgs__rosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/librosidl_typesupport_fastrtps_cpp.so",
+          "/opt/ros/humble/lib/libfastcdr.so.1.0.29",
+          "/opt/ros/humble/lib/librmw.so",
+          "/opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libunique_identifier_msgs__rosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/libunique_identifier_msgs__rosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/librosidl_typesupport_introspection_cpp.so",
+          "/opt/ros/humble/lib/librosidl_typesupport_introspection_c.so",
+          "/opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libunique_identifier_msgs__rosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/librosidl_typesupport_cpp.so",
+          "/opt/ros/humble/lib/libnav_msgs__rosidl_generator_py.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libnav2_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_c.so",
+          "/home/exocean/opt/rtabmap/opt/ros/humble/lib/libnav2_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libnav_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libgeometry_msgs__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libgeometry_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libstd_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libaction_msgs__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_generator_py.so",
+          "/opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/libaction_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/libunique_identifier_msgs__rosidl_generator_py.so",
+          "/usr/lib/aarch64-linux-gnu/libpython3.10.so",
+          "/opt/ros/humble/lib/libunique_identifier_msgs__rosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/librosidl_typesupport_c.so",
+          "/opt/ros/humble/lib/librcpputils.so",
+          "/opt/ros/humble/lib/libunique_identifier_msgs__rosidl_generator_c.so",
+          "/opt/ros/humble/lib/librosidl_runtime_c.so",
+          "/opt/ros/humble/lib/librcutils.so",
+          "-ldl",
+          "-latomic"
+        ]
+      ]
+    }
+  ]
+}
