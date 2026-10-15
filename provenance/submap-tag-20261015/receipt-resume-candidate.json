@@ -1,0 +1,283 @@
+{
+  "schema": "wbrov.receipt-resume-candidate.v1",
+  "status": "not_accepted_for_deployment",
+  "production_switched": false,
+  "runtime": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-58658fb9aeb5265e20fc9dd7c7023ab4e4742cfab80840d2e6aeea2239bc1182",
+  "manifest_sha256": "3269fea9e49cd0a275fc9b8f70ae32c40951a4f3bfb26ec29e6170bccd43a160",
+  "checker_sha256": "98e65359f181088766c2c8aac3e7767508bb372a1a4326059ba5a1f48d93994a",
+  "entrypoints": {
+    "rtabmap": "d3fdd11f6a879e772bf2b2819f270daefdb4eba2903edda240e489431ff0d50c",
+    "rgbd_odometry": "5f28ef2802a695f105530f236f2dc6aece01b08f38b304209d20b9a87e3a3825",
+    "point_cloud_xyzrgb": "3dab14f288f27de23f0e2dcb83242c3a86fda4264d29fb49b6fd9f8ef9663488",
+    "rtabmap_export": "5ba1979257e7f1b4c2e5c00c70b6aa75a22c31b6a8bddccd8b837bd46c200c8a",
+    "header_health_observer": "a04aa06117bae16265f4d836406af274b1de105dff9c53e3a6b6bad7c0886018",
+    "safe_reloc_gid_frontend": "a09155c9aa28dcf297c3373b27730ab0775ba9b50ebef1d00cc8d855611e39bd"
+  },
+  "source_inputs": {
+    "MappingContinuityGate.h": "8121b6055041a2c12297053a3def30b9d2af3ba37aea9d658602830644cac283",
+    "CoreWrapper.cpp": "2e6e90ea950502b0b06750736bd30bc4449d6f244e3533d2df77f31de642674a",
+    "test_mapping_continuity_gate.cpp": "548dad6b8172b7105cad817f2631229e5f47bc582d18cb45f992e74141ec0852",
+    "wrapper_mapping_continuity_native_test.cpp": "344524abcdaaad56fb3cf67e1d2413961a619f75ae1df8a98788481917d97154",
+    "build_receipt_resume.py": "060ddeb037ef51b7d7a33f0044b94d3b186793d848dd91bd0e0889d9b0dae9bf"
+  },
+  "launcher_candidate": {
+    "schema": "wbrov.deploy8-launcher-candidate.v1",
+    "runtime": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-58658fb9aeb5265e20fc9dd7c7023ab4e4742cfab80840d2e6aeea2239bc1182",
+    "runtime_manifest_sha256": "3269fea9e49cd0a275fc9b8f70ae32c40951a4f3bfb26ec29e6170bccd43a160",
+    "mapping_sha256": "0b21c88ff5c20da7fe52936155cb0f518f58b9f5cf312f7cf510c53918e7a8ee",
+    "outer_sha256": "e26502ceebd18548b1692d557cae6f0987f6707fb78bd0ca36535228c93db361",
+    "hardware_started": false,
+    "production_switched": false
+  },
+  "preflight": "passed",
+  "native_regressions": "passed",
+  "first_real_camera_test": {
+    "scope": "candidate mapping launcher plus real ZED and RViz, stationary; no teleop, no lights, no motion",
+    "mapping_sha256": "670f24341c6b39b26d83656cc532baf4999cae8f5646bd6bfb715f10cc1d5dc9",
+    "actuation": false,
+    "rviz_visible_seconds": 39.01571753600729,
+    "map_run": "/home/exocean/maps/rtabmap_calibration_ab/custom_20261008_135558",
+    "probe": {
+      "seconds": 45.01024880001205,
+      "counts": {
+        "/zed/rgb/image_rect_color": 895,
+        "/rtabmap/frame_cloud": 896,
+        "/cloud_map": 14
+      },
+      "unique_stamps": {
+        "/zed/rgb/image_rect_color": 895,
+        "/rtabmap/frame_cloud": 896,
+        "/cloud_map": 14
+      },
+      "last": {
+        "/zed/rgb/image_rect_color": {
+          "width": 384,
+          "height": 240,
+          "bytes": 276480,
+          "frame": "zed_left_camera_optical_frame"
+        },
+        "/rtabmap/frame_cloud": {
+          "width": 1054,
+          "height": 1,
+          "bytes": 33728,
+          "frame": "zed_left_camera_optical_frame"
+        },
+        "/cloud_map": {
+          "width": 1832,
+          "height": 1,
+          "bytes": 58624,
+          "frame": "map"
+        }
+      },
+      "passive_only": true,
+      "states": {
+        "NORMAL": 994
+      },
+      "reasons": {
+        "registered visual geometry": 994
+      },
+      "main_write_allowed_count": 994,
+      "graph_sizes": [
+        2,
+        2,
+        2,
+        3,
+        3,
+        4,
+        5,
+        5,
+        6,
+        7,
+        7,
+        8,
+        8,
+        8,
+        9,
+        9,
+        10,
+        10,
+        10,
+        10,
+        11,
+        11
+      ],
+      "last_continuity": {
+        "schema": "wbrov.mapping-continuity.v1",
+        "state": "NORMAL",
+        "reason": "registered visual geometry",
+        "epoch": 0,
+        "generation": 0,
+        "source_stamp_ns": 1791439028948823000,
+        "session_token_sha256": "9ac8eeee34b0977d29cf4cd0599bb614f67f7b6230124ffe144981fa06a47a0c",
+        "good_samples": 664,
+        "registered": true,
+        "main_map_write_allowed": true,
+        "local_tracking_healthy": true,
+        "local_submap_write_allowed": true,
+        "visual_geometry": true,
+        "depth_geometry": false,
+        "imu_translation_only_allowed": false,
+        "private_recovery_observations_are_main_map": false,
+        "observing_registered_map": false,
+        "map_observation_count": 0,
+        "recovery_commit_pending": false,
+        "required_map_observations": 5,
+        "vo_width": 384,
+        "vo_height": 240,
+        "reference_node_id": 24,
+        "reference_epoch": 0,
+        "reference_stamp_ns": 1791439024532337000,
+        "reference_is_navigation_command": false
+      },
+      "last_age_s": {
+        "/zed/rgb/image_rect_color": 0.02752780800801702,
+        "/rtabmap/frame_cloud": 0.019351903989445418,
+        "/cloud_map": 2.2366521600051783
+      }
+    },
+    "screenshot_sha256": "7ab0ea2bcaccea0429d2deb9710f4fe356f5d58735ac362e492de257c103c908",
+    "launcher_exit_code": 1,
+    "lifecycle": {
+      "schema_version": 1,
+      "phase": "stopped",
+      "launcher_pid": 2775957,
+      "process_start_ticks": 21761560,
+      "boot_id": "d12a8759-0cf1-4fe9-9064-feea661c2763",
+      "nodes_stopped": true,
+      "export_succeeded": true,
+      "cleanup_succeeded": false,
+      "exit_code": 1,
+      "requested_exit_code": 0
+    },
+    "artifacts": {
+      "rtabmap.db": 18321408,
+      "rtabmap_dense.ply": 422889
+    },
+    "passed": false
+  },
+  "first_health": {
+    "schema_version": 2,
+    "ready": true,
+    "elapsed_s": 53.818978304,
+    "denominator_s": 20,
+    "metrics": {
+      "odom": {
+        "received_in_window": 234,
+        "math_valid_unique_stamps": 234,
+        "valid_unique_stamps": 234,
+        "valid_unique_rate_hz": 11.7,
+        "duplicate_math_valid_stamp_count": 0,
+        "math_invalid_count": 0,
+        "math_reason_counts": {
+          "valid": 234
+        },
+        "math_valid_missing_odom_info_count": 0,
+        "math_valid_lost_count": 0,
+        "math_valid_conflicting_status_count": 0,
+        "header_gap": {
+          "p50_ms": 83.343,
+          "p95_ms": 116.65299999999999,
+          "max_ms": 133.323
+        },
+        "header_regressions_in_window": 0
+      },
+      "odom_info_lite": {
+        "received_in_window": 234,
+        "tracking_not_lost_unique_stamps": 234,
+        "lost_unique_stamps": 0,
+        "reason_counts": {
+          "tracking_not_lost": 234
+        },
+        "header_regressions_in_window": 0
+      },
+      "high_camera_info": {
+        "received_in_window": 9,
+        "valid_unique_stamps": 9,
+        "valid_unique_rate_hz": 0.45,
+        "duplicate_valid_stamp_count": 0,
+        "invalid_count": 0,
+        "reason_counts": {
+          "valid": 9
+        },
+        "header_regressions_in_window": 0
+      },
+      "high_to_valid_odom_exact": {
+        "eligible_high_unique_stamps": 9,
+        "covered_unique_stamps": 9,
+        "coverage_ratio": 1,
+        "missing_count": 0,
+        "nearest_stamp_or_restamp_used": false
+      },
+      "high_integrated_proxy": {
+        "source": "exact stamp intersection with /info",
+        "observable": true,
+        "eligible_duration_s": 19.5,
+        "matched_unique_stamps": 9,
+        "rate_hz": 0.46153846153846156,
+        "coverage_ratio": 1,
+        "is_not_database_keyframe_or_dense_map_proof": true
+      },
+      "rtabmap_info": {
+        "received_in_window": 9,
+        "valid_unique_stamps": 9,
+        "header_regressions_in_window": 0
+      }
+    },
+    "gates": {
+      "hard_checks": {
+        "valid_unique_odom_rate_at_least_threshold": false,
+        "valid_unique_high_camera_info_rate_at_least_threshold": true,
+        "eligible_high_exact_valid_odom_coverage_at_least_threshold": true
+      },
+      "hard_pass": false,
+      "integration_proxy_required": true,
+      "integration_proxy_pass": true,
+      "candidate_pass": false
+    },
+    "totals_since_start": {
+      "odom": 629,
+      "odom_info_lite": 629,
+      "high_camera_info": 25,
+      "rtabmap_info": 25
+    },
+    "interpretation": {
+      "odom_valid_means": "same integer-nanosecond stamp has finite-position near-unit-quaternion /odom and /odom_info_lite lost=false, with any conflicting lost=true excluded; not external truth",
+      "high_topic_means": "valid 1920x1200 CameraInfo header proxy; RGB/depth payload topics are not subscribed",
+      "coverage": "integer-nanosecond equality only; no nearest match and no timestamp modification",
+      "integration_proxy": "/info same stamp indicates a processed callback only; not database persistence"
+    }
+  },
+  "latest_candidate_test": {
+    "scope": "candidate mapping launcher plus real ZED and RViz, stationary; no teleop, no lights, no motion",
+    "mapping_sha256": "0b21c88ff5c20da7fe52936155cb0f518f58b9f5cf312f7cf510c53918e7a8ee",
+    "actuation": false,
+    "started_monotonic": 219028.372279968,
+    "launcher_pid": 2814023,
+    "start_ticks": "21902837",
+    "passed": false,
+    "error": "AssertionError('Launcher exited before RViz: 1')",
+    "finished_monotonic": 219088.146931776
+  },
+  "latest_candidate_run": "/home/exocean/maps/rtabmap_calibration_ab/custom_20261008_141930",
+  "camera_scene_probe": {
+    "returncode": 0,
+    "stdout": "[2026-10-08 14:22:26 UTC][ZED][INFO] Logging level INFO\n[2026-10-08 14:22:28 UTC][ZED][INFO] [Init]  Camera FW version: 2001\n[2026-10-08 14:22:28 UTC][ZED][INFO] [Init]  Video mode: HD1200@60\n[2026-10-08 14:22:28 UTC][ZED][INFO] [Init]  Serial Number: S/N 40408468\n[2026-10-08 14:22:28 UTC][ZED][INFO] [Init]  Depth mode selected: NEURAL. Ensure this mode matches your application's performance and accuracy requirements. See https://www.stereolabs.com/docs/depth-sensing/depth-modes for help.\ndepth_valid=11 total=92160 mean=1.06619\nimage_write=SUCCESS\n",
+    "stderr": "",
+    "scope": "camera-only current scene and depth coverage; no control/lights/motion"
+  },
+  "camera_scene_sha256": "a8fa885634a3b510ad2ab6e8ee91fe2475bcc5c9ca44b884c6ee8fea41a6176d",
+  "field_validated": false,
+  "full_teleop_entry_started": false,
+  "limits": [
+    "First real-camera run showed main cloud and exported database/PLY, but 11.7 Hz odometry did not meet the 15 Hz acceptance gate",
+    "Bounded inline odometry and no-Tag save changes passed preflight only; their full live run remains unvalidated",
+    "Later live attempts had Argus timeout/open failure and insufficient image/depth observations; direct SDK test found 11 valid in-range depth pixels of 92160",
+    "Latest candidate was not installed; source-timing and non-Tag automatic reattachment remain unvalidated"
+  ],
+  "local_python_tests": {
+    "passed": 71,
+    "skipped": 3,
+    "skip_reason": "OpenCV unavailable in local bundled Python; --require-opencv precheck fails, no projection tests claimed"
+  },
+  "robot_tasks_after_test": []
+}

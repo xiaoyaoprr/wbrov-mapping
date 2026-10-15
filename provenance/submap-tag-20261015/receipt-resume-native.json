@@ -1,0 +1,78 @@
+{
+  "schema": "wbrov.receipt-expiry-native-build.v1",
+  "root": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/receipt_resume_build_20261015",
+  "baseline_runtime": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-5521cdb72474104d317da57bd6c50b0ed084cf10c64c14775ec2fe7ba5a1429a",
+  "baseline_manifest_sha256": "c73e52185e3cf067ca5da9f813b088fc060cb830bea79d7dc5ab66ce13c00b4b",
+  "inputs": {
+    "MappingContinuityGate.h": "8121b6055041a2c12297053a3def30b9d2af3ba37aea9d658602830644cac283",
+    "CoreWrapper.cpp": "2e6e90ea950502b0b06750736bd30bc4449d6f244e3533d2df77f31de642674a",
+    "test_mapping_continuity_gate.cpp": "548dad6b8172b7105cad817f2631229e5f47bc582d18cb45f992e74141ec0852",
+    "wrapper_mapping_continuity_native_test.cpp": "344524abcdaaad56fb3cf67e1d2413961a619f75ae1df8a98788481917d97154",
+    "build_receipt_resume.py": "060ddeb037ef51b7d7a33f0044b94d3b186793d848dd91bd0e0889d9b0dae9bf"
+  },
+  "hardware_started": false,
+  "field_validated": false,
+  "steps": [
+    {
+      "name": "baseline_tree",
+      "rc": 0,
+      "seconds": 11.24,
+      "log_sha256": "b7ca6c2df4f4eeeccd2157fcfc655120e01554576a47874a65cb22b1c132517b"
+    },
+    {
+      "name": "configure",
+      "rc": 0,
+      "seconds": 6.98,
+      "log_sha256": "723fa2e0df56e6fe81aae57e35ab9582e13fa9fac07bb74878e906585bd71888"
+    },
+    {
+      "name": "compile",
+      "rc": 0,
+      "seconds": 377.79,
+      "log_sha256": "d35999084283388b841b82cf97f8e536b12c16a7a8f8703c161717c14aa00898"
+    },
+    {
+      "name": "gates",
+      "rc": 0,
+      "seconds": 0.53,
+      "log_sha256": "37998c9ddd757e97f71d6cde74cb766f1c6eaa50e59df3af2d3640da98670c04"
+    },
+    {
+      "name": "native_wrapper",
+      "rc": 0,
+      "seconds": 3.21,
+      "log_sha256": "6d7f4ebb2450a8945e58dd679a04eca7f95b85bbb8963da96230c7c2455a0800"
+    },
+    {
+      "name": "wrapper_ldd",
+      "rc": 0,
+      "seconds": 1.08,
+      "log_sha256": "3cf39245d79c016dbc04d8b1359073821ca7fd75777fc58c118ff6d3fff28bd4"
+    }
+  ],
+  "phase": "passed",
+  "verified_inherited_sources": {
+    "rtabmap_core/corelib/include/rtabmap/core/DBDriver.h": "b356683ffbd4201721e10a6665880862cc699d37794bb9527abbd2ec44b933eb",
+    "rtabmap_core/corelib/include/rtabmap/core/DBDriverSqlite3.h": "0a0c42db53cbeaffe4af958a0e6eb0d092108274f1425998628ac2b15de8862c",
+    "rtabmap_core/corelib/include/rtabmap/core/ImageInputReceipt.h": "9c0a7fb9d4775d4b5184b3114b3eb40b0e94f3d29f0484325df17e182de04cfe",
+    "rtabmap_core/corelib/include/rtabmap/core/Memory.h": "99a6c1d70cfcc6f8f0537040440962b0625bead8d4eb51677219443d56510c23",
+    "rtabmap_core/corelib/include/rtabmap/core/Parameters.h": "e1c1dd63bc8be54f9a3033ce8caf0c1671c27bdeb2ba43c0951ef8216e9e087b",
+    "rtabmap_core/corelib/include/rtabmap/core/Rtabmap.h": "6df7a708295d8ab9c3b0f0daf344f291a337d49f9ae7071453940cf3fc690c0d",
+    "rtabmap_core/corelib/include/rtabmap/core/optimizer/OptimizerG2O.h": "75ff6492cb7016e1f3f1a4d0012ad33000d9334da5eb9b2a1ba1da0e9cf4f752",
+    "rtabmap_ros/rtabmap_odom/include/rtabmap_odom/OdometryROS.h": "5f56ae4da35a441085c68f7b2b727a9d5437bb42795bae461f5f637c0c3d3d29",
+    "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/CoreWrapper.h": "7628d97bf8a225451d2fb33f97d8e3bd79baf8ddb672daef032e4b8f51a68362",
+    "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/GlobalPublicationGate.h": "daedd4e70da4b7d207285d8f303ba9e114b8b006fe5f7e46ed1e8f528637bf51",
+    "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/JumpQuarantineGate.h": "a24d09c476743889db76171ef5f19393ad7c053549441de48eb9c4bb9236e0ca",
+    "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/ManagedImuEpochBuffer.h": "7b72f4071377c8e66bdc4d2c6daaab654be0802cdeba19142022575aa2a5d22f",
+    "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/MappingContinuityGate.h": "a8fa8c4d74224b81d8050d6333e81866f018d9beac7cdc84648285a0dc4377e6",
+    "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/SubmapPublisher.h": "3148830766e326c564ffee354473a2445ad990f56c14431480a7aee539abc797",
+    "rtabmap_ros/rtabmap_slam/src/CoreNode.cpp": "ee64bddc87e3e35b5d063fbe5f0dd4fb37ccc26e23479ce78bf131a6f2a0d851",
+    "rtabmap_ros/rtabmap_slam/src/CoreWrapper.cpp": "a81a7a86f9e6de56271e40246ecaf47169ed90f4abc476511f02480da4661730"
+  },
+  "compiled_wrapper_source_sha256": "2e6e90ea950502b0b06750736bd30bc4449d6f244e3533d2df77f31de642674a",
+  "compiled_gate_sha256": "8121b6055041a2c12297053a3def30b9d2af3ba37aea9d658602830644cac283",
+  "outputs": {
+    "rtabmap": "d3fdd11f6a879e772bf2b2819f270daefdb4eba2903edda240e489431ff0d50c",
+    "librtabmap_slam_plugins.so": "a41f3231b6c62a81e78510739e2fb95ecf4bf649a62c5109b8742937730f277f"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schema": "wbrov.repository-deploy8-record.v1",
+  "runtime": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-5521cdb72474104d317da57bd6c50b0ed084cf10c64c14775ec2fe7ba5a1429a",
+  "runtime_manifest_sha256": "c73e52185e3cf067ca5da9f813b088fc060cb830bea79d7dc5ab66ce13c00b4b",
+  "desktop_entry": "/home/exocean/Desktop/机器人键盘遥控/8-水下遥控开灯加建图_一键启动",
+  "desktop_sha256": "f44d584c2b48b4bf22b04a1ab1575e3e2d9907e324824ea5c1d94a20263d9e20",
+  "backup": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/deploy8_startup_diagnostics/backup",
+  "hardware_started": false,
+  "field_validated": false,
+  "known_limitations": [
+    "Recorded non-Tag recovery not passed",
+    "Strict replay source timing not passed"
+  ],
+  "before": {
+    "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh": "af4d96427fcda0b8b55a753e42e27eba166f42afde3d9a894596d182d4abca47",
+    "/home/exocean/Desktop/机器人键盘遥控/.tools/run_water_mapping_with_light.sh": "12c7d7a3d4faaf6da180eb4f0e07f0fd4a34004c118620ec5b43f30e0965fcc4"
+  },
+  "after": {
+    "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh": "7e092ea920a8b952e3f29d960a6f0eff300d88729f9d5c4b82adc38d51dca829",
+    "/home/exocean/Desktop/机器人键盘遥控/.tools/run_water_mapping_with_light.sh": "131f8350f5aeb2b8168243c31377b5662ce05e68f91f397ef694c27d3ac3af48"
+  },
+  "steps": [
+    {
+      "name": "installed_mapping_syntax",
+      "returncode": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "installed_outer_syntax",
+      "returncode": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "installed_camera_profile",
+      "returncode": 0,
+      "log_sha256": "64378a400dcd43be4d18c9584289759c4c864649321e2541fa7ca06949f4e5ba"
+    },
+    {
+      "name": "installed_runtime_tree",
+      "returncode": 0,
+      "log_sha256": "321ca134146e07613fa61fbdca7f1e61e4504c28500b8c4a5e39c02b953059e7"
+    },
+    {
+      "name": "installed_outer_readonly",
+      "returncode": 0,
+      "log_sha256": "543f248c9b2bd1155da6b582f74b1b63b98727cfed7ef9e4b45a331569737c2e"
+    }
+  ],
+  "status": "deployed",
+  "production_switched": true,
+  "protected_unchanged": true,
+  "host_recorded_at": "2026-10-15T13:28:48.871934+00:00",
+  "raw_receipt_sha256": "ef9f0f4a5cfb79524484862bfd0f7ed672fddde3359ea7a988ddc931ac544b26",
+  "candidate_native_receipt_sha256": "3cf42ffd0e345bf4c5a55863abf078c9d5c785503029937a7666206c239f454e",
+  "runtime_regular_files": 577,
+  "protected_files_checked": 7,
+  "runtime_checker_change": "Only frozen source identities and build-root metadata changed; verifier functions/classes are identical.",
+  "source_files": {
+    "launch/deployed_20261015/start_rtabmap_calib_ab.sh": {
+      "sha256": "7e092ea920a8b952e3f29d960a6f0eff300d88729f9d5c4b82adc38d51dca829",
+      "installed_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh"
+    },
+    "launch/deployed_20261015/run_water_mapping_with_light.sh": {
+      "sha256": "131f8350f5aeb2b8168243c31377b5662ce05e68f91f397ef694c27d3ac3af48",
+      "installed_path": "/home/exocean/Desktop/机器人键盘遥控/.tools/run_water_mapping_with_light.sh"
+    },
+    "runtime/tools/check_private_runtime.py": {
+      "sha256": "99eab4a64b21b3890547df44de23645b567ddfb80f063308a1048b7384cfe2fb",
+      "installed_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-5521cdb72474104d317da57bd6c50b0ed084cf10c64c14775ec2fe7ba5a1429a/tools/check_private_runtime.py"
+    }
+  },
+  "previous_deployment_record": "deployment-before-startup-diagnostics.json",
+  "receipt_expiry_record": "receipt-expiry-check.json",
+  "full_entry_after_fix_validated": false,
+  "rollback_script_sha256": "8a80481da740a4f7e50112686fef342a6b668a3784ae9cf76b25f5cd0e959a81",
+  "rollback_transition_sha256": "660cde27bacb3c62417f5965ab35038edbf191b1c414f9c38a655586689e709d",
+  "startup_camera_record": "startup-camera-check.json"
+}

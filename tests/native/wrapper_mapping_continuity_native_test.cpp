@@ -130,6 +130,14 @@ int main(int argc,char ** argv) {
         require(observe(delayed),"continuous delayed source was not observed");
         require(g.localContinuitySerial()==continuousSerial,"continuous delayed source split the local graph");
         require(!g.coreValidated(oldTicket,core.getResetEpoch(),true,true,steady(),w->now().nanoseconds()),"pre-expiration ticket reopened main map");
+        require(!g.beginMapObservation(core.getResetEpoch(),true,steady(),w->now().nanoseconds()),"delivery stall incorrectly demanded two old keyframes");
+        for(unsigned i=0;i<6;++i) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(110));good=sample(*w);
+            require(observe(good),"continuous fresh recovery sample ignored");
+        }
+        const auto resumedNs=rclcpp::Time(good.header.stamp).nanoseconds();
+        require(g.resumeContinuousReceipt(core.getResetEpoch(),true,resumedNs,steady(),w->now().nanoseconds()),"unbroken same-frame delivery recovery stayed locked");
+        require(g.mainMapAllowed(core.getResetEpoch(),steady(),w->now().nanoseconds()),"fresh same-frame recovery did not reopen writes");
         std::this_thread::sleep_for(std::chrono::milliseconds(5));auto lost=sample(*w);lost.lost=true;
         require(observe(lost),"lost packet ignored");
         require(!g.coreValidated(oldTicket,core.getResetEpoch(),true,true,steady(),w->now().nanoseconds()),"in-flight preloss result rearmed gate");

@@ -39,15 +39,19 @@ int main() {
         const auto now=T+72*D/10;
         assert(!g.mainMapAllowed(0,now,now));
         assert(!g.processAllowed(true,T+5*D,now,now));
-        assert(g.beginMapObservation(0,true,now,now));
-        for(unsigned i=0;i<5;++i) {
-            const auto source=T+6*D+static_cast<long long>(i)*150000000LL;
+        assert(!g.beginMapObservation(0,true,now,now)); // no two-old-keyframe deadlock on a one-node map
+        for(unsigned i=0;i<3;++i) {
+            const auto source=T+6*D+static_cast<long long>(i)*D;
             const auto arrival=source+22*D/10;
             assert(g.observe(source,arrival,arrival,visual()));
-            assert(g.observeRegisteredMap(g.ticket(source),0,true,.001,.1,.001,.1,arrival,arrival)==(i==4));
-            if(i<4)assert(!g.mainMapAllowed(0,arrival,arrival));
+            assert(!g.resumeContinuousReceipt(1,true,source,arrival,arrival));
+            assert(!g.resumeContinuousReceipt(0,false,source,arrival,arrival));
+            assert(g.resumeContinuousReceipt(0,true,source,arrival,arrival)==(i==2));
+            if(i<2)assert(!g.mainMapAllowed(0,arrival,arrival));
         }
-        assert(g.mainMapAllowed(0,T+142*D/10,T+142*D/10));
+        assert(g.mainMapAllowed(0,T+102*D/10,T+102*D/10));
+        assert(!g.coreValidated(inFlight,0,true,true,T+102*D/10,T+102*D/10));
+        assert(g.processAllowed(true,T+8*D,T+102*D/10,T+102*D/10));
     }
     {
         Gate g;stable(g,T);assert(!confirm(g,T+2*D,0,false));
@@ -63,6 +67,25 @@ int main() {
         assert(g.localContinuitySerial()==serial);
         assert(g.processAllowed(false,T+7*D,T+92*D/10,T+92*D/10));
         assert(!g.mainMapAllowed(0,T+92*D/10,T+92*D/10));
+        assert(!g.resumeContinuousReceipt(0,true,T+7*D,T+92*D/10,T+92*D/10));
+    }
+    for(int cause=0;cause<6;++cause) {
+        Gate g;normal(g);g.tick(T+51*D/10,T+51*D/10);
+        // Every genuine coordinate/quality change cancels receipt-only resume.
+        if(cause==0)observe(g,T+6*D); // actual source gap
+        if(cause==1)g.observe(T+3*D,T+51*D/10,T+51*D/10,Gate::Evidence{});
+        if(cause==2)g.invalidate("reset or jump");
+        if(cause==3)g.rejectAlignment("rejected geometry");
+        if(cause==4)g.observe(T+3*D,T+51*D/10,T+3*D-1,visual());
+        if(cause==5)g.coreValidated(g.ticket(T+2*D),1,false,true,T+51*D/10,T+51*D/10);
+        const int first=cause==0?7:((cause==1 || cause==4)?4:3);
+        for(int i=first;i<=first+7;++i) {
+            const auto source=T+i*D,arrival=source+22*D/10;
+            assert(g.observe(source,arrival,arrival,visual()));
+        }
+        const auto end=T+(first+7)*D,arrival=end+22*D/10;
+        assert(!g.resumeContinuousReceipt(cause==5?1:0,true,end,arrival,arrival));
+        assert(!g.mainMapAllowed(cause==5?1:0,arrival,arrival));
     }
     {
         // No timer or receipt-age change may hide a true measurement gap/loss.

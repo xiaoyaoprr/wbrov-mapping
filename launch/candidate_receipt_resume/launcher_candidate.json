@@ -1,0 +1,9 @@
+{
+  "schema": "wbrov.deploy8-launcher-candidate.v1",
+  "runtime": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-58658fb9aeb5265e20fc9dd7c7023ab4e4742cfab80840d2e6aeea2239bc1182",
+  "runtime_manifest_sha256": "3269fea9e49cd0a275fc9b8f70ae32c40951a4f3bfb26ec29e6170bccd43a160",
+  "mapping_sha256": "0b21c88ff5c20da7fe52936155cb0f518f58b9f5cf312f7cf510c53918e7a8ee",
+  "outer_sha256": "e26502ceebd18548b1692d557cae6f0987f6707fb78bd0ca36535228c93db361",
+  "hardware_started": false,
+  "production_switched": false
+}

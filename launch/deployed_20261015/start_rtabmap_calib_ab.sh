@@ -2767,13 +2767,13 @@ pid = int(sys.argv[8])
 start_ticks = int(sys.argv[9])
 token_sha = sys.argv[10]
 database_sha = sys.argv[11]
-if phase not in ('live', 'terminal'):
+if phase not in ('admitted', 'live', 'terminal'):
     raise SystemExit(1)
 try:
     ready = load_json(ready_path)
     config = load_json(config_path)
 except FileNotFoundError:
-    raise SystemExit(2 if phase == 'live' else 1)
+    raise SystemExit(2 if phase in ('admitted', 'live') else 1)
 except (OSError, UnicodeError, ValueError, TypeError, json.JSONDecodeError):
     raise SystemExit(1)
 
@@ -2813,7 +2813,7 @@ valid_ready = (ready == {'pid': pid, 'start_ticks': str(start_ticks)} or
 if not valid_config or not valid_ready:
     raise SystemExit(1)
 
-if phase == 'live':
+if phase in ('admitted', 'live'):
     try:
         events = load_jsonl(events_path)
         states = load_jsonl(states_path)
@@ -2831,7 +2831,12 @@ if phase == 'live':
         for record in states)
     if bad_event:
         raise SystemExit(1)
-    if not frame_ready or not valid_state:
+    # A stationary startup may retain only the first Core keyframe. Its RGB
+    # predates this consumer's volatile subscription, so a full pixel join is
+    # not a startup prerequisite. ready.json is written only after source
+    # admission; a checked graph message establishes a working Core observer.
+    # This status never authorizes a recovery proposal or a graph update.
+    if not valid_state or (phase == 'live' and not frame_ready):
         raise SystemExit(2)
     raise SystemExit(0)
 
@@ -2857,7 +2862,7 @@ valid_terminal = (
     isinstance(result.get('buffer_dropped'), dict) and
     set(result['buffer_dropped']) == {'rgb', 'camera_info'} and
     all(type(value) is int and value >= 0 for value in result['buffer_dropped'].values()) and
-    type(result.get('ready_frames')) is int and result['ready_frames'] > 0 and
+    type(result.get('ready_frames')) is int and result['ready_frames'] >= 0 and
     type(result.get('graph_states')) is int and result['graph_states'] > 0 and
     result.get('source_compromised') is False and
     result.get('graph_state_rejections') == 0 and
@@ -4504,8 +4509,16 @@ safe_reloc_gid_frontend_pid=$!
 record_child safe_reloc_gid_frontend "$safe_reloc_gid_frontend_pid" \
     "$python3_runtime" "$python3_runtime_sha256" "$corner_recovery_consumer"
 
+# BEGIN RECOVERY_STARTUP_ADMISSION
 safe_relocalization_handshake_ready=false
-for ((handshake_attempt=0; handshake_attempt<300; handshake_attempt++)); do
+# /proc/uptime is monotonic. Include process/source checks in the budget;
+# counting sleep calls made the old "30 second" wait last over 100 seconds.
+read -r handshake_uptime _ < /proc/uptime
+handshake_deadline=$(( ${handshake_uptime%%.*} + 30 ))
+echo '正在确认恢复模块的数据来源和图状态；完整关键帧配对将在后台等待，不阻挡RViz。'
+while :; do
+    read -r handshake_uptime _ < /proc/uptime
+    (( ${handshake_uptime%%.*} < handshake_deadline )) || break
     if ! owned_process_alive "$bridge_pid" || ! owned_process_alive "$tf_pid" || \
        ! owned_process_alive "$apriltag_pid" || ! owned_process_alive "$graph_display_pid" || ! owned_process_alive "$submap_display_pid" || \
        ! owned_process_alive "$odom_pid" || ! owned_process_alive "$slam_pid" || \
@@ -4517,7 +4530,7 @@ for ((handshake_attempt=0; handshake_attempt<300; handshake_attempt++)); do
             "$run_dir/apriltag_keyframe_binder.log" "$run_dir/corner_recovery.log" >&2
         exit 1
     fi
-    if safe_reloc_state_status live; then
+    if safe_reloc_state_status admitted; then
         safe_relocalization_handshake_ready=true
         break
     else
@@ -4530,9 +4543,11 @@ for ((handshake_attempt=0; handshake_attempt<300; handshake_attempt++)); do
     sleep 0.1
 done
 if [[ "$safe_relocalization_handshake_ready" != true ]]; then
-    echo '[启动失败] 30秒内没有取得本次Core、图状态、RGB/相机信息和Tag像素的完整认证帧；尚未启动RViz。' >&2
+    critical_failure_reason='Recovery source admission or checked Core graph state unavailable within 30 seconds'
+    echo '[启动失败] 30秒内未完成恢复模块的数据来源与Core图状态检查。' >&2
     exit 1
 fi
+# END RECOVERY_STARTUP_ADMISSION
 
 if ! landmark_time_guard_mapped "$slam_pid" "${owned_start_ticks[$slam_pid]:-}" \
     "$landmark_time_guard_receipt" >"$run_dir/landmark_time_guard_mapping.json"; then

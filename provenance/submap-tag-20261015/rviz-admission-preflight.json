@@ -1,0 +1,65 @@
+{
+  "schema": "wbrov.deploy8-preflight.v1",
+  "runtime": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-5521cdb72474104d317da57bd6c50b0ed084cf10c64c14775ec2fe7ba5a1429a",
+  "steps": [
+    {
+      "name": "failure_reporting",
+      "returncode": 0,
+      "log_sha256": "ac952e4e74f3c7d8db8c1153a805db88fa879b5bdc1cb71b38ef3dcf11b96f55"
+    },
+    {
+      "name": "recovery_admission",
+      "returncode": 0,
+      "log_sha256": "69a557554ae67b7cff3f95c3424760b46e10f9bf801ee9c2f5eb048d2f2c10ba"
+    },
+    {
+      "name": "mapping_syntax",
+      "returncode": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "outer_syntax",
+      "returncode": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "camera_profile",
+      "returncode": 0,
+      "log_sha256": "64378a400dcd43be4d18c9584289759c4c864649321e2541fa7ca06949f4e5ba"
+    },
+    {
+      "name": "runtime_tree",
+      "returncode": 0,
+      "log_sha256": "d30af7726dc926fd4950a063d4070ac0c2a129d03b25652477e824ad812f7034"
+    },
+    {
+      "name": "landmark_guard",
+      "returncode": 0,
+      "log_sha256": "4008c3dadc70723261c8e5fbdf0fcd525e8c2a2ce1eaa6ee9c4577f3bb423303"
+    },
+    {
+      "name": "camera_dimensions",
+      "returncode": 0,
+      "log_sha256": "d1ee8615a79cd11d70b7b815630e84f29a6ec0dee9bd2470bdd5f87174861ae5"
+    },
+    {
+      "name": "supervisor_failure",
+      "returncode": 0,
+      "log_sha256": "71fa58fa50024b2ab8a270cded5d44eb5f358ab31ed14057965a21ea010e20ff"
+    },
+    {
+      "name": "outer_readonly",
+      "returncode": 0,
+      "log_sha256": "2e844100a1c4d5b89d533bbe8c86da5ee2ca4f713a1ec899582fc8412f0e82fc"
+    }
+  ],
+  "hardware_started": false,
+  "production_switched": false,
+  "display_source": "existing X11 socket; no GUI started",
+  "status": "passed",
+  "candidate_hashes": {
+    "start_rtabmap_calib_ab.sh": "38f82f89a4d645829b3f3cb3d43c732fbf5128afa35b3695a06fa2e2c0528ed5",
+    "run_water_mapping_with_light.sh": "3cb1eae4a0d39babb4dac46f8af101a2e416cac17517034cd84784474a34ac77"
+  },
+  "prior_failed_check": "outer_readonly blocked by already-finished terminal holding orchestrator lock; preserved in preflight_result_before_terminal_close.json"
+}

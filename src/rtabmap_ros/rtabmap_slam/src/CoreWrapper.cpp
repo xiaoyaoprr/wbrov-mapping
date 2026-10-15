@@ -4705,6 +4705,9 @@ void CoreWrapper::process(
             publishMappingContinuityStatus();
             return; // Frozen private graph, including Kth observation and final commit frame.
         }
+        if(safeRelocalizationEnabled_ && receiptSourceValid && exactContinuityEvidence.usable())
+            mappingContinuityGate_.resumeContinuousReceipt(rtabmap_.getResetEpoch(),rtabmap_.isCurrentMapFrameRegistered(),
+                stamp.nanoseconds(),mappingSteadyNs(),now().nanoseconds());
         if(safeRelocalizationEnabled_ && receiptSourceValid && exactContinuityEvidence.usable() &&
            mappingContinuityGate_.beginMapObservation(rtabmap_.getResetEpoch(),rtabmap_.isCurrentMapFrameRegistered(),
                mappingSteadyNs(),now().nanoseconds()))

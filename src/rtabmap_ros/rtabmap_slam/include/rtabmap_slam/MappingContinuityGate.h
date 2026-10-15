@@ -121,7 +121,7 @@ public:
     }
     void reset() {
         std::lock_guard<std::mutex> l(mutex_);++generation_;++localSerial_;state_=State::PAUSED;
-        epoch_=0;epochKnown_=false;registered_=false;everRegistered_=false;observing_=false;candidateObservation_=candidateReady_=false;
+        epoch_=0;epochKnown_=false;registered_=false;everRegistered_=false;observing_=false;candidateObservation_=candidateReady_=false;receiptOnlyPause_=false;
         sourceNs_=arrivalNs_=goodStartNs_=pauseUntilNs_=0;observationStartNs_=lastObservationNs_=0;mapObservations_=0;
         goodSamples_=visualGoodSamples_=0;visualGoodStartNs_=0;evidence_=Evidence{};reason_="waiting for authenticated geometry";
     }
@@ -136,8 +136,10 @@ public:
             // Receipt latency revokes write/pose permission, not the measured
             // local coordinate chain. A subsequent source gap, lost solution,
             // bad geometry or future clock still cuts that chain explicitly.
-            if(rosNs<sourceNs || !evidence.usable())++localSerial_;
-            pauseLocked(rosNs<sourceNs?"future source":"stale source");return true;
+            if(rosNs<sourceNs || !evidence.usable()) {
+                ++localSerial_;pauseLocked(rosNs<sourceNs?"future source":"stale source with invalid geometry");
+            } else pauseReceiptLocked("stale source");
+            return true;
         }
         if(!evidence.usable()) {++localSerial_;pauseLocked(evidence.lost?"odometry lost":"geometry quality insufficient");return true;}
         if(evidence.recoveryGeometry) {
@@ -164,7 +166,26 @@ public:
         // A timer cannot establish that the frontend lost its coordinate
         // frame. Invalidate in-flight work now; observe() decides continuity
         // from the next authenticated source stamp and measured geometry.
-        if(!freshLocked(steadyNs,rosNs) && state_!=State::PAUSED)pauseLocked("source or arrival expired");
+        if(!freshLocked(steadyNs,rosNs) && state_!=State::PAUSED) {
+            if(steadyNs<arrivalNs_ || rosNs<sourceNs_)pauseLocked("clock moved behind measurement");
+            else pauseReceiptLocked("source or arrival expired");
+        }
+    }
+    // A delivery stall does not change an already registered odometry frame.
+    // Reopen only after fresh measured motion is continuous for the full
+    // observation span, and Core confirms the SAME registered epoch. Any lost
+    // solution, source gap, reset, bad geometry or alignment rejection cancels
+    // this path. No old-keyframe loop or new coordinate transform is inferred.
+    bool resumeContinuousReceipt(Epoch epoch,bool coreRegistered,long long frameNs,long long steadyNs,long long rosNs) {
+        std::lock_guard<std::mutex> l(mutex_);
+        if(!receiptOnlyPause_ || !epochKnown_ || epoch!=epoch_ || !coreRegistered ||
+           localSerial_!=receiptPauseSerial_ || !stableLocked() || !freshLocked(steadyNs,rosNs) ||
+           goodSamples_<MAP_OBSERVATIONS || sourceNs_-goodStartNs_<MAP_OBSERVATION_SPAN_NS ||
+           frameNs<goodStartNs_ || frameNs>sourceNs_ || sourceNs_-frameNs>MAX_AGE_NS)return false;
+        receiptOnlyPause_=false;registered_=true;
+        state_=visualStableLocked()?State::NORMAL:State::DEGRADED;
+        reason_="fresh continuous measured motion; same Core-registered coordinate frame";
+        return true;
     }
     // Registered graph: skip process until measured local tracking has recovered.
     // Unregistered graph: allow private observations; Core quarantine owns them.
@@ -180,7 +201,7 @@ public:
         std::lock_guard<std::mutex> l(mutex_);
         if(t.generation!=generation_)return false;
         if(epochKnown_ && epoch!=epoch_) {
-            ++generation_;registered_=false;state_=State::RECOVERING;
+            ++generation_;registered_=false;receiptOnlyPause_=false;state_=State::RECOVERING;
             epoch_=epoch;reason_="new private epoch needs verified registration";
             goodStartNs_=sourceNs_;goodSamples_=evidence_.usable()&&evidence_.recoveryGeometry?1U:0U;observing_=false;candidateObservation_=candidateReady_=false;
             // A Core-authenticated epoch boundary is an identity change, never
@@ -189,9 +210,10 @@ public:
         }
         epoch_=epoch;epochKnown_=true;
         if(candidateObservation_)return false; // only candidateCommitted may open this prepared transaction
-        if(!registered) {registered_=false;observing_=false;state_=State::RECOVERING;reason_="private recovery observations only";return false;}
+        if(!registered) {registered_=false;receiptOnlyPause_=false;observing_=false;state_=State::RECOVERING;reason_="private recovery observations only";return false;}
         if(!exactFrameGeometry || !stableLocked() || !freshLocked(steadyNs,rosNs) ||
            t.frameNs<goodStartNs_ || t.frameNs>sourceNs_ || sourceNs_-t.frameNs>MAX_AGE_NS) return false;
+        if(receiptOnlyPause_)return false; // same-frame resume has its own longer observation budget
         if(everRegistered_ && !registered_) {startObservationLocked();return false;}
         if(observing_)return false;
         registered_=true;everRegistered_=true;
@@ -210,7 +232,7 @@ public:
     bool beginMapObservation(Epoch epoch,bool coreRegistered,long long steadyNs,long long rosNs) {
         std::lock_guard<std::mutex> l(mutex_);
         if(observing_)return true;
-        if(!everRegistered_ || registered_ || !coreRegistered || !epochKnown_ || epoch!=epoch_ ||
+        if(receiptOnlyPause_ || !everRegistered_ || registered_ || !coreRegistered || !epochKnown_ || epoch!=epoch_ ||
            !stableLocked() || !freshLocked(steadyNs,rosNs))return false;
         startObservationLocked();return true;
     }
@@ -284,11 +306,17 @@ private:
         return registered_ && epochKnown_ && epoch==epoch_ && (state_==State::NORMAL||state_==State::DEGRADED) && freshLocked(steadyNs,rosNs);
     }
     void pauseLocked(const char * reason) {
-        ++generation_;registered_=false;observing_=false;candidateObservation_=candidateReady_=false;state_=State::PAUSED;goodSamples_=visualGoodSamples_=0;goodStartNs_=visualGoodStartNs_=0;reason_=reason;
+        ++generation_;registered_=false;receiptOnlyPause_=false;observing_=false;candidateObservation_=candidateReady_=false;state_=State::PAUSED;goodSamples_=visualGoodSamples_=0;goodStartNs_=visualGoodStartNs_=0;reason_=reason;
         pauseUntilNs_=sourceNs_+MIN_PAUSE_NS;mapObservations_=0;observationStartNs_=lastObservationNs_=0;
     }
+    void pauseReceiptLocked(const char * reason) {
+        const bool keep=(receiptOnlyPause_ && receiptPauseSerial_==localSerial_) ||
+            (registered_ && everRegistered_ && epochKnown_ && !observing_ && !candidateObservation_);
+        pauseLocked(reason);
+        receiptOnlyPause_=keep;receiptPauseSerial_=localSerial_;
+    }
     void startObservationLocked() {
-        registered_=true;observing_=true;candidateObservation_=candidateReady_=false;state_=State::RECOVERING;mapObservations_=0;observationStartNs_=lastObservationNs_=0;
+        registered_=true;receiptOnlyPause_=false;observing_=true;candidateObservation_=candidateReady_=false;state_=State::RECOVERING;mapObservations_=0;observationStartNs_=lastObservationNs_=0;
         reason_="registered main-map observation period; no graph writes";
     }
     mutable std::mutex mutex_;
@@ -296,6 +324,7 @@ private:
     long long sourceNs_=0,arrivalNs_=0,goodStartNs_=0;unsigned goodSamples_=0;
     bool registered_=false,epochKnown_=false,everRegistered_=false,observing_=false;
     bool candidateObservation_=false,candidateReady_=false;
+    bool receiptOnlyPause_=false;std::uint64_t receiptPauseSerial_=0;
     long long pauseUntilNs_=0,observationStartNs_=0,lastObservationNs_=0;unsigned mapObservations_=0;
     long long visualGoodStartNs_=0;unsigned visualGoodSamples_=0;
     Evidence evidence_;std::string reason_="waiting for authenticated geometry";
