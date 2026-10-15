@@ -74,7 +74,7 @@ readonly dual_stream_binary='/home/exocean/.cache/rtabmap_dense/calib_ab_2026082
 # Frozen ARM64 dual-stream bridge candidate.  The managed runtime observer is
 # still an independent fail-closed deployment prerequisite.
 readonly dual_stream_binary_sha256='2b1634ae850a340590257545e89f382b1d29625b494af318123fef6430fb9f50'
-readonly private_runtime_root='/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-e14fc23acd43991952aa0c9e7de0716f9eadf027959cedca07a1ddc16ea193a1'
+readonly private_runtime_root='/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-5521cdb72474104d317da57bd6c50b0ed084cf10c64c14775ec2fe7ba5a1429a'
 readonly camera_health_observer="$private_runtime_root/bin/header_health_observer"
 readonly camera_health_observer_sha256='a04aa06117bae16265f4d836406af274b1de105dff9c53e3a6b6bad7c0886018'
 readonly apriltag_anchor_builder='/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/apriltag_anchor_builder_exact/80612ee432f9655a1970739b432cebbc8f50627026abdea2e8b2c15a885771a6/build_apriltag_multiview_anchors.py'
@@ -553,11 +553,11 @@ check_camera_profile_dependencies() {
 # BEGIN RESET_QUARANTINE_RUNTIME_CONFIG
 readonly reset_runtime_root="$private_runtime_root"
 readonly reset_runtime_check="$reset_runtime_root/tools/check_private_runtime.py"
-readonly reset_runtime_check_sha256='f91e2878d3c168869249d76fd9398b9608786b6739bbe17fbb1cb9c815f62bc3'
+readonly reset_runtime_check_sha256='99eab4a64b21b3890547df44de23645b567ddfb80f063308a1048b7384cfe2fb'
 readonly reset_runtime_manifest="$reset_runtime_root/runtime-manifest.json"
-readonly reset_runtime_manifest_sha256='dd256165c38309d273df910a5abb36ebce903777fd627b5d003899abecd29ca1'
+readonly reset_runtime_manifest_sha256='c73e52185e3cf067ca5da9f813b088fc060cb830bea79d7dc5ab66ce13c00b4b'
 readonly reset_runtime_node="$reset_runtime_root/bin/rtabmap"
-readonly reset_runtime_node_sha256='2a894ec69c7e0ff249659548b1043e08bc672bff48a4cc10064769d5fc37a70a'
+readonly reset_runtime_node_sha256='2cd205bda33cdb302dbc72cec5c71874e1d9a8b7d1cb06b2a8c14bce56700647'
 readonly odom_binary="$reset_runtime_root/bin/rgbd_odometry"
 readonly odom_binary_sha256='5f28ef2802a695f105530f236f2dc6aece01b08f38b304209d20b9a87e3a3825'
 readonly reset_runtime_library_directory="$reset_runtime_root/lib"
@@ -4284,6 +4284,11 @@ for ((frontend_attempt=0; frontend_attempt<10; frontend_attempt++)); do
     sleep 0.1
 done
 if [[ "$initial_frontend_stable" != true ]]; then
+    if ! owned_process_alive "$bridge_pid"; then
+        critical_failure_reason='ZED相机进程退出或身份失效；请查看下面zed_rgbd.log中的开流错误。'
+    else
+        critical_failure_reason='TF、AprilTag、显示节点或锁管理进程未通过启动检查。'
+    fi
     echo "相机、TF、AprilTag或图结构显示节点未稳定启动：" >&2
     tail -n 120 -- "$run_dir/zed_rgbd.log" "$run_dir/static_tf.log" \
         "$run_dir/apriltag.log" "$run_dir/graph_display.log" "$run_dir/submap_display.log" >&2

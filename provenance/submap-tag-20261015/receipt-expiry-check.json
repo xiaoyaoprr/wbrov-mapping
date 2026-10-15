@@ -1,0 +1,229 @@
+{
+  "status": "PASS",
+  "scope": "Standalone before/after regression plus native linked Wrapper timer regression; immutable runtime and two launcher files deployed. No hardware started by these tests.",
+  "steps": [
+    {
+      "kind": "before",
+      "build_returncode": 0,
+      "test_returncode": -6,
+      "seconds": 2.114891743985936,
+      "stdout": "",
+      "stderr": "test_before: /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/receipt_expiry_candidate_20261015/test_mapping_continuity_gate.cpp:30: int main(): Assertion `g.localContinuitySerial()==serial' failed.\n"
+    },
+    {
+      "kind": "candidate",
+      "build_returncode": 0,
+      "test_returncode": 0,
+      "seconds": 2.3469351999810897,
+      "stdout": "PASS: bootstrap, measured hysteresis, unique/fresh source, observation before candidate commit, failed K/loss invalidate commit, unique final commit, same-epoch no-Tag, depth/IMU boundaries\n",
+      "stderr": ""
+    }
+  ],
+  "files": {
+    "candidate/rtabmap_slam/MappingContinuityGate.h": "a8fa8c4d74224b81d8050d6333e81866f018d9beac7cdc84648285a0dc4377e6",
+    "before/rtabmap_slam/MappingContinuityGate.h": "d5f43d0bc9585c46b15eea755c1b3125b16b4f1425c86aedf11fbb26324d2a60",
+    "test_mapping_continuity_gate.cpp": "de559731cd9bc365b8bae925e11474d52b8603ac86a7e8a2b03494635281cab3"
+  },
+  "production_deployed": true,
+  "full_native_runtime_built": true,
+  "hardware_started": false,
+  "schema": "wbrov.receipt-expiry-fix.v1",
+  "live_observation": {
+    "run": "/home/exocean/maps/rtabmap_calibration_ab/custom_20261008_115737",
+    "odom_lite_samples": 5369,
+    "lost_samples": 0,
+    "split_events_at_snapshot": 15,
+    "expiry_transition": [
+      {
+        "state": "PAUSED",
+        "reason": "source or arrival expired",
+        "epoch": 19,
+        "generation": 69,
+        "source_stamp_ns": 1791432520681498000,
+        "visual_geometry": true,
+        "depth_geometry": false,
+        "good_samples": 0
+      },
+      {
+        "state": "PAUSED",
+        "reason": "waiting for stable geometry and Core registration",
+        "epoch": 19,
+        "generation": 69,
+        "source_stamp_ns": 1791432520864823000,
+        "visual_geometry": true,
+        "depth_geometry": false,
+        "good_samples": 1
+      },
+      {
+        "state": "RECOVERING",
+        "reason": "waiting for stable geometry and Core registration",
+        "epoch": 19,
+        "generation": 69,
+        "source_stamp_ns": 1791432520964813000,
+        "visual_geometry": true,
+        "depth_geometry": false,
+        "good_samples": 2
+      },
+      {
+        "state": "RECOVERING",
+        "reason": "new private epoch needs verified registration",
+        "epoch": 20,
+        "generation": 70,
+        "source_stamp_ns": 1791432521914780000,
+        "visual_geometry": true,
+        "depth_geometry": false,
+        "good_samples": 1
+      }
+    ],
+    "next_source_gap_ms": 183.325,
+    "cloud_map_received": 0,
+    "frame_cloud_received": 149,
+    "frame_cloud_last_points": 1037,
+    "sampled_local_cloud_last_points": 1074
+  },
+  "display_workaround": {
+    "window_opened": true,
+    "screenshot_verified": true,
+    "screenshot_sha256": "293d1a52cf6fafbf7d4a83f78b96dcaeea9180dee4c6a159e9ac2eedcfca55f0",
+    "fixed_submap_id": 12,
+    "automatically_follows_new_submaps": false,
+    "mapping_restarted": false,
+    "control_commands_sent": false
+  },
+  "field_validated": false,
+  "native_build": {
+    "schema": "wbrov.receipt-expiry-native-build.v1",
+    "root": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/receipt_expiry_build_20261015",
+    "baseline_runtime": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-e14fc23acd43991952aa0c9e7de0716f9eadf027959cedca07a1ddc16ea193a1",
+    "baseline_manifest_sha256": "dd256165c38309d273df910a5abb36ebce903777fd627b5d003899abecd29ca1",
+    "inputs": {
+      "MappingContinuityGate.h": "a8fa8c4d74224b81d8050d6333e81866f018d9beac7cdc84648285a0dc4377e6",
+      "test_mapping_continuity_gate.cpp": "de559731cd9bc365b8bae925e11474d52b8603ac86a7e8a2b03494635281cab3",
+      "wrapper_mapping_continuity_native_test.cpp": "30119d354516acefac8d24c764eeb37541ec3b4ea247c16cf4f6c439c67b0d1e",
+      "build_receipt_expiry.py": "ff2fa4690e00ddf56518cee4a7b17bb48b44177849192a12dd6701e82b489ced"
+    },
+    "hardware_started": false,
+    "field_validated": false,
+    "steps": [
+      {
+        "name": "baseline_tree",
+        "rc": 0,
+        "seconds": 10.18,
+        "log_sha256": "80253d13ba70ef881c8d324d923f207ac6e5ef8f6d842f8833fc4e7a5af40443"
+      },
+      {
+        "name": "configure",
+        "rc": 0,
+        "seconds": 6.4,
+        "log_sha256": "c6526e3737b5793ecd689ac2aceaf8b23681dd8ded302d3679b86743eda3dc15"
+      },
+      {
+        "name": "compile",
+        "rc": 0,
+        "seconds": 341.79,
+        "log_sha256": "d91377983d4fa5680b55fdda624c37219c962b7a320718f1c803f245fc9cb227"
+      },
+      {
+        "name": "gates",
+        "rc": 0,
+        "seconds": 0.53,
+        "log_sha256": "216958f5f4a917f069653c56f4485886386d32ef443af6a5330e97a3df9f1031"
+      },
+      {
+        "name": "native_wrapper",
+        "rc": 1,
+        "seconds": 2.66,
+        "log_sha256": "599e5fb3166a448ce96fda22e29cbe2bb88d4c10688b8da61fbe2ad33c34f32d"
+      },
+      {
+        "name": "native_test_recompile",
+        "rc": 0,
+        "seconds": 35.35,
+        "log_sha256": "1d4de6f19f6288152671f198c066a47a6196ab4b4c6ee6a04669b7bac6b54799"
+      },
+      {
+        "name": "native_wrapper_corrected",
+        "rc": 0,
+        "seconds": 2.68,
+        "log_sha256": "a5ade2cc21b3fb73c425d66b9dfbcca7a839b90173898c9f7cfe51dcc13dc69e"
+      },
+      {
+        "name": "wrapper_ldd",
+        "rc": 0,
+        "seconds": 1.07,
+        "log_sha256": "51dd37216c8f90f45818d9f6e36093082f508abe952f0ae172a86fc075e223fb"
+      }
+    ],
+    "phase": "passed",
+    "compiled_gate_sha256": "a8fa8c4d74224b81d8050d6333e81866f018d9beac7cdc84648285a0dc4377e6",
+    "test_harness_correction": "Execute the real Wrapper expiry timer using spin_some, not only publish its snapshot.",
+    "previous_error": "AssertionError('native_wrapper failed')",
+    "outputs": {
+      "rtabmap": "2cd205bda33cdb302dbc72cec5c71874e1d9a8b7d1cb06b2a8c14bce56700647",
+      "librtabmap_slam_plugins.so": "01e80f709b9bda49935658941bcbda3170a2bb42538aaba0faa6500080f72790"
+    }
+  },
+  "runtime": {
+    "root": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-5521cdb72474104d317da57bd6c50b0ed084cf10c64c14775ec2fe7ba5a1429a",
+    "manifest_sha256": "c73e52185e3cf067ca5da9f813b088fc060cb830bea79d7dc5ab66ce13c00b4b",
+    "regular_files": 577,
+    "receipt_sha256": "a17fa0ab1d33f0d3332e3ee4bc62e25a325996dd82eddc43e2a76880d70ebbad"
+  },
+  "preflight": {
+    "schema": "wbrov.deploy8-preflight.v1",
+    "runtime": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-5521cdb72474104d317da57bd6c50b0ed084cf10c64c14775ec2fe7ba5a1429a",
+    "steps": [
+      {
+        "name": "mapping_syntax",
+        "returncode": 0,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "outer_syntax",
+        "returncode": 0,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "camera_profile",
+        "returncode": 0,
+        "log_sha256": "64378a400dcd43be4d18c9584289759c4c864649321e2541fa7ca06949f4e5ba"
+      },
+      {
+        "name": "runtime_tree",
+        "returncode": 0,
+        "log_sha256": "0d5ff064872aa0433f89683540415ac0e4f8b00dc7bfabe606f68fda6082a938"
+      },
+      {
+        "name": "landmark_guard",
+        "returncode": 0,
+        "log_sha256": "4008c3dadc70723261c8e5fbdf0fcd525e8c2a2ce1eaa6ee9c4577f3bb423303"
+      },
+      {
+        "name": "camera_dimensions",
+        "returncode": 0,
+        "log_sha256": "d1ee8615a79cd11d70b7b815630e84f29a6ec0dee9bd2470bdd5f87174861ae5"
+      },
+      {
+        "name": "supervisor_failure",
+        "returncode": 0,
+        "log_sha256": "71fa58fa50024b2ab8a270cded5d44eb5f358ab31ed14057965a21ea010e20ff"
+      },
+      {
+        "name": "outer_readonly",
+        "returncode": 0,
+        "log_sha256": "93bb0e96b29a29cc9db81622301392c3c58eadbe4e45e1e0c8b5c60a4e577005"
+      }
+    ],
+    "hardware_started": false,
+    "production_switched": false,
+    "display_source": "existing X11 socket; no GUI started",
+    "status": "passed",
+    "candidate_hashes": {
+      "start_rtabmap_calib_ab.sh": "af4d96427fcda0b8b55a753e42e27eba166f42afde3d9a894596d182d4abca47",
+      "run_water_mapping_with_light.sh": "12c7d7a3d4faaf6da180eb4f0e07f0fd4a34004c118620ec5b43f30e0965fcc4"
+    }
+  },
+  "deployment_receipt_sha256": "23730d25e3401acbf65a29f73ffbaab0f7250bb7fd5779dafef026a264fbde30",
+  "recorded_full_sensor_replay_rerun": false,
+  "previous_user_run_save_verified": false
+}

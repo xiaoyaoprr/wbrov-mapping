@@ -1,0 +1,34 @@
+{
+  "schema": "wbrov.startup-camera-check.v1",
+  "run": "custom_20261008_123354",
+  "observed_mapping_launcher_sha256": "af4d96427fcda0b8b55a753e42e27eba166f42afde3d9a894596d182d4abca47",
+  "camera_error": "CAMERA STREAM FAILED TO START",
+  "argus_error": "Error AlreadyAllocated: Device 0 (of 1) is in use",
+  "robot_clients_before_service_restart": [],
+  "service_restart": {
+    "status": "service_restarted",
+    "before": "MainPID=2277643",
+    "after": "MainPID=2296326\nActiveState=active\nSubState=running\n",
+    "camera_opened": false,
+    "control_started": false
+  },
+  "probe": {
+    "exit_code": 0,
+    "stdout": "[2026-10-08 12:41:42 UTC][ZED][INFO] Logging level INFO\n[2026-10-08 12:41:44 UTC][ZED][INFO] [Init]  Camera FW version: 2001\n[2026-10-08 12:41:44 UTC][ZED][INFO] [Init]  Video mode: HD1200@60\n[2026-10-08 12:41:44 UTC][ZED][INFO] [Init]  Serial Number: S/N 40408468\n[2026-10-08 12:41:44 UTC][ZED][INFO] [Init]  Depth mode selected: NEURAL. Ensure this mode matches your application's performance and accuracy requirements. See https://www.stereolabs.com/docs/depth-sensing/depth-modes for help.\nattempt=1 open=SUCCESS\nPASS attempt=1 serial=40408468 grabs=10 image=384x240 depth=NEURAL closed=true\n[2026-10-08 12:41:46 UTC][ZED][INFO] Logging level INFO\n[2026-10-08 12:41:47 UTC][ZED][INFO] [Init]  Camera FW version: 2001\n[2026-10-08 12:41:47 UTC][ZED][INFO] [Init]  Video mode: HD1200@60\n[2026-10-08 12:41:47 UTC][ZED][INFO] [Init]  Serial Number: S/N 40408468\n[2026-10-08 12:41:47 UTC][ZED][INFO] [Init]  Depth mode selected: NEURAL. Ensure this mode matches your application's performance and accuracy requirements. See https://www.stereolabs.com/docs/depth-sensing/depth-modes for help.\nattempt=2 open=SUCCESS\nPASS attempt=2 serial=40408468 grabs=10 image=384x240 depth=NEURAL closed=true\n",
+    "stderr": "",
+    "scope": "ZED HD1200@60 NEURAL with deployed calibration; two open/grab/close cycles; no ROS, control or lights",
+    "source_sha256": "24e8031621249617746e040f3d7e716dec610cfb22e107b95bc30c5c423a066f"
+  },
+  "probe_record_sha256": "2272db995596d6dc7211439b8c818ab05676bffe72c339055abceab081517711",
+  "launcher_reporting_test": {
+    "name": "failure_reporting",
+    "returncode": 0,
+    "log_sha256": "ac952e4e74f3c7d8db8c1153a805db88fa879b5bdc1cb71b38ef3dcf11b96f55"
+  },
+  "launcher_reporting_deployed": true,
+  "deployment_receipt_sha256": "ef9f0f4a5cfb79524484862bfd0f7ed672fddde3359ea7a988ddc931ac544b26",
+  "control_or_lights_started": false,
+  "full_joint_launcher_validated": false,
+  "root_cause_of_retained_argus_session_confirmed": false,
+  "limitation": "Camera-only double reopen passed. This does not prove full RViz startup, continuous cloud, or that stale Argus sessions cannot recur."
+}

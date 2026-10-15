@@ -119,6 +119,17 @@ int main(int argc,char ** argv) {
         require(g.coreValidated(g.ticket(ns),core.getResetEpoch(),true,true,steady(),w->now().nanoseconds()),"Core registration did not permit recovery");
         require(g.snapshot(steady(),w->now().nanoseconds()).state==Gate::State::NORMAL,"visual state not NORMAL");
         auto oldTicket=g.ticket(ns);
+        // Expiration must revoke publication without inventing a frontend
+        // coordinate reset. Model a delayed delivery whose source is continuous.
+        const auto continuousSerial=g.localContinuitySerial();
+        std::this_thread::sleep_for(std::chrono::milliseconds(310));
+        rclcpp::spin_some(w); // Run the Wrapper's actual 100 ms expiry timer.
+        require(!g.mainMapAllowed(core.getResetEpoch(),steady(),w->now().nanoseconds()),"expired evidence kept main-map writes open");
+        require(g.localContinuitySerial()==continuousSerial,"receipt timer invented a local coordinate discontinuity");
+        auto delayed=sample(*w);delayed.header.stamp=rclcpp::Time(ns+183000000LL);
+        require(observe(delayed),"continuous delayed source was not observed");
+        require(g.localContinuitySerial()==continuousSerial,"continuous delayed source split the local graph");
+        require(!g.coreValidated(oldTicket,core.getResetEpoch(),true,true,steady(),w->now().nanoseconds()),"pre-expiration ticket reopened main map");
         std::this_thread::sleep_for(std::chrono::milliseconds(5));auto lost=sample(*w);lost.lost=true;
         require(observe(lost),"lost packet ignored");
         require(!g.coreValidated(oldTicket,core.getResetEpoch(),true,true,steady(),w->now().nanoseconds()),"in-flight preloss result rearmed gate");
@@ -140,7 +151,7 @@ int main(int argc,char ** argv) {
         require(g.snapshot(steady(),w->now().nanoseconds()).state==Gate::State::PAUSED,"IMU-only opened mapping");
         require(core.getLocalOptimizedPoses().size()==graphSize,"adapter-only evidence mutated graph");
         (w.get()->*member(Status{}))();
-        std::cout<<"PASS native linked Wrapper adapter: full-frame support/dimension binding, numeric-only reject, hysteresis, bootstrap, registration observation period, loss/old ticket, depth evidence, IMU-only PAUSED, no graph writes\n";
+        std::cout<<"PASS native linked Wrapper adapter: full-frame support/dimension binding, numeric-only reject, hysteresis, bootstrap, receipt expiry preserves local continuity but revokes writes, registration observation period, loss/old ticket, depth evidence, IMU-only PAUSED, no graph writes\n";
         w.reset();rclcpp::shutdown();return 0;
     }catch(const std::exception & e){std::cerr<<e.what()<<'\n';rclcpp::shutdown();return 1;}
 }

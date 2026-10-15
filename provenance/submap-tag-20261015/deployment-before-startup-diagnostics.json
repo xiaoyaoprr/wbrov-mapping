@@ -1,0 +1,77 @@
+{
+  "schema": "wbrov.repository-deploy8-record.v1",
+  "runtime": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-5521cdb72474104d317da57bd6c50b0ed084cf10c64c14775ec2fe7ba5a1429a",
+  "runtime_manifest_sha256": "c73e52185e3cf067ca5da9f813b088fc060cb830bea79d7dc5ab66ce13c00b4b",
+  "desktop_entry": "/home/exocean/Desktop/机器人键盘遥控/8-水下遥控开灯加建图_一键启动",
+  "desktop_sha256": "f44d584c2b48b4bf22b04a1ab1575e3e2d9907e324824ea5c1d94a20263d9e20",
+  "backup": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/deploy8_receipt_expiry/backup",
+  "hardware_started": false,
+  "field_validated": false,
+  "known_limitations": [
+    "Recorded non-Tag recovery not passed",
+    "Strict replay source timing not passed"
+  ],
+  "before": {
+    "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh": "bcae85036302f6775fc0af975b95fbbf978298d072169220a155900018f8bbab",
+    "/home/exocean/Desktop/机器人键盘遥控/.tools/run_water_mapping_with_light.sh": "5c548be86d75b7213c7b894793ca3f353fc0d6a4a53a866969487859ef614082"
+  },
+  "after": {
+    "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh": "af4d96427fcda0b8b55a753e42e27eba166f42afde3d9a894596d182d4abca47",
+    "/home/exocean/Desktop/机器人键盘遥控/.tools/run_water_mapping_with_light.sh": "12c7d7a3d4faaf6da180eb4f0e07f0fd4a34004c118620ec5b43f30e0965fcc4"
+  },
+  "steps": [
+    {
+      "name": "installed_mapping_syntax",
+      "returncode": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "installed_outer_syntax",
+      "returncode": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "installed_camera_profile",
+      "returncode": 0,
+      "log_sha256": "64378a400dcd43be4d18c9584289759c4c864649321e2541fa7ca06949f4e5ba"
+    },
+    {
+      "name": "installed_runtime_tree",
+      "returncode": 0,
+      "log_sha256": "768f9f8e232730d1f29cadd2570cc141749b88206163e28d3decc3f6b251a3cc"
+    },
+    {
+      "name": "installed_outer_readonly",
+      "returncode": 0,
+      "log_sha256": "ad923cc3ab9c65340458a092d6951ed25f70f3e907c7c93a9821615c0cee348c"
+    }
+  ],
+  "status": "deployed",
+  "production_switched": true,
+  "protected_unchanged": true,
+  "host_recorded_at": "2026-10-15T12:58:42.540243+00:00",
+  "raw_receipt_sha256": "23730d25e3401acbf65a29f73ffbaab0f7250bb7fd5779dafef026a264fbde30",
+  "candidate_native_receipt_sha256": "3cf42ffd0e345bf4c5a55863abf078c9d5c785503029937a7666206c239f454e",
+  "runtime_regular_files": 577,
+  "protected_files_checked": 7,
+  "runtime_checker_change": "Only frozen source identities and build-root metadata changed; verifier functions/classes are identical.",
+  "source_files": {
+    "launch/deployed_20261015/start_rtabmap_calib_ab.sh": {
+      "sha256": "af4d96427fcda0b8b55a753e42e27eba166f42afde3d9a894596d182d4abca47",
+      "installed_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh"
+    },
+    "launch/deployed_20261015/run_water_mapping_with_light.sh": {
+      "sha256": "12c7d7a3d4faaf6da180eb4f0e07f0fd4a34004c118620ec5b43f30e0965fcc4",
+      "installed_path": "/home/exocean/Desktop/机器人键盘遥控/.tools/run_water_mapping_with_light.sh"
+    },
+    "runtime/tools/check_private_runtime.py": {
+      "sha256": "99eab4a64b21b3890547df44de23645b567ddfb80f063308a1048b7384cfe2fb",
+      "installed_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-5521cdb72474104d317da57bd6c50b0ed084cf10c64c14775ec2fe7ba5a1429a/tools/check_private_runtime.py"
+    }
+  },
+  "previous_deployment_record": "deployment-before-receipt-expiry.json",
+  "receipt_expiry_record": "receipt-expiry-check.json",
+  "full_entry_after_fix_validated": false,
+  "rollback_script_sha256": "8a80481da740a4f7e50112686fef342a6b668a3784ae9cf76b25f5cd0e959a81",
+  "rollback_transition_sha256": "8ca78e62ddc32d7411124c7753388554c0aa25308ee866f60f4d59b0e1a08ba8"
+}

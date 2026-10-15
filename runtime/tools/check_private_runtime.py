@@ -32,7 +32,7 @@ from typing import Any, Dict, Iterable, List, Mapping, MutableMapping, Optional,
 
 SCHEMA_VERSION = 3
 PACKAGE_KIND = "wbrov-private-rtabmap-runtime"
-EXPECTED_PRIVATE_ROOT = '/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/deploy8_20261015_r3'
+EXPECTED_PRIVATE_ROOT = '/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/deploy8_receipt_expiry'
 MANIFEST_NAME = "runtime-manifest.json"
 MAX_MANIFEST_BYTES = 32 * 1024 * 1024
 MAX_TREE_ENTRIES = 100000
@@ -71,7 +71,7 @@ SOURCE_HASHES = {
     "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/GlobalPublicationGate.h": "daedd4e70da4b7d207285d8f303ba9e114b8b006fe5f7e46ed1e8f528637bf51",
     "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/JumpQuarantineGate.h": "a24d09c476743889db76171ef5f19393ad7c053549441de48eb9c4bb9236e0ca",
     "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/ManagedImuEpochBuffer.h": "7b72f4071377c8e66bdc4d2c6daaab654be0802cdeba19142022575aa2a5d22f",
-    "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/MappingContinuityGate.h": "d5f43d0bc9585c46b15eea755c1b3125b16b4f1425c86aedf11fbb26324d2a60",
+    "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/MappingContinuityGate.h": "a8fa8c4d74224b81d8050d6333e81866f018d9beac7cdc84648285a0dc4377e6",
     "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/SubmapPublisher.h": "3148830766e326c564ffee354473a2445ad990f56c14431480a7aee539abc797",
     "rtabmap_ros/rtabmap_slam/src/CoreNode.cpp": "ee64bddc87e3e35b5d063fbe5f0dd4fb37ccc26e23479ce78bf131a6f2a0d851",
     "rtabmap_ros/rtabmap_slam/src/CoreWrapper.cpp": "a81a7a86f9e6de56271e40246ecaf47169ed90f4abc476511f02480da4661730"

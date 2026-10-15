@@ -22,6 +22,62 @@ void mapObservations(Gate &g,long long start,Gate::Epoch epoch=0,Gate::Evidence 
 }
 int main() {
     {
+        // A late delivery with an unbroken measured source sequence pauses the
+        // map but must not force Core to create an unrelated coordinate frame.
+        Gate g;normal(g);const auto serial=g.localContinuitySerial();
+        const auto inFlight=g.ticket(T+2*D);
+        g.tick(T+51*D/10,T+51*D/10);
+        assert(g.localContinuitySerial()==serial);
+        assert(!g.mainMapAllowed(0,T+51*D/10,T+51*D/10));
+        assert(!g.processAllowed(false,T+2*D,T+51*D/10,T+51*D/10));
+        assert(!g.coreValidated(inFlight,0,true,true,T+51*D/10,T+51*D/10));
+        for(int i=3;i<=5;++i) {
+            const auto source=T+i*D,arrival=source+22*D/10;
+            assert(g.observe(source,arrival,arrival,visual()));
+        }
+        assert(g.localContinuitySerial()==serial);
+        const auto now=T+72*D/10;
+        assert(!g.mainMapAllowed(0,now,now));
+        assert(!g.processAllowed(true,T+5*D,now,now));
+        assert(g.beginMapObservation(0,true,now,now));
+        for(unsigned i=0;i<5;++i) {
+            const auto source=T+6*D+static_cast<long long>(i)*150000000LL;
+            const auto arrival=source+22*D/10;
+            assert(g.observe(source,arrival,arrival,visual()));
+            assert(g.observeRegisteredMap(g.ticket(source),0,true,.001,.1,.001,.1,arrival,arrival)==(i==4));
+            if(i<4)assert(!g.mainMapAllowed(0,arrival,arrival));
+        }
+        assert(g.mainMapAllowed(0,T+142*D/10,T+142*D/10));
+    }
+    {
+        Gate g;stable(g,T);assert(!confirm(g,T+2*D,0,false));
+        const auto serial=g.localContinuitySerial();
+        assert(g.observe(T+3*D,T+7*D,T+7*D,visual())); // late, still same source chain
+        assert(g.localContinuitySerial()==serial);
+        assert(!g.processAllowed(false,T+3*D,T+7*D,T+7*D));
+        assert(g.observe(T+4*D,T+71*D/10,T+71*D/10,visual()));
+        for(int i=5;i<=7;++i) {
+            const auto source=T+i*D,arrival=source+22*D/10;
+            assert(g.observe(source,arrival,arrival,visual()));
+        }
+        assert(g.localContinuitySerial()==serial);
+        assert(g.processAllowed(false,T+7*D,T+92*D/10,T+92*D/10));
+        assert(!g.mainMapAllowed(0,T+92*D/10,T+92*D/10));
+    }
+    {
+        // No timer or receipt-age change may hide a true measurement gap/loss.
+        Gate gap;normal(gap);const auto serial=gap.localContinuitySerial();
+        gap.tick(T+6*D,T+6*D);observe(gap,T+7*D);
+        assert(gap.localContinuitySerial()>serial);
+        assert(!gap.processAllowed(false,T+7*D,T+7*D,T+7*D));
+        Gate lost;normal(lost);const auto lostSerial=lost.localContinuitySerial();
+        assert(lost.observe(T+3*D,T+7*D,T+7*D,Gate::Evidence{}));
+        assert(lost.localContinuitySerial()>lostSerial);
+        Gate future;normal(future);const auto futureSerial=future.localContinuitySerial();
+        assert(future.observe(T+3*D,T+3*D,T+3*D-1,visual()));
+        assert(future.localContinuitySerial()>futureSerial);
+    }
+    {
         Gate g;normal(g);const auto serial=g.localContinuitySerial();
         g.rejectAlignment("bad global candidate");assert(g.localContinuitySerial()==serial);
         stable(g,T+3*D);assert(g.localGeometryReady(T+5*D,T+5*D,T+5*D));

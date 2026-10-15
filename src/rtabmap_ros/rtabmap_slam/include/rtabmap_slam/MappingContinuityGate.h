@@ -132,7 +132,13 @@ public:
         // acquire confidence or refresh a previous valid registration.
         if(sourceNs_>0 && (arrivalNs<arrivalNs_ || sourceNs-sourceNs_>MAX_AGE_NS)) {++localSerial_;pauseLocked("measurement gap");}
         sourceNs_=sourceNs;arrivalNs_=arrivalNs;evidence_=evidence;
-        if(rosNs<sourceNs || rosNs-sourceNs>MAX_AGE_NS) {++localSerial_;pauseLocked("stale or future source");return true;}
+        if(rosNs<sourceNs || rosNs-sourceNs>MAX_AGE_NS) {
+            // Receipt latency revokes write/pose permission, not the measured
+            // local coordinate chain. A subsequent source gap, lost solution,
+            // bad geometry or future clock still cuts that chain explicitly.
+            if(rosNs<sourceNs || !evidence.usable())++localSerial_;
+            pauseLocked(rosNs<sourceNs?"future source":"stale source");return true;
+        }
         if(!evidence.usable()) {++localSerial_;pauseLocked(evidence.lost?"odometry lost":"geometry quality insufficient");return true;}
         if(evidence.recoveryGeometry) {
             if(goodSamples_==0) goodStartNs_=sourceNs;
@@ -154,7 +160,11 @@ public:
         return true;
     }
     void tick(long long steadyNs,long long rosNs) {
-        std::lock_guard<std::mutex> l(mutex_);if(!freshLocked(steadyNs,rosNs) && state_!=State::PAUSED){++localSerial_;pauseLocked("source or arrival expired");}
+        std::lock_guard<std::mutex> l(mutex_);
+        // A timer cannot establish that the frontend lost its coordinate
+        // frame. Invalidate in-flight work now; observe() decides continuity
+        // from the next authenticated source stamp and measured geometry.
+        if(!freshLocked(steadyNs,rosNs) && state_!=State::PAUSED)pauseLocked("source or arrival expired");
     }
     // Registered graph: skip process until measured local tracking has recovered.
     // Unregistered graph: allow private observations; Core quarantine owns them.

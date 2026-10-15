@@ -62,9 +62,9 @@ default_localization_source_db="/home/exocean/maps/rtabmap_calibration_ab/custom
 # Release tooling replaces these three sentinels only after the paired
 # Core/ROS runtime and launcher are frozen.  Leaving any sentinel in place is a
 # deliberate fail-closed state, not a development fallback.
-readonly FINAL_MAPPING_LAUNCHER_SHA256='bcae85036302f6775fc0af975b95fbbf978298d072169220a155900018f8bbab'
-readonly FINAL_RESET_RUNTIME_ROOT='/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-e14fc23acd43991952aa0c9e7de0716f9eadf027959cedca07a1ddc16ea193a1'
-readonly FINAL_RESET_RUNTIME_NODE_SHA256='2a894ec69c7e0ff249659548b1043e08bc672bff48a4cc10064769d5fc37a70a'
+readonly FINAL_MAPPING_LAUNCHER_SHA256='7e092ea920a8b952e3f29d960a6f0eff300d88729f9d5c4b82adc38d51dca829'
+readonly FINAL_RESET_RUNTIME_ROOT='/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-5521cdb72474104d317da57bd6c50b0ed084cf10c64c14775ec2fe7ba5a1429a'
+readonly FINAL_RESET_RUNTIME_NODE_SHA256='2cd205bda33cdb302dbc72cec5c71874e1d9a8b7d1cb06b2a8c14bce56700647'
 readonly FINAL_RESET_RUNTIME_NODE="$FINAL_RESET_RUNTIME_ROOT/bin/rtabmap"
 # The full immutable-library checks alone take about 27s before any node starts.
 # Bound the complete preflight + node startup, including repeated pre-exec checks.
@@ -714,6 +714,12 @@ queue_completed_navigation_map() {
         --expected-launcher-start-ticks "$mapping_ticks" --expected-boot "$boot_id"
 }
 
+show_mapping_failure_log() {
+    [[ -n "$run_dir" && -f "$run_dir/mapping.log" && ! -L "$run_dir/mapping.log" ]] || return 0
+    printf '\n[建图故障详情] 本次 mapping.log 最后80行：\n' >&2
+    tail -n 80 -- "$run_dir/mapping.log" >&2 || true
+}
+
 on_exit() {
     local status=$? cleanup_status=0
     trap - EXIT
@@ -730,6 +736,12 @@ on_exit() {
                 fi
                 ;;
         esac
+    fi
+    if ((status != 0)); then
+        if [[ -z "$failure_reason" ]] && ((mapping_exit_status != 0)); then
+            failure_reason="建图进程退出（状态码$mapping_exit_status）；具体原因见本次建图日志。"
+        fi
+        show_mapping_failure_log
     fi
     # Preserve the diagnosis after the safety cleanup, even if the terminal closes.
     if [[ -n "$run_dir" && -d "$run_dir" ]]; then
