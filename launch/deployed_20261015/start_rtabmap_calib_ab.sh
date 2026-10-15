@@ -74,7 +74,7 @@ readonly dual_stream_binary='/home/exocean/.cache/rtabmap_dense/calib_ab_2026082
 # Frozen ARM64 dual-stream bridge candidate.  The managed runtime observer is
 # still an independent fail-closed deployment prerequisite.
 readonly dual_stream_binary_sha256='2b1634ae850a340590257545e89f382b1d29625b494af318123fef6430fb9f50'
-readonly private_runtime_root='/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-5521cdb72474104d317da57bd6c50b0ed084cf10c64c14775ec2fe7ba5a1429a'
+readonly private_runtime_root='/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-0003cd4f818852d584959c6ee2602e92117d4c80ac194a42ad0e87051cf566b2'
 readonly camera_health_observer="$private_runtime_root/bin/header_health_observer"
 readonly camera_health_observer_sha256='a04aa06117bae16265f4d836406af274b1de105dff9c53e3a6b6bad7c0886018'
 readonly apriltag_anchor_builder='/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/apriltag_anchor_builder_exact/80612ee432f9655a1970739b432cebbc8f50627026abdea2e8b2c15a885771a6/build_apriltag_multiview_anchors.py'
@@ -553,11 +553,11 @@ check_camera_profile_dependencies() {
 # BEGIN RESET_QUARANTINE_RUNTIME_CONFIG
 readonly reset_runtime_root="$private_runtime_root"
 readonly reset_runtime_check="$reset_runtime_root/tools/check_private_runtime.py"
-readonly reset_runtime_check_sha256='99eab4a64b21b3890547df44de23645b567ddfb80f063308a1048b7384cfe2fb'
+readonly reset_runtime_check_sha256='f8cc1365c76ca21e3e0cb060e0dc36d70cf15f9e0338ddbbbd309c730b4ba2e4'
 readonly reset_runtime_manifest="$reset_runtime_root/runtime-manifest.json"
-readonly reset_runtime_manifest_sha256='c73e52185e3cf067ca5da9f813b088fc060cb830bea79d7dc5ab66ce13c00b4b'
+readonly reset_runtime_manifest_sha256='0b44f95e0df8fb4de1a78be3a25fe98c47f3742fdd8a24fbc5c24165399c498b'
 readonly reset_runtime_node="$reset_runtime_root/bin/rtabmap"
-readonly reset_runtime_node_sha256='2cd205bda33cdb302dbc72cec5c71874e1d9a8b7d1cb06b2a8c14bce56700647'
+readonly reset_runtime_node_sha256='63361f4627b50390e000f38c7a8e71b88ece6251dfe1eab5f3507ad099a1dc8c'
 readonly odom_binary="$reset_runtime_root/bin/rgbd_odometry"
 readonly odom_binary_sha256='5f28ef2802a695f105530f236f2dc6aece01b08f38b304209d20b9a87e3a3825'
 readonly reset_runtime_library_directory="$reset_runtime_root/lib"
@@ -1171,11 +1171,11 @@ declare -a odom_camera_profile_args=()
 declare -a odom_transport_args=()
 declare -a apriltag_camera_profile_args=()
 if [[ "$camera_profile" == "$default_camera_profile" ]]; then
-    # If processing falls behind, discard superseded low-resolution inputs so
-    # the live estimate stays close to the newest camera sample.
-    # Keep latency bounded if the machine cannot sustain every scheduled frame.
+    # Process atomic RGB-D inline; KEEP_LAST(1) retains only the newest waiting
+    # sample. The asynchronous try-lock drops even fresh 33/67 ms burst inputs
+    # while the previous frame is computing. Keep the DDS backlog bounded.
     # Acceptance is still the measured valid /odom rate (>=15 Hz), not input FPS.
-    odom_camera_profile_args=(-p always_process_most_recent_frame:=true)
+    odom_camera_profile_args=(-p always_process_most_recent_frame:=false -p topic_queue_size:=1)
     # Carry RGB, depth and both CameraInfo objects in one DDS sample. Raw
     # topics stay available for RViz, depth display, AprilTag and diagnostics.
     odom_transport_args=(
@@ -1205,7 +1205,7 @@ odom_camera_profile_args=()
 odom_transport_args=()
 apriltag_camera_profile_args=()
 if [[ "$camera_profile" == "$default_camera_profile" ]]; then
-    odom_camera_profile_args=(-p always_process_most_recent_frame:=true)
+    odom_camera_profile_args=(-p always_process_most_recent_frame:=false -p topic_queue_size:=1)
     odom_transport_args=(
         -r "rgbd_image:=$odom_rgbd_topic"
         -p subscribe_rgbd:=true
@@ -2394,6 +2394,7 @@ timer_pid=""
 cleaned=0
 cleanup_nodes_stopped=false
 cleanup_export_succeeded=false
+cleanup_no_tag_available=false
 cleanup_apriltag_anchor_succeeded=false
 cleanup_continuation_contract_succeeded=false
 critical_failure_reason=""
@@ -3759,6 +3760,40 @@ safe_export_saved_poses() {
     return 0
 }
 
+no_exact_tag_observations() {
+    # Called only after all owned children have stopped and export passed.
+    # This exception permits a saved new map, never a continuation contract.
+    [[ "$continuation_enabled" == false ]] || return 1
+    "$python3_runtime" - "$run_dir" "$apriltag_keyframe_binder_pid" <<'PY_NO_TAG'
+import json, pathlib, sys
+root = pathlib.Path(sys.argv[1])
+state_path = root / 'apriltag_keyframe_binding_state.json'
+bindings = root / 'apriltag_keyframe_bindings.jsonl'
+try:
+    assert state_path.is_file() and not state_path.is_symlink()
+    assert bindings.is_file() and not bindings.is_symlink()
+    state = json.loads(state_path.read_text())
+    assert state['schema_version'] == 1 and state['pid'] == int(sys.argv[2])
+    assert state['observer_only'] is True and state['graph_edge_added'] is False
+    assert state['output'] == str(bindings)
+    for name in ('accepted_bindings', 'pending_info_stamps', 'pending_tag_stamps'):
+        assert type(state[name]) is int and state[name] == 0
+    rows = 0
+    for line in bindings.read_text().splitlines():
+        if not line.strip(): continue
+        event = json.loads(line)
+        assert event['accepted'] is False
+        assert event['reason'] in ('info_without_exact_tag', 'observer_shutdown')
+        assert type(event['keyframe_id']) is int and event['keyframe_id'] > 0
+        assert type(event['image_stamp_ns']) is int and event['image_stamp_ns'] > 0
+        assert not any('tag' in key or 'pose' in key for key in event)
+        rows += 1
+    assert type(state['rejected_events']) is int and state['rejected_events'] == rows
+except (AssertionError, KeyError, ValueError, TypeError, OSError):
+    sys.exit(1)
+PY_NO_TAG
+}
+
 build_apriltag_multiview_sidecar() {
     local bindings_jsonl="$run_dir/apriltag_keyframe_bindings.jsonl"
     local output="$run_dir/apriltag_multiview_anchors.json"
@@ -3966,7 +4001,10 @@ cleanup() {
         elif [[ -s "$database" ]]; then
             if safe_export_saved_poses; then
                 cleanup_export_succeeded=true
-                if build_apriltag_multiview_sidecar; then
+                if no_exact_tag_observations; then
+                    cleanup_no_tag_available=true
+                    echo '[地图已保存] 本轮没有精确Tag观测；未生成Tag续建锚点，不列入2号续建候选。'
+                elif build_apriltag_multiview_sidecar; then
                     cleanup_apriltag_anchor_succeeded=true
                     if [[ "$camera_profile" == "$default_camera_profile" &&
                           "$camera_health_ready_passed" != true ]]; then
@@ -4117,8 +4155,16 @@ on_exit() {
     publish_lifecycle stopping "$status" "$requested_status" false || lifecycle_failed=1
     cleanup || cleanup_status=$?
     if ((cleanup_status == 0 && lifecycle_failed == 0)) && [[ -z "$critical_failure_reason" ]]; then
-        if [[ "$cleanup_continuation_contract_succeeded" != true ]] ||
-           ! continuation_contract_tool validate "$run_dir" >/dev/null; then
+        if [[ "$cleanup_no_tag_available" == true && "$continuation_enabled" == false &&
+              "$cleanup_nodes_stopped" == true && "$cleanup_export_succeeded" == true ]]; then
+            # No Tag is a valid new-map outcome. Health/export checks already
+            # passed in cleanup; do not publish a usable continuation receipt.
+            succeeded=true
+            case "$requested_status" in
+                0|129|130|143) status=0 ;;
+            esac
+        elif [[ "$cleanup_continuation_contract_succeeded" != true ]] ||
+             ! continuation_contract_tool validate "$run_dir" >/dev/null; then
             echo '[保存状态缺失] 最终续建契约不存在或不再匹配本次调用；拒绝发布成功lifecycle。' >&2
             status=1
         else
@@ -4190,7 +4236,7 @@ echo "视觉里程计：连续8个失败帧后在最后有效位姿重建F2M局�
 echo "已撤回未验收的2x3网格、0.01内点分布门和80px搜索窗，恢复RTAB-Map默认1x1/0/40。"
 echo "失锁恢复模式：新段先隔离建图；同一Tag需3个精确关键帧视角，并由核心做多桥影子优化、留出与刚体保平面门后才允许合图。"
 if [[ "$camera_profile" == "$default_camera_profile" ]]; then
-    echo "dual profile优先处理最新低分辨率帧以限制延迟；若有效/odom低于15Hz，本轮不算通过。"
+    echo "dual profile使用单槽RGB-D输入队列以限制延迟；若有效/odom低于15Hz，本轮不算通过。"
 fi
 echo "运动速度平移外推已关闭，避免失锁后预测位移无限增长；仍保留同步IMU的帧间旋转预测。"
 echo "恢复未获得核心同token提交回执前不能冒充已定位；普通跨epoch回环不能绕过安全事务入口。"

@@ -21,6 +21,30 @@ void mapObservations(Gate &g,long long start,Gate::Epoch epoch=0,Gate::Evidence 
     }
 }
 int main() {
+    for(int scenario=0;scenario<8;++scenario) {
+        Gate g;normal(g);const auto serial=g.localContinuitySerial();const auto ticket=g.ticket(T+2*D);
+        auto e=visual();long long gap=350000000LL;e.measuredIntervalNs=gap;
+        if(scenario==1)e.measuredIntervalNs=0; // initialization/reset or no evidence
+        if(scenario==2)e.measuredIntervalNs=50000000LL; // missing DDS reports
+        if(scenario==3){gap=750000001LL;e.measuredIntervalNs=gap;}
+        if(scenario==4)e.recoveryGeometry=false;
+        if(scenario==5)e.lost=true;
+        if(scenario==6){observe(g,T+3*D,Gate::Evidence{});}
+        if(scenario==7){gap=750000000LL;e.measuredIntervalNs=gap;}
+        const auto t=(scenario==6?T+3*D:T+2*D)+gap;
+        g.tick(t,t);observe(g,t,e);
+        const bool bridged=scenario==0 || scenario==7;
+        assert((g.localContinuitySerial()==serial)==bridged);
+        assert(!g.mainMapAllowed(0,t,t));
+        assert(!g.coreValidated(ticket,0,true,true,t,t));
+        for(int i=1;i<=6;++i) {
+            const auto fresh=t+i*D;observe(g,fresh);
+            const bool resumed=g.resumeContinuousReceipt(0,true,fresh,fresh,fresh);
+            if(i<5 || !bridged)assert(!resumed);
+        }
+        assert(g.mainMapAllowed(0,t+6*D,t+6*D)==bridged);
+    }
+
     {
         // A late delivery with an unbroken measured source sequence pauses the
         // map but must not force Core to create an unrelated coordinate frame.

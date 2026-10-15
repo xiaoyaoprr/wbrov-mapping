@@ -129,6 +129,8 @@ static MappingContinuityGate::Evidence mappingEvidence(const rtabmap_msgs::msg::
 {
     MappingContinuityGate::Evidence e;
     e.lost=msg.lost;
+    if(msg.type==0 && std::isfinite(msg.interval) && msg.interval>0.0f && msg.interval<=0.75f)
+        e.measuredIntervalNs=static_cast<long long>(std::llround(static_cast<double>(msg.interval)*1e9));
     const auto & t=msg.transform.translation;
     const auto & q=msg.transform.rotation;
     const double qn=q.x*q.x+q.y*q.y+q.z*q.z+q.w*q.w;
@@ -6171,7 +6173,12 @@ bool CoreWrapper::observeResetQuarantineOdomInfo(
 	resetQuarantineLastOdomInfoSteadyNs_.store(nowSteadyNs, std::memory_order_release);
 	resetQuarantineOdomInfoSeen_.store(true, std::memory_order_release);
     const auto continuityEvidence=mappingEvidence(msg,mappingContinuityVoWidth_,mappingContinuityVoHeight_);
+    const auto localSerialBefore=mappingContinuityGate_.localContinuitySerial();
     mappingContinuityGate_.observe(stampNs, nowSteadyNs, now().nanoseconds(), continuityEvidence);
+    if(previousStampNs>0 && stampNs-previousStampNs>MappingContinuityGate::MAX_AGE_NS)
+        RCLCPP_WARN(get_logger(),"[MEASURED_INTERVAL_CHECK] gap_ns=%lld measured_interval_ns=%lld lost=%s visual_geometry=%s local_chain_cut=%s",
+            stampNs-previousStampNs,continuityEvidence.measuredIntervalNs,msg.lost?"true":"false",
+            continuityEvidence.visualGeometry?"true":"false",mappingContinuityGate_.localContinuitySerial()!=localSerialBefore?"true":"false");
     globalPublicationGate_.observe(stampNs, nowSteadyNs, continuityEvidence.usable());
     publishMappingContinuityStatus();
 	if(msg.lost)

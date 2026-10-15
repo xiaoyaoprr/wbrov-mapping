@@ -1,10 +1,10 @@
 {
   "schema": "wbrov.deploy8-cutover.v1",
-  "runtime": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-5521cdb72474104d317da57bd6c50b0ed084cf10c64c14775ec2fe7ba5a1429a",
-  "runtime_manifest_sha256": "c73e52185e3cf067ca5da9f813b088fc060cb830bea79d7dc5ab66ce13c00b4b",
+  "runtime": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-0003cd4f818852d584959c6ee2602e92117d4c80ac194a42ad0e87051cf566b2",
+  "runtime_manifest_sha256": "0b44f95e0df8fb4de1a78be3a25fe98c47f3742fdd8a24fbc5c24165399c498b",
   "desktop_entry": "/home/exocean/Desktop/机器人键盘遥控/8-水下遥控开灯加建图_一键启动",
   "desktop_sha256": "f44d584c2b48b4bf22b04a1ab1575e3e2d9907e324824ea5c1d94a20263d9e20",
-  "backup": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/deploy8_rviz_admission/backup",
+  "backup": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/deploy8_measured_gap/backup",
   "hardware_started": false,
   "field_validated": false,
   "known_limitations": [
@@ -12,12 +12,12 @@
     "Strict replay source timing not passed"
   ],
   "before": {
-    "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh": "7e092ea920a8b952e3f29d960a6f0eff300d88729f9d5c4b82adc38d51dca829",
-    "/home/exocean/Desktop/机器人键盘遥控/.tools/run_water_mapping_with_light.sh": "131f8350f5aeb2b8168243c31377b5662ce05e68f91f397ef694c27d3ac3af48"
-  },
-  "after": {
     "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh": "38f82f89a4d645829b3f3cb3d43c732fbf5128afa35b3695a06fa2e2c0528ed5",
     "/home/exocean/Desktop/机器人键盘遥控/.tools/run_water_mapping_with_light.sh": "3cb1eae4a0d39babb4dac46f8af101a2e416cac17517034cd84784474a34ac77"
+  },
+  "after": {
+    "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh": "c20ae67f294881b412cedcf5eaf767b8631361fb2358d7c2692f1ecff540a04e",
+    "/home/exocean/Desktop/机器人键盘遥控/.tools/run_water_mapping_with_light.sh": "350141d103b9dae449438668654db94e66ee21b2c5fb82ae440099dfce42d514"
   },
   "steps": [
     {
@@ -38,51 +38,84 @@
     {
       "name": "installed_runtime_tree",
       "returncode": 0,
-      "log_sha256": "1ba33f13aaa27ac9bf93d1f074ba65029c95354d4fff9a1508db3568064900c5"
+      "log_sha256": "71fcd136d84bcedea2f84629f6d8f3d21bd4fedbfb87193e55a86456e5482913"
     },
     {
       "name": "installed_outer_readonly",
       "returncode": 0,
-      "log_sha256": "6be0cdee35e32e6b85b53bb9c1c013e6934517838d4f0e6859c7806b6011dfb4"
+      "log_sha256": "1f98a4d74f5c48ac9aae85c464807679c78995b18b9aa92447e6361e63354ede"
     }
   ],
   "status": "deployed",
   "production_switched": true,
   "protected_unchanged": true,
-  "host_recorded_at": "2026-10-15T14:54:43.536011+00:00",
-  "raw_receipt_sha256": "82e433defe8dec85571145f78e3a94a48f392848583abeb8b012a3386a6e52f5",
-  "candidate_native_receipt_sha256": "3cf42ffd0e345bf4c5a55863abf078c9d5c785503029937a7666206c239f454e",
+  "host_recorded_at": "2026-10-15T16:13:10.762341+00:00",
+  "raw_receipt_sha256": "2b61829e4bf76c8b7dd167bd93e12ac3ac418e560f778f14863147fb14d8d888",
+  "candidate_native_receipt_sha256": "495085f61015987d52b06ce1f8624fb513b53c65cee4bc118e4ad2ad8398db7a",
   "runtime_regular_files": 577,
-  "protected_files_checked": 7,
+  "protected_files_checked": 8,
   "runtime_checker_change": "Only frozen source identities and build-root metadata changed; verifier functions/classes are identical.",
   "source_files": {
     "launch/deployed_20261015/start_rtabmap_calib_ab.sh": {
-      "sha256": "38f82f89a4d645829b3f3cb3d43c732fbf5128afa35b3695a06fa2e2c0528ed5",
+      "sha256": "c20ae67f294881b412cedcf5eaf767b8631361fb2358d7c2692f1ecff540a04e",
       "installed_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh"
     },
     "launch/deployed_20261015/run_water_mapping_with_light.sh": {
-      "sha256": "3cb1eae4a0d39babb4dac46f8af101a2e416cac17517034cd84784474a34ac77",
+      "sha256": "350141d103b9dae449438668654db94e66ee21b2c5fb82ae440099dfce42d514",
       "installed_path": "/home/exocean/Desktop/机器人键盘遥控/.tools/run_water_mapping_with_light.sh"
     },
     "runtime/tools/check_private_runtime.py": {
-      "sha256": "99eab4a64b21b3890547df44de23645b567ddfb80f063308a1048b7384cfe2fb",
-      "installed_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-5521cdb72474104d317da57bd6c50b0ed084cf10c64c14775ec2fe7ba5a1429a/tools/check_private_runtime.py"
+      "sha256": "f8cc1365c76ca21e3e0cb060e0dc36d70cf15f9e0338ddbbbd309c730b4ba2e4",
+      "installed_path": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-0003cd4f818852d584959c6ee2602e92117d4c80ac194a42ad0e87051cf566b2/tools/check_private_runtime.py"
     }
   },
-  "previous_deployment_record": "deployment-before-rviz-admission.json",
-  "receipt_expiry_record": "receipt-expiry-check.json",
+  "previous_deployment_record": "deployment-before-receipt-resume.json",
   "full_entry_after_fix_validated": false,
-  "startup_camera_record": "startup-camera-check.json",
-  "receipt_resume_candidate_deployed": false,
-  "receipt_resume_candidate_record": "receipt-resume-candidate.json",
+  "receipt_resume_candidate_deployed": true,
+  "receipt_resume_candidate_record": "receipt-resume-check.json",
   "rollback_script_sha256": "8a80481da740a4f7e50112686fef342a6b668a3784ae9cf76b25f5cd0e959a81",
-  "rollback_transition_sha256": "8e0aff4b516b1bd5df0553fb04bb5eeeecd870b454774de399d92a4529cc80d2",
+  "rollback_transition_sha256": "a297fd63daa4ef43dc7b6261881a0f10d42093132c9b83b41accb909a83ed934",
   "final_binding_check": {
+    "schema": "wbrov.final-installed-check.v1",
+    "passed": true,
     "installed": {
-      "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh": "38f82f89a4d645829b3f3cb3d43c732fbf5128afa35b3695a06fa2e2c0528ed5",
-      "/home/exocean/Desktop/机器人键盘遥控/.tools/run_water_mapping_with_light.sh": "3cb1eae4a0d39babb4dac46f8af101a2e416cac17517034cd84784474a34ac77"
+      "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh": "c20ae67f294881b412cedcf5eaf767b8631361fb2358d7c2692f1ecff540a04e",
+      "/home/exocean/Desktop/机器人键盘遥控/.tools/run_water_mapping_with_light.sh": "350141d103b9dae449438668654db94e66ee21b2c5fb82ae440099dfce42d514"
     },
+    "runtime_manifest_sha256": "0b44f95e0df8fb4de1a78be3a25fe98c47f3742fdd8a24fbc5c24165399c498b",
+    "protected_files_unchanged": 8,
     "both_locks_available": true,
-    "candidate_deployed": false
+    "udp_3333_released": true,
+    "mapping_processes": [],
+    "light_shutdown": {
+      "phase": "off",
+      "pid": 3020620,
+      "start_ticks": "22395606",
+      "monotonic": 224127.131523872,
+      "deadline_monotonic": 224856.171295104,
+      "light_percent": 0,
+      "packets": {
+        "heartbeat": 16638,
+        "led_30": 3375,
+        "led_0": 6
+      },
+      "motion_packets_allowed": false,
+      "unlock_called": false,
+      "teleop_sha256": "2059378cabf4243a8d7efa2eeff82a48001258736f4368b53524ccc9bb8b2602",
+      "failures": [],
+      "physical_led_ack_available": false,
+      "valid_feedback_count": 6806,
+      "motion_gate_closed": true,
+      "motion_ever_activated": false
+    },
+    "installed_run": "/home/exocean/maps/rtabmap_calibration_ab/custom_20261008_154208",
+    "installed_camera_rviz_save_passed": true
+  },
+  "receipt_resume_record": "receipt-resume-check.json",
+  "installed_mapping_camera_rviz_save_test_passed": true,
+  "hardware_started_scope": "The atomic file cutover did not start hardware. The separately recorded candidate and installed acceptance runs used the real camera, RViz, and authorized lights.",
+  "historical_records": {
+    "receipt_expiry_record": "receipt-expiry-check.json",
+    "startup_camera_record": "startup-camera-check.json"
   }
 }

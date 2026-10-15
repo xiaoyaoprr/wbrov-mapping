@@ -3,6 +3,7 @@
 #include <array>
 #include <algorithm>
 #include <cmath>
+#include <cstdlib>
 #include <cstdint>
 #include <mutex>
 #include <string>
@@ -24,6 +25,9 @@ public:
         bool finiteMotion = false;
         bool covarianceValid = false;
         bool recoveryGeometry = false;
+        // Authenticated F2M interval since its previous successful measured pose.
+        // Zero after initialization/reset, or unavailable, cannot prove a bridge.
+        long long measuredIntervalNs = 0;
         bool usable() const { return !lost && finiteMotion && covarianceValid && (visualGeometry || depthGeometry); }
     };
     struct Ticket { std::uint64_t generation; long long frameNs; };
@@ -130,7 +134,19 @@ public:
         if(sourceNs<=0 || arrivalNs<=0 || sourceNs<=sourceNs_) return false;
         // Every unique packet advances the high-water mark; stale packets never
         // acquire confidence or refresh a previous valid registration.
-        if(sourceNs_>0 && (arrivalNs<arrivalNs_ || sourceNs-sourceNs_>MAX_AGE_NS)) {++localSerial_;pauseLocked("measurement gap");}
+        if(sourceNs_>0 && (arrivalNs<arrivalNs_ || sourceNs-sourceNs_>MAX_AGE_NS)) {
+            const long long gap=sourceNs-sourceNs_;
+            // Sampling can pause while F2M still measures a transform from the
+            // exact preceding successful pose. Require that explicit interval,
+            // measured geometry on both sides, and a bounded gap. Missing DDS
+            // samples, reset/initialization (interval zero), bad geometry and
+            // longer blind intervals retain the isolated-submap behavior.
+            const bool measuredBridge=arrivalNs>=arrivalNs_ && gap>MAX_AGE_NS && gap<=750000000LL &&
+                evidence_.usable() && evidence.usable() && evidence.visualGeometry && evidence.recoveryGeometry &&
+                evidence.measuredIntervalNs>0 && std::llabs(evidence.measuredIntervalNs-gap)<=1000000LL;
+            if(measuredBridge)pauseReceiptLocked("bounded measured F2M interval; observing before resume");
+            else {++localSerial_;pauseLocked("unverified measurement gap");}
+        }
         sourceNs_=sourceNs;arrivalNs_=arrivalNs;evidence_=evidence;
         if(rosNs<sourceNs || rosNs-sourceNs>MAX_AGE_NS) {
             // Receipt latency revokes write/pose permission, not the measured

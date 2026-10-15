@@ -1,6 +1,6 @@
 {
   "schema": "wbrov.deploy8-preflight.v1",
-  "runtime": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-58658fb9aeb5265e20fc9dd7c7023ab4e4742cfab80840d2e6aeea2239bc1182",
+  "runtime": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-0003cd4f818852d584959c6ee2602e92117d4c80ac194a42ad0e87051cf566b2",
   "steps": [
     {
       "name": "failure_reporting",
@@ -10,7 +10,7 @@
     {
       "name": "recovery_admission",
       "returncode": 0,
-      "log_sha256": "08ebb528bf44f50ef62f5d72a8faecad6750af137e06dd4f6ddb4f0bd7da7cd1"
+      "log_sha256": "20d0ef191041a25d1e0f5c7cc168153033c3519f35eb69de6cb4046650930c71"
     },
     {
       "name": "no_tag_save",
@@ -35,17 +35,17 @@
     {
       "name": "runtime_tree",
       "returncode": 0,
-      "log_sha256": "7fce7eed7ee2ebfd1f6b165e821a76f7473e19f4114c2992e485df00dab23a9f"
+      "log_sha256": "24b9c944e8b4c8f3221e3434fcb4fed9f4b7a5ff4919d87ac927ccff0ee663b7"
     },
     {
       "name": "landmark_guard",
       "returncode": 0,
-      "log_sha256": "4f92e0dc9518a4530f6aeee43ddec94531a2ede02b6e4648b1ad9feee9ec76c0"
+      "log_sha256": "eed484c3cebb96c7c97c26fb1816a4ecde9c5e68a64cf094a8be9719f7f6b153"
     },
     {
       "name": "camera_dimensions",
       "returncode": 0,
-      "log_sha256": "7edbe7a658a14ea190cbbd3b2a6b81f4814fdfc77e2a5fde87abff6022d5c8d7"
+      "log_sha256": "709ee4c2a548d61b64cc98cc5556bd3a6fa9cd11c42062684bb240036c1f11c8"
     },
     {
       "name": "supervisor_failure",
@@ -55,7 +55,7 @@
     {
       "name": "outer_readonly",
       "returncode": 0,
-      "log_sha256": "d80cf2f509eff743efb0faa73e3eaecaa6a4eabaacd42c86f2eb34b29a63e3f0"
+      "log_sha256": "2e4c5a5e91f5ffab1b1f98e350ac3cc543d31c3fb05be130d248f13b8a7139f8"
     }
   ],
   "hardware_started": false,
@@ -63,7 +63,7 @@
   "display_source": "existing X11 socket; no GUI started",
   "status": "passed",
   "candidate_hashes": {
-    "start_rtabmap_calib_ab.sh": "0b21c88ff5c20da7fe52936155cb0f518f58b9f5cf312f7cf510c53918e7a8ee",
-    "run_water_mapping_with_light.sh": "e26502ceebd18548b1692d557cae6f0987f6707fb78bd0ca36535228c93db361"
+    "start_rtabmap_calib_ab.sh": "c20ae67f294881b412cedcf5eaf767b8631361fb2358d7c2692f1ecff540a04e",
+    "run_water_mapping_with_light.sh": "350141d103b9dae449438668654db94e66ee21b2c5fb82ae440099dfce42d514"
   }
 }

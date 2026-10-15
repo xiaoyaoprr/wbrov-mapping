@@ -138,6 +138,17 @@ int main(int argc,char ** argv) {
         const auto resumedNs=rclcpp::Time(good.header.stamp).nanoseconds();
         require(g.resumeContinuousReceipt(core.getResetEpoch(),true,resumedNs,steady(),w->now().nanoseconds()),"unbroken same-frame delivery recovery stayed locked");
         require(g.mainMapAllowed(core.getResetEpoch(),steady(),w->now().nanoseconds()),"fresh same-frame recovery did not reopen writes");
+        const auto beforeGap=g.localContinuitySerial();
+        std::this_thread::sleep_for(std::chrono::milliseconds(360));rclcpp::spin_some(w);
+        auto bridged=sample(*w);const auto bridgedNs=rclcpp::Time(bridged.header.stamp).nanoseconds();
+        bridged.interval=static_cast<float>(static_cast<double>(bridgedNs-resumedNs)/1e9);
+        require(observe(bridged),"measured long interval ignored");
+        require(g.localContinuitySerial()==beforeGap,"Wrapper discarded the exact F2M measured interval");
+        require(!g.mainMapAllowed(core.getResetEpoch(),steady(),w->now().nanoseconds()),"measured interval bypassed observation pause");
+        for(unsigned i=0;i<6;++i) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(110));good=sample(*w);require(observe(good),"post-gap sample ignored");
+        }
+        require(g.resumeContinuousReceipt(core.getResetEpoch(),true,rclcpp::Time(good.header.stamp).nanoseconds(),steady(),w->now().nanoseconds()),"measured gap failed to resume after observation");
         std::this_thread::sleep_for(std::chrono::milliseconds(5));auto lost=sample(*w);lost.lost=true;
         require(observe(lost),"lost packet ignored");
         require(!g.coreValidated(oldTicket,core.getResetEpoch(),true,true,steady(),w->now().nanoseconds()),"in-flight preloss result rearmed gate");
