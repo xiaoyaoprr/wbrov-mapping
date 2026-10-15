@@ -137,6 +137,7 @@ def make_consumer(node, config, emit):
             self.receipts = OrderedDict()
             self.node_receipts = {}
             self.bindings = {}
+            self.last_receipt_stamp=0;self.last_receipt_node=0;self.last_receipt_epoch=-1
             self.counts = {'bound': 0, 'rejected': 0, 'duplicate': 0, 'expired': 0}
             self.stopped = False
             self.reported_compromise = False
@@ -192,7 +193,14 @@ def make_consumer(node, config, emit):
                     self.counts['duplicate'] += 1
                     self.event('duplicate_receipt', node_id=key)
                     return
+                # Core accepts only strictly increasing source stamps and new
+                # signature IDs. After cache eviction, an old receipt must not
+                # be admitted again as fresh or with a different identity.
+                require(ns>self.last_receipt_stamp and key>self.last_receipt_node,
+                        'retired or nonmonotonic Core receipt')
                 require(len(self.receipts) < 4096, 'receipt capacity reached')
+                self.last_receipt_stamp=ns;self.last_receipt_node=key
+                self.last_receipt_epoch=int(receipt['reset_epoch'])
                 self.node_receipts[key] = deepcopy(receipt)
                 self.receipts[ns] = dict(receipt=deepcopy(receipt), raw_sha256=hashlib.sha256(message.data.encode()).hexdigest(),
                                          source_gid=source, arrival=time.monotonic())
@@ -206,6 +214,8 @@ def make_consumer(node, config, emit):
                 source = self.sources.check('pixels', incoming=info)
                 pixels = measured_pixels(message.data)
                 ns = pixels['image_stamp_ns']
+                require(ns in self.receipts or ns>self.last_receipt_stamp,
+                        'pixels reference a retired accepted image')
                 require(pixels['camera_frame'] == config['camera_frame'], 'wrong managed pixel frame')
                 if not pixels['observations']:
                     self.event('no_measured_tags', image_stamp_ns=str(ns))

@@ -1,0 +1,409 @@
+{
+  "schema": "wbrov.repository-candidate-sources.v1",
+  "baseline_commit": "234b053d9dd7b0ae5101a907577de6dcd773447c",
+  "source_archive": "source_8ba1c4732d33.zip",
+  "source_archive_sha256": "6b8a50125333574029d5d6202a15e9e3cbb4467c08277107c7af821742e02dac",
+  "files": {
+    "src/rtabmap_core/corelib/src/Rtabmap.cpp": {
+      "archive_path": "core/Rtabmap.cpp",
+      "sha256": "87d4848b4222ac7076c475cc8eabbfab0cbdf7b987d57c4f8e8e78d53d4fad08",
+      "baseline_sha256": "0923313c0fdec9bc746e346016415c7bd2d0549b230c2279e383db8261037ddc",
+      "changed": true
+    },
+    "src/rtabmap_core/corelib/src/EarlyGravityCertificate.h": {
+      "archive_path": "core/EarlyGravityCertificate.h",
+      "sha256": "143cf85afb1503bcdaf25a91abdf7baaea27f689c11ee9f65f801f8606715bca",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "src/rtabmap_core/corelib/src/optimizer_trace.inc": {
+      "archive_path": "core/optimizer_trace.inc",
+      "sha256": "ca20901de5d2856aa0e45586c7f9e4cbfdd595ed84dd435d9d0bcd66518adc53",
+      "baseline_sha256": "ca20901de5d2856aa0e45586c7f9e4cbfdd595ed84dd435d9d0bcd66518adc53",
+      "changed": false
+    },
+    "src/rtabmap_core/corelib/src/safe_gravity_residual.inc": {
+      "archive_path": "core/safe_gravity_residual.inc",
+      "sha256": "ac88ab9dbfcfb934a32ee840ad1a793d1282c195a44a949274801e110b070a24",
+      "baseline_sha256": "ac88ab9dbfcfb934a32ee840ad1a793d1282c195a44a949274801e110b070a24",
+      "changed": false
+    },
+    "src/rtabmap_core/corelib/src/early_component_gate.inc": {
+      "archive_path": "core/early_component_gate.inc",
+      "sha256": "b48274b3ad7c6e61a0dda7dfbe5e3630f5d54c6a636cf00176e96335af152713",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "src/rtabmap_core/corelib/src/early_shadow_guard.inc": {
+      "archive_path": "core/early_shadow_guard.inc",
+      "sha256": "240682e319bc57cb45f840c874e02b7d737e2d87fbd429f11941bace1a2192d4",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "src/rtabmap_core/corelib/src/recovery_geometry.inc": {
+      "archive_path": "core/recovery_geometry.inc",
+      "sha256": "c28a5c4b7ccaa9f533ac18da9056939f024fde241b31b7de017df265a3d43992",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "src/rtabmap_core/corelib/src/visual_recovery.inc": {
+      "archive_path": "core/visual_recovery.inc",
+      "sha256": "7088ef53d0b13a6634af9e79b018f684dd8ea217a34f0287339860f60f2cde62",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "src/rtabmap_core/corelib/include/rtabmap/core/DBDriver.h": {
+      "archive_path": "core/headers/rtabmap/core/DBDriver.h",
+      "sha256": "b356683ffbd4201721e10a6665880862cc699d37794bb9527abbd2ec44b933eb",
+      "baseline_sha256": "b356683ffbd4201721e10a6665880862cc699d37794bb9527abbd2ec44b933eb",
+      "changed": false
+    },
+    "src/rtabmap_core/corelib/include/rtabmap/core/DBDriverSqlite3.h": {
+      "archive_path": "core/headers/rtabmap/core/DBDriverSqlite3.h",
+      "sha256": "0a0c42db53cbeaffe4af958a0e6eb0d092108274f1425998628ac2b15de8862c",
+      "baseline_sha256": "0a0c42db53cbeaffe4af958a0e6eb0d092108274f1425998628ac2b15de8862c",
+      "changed": false
+    },
+    "src/rtabmap_core/corelib/include/rtabmap/core/ImageInputReceipt.h": {
+      "archive_path": "core/headers/rtabmap/core/ImageInputReceipt.h",
+      "sha256": "9c0a7fb9d4775d4b5184b3114b3eb40b0e94f3d29f0484325df17e182de04cfe",
+      "baseline_sha256": "9c0a7fb9d4775d4b5184b3114b3eb40b0e94f3d29f0484325df17e182de04cfe",
+      "changed": false
+    },
+    "src/rtabmap_core/corelib/include/rtabmap/core/Memory.h": {
+      "archive_path": "core/headers/rtabmap/core/Memory.h",
+      "sha256": "99a6c1d70cfcc6f8f0537040440962b0625bead8d4eb51677219443d56510c23",
+      "baseline_sha256": "99a6c1d70cfcc6f8f0537040440962b0625bead8d4eb51677219443d56510c23",
+      "changed": false
+    },
+    "src/rtabmap_core/corelib/include/rtabmap/core/Parameters.h": {
+      "archive_path": "core/headers/rtabmap/core/Parameters.h",
+      "sha256": "e1c1dd63bc8be54f9a3033ce8caf0c1671c27bdeb2ba43c0951ef8216e9e087b",
+      "baseline_sha256": "e1c1dd63bc8be54f9a3033ce8caf0c1671c27bdeb2ba43c0951ef8216e9e087b",
+      "changed": false
+    },
+    "src/rtabmap_core/corelib/include/rtabmap/core/Rtabmap.h": {
+      "archive_path": "core/headers/rtabmap/core/Rtabmap.h",
+      "sha256": "6df7a708295d8ab9c3b0f0daf344f291a337d49f9ae7071453940cf3fc690c0d",
+      "baseline_sha256": "8e37f5e7a91496ace9d8a172e7bfec0cee1e4860fb06a9fc2de86e7179d5c0b1",
+      "changed": true
+    },
+    "src/rtabmap_core/corelib/include/rtabmap/core/optimizer/OptimizerG2O.h": {
+      "archive_path": "core/headers/rtabmap/core/optimizer/OptimizerG2O.h",
+      "sha256": "75ff6492cb7016e1f3f1a4d0012ad33000d9334da5eb9b2a1ba1da0e9cf4f752",
+      "baseline_sha256": "75ff6492cb7016e1f3f1a4d0012ad33000d9334da5eb9b2a1ba1da0e9cf4f752",
+      "changed": false
+    },
+    "src/rtabmap_ros/rtabmap_slam/src/CoreWrapper.cpp": {
+      "archive_path": "wrapper/candidate/src/CoreWrapper.cpp",
+      "sha256": "a81a7a86f9e6de56271e40246ecaf47169ed90f4abc476511f02480da4661730",
+      "baseline_sha256": "de41a6608d3d47b4ce2763159f0594cecfb4439f328f853ced63595498e92a05",
+      "changed": true
+    },
+    "src/rtabmap_ros/rtabmap_slam/include/rtabmap_slam/CoreWrapper.h": {
+      "archive_path": "wrapper/candidate/include/rtabmap_slam/CoreWrapper.h",
+      "sha256": "7628d97bf8a225451d2fb33f97d8e3bd79baf8ddb672daef032e4b8f51a68362",
+      "baseline_sha256": "268ddfe5263c30696293dedebb650df5b9671786a3a838639c84df0610a9f0b8",
+      "changed": true
+    },
+    "src/rtabmap_ros/rtabmap_slam/include/rtabmap_slam/GlobalPublicationGate.h": {
+      "archive_path": "wrapper/candidate/include/rtabmap_slam/GlobalPublicationGate.h",
+      "sha256": "daedd4e70da4b7d207285d8f303ba9e114b8b006fe5f7e46ed1e8f528637bf51",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "src/rtabmap_ros/rtabmap_slam/include/rtabmap_slam/JumpQuarantineGate.h": {
+      "archive_path": "wrapper/candidate/include/rtabmap_slam/JumpQuarantineGate.h",
+      "sha256": "a24d09c476743889db76171ef5f19393ad7c053549441de48eb9c4bb9236e0ca",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "src/rtabmap_ros/rtabmap_slam/include/rtabmap_slam/ManagedImuEpochBuffer.h": {
+      "archive_path": "wrapper/candidate/include/rtabmap_slam/ManagedImuEpochBuffer.h",
+      "sha256": "7b72f4071377c8e66bdc4d2c6daaab654be0802cdeba19142022575aa2a5d22f",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "src/rtabmap_ros/rtabmap_slam/include/rtabmap_slam/MappingContinuityGate.h": {
+      "archive_path": "wrapper/candidate/include/rtabmap_slam/MappingContinuityGate.h",
+      "sha256": "d5f43d0bc9585c46b15eea755c1b3125b16b4f1425c86aedf11fbb26324d2a60",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "src/rtabmap_ros/rtabmap_slam/include/rtabmap_slam/SubmapPublisher.h": {
+      "archive_path": "wrapper/candidate/include/rtabmap_slam/SubmapPublisher.h",
+      "sha256": "3148830766e326c564ffee354473a2445ad990f56c14431480a7aee539abc797",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "src/rtabmap_core/corelib/src/odometry/OdometryF2M.cpp": {
+      "archive_path": "frontend/OdometryF2M.cpp",
+      "sha256": "6529a78d285aece8408795384c7b0f1ddb5956a2ad966facf018fcceadd80bbc",
+      "baseline_sha256": "4aa40cc6e02ad3cffb7f1e8da27bde6815a00dda90d2fe511887c5504a68c172",
+      "changed": true
+    },
+    "src/rtabmap_core/corelib/src/odometry/DepthGeometryRecovery.h": {
+      "archive_path": "frontend/DepthGeometryRecovery.h",
+      "sha256": "ac904ee5a0e3c9c6de35c4b049f39828f79636a92a3d4b0c81f59bd2cb17c76a",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "runtime/libexec/wbrov_corner_recovery/consumer.py": {
+      "archive_path": "tag/consumer.py",
+      "sha256": "6b7b4b44526c3e9b472b0772531ec4292725ecbe83e7c30d1c27354d8dcee36f",
+      "baseline_sha256": "90f113846771fa9cbe3f698f9c2392e248f4cbaa223383fb1273f042be7fad12",
+      "changed": true
+    },
+    "runtime/libexec/wbrov_corner_recovery/live_bridge.py": {
+      "archive_path": "tag/live_bridge.py",
+      "sha256": "bab7692e263412ffd01c87a8db0849d934c217301fb4025b434e9521db62c8a2",
+      "baseline_sha256": "39717307a0266db0af6beb582f9614159f148507b28adff05d97b6b2f900fad5",
+      "changed": true
+    },
+    "runtime/libexec/wbrov_corner_recovery/bridge_status.py": {
+      "archive_path": "tag/bridge_status.py",
+      "sha256": "fbb02cf5795781f10b53f3099dcd2649944bde6a53f9175a14ef8ad843adc78f",
+      "baseline_sha256": "a60531e90802895f66bd3291deaa79bc17de586ab6052b0fde159fa0cdfe5ad0",
+      "changed": true
+    },
+    "runtime/libexec/wbrov_corner_recovery/tag_visualization.py": {
+      "archive_path": "tag/tag_visualization.py",
+      "sha256": "c12c11fc440552e35dc2937ac1824d3634821968041761c765eab573ed7215df",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "runtime/libexec/wbrov_corner_recovery/tag_visualization_geometry.py": {
+      "archive_path": "tag/tag_visualization_geometry.py",
+      "sha256": "04af40f647f432cdaac644a42d93db31295ba853d4189001c42394f9beb14238",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "runtime/libexec/wbrov_corner_recovery/test_observing_ack.py": {
+      "archive_path": "tag/test_observing_ack.py",
+      "sha256": "b73b42aacb7418d6b1c6d22c73a0fd842addc1d8b733073dbc5c812b0e75c394",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "runtime/libexec/wbrov_corner_recovery/test_tag_visualization.py": {
+      "archive_path": "tag/test_tag_visualization.py",
+      "sha256": "f842520cae95af6931bf3fcb3615773a463876be6c21a32187bf763de50cc70f",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "src/visualization/graph_display_geometry.py": {
+      "archive_path": "guidance/graph_display_geometry.py",
+      "sha256": "5bd28861322e8c98afedd9d61b313a2f740d143ebfd5e48429f39ba7025977df",
+      "baseline_sha256": "5bd28861322e8c98afedd9d61b313a2f740d143ebfd5e48429f39ba7025977df",
+      "changed": false
+    },
+    "src/visualization/rtabmap_graph_display.py": {
+      "archive_path": "guidance/rtabmap_graph_display.py",
+      "sha256": "125772c67130460b82a6f6a38e0a764d41995314c327a7975ec709471403c238",
+      "baseline_sha256": "8fd48751b2b94ed6eba8e490b0d50fd59b8e5dc14900b30811cd9f8582e8901e",
+      "changed": true
+    },
+    "src/visualization/rtabmap_dense_graph_optimized.rviz": {
+      "archive_path": "guidance/rtabmap_dense_graph_optimized.rviz",
+      "sha256": "86cf66fcc8f4f8c85b1653dbcd5dd9c93876ff807a1b92e779d598471e8b7345",
+      "baseline_sha256": "10681fb0f960810a366864474e8b1d4d6e0939a2da1c5b846a14332b20cff139",
+      "changed": true
+    },
+    "src/visualization/rtabmap_submap_display.py": {
+      "archive_path": "guidance/rtabmap_submap_display.py",
+      "sha256": "843a002677a2cba18b796f43815e57ff3b0956fd47c7e1929864db0d6e03efdc",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "src/visualization/submap_display_geometry.py": {
+      "archive_path": "guidance/submap_display_geometry.py",
+      "sha256": "21827d469bde4ab74e2892b79e7819ffb9b33d1e982274df6608cd7bd3bf69b0",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "src/visualization/submap_rviz_config.py": {
+      "archive_path": "guidance/submap_rviz_config.py",
+      "sha256": "b07466ecf249349c9048391f834e6f49ee8a21d8e269b7781a667c88a21e791a",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "src/visualization/test_submap_display_geometry.py": {
+      "archive_path": "guidance/test_submap_display_geometry.py",
+      "sha256": "fb8acabf14418d3fcac6227ea7e5b1b8a45b8e0f661b6dbe64f9bc365b792ce6",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "src/visualization/test_submap_display_ros.py": {
+      "archive_path": "guidance/test_submap_display_ros.py",
+      "sha256": "d4cfaa722fedc6c85cf6213ff0f2f6a208290fe4da32ead3792ce9d147f39d5e",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "tests/native/test_early_certificate.cpp": {
+      "archive_path": "core/test_early_certificate.cpp",
+      "sha256": "ea495643e0ab99afe7c18c2a004876b20d2ed641703555ceb4c45735c38fdb11",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "tests/native/test_visual_recovery_native.cpp": {
+      "archive_path": "core/test_visual_recovery_native.cpp",
+      "sha256": "b8fac5e5c07b7c664df07056f708f8364cf7609f76559cef903688240ba33d39",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "tests/native/ObservationDiagnostic.h": {
+      "archive_path": "core/ObservationDiagnostic.h",
+      "sha256": "5f5d886ced53f78669f481422e1a5101597c48f1552fc8bf40431f3c8b792c60",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "tests/native/test_depth_geometry.cpp": {
+      "archive_path": "frontend/test_depth_geometry.cpp",
+      "sha256": "6139adbe48ff798d5450bbd14f14ff5de7f839f692525c3f1150505c127bbf4b",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "tests/native/test_global_publication_gate.cpp": {
+      "archive_path": "wrapper/tests/test_global_publication_gate.cpp",
+      "sha256": "20132e2b36b2a3ca1626683d26a8490cc646d1db5ac4c1c2ed4ec8178172a6be",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "tests/native/test_jump_gate.cpp": {
+      "archive_path": "wrapper/tests/test_jump_gate.cpp",
+      "sha256": "0b843675406782fdda291c506c4a0f84e6d58bbe8b14791af5e64f824581f0c8",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "tests/native/test_mapping_continuity_gate.cpp": {
+      "archive_path": "wrapper/tests/test_mapping_continuity_gate.cpp",
+      "sha256": "be82f96b884db8815c127fdae6930fe54601e9c931cb023049ece9f3b33a2862",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "tests/native/wrapper_mapping_continuity_native_test.cpp": {
+      "archive_path": "wrapper/tests/wrapper_mapping_continuity_native_test.cpp",
+      "sha256": "8e817b1cf3dd0c69987c5f9e15974ce0f46188d35e65fb6ef6f6c93e0a9aeebd",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "tests/native/wrapper_quarantine_native_test.cpp": {
+      "archive_path": "wrapper/tests/wrapper_quarantine_native_test.cpp",
+      "sha256": "e5101b4b3dd57b0038ff348b14ecd577be026fc4300e9f9718e3f16f9808104c",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "runtime/libexec/wbrov_corner_recovery/core_pixel_consumer.py": {
+      "archive_path": "tag/baseline/core_pixel_consumer.py",
+      "sha256": "6a003bbf0e60163bd77ee10775f0690b06818fd1325ccdb39cc9bba0b7f85f80",
+      "baseline_sha256": "445ef5b326abddd1aaf82e7e1bb14d0466af145c424f78be2a15b4c6fa21ba42",
+      "changed": true
+    },
+    "runtime/libexec/wbrov_corner_recovery/managed_graph_state.py": {
+      "archive_path": "tag/baseline/managed_graph_state.py",
+      "sha256": "896826dfd4cd0c119513bb82fed10731ad70c5c638547ab30114722dbeea6de1",
+      "baseline_sha256": "347fa9a404728b9a8d188f9f5d8abf5791f44d0b81e65cd6b04021f993dcc47a",
+      "changed": true
+    },
+    "runtime/libexec/wbrov_corner_recovery/measured_bridge.py": {
+      "dependency_source": "gauge_alignment_20260923/tag/measured_bridge.py",
+      "authority": "native runtime receipt",
+      "sha256": "b035c7b9a1cdb8979e7c9d4011a20cf70c1b78a7e6993fdc90cbb3900d1030fa",
+      "baseline_sha256": "0ac9767830d58f5ffac43542901446e7bcd975ff671c7b950d98bf2ff6cb4473",
+      "changed": true
+    },
+    "runtime/libexec/wbrov_corner_recovery/startup_sources.py": {
+      "dependency_source": "map_retry_20260923/tag/startup_sources.py",
+      "authority": "native runtime receipt",
+      "sha256": "10305a90c0bd9be6d3c48122d56525b3353d74556ad566341900c6e41b760da7",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "runtime/libexec/wbrov_corner_recovery/deferred_retry_window.py": {
+      "dependency_source": "frontend_startup_contract_20261014/candidate/mapping/deferred_retry_window.py",
+      "authority": "native runtime receipt",
+      "sha256": "a11da7ae8a81c91879d6070a0149bef8a2b4a7863c6149a727a66bd8c93e2e7e",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "runtime/libexec/wbrov_corner_recovery/history_retention.py": {
+      "dependency_source": "canonical_tag_20260923/tag/history_retention.py",
+      "authority": "native runtime receipt",
+      "sha256": "b27ae42ad1637dd85d42cd010dcd8a9956462b76dc0d3f379817c27a9eeba825",
+      "baseline_sha256": null,
+      "changed": true
+    },
+    "runtime/libexec/wbrov_corner_recovery/reference_policy.py": {
+      "dependency_source": "continuing_replay_20260923/baseline/reference_policy.py",
+      "authority": "native runtime receipt",
+      "sha256": "f2625123ef0c55743100d6b3c9d777c3bd3f894008fdc3608c322c5ceac0f2e6",
+      "baseline_sha256": null,
+      "changed": true
+    }
+  },
+  "dependency_pins_checked": 28,
+  "native_runtime_python_files": {
+    "src/visualization/rtabmap_graph_display.py": "125772c67130460b82a6f6a38e0a764d41995314c327a7975ec709471403c238",
+    "src/visualization/graph_display_geometry.py": "5bd28861322e8c98afedd9d61b313a2f740d143ebfd5e48429f39ba7025977df",
+    "runtime/libexec/safe_reloc_engine_core.py": "314314f138e4057c1b5e074cc31fc98e3c3652bfab26cb0fb9551e3d6464f555",
+    "runtime/libexec/write_process_identity.py": "06b99b3f26955770a6bb3cfb7c6054f8e2fef6655c90ce513e4371d9161143f5",
+    "runtime/libexec/safe_reloc_ipc_engine.py": "e0568a37c397f99e1ae492119c6f3a41f763708ce4122e47024fa5e1c2611ba9",
+    "runtime/libexec/wbrov_corner_recovery/core_pixel_consumer.py": "6a003bbf0e60163bd77ee10775f0690b06818fd1325ccdb39cc9bba0b7f85f80",
+    "runtime/libexec/wbrov_corner_recovery/tag_pixel_record.py": "d0dcf6bdc59f8f9522cacfa64bb7087c8ebb9e6ecbfac574632a38034f73db93",
+    "runtime/libexec/wbrov_corner_recovery/consumer.py": "6b7b4b44526c3e9b472b0772531ec4292725ecbe83e7c30d1c27354d8dcee36f",
+    "runtime/libexec/wbrov_corner_recovery/render_config.py": "74957100aa6f959868b55efa5c8effadb536342f7774e95fb1099aa3a9ca620e",
+    "runtime/libexec/wbrov_corner_recovery/verified_corners.py": "e0a54d003d6f987e55e45f54cafea538a58ebb06e563e9daf1d19e4265bb9b72",
+    "runtime/libexec/wbrov_corner_recovery/verified_pixel_observer.py": "b8114d17f2da6a3115960d6c34dd0d49df09c696682176698add679002cb7f3d",
+    "runtime/libexec/wbrov_corner_recovery/measured_bridge.py": "b035c7b9a1cdb8979e7c9d4011a20cf70c1b78a7e6993fdc90cbb3900d1030fa",
+    "runtime/libexec/wbrov_corner_recovery/managed_graph_state.py": "896826dfd4cd0c119513bb82fed10731ad70c5c638547ab30114722dbeea6de1",
+    "runtime/libexec/wbrov_corner_recovery/bridge_status.py": "fbb02cf5795781f10b53f3099dcd2649944bde6a53f9175a14ef8ad843adc78f",
+    "runtime/libexec/wbrov_corner_recovery/decoded_pixel_metadata.py": "acb9f4778160b7fadac4db7fa1a3443a5f08cd238f634aba7a02704aab903bfc",
+    "runtime/libexec/wbrov_corner_recovery/core_pixel_join.py": "5b0bc22205258afde156ce3e1e4d0047fbddedb8f159b2a76380428c04db8d4d",
+    "runtime/libexec/wbrov_corner_recovery/live_bridge.py": "bab7692e263412ffd01c87a8db0849d934c217301fb4025b434e9521db62c8a2",
+    "runtime/libexec/wbrov_corner_recovery/edge_refinement.py": "2b030f5a6948290d62cb972b9b21be9df26f2de99d588e59ffc6d4cf34abdb33",
+    "runtime/libexec/wbrov_corner_recovery/message_info_executor.py": "fa4658355deb48d46e47595059ed151087322017bc3148c7ad64cdf6806797f0",
+    "runtime/libexec/wbrov_corner_recovery/startup_sources.py": "10305a90c0bd9be6d3c48122d56525b3353d74556ad566341900c6e41b760da7",
+    "runtime/libexec/wbrov_corner_recovery/deferred_retry_window.py": "a11da7ae8a81c91879d6070a0149bef8a2b4a7863c6149a727a66bd8c93e2e7e",
+    "runtime/libexec/wbrov_corner_recovery/history_retention.py": "b27ae42ad1637dd85d42cd010dcd8a9956462b76dc0d3f379817c27a9eeba825",
+    "runtime/libexec/wbrov_corner_recovery/reference_policy.py": "f2625123ef0c55743100d6b3c9d777c3bd3f894008fdc3608c322c5ceac0f2e6",
+    "src/visualization/rtabmap_submap_display.py": "843a002677a2cba18b796f43815e57ff3b0956fd47c7e1929864db0d6e03efdc",
+    "src/visualization/submap_display_geometry.py": "21827d469bde4ab74e2892b79e7819ffb9b33d1e982274df6608cd7bd3bf69b0",
+    "src/visualization/submap_rviz_config.py": "b07466ecf249349c9048391f834e6f49ee8a21d8e269b7781a667c88a21e791a",
+    "runtime/libexec/wbrov_corner_recovery/tag_visualization.py": "c12c11fc440552e35dc2937ac1824d3634821968041761c765eab573ed7215df",
+    "runtime/libexec/wbrov_corner_recovery/tag_visualization_geometry.py": "04af40f647f432cdaac644a42d93db31295ba853d4189001c42394f9beb14238"
+  },
+  "runtime_receipt_sha256": "dbc56b4b3457405084641d9cf690b2d995bb5baf03c6b5fa42cac2d307cb9b49",
+  "production_deployed": false,
+  "field_validated": false,
+  "replay_sources": {
+    "tests/recorded_replay/replay_audit.py": {
+      "candidate_path": "replay/replay_audit.py",
+      "candidate_sha256": "3a632426b2eed23ebcb70cf35a317e6f87b08c9f33d5cef8fb0633529a40c405",
+      "repository_sha256": "3a632426b2eed23ebcb70cf35a317e6f87b08c9f33d5cef8fb0633529a40c405",
+      "repository_adaptation": null
+    },
+    "tests/recorded_replay/replay_single_map.py": {
+      "candidate_path": "replay/replay_single_map.py",
+      "candidate_sha256": "8b7a5d5465488b2243915906ad953e564e6f49982f085fe1c1a9edae2eaa044a",
+      "repository_sha256": "8b7a5d5465488b2243915906ad953e564e6f49982f085fe1c1a9edae2eaa044a",
+      "repository_adaptation": null
+    },
+    "tests/recorded_replay/submap_replay_audit.py": {
+      "candidate_path": "replay/submap_replay_audit.py",
+      "candidate_sha256": "b67d9881c34087185b59c1a78683f712b135ff8a96fea80530c9f2e5f2e32660",
+      "repository_sha256": "b67d9881c34087185b59c1a78683f712b135ff8a96fea80530c9f2e5f2e32660",
+      "repository_adaptation": null
+    },
+    "tests/recorded_replay/test_replay_audit.py": {
+      "candidate_path": "replay/test_replay_audit.py",
+      "candidate_sha256": "1b993dd0faaf73c8d700f87f15ff3437bdadfdc4ea0d93c529065c4a494daaaf",
+      "repository_sha256": "1b993dd0faaf73c8d700f87f15ff3437bdadfdc4ea0d93c529065c4a494daaaf",
+      "repository_adaptation": null
+    },
+    "tests/recorded_replay/test_submap_replay_audit.py": {
+      "candidate_path": "replay/test_submap_replay_audit.py",
+      "candidate_sha256": "b2f9e8ad0015839e37457d01169247350d62040152e4083f1bec84490a637702",
+      "repository_sha256": "cd02e1d762e724800117a746d371866b84addc8a6c78b12a7c3f3d19fc0ffd84",
+      "repository_adaptation": "Syntax-only test follows repository layout and checks the repository test entry point."
+    }
+  }
+}

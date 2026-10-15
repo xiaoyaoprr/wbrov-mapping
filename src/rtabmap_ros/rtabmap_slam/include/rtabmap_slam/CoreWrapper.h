@@ -29,6 +29,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define COREWRAPPER_H_
 
 #include <rtabmap_slam/visibility.h>
+#include <rtabmap_slam/JumpQuarantineGate.h>
+#include <rtabmap_slam/GlobalPublicationGate.h>
+#include <rtabmap_slam/MappingContinuityGate.h>
+#include <rtabmap_slam/SubmapPublisher.h>
+#include <functional>
 #include <rclcpp/rclcpp.hpp>
 #include <rmw/types.h>
 #include <condition_variable>
@@ -48,6 +53,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <std_msgs/msg/u_int64.hpp>
 #include <sensor_msgs/msg/nav_sat_fix.hpp>
 #include <sensor_msgs/msg/imu.hpp>
+#include <sensor_msgs/msg/image.hpp>
 #include <nav_msgs/srv/get_map.hpp>
 #include <nav_msgs/srv/get_plan.hpp>
 #include <geometry_msgs/msg/pose_with_covariance_stamped.hpp>
@@ -152,6 +158,8 @@ public:
 
 private:
 	bool odomUpdate(const nav_msgs::msg::Odometry & odomMsg, rclcpp::Time stamp);
+	bool odomUpdate(const nav_msgs::msg::Odometry & odomMsg, rclcpp::Time stamp,
+			const rtabmap_msgs::msg::OdomInfo * authenticatedRgbdInfo);
 	bool odomTFUpdate(const std::string & odomFrameId, const rclcpp::Time & stamp); // TF odom
 
 	// Callback called from sync thread
@@ -362,6 +370,50 @@ private:
 	void loadParameters(const std::string & configFile, rtabmap::ParametersMap & parameters);
 	void saveParameters(const std::string & configFile);
 
+	// Only processingCallbackGroup_ may query Core frame registration.
+	bool globalMapPublicationAllowed() const;
+	void withFreshGlobalPose(const std::function<void()> & publish);
+	GlobalPublicationGate globalPublicationGate_;
+	MappingContinuityGate mappingContinuityGate_;
+	std::unique_ptr<SubmapPublisher> submapPublisher_; // processing lane only
+	rclcpp::TimerBase::SharedPtr submapHeartbeatTimer_;
+	bool mappingHasWrittenLocalFrame_=false;
+	std::uint64_t mappingWrittenLocalSerial_=0;
+	unsigned long long mappingWrittenLocalEpoch_=0;
+	void refreshSubmapVisualization(const rclcpp::Time & stamp,bool localHealthy);
+	void publishMappingContinuityStatus();
+	bool tryMappingVisualRecovery();
+	bool mappingRecoveryCommitCurrent(MappingContinuityGate::Ticket ticket, unsigned long long epoch, bool requireProposal);
+	bool observeRecoveredMainMap(const rtabmap::SensorData & data, const rtabmap::Transform & odom, long long stampNs);
+	void discardPendingMappingRecovery(const std::string & reason);
+	bool observePendingMappingRecovery(const rtabmap::SensorData & data, const rtabmap::Transform & odom, long long stampNs);
+	bool pendingMappingAlignmentAllowed(const rtabmap::Transform & correction);
+	struct PendingMappingRecovery {
+		bool active=false,requireProposal=false;
+		MappingContinuityGate::Ticket ticket{0,0};
+		unsigned long long epoch=0,revision=0;
+		rtabmap::Transform correction,lastCorrection;
+		rtabmap::Rtabmap::SafeRelocalizationLimits limits;
+		std::vector<std::pair<rtabmap::Transform,rtabmap::Transform>> observations; // measured main pose, odom
+		std::function<bool(std::string &)> commit;
+		std::function<void(bool,const std::string &)> finish;
+		std::string token,pendingStatus;
+	};
+	PendingMappingRecovery pendingMappingRecovery_; // processing callback group only
+	int mappingContinuityVoWidth_ = 384;
+	int mappingContinuityVoHeight_ = 240;
+	std::uint64_t mappingObservationGeneration_ = 0;
+	rtabmap::Transform mappingObservationSeedCorrection_;
+	rtabmap::Transform mappingObservationLastCorrection_;
+	rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr mappingRecoveryReferencePub_;
+	std::mutex mappingRecoveryReferenceMutex_;
+	sensor_msgs::msg::Image::SharedPtr mappingLastTrustedImage_;
+	int mappingLastTrustedNodeId_ = 0;
+	unsigned long long mappingLastTrustedEpoch_ = 0;
+	std::uint64_t mappingLastReferencePublishedGeneration_ = 0;
+	rclcpp::Publisher<std_msgs::msg::String>::SharedPtr mappingContinuityStatusPub_;
+	rclcpp::Publisher<std_msgs::msg::String>::SharedPtr mappingContinuityTextPub_;
+	rclcpp::TimerBase::SharedPtr mappingContinuityTimer_;
 	void publishStats(const rclcpp::Time & stamp);
 	void publishCurrentGoal(const rclcpp::Time & stamp);
 #ifdef WITH_NAV2_MSGS
@@ -645,6 +697,8 @@ private:
 	// Protected by lastPoseMutex_; the cache/stream above use OdomAuthMutex_.
 	long long resetQuarantineContinuityAnchorStampNs_ = 0;
 	unsigned long long resetQuarantineContinuityAnchorChain_ = 0;
+	bool jumpQuarantineEnabled_ = false;
+	JumpQuarantineGate jumpQuarantineGate_; // lastPoseMutex_; not a fusion authorization.
 	std::mutex resetQuarantineOdomAuthMutex_;
 	std::condition_variable resetQuarantineOdomAuthCondition_;
 	bool resetQuarantineOdomInfoPublisherBound_;

@@ -1,0 +1,78 @@
+Submap and Tag display candidate — no robot/control/TF operations
+
+Inputs (reliable, transient_local, keep_last 1, complete snapshots):
+- /wbrov/submaps/registry, std_msgs/String, schema wbrov.submaps.v1.
+  Root Wrapper owns session_token_sha256 (64hex), session_short_hash (first16),
+  revision, main_frame_id=map, and submaps[]. Each entry has key
+  m<map_id>_e<reset_epoch>_c<component_id>, nodes with exact poses, registration,
+  activity/status, and graph/cloud/display topics under /wbrov/submaps/<key>/.
+- /wbrov/submaps/<key>/graph, rtabmap_msgs/MapGraph. Its positive node IDs/positions
+  must match the same registry snapshot. The display does not apply any transform.
+- /wbrov/tag_visualization/state, std_msgs/String, schema wbrov.tag-visualization.v1.
+  Must match the full session hash and registry revision. Placed entries include
+  submap_key, map_id, reset_epoch, node_id present in that entry, family/tag_id,
+  frame_id, source_stamp_ns (integer or decimal string), center[3], corners3d[4][3],
+  placement_status local_submap or main_registered, relocalization_verified=false.
+  Unplaced entries may have null identities but must not have spatial coordinates.
+- /wbrov/mapping_continuity/status supplies actual local_tracking_healthy and
+  local_submap_write_allowed, with exact full session hash and epoch identity
+  and <=1 second arrival age.
+  The registry heartbeat only proves availability of a frozen snapshot; it is
+  never interpreted as current healthy tracking or current permission to write.
+
+Outputs:
+- /wbrov/submaps/<key>/display, visualization_msgs/MarkerArray: independently
+  framed complete replacement with color, real neighbor edges, status, Tag corners,
+  center and label. Current Tag producer estimates 3D corners from receipt-bound
+  pixels using planar pose geometry; markers explicitly say position estimate,
+  not independently depth-verified coordinates. No edge is inferred merely from
+  sorted node IDs.
+- /wbrov/tags/main_markers: only explicitly registered entries already in map.
+  Unknown/ambiguous Tag IDs are listed in non-spatial diagnostic text, never as
+  guessed Tag coordinates. Marker labels identify history, not current detections
+  or successful relocalization evidence.
+- Optional --rviz-output-dir ABS_EXISTING_RUN_DIRECTORY creates one .rviz per
+  unregistered submap, active_submap.rviz and submap_views.json. It never starts
+  RViz. Launcher may read manifest.active and open that config in a separate
+  window. No active view means no currently selected unregistered submap; do not
+  reuse an older active_submap.rviz just because the file remains on disk.
+
+Frame behavior:
+- Unregistered frame is wbrov_submap_<session16>_<key>, without a TF to map.
+  The separate RViz fixed frame is this exact frame; it only subscribes this
+  submap's cloud/display topics. Main RViz keeps map, /cloud_map and /mapGraph.
+- On registration the entry frame becomes map using producer-supplied optimized
+  poses. Its old local markers are cleared; registered cloud remains owned by the
+  main-map pipeline. Tag geometry is accepted only on the new registry revision.
+- New sessions clear old markers. Older revisions and retired sessions cannot
+  replace current views. Tag/graph messages arriving before their registry may
+  be retained once and only shown after exact snapshot matching.
+- A missing registry update for >2 seconds labels local geometry as a retained
+  snapshot; it is not presented as fresh localization. No navigation/control
+  publications, SLAM service calls, TF publication, or auto-launched windows.
+
+Run checks (from src/visualization in this repository):
+  python3 -B -m unittest -v test_submap_display_geometry.py
+  python3 -B rtabmap_submap_display.py --check-only
+  python3 -B rtabmap_graph_display.py --check-only
+Runtime (after launcher authorizes/starts the passive process):
+  python3 -B rtabmap_submap_display.py --rviz-output-dir /absolute/run/submap_views
+
+Display bounds: up to 4096 submaps per registry; larger snapshots clear displayed
+placements and show an explicit unsupported-capacity message on the main marker
+topic. This consumer never deletes producer raw map data. Registry input is
+limited to 16 MiB; Tag producer separately limits registry to 8 MiB/20000 nodes.
+
+Local validation: 13 pure geometry/contract tests passed on Windows. Tests cover
+local-vs-main separation, real registration transition, stale revision/pose
+mismatch, duplicate identities, multiple components with same Tag ID, missing
+node/NaN rejection, no invented neighbor edges, unplaced diagnostics and RViz
+configuration identity, full-session live-state binding, explicit capacity
+rejection and frozen-registry heartbeat not implying live tracking.
+Native ROS --check-only, node/DDS smoke checks and recorded-data message audits
+passed in the isolated candidate runtime. The final tagged replay published
+1200 frames and observed separately framed local submaps and registered-main
+Tag markers. RViz rendering and underwater accuracy were not tested. Recorded
+non-Tag recovery and strict replay-source timing remain unproven/not passed.
+See docs/SUBMAP_TAG_CANDIDATE.md and
+provenance/submap-tag-20261015/validation.json for the exact evidence boundaries.

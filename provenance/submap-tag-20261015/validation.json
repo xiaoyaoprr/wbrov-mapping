@@ -1,0 +1,457 @@
+{
+  "schema": "wbrov.repository-candidate-validation.v1",
+  "candidate_status": "partial; recorded non-Tag recovery and strict source timing not passed",
+  "source_archive_sha256": "6b8a50125333574029d5d6202a15e9e3cbb4467c08277107c7af821742e02dac",
+  "runtime_receipt_sha256": "dbc56b4b3457405084641d9cf690b2d995bb5baf03c6b5fa42cac2d307cb9b49",
+  "native_candidate": {
+    "status": "passed",
+    "tested": [
+      "certificate_build.log",
+      "certificate_test.log",
+      "depth_configure.log",
+      "depth_build.log",
+      "depth_test.log",
+      "core_compile.log",
+      "f2m_compile.log",
+      "core_link.log",
+      "core_ldd.log",
+      "wrapper_configure.log",
+      "core_native_fixture_build.log",
+      "visual_native_tests.log",
+      "prepare_close_native_tests.log",
+      "reseed_private_native_tests.log",
+      "resume_wrapper_build.log",
+      "resume_wrapper_gate_tests.log",
+      "resume_wrapper_native_tests.log",
+      "resume_guidance_check.log",
+      "display_fix_guidance_check.log",
+      "display_fix_submap_guidance_check.log",
+      "display_fix_submap_guidance_tests.log",
+      "display_fix_tag_observing_tests.log",
+      "tag_fixture_fix_tag_visualization_tests.log",
+      "startup_fix_check.log",
+      "startup_fix_ros_smoke.log",
+      "display_rate_fix_check.log",
+      "display_rate_fix_ros_smoke.log"
+    ],
+    "ros_node_and_dds_smoke": true,
+    "tag_tests": 25,
+    "tag_tests_skipped": 0,
+    "local_geometry_tests": 13,
+    "tag_ack_tests": 10,
+    "replay_audit_tests": 26,
+    "source_contract_tests": 12,
+    "synthetic_core_recovery": "passed; 76-second continuous submap anchored at end; prepare/observe/commit and close/reseed rejection cases"
+  },
+  "native_scope": "Previously completed isolated Jetson build and replay of the pinned candidate, not a fresh full build from this repository checkout.",
+  "recorded_tag_case": {
+    "published": 1200,
+    "duration_s": 60.78047900000001,
+    "map_accepted": 47,
+    "final_submaps": [
+      {
+        "key": "m0_e0_c1",
+        "registered": true,
+        "active": false,
+        "frame_id": "map",
+        "node_count": 9
+      },
+      {
+        "key": "m1_e1_c10",
+        "registered": false,
+        "active": false,
+        "frame_id": "wbrov_submap_ce0d177d1d56aee0_m1_e1_c10",
+        "node_count": 14
+      },
+      {
+        "key": "m2_e2_c24",
+        "registered": false,
+        "active": false,
+        "frame_id": "wbrov_submap_ce0d177d1d56aee0_m2_e2_c24",
+        "node_count": 11
+      },
+      {
+        "key": "m3_e3_c36",
+        "registered": false,
+        "active": false,
+        "frame_id": "wbrov_submap_ce0d177d1d56aee0_m3_e3_c36",
+        "node_count": 5
+      },
+      {
+        "key": "m4_e4_c41",
+        "registered": false,
+        "active": true,
+        "frame_id": "wbrov_submap_ce0d177d1d56aee0_m4_e4_c41",
+        "node_count": 8
+      }
+    ],
+    "tag_ids": {
+      "main_registered": [
+        3,
+        4
+      ],
+      "local_submap": [
+        1,
+        2,
+        10
+      ]
+    },
+    "tag_placements": [
+      {
+        "tag_id": 4,
+        "submap_key": "m0_e0_c1",
+        "map_id": 0,
+        "reset_epoch": 0,
+        "node_id": 2,
+        "frame_id": "map",
+        "placement_status": "main_registered",
+        "center": [
+          0.42480464276487423,
+          -0.14032316986971863,
+          9.931928737387519e-05
+        ]
+      },
+      {
+        "tag_id": 4,
+        "submap_key": "m0_e0_c1",
+        "map_id": 0,
+        "reset_epoch": 0,
+        "node_id": 3,
+        "frame_id": "map",
+        "placement_status": "main_registered",
+        "center": [
+          0.42446332434066175,
+          -0.13881104440795614,
+          -0.0027098776096773428
+        ]
+      },
+      {
+        "tag_id": 3,
+        "submap_key": "m0_e0_c1",
+        "map_id": 0,
+        "reset_epoch": 0,
+        "node_id": 7,
+        "frame_id": "map",
+        "placement_status": "main_registered",
+        "center": [
+          0.18916514029803044,
+          0.3206821112685933,
+          0.0021038693877799327
+        ]
+      },
+      {
+        "tag_id": 3,
+        "submap_key": "m0_e0_c1",
+        "map_id": 0,
+        "reset_epoch": 0,
+        "node_id": 8,
+        "frame_id": "map",
+        "placement_status": "main_registered",
+        "center": [
+          0.18918736061493038,
+          0.32144107093999297,
+          0.0005921756147440303
+        ]
+      },
+      {
+        "tag_id": 2,
+        "submap_key": "m2_e2_c24",
+        "map_id": 2,
+        "reset_epoch": 2,
+        "node_id": 24,
+        "frame_id": "wbrov_submap_ce0d177d1d56aee0_m2_e2_c24",
+        "placement_status": "local_submap",
+        "center": [
+          0.5488074137725079,
+          -0.0918147944092138,
+          0.10149894103350679
+        ]
+      },
+      {
+        "tag_id": 1,
+        "submap_key": "m2_e2_c24",
+        "map_id": 2,
+        "reset_epoch": 2,
+        "node_id": 34,
+        "frame_id": "wbrov_submap_ce0d177d1d56aee0_m2_e2_c24",
+        "placement_status": "local_submap",
+        "center": [
+          0.1834089857193481,
+          0.24856814431562418,
+          -0.08796997158563127
+        ]
+      },
+      {
+        "tag_id": 1,
+        "submap_key": "m2_e2_c24",
+        "map_id": 2,
+        "reset_epoch": 2,
+        "node_id": 35,
+        "frame_id": "wbrov_submap_ce0d177d1d56aee0_m2_e2_c24",
+        "placement_status": "local_submap",
+        "center": [
+          0.1810568911479554,
+          0.24803623129500035,
+          -0.08648126361065728
+        ]
+      },
+      {
+        "tag_id": 10,
+        "submap_key": "m4_e4_c41",
+        "map_id": 4,
+        "reset_epoch": 4,
+        "node_id": 46,
+        "frame_id": "wbrov_submap_ce0d177d1d56aee0_m4_e4_c41",
+        "placement_status": "local_submap",
+        "center": [
+          -0.1537205816774665,
+          0.15385302503964549,
+          0.019856863835588254
+        ]
+      }
+    ],
+    "exit_codes": {
+      "tag": 0,
+      "submap_display": 0,
+      "display": 0,
+      "slam": 0,
+      "odom": 0
+    },
+    "source_realtime_valid": false,
+    "publish_lateness_s": {
+      "count": 1200,
+      "min": 0.0037953600000000002,
+      "mean": 0.012567174326666668,
+      "p50": 0.006260096000000001,
+      "p95": 0.03377499039999998,
+      "p99": 0.06437324695999999,
+      "max": 0.09875906400000001
+    },
+    "source_age_diagnostics": {
+      "full_odom_info_age_s": {
+        "count": 1114,
+        "min": 0.029809536,
+        "mean": 0.08391209587073609,
+        "p50": 0.07843408400000002,
+        "p95": 0.13309053199999998,
+        "p99": 0.17219151271999994,
+        "max": 0.238331272
+      },
+      "continuity_status_age_s": {
+        "count": 1807,
+        "min": 0.031192512000000002,
+        "mean": 0.12541360414831212,
+        "p50": 0.086428616,
+        "p95": 0.1744541368,
+        "p99": 1.6222959603200056,
+        "max": 3.42957664
+      },
+      "odom_info_age_over_300ms": 0,
+      "source_clock_policy": "fixed translation of original source clock; never slowed or restamped to satisfy freshness"
+    },
+    "case_id": "recorded_submap_tag_206254419227392",
+    "message_audit": {
+      "status_messages": 1871,
+      "blocked_source_intervals": 871,
+      "blocked_intervals_with_existing_public_graph": 853,
+      "observation_intervals_with_existing_public_graph": 0,
+      "public_graph_messages_inside_blocked_intervals": 0,
+      "main_graph_growth_during_monitored_blocked_intervals": {
+        "status": "observed_no_growth",
+        "violations": []
+      },
+      "second_disconnected_public_map": {
+        "status": "not_observed",
+        "violations": []
+      },
+      "native_depth_fallback": {
+        "status": "observed",
+        "count": 13
+      },
+      "controlled_short_depth_fallback": {
+        "status": "observed",
+        "count": 4
+      },
+      "fault_bootstrap_preconditions": [
+        {
+          "kind": "blank_rgb_and_depth",
+          "first_fault_ns": 1791427621021051128,
+          "main_map_established_before_fault": true
+        },
+        {
+          "kind": "blank_rgb_depth_preserved",
+          "first_fault_ns": 1791427602821887128,
+          "main_map_established_before_fault": true
+        }
+      ],
+      "public_cloud_payload_during_monitored_blocked_intervals": {
+        "status": "observed_unchanged",
+        "intervals_with_existing_public_cloud": 853,
+        "payload_changes": []
+      },
+      "controlled_long_loss": {
+        "status": "observed",
+        "lost_frames": 15
+      },
+      "native_reset": {
+        "status": "observed",
+        "epochs": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "native_reset_log_lines": [
+          "[WARN] [1791427621.529417344] [rtabmap_rgbd_odometry]: Odometry automatically reset to latest computed pose!",
+          "\u001b[33m[ WARN] (2026-10-08 10:47:01.642) MsgConversion.cpp:2054::getTransform() (getting transform \"odom\" -> \"base_link\") Lookup would require extrapolation into th[WARN] [1791427621.642259584] [rtabmap_rgbd_odometry]: Odometry automatically reset to latest computed pose!",
+          "[WARN] [1791427621.749773888] [rtabmap_rgbd_odometry]: Odometry automatically reset to latest computed pose!",
+          "[WARN] [1791427621.857879360] [rtabmap_rgbd_odometry]: Odometry automatically reset to latest computed pose!",
+          "[WARN] [1791427621.965079680] [rtabmap_rgbd_odometry]: Odometry automatically reset to latest computed pose!",
+          "[WARN] [1791427622.072139808] [rtabmap_rgbd_odometry]: Odometry automatically reset to latest computed pose!",
+          "[WARN] [1791427622.179388480] [rtabmap_rgbd_odometry]: Odometry automatically reset to latest computed pose!",
+          "[WARN] [1791427622.286785280] [rtabmap_rgbd_odometry]: Odometry automatically reset to latest computed pose!",
+          "[WARN] [1791427650.143482720] [rtabmap_rgbd_odometry]: Odometry automatically reset to latest computed pose!",
+          "[WARN] [1791427650.638464128] [rtabmap_rgbd_odometry]: Odometry automatically reset to latest computed pose!",
+          "[WARN] [1791427651.262636768] [rtabmap_rgbd_odometry]: Odometry automatically reset to latest computed pose!"
+        ]
+      },
+      "registered_map_observation": {
+        "status": "not_proven",
+        "completion": "not_proven"
+      },
+      "resume_after_pause": {
+        "status": "not_proven"
+      },
+      "submaps_and_tags": {
+        "local_healthy_submap_growth": {
+          "status": "observed"
+        },
+        "main_graph_registered_membership": {
+          "status": "observed_consistent",
+          "checked": 9,
+          "violations": [],
+          "unmatched_source_graphs": 0
+        },
+        "independent_submap_frames": {
+          "status": "observed_consistent",
+          "checked": 115,
+          "violations": [],
+          "forbidden_tf_edges": []
+        },
+        "submap_graph_registry_match": {
+          "status": "observed_consistent",
+          "checked": 51,
+          "violations": []
+        },
+        "submap_cloud_registry_frame": {
+          "status": "observed_consistent",
+          "checked": 51,
+          "violations": []
+        },
+        "loss_creates_separate_local_epoch": {
+          "status": "observed_consistent",
+          "checked": 2,
+          "violations": []
+        },
+        "untrusted_frame_write_gate": {
+          "status": "observed_consistent",
+          "checked": 47,
+          "violations": []
+        },
+        "tag_registry_identity": {
+          "status": "observed_consistent",
+          "checked": 55,
+          "violations": [],
+          "placed": 146,
+          "unplaced": 83
+        },
+        "main_tag_markers_registered_only": {
+          "status": "observed_consistent",
+          "checked": 309,
+          "violations": []
+        },
+        "recovery_claim": "Use post-established-main loss, pause, registered resumption AND new public nodes; local growth/Tag display alone is not recovery.",
+        "limitations": [
+          "No active database inspection or physical ground truth. Exact-source registry correlation can be incomplete across asynchronous publishers.",
+          "Tag coordinates are receipt-bound planar estimates, not independent depth verification or successful relocalization.",
+          "Marker-to-Tag geometry is checked against recorded history; this does not certify every asynchronous display transition."
+        ]
+      },
+      "paused_state_observed": true,
+      "limitations": [
+        "Monitors public trusted MapGraph/cloud outputs; does not inspect active SQLite or prove hidden internal graph state.",
+        "No public growth during source-correlated blocked intervals does not prove every asynchronous transition instant.",
+        "Connected public graph does not by itself prove spatially correct non-overlapping point clouds.",
+        "A cloud payload change is evidence to inspect; serialization or map correction can change it without adding points.",
+        "Images/depth are correlated ZED data; reverse registration and repeated frames are not independent sensor evidence.",
+        "Recorded 384x240 CPU replay does not prove live camera/GPU timing or underwater geometric accuracy."
+      ]
+    },
+    "submap_workload": {
+      "registries": 115,
+      "graphs": 51,
+      "clouds": 51,
+      "marker_messages": 209,
+      "tag_states": 56,
+      "main_tag_marker_messages": 103,
+      "rviz_started": false
+    }
+  },
+  "recorded_visual_return_case": {
+    "published": 2000,
+    "tag_enabled": false,
+    "repeated_recording": true,
+    "physical_return": false,
+    "cycles": 2,
+    "blank_cut_s": 0.75,
+    "recovery": {
+      "status": "not_proven",
+      "events": []
+    },
+    "observation": {
+      "status": "not_proven",
+      "completion": "not_proven"
+    },
+    "source_realtime_valid": false,
+    "exit_codes": {
+      "submap_display": 0,
+      "display": 0,
+      "slam": 0,
+      "odom": 0
+    },
+    "case_id": "recorded_submap_tag_206412709389120"
+  },
+  "display_change": {
+    "before_submap_messages": 6435,
+    "after_submap_messages": 209,
+    "max_dirty_render_hz": 5,
+    "frozen_refresh_hz": 1,
+    "comparison": "same recorded input; not a repeated performance benchmark"
+  },
+  "remaining": [
+    "Recorded non-Tag recovery found old-node candidates but did not pass three independent geometrically validated pairs or observation/commit.",
+    "Candidate retention rejected one approximately 2mm / 0.286deg difference by normalized covariance; others lacked inlier distribution or valid depth. Investigate selection/noise model before production cutover; do not disable final transaction checks.",
+    "Tagged replay publish-lateness p95 exceeds the unchanged 30ms source-real-time criterion; source_realtime_valid remains false.",
+    "No live ZED/GPU, RViz renderer, underwater precision, surveyed Tag prior, pressure fusion, IMU translation or uncertain gap refill validation."
+  ],
+  "repository_windows_checks": {
+    "python_tests": {
+      "status": "passed_with_explicit_skips",
+      "total": 74,
+      "passed": 71,
+      "skipped": 3,
+      "skipped_reason": "NumPy/OpenCV unavailable; these three numerical tests previously passed on Jetson.",
+      "log_sha256": "5a858ca68f282a0d400a595fd0bf67a0ae4df6136b416ef475534ad1d480f286"
+    },
+    "candidate_source_files_hash_verified": 55,
+    "native_runtime_python_pins_verified": 28,
+    "new_cmake_test_entry_compiled": false,
+    "full_repository_build": false,
+    "hardware_started": false
+  },
+  "production_deployed": false,
+  "hardware_started": false,
+  "rviz_renderer_started": false,
+  "field_validated": false
+}

@@ -42,12 +42,31 @@ class ManagedGraphState:
                 require(abs(sum(v*v for v in row['quaternion_xyzw'])-1)<.002,'nonunit graph quaternion')
                 poses[row['id']]=row
             self.last_epoch=state['reset_epoch'];self.last_revision=state['graph_revision'];self.received+=1
-            self.current=dict(state=deepcopy(state),poses=poses,publisher_gid=gid,arrival_monotonic_ns=time.monotonic_ns())
+            # Both indexes reference the one validated, privately decoded JSON
+            # object. No need to duplicate every pose in the current snapshot.
+            self.current=dict(state=state,poses=poses,publisher_gid=gid,arrival_monotonic_ns=time.monotonic_ns())
             self.by_epoch[state['reset_epoch']]=self.current
             self.record(state,message.data,gid)
         except (ValueError,TypeError,KeyError,OverflowError,RecursionError) as exc:
             self.rejected+=1
             self.consumer.rejected(exc)
+
+    def compact(self,receipts):
+        if self.current is None:return
+        retained={}
+        for receipt in receipts:retained.setdefault(int(receipt['reset_epoch']),set()).add(receipt['node_id'])
+        current_epoch=self.current['state']['reset_epoch']
+        for epoch,snapshot in list(self.by_epoch.items()):
+            # Different DDS topics can arrive out of order. The first receipt
+            # of a later epoch is the single-writer barrier proving all earlier
+            # admitted receipts have already been delivered to this consumer.
+            if epoch==current_epoch or epoch>=self.consumer.last_receipt_epoch:continue
+            ids=retained.get(epoch,set())
+            if not ids:del self.by_epoch[epoch];continue
+            # This is a derived retained-pose cache, never a new authenticated
+            # graph state. Full current snapshots and raw evidence are intact.
+            self.by_epoch[epoch]=dict(snapshot,state={k:v for k,v in snapshot['state'].items() if k!='graph_poses'},
+                poses={i:p for i,p in snapshot['poses'].items() if i in ids},compacted=True)
 
     def pose_for_receipt(self,receipt):
         epoch=int(receipt['reset_epoch']);snapshot=self.by_epoch.get(epoch)

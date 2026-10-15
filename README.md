@@ -1,8 +1,10 @@
 # WBROV 水下建图算法
 
-2026-10-15 从 Jetson 当前建图入口及对应源码整理的源代码归档，包含 ZED 双流前端、定制 RTAB-Map Core/ROS、AprilTag 观测和多视角锚点、重定位、重力约束、地图可视化与设备标定配置。
+本仓库基于 2026-10-15 的 Jetson 源码归档，包含 ZED 双流前端、定制 RTAB-Map Core/ROS、AprilTag、重定位、重力约束和地图可视化。本次已更新为主图隔离、临时子图保留和 AprilTag 位置显示的候选源码。
 
-当前入口指向的运行包标识为 `168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b`。归档保留原文件和来源记录，适合代码备份、审查和后续开发。本次没有重新编译或启动设备，不能据此认定已完成现场验证。
+**候选状态：原生编译及部分录制回放检查通过，非 Tag 自动接回和严格回放源时序验收仍未通过，尚未进行水下现场验证。** 已观察到主图/临时子图隔离、局部健康时继续记录及主图/局部 AprilTag 位置消息；完整结果和限制见 [候选更新说明](docs/SUBMAP_TAG_CANDIDATE.md)。
+
+机器人正式入口仍指向运行包 `168660dbaf7e786a4d0682455b19e8672bbd5930ac43eeb0d47b7b10660c8f0b`，未因本次 Git 更新而切换。原始归档可通过 `234b053` 或 `source-2026-10-15` 查阅。
 
 ## 代码目录
 
@@ -12,13 +14,14 @@
 | `src/rtabmap_core/` | RTAB-Map 0.23.7 源码基线和建图、重力约束、优化器等定制改动 |
 | `src/rtabmap_ros/` | ROS 2 消息、里程计、SLAM 包与时间戳转换保护 |
 | `src/apriltag/` | Tag 检测、位姿几何保护、关键帧绑定、多视角锚点生成 |
-| `runtime/libexec/` | 当前运行包中的安全重定位和转角恢复 Python 模块 |
+| `runtime/libexec/` | 候选安全重定位、Tag 观测与显示模块，依赖按原生运行回执补齐 |
 | `runtime/tools/` | 原运行包检查工具 |
 | `src/native_helpers/` | 图像健康观测、发布者身份校验和消息来源适配器源码 |
 | `src/visualization/` | 图优化结果显示和 RViz 配置 |
 | `config/` | DDS 配置及现机相机标定文件 |
 | `launch/original/` | 现机建图启动脚本的原样副本 |
-| `provenance/` | 运行清单、逐文件来源与 SHA-256、构建配置摘录 |
+| `provenance/` | 初始设备归档依据，以及 `submap-tag-20261015/` 中的候选来源和验证摘要 |
+| `tests/` | 原生几何/门控夹具、录制回放及消息审计测试 |
 
 ## 核验归档
 
@@ -26,11 +29,12 @@
 
 ```bash
 python tools/verify_package.py
+python tools/test_mapping_candidate.py
 ```
 
-该命令只读取文件并校验 `MANIFEST.sha256`，不会导入建图模块或打开硬件。`provenance/validation.json` 记录本次检查结果。
+第一条命令只读取文件并校验 `MANIFEST.sha256`。第二条运行不启动 ROS 节点的 Python 行为测试；未安装 NumPy/OpenCV 时会明确跳过三个数值投影测试。加 `--require-opencv` 可要求这些测试必须执行。候选验证摘要在 `provenance/submap-tag-20261015/validation.json`；原 `provenance/validation.json` 保留初始归档结果。
 
-已核对当前运行清单指定的 20 个 Core/ROS 源码文件；发布器源码与原构建清单逐项匹配；运行辅助脚本与现机运行清单匹配。其余 Core/ROS 文件从对应源码基线补齐，部分 ROS 资源由本地完整源码备份补充，每个文件的来源单独记录。因此本仓库不宣称可以逐字节复现当前二进制。
+初始归档核对了设备清单指定的 20 个 Core/ROS 文件及发布器、运行脚本，其余基线和补充来源单独记录。本次修改的源码以候选 `source-map.json` 为准，不再宣称它们与正式设备运行包逐字节一致，也不宣称可以逐字节复现二进制。
 
 ## 构建与运行
 
@@ -44,4 +48,4 @@ python tools/verify_package.py
 
 ## 来源与许可
 
-第三方代码保留原版权与许可文件。RTAB-Map 顶层许可不能代表其全部内嵌组件；详见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。本次归档没有替用户为自有代码新增开源许可证；仓库按私有仓库准备。
+第三方代码保留原版权与许可文件，来源说明见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。本次更新没有替用户为自有代码新增开源许可证，也未修改仓库可见性。

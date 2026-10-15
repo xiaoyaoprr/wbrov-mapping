@@ -19,6 +19,9 @@ from core_pixel_consumer import make_consumer,ManagedSources
 from managed_graph_state import ManagedGraphState
 from message_info_executor import MessageInfoExecutor
 from live_bridge import LiveBridge
+from startup_sources import wait_for_sources
+from history_retention import compact
+from tag_visualization import TagVisualizationPublisher
 
 root=Path(__file__).resolve().parent;config=json.loads(Path(sys.argv[1]).read_text());out=Path(sys.argv[2]);out.mkdir()
 fixture_mode=bool(config.get('fixture_mode',True))
@@ -39,11 +42,21 @@ ready_topic=config.get('frame_ready_topic','/private/recorded_frame_ready')
 ready_pub=(owner.create_publisher(UInt64MultiArray,ready_topic,qos)
            if isinstance(ready_topic,str) and ready_topic else None)
 events=(out/'events.jsonl').open('x');payloads=(out/'detector.jsonl').open('x');states=(out/'graph_states.jsonl').open('x')
-pixel_consumed=set();pending_ready={};ready_count=0;detected_count=0
+pixel_consumed=set();pending_ready={};ready_count=0;detected_count=0;last_retention_key=None
+tag_visualizer=None
 def emit(event):
     events.write(json.dumps(event,sort_keys=True,separators=(',',':'),allow_nan=False)+'\n');events.flush()
-    if event['event'] in ('bound','no_measured_tags'):pixel_consumed.add(int(event['image_stamp_ns']))
+    if event['event'] in ('bound','no_measured_tags') and int(event['image_stamp_ns']) in pending_ready:
+        pixel_consumed.add(int(event['image_stamp_ns']))
+    if tag_visualizer is not None:tag_visualizer.consume_event(event)
+with (out/'startup_sources.jsonl').open('x') as admission_log:
+    def record_admission(event):
+        admission_log.write(json.dumps(event,sort_keys=True)+'\n');admission_log.flush()
+    admitted_sources=wait_for_sources(owner,config['sources'],lambda:stop,record_admission)
 consumer=make_consumer(owner,config,emit)
+# Source checks remain strict after admission, including every callback GID.
+# A later replacement cannot be treated as another startup or cleared here.
+consumer.sources.bound.update(admitted_sources)
 def record_state(state,raw,gid):
     name=out/('graph_epoch_'+str(state['reset_epoch'])+'.json');temp=name.with_suffix('.tmp');temp.write_text(raw);temp.replace(name)
     states.write(json.dumps(dict(reset_epoch=state['reset_epoch'],graph_revision=state['graph_revision'],
@@ -53,6 +66,7 @@ graph=ManagedGraphState(owner,consumer,config,record_state)
 proposer=Node(nodes.get('proposer','apriltag_safe_relocalizer'));live=LiveBridge(proposer,consumer,graph,config,out)
 sources=ManagedSources(detector,{k:config['sources'][k] for k in ('rgb','camera_info')})
 images=OrderedDict();infos=OrderedDict();bridge=CvBridge();observer=VerifiedPixelObserver()
+tag_visualizer=TagVisualizationPublisher(owner,consumer,config,observer,emit)
 image_buffer_capacity=int(config.get('image_buffer_capacity',128))
 assert 16 <= image_buffer_capacity <= 256
 buffer_dropped={'rgb':0,'camera_info':0}
@@ -87,7 +101,7 @@ subs=[detector.create_subscription(Image,config['sources']['rgb']['topic'],rgb,q
       detector.create_subscription(CameraInfo,config['sources']['camera_info']['topic'],camera,qos)]
 for subscription in subs:subscription._wbrov_message_info_required=True
 def ready():
-    global ready_count
+    global ready_count,last_retention_key
     # A Core receipt normally follows the corresponding RGB callbacks, so the
     # timer completes the three-way join without modifying the Core consumer.
     for ns in list(images):
@@ -102,11 +116,15 @@ def ready():
         if ready_pub is not None:
             ready_pub.publish(UInt64MultiArray(data=[ns,node_id,epoch]))
         pending_ready.pop(ns);pixel_consumed.remove(ns);ready_count+=1
+        live.completed_for_retention.add(ns)
         if not tags:
             receipt=consumer.receipts.pop(ns,None)
             if receipt is not None:consumer.node_receipts.pop(receipt['receipt']['node_id'],None)
         emit(dict(event='frame_ready',image_stamp_ns=str(ns),node_id=node_id,reset_epoch=epoch,graph_revision=revision,
             tag_ids=tags,graph_update_authorized=False))
+    key=(ready_count,graph.last_epoch,consumer.last_receipt_epoch)
+    if key!=last_retention_key:
+        compact(live,pending_ready);last_retention_key=key
 timer=owner.create_timer(.01,ready)
 executor=MessageInfoExecutor();executor.add_node(detector);executor.add_node(owner);executor.add_node(proposer)
 parts=Path('/proc/self/stat').read_text().rsplit(')',1)[1].split()
@@ -119,7 +137,7 @@ finally:
     primary=sys.exc_info()[1];cleanup_errors=[];bridge_complete=False
     try:bridge_complete=live.close()
     except BaseException as exc:cleanup_errors.append(repr(exc))
-    operations=[consumer.close,lambda:executor.remove_node(owner),lambda:executor.remove_node(detector),
+    operations=[tag_visualizer.close,consumer.close,lambda:executor.remove_node(owner),lambda:executor.remove_node(detector),
         lambda:executor.remove_node(proposer),proposer.destroy_node,owner.destroy_node,detector.destroy_node,
         executor.shutdown,lambda:rclpy.shutdown() if rclpy.ok() else None,events.close,payloads.close,states.close]
     for operation in operations:
@@ -134,4 +152,7 @@ with (out/'RESULT.json').open('x') as f:json.dump(dict(bridge_proposals=live.pro
     pending_ready=len(pending_ready),graph_epochs=sorted(graph.by_epoch),actual_sensor_dds_callbacks=True,
     actual_verified_pixel_observer=True,actual_graph_state_source_checked=True,
     fixture_mode=fixture_mode,image_buffer_capacity=image_buffer_capacity,
-    buffer_dropped=buffer_dropped,hardware_started=False),f,indent=2)
+    buffer_dropped=buffer_dropped,retention=dict(passes=live.retention_passes,reclaimed=live.retention_reclaimed,
+        rows=len(live.rows),processed=len(live.processed),bindings=len(consumer.bindings),receipts=len(consumer.receipts),
+        completed_tombstones=len(live.completed_for_retention),references=len(live.references),
+        historical_poses=sum(len(s['poses']) for e,s in graph.by_epoch.items() if s is not graph.current)),hardware_started=False),f,indent=2)

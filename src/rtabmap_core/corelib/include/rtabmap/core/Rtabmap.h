@@ -43,6 +43,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stack>
 #include <set>
 #include <vector>
+#include <functional>
 
 namespace rtabmap_slam
 {
@@ -264,6 +265,27 @@ public:
 	// released by destroying the Rtabmap instance.
 	void setSafeRelocalizationGuardEnabled(bool enabled);
 	unsigned long long getResetEpoch() const {return _resetEpoch;}
+	// Coordinate registration only; not a navigation or held-out geometry certificate.
+	// Call on the Core processing thread. Adds no data member or virtual ABI change.
+	bool isCurrentMapFrameRegistered() const
+	{
+		return !_safeRelocalizationGuardEnabled || _resetEpoch == 0 ||
+				_safeRelocalizationCommittedEpochs.count(_resetEpoch) != 0;
+	}
+    struct LocalSubmapSnapshot
+    {
+        int mapId;
+        unsigned long long resetEpoch;
+        int componentId;
+        bool registeredToMain;
+        std::map<int,Transform> poses;
+        std::multimap<int,Link> links;
+    };
+    // Core processing lane only. Current unregistered graph, grouped by
+    // epoch/map/component; first node is identity, no main-map transform.
+    // Relative measured links only; excludes self priors and virtual edges.
+    bool getUnregisteredLocalSubmaps(std::vector<LocalSubmapSnapshot> & snapshots,
+        std::string & reason) const;
 	unsigned long long getSignatureResetEpoch(int id) const;
 	cv::Mat getInformation(const cv::Mat & covariance) const;
 	void addNodesToRepublish(const std::vector<int> & ids);
@@ -287,6 +309,52 @@ public:
 											const std::map<int, float> & likelihood) const;
 
 private:
+    // Wrapper-owned candidate revalidation; no external transform is accepted.
+    // Adds a nonvirtual method only, preserving the existing object layout.
+    bool tryVisualRecoveryWithAcceptedImages(const SafeRelocalizationLimits & limits,
+        const AcceptedImageSourceContext & context, const std::function<bool()> & commitAllowed,
+        std::string & reason);
+    bool prepareVisualRecoveryWithAcceptedImages(const SafeRelocalizationLimits & limits,
+        const AcceptedImageSourceContext & context, const std::function<bool()> & preparationAllowed,
+        Transform & proposedMapCorrection, std::string & reason);
+    bool commitVisualRecoveryWithObservedAlignment(const SafeRelocalizationLimits & limits,
+        const AcceptedImageSourceContext & context, const std::function<bool(const Transform &)> & commitAllowed,
+        std::string & reason);
+    bool tryVisualRecoveryImpl(const SafeRelocalizationLimits & limits,
+        const AcceptedImageSourceContext & context, const std::function<bool()> & commitAllowed,
+        Transform * preparedMapCorrection, const std::function<bool(const Transform &)> * observedAlignmentAllowed,
+        std::string & reason);
+    bool validateRecoveryCache(const std::set<int> & ids, const std::vector<Link> & evidence,
+        const SafeRelocalizationLimits & limits, std::string & reason) const;
+    bool validateObservationAgainstReferences(const SensorData & observation, const Transform & predicted,
+        const std::map<int,Transform> & references, int excludedId, int requiredAnchor,
+        const SafeRelocalizationLimits & limits, Transform & measured, std::string & reason) const;
+    bool validateRegisteredMapObservation(const SensorData & data, const Transform & odomPose,
+        int lastTrustedNodeId, const SafeRelocalizationLimits & limits,
+        Transform & measuredMainPose, std::string & reason) const;
+    bool validateProposedMapObservation(const SensorData & data, const Transform & odomPose,
+        int lastTrustedNodeId, const Transform & proposedMapCorrection, const SafeRelocalizationLimits & limits,
+        Transform & measuredMainPose, std::string & reason) const;
+    bool validateSameEpochVisualClosure(int currentId, int oldId, const Transform & proposed,
+        std::string & reason) const;
+    bool addDepthCornerLinksWithAcceptedImagesAtomically(const std::vector<Link> & endpointEvidence,
+        unsigned long long sourceResetEpoch, const SafeRelocalizationLimits & limits,
+        const std::vector<AcceptedImageReceipt> & receipts,
+        const std::vector<AcceptedTagCornerObservation> & corners,
+        const AcceptedImageSourceContext & context, const std::function<bool()> & commitAllowed,
+        std::string & reason);
+    bool prepareDepthCornerRecoveryWithAcceptedImages(const std::vector<Link> & endpointEvidence,
+        unsigned long long sourceResetEpoch, const SafeRelocalizationLimits & limits,
+        const std::vector<AcceptedImageReceipt> & receipts,
+        const std::vector<AcceptedTagCornerObservation> & corners,
+        const AcceptedImageSourceContext & context, const std::function<bool()> & preparationAllowed,
+        Transform & proposedMapCorrection, std::string & reason);
+    bool commitDepthCornerRecoveryWithObservedAlignment(const std::vector<Link> & endpointEvidence,
+        unsigned long long sourceResetEpoch, const SafeRelocalizationLimits & limits,
+        const std::vector<AcceptedImageReceipt> & receipts,
+        const std::vector<AcceptedTagCornerObservation> & corners,
+        const AcceptedImageSourceContext & context, const std::function<bool(const Transform &)> & commitAllowed,
+        std::string & reason);
     bool validateAcceptedImagesForTransaction(const std::vector<Link> & evidence,
         const std::vector<AcceptedImageReceipt> & receipts, unsigned long long sourceResetEpoch,
         const AcceptedImageSourceContext & context, std::string & reason) const;
@@ -302,6 +370,15 @@ private:
     bool addLinksAtomicallyImpl(const std::vector<Link> & evidence, unsigned long long sourceResetEpoch,
         const SafeRelocalizationLimits & limits, const std::vector<AcceptedImageReceipt> * receipts,
         const AcceptedImageSourceContext * context, std::string & reason);
+    bool addLinksAtomicallyImpl(const std::vector<Link> & evidence, unsigned long long sourceResetEpoch,
+        const SafeRelocalizationLimits & limits, const std::vector<AcceptedImageReceipt> * receipts,
+        const AcceptedImageSourceContext * context, std::string & reason,
+        const std::function<bool()> * commitAllowed);
+    bool addLinksAtomicallyImpl(const std::vector<Link> & evidence, unsigned long long sourceResetEpoch,
+        const SafeRelocalizationLimits & limits, const std::vector<AcceptedImageReceipt> * receipts,
+        const AcceptedImageSourceContext * context, std::string & reason,
+        const std::function<bool()> * commitAllowed, Transform * preparedMapCorrection,
+        const std::function<bool(const Transform &)> * observedAlignmentAllowed);
 	bool buildDepthCornerEvidence(const std::vector<Link> & endpointEvidence,
 		const std::vector<AcceptedImageReceipt> & receipts,
 		const std::vector<AcceptedTagCornerObservation> & corners,

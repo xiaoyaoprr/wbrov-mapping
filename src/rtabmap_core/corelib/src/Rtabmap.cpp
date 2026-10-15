@@ -95,6 +95,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
 #include "optimizer_trace.inc"
+#include "EarlyGravityCertificate.h"
 
 namespace rtabmap
 {
@@ -1683,16 +1684,23 @@ bool Rtabmap::acceptCrossMapLoopEvidence(
 	{
 		_crossMapLoopEvidence.clear();
 	}
-	while(!_crossMapLoopEvidence.empty() &&
+	while(!_safeRelocalizationGuardEnabled && !_crossMapLoopEvidence.empty() &&
 			evidence.newId-_crossMapLoopEvidence.front().newId > _crossMapLoopPendingMaxIdSpan)
 	{
 		_crossMapLoopEvidence.erase(_crossMapLoopEvidence.begin());
 	}
 
+    if(_safeRelocalizationGuardEnabled)
+    {
+        for(auto previous=_crossMapLoopEvidence.begin();previous!=_crossMapLoopEvidence.end();)
+            if(previous->oldId==evidence.oldId && previous->newId!=evidence.newId)
+                previous=_crossMapLoopEvidence.erase(previous);
+            else ++previous;
+    }
 	for(std::vector<CrossMapLoopEvidence>::const_iterator iter=_crossMapLoopEvidence.begin();
 			iter!=_crossMapLoopEvidence.end(); ++iter)
 	{
-		if(iter->newId == evidence.newId)
+		if(iter->newId == evidence.newId || (_safeRelocalizationGuardEnabled && iter->oldId == evidence.oldId))
 		{
 			reason = uFormat("duplicate current keyframe id=%d", evidence.newId);
 			return false;
@@ -1733,6 +1741,14 @@ bool Rtabmap::acceptCrossMapLoopEvidence(
 	}
 
 	_crossMapLoopEvidence.push_back(evidence);
+    if(_safeRelocalizationGuardEnabled)
+    {
+        // Healthy local geometry is independently certified for every edge.
+        // Three current independent anchors may all occur late in exploration.
+        while(_crossMapLoopEvidence.size()>3) _crossMapLoopEvidence.erase(_crossMapLoopEvidence.begin());
+        reason=uFormat("retained %u/3 independent native visual candidates; raw RGB-D and shadow transaction still required",(unsigned int)_crossMapLoopEvidence.size());
+        return false; // never authorize an ordinary native cross-epoch addLink
+    }
 	if((int)_crossMapLoopEvidence.size() < _crossMapLoopPendingCount)
 	{
 		reason = uFormat("consistent view-diverse evidence %d/%d (current=%d old=%d maps=%d->%d epochs=%llu->%llu max_word_jaccard=%f diagnostic_only)",
@@ -3010,10 +3026,9 @@ bool Rtabmap::process(
 								transform.prettyPrint().c_str());
 						// Add a loop constraint
 						UASSERT(!info.covariance.empty() && info.covariance.at<double>(0,0) > 0.0 && info.covariance.at<double>(5,5) > 0.0);
-						if(_safeRelocalizationGuardEnabled &&
-								getSignatureResetEpoch(signature->id()) != getSignatureResetEpoch(*iter))
+						if(_safeRelocalizationGuardEnabled)
 						{
-							UINFO("Observed but did not add cross-reset local-time closure %d->%d; guarded transaction is the only cross-reset graph mutation path",
+							UINFO("Observed but did not add unverified local-time closure %d->%d; guarded transaction is the only cross-reset graph mutation path",
 									signature->id(), *iter);
 						}
 						else if(_memory->addLink(Link(signature->id(), *iter, Link::kLocalTimeClosure, transform, getInformation(info.covariance))))
@@ -3988,10 +4003,9 @@ bool Rtabmap::process(
 										}
 									}
 
-									if(_safeRelocalizationGuardEnabled &&
-											getSignatureResetEpoch(signature->id()) != getSignatureResetEpoch(nearestId))
+									if(_safeRelocalizationGuardEnabled)
 									{
-										UINFO("Observed but did not add cross-reset visual proximity closure %d->%d; guarded transaction is required",
+										UINFO("Observed but did not add unverified visual proximity closure %d->%d; guarded transaction is required",
 												signature->id(), nearestId);
 									}
 									else if(_memory->addLink(Link(signature->id(), nearestId, type, transform, information)))
@@ -4181,10 +4195,9 @@ bool Rtabmap::process(
 
 										// set Identify covariance for laser scan matching only
 										UASSERT(!info.covariance.empty() && info.covariance.at<double>(0,0) > 0.0 && info.covariance.at<double>(5,5) > 0.0);
-										if(_safeRelocalizationGuardEnabled &&
-												getSignatureResetEpoch(signature->id()) != getSignatureResetEpoch(nearestId))
+										if(_safeRelocalizationGuardEnabled)
 										{
-											UINFO("Observed but did not add cross-reset scan proximity closure %d->%d; guarded transaction is required",
+											UINFO("Observed but did not add unverified scan proximity closure %d->%d; guarded transaction is required",
 													signature->id(), nearestId);
 										}
 										else if(_memory->addLink(Link(signature->id(), nearestId, Link::kLocalSpaceClosure, transform, getInformation(info.covariance)/_proximityMergedScanCovFactor, scanMatchingIds)))
@@ -4286,7 +4299,15 @@ bool Rtabmap::process(
 					if(currentResetEpoch != oldResetEpoch)
 					{
 						rejectedLoopClosure = true;
-						UINFO("Observed but did not add cross-reset global loop %d -> %d (epochs %llu -> %llu): safe relocalization requires the guarded JSON transaction",
+                        const Signature * visualOld=_memory->getSignature(_loopClosureHypothesis.first);
+                        if(!isCurrentMapFrameRegistered() && visualOld &&
+                           _safeRelocalizationTrustedPoses.count(visualOld->id()) && oldResetEpoch<currentResetEpoch)
+                        {
+                            std::string pendingReason;
+                            acceptCrossMapLoopEvidence(*signature,*visualOld,currentResetEpoch,oldResetEpoch,transform,info,pendingReason);
+                            UWARN("Guarded local-submap candidate current=%d old=%d retained=%u: %s",signature->id(),visualOld->id(),unsigned(_crossMapLoopEvidence.size()),pendingReason.c_str());
+                        }
+						UINFO("Observed but did not add cross-reset global loop %d -> %d (epochs %llu -> %llu): safe relocalization requires an authenticated shadow transaction",
 								signature->id(), _loopClosureHypothesis.first,
 								currentResetEpoch, oldResetEpoch);
 					}
@@ -4335,6 +4356,16 @@ bool Rtabmap::process(
 					}
 				}
 			}
+            if(!rejectedLoopClosure && _safeRelocalizationGuardEnabled && _rgbdSlamMode &&
+               getSignatureResetEpoch(signature->id())==getSignatureResetEpoch(_loopClosureHypothesis.first))
+            {
+                std::string closureReason;
+                if(!validateSameEpochVisualClosure(signature->id(),_loopClosureHypothesis.first,transform,closureReason))
+                {
+                    rejectedLoopClosure=true;
+                    UWARN("Rejected same-epoch visual loop without two independent raw old-keyframe checks: %s",closureReason.c_str());
+                }
+            }
 			if(!rejectedLoopClosure)
 			{
 				// Make the new one the parent of the old one
@@ -8842,6 +8873,8 @@ bool Rtabmap::addLinksWithAcceptedImagesAtomically(
     return addLinksAtomicallyImpl(evidence, sourceResetEpoch, limits, &receipts, &context, reason);
 }
 
+#include "visual_recovery.inc"
+
 bool Rtabmap::buildDepthCornerEvidence(
 		const std::vector<Link> & endpointEvidence,
 		const std::vector<AcceptedImageReceipt> & receipts,
@@ -9051,10 +9084,28 @@ bool Rtabmap::addLinksAtomically(
     return addLinksAtomicallyImpl(evidence, sourceResetEpoch, limits, nullptr, nullptr, reason);
 }
 
+// Retain the original private symbol for previously linked callers/tests.
 bool Rtabmap::addLinksAtomicallyImpl(const std::vector<Link> & evidence,
         unsigned long long sourceResetEpoch, const SafeRelocalizationLimits & limits,
         const std::vector<AcceptedImageReceipt> * receipts, const AcceptedImageSourceContext * context,
         std::string & reason)
+{
+    return addLinksAtomicallyImpl(evidence,sourceResetEpoch,limits,receipts,context,reason,nullptr);
+}
+
+bool Rtabmap::addLinksAtomicallyImpl(const std::vector<Link> & evidence,
+        unsigned long long sourceResetEpoch, const SafeRelocalizationLimits & limits,
+        const std::vector<AcceptedImageReceipt> * receipts, const AcceptedImageSourceContext * context,
+        std::string & reason, const std::function<bool()> * commitAllowed)
+{
+    return addLinksAtomicallyImpl(evidence,sourceResetEpoch,limits,receipts,context,reason,commitAllowed,nullptr,nullptr);
+}
+
+bool Rtabmap::addLinksAtomicallyImpl(const std::vector<Link> & evidence,
+        unsigned long long sourceResetEpoch, const SafeRelocalizationLimits & limits,
+        const std::vector<AcceptedImageReceipt> * receipts, const AcceptedImageSourceContext * context,
+        std::string & reason, const std::function<bool()> * commitAllowed,
+        Transform * preparedMapCorrection, const std::function<bool(const Transform &)> * observedAlignmentAllowed)
 {
 	reason.clear();
     if(receipts && (!context || !validateAcceptedImagesForTransaction(evidence, *receipts, sourceResetEpoch, *context, reason)))
@@ -9245,16 +9296,65 @@ bool Rtabmap::addLinksAtomicallyImpl(const std::vector<Link> & evidence,
 		reason = "shadow graph lacks a complete old component or current epoch";
 		return false;
 	}
-	// Do not freeze a just-reset component before measured gravity has had
-	// enough frames to settle its roll/pitch. Recorded underwater replay showed
-	// that the first 68-node Tag opportunity was still converging, while the
-	// later 300-node revisit was stable.
-	if(currentIds.size() < 200)
-	{
-		reason = uFormat("current reset component needs gravity stabilization (%u/200 nodes)",
-				(unsigned int)currentIds.size());
-		return false;
-	}
+    if(_safeRelocalizationGuardEnabled && !validateRecoveryCache(currentIds,evidence,limits,reason)) return false;
+    bool earlyGravityCertified = false;
+    if(currentIds.size() < 200)
+    {
+        wbrov::EarlyGravityCertificate certificate;
+        certificate.nodes=currentIds.size();
+        {
+            double firstStamp=std::numeric_limits<double>::infinity(),lastStamp=0.0;
+            for(int id : currentIds)
+            {
+                const Signature * signature=_memory->getSignature(id);
+                if(!signature || !std::isfinite(signature->getStamp()) || signature->getStamp()<=0.0)
+                { certificate.finite=false;continue; }
+                firstStamp=std::min(firstStamp,signature->getStamp());
+                lastStamp=std::max(lastStamp,signature->getStamp());
+            }
+            certificate.sourceSpan=lastStamp-firstStamp;
+            std::set<int> measuredIds;
+            double beforeSum=0.0;
+            std::vector<double> alignedSums(anchorAlignments.size(),0.0);
+            for(const auto & row : _constraints)
+            {
+                const Link & link=row.second;
+                if(link.type()!=Link::kGravity || link.from()!=link.to() || !currentIds.count(link.from()))continue;
+                if(!measuredIds.insert(link.from()).second) {certificate.finite=false;continue;}
+                const Transform & pose=initialPoses.at(link.from());
+                const double before=safeGravityDirectionError(pose,link.transform())*180.0/M_PI;
+                certificate.finite=certificate.finite && std::isfinite(before);
+                beforeSum+=before;certificate.beforeMaxDeg=std::max(certificate.beforeMaxDeg,before);
+                for(unsigned int i=0;i<anchorAlignments.size();++i)
+                {
+                    const double after=safeGravityDirectionError(anchorAlignments[i]*pose,link.transform())*180.0/M_PI;
+                    certificate.finite=certificate.finite && std::isfinite(after);
+                    alignedSums[i]+=after;
+                    certificate.alignedMaxDeg=std::max(certificate.alignedMaxDeg,after);
+                    certificate.maxResidualIncreaseDeg=std::max(certificate.maxResidualIncreaseDeg,after-before);
+                }
+            }
+            certificate.gravityNodes=measuredIds.size();
+            if(certificate.gravityNodes)
+            {
+                certificate.beforeMeanDeg=beforeSum/certificate.gravityNodes;
+                for(double sum : alignedSums)
+                    certificate.alignedMeanMaxDeg=std::max(certificate.alignedMeanMaxDeg,sum/certificate.gravityNodes);
+            }
+            std::string certificateReason;
+            earlyGravityCertified=certificate.eligible(certificateReason);
+            UWARN("single-main-map early certificate eligible=%d nodes=%u gravity=%u span=%.6fs mean=%.6f max=%.6f aligned_mean=%.6f aligned_max=%.6f increase=%.6f reason=%s",
+                earlyGravityCertified?1:0,(unsigned int)certificate.nodes,(unsigned int)certificate.gravityNodes,certificate.sourceSpan,
+                certificate.beforeMeanDeg,certificate.beforeMaxDeg,certificate.alignedMeanMaxDeg,certificate.alignedMaxDeg,
+                certificate.maxResidualIncreaseDeg,certificateReason.c_str());
+        }
+        if(!earlyGravityCertified)
+        {
+            reason=uFormat("temporary recovery segment has not passed source-time/measured-gravity stability (%u nodes); main map remains frozen",(unsigned int)currentIds.size());
+            return false;
+        }
+    }
+
 	for(std::multimap<int, Link>::const_iterator iter=_safeRelocalizationTrustedConstraints.begin();
 			iter!=_safeRelocalizationTrustedConstraints.end(); ++iter)
 	{
@@ -9454,6 +9554,28 @@ bool Rtabmap::addLinksAtomicallyImpl(const std::vector<Link> & evidence,
 						beforeRelative.getAngle(afterRelative)*180.0/M_PI);
 			}
 		}
+        // An early graph is accepted only under the ORIGINAL strict rigidity
+        // limits: it never receives the mature distributed-gravity exception.
+        // Check absolute residuals after every independent shadow solve too.
+        if(earlyGravityCertified)
+        {
+            double maxEarlyGravity=0.0;
+            for(const auto & row : connectedConstraints)
+            {
+                const Link & link=row.second;
+                if(link.type()==Link::kGravity && link.from()==link.to() && currentIds.count(link.from()))
+                {
+                    const double residual=safeGravityDirectionError(optimized.at(link.from()),link.transform())*180.0/M_PI;
+                    if(!std::isfinite(residual)) {reason="early shadow has non-finite gravity";return false;}
+                    maxEarlyGravity=std::max(maxEarlyGravity,residual);
+                }
+            }
+            if(gravityResidualCount*10<currentIds.size()*9 || !gravityResidualCount ||
+               gravityResidualAfterSumDeg/gravityResidualCount>2.0 || maxEarlyGravity>5.0 ||
+               maxGravityResidualIncreaseDeg>std::min(double(limits.maxGravityResidualIncrease),0.5))
+            {reason="early shadow failed absolute measured-gravity certificate";return false;}
+        }
+
 		const bool standardCurrentRigidityExceeded =
 				maxNewRigidTranslation > limits.maxNewRigidTranslation ||
 				maxNewRigidRotationDeg > limits.maxNewRigidRotation ||
@@ -9463,7 +9585,7 @@ bool Rtabmap::addLinksAtomicallyImpl(const std::vector<Link> & evidence,
 		// newly reset component. Permit that narrow case only when local visual
 		// edges remain continuous and every measured-gravity residual improves.
 		const bool safeDistributedGravityCorrection =
-				gravityResidualCount >= 30 &&
+				!earlyGravityCertified && gravityResidualCount >= 30 &&
 				maxNewRigidTranslation <= std::min(double(limits.maxNewRigidTranslation)*5.0/3.0, 0.050) &&
 				maxNewRigidRotationDeg <= std::min(double(limits.maxNewRigidRotation)*7.0/3.0, 7.0) &&
 				maxNewRigidZError <= std::min(double(limits.maxNewRigidZError)*2.5, 0.050) &&
@@ -9619,6 +9741,23 @@ bool Rtabmap::addLinksAtomicallyImpl(const std::vector<Link> & evidence,
 			return false;
 		}
 	}
+    // This is after all four potentially slow shadow optimizations and every
+    // preflight, immediately before the first persistent graph mutation.
+    if(commitAllowed && (!*commitAllowed || !(*commitAllowed)()))
+    { reason="recovery continuity ticket expired or was invalidated before commit"; return false; }
+    const Transform finalMapCorrection=finalPoses.at(lastId)*lastRawPose.inverse();
+    if(!safeRigidTransform(finalMapCorrection))
+    { reason="recovery final correction is not a rigid transform"; return false; }
+    if(preparedMapCorrection)
+    {
+        *preparedMapCorrection=finalMapCorrection;
+        reason="prepared fixed-old recovery alignment; no graph or registration state was changed";
+        return true;
+    }
+    // K actual old-map observations are checked against THIS re-solved final
+    // correction, not merely against an earlier proposal or a correction delta.
+    if(observedAlignmentAllowed && (!*observedAlignmentAllowed || !(*observedAlignmentAllowed)(finalMapCorrection)))
+    { reason="recovery observation certificate rejected final alignment or current continuity ticket"; return false; }
 	for(std::vector<Link>::const_iterator iter=evidence.begin(); iter!=evidence.end(); ++iter)
 	{
 		// After the exhaustive preflight, Memory::addLink(addInDatabase=false)

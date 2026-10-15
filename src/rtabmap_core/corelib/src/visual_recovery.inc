@@ -1,0 +1,240 @@
+#include "recovery_geometry.inc"
+
+// Preserve the existing Tag transaction symbol. The candidate wrapper uses
+// this overload so a late odometry loss/timeout rejects after shadow solving.
+bool Rtabmap::addDepthCornerLinksWithAcceptedImagesAtomically(
+        const std::vector<Link> & endpointEvidence, unsigned long long sourceResetEpoch,
+        const SafeRelocalizationLimits & limits, const std::vector<AcceptedImageReceipt> & receipts,
+        const std::vector<AcceptedTagCornerObservation> & corners,
+        const AcceptedImageSourceContext & context, const std::function<bool()> & commitAllowed,
+        std::string & reason)
+{
+    if(!commitAllowed || !commitAllowed())
+    { reason="Tag recovery continuity ticket is no longer current"; return false; }
+    if(!validateAcceptedImagesForTransaction(endpointEvidence,receipts,sourceResetEpoch,context,reason)) return false;
+    std::vector<Link> measuredEvidence;
+    if(!buildDepthCornerEvidence(endpointEvidence,receipts,corners,measuredEvidence,reason)) return false;
+    return addLinksAtomicallyImpl(measuredEvidence,sourceResetEpoch,limits,&receipts,&context,reason,&commitAllowed);
+}
+
+bool Rtabmap::prepareDepthCornerRecoveryWithAcceptedImages(
+        const std::vector<Link> & endpointEvidence, unsigned long long sourceResetEpoch,
+        const SafeRelocalizationLimits & limits, const std::vector<AcceptedImageReceipt> & receipts,
+        const std::vector<AcceptedTagCornerObservation> & corners,
+        const AcceptedImageSourceContext & context, const std::function<bool()> & preparationAllowed,
+        Transform & proposedMapCorrection, std::string & reason)
+{
+    proposedMapCorrection.setNull();
+    if(!preparationAllowed || !preparationAllowed())
+    { reason="Tag recovery preparation ticket is no longer current"; return false; }
+    if(!validateAcceptedImagesForTransaction(endpointEvidence,receipts,sourceResetEpoch,context,reason)) return false;
+    std::vector<Link> measuredEvidence;
+    if(!buildDepthCornerEvidence(endpointEvidence,receipts,corners,measuredEvidence,reason)) return false;
+    return addLinksAtomicallyImpl(measuredEvidence,sourceResetEpoch,limits,&receipts,&context,reason,
+        &preparationAllowed,&proposedMapCorrection,nullptr);
+}
+
+bool Rtabmap::commitDepthCornerRecoveryWithObservedAlignment(
+        const std::vector<Link> & endpointEvidence, unsigned long long sourceResetEpoch,
+        const SafeRelocalizationLimits & limits, const std::vector<AcceptedImageReceipt> & receipts,
+        const std::vector<AcceptedTagCornerObservation> & corners,
+        const AcceptedImageSourceContext & context, const std::function<bool(const Transform &)> & commitAllowed,
+        std::string & reason)
+{
+    if(!commitAllowed) { reason="Tag recovery requires a final observation certificate"; return false; }
+    if(!validateAcceptedImagesForTransaction(endpointEvidence,receipts,sourceResetEpoch,context,reason)) return false;
+    std::vector<Link> measuredEvidence;
+    if(!buildDepthCornerEvidence(endpointEvidence,receipts,corners,measuredEvidence,reason)) return false;
+    return addLinksAtomicallyImpl(measuredEvidence,sourceResetEpoch,limits,&receipts,&context,reason,
+        nullptr,nullptr,&commitAllowed);
+}
+
+// Called only by the managed wrapper on its serialized Core mutation lane,
+// after processWithAuthenticatedImage has retained the current input receipt.
+// The existing native loop is a candidate selector, never an authorization.
+bool Rtabmap::tryVisualRecoveryWithAcceptedImages(
+        const SafeRelocalizationLimits & limits,
+        const AcceptedImageSourceContext & context,
+        const std::function<bool()> & commitAllowed, std::string & reason)
+{
+    return tryVisualRecoveryImpl(limits,context,commitAllowed,nullptr,nullptr,reason);
+}
+
+bool Rtabmap::prepareVisualRecoveryWithAcceptedImages(const SafeRelocalizationLimits & limits,
+        const AcceptedImageSourceContext & context, const std::function<bool()> & preparationAllowed,
+        Transform & proposedMapCorrection, std::string & reason)
+{
+    proposedMapCorrection.setNull();
+    return tryVisualRecoveryImpl(limits,context,preparationAllowed,&proposedMapCorrection,nullptr,reason);
+}
+
+bool Rtabmap::commitVisualRecoveryWithObservedAlignment(const SafeRelocalizationLimits & limits,
+        const AcceptedImageSourceContext & context, const std::function<bool(const Transform &)> & commitAllowed,
+        std::string & reason)
+{
+    if(!commitAllowed) { reason="visual recovery requires a final observation certificate"; return false; }
+    const std::function<bool()> preparing=[] { return true; };
+    return tryVisualRecoveryImpl(limits,context,preparing,nullptr,&commitAllowed,reason);
+}
+
+bool Rtabmap::tryVisualRecoveryImpl(const SafeRelocalizationLimits & limits,
+        const AcceptedImageSourceContext & context, const std::function<bool()> & commitAllowed,
+        Transform * preparedMapCorrection, const std::function<bool(const Transform &)> * observedAlignmentAllowed,
+        std::string & reason)
+{
+    reason.clear();
+    if(!_safeRelocalizationGuardEnabled || !_memory || !_memory->isIncremental() ||
+       _resetEpoch==0 || isCurrentMapFrameRegistered() ||
+       !_safeRelocalizationTrustedSnapshotValid || _crossMapLoopEvidence.size()!=3)
+    { reason=uFormat("local-submap alignment waiting for three independent trusted-map candidates (retained=%u epoch=%llu registered=%d trusted_snapshot=%d)",
+        unsigned(_crossMapLoopEvidence.size()),_resetEpoch,isCurrentMapFrameRegistered()?1:0,_safeRelocalizationTrustedSnapshotValid?1:0); return false; }
+    if(!commitAllowed || !commitAllowed())
+    { reason="visual recovery continuity ticket is no longer current"; return false; }
+    const Signature * last=_memory->getLastWorkingSignature(false);
+    if(!last || last->id()!=_crossMapLoopEvidence.back().newId)
+    { reason=uFormat("local-submap newest bridge is stale (current=%d newest_candidate=%d)",last?last->id():0,_crossMapLoopEvidence.back().newId); return false; }
+
+    std::vector<Link> endpointEvidence;
+    std::vector<AcceptedImageReceipt> receipts;
+    std::set<int> endpoints;
+    std::set<std::int64_t> currentStamps,oldStamps;
+    std::map<int,AcceptedImageReceipt> byId;
+    const cv::Mat placeholderInformation=cv::Mat::eye(6,6,CV_64FC1);
+    for(const CrossMapLoopEvidence & candidate:_crossMapLoopEvidence)
+    {
+        if(candidate.newResetEpoch!=_resetEpoch || candidate.oldResetEpoch>=_resetEpoch ||
+           !endpoints.insert(candidate.newId).second || !endpoints.insert(candidate.oldId).second)
+        { reason="visual recovery candidate identities are repeated or from a different epoch"; return false; }
+        AcceptedImageReceipt current,old;
+        if(!getAcceptedImageReceipt(candidate.newId,current) || !getAcceptedImageReceipt(candidate.oldId,old) ||
+           current.resetEpoch!=candidate.newResetEpoch || old.resetEpoch!=candidate.oldResetEpoch ||
+           current.mapId!=candidate.newMapId || old.mapId!=candidate.oldMapId ||
+           !currentStamps.insert(current.input.headerStampNs).second || !oldStamps.insert(old.input.headerStampNs).second)
+        { reason="visual recovery lacks six independent authenticated image receipts"; return false; }
+        receipts.push_back(current);receipts.push_back(old);
+        byId.emplace(current.signatureId,current);byId.emplace(old.signatureId,old);
+        endpointEvidence.push_back(Link(candidate.newId,candidate.oldId,Link::kUserClosure,
+            Transform::getIdentity(),placeholderInformation));
+    }
+    if(currentStamps.size()!=3 || oldStamps.size()!=3 ||
+       *currentStamps.rbegin()-*currentStamps.begin()<200000000 ||
+       *oldStamps.rbegin()-*oldStamps.begin()<200000000)
+    { reason="visual recovery requires source-time-separated views on both sides"; return false; }
+    if(!validateAcceptedImagesForTransaction(endpointEvidence,receipts,_resetEpoch,context,reason)) return false;
+
+    // Reload the six image/depth observations through Core's owner. Never use
+    // a transform, descriptor set, image, or depth array supplied by a caller.
+    std::map<int,SensorData> observations;
+    for(const auto & item:byId)
+    {
+        SensorData data=_memory->getNodeData(item.first,true,false,false,false);
+        data.uncompressData();
+        if(data.imageRaw().empty() || data.depthRaw().empty() ||
+           data.cameraModels().size()!=1 || !receiptCameraMatches(data.cameraModels().front(),item.second.input))
+        { reason="visual recovery raw RGB-D/camera data is unavailable"; return false; }
+        data.setFeatures(std::vector<cv::KeyPoint>(),std::vector<cv::Point3f>(),cv::Mat());
+        observations.emplace(item.first,data);
+    }
+
+    const int minimumInliers=std::max(25,_crossMapLoopMinInliers);
+    const int minimumCells=std::max(4,_crossMapLoopMinGridCells);
+    const double minimumSpan=std::max(0.02,double(_crossMapLoopMin3DSpan));
+    const double minimumHessian=std::max(0.0001,double(_crossMapLoopMinHessianRatio));
+    ParametersMap registrationParameters=_parameters;
+    registrationParameters[Parameters::kRegStrategy()]="0";
+    registrationParameters[Parameters::kRegForce3DoF()]="false";
+    registrationParameters[Parameters::kVisEstimationType()]="0";
+    int configuredInliers=Parameters::defaultVisMinInliers();
+    Parameters::parse(_parameters,Parameters::kVisMinInliers(),configuredInliers);
+    registrationParameters[Parameters::kVisMinInliers()]=uNumber2Str(std::max(minimumInliers,configuredInliers));
+    float correspondenceDistance=Parameters::defaultVisInlierDistance();
+    Parameters::parse(_parameters,Parameters::kVisInlierDistance(),correspondenceDistance);
+    if(!std::isfinite(correspondenceDistance) || correspondenceDistance<=0)
+    { reason="visual recovery correspondence distance is invalid"; return false; }
+    registrationParameters[Parameters::kVisInlierDistance()]=uNumber2Str(std::min(.025f,correspondenceDistance));
+
+    auto geometricEvidence=[&](const Signature & from,const Signature & to,
+            const Transform & transform,const RegistrationInfo & info)->bool {
+        if(!safeRigidTransform(transform) || info.inliers<minimumInliers) return false;
+        const std::set<int> words(info.inliersIDs.begin(),info.inliersIDs.end());
+        if(int(words.size())<minimumInliers) return false;
+        for(const Signature * signature:{&from,&to})
+        {
+            int width=0,height=0;
+            if(!signatureImageSize(*signature,width,height) ||
+               occupiedGridCells(*signature,words,width,height)<minimumCells) return false;
+            const std::vector<cv::Point3f> points=validInlierPoints(*signature,words);
+            double span=0.0,hessian=0.0;
+            if(int(points.size())<minimumInliers || !pointSetGeometry(points,span,hessian) ||
+               span<minimumSpan || hessian<minimumHessian) return false;
+        }
+        double linear=0.0,angular=0.0;
+        if(!covarianceVariances(info.covariance,linear,angular)) return false;
+        cv::Mat covarianceEigenvalues;
+        if(!cv::checkRange(info.covariance) || cv::norm(info.covariance-info.covariance.t(),cv::NORM_INF)>1e-9 ||
+           !cv::eigen(info.covariance,covarianceEigenvalues) || covarianceEigenvalues.at<double>(5)<=0.0 ||
+           covarianceEigenvalues.at<double>(0)/covarianceEigenvalues.at<double>(5)>limits.maxInformationCondition) return false;
+        double squared=0.0,maximum=0.0;
+        int count=0;
+        for(int word:words)
+        {
+            const auto a=from.getWords().equal_range(word),b=to.getWords().equal_range(word);
+            if(std::distance(a.first,a.second)!=1 || std::distance(b.first,b.second)!=1) return false;
+            const int ai=a.first->second,bi=b.first->second;
+            if(ai<0 || bi<0 || ai>=int(from.getWords3().size()) || bi>=int(to.getWords3().size())) return false;
+            const cv::Point3f & p=from.getWords3()[ai];
+            const cv::Point3f & q=to.getWords3()[bi];
+            if(!finitePoint(p) || !finitePoint(q)) return false;
+            const double residual=cv::norm(cv::Point3d(p.x,p.y,p.z)-
+                transformPoint(transform,cv::Point3d(q.x,q.y,q.z)));
+            if(!std::isfinite(residual)) return false;
+            squared+=residual*residual;maximum=std::max(maximum,residual);++count;
+        }
+        // Same absolute metric residual limits as the existing depth-corner
+        // transaction. Planar/line degeneracy and pixel coverage are checked
+        // separately; a low RMS alone is never sufficient.
+        return count>=minimumInliers && std::sqrt(squared/double(count))<=0.018 && maximum<=0.025;
+    };
+
+    std::vector<Link> measuredEvidence;
+    for(const Link & endpoint:endpointEvidence)
+    {
+        // Separate objects and feature extraction for both directions avoid
+        // treating an inverse of the first solution as independent evidence.
+        Signature forwardCurrent(observations.at(endpoint.from()));
+        Signature forwardOld(observations.at(endpoint.to()));
+        Signature reverseOld(observations.at(endpoint.to()));
+        Signature reverseCurrent(observations.at(endpoint.from()));
+        std::unique_ptr<Registration> forward(Registration::create(registrationParameters));
+        std::unique_ptr<Registration> reverse(Registration::create(registrationParameters));
+        if(!forward || !reverse || !forward->isImageRequired() || !reverse->isImageRequired())
+        { reason="visual recovery registration backend is unavailable"; return false; }
+        RegistrationInfo forwardInfo,reverseInfo;
+        const Transform currentFromOld=forward->computeTransformationMod(forwardCurrent,forwardOld,Transform(),&forwardInfo);
+        const Transform oldFromCurrent=reverse->computeTransformationMod(reverseOld,reverseCurrent,Transform(),&reverseInfo);
+        if(!geometricEvidence(forwardCurrent,forwardOld,currentFromOld,forwardInfo) ||
+           !geometricEvidence(reverseOld,reverseCurrent,oldFromCurrent,reverseInfo))
+        { reason="visual recovery raw bidirectional RGB-D geometry failed"; return false; }
+        const Transform reversePrediction=oldFromCurrent.inverse();
+        if(currentFromOld.getDistance(reversePrediction)>std::min(0.025,double(limits.maxHoldoutTranslation)) ||
+           currentFromOld.getAngle(reversePrediction)>std::min(2.0,double(limits.maxHoldoutRotation))*M_PI/180.0)
+        { reason="visual recovery bidirectional RGB-D transformations disagree"; return false; }
+        // Conservative covariance floor, at least the established 2cm/3deg
+        // bridge floor and no stronger than either measured direction.
+        double fLinear=0.0,fAngular=0.0,rLinear=0.0,rAngular=0.0;
+        if(!covarianceVariances(forwardInfo.covariance,fLinear,fAngular) ||
+           !covarianceVariances(reverseInfo.covariance,rLinear,rAngular)) return false;
+        const double linear=std::max(0.0004,std::max(fLinear,rLinear));
+        const double angular=std::max(std::pow(3.0*M_PI/180.0,2.0),std::max(fAngular,rAngular));
+        cv::Mat information=cv::Mat::eye(6,6,CV_64FC1);
+        for(int axis=0;axis<3;++axis) information.at<double>(axis,axis)=1.0/linear;
+        for(int axis=3;axis<6;++axis) information.at<double>(axis,axis)=1.0/angular;
+        measuredEvidence.push_back(Link(endpoint.from(),endpoint.to(),Link::kUserClosure,currentFromOld,information));
+    }
+    if(!addLinksAtomicallyImpl(measuredEvidence,_resetEpoch,limits,&receipts,&context,reason,&commitAllowed,
+        preparedMapCorrection,observedAlignmentAllowed)) return false;
+    if(preparedMapCorrection) return true;
+    _crossMapLoopEvidence.clear();
+    reason="registered by three independent raw bidirectional RGB-D bridges and fixed-old shadow/holdout transaction";
+    return true;
+}

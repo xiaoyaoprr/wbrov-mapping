@@ -39,6 +39,53 @@ def agreement(ts):
     return all(distance(a,b)[0]<=.08 and distance(a,b)[1]<=8. and
                abs(a[2,3]-b[2,3])<=.02 and tilt(a,b)<=2. for a,b in combinations(ts,2))
 
+def rigid(value):
+    T=np.asarray(value,dtype=float)
+    if T.shape!=(4,4) or not np.isfinite(T).all() or not np.allclose(T[3],[0,0,0,1],atol=1e-9,rtol=0):
+        raise ValueError('invalid finite rigid alignment/pose')
+    R=T[:3,:3]
+    if not np.allclose(R.T@R,np.eye(3),atol=1e-6,rtol=0) or abs(np.linalg.det(R)-1)>1e-6:
+        raise ValueError('nonrigid alignment/pose')
+    return T
+
+def body_support_points(poses):
+    if len(poses)!=3:raise ValueError('three observed body poses required')
+    return np.stack([rigid(p)[:,3] for p in poses],axis=1)
+
+def alignment_metrics(alignments,points):
+    """Compare actions on ALL observed positions, not on an arbitrary origin.
+
+    For a source-coordinate change D, A'=A D^-1 and P'=D P, so A'P'=AP.
+    No graph pose, measurement, link, or alignment is fitted or modified here.
+    Destination z is the existing old-map gravity axis; yaw/translation of
+    that frame leaves these tests unchanged. An arbitrary destination tilt
+    would also require transforming gravity and is not this frame contract.
+    """
+    if len(alignments)<2:raise ValueError('at least two alignments required')
+    points=np.asarray(points,dtype=float)
+    if points.shape!=(4,3) or not np.isfinite(points).all() or not np.allclose(points[3],1,atol=1e-9,rtol=0):
+        raise ValueError('invalid observed support points')
+    transforms=[rigid(a) for a in alignments];actions=[(a@points)[:3] for a in transforms]
+    if not all(np.isfinite(p).all() for p in actions):raise ValueError('nonfinite alignment action')
+    deltas=[a-b for a,b in combinations(actions,2)]
+    result=dict(max_translation_m=max(float(np.max(np.linalg.norm(d,axis=0))) for d in deltas),
+        max_rotation_deg=max(distance(a,b)[1] for a,b in combinations(transforms,2)),
+        max_z_m=max(float(np.max(np.abs(d[2]))) for d in deltas),
+        max_tilt_deg=max(tilt(a,b) for a,b in combinations(transforms,2)))
+    if not all(math.isfinite(v) for v in result.values()):raise ValueError('nonfinite alignment metric')
+    return result
+
+def normalized_alignment(metrics):
+    return tuple(metrics[k]/bound for k,bound in (
+        ('max_translation_m',.08),('max_rotation_deg',8.),('max_z_m',.02),('max_tilt_deg',2.)))
+
+def alignment_passes(metrics):
+    return all(math.isfinite(v) and 0<=v<=1 for v in normalized_alignment(metrics))
+
+def alignment_ambiguous(a,b,points):
+    metric=alignment_metrics([a,b],points)
+    return metric['max_translation_m']>.01 or metric['max_rotation_deg']>1.
+
 def pose(rv,tv):
     T=np.eye(4);T[:3,:3]=cv2.Rodrigues(rv)[0];T[:3,3]=np.asarray(tv).ravel();return T
 
@@ -129,20 +176,19 @@ def propose(old_reference,current_rows):
     for pair in combinations(recent[:-1],2):
         currents=(*pair,recent[-1])
         if not independent(currents):continue
+        support=body_support_points([c['body'] for c in currents])
         options=[]
         for ob in old_modes:
             for cb in product(*(r['branches'] for r in currents)):
                 links=[relative(c,o) for c,o in zip(cb,ob)]
                 alignments=[o['body']@np.linalg.inv(l)@np.linalg.inv(c['body']) for c,o,l in zip(currents,olds,links)]
-                if agreement(alignments):
-                    pairwise=[distance(a,b) for a,b in combinations(alignments,2)]
-                    score=(max(v[0] for v in pairwise),max(v[1] for v in pairwise),
-                           max(abs(a[2,3]-b[2,3]) for a,b in combinations(alignments,2)),
-                           max(tilt(a,b) for a,b in combinations(alignments,2)))
+                metric=alignment_metrics(alignments,support)
+                if alignment_passes(metric):
+                    score=tuple(metric[k] for k in ('max_translation_m','max_rotation_deg','max_z_m','max_tilt_deg'))
                     options.append((score,sum(b['rms']**2 for b in (*ob,*cb)),cb,ob,links,alignments))
         if not options:continue
         options.sort(key=lambda x:(x[0],x[1]));best=options[0]
-        if any(distance(best[5][0],v[5][0])[0]>.01 or distance(best[5][0],v[5][0])[1]>1. for v in options[1:]):
+        if any(alignment_ambiguous(best[5][0],v[5][0],support) for v in options[1:]):
             ambiguous=True;continue
         ranked.append((best[0],best[1],tuple(r['id'] for r in currents),currents,best))
     if ranked:
@@ -164,6 +210,8 @@ def propose(old_reference,current_rows):
                     corner_rms_at_960=[b['rms'] for b in (*best[3],*best[2])],
                     alignment_consistency=dict(max_translation_m=best[0][0],max_rotation_deg=best[0][1],
                                                max_z_m=best[0][2],max_tilt_deg=best[0][3]),
+                    alignment_evaluation='all_three_current_body_positions',
+                    alignment_support_body_positions=[r['body'][:3,3].tolist() for r in currents],
                     link_measurements_use_only_own_endpoint_pixels=True,shared_fit_used=False), 'three_independent_measured_links'
     if ambiguous:return None,'multiple_consistent_planar_branches'
     return None,'three_view_alignment_disagreement_or_baseline'

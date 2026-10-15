@@ -1,0 +1,65 @@
+{
+  "schema": "wbrov.repository-evidence-hashes.v1",
+  "note": "Hashes refer to the delivered local candidate package. Binary overlays, recordings and raw logs are not uploaded to this source repository.",
+  "archives": {
+    "build_and_replay_tools.zip": {
+      "sha256": "1f80cf2919f0150dbce84f0a523a66bdbd023b386ece3790477eda4caf110e5c",
+      "bytes": 10739
+    },
+    "evidence_116104d9cf8b.zip": {
+      "sha256": "93c63106f875ee62ab71cb46ce915c084216d2f5b23e17f515ee1fd046803509",
+      "bytes": 4684603
+    },
+    "native_overlay_33599d01fbf4.zip": {
+      "sha256": "f0f1838ddd7317f04b77710006b09ee69662468dc3baa2b89acec3430490e364",
+      "bytes": 7570196
+    },
+    "replay_f4da20f81399.zip": {
+      "sha256": "7c182290a21966093b3c67b834d7c19b3719a0bfd59d23dac17c192aefb2299c",
+      "bytes": 19930
+    },
+    "source_8ba1c4732d33.zip": {
+      "sha256": "6b8a50125333574029d5d6202a15e9e3cbb4467c08277107c7af821742e02dac",
+      "bytes": 477861
+    },
+    "supplemental_evidence.zip": {
+      "sha256": "4d898bb37dfd7a5be7c72e6efde244f76229c6ffe496112eb2c6d8c12d75dd21",
+      "bytes": 107327
+    },
+    "WBROV_submap_tag_candidate_20261015.zip": {
+      "sha256": "fce2cb74700e184074b22380206e1ce8116f9db2c04fbfedf49efe194bbc10ba",
+      "bytes": 12911275
+    }
+  },
+  "validation_summary_sha256": "94cc0a94a9f5efc92a1a736b371ca773262e029c873c13575d5170d185b956b2",
+  "native_test_logs": {
+    "certificate_build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "certificate_test.log": "4e25968e426c797a9cf33e53f75729b0e40d9545e17b742915d6393cb2b1a351",
+    "depth_configure.log": "1dc6967a0cfafa53b5376c5b1f2c914e99e4d051d09980a3197e9d5519c32bc7",
+    "depth_build.log": "ca011f2cff1db079132a3ab6c5d3525645dc6ed96f1cf0daf2bfe1b6f79b09d6",
+    "depth_test.log": "ed5a70f3e179d8b45e5128b8b79d4ce30dd2a8841719481b8d5947f80350e0d3",
+    "core_compile.log": "b2626b68b56b913d4a9dd0c85b928d85f08f1fede00b374be07292168809f2b2",
+    "f2m_compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "core_link.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "core_ldd.log": "ee9b017768c507f138eaa0ba0413af040d221027e08f286216b25d951bb7caa0",
+    "wrapper_configure.log": "687d83dffb673a46f06c53bbaaf16aed1bbbcdc1d5b9ac391bedec27e5f3eba3",
+    "core_native_fixture_build.log": "95014aaa2d2a2e680a272898ac5462d6a2f7ed39e39faf770f838512e420eed7",
+    "visual_native_tests.log": "66147daa9b09c38b63ee85ff8217fa61dddb97382775bf00f12b649a9c6b5711",
+    "prepare_close_native_tests.log": "ff6960e68cad508ca698015d4cd0efa1f8add743f1f1958c6f8012fcad7aaf31",
+    "reseed_private_native_tests.log": "e4f52a40eb4b876d59157c72a2802e38f869fb1c2740c3343872558d4aa1bde4",
+    "resume_wrapper_build.log": "9ab03fdc4abd8dfd0e36d62755fa43b81580ebafb2298135c44f20ee8710429d",
+    "resume_wrapper_gate_tests.log": "886f674db3f65103871d835566c67be672f1677f5d9f5b56e7309597988ca767",
+    "resume_wrapper_native_tests.log": "7ee764901c3c9637ce0ad3caf439494a0133f9fbed77430a7ae0b0f6be2f6ebf",
+    "resume_guidance_check.log": "77ae8a8ad6e6e0b55b245ac8e971ad203f9a8ff7f0ee46f76c98d53a8b1b49f0",
+    "display_fix_guidance_check.log": "77ae8a8ad6e6e0b55b245ac8e971ad203f9a8ff7f0ee46f76c98d53a8b1b49f0",
+    "display_fix_submap_guidance_check.log": "b00d79536145bd714af6bce9eb9b6b8c39d50e11fe6283c329638aeb042113f4",
+    "display_fix_submap_guidance_tests.log": "95575ef3c8ded067c8d2c863b857192fd97304ab1c880e51f5a77d2634c1027f",
+    "display_fix_tag_observing_tests.log": "0044490225a51e2d7c104ae236051591e13f67be2e66db954a4e33d7ea60663d",
+    "tag_fixture_fix_tag_visualization_tests.log": "a9a07dc4460bd36a2d6753f9782b7c3f9cbc14e86f0414b37121d23693ddc292",
+    "startup_fix_check.log": "b00d79536145bd714af6bce9eb9b6b8c39d50e11fe6283c329638aeb042113f4",
+    "startup_fix_ros_smoke.log": "1c2ff723b278ed3723095399854f3a36f67bd5b49f9b00ac4daae4d41aaf4964",
+    "display_rate_fix_check.log": "b00d79536145bd714af6bce9eb9b6b8c39d50e11fe6283c329638aeb042113f4",
+    "display_rate_fix_ros_smoke.log": "abc5561e68a8b03fece108d71a96f1f3a049c7c12a06cba8437d6fdd16f3c871"
+  },
+  "return_recovery_diagnostic_sha256": "a9752a566c32447b1b06fac1fe79b2e2923cb06a5f40b8ba0d0b7f8f9f20cf9d"
+}

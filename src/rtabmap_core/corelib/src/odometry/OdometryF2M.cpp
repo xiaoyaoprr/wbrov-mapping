@@ -52,6 +52,94 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	#define ISFINITE(value) std::isfinite(value)
 #endif
 
+// WBROV_DEPTH_RECOVERY_CONTEXT_V1: private state, no OdometryF2M ABI change.
+#include "DepthGeometryRecovery.h"
+#include <memory>
+#include <mutex>
+#include <cstdlib>
+#include <cerrno>
+
+namespace {
+struct WbrovDepthContext {
+    std::mutex mutex;
+    wbrov_depth::FixedVisualAnchor anchor;
+    wbrov_depth::Config config;
+    bool enabled = false;
+};
+std::mutex wbrovDepthRegistryMutex;
+std::map<const void *,std::shared_ptr<WbrovDepthContext> > wbrovDepthRegistry;
+
+bool wbrovDepthEnv(const char *key,double &out) {
+    const char *s=std::getenv(key);if(!s)return true;
+    char *end=nullptr;errno=0;const double value=std::strtod(s,&end);
+    if(errno || !end || *end!='\0' || end==s || !std::isfinite(value))return false;
+    out=value;return true;
+}
+std::shared_ptr<WbrovDepthContext> wbrovDepthContext(
+        const void *owner,const rtabmap::ParametersMap &parameters) {
+    std::lock_guard<std::mutex> registry(wbrovDepthRegistryMutex);
+    auto existing=wbrovDepthRegistry.find(owner);
+    if(existing!=wbrovDepthRegistry.end())return existing->second;
+    std::shared_ptr<WbrovDepthContext> c(new WbrovDepthContext);
+    const char *on=std::getenv("WBROV_DEPTH_RECOVERY");
+    c->enabled=on && std::string(on)=="1";
+    int filter=rtabmap::Parameters::defaultOdomFilteringStrategy();
+    rtabmap::Parameters::parse(parameters,rtabmap::Parameters::kOdomFilteringStrategy(),filter);
+    bool force3dof=rtabmap::Parameters::defaultRegForce3DoF();
+    rtabmap::Parameters::parse(parameters,rtabmap::Parameters::kRegForce3DoF(),force3dof);
+    bool holonomic=rtabmap::Parameters::defaultOdomHolonomic();
+    rtabmap::Parameters::parse(parameters,rtabmap::Parameters::kOdomHolonomic(),holonomic);
+    // The anchor is the raw F2M pose. Outer pose filtering would change that
+    // reference after this method returns; do not silently accept that contract.
+    c->enabled=c->enabled && filter==0 && !force3dof && holonomic;
+    struct Setting {const char *key;double *value;};
+    Setting settings[]={
+        {"WBROV_DEPTH_RECOVERY_MIN_DEPTH",&c->config.minimumDepth},
+        {"WBROV_DEPTH_RECOVERY_MAX_DEPTH",&c->config.maximumDepth},
+        {"WBROV_DEPTH_RECOVERY_MAX_AGE",&c->config.maximumAge},
+        {"WBROV_DEPTH_RECOVERY_MAX_TRANSLATION",&c->config.maximumTranslation},
+        {"WBROV_DEPTH_RECOVERY_MAX_ROTATION_RAD",&c->config.maximumRotation},
+        {"WBROV_DEPTH_RECOVERY_GRAVITY_TILT_ERROR_RAD",&c->config.maximumGravityTiltError},
+        {"WBROV_DEPTH_RECOVERY_MAX_POINT_DISTANCE",&c->config.maximumPointDistance},
+        {"WBROV_DEPTH_RECOVERY_MAX_DEPTH_EDGE",&c->config.maximumDepthEdge},
+        {"WBROV_DEPTH_RECOVERY_MAX_RMS",&c->config.maximumRms},
+        {"WBROV_DEPTH_RECOVERY_MIN_OVERLAP",&c->config.minimumOverlap},
+        {"WBROV_DEPTH_RECOVERY_MIN_HESSIAN_RATIO",&c->config.minimumHessianRatio},
+        {"WBROV_DEPTH_RECOVERY_MIN_GRID_COVERAGE",&c->config.minimumGridCoverage},
+        {"WBROV_DEPTH_RECOVERY_MAX_ROUNDTRIP_TRANSLATION",&c->config.maximumRoundTripTranslation},
+        {"WBROV_DEPTH_RECOVERY_MAX_ROUNDTRIP_ROTATION_RAD",&c->config.maximumRoundTripRotation}};
+    bool valid=true;for(const Setting &s:settings)valid=wbrovDepthEnv(s.key,*s.value)&&valid;
+    double minimumCorrespondences=c->config.minimumCorrespondences;
+    double iterations=c->config.iterationsPerLevel;
+    valid=wbrovDepthEnv("WBROV_DEPTH_RECOVERY_MIN_CORRESPONDENCES",minimumCorrespondences)&&valid;
+    valid=wbrovDepthEnv("WBROV_DEPTH_RECOVERY_ITERATIONS",iterations)&&valid;
+    if(minimumCorrespondences<30 || minimumCorrespondences>100000 || std::floor(minimumCorrespondences)!=minimumCorrespondences ||
+       iterations<1 || iterations>30 || std::floor(iterations)!=iterations)valid=false;
+    if(valid){c->config.minimumCorrespondences=int(minimumCorrespondences);c->config.iterationsPerLevel=int(iterations);}
+    c->enabled=c->enabled&&valid&&c->config.valid();
+    wbrovDepthRegistry[owner]=c;
+    UINFO("[DEPTH_RECOVERY] enabled=%s inertia_translation=false anchor=last_visual max_age=%.3f min_hessian=%.6g",
+          c->enabled?"true":"false",c->config.maximumAge,c->config.minimumHessianRatio);
+    return c;
+}
+void wbrovDepthErase(const void *owner) {
+    std::lock_guard<std::mutex> registry(wbrovDepthRegistryMutex);
+    wbrovDepthRegistry.erase(owner);
+}
+wbrov_depth::Pose wbrovDepthPose(const rtabmap::Transform &t) {
+    wbrov_depth::Pose p=wbrov_depth::Pose::Identity();p.matrix()=t.toEigen4d();return p;
+}
+wbrov_depth::Frame wbrovDepthFrame(const rtabmap::SensorData &data) {
+    wbrov_depth::Frame f;f.stamp=data.stamp();
+    if(data.cameraModels().size()!=1 || data.depthRaw().empty())return f;
+    const rtabmap::CameraModel &camera=data.cameraModels()[0];
+    if(!camera.isValidForProjection() || camera.localTransform().isNull() ||
+       camera.imageWidth()!=data.depthRaw().cols || camera.imageHeight()!=data.depthRaw().rows)return f;
+    f.depth=data.depthRaw();f.fx=camera.fx();f.fy=camera.fy();f.cx=camera.cx();f.cy=camera.cy();
+    f.bodyFromCamera=wbrovDepthPose(camera.localTransform());return f;
+}
+} // anonymous namespace
+
 namespace rtabmap {
 
 OdometryF2M::OdometryF2M(const ParametersMap & parameters) :
@@ -173,6 +261,7 @@ OdometryF2M::OdometryF2M(const ParametersMap & parameters) :
 
 OdometryF2M::~OdometryF2M()
 {
+	wbrovDepthErase(this);
 	delete map_;
 	delete lastFrame_;
 	delete sba_;
@@ -183,6 +272,7 @@ OdometryF2M::~OdometryF2M()
 
 void OdometryF2M::reset(const Transform & initialPose)
 {
+	wbrovDepthErase(this);
 	Odometry::reset(initialPose);
 
 	UDEBUG("initialPose=%s", initialPose.prettyPrint().c_str());
@@ -1543,6 +1633,93 @@ Transform OdometryF2M::computeTransform(
 	{
 		UERROR("SensorData not valid!");
 	}
+
+    // WBROV_DEPTH_RECOVERY_HOOK_V1. Regular visual registration/BA has finished.
+    // Depth success does not mutate the visual map, BA state, or visual anchor.
+    {
+        const std::shared_ptr<WbrovDepthContext> depthContext=wbrovDepthContext(this,parameters_);
+        if(depthContext->enabled && regPipeline_->isImageRequired() && !regPipeline_->isScanRequired())
+        {
+            std::lock_guard<std::mutex> instanceLock(depthContext->mutex);
+            const wbrov_depth::Frame depthFrame=wbrovDepthFrame(data);
+            const Transform currentImu=imus().empty()?Transform():Transform::getTransform(imus(),data.stamp());
+            const bool hasImu=!currentImu.isNull();
+            Eigen::Matrix3d imuRotation=Eigen::Matrix3d::Identity();
+            if(hasImu)imuRotation=currentImu.toEigen4d().block<3,3>(0,0);
+            if(!output.isNull())
+            {
+                // A new confirmed visual observation alone can refresh anchor age.
+                depthContext->anchor.set(depthFrame,wbrovDepthPose(this->getPose()*output),hasImu,imuRotation);
+            }
+            else
+            {
+                const Transform predicted=this->getPose()*(guess.isNull()?Transform::getIdentity():guess);
+                wbrov_depth::Pose recovered;
+                wbrov_depth::Matrix6 worldCovariance;
+                const wbrov_depth::Result candidate=depthContext->anchor.recover(
+                    depthFrame,wbrovDepthPose(predicted),hasImu,imuRotation,
+                    depthContext->config,recovered,worldCovariance);
+                if(candidate.accepted)
+                {
+                    Eigen::Affine3d affine(recovered.matrix());
+                    output=this->getPose().inverse()*Transform::fromEigen3d(affine);
+                    // Incremental pose covariance is expressed in previous-body
+                    // coordinates; the evaluator's left tangent is anchor-camera.
+                    const wbrov_depth::Matrix6 a=wbrov_depth::adjoint(wbrovDepthPose(this->getPose().inverse()));
+                    const wbrov_depth::Matrix6 covariance=a*worldCovariance*a.transpose();
+                    regInfo=RegistrationInfo();
+                    regInfo.covariance=cv::Mat(6,6,CV_64FC1);
+                    for(int r=0;r<6;++r)for(int c=0;c<6;++c)regInfo.covariance.at<double>(r,c)=covariance(r,c);
+                    // Keep actual visual inliers at zero. Consumers recognize
+                    // this visual-only F2M build's nonzero geometric metrics.
+                    regInfo.icpCorrespondences=candidate.correspondences;
+                    regInfo.icpInliersRatio=candidate.overlap;
+                    regInfo.icpStructuralComplexity=candidate.hessianRatio;
+                    regInfo.icpStructuralDistribution=candidate.gridCoverage;
+                    regInfo.icpRMS=candidate.rms;
+                    regInfo.icpTranslation=output.getNorm();
+                    regInfo.icpRotation=wbrov_depth::angle(output.toEigen4d().block<3,3>(0,0));
+                    if(info) {
+                        // Do not expose a failed visual BA trial as a successful
+                        // depth solve. These maps are output diagnostics only.
+                        info->localBundleModels.clear();
+                        info->localBundlePoses.clear();
+                        info->localBundleMaxKeyFramesForInlier=0;
+                    }
+                    UINFO("[DEPTH_RECOVERY] accepted=true source=depth_geometry stamp=%.9f anchor=%.9f correspondences=%d overlap=%.6f hessian_ratio=%.9g coverage=%.6f rms=%.6f gravity_checked=%s inertial_translation=false",
+                        data.stamp(),depthContext->anchor.stamp(),candidate.correspondences,
+                        candidate.overlap,candidate.hessianRatio,candidate.gridCoverage,candidate.rms,
+                        candidate.gravityChecked?"true":"false");
+                }
+                else
+                {
+                    UINFO("[DEPTH_RECOVERY] accepted=false stamp=%.9f reason=%s inertial_translation=false",
+                        data.stamp(),candidate.reason.c_str());
+                }
+            }
+        }
+    }
+
+    // Current input camera dimensions must remain observable in full OdomInfo,
+    // including initialization and depth-only success. Conversion requires equal
+    // pose/model key sets. These are real accepted-frame diagnostics, not new BA
+    // constraints, and no internal bundle/visual-map state is changed here.
+    if(info && !output.isNull())
+    {
+        const bool oneCamera=data.cameraModels().size()==1;
+        const bool actualDimensions=oneCamera && !data.imageRaw().empty() && !data.depthRaw().empty() &&
+            data.cameraModels()[0].isValidForProjection() &&
+            data.cameraModels()[0].imageWidth()==data.imageRaw().cols &&
+            data.cameraModels()[0].imageHeight()==data.imageRaw().rows &&
+            data.depthRaw().size()==data.imageRaw().size();
+        if(actualDimensions) {
+            info->localBundleModels[lastFrame_->id()]=data.cameraModels();
+            info->localBundlePoses[lastFrame_->id()]=this->getPose()*output;
+        } else {
+            info->localBundleModels.clear();
+            info->localBundlePoses.clear();
+        }
+    }
 
 	if(info)
 	{

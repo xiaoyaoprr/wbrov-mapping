@@ -37,8 +37,8 @@ Visualization Manager:
       Position Transformer: XYZ
       Use rainbow: false
     - Class: rviz_default_plugins/PointCloud2
-      Enabled: true
-      Name: Live_RGBD_Cloud
+      Enabled: false
+      Name: Diagnostic_Live_RGBD_Cloud
       Topic:
         Value: /rtabmap/frame_cloud
         Depth: 2
@@ -94,12 +94,21 @@ Visualization Manager:
       Length: 0.15
       Radius: 0.01
     - Class: rviz_default_plugins/MarkerArray
-      Enabled: true
+      Enabled: false
       Name: AprilTag_Current
       Topic:
         Value: /apriltag/markers
         Depth: 5
         Durability Policy: Volatile
+        Reliability Policy: Reliable
+        History Policy: Keep Last
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: AprilTag_Registered_History_From_Receipts
+      Topic:
+        Value: /wbrov/tags/main_markers
+        Depth: 1
+        Durability Policy: Transient Local
         Reliability Policy: Reliable
         History Policy: Keep Last
     - Class: rviz_default_plugins/MarkerArray
@@ -136,6 +145,28 @@ Visualization Manager:
       Min Value: 0
       Max Value: 1
       Median window: 5
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Name: Last_Trusted_View_Return_Reference
+      Topic:
+        Value: /wbrov/mapping/recovery_reference_image
+        Depth: 1
+        Durability Policy: Transient Local
+        Reliability Policy: Reliable
+        History Policy: Keep Last
+      Normalize Range: true
+      Min Value: 0
+      Max Value: 1
+      Median window: 5
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: Mapping_Continuity_Status
+      Topic:
+        Value: /mapping/continuity_display
+        Depth: 1
+        Durability Policy: Transient Local
+        Reliability Policy: Reliable
+        History Policy: Keep Last
     - Class: rviz_default_plugins/TF
       Enabled: false
       Name: Diagnostic_All_TF_Frames

@@ -119,6 +119,79 @@ using namespace rtabmap;
 
 namespace rtabmap_slam {
 
+static long long mappingSteadyNs()
+{
+    return std::chrono::duration_cast<std::chrono::nanoseconds>(
+        std::chrono::steady_clock::now().time_since_epoch()).count();
+}
+
+static MappingContinuityGate::Evidence mappingEvidence(const rtabmap_msgs::msg::OdomInfo & msg,int expectedWidth,int expectedHeight)
+{
+    MappingContinuityGate::Evidence e;
+    e.lost=msg.lost;
+    const auto & t=msg.transform.translation;
+    const auto & q=msg.transform.rotation;
+    const double qn=q.x*q.x+q.y*q.y+q.z*q.z+q.w*q.w;
+    e.finiteMotion=std::isfinite(t.x)&&std::isfinite(t.y)&&std::isfinite(t.z)&&
+        std::isfinite(qn)&&std::fabs(qn-1.0)<=1e-3;
+    e.covarianceValid=MappingContinuityGate::covarianceHealthy(msg.covariance);
+    bool dimensionsSeen=false,dimensionsCorrect=expectedWidth>0&&expectedHeight>0;
+    for(const auto & bundle:msg.local_bundle_models)for(const auto & model:bundle.models) {
+        dimensionsSeen=true;
+        dimensionsCorrect=dimensionsCorrect && model.camera_info.width==static_cast<unsigned>(expectedWidth) &&
+            model.camera_info.height==static_cast<unsigned>(expectedHeight);
+    }
+    e.visualGeometry=msg.inliers>=15 && msg.matches>=msg.inliers &&
+        static_cast<double>(msg.inliers)/static_cast<double>(std::max(1,msg.matches))>=0.25;
+    if(e.visualGeometry)
+    {
+        std::map<int,std::array<double,3>> spatial;
+        if(msg.local_map_keys.size()!=msg.local_map_values.size() || msg.words_keys.size()!=msg.words_values.size())
+            e.visualGeometry=false;
+        else
+        {
+            for(std::size_t i=0;i<msg.local_map_keys.size();++i) {
+                const auto & p=msg.local_map_values[i];spatial.emplace(msg.local_map_keys[i],std::array<double,3>{{p.x,p.y,p.z}});
+            }
+            const std::set<int> inliers(msg.word_inliers.begin(),msg.word_inliers.end());
+            std::set<int> used;
+            std::vector<std::array<double,5>> points;
+            const std::array<double,4> bounds{{0,static_cast<double>(expectedWidth),0,static_cast<double>(expectedHeight)}};
+            for(std::size_t i=0;i<msg.words_keys.size();++i) {
+                const auto & p=msg.words_values[i].pt;
+                if(!std::isfinite(p.x)||!std::isfinite(p.y))continue;
+                const int id=msg.words_keys[i];const auto xyz=spatial.find(id);
+                if(inliers.count(id) && xyz!=spatial.end() && used.insert(id).second)
+                    points.push_back({{p.x,p.y,xyz->second[0],xyz->second[1],xyz->second[2]}});
+            }
+            e.visualGeometry=MappingContinuityGate::visualSupportHealthy(points,bounds);
+        }
+    }
+    // This is the pinned F2M measured-depth fallback contract, not inference
+    // from a missing visual solution. Ordinary VO keeps its visual inliers.
+    e.depthGeometry=msg.type==0 && msg.inliers==0 && msg.matches==0 &&
+        msg.icp_correspondences>=80 && std::isfinite(msg.icp_inliers_ratio) &&
+        msg.icp_inliers_ratio>=0.55f && msg.icp_inliers_ratio<=1.0f &&
+        std::isfinite(msg.icp_structural_complexity) && msg.icp_structural_complexity>=1e-4f &&
+        msg.icp_structural_complexity<=1.0f && std::isfinite(msg.icp_structural_distribution) &&
+        msg.icp_structural_distribution>=0.5f && msg.icp_structural_distribution<=1.0f;
+    if(!dimensionsSeen || !dimensionsCorrect) {e.visualGeometry=false;e.depthGeometry=false;}
+    e.recoveryGeometry=(e.visualGeometry && msg.inliers>=25 &&
+        static_cast<double>(msg.inliers)/static_cast<double>(std::max(1,msg.matches))>=0.35) ||
+        (e.depthGeometry && msg.icp_correspondences>=100 && msg.icp_inliers_ratio>=0.65f &&
+         msg.icp_structural_complexity>=2e-4f && msg.icp_structural_distribution>=0.67f);
+    return e;
+}
+
+static MappingContinuityGate::Evidence mappingEvidence(const rtabmap::OdometryInfo & info,int expectedWidth,int expectedHeight)
+{
+    rtabmap_msgs::msg::OdomInfo msg;
+    rtabmap_conversions::odomInfoToROS(info,msg,false);
+    return mappingEvidence(msg,expectedWidth,expectedHeight);
+}
+
+
+
 namespace
 {
 
@@ -1348,6 +1421,10 @@ CoreWrapper::CoreWrapper(const rclcpp::NodeOptions & options) :
 			"reset_quarantine_enabled", resetQuarantineEnabled_);
 	resetQuarantineLostCount_ = this->declare_parameter(
 			"reset_quarantine_lost_count", resetQuarantineLostCount_);
+	mappingContinuityVoWidth_ = this->declare_parameter("mapping_continuity_vo_width", mappingContinuityVoWidth_);
+	mappingContinuityVoHeight_ = this->declare_parameter("mapping_continuity_vo_height", mappingContinuityVoHeight_);
+    if(mappingContinuityVoWidth_<=0 || mappingContinuityVoHeight_<=0)
+        throw std::runtime_error("mapping continuity requires pinned positive VO image dimensions");
 	resetQuarantineOdomInfoMaxAgeSec_ = this->declare_parameter(
 			"reset_quarantine_odom_info_max_age_sec", resetQuarantineOdomInfoMaxAgeSec_);
 	resetQuarantineMaxUnannouncedTranslation_ = this->declare_parameter(
@@ -1376,6 +1453,11 @@ CoreWrapper::CoreWrapper(const rclcpp::NodeOptions & options) :
 			rtabmap::Transform::fromString(resetQuarantineExpectedSensorToBase_);
 	safeRelocalizationEnabled_ = this->declare_parameter(
 			"safe_relocalization_enabled", safeRelocalizationEnabled_);
+	jumpQuarantineEnabled_ = this->declare_parameter("unannounced_jump_quarantine_enabled", false);
+	if(jumpQuarantineEnabled_ && (!resetQuarantineEnabled_ || !safeRelocalizationEnabled_))
+	{
+		throw std::runtime_error("unannounced jump isolation requires source-bound quarantine and safe relocalization");
+	}
 	safeRelocalizationStartNewMapOnFirstUpdate_ = this->declare_parameter(
 			"safe_relocalization_start_new_map_on_first_update",
 			safeRelocalizationStartNewMapOnFirstUpdate_);
@@ -1625,6 +1707,21 @@ CoreWrapper::CoreWrapper(const rclcpp::NodeOptions & options) :
         "/wbrov/accepted_image_input", rclcpp::QoS(rclcpp::KeepLast(64)).reliable().transient_local());
 	resetEpochPub_ = this->create_publisher<std_msgs::msg::UInt64>(
 			"/wbrov/reset_epoch", rclcpp::QoS(1).reliable().transient_local());
+	if(safeRelocalizationEnabled_)
+    {
+        submapPublisher_.reset(new SubmapPublisher(*this));
+        submapHeartbeatTimer_=this->create_wall_timer(std::chrono::milliseconds(1000),[this]() {submapPublisher_->heartbeat();});
+        mappingContinuityStatusPub_ = this->create_publisher<std_msgs::msg::String>(
+            "/wbrov/mapping_continuity/status", rclcpp::QoS(1).reliable().transient_local());
+        mappingContinuityTextPub_ = this->create_publisher<std_msgs::msg::String>(
+            "/wbrov/mapping_continuity/text", rclcpp::QoS(1).reliable().transient_local());
+        mappingRecoveryReferencePub_ = this->create_publisher<sensor_msgs::msg::Image>(
+            "/wbrov/mapping/recovery_reference_image", rclcpp::QoS(1).reliable().transient_local());
+        mappingContinuityTimer_ = this->create_wall_timer(std::chrono::milliseconds(100), [this]() {
+            mappingContinuityGate_.tick(mappingSteadyNs(), now().nanoseconds());
+            publishMappingContinuityStatus();
+        });
+    }
 	if(safeRelocalizationEnabled_)
 	{
 		safeRelocalizationStatusPub_ = this->create_publisher<std_msgs::msg::String>(
@@ -2196,7 +2293,8 @@ CoreWrapper::CoreWrapper(const rclcpp::NodeOptions & options) :
 			rclcpp::Rate r(1.0 / tfDelay);
 			while(tfThreadRunning_)
 			{
-				mapToOdomMutex_.lock();
+				withFreshGlobalPose([&]() {
+				std::lock_guard<std::mutex> mapLock(mapToOdomMutex_);
 				if(!odomFrameId_.empty())
 				{
 					geometry_msgs::msg::TransformStamped msg;
@@ -2206,7 +2304,7 @@ CoreWrapper::CoreWrapper(const rclcpp::NodeOptions & options) :
 					msg.header.stamp = now() + rclcpp::Duration::from_seconds(tfTolerance);
 					tfBroadcaster_->sendTransform(msg);
 				}
-				mapToOdomMutex_.unlock();
+				});
 				try {
 					r.sleep();
 				}
@@ -2722,6 +2820,12 @@ void CoreWrapper::defaultCallback(const sensor_msgs::msg::Image::ConstSharedPtr 
 
 bool CoreWrapper::odomUpdate(const nav_msgs::msg::Odometry & odomMsg, rclcpp::Time stamp)
 {
+	return odomUpdate(odomMsg, stamp, nullptr);
+}
+
+bool CoreWrapper::odomUpdate(const nav_msgs::msg::Odometry & odomMsg, rclcpp::Time stamp,
+		const rtabmap_msgs::msg::OdomInfo * authenticatedRgbdInfo)
+{
 	unsigned long long authenticatedContinuityChain = 0;
 	if(!paused_)
 	{
@@ -2836,6 +2940,28 @@ bool CoreWrapper::odomUpdate(const nav_msgs::msg::Odometry & odomMsg, rclcpp::Ti
 			const bool unexpectedReset = odom.isIdentity() || highCovariance ||
 					!std::isfinite(deltaTranslation) || !std::isfinite(deltaRotationDeg) ||
 					(excessiveDelta && !continuous);
+			// This overload is reached only after the complete RGB-D source,
+			// calibration and exact OdomInfo envelope is authenticated. A private
+			// epoch is NOT permission to connect either coordinate frame.
+			const bool eligibleJumpProbe = jumpQuarantineEnabled_ && authenticatedRgbdInfo &&
+					rclcpp::Time(authenticatedRgbdInfo->header.stamp).nanoseconds() == stamp.nanoseconds() &&
+					!authenticatedRgbdInfo->lost && authenticatedRgbdInfo->inliers >= 15 &&
+					!odom.isIdentity() && !highCovariance && authenticatedContinuityChain != 0;
+			bool isolatedJumpAdmission = false;
+			const bool lostRecoveryPending = resetQuarantineRecoveryPending_.load(std::memory_order_acquire);
+			if(jumpQuarantineEnabled_ && jumpQuarantineGate_.pendingStamp()>0 && !lostRecoveryPending)
+			{
+				const auto decision = jumpQuarantineGate_.observe(stamp.nanoseconds(),
+						authenticatedContinuityChain, eligibleJumpProbe);
+				isolatedJumpAdmission = decision != JumpQuarantineGate::Decision::Reject;
+				if(!isolatedJumpAdmission) return false;
+				if(decision == JumpQuarantineGate::Decision::Arm)
+				{
+					RCLCPP_WARN(this->get_logger(),
+							"[JUMP_QUARANTINE] replaced abandoned pending boundary after a complete stable new-chain streak; stamp_ns=%lld chain=%llu; backend queue exclusively owned, old graph unchanged",
+							static_cast<long long>(stamp.nanoseconds()), authenticatedContinuityChain);
+				}
+			}
 			if(excessiveDelta && continuous && !unexpectedReset)
 			{
 				RCLCPP_INFO(this->get_logger(),
@@ -2843,19 +2969,33 @@ bool CoreWrapper::odomUpdate(const nav_msgs::msg::Odometry & odomMsg, rclcpp::Ti
 						(stamp-lastPoseStamp_).seconds(), deltaTranslation, deltaRotationDeg,
 						authenticatedContinuityChain);
 			}
-			if(unexpectedReset &&
-					!resetQuarantineRecoveryPending_.load(std::memory_order_acquire))
+			if(unexpectedReset && !lostRecoveryPending && !isolatedJumpAdmission)
 			{
+				globalPublicationGate_.invalidate();
+                mappingContinuityGate_.invalidate("suspected odometry discontinuity");
 				resetQuarantineSuspectedReset_.store(true, std::memory_order_release);
-				RCLCPP_ERROR(this->get_logger(),
-						"reset quarantine rejected unannounced odometry reset/jump before graph update (identity=%s high_covariance=%s translation=%.6f limit=%.6f rotation_deg=%.6f limit=%.6f); waiting for an authenticated lost/recovered boundary or a continuous pose",
-						odom.isIdentity()?"true":"false", highCovariance?"true":"false",
-						deltaTranslation, resetQuarantineMaxUnannouncedTranslation_,
-						deltaRotationDeg, resetQuarantineMaxUnannouncedRotationDeg_);
-				return false;
+				const auto decision = jumpQuarantineGate_.observe(stamp.nanoseconds(),
+						authenticatedContinuityChain, eligibleJumpProbe && excessiveDelta && !continuous);
+				isolatedJumpAdmission = decision == JumpQuarantineGate::Decision::Arm;
+				if(isolatedJumpAdmission)
+				{
+					RCLCPP_WARN(this->get_logger(),
+							"[JUMP_QUARANTINE] armed separate recovery after three authenticated RGB-D probes on one continuous candidate chain; stamp_ns=%lld chain=%llu; lost_state_unchanged=true graph_not_yet_changed=true",
+							static_cast<long long>(stamp.nanoseconds()), authenticatedContinuityChain);
+				}
+				else
+				{
+					RCLCPP_ERROR(this->get_logger(),
+							"reset quarantine rejected unannounced odometry reset/jump before graph update (identity=%s high_covariance=%s translation=%.6f limit=%.6f rotation_deg=%.6f limit=%.6f); waiting for an authenticated lost/recovered boundary or a continuous pose",
+							odom.isIdentity()?"true":"false", highCovariance?"true":"false",
+							deltaTranslation, resetQuarantineMaxUnannouncedTranslation_,
+							deltaRotationDeg, resetQuarantineMaxUnannouncedRotationDeg_);
+					return false;
+				}
 			}
-			if(!unexpectedReset)
+			if(!unexpectedReset && !isolatedJumpAdmission)
 			{
+				jumpQuarantineGate_.resetCandidate();
 				resetQuarantineSuspectedReset_.store(false, std::memory_order_release);
 			}
 		}
@@ -3000,6 +3140,8 @@ bool CoreWrapper::odomTFUpdate(const std::string & odomFrameId, const rclcpp::Ti
 			if(unexpectedReset &&
 					!resetQuarantineRecoveryPending_.load(std::memory_order_acquire))
 			{
+				globalPublicationGate_.invalidate();
+                mappingContinuityGate_.invalidate("suspected odometry discontinuity");
 				resetQuarantineSuspectedReset_.store(true, std::memory_order_release);
 				RCLCPP_ERROR(this->get_logger(),
 						"reset quarantine rejected unannounced TF odometry reset/jump before graph update (identity=%s translation=%.6f limit=%.6f rotation_deg=%.6f limit=%.6f); waiting for an authenticated lost/recovered boundary or a continuous pose",
@@ -3101,9 +3243,19 @@ void CoreWrapper::commonMultiCameraCallback(
 	// lastPose back after t1 has already been admitted.
 	std::unique_lock<std::mutex> admissionLock(
 			resetQuarantineAdmissionMutex_, std::defer_lock);
+	std::unique_lock<UMutex> recoveryQueueLock(syncDataMutex_, std::defer_lock);
 	if(resetQuarantineEnabled_ || safeRelocalizationEnabled_)
 	{
 		admissionLock.lock();
+		if(jumpQuarantineEnabled_)
+		{
+			// Reserve the backend slot BEFORE consuming one-shot evidence or
+			// accepting any pose/boundary. Never arm a recovery then drop its
+			// image merely because processAsync owns the queue.
+			if(syncDataMutex_.lockTry() != 0) return;
+			recoveryQueueLock = std::unique_lock<UMutex>(syncDataMutex_, std::adopt_lock);
+			if(syncData_.valid || !syncTimer_->is_canceled()) return;
+		}
 		if(!odomMsg)
 		{
 			RCLCPP_ERROR_THROTTLE(this->get_logger(), *this->get_clock(), 5000,
@@ -3127,6 +3279,13 @@ void CoreWrapper::commonMultiCameraCallback(
 					this->get_logger(), *this->get_clock(), 5000,
 					"guarded RGB-D admission rejected a null, delayed pre-epoch or non-monotonic callback before consuming any one-shot evidence (stamp_ns=%lld epoch_start_ns=%lld last_pose_stamp_ns=%lld)",
 					admissionStampNs, epochStartStampNs, lastPoseStampNs);
+			return;
+		}
+		if(jumpQuarantineEnabled_ && rate_>0.0f && previousStamp_.seconds()>0.0 &&
+				rclcpp::Time(odomMsg->header.stamp).seconds()>previousStamp_.seconds() &&
+				rclcpp::Time(odomMsg->header.stamp).seconds()-previousStamp_.seconds()<1.0f/rate_)
+		{
+			// Throttled images must not create an unqueued recovery boundary.
 			return;
 		}
 		// The independent full-rate subscription owns publisher/GID validation
@@ -3170,7 +3329,8 @@ void CoreWrapper::commonMultiCameraCallback(
 				return;
 			}
 		}
-		else if(cameraInfoMsgs.size() == 0 || !odomUpdate(*odomMsg, cameraInfoMsgs[0].header.stamp))
+		else if(cameraInfoMsgs.size() == 0 || !odomUpdate(*odomMsg, cameraInfoMsgs[0].header.stamp,
+				(resetQuarantineEnabled_ && safeRelocalizationEnabled_) ? odomInfoMsg.get() : nullptr))
 		{
 			return;
 		}
@@ -3205,7 +3365,11 @@ void CoreWrapper::commonMultiCameraCallback(
 		}
 	}
 
-	if(syncTimer_->is_canceled() && syncDataMutex_.lockTry() == 0)
+	if(!recoveryQueueLock.owns_lock())
+	{
+		if(!syncTimer_->is_canceled() || syncDataMutex_.lockTry() != 0) return;
+		recoveryQueueLock = std::unique_lock<UMutex>(syncDataMutex_, std::adopt_lock);
+	}
 	{
 		UScopeMutex lock(lastPoseMutex_);
 		commonMultiCameraCallbackImpl(odomFrameId,
@@ -3228,7 +3392,6 @@ void CoreWrapper::commonMultiCameraCallback(
                 syncData_.imageIdentity = captureAuthenticatedImageIdentity(imageMsgs.front(), cameraInfoMsgs.front());
 			syncTimer_->reset();
 		}
-		syncDataMutex_.unlock();
 	}
 }
 
@@ -3932,6 +4095,11 @@ void CoreWrapper::process(
 		const OdometryInfo & odomInfo,
 		double timeMsgConversion, const rtabmap::ImageInputIdentity & imageIdentity)
 {
+	// processAsync already owns this recursive UMutex. Retain explicit
+	// ownership here as well: no callback can replace a pending boundary
+	// between preflight and graph update, including direct test invocations.
+	std::unique_lock<UMutex> recoveryQueueLock(syncDataMutex_, std::defer_lock);
+	if(jumpQuarantineEnabled_) recoveryQueueLock.lock();
 	UTimer timer;
 	if(safeRelocalizationEnabled_ && !verifySafeRelocalizationDatabasePathBinding())
 	{
@@ -4030,12 +4198,25 @@ void CoreWrapper::process(
 					recoveryStampNs);
 			return;
 		}
-		bool expectedRecoveryPending = true;
-		if(resetQuarantineRecoveryPending_.compare_exchange_strong(
+		long long jumpBoundaryStampNs = 0;
+		bool lostBoundary = false;
+		{
+			UScopeMutex poseLock(lastPoseMutex_);
+			jumpBoundaryStampNs = jumpQuarantineGate_.pendingStamp();
+			if(jumpBoundaryStampNs>0 && processStampNs<jumpBoundaryStampNs)
+			{
+				RCLCPP_WARN(this->get_logger(), "[JUMP_QUARANTINE] delayed pre-boundary RGB-D refused without consuming isolation");
+				return;
+			}
+			bool expectedRecoveryPending = true;
+			lostBoundary = resetQuarantineRecoveryPending_.compare_exchange_strong(
 				expectedRecoveryPending,
 				false,
 				std::memory_order_acq_rel,
-				std::memory_order_acquire))
+				std::memory_order_acquire);
+			if(lostBoundary || jumpBoundaryStampNs>0) jumpQuarantineGate_.reset();
+		}
+		if(lostBoundary || jumpBoundaryStampNs>0)
 		{
 			resetQuarantineSuspectedReset_.store(false, std::memory_order_release);
 			if(!rtabmap_.getLocalOptimizedPoses().empty())
@@ -4063,6 +4244,14 @@ void CoreWrapper::process(
 				resetQuarantineEpoch_.store(epoch, std::memory_order_release);
 				++safeRelocalizationGraphRevision_;
 				publishResetEpoch();
+				if(jumpBoundaryStampNs>0)
+				{
+					RCLCPP_WARN(this->get_logger(),
+							"[JUMP_QUARANTINE] isolated epoch=%llu map_id=%d process_stamp_ns=%lld boundary_stamp_ns=%lld; old graph preserved, no cross-boundary neighbor; verified Tag/visual alignment still required",
+							epoch, newMapId, processStampNs, jumpBoundaryStampNs);
+				}
+				if(lostBoundary)
+				{
 				RCLCPP_WARN(
 						this->get_logger(),
 					"reset quarantine: recovery epoch=%llu triggered map_id=%d on first valid RGB-D update at-or-after recovery stamp (process_stamp_ns=%lld recovery_stamp_ns=%lld lost_start_stamp_ns=%lld); no neighbor edge crosses the lost boundary",
@@ -4071,12 +4260,13 @@ void CoreWrapper::process(
 					processStampNs,
 					recoveryStampNs,
 					resetQuarantineLostStartStampNs_.load(std::memory_order_acquire));
+				}
 			}
 			else
 			{
 				RCLCPP_WARN(
 						this->get_logger(),
-						"reset quarantine observed a lost/recovered sequence before a graph existed; no map boundary was required");
+						"reset quarantine observed a recovery boundary before a graph existed; no map boundary was required");
 			}
 		}
 	}
@@ -4472,9 +4662,66 @@ void CoreWrapper::process(
 		}
 
 		timeMsgConversion += timer.ticks();
-		const unsigned long long epochBeforeProcess = rtabmap_.getResetEpoch();
+        // Loss never authorizes appending a new primary-map point. Continue
+        // processing only inside an already isolated Core recovery epoch, or
+        // after authenticated same-epoch tracking has passed recovery hysteresis.
         const bool receiptSourceValid = imageIdentity.headerStampNs == stamp.nanoseconds() &&
                 queuedImageIdentityStillValid(imageIdentity);
+        const auto exactContinuityEvidence=safeRelocalizationEnabled_?mappingEvidence(odomInfo,mappingContinuityVoWidth_,mappingContinuityVoHeight_):MappingContinuityGate::Evidence{};
+        const auto localSerial=mappingContinuityGate_.localContinuitySerial();
+        // An unknown motion gap is not an odometry edge. Once local geometry
+        // is healthy again, retain observations in a new independent submap,
+        // even if the VO reset countdown did not reach eight packets.
+        if(safeRelocalizationEnabled_ && receiptSourceValid && exactContinuityEvidence.usable() &&
+           mappingContinuityGate_.localGeometryReady(stamp.nanoseconds(),mappingSteadyNs(),now().nanoseconds()) &&
+           mappingHasWrittenLocalFrame_ && localSerial!=mappingWrittenLocalSerial_ &&
+           mappingWrittenLocalEpoch_==rtabmap_.getResetEpoch() && !rtabmap_.getLocalOptimizedPoses().empty())
+        {
+            discardPendingMappingRecovery("local geometry discontinuity; isolate before writing");
+            refreshSubmapVisualization(stamp,false);
+            const int newMapId=rtabmap_.triggerNewMapForContinuation();
+            if(newMapId<0) {
+                RCLCPP_ERROR(get_logger(),"Local submap boundary refused; no observation written");
+                publishMappingContinuityStatus();return;
+            }
+            resetQuarantineRecoveryPending_.store(false,std::memory_order_release);
+            resetQuarantineSuspectedReset_.store(false,std::memory_order_release);
+            {
+                std::lock_guard<std::mutex> imuAuthLock(resetQuarantineImuAuthMutex_);
+                UScopeMutex imuLock(imuMutex_);
+                resetQuarantineEpochStartStampNs_.store(stamp.nanoseconds(),std::memory_order_release);
+                managed_imu::cut(imus_,resetQuarantineImuStampNsByTime_,stamp.nanoseconds());
+                if(imus_.empty())imuFrameId_.clear();
+            }
+            clearSafeRelocalizationTokens();
+            resetQuarantineEpoch_.store(rtabmap_.getResetEpoch(),std::memory_order_release);
+            ++safeRelocalizationGraphRevision_;publishResetEpoch();
+            RCLCPP_WARN(get_logger(),"[LOCAL_SUBMAP_BOUNDARY] map_id=%d epoch=%llu after local estimation loss; no cross-gap neighbor or assumed main transform",newMapId,rtabmap_.getResetEpoch());
+        }
+        if(safeRelocalizationEnabled_ && pendingMappingRecovery_.active)
+        {
+            if(receiptSourceValid && exactContinuityEvidence.usable())observePendingMappingRecovery(data,odom,stamp.nanoseconds());
+            else if(!receiptSourceValid)discardPendingMappingRecovery("observation image identity no longer authenticated");
+            publishMappingContinuityStatus();
+            return; // Frozen private graph, including Kth observation and final commit frame.
+        }
+        if(safeRelocalizationEnabled_ && receiptSourceValid && exactContinuityEvidence.usable() &&
+           mappingContinuityGate_.beginMapObservation(rtabmap_.getResetEpoch(),rtabmap_.isCurrentMapFrameRegistered(),
+               mappingSteadyNs(),now().nanoseconds()))
+        {
+            observeRecoveredMainMap(data,odom,stamp.nanoseconds());
+            publishMappingContinuityStatus();
+            return; // Every observation-period frame, including Kth, is read-only.
+        }
+        if(safeRelocalizationEnabled_ && (!receiptSourceValid || !exactContinuityEvidence.usable() || !mappingContinuityGate_.processAllowed(
+            rtabmap_.isCurrentMapFrameRegistered(), stamp.nanoseconds(), mappingSteadyNs(), now().nanoseconds())))
+        {
+            publishMappingContinuityStatus();
+            return;
+        }
+        const auto continuityTicket=mappingContinuityGate_.ticket(stamp.nanoseconds());
+		const auto publicationTicket = globalPublicationGate_.ticket();
+		const unsigned long long epochBeforeProcess = rtabmap_.getResetEpoch();
         std::string receiptReason;
 		const bool processSucceeded = receiptSourceValid ?
                 rtabmap_.processWithAuthenticatedImage(data, odom, covariance, odomVelocity, externalStats, imageIdentity, receiptReason) :
@@ -4482,6 +4729,9 @@ void CoreWrapper::process(
 		const bool processEpochChanged = epochBeforeProcess != rtabmap_.getResetEpoch();
 		if(processSucceeded)
 		{
+			mappingHasWrittenLocalFrame_=true;
+			mappingWrittenLocalSerial_=localSerial;
+			mappingWrittenLocalEpoch_=rtabmap_.getResetEpoch();
 			if(safeRelocalizationEnabled_)
 			{
 				std::string freezeReason;
@@ -4509,6 +4759,8 @@ void CoreWrapper::process(
                     publishAcceptedImageReceipt(receipt);
                 else RCLCPP_DEBUG(this->get_logger(), "No accepted-image receipt: %s", receiptReason.c_str());
             }
+            if(receiptSourceValid && !rtabmap_.isCurrentMapFrameRegistered() && tryMappingVisualRecovery())
+                publishResetEpoch();
 			timeRtabmap = timer.ticks();
 			mapToOdomMutex_.lock();
 			mapToOdom_ = rtabmap_.getMapCorrection();
@@ -4523,6 +4775,31 @@ void CoreWrapper::process(
 
 			odomFrameId_ = odomFrameId;
 			mapToOdomMutex_.unlock();
+            mappingContinuityGate_.coreValidated(continuityTicket, rtabmap_.getResetEpoch(),
+                rtabmap_.isCurrentMapFrameRegistered(), receiptSourceValid && exactContinuityEvidence.usable(),
+                mappingSteadyNs(), now().nanoseconds());
+            publishMappingContinuityStatus();
+			refreshSubmapVisualization(stamp,exactContinuityEvidence.usable());
+			globalPublicationGate_.coreUpdated(publicationTicket, rtabmap_.getResetEpoch(),
+					receiptSourceValid && rtabmap_.isCurrentMapFrameRegistered() &&
+					!resetQuarantineRecoveryPending_.load(std::memory_order_acquire) &&
+					!resetQuarantineSuspectedReset_.load(std::memory_order_acquire));
+            if(safeRelocalizationEnabled_ && globalMapPublicationAllowed() && !data.imageRaw().empty())
+            {
+                const int nodeId=rtabmap_.getLastLocationId();
+                rtabmap::AcceptedImageReceipt retainedReceipt;
+                if(nodeId>0 && rtabmap_.getLocalOptimizedPoses().count(nodeId) &&
+                   rtabmap_.getAcceptedImageReceipt(nodeId,retainedReceipt) &&
+                   retainedReceipt.input.headerStampNs==stamp.nanoseconds() &&
+                   (data.imageRaw().type()==CV_8UC1 || data.imageRaw().type()==CV_8UC3))
+                {
+                    std_msgs::msg::Header header;header.stamp=stamp;header.frame_id=imageIdentity.sensorFrame;
+                    auto reference=cv_bridge::CvImage(header,data.imageRaw().channels()==1?"mono8":"bgr8",data.imageRaw()).toImageMsg();
+                    std::lock_guard<std::mutex> lock(mappingRecoveryReferenceMutex_);
+                    mappingLastTrustedImage_=std::move(reference);mappingLastTrustedNodeId_=nodeId;
+                    mappingLastTrustedEpoch_=rtabmap_.getResetEpoch();
+                }
+            }
 
 			if(data.id() < 0)
 			{
@@ -4530,6 +4807,8 @@ void CoreWrapper::process(
 			}
 			else
 			{
+				if(globalMapPublicationAllowed())
+				{
 				if(localizationPosePub_->get_subscription_count())
 				{
 				    bool localized = rtabmap_.getStatistics().loopClosureId()!=0 ||
@@ -4557,7 +4836,7 @@ void CoreWrapper::process(
 							poseMsg.pose.covariance.data()[28] = twoDMapping_?rtabmap::Registration::COVARIANCE_ANGULAR_EPSILON:9999;
 							poseMsg.pose.covariance.data()[35] = 9999;
 						}
-						localizationPosePub_->publish(poseMsg);
+						withFreshGlobalPose([&]() { localizationPosePub_->publish(poseMsg); });
 					}
 				}
 				std::map<int, rtabmap::Transform> filteredPoses(rtabmap_.getLocalOptimizedPoses().lower_bound(1), rtabmap_.getLocalOptimizedPoses().end());
@@ -4712,6 +4991,13 @@ void CoreWrapper::process(
 				}
 
 				timePublishMaps = timer.ticks();
+				}
+				else
+				{
+					// Info/private graph/receipts continue so Tag can register this epoch.
+					// Do not clear the last registered latched map or cache local coordinates.
+					this->publishStats(stamp);
+				}
 			}
 
 			// If not intermediate node
@@ -5881,6 +6167,10 @@ bool CoreWrapper::observeResetQuarantineOdomInfo(
 	// duplicates/out-of-order packets must never refresh freshness.
 	resetQuarantineLastOdomInfoSteadyNs_.store(nowSteadyNs, std::memory_order_release);
 	resetQuarantineOdomInfoSeen_.store(true, std::memory_order_release);
+    const auto continuityEvidence=mappingEvidence(msg,mappingContinuityVoWidth_,mappingContinuityVoHeight_);
+    mappingContinuityGate_.observe(stampNs, nowSteadyNs, now().nanoseconds(), continuityEvidence);
+    globalPublicationGate_.observe(stampNs, nowSteadyNs, continuityEvidence.usable());
+    publishMappingContinuityStatus();
 	if(msg.lost)
 	{
 		int previous = resetQuarantineLostStreak_.load(std::memory_order_relaxed);
@@ -6410,6 +6700,9 @@ void CoreWrapper::pauseRtabmapCallback(
 	else
 	{
 		paused_ = true;
+        globalPublicationGate_.invalidate();
+        mappingContinuityGate_.invalidate("mapping paused by operator");
+        publishMappingContinuityStatus();
 		RCLCPP_INFO(this->get_logger(), "rtabmap: paused!");
 		set_parameter(rclcpp::Parameter("is_rtabmap_paused", true));
 	}
@@ -6709,6 +7002,7 @@ void CoreWrapper::backupDatabaseCallback(
 
 void CoreWrapper::republishMaps()
 {
+	if(!globalMapPublicationAllowed()) return;
 	rclcpp::Time stamp = now();
 	mapsManager_.publishMaps(rtabmap_.getLocalOptimizedPoses(), stamp, mapFrameId_);
 
@@ -7037,6 +7331,7 @@ void CoreWrapper::getMapDataCallback(
 		const std::shared_ptr<rtabmap_msgs::srv::GetMap::Request> req,
 		std::shared_ptr<rtabmap_msgs::srv::GetMap::Response> res)
 {
+	if(!globalMapPublicationAllowed()) return;
 	RCLCPP_INFO(this->get_logger(), "rtabmap: Getting map (global=%s optimized=%s graphOnly=%s)...",
 			req->global_map?"true":"false",
 			req->optimized?"true":"false",
@@ -7082,6 +7377,7 @@ void CoreWrapper::getMapData2Callback(
 		const std::shared_ptr<rtabmap_msgs::srv::GetMap2::Request> req,
 		std::shared_ptr<rtabmap_msgs::srv::GetMap2::Response> res)
 {
+	if(!globalMapPublicationAllowed()) return;
 	RCLCPP_INFO(get_logger(), "rtabmap: Getting map (global=%s optimized=%s with_images=%s with_scans=%s with_user_data=%s with_grids=%s with_words=%s with_global_descriptors=%s)...",
 			req->global_map?"true":"false",
 			req->optimized?"true":"false",
@@ -7128,6 +7424,7 @@ void CoreWrapper::getMapCallback(
 		const std::shared_ptr<nav_msgs::srv::GetMap::Request>,
 		std::shared_ptr<nav_msgs::srv::GetMap::Response> res)
 {
+	if(!globalMapPublicationAllowed()) return;
 	// Make sure grid map cache is up to date (in case there is no subscriber on map topics)
 	std::map<int, Transform> poses = rtabmap_.getLocalOptimizedPoses();
 	mapsManager_.updateMapCaches(poses, rtabmap_.getMemory(), true, false);
@@ -7170,6 +7467,7 @@ void CoreWrapper::getProbMapCallback(
 		const std::shared_ptr<nav_msgs::srv::GetMap::Request>,
 		std::shared_ptr<nav_msgs::srv::GetMap::Response> res)
 {
+	if(!globalMapPublicationAllowed()) return;
 	// Make sure grid map cache is up to date (in case there is no subscriber on map topics)
 	std::map<int, Transform> poses = rtabmap_.getLocalOptimizedPoses();
 	mapsManager_.updateMapCaches(poses, rtabmap_.getMemory(), true, false);
@@ -7212,6 +7510,7 @@ void CoreWrapper::publishMapCallback(
 		const std::shared_ptr<rtabmap_msgs::srv::PublishMap::Request> req,
 		std::shared_ptr<rtabmap_msgs::srv::PublishMap::Response>)
 {
+	if(!globalMapPublicationAllowed()) return;
 	RCLCPP_INFO(this->get_logger(), "rtabmap: Publishing map...");
 
 	rclcpp::Time stampNow = now();
@@ -7980,6 +8279,7 @@ std::string CoreWrapper::publishSafeRelocalizationStatus(
 
 void CoreWrapper::clearSafeRelocalizationTokens()
 {
+	discardPendingMappingRecovery("recovery epoch or protocol changed before final commit");
 	// Reset only the per-epoch admission budget. Terminal token meanings are
 	// session-wide and immutable: a delayed duplicate from an earlier epoch
 	// must replay its original outcome, never acquire a second meaning after a
@@ -7989,6 +8289,15 @@ void CoreWrapper::clearSafeRelocalizationTokens()
 
 void CoreWrapper::clearSafeRelocalizationProtocolState(bool firstUpdateHandled, bool clearTokens)
 {
+	globalPublicationGate_.reset();
+	discardPendingMappingRecovery("mapping protocol reset before final commit");
+	mappingContinuityGate_.reset();
+    {
+        std::lock_guard<std::mutex> lock(mappingRecoveryReferenceMutex_);
+        mappingLastTrustedImage_.reset();mappingLastTrustedNodeId_=0;mappingLastTrustedEpoch_=0;
+    }
+    mappingObservationSeedCorrection_.setNull();mappingObservationLastCorrection_.setNull();
+	publishMappingContinuityStatus();
 	safeRelocalizationFirstUpdateHandled_ = firstUpdateHandled;
 	if(clearTokens)
 	{
@@ -7999,6 +8308,10 @@ void CoreWrapper::clearSafeRelocalizationProtocolState(bool firstUpdateHandled, 
 	resetQuarantineRecoveryPending_.store(false, std::memory_order_release);
 	resetQuarantineSuspectedReset_.store(false, std::memory_order_release);
 	resetQuarantineOdomInfoSeen_.store(false, std::memory_order_release);
+	{
+		UScopeMutex poseLock(lastPoseMutex_);
+		jumpQuarantineGate_.reset();
+	}
 	resetQuarantineLastOdomInfoSteadyNs_.store(0, std::memory_order_release);
 	resetQuarantineLastOdomInfoStampNs_.store(0, std::memory_order_release);
 	resetQuarantineLostStartStampNs_.store(0, std::memory_order_release);
@@ -8064,6 +8377,10 @@ void CoreWrapper::safeRelocalizationProposalCallback(
 		}
 	}
 	std::string sessionToken;
+	if(pendingMappingRecovery_.active &&
+	   (pendingMappingRecovery_.revision!=safeRelocalizationGraphRevision_ ||
+	    !mappingRecoveryCommitCurrent(pendingMappingRecovery_.ticket,pendingMappingRecovery_.epoch,pendingMappingRecovery_.requireProposal)))
+		discardPendingMappingRecovery("prepared recovery invalidated before proposal retry");
 	std::string transactionToken;
 	std::string producer;
 	std::string anchorDatabaseSha256;
@@ -8162,6 +8479,11 @@ void CoreWrapper::safeRelocalizationProposalCallback(
 			}
 			else if(terminal->second.second.empty())
 			{
+				if(pendingMappingRecovery_.active && pendingMappingRecovery_.token==transactionToken)
+				{
+					if(safeRelocalizationStatusPub_) {std_msgs::msg::String replay;replay.data=pendingMappingRecovery_.pendingStatus;safeRelocalizationStatusPub_->publish(replay);}
+					return;
+				}
 				RCLCPP_FATAL(this->get_logger(),
 						"Safe relocalization token is reserved without a terminal outcome; stopping instead of reporting an ambiguous rejection");
 				safeRelocalizationFatal_.store(true, std::memory_order_release);
@@ -8438,14 +8760,17 @@ void CoreWrapper::safeRelocalizationProposalCallback(
 	limits.maxNewRigidTiltError = (float)safeRelocalizationMaxNewRigidTiltError_;
 	limits.maxGravityResidualIncrease = (float)safeRelocalizationMaxGravityResidualIncrease_;
 	limits.maxInformationCondition = safeRelocalizationMaxInformationCondition_;
-	bool committed = false;
+    const auto continuityTicket=mappingContinuityGate_.ticket(
+        resetQuarantineLastOdomInfoStampNs_.load(std::memory_order_acquire));
+    bool sourceSnapshotReady=false;
+    rtabmap::AcceptedImageSourceContext commitContext;
 	try
 	{
         {
             // Authentication callbacks use auth mutexes before the lost/recovery
             // state mutex. The processing callback group excludes other graph
-            // mutations. Hold both kinds of state until Core finishes preflight
-            // and commit; never call a helper which reacquires these mutexes.
+            // mutations. Snapshot only; raw geometry/shadow work runs without
+            // these locks and checks source ownership again at final commit.
             std::scoped_lock authLocks(safeRelocalizationProposalAuthMutex_, resetQuarantineRgbdAuthMutex_,
                                        resetQuarantineOdomAuthMutex_, resetQuarantineOdomInfoAuthMutex_);
             UScopeMutex stateLock(resetQuarantineStateMutex_);
@@ -8497,7 +8822,7 @@ void CoreWrapper::safeRelocalizationProposalCallback(
                 auto hex = [](const std::array<uint8_t, RMW_GID_STORAGE_SIZE> & gid) {
                     std::string text;for(uint8_t byte : gid) text += uFormat("%02x", static_cast<unsigned int>(byte));return text;
                 };
-                rtabmap::AcceptedImageSourceContext context;
+                auto & context=commitContext;
                 context.sessionTokenSha256 = safeSha256(safeRelocalizationSessionToken_);
                 context.databaseSha256 = safeRelocalizationDatabaseSha256_;
                 context.rgbPublisherGidHex = hex(resetQuarantineRgbPublisherGid_);
@@ -8507,33 +8832,51 @@ void CoreWrapper::safeRelocalizationProposalCallback(
                     return receipt.input.sensorFrame == resetQuarantineExpectedSensorFrame_;
                 });
                 if(!expectedCamera) transactionReason = "image receipt camera frame differs from the managed sensor";
-                else committed = rtabmap_.addDepthCornerLinksWithAcceptedImagesAtomically(
-                    evidence, sourceEpoch, limits, acceptedImages, acceptedCorners, context, transactionReason);
+                else sourceSnapshotReady=true;
             }
         }
-		if(committed)
-		{
-		// Revision belongs to the graph commit itself, not to later display-cache
-		// work.  Reserve and materialize the exact terminal response before any
-		// operation which may throw, so an exact retransmit can never be answered
-		// as an ambiguous "already consumed" rejection while this Core is alive.
-			++safeRelocalizationGraphRevision_;
-		}
-		terminalStatus = publishSafeRelocalizationStatus(
-				committed?"committed":"rejected", transactionReason,
-				transactionToken, tagId, sourceEpoch, observerGraphRevision, evidence, false);
-		terminalReservation->second = terminalStatus;
-		if(committed)
-		{
-			mapToOdomMutex_.lock();
-			mapToOdom_ = rtabmap_.getMapCorrection();
-			mapToOdomMutex_.unlock();
-			publishResetEpoch();
-			mapsManager_.clear();
-			std::map<int, rtabmap::Transform> cachePoses = mapsManager_.updateMapCaches(
-					rtabmap_.getLocalOptimizedPoses(), rtabmap_.getMemory(), false, false);
-			mapsManager_.publishMaps(cachePoses, now(), mapFrameId_);
-		}
+        if(sourceSnapshotReady)
+        {
+            const auto commitAllowed=[&]() {
+                return mappingRecoveryCommitCurrent(continuityTicket,sourceEpoch,true);
+            };
+            rtabmap::Transform proposed;
+            if(pendingMappingRecovery_.active)transactionReason="another recovery candidate is already in its read-only observation period";
+            else if(rtabmap_.prepareDepthCornerRecoveryWithAcceptedImages(evidence,sourceEpoch,limits,
+                    acceptedImages,acceptedCorners,commitContext,commitAllowed,proposed,transactionReason) && !proposed.isNull() &&
+                    mappingContinuityGate_.beginCandidateObservation(continuityTicket,sourceEpoch,mappingSteadyNs(),now().nanoseconds()))
+            {
+                auto & pending=pendingMappingRecovery_;
+                pending.active=true;pending.requireProposal=true;pending.ticket=continuityTicket;pending.epoch=sourceEpoch;
+                pending.revision=safeRelocalizationGraphRevision_;pending.correction=pending.lastCorrection=proposed;pending.limits=limits;
+                pending.token=transactionToken;
+                pending.commit=[this,evidence,sourceEpoch,limits,acceptedImages,acceptedCorners,commitContext](std::string & why) {
+                    return rtabmap_.commitDepthCornerRecoveryWithObservedAlignment(evidence,sourceEpoch,limits,
+                        acceptedImages,acceptedCorners,commitContext,
+                        [this](const rtabmap::Transform & correction){return pendingMappingAlignmentAllowed(correction);},why);
+                };
+                pending.finish=[this,terminalReservation,transactionToken,tagId,sourceEpoch,observerGraphRevision,evidence]
+                        (bool accepted,const std::string & why) {
+                    if(!terminalReservation->second.empty()) {
+                        safeRelocalizationFatal_.store(true,std::memory_order_release);
+                        RCLCPP_FATAL(get_logger(),"Prepared recovery attempted a second terminal outcome");rclcpp::shutdown();return;
+                    }
+                    terminalReservation->second=publishSafeRelocalizationStatus(accepted?"committed":"rejected",why,
+                        transactionToken,tagId,sourceEpoch,observerGraphRevision,evidence,false);
+                    if(safeRelocalizationStatusPub_) {std_msgs::msg::String outcome;outcome.data=terminalReservation->second;safeRelocalizationStatusPub_->publish(outcome);}
+                };
+                pending.pendingStatus=publishSafeRelocalizationStatus("observing",
+                    "geometry prepared; graph remains uncommitted until five direct old-map observations pass",
+                    transactionToken,tagId,sourceEpoch,observerGraphRevision,evidence,false);
+                if(safeRelocalizationStatusPub_) {std_msgs::msg::String waiting;waiting.data=pending.pendingStatus;safeRelocalizationStatusPub_->publish(waiting);}
+                publishMappingContinuityStatus();
+                return; // Token remains reserved; exact retries replay this nonterminal status.
+            }
+            else if(transactionReason.empty())transactionReason="prepared candidate lost continuity before observation";
+        }
+        terminalStatus = publishSafeRelocalizationStatus(
+                "rejected", transactionReason, transactionToken, tagId, sourceEpoch, observerGraphRevision, evidence, false);
+        terminalReservation->second = terminalStatus;
 	}
 	catch(const std::exception & exception)
 	{
@@ -8572,6 +8915,7 @@ void CoreWrapper::getNodesInRadiusCallback(
 		const std::shared_ptr<rtabmap_msgs::srv::GetNodesInRadius::Request> req,
 		std::shared_ptr<rtabmap_msgs::srv::GetNodesInRadius::Response> res)
 {
+	if(!globalMapPublicationAllowed()) return;
 	RCLCPP_INFO(get_logger(), "Get nodes in radius (%f): node_id=%d pose=(%f,%f,%f)", req->radius, req->node_id, req->x, req->y, req->z);
 	std::map<int, Transform> poses;
 	std::map<int, float> dists;
@@ -8601,6 +8945,324 @@ void CoreWrapper::getNodesInRadiusCallback(
 	}
 }
 
+bool CoreWrapper::globalMapPublicationAllowed() const
+{
+	return !safeRelocalizationEnabled_ ||
+			(!safeRelocalizationFatal_.load(std::memory_order_acquire) &&
+			 !resetQuarantineRecoveryPending_.load(std::memory_order_acquire) &&
+			 !resetQuarantineSuspectedReset_.load(std::memory_order_acquire) &&
+             mappingContinuityGate_.mainMapAllowed(rtabmap_.getResetEpoch(), mappingSteadyNs(), now().nanoseconds()) &&
+			 globalPublicationGate_.mapAllowed(rtabmap_.getResetEpoch()));
+}
+
+void CoreWrapper::withFreshGlobalPose(const std::function<void()> & publish)
+{
+	if(!safeRelocalizationEnabled_) { publish(); return; }
+	const long long steadyNs = std::chrono::duration_cast<std::chrono::nanoseconds>(
+			std::chrono::steady_clock::now().time_since_epoch()).count();
+	const long long maxAgeNs = static_cast<long long>(
+			std::min(0.30, resetQuarantineOdomInfoMaxAgeSec_) * 1e9);
+	globalPublicationGate_.withFreshPose(steadyNs, now().nanoseconds(), maxAgeNs, [&]() {
+		// Atomics only here: never take Core/authentication/state locks while
+		// holding the gate. The TF callback takes mapToOdomMutex_ only.
+		if(!safeRelocalizationFatal_.load(std::memory_order_acquire) &&
+		   !resetQuarantineRecoveryPending_.load(std::memory_order_acquire) &&
+		   !resetQuarantineSuspectedReset_.load(std::memory_order_acquire))
+            mappingContinuityGate_.withFreshMainPose(steadyNs, now().nanoseconds(), publish);
+	});
+}
+
+bool CoreWrapper::mappingRecoveryCommitCurrent(MappingContinuityGate::Ticket ticket,
+        unsigned long long epoch, bool requireProposal)
+{
+    if(!safeRelocalizationEnabled_ || epoch!=rtabmap_.getResetEpoch())return false;
+    // Same ordering as the Tag transaction: authenticated source ownership,
+    // then loss/epoch state; the processing group exclusively owns Core.
+    std::scoped_lock authLocks(safeRelocalizationProposalAuthMutex_, resetQuarantineRgbdAuthMutex_, resetQuarantineOdomAuthMutex_, resetQuarantineOdomInfoAuthMutex_);
+    UScopeMutex stateLock(resetQuarantineStateMutex_);
+    if(safeRelocalizationFatal_.load(std::memory_order_acquire) ||
+       !safeRelocalizationDatabaseBindingValid_ || !resetQuarantineOdomInfoSeen_.load(std::memory_order_acquire) ||
+       resetQuarantineLostStreak_.load(std::memory_order_acquire)!=0 ||
+       resetQuarantineRecoveryPending_.load(std::memory_order_acquire) ||
+       resetQuarantineSuspectedReset_.load(std::memory_order_acquire) ||
+       resetQuarantineRgbPublisherCompromised_ || resetQuarantineDepthPublisherCompromised_ ||
+       resetQuarantineCameraInfoPublisherCompromised_ || resetQuarantineOdomPublisherCompromised_ ||
+       resetQuarantineOdomInfoPublisherCompromised_ ||
+       !resetQuarantineRgbPublisherBound_ || !resetQuarantineDepthPublisherBound_ ||
+       !resetQuarantineCameraInfoPublisherBound_ || !resetQuarantineOdomPublisherBound_ ||
+       !resetQuarantineOdomInfoPublisherBound_) return false;
+    auto endpointCurrent = [&](const std::string & topic, const std::string & expectedNode,
+            const std::string & expectedNamespace, const std::array<uint8_t,RMW_GID_STORAGE_SIZE> & gid) {
+        const auto publishers=this->get_publishers_info_by_topic(topic);
+        return publishers.size()==1 && publishers.front().node_name()==expectedNode &&
+            publishers.front().node_namespace()==expectedNamespace && publishers.front().endpoint_gid().size()==gid.size() &&
+            std::equal(gid.begin(),gid.end(),publishers.front().endpoint_gid().begin());
+    };
+    if(!endpointCurrent(resetQuarantineRgbSub_->get_topic_name(),resetQuarantineExpectedSensorNode_,resetQuarantineExpectedSensorNamespace_,resetQuarantineRgbPublisherGid_) ||
+       !endpointCurrent(resetQuarantineDepthSub_->get_topic_name(),resetQuarantineExpectedSensorNode_,resetQuarantineExpectedSensorNamespace_,resetQuarantineDepthPublisherGid_) ||
+       !endpointCurrent(resetQuarantineCameraInfoSub_->get_topic_name(),resetQuarantineExpectedSensorNode_,resetQuarantineExpectedSensorNamespace_,resetQuarantineCameraInfoPublisherGid_) ||
+       !endpointCurrent(resetQuarantineOdomSub_->get_topic_name(),resetQuarantineExpectedOdomInfoNode_,resetQuarantineExpectedOdomNamespace_,resetQuarantineOdomPublisherGid_) ||
+       !endpointCurrent(resetQuarantineOdomInfoSub_->get_topic_name(),resetQuarantineExpectedOdomInfoNode_,resetQuarantineExpectedOdomNamespace_,resetQuarantineOdomInfoPublisherGid_)) return false;
+
+    if(requireProposal && (!safeRelocalizationProposalPublisherBound_ || safeRelocalizationProposalPublisherCompromised_ ||
+       !endpointCurrent(safeRelocalizationProposalSub_->get_topic_name(),safeRelocalizationExpectedProposalNode_,
+           safeRelocalizationExpectedProposalNamespace_,safeRelocalizationProposalPublisherGid_)))return false;
+    return mappingContinuityGate_.recoveryCommitAllowed(ticket,epoch,mappingSteadyNs(),now().nanoseconds());
+}
+
+bool CoreWrapper::tryMappingVisualRecovery()
+{
+    if(!safeRelocalizationEnabled_ || rtabmap_.isCurrentMapFrameRegistered() || pendingMappingRecovery_.active)return false;
+    // Snapshot briefly, release all source/state locks during registration and
+    // shadow solves; final callback reacquires them immediately before mutation.
+    const auto sourceNs=resetQuarantineLastOdomInfoStampNs_.load(std::memory_order_acquire);
+    const auto ticket=mappingContinuityGate_.ticket(sourceNs);
+    const auto epoch=rtabmap_.getResetEpoch();
+    if(!mappingRecoveryCommitCurrent(ticket,epoch,false))return false;
+    auto hex=[](const std::array<uint8_t,RMW_GID_STORAGE_SIZE> & gid) {
+        std::string out;for(uint8_t byte:gid)out+=uFormat("%02x",static_cast<unsigned int>(byte));return out;
+    };
+    rtabmap::AcceptedImageSourceContext context;
+    context.sessionTokenSha256=safeSha256(safeRelocalizationSessionToken_);
+    context.databaseSha256=safeRelocalizationDatabaseSha256_;
+    {
+        std::scoped_lock lock(resetQuarantineRgbdAuthMutex_);
+        context.rgbPublisherGidHex=hex(resetQuarantineRgbPublisherGid_);
+        context.infoPublisherGidHex=hex(resetQuarantineCameraInfoPublisherGid_);
+    }
+    context.provenanceScope="managed_ros_rgbd";
+	rtabmap::Rtabmap::SafeRelocalizationLimits limits;
+	limits.maxHoldoutTranslation = (float)safeRelocalizationMaxTranslation_;
+	limits.maxHoldoutRotation = (float)safeRelocalizationMaxRotation_;
+	limits.minBridgeTranslation = (float)safeRelocalizationMinBridgeTranslation_;
+	limits.minBridgeRotation = (float)safeRelocalizationMinBridgeRotation_;
+	limits.maxAnchorZ = (float)safeRelocalizationMaxAnchorZ_;
+	limits.maxAnchorTilt = (float)safeRelocalizationMaxAnchorTilt_;
+	limits.maxOldPoseTranslation = (float)safeRelocalizationMaxOldPoseTranslation_;
+	limits.maxOldPoseRotation = (float)safeRelocalizationMaxOldPoseRotation_;
+	limits.maxNewRigidTranslation = (float)safeRelocalizationMaxNewRigidTranslation_;
+	limits.maxNewRigidRotation = (float)safeRelocalizationMaxNewRigidRotation_;
+	limits.maxNewRigidZError = (float)safeRelocalizationMaxNewRigidZError_;
+	limits.maxNewRigidTiltError = (float)safeRelocalizationMaxNewRigidTiltError_;
+	limits.maxGravityResidualIncrease = (float)safeRelocalizationMaxGravityResidualIncrease_;
+	limits.maxInformationCondition = safeRelocalizationMaxInformationCondition_;
+
+    std::string reason;
+    const auto commitAllowed=[&]() {
+        return mappingRecoveryCommitCurrent(ticket,epoch,false);
+    };
+    rtabmap::Transform proposed;
+    if(!rtabmap_.prepareVisualRecoveryWithAcceptedImages(limits,context,commitAllowed,proposed,reason) || proposed.isNull()) {
+        RCLCPP_WARN_THROTTLE(get_logger(),*get_clock(),2000,"[VISUAL_RECOVERY_REJECTED] epoch=%llu reason=%s",epoch,reason.c_str());return false;
+    }
+    if(!mappingContinuityGate_.beginCandidateObservation(ticket,epoch,mappingSteadyNs(),now().nanoseconds())) {
+        RCLCPP_WARN(get_logger(),"[VISUAL_RECOVERY_REJECTED] epoch=%llu prepared geometry lost continuity/freshness before observation",epoch);return false;
+    }
+    auto & pending=pendingMappingRecovery_;
+    pending.active=true;pending.ticket=ticket;pending.epoch=epoch;pending.revision=safeRelocalizationGraphRevision_;
+    pending.correction=pending.lastCorrection=proposed;pending.limits=limits;
+    pending.commit=[this,limits,context](std::string & why) {
+        return rtabmap_.commitVisualRecoveryWithObservedAlignment(limits,context,
+            [this](const rtabmap::Transform & correction){return pendingMappingAlignmentAllowed(correction);},why);
+    };
+    RCLCPP_INFO(get_logger(),"Old-keyframe recovery prepared without graph mutation; waiting for five direct old-map observations");
+    return false; // No registration or graph revision has occurred.
+}
+
+void CoreWrapper::discardPendingMappingRecovery(const std::string & reason)
+{
+    if(!pendingMappingRecovery_.active)return;
+    auto finish=pendingMappingRecovery_.finish;
+    pendingMappingRecovery_=PendingMappingRecovery{};
+    mappingContinuityGate_.rejectAlignment(reason.c_str());
+    if(finish)finish(false,reason);
+}
+
+bool CoreWrapper::pendingMappingAlignmentAllowed(const rtabmap::Transform & correction)
+{
+    const auto & pending=pendingMappingRecovery_;
+    if(!pending.active || correction.isNull() || pending.epoch!=rtabmap_.getResetEpoch() ||
+       pending.revision!=safeRelocalizationGraphRevision_ ||
+       !mappingContinuityGate_.candidateCommitReady(pending.ticket,pending.epoch,mappingSteadyNs(),now().nanoseconds()) ||
+       !mappingRecoveryCommitCurrent(pending.ticket,pending.epoch,pending.requireProposal) ||
+       pending.observations.size()<MappingContinuityGate::MAP_OBSERVATIONS)return false;
+    for(const auto & observation:pending.observations)
+    {
+        const auto predicted=correction*observation.second;
+        const auto & measured=observation.first;
+        const Eigen::Vector3d a=predicted.getQuaterniond()*Eigen::Vector3d::UnitZ();
+        const Eigen::Vector3d b=measured.getQuaterniond()*Eigen::Vector3d::UnitZ();
+        const double tilt=std::acos(std::max(-1.0,std::min(1.0,a.dot(b))))*180.0/M_PI;
+        if(!std::isfinite(tilt) || predicted.getDistance(measured)>std::min(.025,double(pending.limits.maxHoldoutTranslation)) ||
+           predicted.getAngle(measured)>std::min(2.0,double(pending.limits.maxHoldoutRotation))*M_PI/180.0 ||
+           std::fabs(predicted.z()-measured.z())>std::min(.02,double(pending.limits.maxAnchorZ)) ||
+           tilt>std::min(2.0,double(pending.limits.maxAnchorTilt)))return false;
+    }
+    return true;
+}
+
+bool CoreWrapper::observePendingMappingRecovery(const rtabmap::SensorData & data,
+        const rtabmap::Transform & odom,long long stampNs)
+{
+    if(!pendingMappingRecovery_.active)return false;
+    const auto ticket=mappingContinuityGate_.ticket(stampNs);
+    const auto epoch=pendingMappingRecovery_.epoch;
+    if(ticket.generation!=pendingMappingRecovery_.ticket.generation || epoch!=rtabmap_.getResetEpoch() ||
+       pendingMappingRecovery_.revision!=safeRelocalizationGraphRevision_ ||
+       !mappingRecoveryCommitCurrent(pendingMappingRecovery_.ticket,epoch,pendingMappingRecovery_.requireProposal))
+    {discardPendingMappingRecovery("prepared recovery identity or source continuity changed");return false;}
+    if(!mappingContinuityGate_.observationInputAllowed(ticket,epoch,mappingSteadyNs(),now().nanoseconds()))return false;
+    int lastTrusted=0;
+    {std::lock_guard<std::mutex> lock(mappingRecoveryReferenceMutex_);lastTrusted=mappingLastTrustedNodeId_;}
+    rtabmap::Transform measured;
+    std::string reason;
+    const bool verified=lastTrusted>0 && rtabmap_.validateProposedMapObservation(data,odom,lastTrusted,
+        pendingMappingRecovery_.correction,pendingMappingRecovery_.limits,measured,reason);
+    const bool current=mappingRecoveryCommitCurrent(pendingMappingRecovery_.ticket,epoch,pendingMappingRecovery_.requireProposal);
+    if(!verified || !current || measured.isNull() || odom.isNull())
+    {discardPendingMappingRecovery(verified?"candidate observation source invalidated":reason);return false;}
+    const auto correction=measured*odom.inverse();
+    const bool ready=mappingContinuityGate_.observeRegisteredMap(ticket,epoch,true,
+        correction.getDistance(pendingMappingRecovery_.correction),correction.getAngle(pendingMappingRecovery_.correction)*180.0/M_PI,
+        correction.getDistance(pendingMappingRecovery_.lastCorrection),correction.getAngle(pendingMappingRecovery_.lastCorrection)*180.0/M_PI,
+        mappingSteadyNs(),now().nanoseconds());
+    const auto state=mappingContinuityGate_.snapshot(mappingSteadyNs(),now().nanoseconds());
+    if(!state.observingMainMap || state.generation!=pendingMappingRecovery_.ticket.generation)
+    {discardPendingMappingRecovery("candidate observation failed correction or continuity limits");return false;}
+    if(state.mapObservationCount<=pendingMappingRecovery_.observations.size())return false;
+    pendingMappingRecovery_.lastCorrection=correction;
+    pendingMappingRecovery_.observations.emplace_back(measured,odom);
+    if(!ready)return false;
+    // The Kth frame stays read-only. The transaction re-runs all raw geometry,
+    // complete-cache certification and shadow solves on the frozen private graph.
+    bool committed=false;
+    try {committed=pendingMappingRecovery_.commit && pendingMappingRecovery_.commit(reason);}
+    catch(const std::exception & exception) {
+        safeRelocalizationFatal_.store(true,std::memory_order_release);
+        RCLCPP_FATAL(get_logger(),"Observed recovery transaction threw: %s",exception.what());
+        rclcpp::shutdown();return false;
+    }
+    if(!committed){discardPendingMappingRecovery(reason.empty()?"final candidate transaction rejected":reason);return false;}
+    const auto originalTicket=pendingMappingRecovery_.ticket;
+    auto finish=pendingMappingRecovery_.finish;
+    pendingMappingRecovery_=PendingMappingRecovery{};
+    ++safeRelocalizationGraphRevision_;
+    mappingContinuityGate_.candidateCommitted(originalTicket,epoch,rtabmap_.isCurrentMapFrameRegistered(),mappingSteadyNs(),now().nanoseconds());
+    {std::lock_guard<std::mutex> lock(mapToOdomMutex_);mapToOdom_=rtabmap_.getMapCorrection();}
+    globalPublicationGate_.coreUpdated(globalPublicationGate_.ticket(),epoch,rtabmap_.isCurrentMapFrameRegistered() &&
+        !resetQuarantineRecoveryPending_.load(std::memory_order_acquire) && !resetQuarantineSuspectedReset_.load(std::memory_order_acquire));
+    if(finish)finish(true,reason);
+    publishResetEpoch();
+    if(globalMapPublicationAllowed()) {
+        mapsManager_.clear();
+        const auto poses=mapsManager_.updateMapCaches(rtabmap_.getLocalOptimizedPoses(),rtabmap_.getMemory(),false,false);
+        mapsManager_.publishMaps(poses,now(),mapFrameId_);
+    }
+    refreshSubmapVisualization(now(),true);
+    RCLCPP_INFO(get_logger(),"Five old-map observations passed before the unique atomic recovery commit; next qualified frame may extend the map");
+    return true;
+}
+
+bool CoreWrapper::observeRecoveredMainMap(const rtabmap::SensorData & data,
+        const rtabmap::Transform & odom,long long stampNs)
+{
+    const auto ticket=mappingContinuityGate_.ticket(stampNs);
+    const auto epoch=rtabmap_.getResetEpoch();
+    if(!mappingContinuityGate_.observationInputAllowed(ticket,epoch,mappingSteadyNs(),now().nanoseconds()))return false;
+    if(mappingObservationSeedCorrection_.isNull() || mappingObservationGeneration_!=ticket.generation)
+    {
+        mappingObservationGeneration_=ticket.generation;
+        mappingObservationSeedCorrection_=rtabmap_.getMapCorrection();
+        mappingObservationLastCorrection_=mappingObservationSeedCorrection_;
+    }
+    int lastTrusted=0;
+    {std::lock_guard<std::mutex> lock(mappingRecoveryReferenceMutex_);lastTrusted=mappingLastTrustedNodeId_;}
+	rtabmap::Rtabmap::SafeRelocalizationLimits limits;
+	limits.maxHoldoutTranslation = (float)safeRelocalizationMaxTranslation_;
+	limits.maxHoldoutRotation = (float)safeRelocalizationMaxRotation_;
+	limits.minBridgeTranslation = (float)safeRelocalizationMinBridgeTranslation_;
+	limits.minBridgeRotation = (float)safeRelocalizationMinBridgeRotation_;
+	limits.maxAnchorZ = (float)safeRelocalizationMaxAnchorZ_;
+	limits.maxAnchorTilt = (float)safeRelocalizationMaxAnchorTilt_;
+	limits.maxOldPoseTranslation = (float)safeRelocalizationMaxOldPoseTranslation_;
+	limits.maxOldPoseRotation = (float)safeRelocalizationMaxOldPoseRotation_;
+	limits.maxNewRigidTranslation = (float)safeRelocalizationMaxNewRigidTranslation_;
+	limits.maxNewRigidRotation = (float)safeRelocalizationMaxNewRigidRotation_;
+	limits.maxNewRigidZError = (float)safeRelocalizationMaxNewRigidZError_;
+	limits.maxNewRigidTiltError = (float)safeRelocalizationMaxNewRigidTiltError_;
+	limits.maxGravityResidualIncrease = (float)safeRelocalizationMaxGravityResidualIncrease_;
+	limits.maxInformationCondition = safeRelocalizationMaxInformationCondition_;
+
+
+    rtabmap::Transform measuredMainPose;
+    std::string reason;
+    const bool verified=lastTrusted>0 && rtabmap_.validateRegisteredMapObservation(
+        data,odom,lastTrusted,limits,measuredMainPose,reason);
+    const bool sourcesCurrent=mappingRecoveryCommitCurrent(ticket,epoch,false);
+    rtabmap::Transform correction;
+    double seedTranslation=std::numeric_limits<double>::infinity(),seedRotation=seedTranslation;
+    double stepTranslation=seedTranslation,stepRotation=seedTranslation;
+    if(verified && !measuredMainPose.isNull() && !odom.isNull())
+    {
+        correction=measuredMainPose*odom.inverse();
+        seedTranslation=correction.getDistance(mappingObservationSeedCorrection_);
+        seedRotation=correction.getAngle(mappingObservationSeedCorrection_)*180.0/M_PI;
+        stepTranslation=correction.getDistance(mappingObservationLastCorrection_);
+        stepRotation=correction.getAngle(mappingObservationLastCorrection_)*180.0/M_PI;
+    }
+    const bool complete=mappingContinuityGate_.observeRegisteredMap(ticket,epoch,verified&&sourcesCurrent,
+        seedTranslation,seedRotation,stepTranslation,stepRotation,mappingSteadyNs(),now().nanoseconds());
+    if(verified && sourcesCurrent && !correction.isNull())mappingObservationLastCorrection_=correction;
+    if(!verified || !sourcesCurrent)
+        RCLCPP_WARN(this->get_logger(),"Registered-map observation rejected; map remains paused: %s",reason.c_str());
+    if(complete)RCLCPP_INFO(this->get_logger(),"Five independent registered-map observations passed; next qualified frame may extend main map");
+    return complete;
+}
+
+void CoreWrapper::refreshSubmapVisualization(const rclcpp::Time & stamp,bool localHealthy)
+{
+    if(!safeRelocalizationEnabled_)return;
+    if(!submapPublisher_)return;
+    try {submapPublisher_->refresh(rtabmap_,safeRelocalizationSessionTokenSha256_,mapFrameId_,stamp,localHealthy);}
+    catch(const std::exception & error) {RCLCPP_ERROR(get_logger(),"Independent submap visualization failed: %s",error.what());}
+}
+
+void CoreWrapper::publishMappingContinuityStatus()
+{
+    if(!safeRelocalizationEnabled_ || !mappingContinuityStatusPub_) return;
+    const auto s=mappingContinuityGate_.snapshot(mappingSteadyNs(), now().nanoseconds());
+    const bool localReady=mappingContinuityGate_.localGeometryReady(s.sourceNs,mappingSteadyNs(),now().nanoseconds());
+    sensor_msgs::msg::Image::SharedPtr reference;
+    int trustedNode=0;unsigned long long trustedEpoch=0;bool publishReference=false;
+    {
+        std::lock_guard<std::mutex> lock(mappingRecoveryReferenceMutex_);
+        reference=mappingLastTrustedImage_;trustedNode=mappingLastTrustedNodeId_;trustedEpoch=mappingLastTrustedEpoch_;
+        publishReference=reference && !s.mainMapWriteAllowed && mappingLastReferencePublishedGeneration_!=s.generation;
+        if(publishReference)mappingLastReferencePublishedGeneration_=s.generation;
+    }
+    std_msgs::msg::String status;
+    status.data=uFormat("{\"schema\":\"wbrov.mapping-continuity.v1\",\"state\":\"%s\","
+        "\"reason\":\"%s\",\"epoch\":%llu,\"generation\":%llu,\"source_stamp_ns\":%lld,\"session_token_sha256\":\"%s\","
+        "\"good_samples\":%u,\"registered\":%s,\"main_map_write_allowed\":%s,"
+        "\"local_tracking_healthy\":%s,\"local_submap_write_allowed\":%s,\"visual_geometry\":%s,\"depth_geometry\":%s,\"imu_translation_only_allowed\":false,"
+        "\"private_recovery_observations_are_main_map\":false,\"observing_registered_map\":%s,\"map_observation_count\":%u,\"recovery_commit_pending\":%s,"
+        "\"required_map_observations\":5,\"vo_width\":%d,\"vo_height\":%d,\"reference_node_id\":%d,"
+        "\"reference_epoch\":%llu,\"reference_stamp_ns\":%lld,\"reference_is_navigation_command\":false}",
+        MappingContinuityGate::stateName(s.state),s.reason.c_str(),s.epoch,
+        static_cast<unsigned long long>(s.generation),s.sourceNs,safeRelocalizationSessionTokenSha256_.c_str(),s.goodSamples,
+        s.registered?"true":"false",s.mainMapWriteAllowed?"true":"false",
+        localReady?"true":"false",localReady&&!s.observingMainMap?"true":"false",s.visualGeometry?"true":"false",s.depthGeometry?"true":"false",s.observingMainMap&&!s.observingCandidate?"true":"false",
+        s.mapObservationCount,s.observingCandidate?"true":"false",mappingContinuityVoWidth_,mappingContinuityVoHeight_,trustedNode,trustedEpoch,
+        reference?static_cast<long long>(rclcpp::Time(reference->header.stamp).nanoseconds()):0LL);
+    mappingContinuityStatusPub_->publish(status);
+    std_msgs::msg::String display;display.data=MappingContinuityGate::chinese(s.state);
+    if(s.state==MappingContinuityGate::State::PAUSED && !reference)display.data="定位丢失，建图暂停；尚无可信参考图像";
+    if(s.observingMainMap)display.data=uFormat("候选主图位置，正在观察验证 %u/5；主地图暂停更新",s.mapObservationCount);
+    else if(localReady && !s.mainMapWriteAllowed)display.data="局部跟踪正常，临时子图记录中；尚未对齐主地图";
+    mappingContinuityTextPub_->publish(display);
+    if(publishReference && mappingRecoveryReferencePub_)mappingRecoveryReferencePub_->publish(*reference);
+}
+
 void CoreWrapper::publishStats(const rclcpp::Time & stamp)
 {
 	UDEBUG("Publishing stats...");
@@ -8621,16 +9283,38 @@ void CoreWrapper::publishStats(const rclcpp::Time & stamp)
 		infoPub_->publish(std::move(msg));
 	}
 
+	if(!globalMapPublicationAllowed()) return;
+
+	// Core statistics deliberately reinsert the latest localized observation
+	// even when small-movement cleanup removed it from the retained graph.
+	// Managed mapping must publish one persistent snapshot, not that display
+	// overlay. Keep ordinary/localization-mode statistics semantics unchanged.
+	const bool retainedMappingSnapshot = safeRelocalizationEnabled_ &&
+			rtabmap_.getMemory() && rtabmap_.getMemory()->isIncremental();
+	const auto & graphPoses = retainedMappingSnapshot?
+			rtabmap_.getLocalOptimizedPoses() : stats.poses();
+	const auto & graphConstraints = retainedMappingSnapshot?
+			rtabmap_.getLocalConstraints() : stats.constraints();
+
 	if(mapDataPub_->get_subscription_count())
 	{
 		rtabmap_msgs::msg::MapData::UniquePtr msg(new rtabmap_msgs::msg::MapData);
 		msg->header.stamp = stamp;
 		msg->header.frame_id = mapFrameId_;
 
+		std::map<int, rtabmap::Signature> retainedSignatures;
+		const auto * signatures = &stats.getSignaturesData();
+		if(retainedMappingSnapshot)
+		{
+			for(const auto & item : stats.getSignaturesData())
+				if(graphPoses.count(item.first)) retainedSignatures.insert(item);
+			signatures = &retainedSignatures;
+		}
+
 		rtabmap_conversions::mapDataToROS(
-			stats.poses(),
-			stats.constraints(),
-			stats.getSignaturesData(),
+			graphPoses,
+			graphConstraints,
+			*signatures,
 			stats.mapCorrection(),
 			*msg);
 
@@ -8650,8 +9334,8 @@ void CoreWrapper::publishStats(const rclcpp::Time & stamp)
 			msg->header.frame_id = mapFrameId_;
 
 			rtabmap_conversions::mapGraphToROS(
-				stats.poses(),
-				stats.constraints(),
+				graphPoses,
+				graphConstraints,
 				stats.mapCorrection(),
 				*msg);
 
@@ -8684,8 +9368,8 @@ void CoreWrapper::publishStats(const rclcpp::Time & stamp)
 			iter!=stats.odomCacheConstraints().end();
 			++iter)
 		{
-			std::map<int, Transform>::const_iterator pter = stats.poses().find(iter->second.to());
-			if(pter != stats.poses().end())
+			std::map<int, Transform>::const_iterator pter = graphPoses.find(iter->second.to());
+			if(pter != graphPoses.end())
 			{
 				poses.insert(*pter);
 			}
@@ -8729,12 +9413,12 @@ void CoreWrapper::publishStats(const rclcpp::Time & stamp)
 
 	bool pubLabels = labelsPub_->get_subscription_count();
 	visualization_msgs::msg::MarkerArray markers;
-	if((landmarksPub_->get_subscription_count() || pubLabels) && !stats.poses().empty() && stats.poses().begin()->first < 0)
+	if((landmarksPub_->get_subscription_count() || pubLabels) && !graphPoses.empty() && graphPoses.begin()->first < 0)
 	{
 		geometry_msgs::msg::PoseArray::UniquePtr msg(new geometry_msgs::msg::PoseArray);
 		msg->header.stamp = stamp;
 		msg->header.frame_id = mapFrameId_;
-		for(std::map<int, Transform>::const_iterator iter=stats.poses().begin(); iter!=stats.poses().end() && iter->first<0; ++iter)
+		for(std::map<int, Transform>::const_iterator iter=graphPoses.begin(); iter!=graphPoses.end() && iter->first<0; ++iter)
 		{
 			geometry_msgs::msg::Pose p;
 			rtabmap_conversions::transformToPoseMsg(iter->second, p);
@@ -8778,17 +9462,17 @@ void CoreWrapper::publishStats(const rclcpp::Time & stamp)
 	bool pubPath = mapPathPub_->get_subscription_count();
 	if(pubLabels || pubPath)
 	{
-		if(stats.poses().size())
+		if(graphPoses.size())
 		{
 			nav_msgs::msg::Path path;
 			if(pubPath)
 			{
 				// Ignore pose of current location in Localization mode
-				path.poses.resize(stats.poses().size()-(rtabmap_.getMemory()->isIncremental()?0:1));
+				path.poses.resize(graphPoses.size()-(rtabmap_.getMemory()->isIncremental()?0:1));
 			}
 			int oi = 0;
-			for(std::map<int, Transform>::const_iterator poseIter=stats.poses().begin();
-				poseIter!=stats.poses().end();
+			for(std::map<int, Transform>::const_iterator poseIter=graphPoses.begin();
+				poseIter!=graphPoses.end();
 				++poseIter)
 			{
 				if(pubLabels && rtabmap_.getMemory())
@@ -8852,7 +9536,7 @@ void CoreWrapper::publishStats(const rclcpp::Time & stamp)
 
 					markers.markers.push_back(marker);
 				}
-				if(pubPath && (rtabmap_.getMemory()->isIncremental() || poseIter->first != stats.poses().rbegin()->first))
+				if(pubPath && (rtabmap_.getMemory()->isIncremental() || poseIter->first != graphPoses.rbegin()->first))
 				{
 					rtabmap_conversions::transformToPoseMsg(poseIter->second, path.poses.at(oi).pose);
 					path.poses.at(oi).header.frame_id = mapFrameId_;
@@ -8878,6 +9562,7 @@ void CoreWrapper::publishStats(const rclcpp::Time & stamp)
 
 void CoreWrapper::publishCurrentGoal(const rclcpp::Time & stamp)
 {
+	if(!globalMapPublicationAllowed()) return;
 	if(!currentMetricGoal_.isNull() && currentMetricGoal_ != lastPublishedMetricGoal_)
 	{
 		RCLCPP_INFO(this->get_logger(), "Publishing next goal: %d -> %s",
@@ -9006,6 +9691,7 @@ void CoreWrapper::resultCallback(
 
 void CoreWrapper::publishLocalPath(const rclcpp::Time & stamp)
 {
+	if(!globalMapPublicationAllowed()) return;
 	if(rtabmap_.getPath().size())
 	{
 		std::vector<std::pair<int, Transform> > poses = rtabmap_.getPathNextPoses();
@@ -9044,6 +9730,7 @@ void CoreWrapper::publishLocalPath(const rclcpp::Time & stamp)
 
 void CoreWrapper::publishGlobalPath(const rclcpp::Time & stamp)
 {
+	if(!globalMapPublicationAllowed()) return;
 	if((globalPathPub_->get_subscription_count() || globalPathNodesPub_->get_subscription_count()) && rtabmap_.getPath().size())
 	{
 		Transform pose = uValue(rtabmap_.getLocalOptimizedPoses(), rtabmap_.getPathCurrentGoalId(), Transform());
@@ -9152,6 +9839,7 @@ void CoreWrapper::octomapBinaryCallback(
 		const std::shared_ptr<octomap_msgs::srv::GetOctomap::Request>,
 		std::shared_ptr<octomap_msgs::srv::GetOctomap::Response> res)
 {
+	if(!globalMapPublicationAllowed()) return;
 	RCLCPP_INFO(this->get_logger(), "Sending binary map data on service request");
 	res->map.header.frame_id = mapFrameId_;
 	res->map.header.stamp = now();
@@ -9176,6 +9864,7 @@ void CoreWrapper::octomapFullCallback(
 		const std::shared_ptr<octomap_msgs::srv::GetOctomap::Request>,
 		std::shared_ptr<octomap_msgs::srv::GetOctomap::Response> res)
 {
+	if(!globalMapPublicationAllowed()) return;
 	RCLCPP_INFO(this->get_logger(), "Sending full map data on service request");
 	res->map.header.frame_id = mapFrameId_;
 	res->map.header.stamp = now();
