@@ -1,0 +1,36 @@
+{
+  "schema": "wbrov.final-installed-check.v1",
+  "passed": true,
+  "installed": {
+    "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh": "8b6adf33e0550465ce5e4f10ffa7d8e5f5d43db022084c2496aa81b8b3de8bb3",
+    "/home/exocean/Desktop/机器人键盘遥控/.tools/run_water_mapping_with_light.sh": "34cf9b3c35fa4f7977721bb94f4786d59bf662c6c552d202c14123ab06bb03d2"
+  },
+  "runtime_manifest_sha256": "1e2cfcf809e8d8ff5877bc2ee31711efbad8856e47e5c2006d086549e0dcc0c8",
+  "protected_files_unchanged": 10,
+  "both_locks_available": true,
+  "udp_3333_released": true,
+  "mapping_processes": [],
+  "light_shutdown": {
+    "phase": "off",
+    "pid": 4115465,
+    "start_ticks": "27516894",
+    "monotonic": 275338.479247616,
+    "deadline_monotonic": 276069.045168992,
+    "light_percent": 0,
+    "packets": {
+      "heartbeat": 16485,
+      "led_30": 3344,
+      "led_0": 6
+    },
+    "motion_packets_allowed": false,
+    "unlock_called": false,
+    "teleop_sha256": "2059378cabf4243a8d7efa2eeff82a48001258736f4368b53524ccc9bb8b2602",
+    "failures": [],
+    "physical_led_ack_available": false,
+    "valid_feedback_count": 6734,
+    "motion_gate_closed": true,
+    "motion_ever_activated": false
+  },
+  "installed_run": "/home/exocean/maps/rtabmap_calibration_ab/custom_20261009_055533",
+  "installed_camera_rviz_save_passed": true
+}

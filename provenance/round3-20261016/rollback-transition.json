@@ -1,0 +1,20 @@
+{
+  "targets": {
+    "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh": {
+      "before": "3737f9a09d802ff56ad566b8ea56194398e338a0f2c5c51711bdfcfb2345c022",
+      "after": "8b6adf33e0550465ce5e4f10ffa7d8e5f5d43db022084c2496aa81b8b3de8bb3",
+      "backup": "start_rtabmap_calib_ab.sh",
+      "mode": 448
+    },
+    "/home/exocean/Desktop/机器人键盘遥控/.tools/run_water_mapping_with_light.sh": {
+      "before": "73afbf9254afa49c6fee8003cc66b9cb289129ed6c289f09afdc36b2c31f3ebe",
+      "after": "34cf9b3c35fa4f7977721bb94f4786d59bf662c6c552d202c14123ab06bb03d2",
+      "backup": "run_water_mapping_with_light.sh",
+      "mode": 448
+    }
+  },
+  "locks": [
+    "/home/exocean/.cache/wbrov_water_mapping/orchestrator.lock",
+    "/home/exocean/.cache/rtabmap_dense_calib_ab/launcher.lock"
+  ]
+}

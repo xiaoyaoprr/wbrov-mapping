@@ -62,9 +62,9 @@ default_localization_source_db="/home/exocean/maps/rtabmap_calibration_ab/custom
 # Release tooling replaces these three sentinels only after the paired
 # Core/ROS runtime and launcher are frozen.  Leaving any sentinel in place is a
 # deliberate fail-closed state, not a development fallback.
-readonly FINAL_MAPPING_LAUNCHER_SHA256='3737f9a09d802ff56ad566b8ea56194398e338a0f2c5c51711bdfcfb2345c022'
-readonly FINAL_RESET_RUNTIME_ROOT='/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-6ecf6344d6196d705d276f5fe2979ee5732389ddadbfe684498770de11c3d531'
-readonly FINAL_RESET_RUNTIME_NODE_SHA256='63361f4627b50390e000f38c7a8e71b88ece6251dfe1eab5f3507ad099a1dc8c'
+readonly FINAL_MAPPING_LAUNCHER_SHA256='8b6adf33e0550465ce5e4f10ffa7d8e5f5d43db022084c2496aa81b8b3de8bb3'
+readonly FINAL_RESET_RUNTIME_ROOT='/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-74d38aba069fcfbb0872b705ca44b6ea5b95e96c5362a4f1aa214e44bb04a77f'
+readonly FINAL_RESET_RUNTIME_NODE_SHA256='204ef15544749422549ebff440b05a3d148c2e7527f990e67f7431a7b2306516'
 readonly FINAL_RESET_RUNTIME_NODE="$FINAL_RESET_RUNTIME_ROOT/bin/rtabmap"
 # The full immutable-library checks alone take about 27s before any node starts.
 # Bound the complete preflight + node startup, including repeated pre-exec checks.

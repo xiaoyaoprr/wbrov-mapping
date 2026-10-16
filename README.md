@@ -4,13 +4,11 @@
 
 **候选状态：原生编译及部分录制回放检查通过，非 Tag 自动接回和严格回放源时序验收仍未通过，尚未进行水下现场验证。** 已观察到主图/临时子图隔离、局部健康时继续记录及主图/局部 AprilTag 位置消息；完整结果和限制见 [候选更新说明](docs/SUBMAP_TAG_CANDIDATE.md)。
 
-桌面8号现绑定运行包 `6ecf6344d6196d705d276f5fe2979ee5732389ddadbfe684498770de11c3d531`。第二轮修正了跨图候选协方差过度自信和早期重试文案不匹配，统一了实际编译的证书代码。候选版及安装后的真实相机→建图→RViz→正常保存均通过；主窗口分别在36.7/37.1秒可见。按授权开启双灯30%，未发送运动或解锁指令，测试结束已关灯。完整无Tag接回仍受深度/覆盖不足限制，见 [本轮修正与验收](docs/ROUND2_20261016.md)。前次启动与点云修复见 [历史实机记录](docs/RECEIPT_RESUME_20261015.md)，原始归档可通过 `234b053` 或 `source-2026-10-15` 查阅。
-
-第三轮候选已增加短暂退化的限时停写与旧图核验、具体触发诊断及固定状态面板。原生与DDS测试通过，但真实相机测试遇到持续网格覆盖不足、RViz偶发黑屏和隔离分量导出覆盖失败，**本轮未部署，8号保持上一版**。详情与失败证据见 [第三轮候选记录](docs/ROUND3_20261016.md)。
+桌面8号现绑定运行包 `74d38aba069fcfbb0872b705ca44b6ea5b95e96c5362a4f1aa214e44bb04a77f`。第三轮增加短暂几何退化时的限时停写与旧图验证、具体触发原因、未对齐子图计数和固定状态面板。首次实机失败记录保留；调整静止场景后，同一候选及安装后的真实相机→建图→RViz→正常保存均通过，窗口分别在36.1/36.6秒可见。仅开启30%灯光，未发送运动或解锁，结束已关灯。偶发GLX黑屏未证实修复，完整无Tag接回和水下连续建图仍待验收，见[第三轮记录](docs/ROUND3_20261016.md)。前次结果见[第二轮记录](docs/ROUND2_20261016.md)，原始归档可通过`234b053`或`source-2026-10-15`查阅。
 
 ## 代码目录
 
-早期诊断和候选失败记录保留；当前安装版本的启动、主图显示与保存实测见 [最新修正记录](docs/ROUND2_20261016.md)。
+早期诊断和候选失败记录保留；当前安装版本的启动、主图显示与保存实测见 [最新修正记录](docs/ROUND3_20261016.md)。
 
 | 目录 | 内容 |
 | --- | --- |
@@ -25,7 +23,7 @@
 | `config/` | DDS 配置及现机相机标定文件 |
 | `launch/original/` | 更新前建图启动脚本的原样归档 |
 | `launch/deployed_20261015/` | 实际已部署的建图和8号外层脚本，绑定当前实测运行包 |
-| `launch/candidate_quality_pause/` | 第三轮未通过实机验收的候选入口；不代表当前8号 |
+| `launch/candidate_quality_pause/` | 第三轮候选入口；场景调整后通过静止复测，与当前8号绑定一致 |
 | `launch/candidate_receipt_resume/` | 接收恢复与有界队列修复的候选来源，已通过静止实测并部署 |
 | `provenance/` | 初始设备归档依据，以及 `submap-tag-20261015/` 中的候选来源和验证摘要 |
 | `tests/` | 原生几何/门控夹具、录制回放及消息审计测试 |
@@ -41,7 +39,7 @@ python tools/test_mapping_candidate.py
 
 第一条命令只读取文件并校验 `MANIFEST.sha256`。第二条运行不启动 ROS 节点的 Python 行为测试；未安装 NumPy/OpenCV 时会明确跳过三个数值投影测试。加 `--require-opencv` 可要求这些测试必须执行。候选验证摘要在 `provenance/submap-tag-20261015/validation.json`；原 `provenance/validation.json` 保留初始归档结果。
 
-初始归档核对了设备清单指定的 20 个 Core/ROS 文件及发布器、运行脚本，其余基线和补充来源单独记录。`provenance/submap-tag-20261015/` 内的 `source-map.json` 和 `receipt-resume-candidate.json` 保留历史来源；当前编译输入与实测结果在 `provenance/round2-20261016/`，设备绑定在 `provenance/submap-tag-20261015/deployment.json`；前次 `receipt-resume-*.json` 保留历史证据。入口与已编译源码按哈希核对，不宣称本归档能逐字节复现二进制。
+初始归档核对了设备清单指定的 20 个 Core/ROS 文件及发布器、运行脚本，其余基线和补充来源单独记录。`provenance/submap-tag-20261015/` 内的 `source-map.json` 和 `receipt-resume-candidate.json` 保留历史来源；当前编译输入与实测结果在 `provenance/round3-20261016/`，设备绑定在 `provenance/submap-tag-20261015/deployment.json`；前次 `receipt-resume-*.json` 保留历史证据。入口与已编译源码按哈希核对，不宣称本归档能逐字节复现二进制。
 
 ## 构建与运行
 

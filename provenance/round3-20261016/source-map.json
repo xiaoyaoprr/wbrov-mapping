@@ -1,5 +1,5 @@
 {
-  "schema": "wbrov.round3-candidate-source-map.v1",
+  "schema": "wbrov.round3-source-map.v1",
   "source_files": {
     "src/rtabmap_ros/rtabmap_slam/include/rtabmap_slam/MappingContinuityGate.h": "a243c950b19e17cb5c807876017c5736ab81f1cfe428c4bef90b5af61dd4ce3d",
     "src/rtabmap_ros/rtabmap_slam/include/rtabmap_slam/SubmapPublisher.h": "2bf792796cb378ef5ea65f595c403fa358da7d8778e0b20de2b635e9d851cd57",
@@ -16,12 +16,12 @@
     "src/visualization/test_submap_display_geometry.py": "fb8acabf14418d3fcac6227ea7e5b1b8a45b8e0f661b6dbe64f9bc365b792ce6",
     "src/visualization/test_submap_display_ros.py": "d4cfaa722fedc6c85cf6213ff0f2f6a208290fe4da32ead3792ce9d147f39d5e"
   },
-  "candidate_runtime": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-74d38aba069fcfbb0872b705ca44b6ea5b95e96c5362a4f1aa214e44bb04a77f",
+  "runtime": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-74d38aba069fcfbb0872b705ca44b6ea5b95e96c5362a4f1aa214e44bb04a77f",
   "manifest_sha256": "1e2cfcf809e8d8ff5877bc2ee31711efbad8856e47e5c2006d086549e0dcc0c8",
   "checker_sha256": "87e02567c08c796454172fd5e42ccc41810593964e6a1101f0664f2b5d82c539",
   "plugin_sha256": "c4210c4b84d47109f3546c30a74b3e4e5f3834476d636d2d2ff1dc4f464133c9",
   "core_unchanged_sha256": "e19e48b9207318668bb8cd4632f1be39062e2396bae230e84f6104ef99f810aa",
   "native_receipt_sha256": "6bb10eef99965d371a9dc4fcdb536a3a5ce5f32ea61a6ed31ecfb52545bfe8e8",
   "runtime_regular_files": 577,
-  "deployed": false
+  "verifier_functions_changed": false
 }
