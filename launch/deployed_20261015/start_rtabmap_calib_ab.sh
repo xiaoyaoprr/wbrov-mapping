@@ -74,7 +74,7 @@ readonly dual_stream_binary='/home/exocean/.cache/rtabmap_dense/calib_ab_2026082
 # Frozen ARM64 dual-stream bridge candidate.  The managed runtime observer is
 # still an independent fail-closed deployment prerequisite.
 readonly dual_stream_binary_sha256='2b1634ae850a340590257545e89f382b1d29625b494af318123fef6430fb9f50'
-readonly private_runtime_root='/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-0003cd4f818852d584959c6ee2602e92117d4c80ac194a42ad0e87051cf566b2'
+readonly private_runtime_root='/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-6ecf6344d6196d705d276f5fe2979ee5732389ddadbfe684498770de11c3d531'
 readonly camera_health_observer="$private_runtime_root/bin/header_health_observer"
 readonly camera_health_observer_sha256='a04aa06117bae16265f4d836406af274b1de105dff9c53e3a6b6bad7c0886018'
 readonly apriltag_anchor_builder='/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/apriltag_anchor_builder_exact/80612ee432f9655a1970739b432cebbc8f50627026abdea2e8b2c15a885771a6/build_apriltag_multiview_anchors.py'
@@ -553,9 +553,9 @@ check_camera_profile_dependencies() {
 # BEGIN RESET_QUARANTINE_RUNTIME_CONFIG
 readonly reset_runtime_root="$private_runtime_root"
 readonly reset_runtime_check="$reset_runtime_root/tools/check_private_runtime.py"
-readonly reset_runtime_check_sha256='f8cc1365c76ca21e3e0cb060e0dc36d70cf15f9e0338ddbbbd309c730b4ba2e4'
+readonly reset_runtime_check_sha256='b77af6f7d6895484c822c86ba74586186940e0aef1a6442d9390ffd31e5306ad'
 readonly reset_runtime_manifest="$reset_runtime_root/runtime-manifest.json"
-readonly reset_runtime_manifest_sha256='0b44f95e0df8fb4de1a78be3a25fe98c47f3742fdd8a24fbc5c24165399c498b'
+readonly reset_runtime_manifest_sha256='1a0c75bbc1cced70e9335a7d383db11d36d3617c43f6d7e0a56e2f70f51e4826'
 readonly reset_runtime_node="$reset_runtime_root/bin/rtabmap"
 readonly reset_runtime_node_sha256='63361f4627b50390e000f38c7a8e71b88ece6251dfe1eab5f3507ad099a1dc8c'
 readonly odom_binary="$reset_runtime_root/bin/rgbd_odometry"

@@ -1,0 +1,1116 @@
+{
+  "schema": "wbrov.round2-validation.v1",
+  "candidate": {
+    "scope": "candidate mapping launcher plus real ZED and RViz, stationary; 30 percent lights via a bounded separate light-only owner; no motion or unlock",
+    "mapping_sha256": "3737f9a09d802ff56ad566b8ea56194398e338a0f2c5c51711bdfcfb2345c022",
+    "lighting_actuation": true,
+    "propulsion_actuation": false,
+    "light_before": {
+      "phase": "on",
+      "pid": 3052049,
+      "start_ticks": "26497119",
+      "monotonic": 264990.073422464,
+      "deadline_monotonic": 265871.298506624,
+      "light_percent": 30,
+      "packets": {
+        "heartbeat": 1845,
+        "led_30": 372
+      },
+      "motion_packets_allowed": false,
+      "unlock_called": false,
+      "teleop_sha256": "2059378cabf4243a8d7efa2eeff82a48001258736f4368b53524ccc9bb8b2602",
+      "failures": [],
+      "physical_led_ack_available": false,
+      "valid_feedback_count": 741,
+      "motion_gate_closed": true,
+      "motion_ever_activated": false
+    },
+    "light_after_probe": {
+      "phase": "on",
+      "pid": 3052049,
+      "start_ticks": "26497119",
+      "monotonic": 265072.500995104,
+      "deadline_monotonic": 265871.298506624,
+      "light_percent": 30,
+      "packets": {
+        "heartbeat": 9825,
+        "led_30": 2002
+      },
+      "motion_packets_allowed": false,
+      "unlock_called": false,
+      "teleop_sha256": "2059378cabf4243a8d7efa2eeff82a48001258736f4368b53524ccc9bb8b2602",
+      "failures": [],
+      "physical_led_ack_available": false,
+      "valid_feedback_count": 4022,
+      "motion_gate_closed": true,
+      "motion_ever_activated": false
+    },
+    "rviz_visible_seconds": 36.6552587840124,
+    "map_run": "/home/exocean/maps/rtabmap_calibration_ab/custom_20261009_030532",
+    "probe": {
+      "retained_node_ids_unchanged": true,
+      "retained_pose_max_translation_m": 0.0,
+      "retained_pose_max_rotation_deg": 0.3643647478997267,
+      "graph_content_hashes": [
+        "03fed999a344d8f2f3d9433bdbef8630c99d8b80c9d33540b1af2012b529cc98",
+        "073a0e9e858272bfcae584f6922160b1a5793d55509a4a7c5230bfa30e06bced",
+        "09faf9cc01f79763ca2d2fdbe2149f8d7a67e02eb52ebf7232726ccb8a9af6e8",
+        "0af14c89cd5bbcfecebe030002e18551e4a064fcf31efe64d52f4cbfa79a25cf",
+        "1a19641c2d84201e7c02cb1e84f4df3db1c33ed3b10e5b1b41a45c54f2b7963a",
+        "1f9fd05b32708dd3bc2e83bcdb36959ff376561bf0bd81a3f660ededc6123e8a",
+        "232d41bb751912562a839b3c68fbc4e41ee68526cdacff47e655856fb1de65b7",
+        "27d5f2c12d967ef88c62498cf98ceb1de93e73d869e7ebca7b82f65ea7f19f30",
+        "30fede64b6bd6006a34a66124222cb6e4cc1d4da6634374966f202b5c86f6ebf",
+        "338a47ed2a5795d0549715421744722054ece73e7bc2017949a8a05a04e41d3b",
+        "41fb9eea5407345b8bd7a18458859422e38bf257cc94be80cd0da913733e434c",
+        "4345db6f4c09a991737bb7624c858b33efc67d7b0edb36ab9c3060b257b8caca",
+        "44bb3fff45548acbdf987b12f0978cbac34d63097a707248f8a931351fe36d8a",
+        "4930b3977e9100023f5634c21bcccf78010c4841d398bcce81cb138719f91155",
+        "49bdd8172980c6ba63a0283cdb92d7653c7b26dabb6e4a44aec3fdab3cc0cc8c",
+        "4f6ce1d60a905dab88ca16871af7589ee6dbf651b743866dddddb0b4fe418fb5",
+        "69a988a19e113f28f73cf595a216e91c5bc154ee4f23e7992cfd6f0f890de66e",
+        "6f69953d5be14780dc9dff8c1a6187fc0e625fdf9972253b23a37e6718d7deed",
+        "720de059d0c0446f7b4ac5ebb0fec46fe21f9160f64f35e35e254ffc6116dfdf",
+        "7e9715f7665cbfef17091827e42d6f761b638fb3a45888e8dc2756ed4793d01f",
+        "8101bbbcdae900cdcaec2262dc83bae9ae8bdece0bf31dd6bba02926275d0aef",
+        "8e9b419334623cca853a96d349fc2833334a6e7e01bc1ab7f775ec6a851192e8",
+        "908ef4995c788af1984ca6e64e8b1f1d0d4f12587d39abd2a07d0d05efc2b42a",
+        "92325330ef4cb8e57b52cf07e1c2637e1f2dfe4da85edab85af8d0bd39720325",
+        "92b43ff4572350f568e5fd59898ae6a0bb6660e23b627e48c763a296082efbb8",
+        "9542773515d4d63985feebce2a55a85fb41bf3395b5521b8875398864e1af71b",
+        "99395a1dc9882fd524a0ec7790a1ba28f95ccbc5fbf71f09233f69297b2bee48",
+        "999f4ff84bcb5715a2b355e21e7c508dacc186ee6a344a8881b0fcd611f8ccd3",
+        "99f689226a8e2c4b5dd61ae1141acfff94f9eb81f555637ddc359b1feee135f1",
+        "a0e162dae267e71e309cb8f35f8abaab80897b411328cf5f2529fb55abba81cc",
+        "a2aa59fc778f4993c53628f9be607440638074f352f9cd0ceb8e40827037a7c4",
+        "a35fb0c40d6ec09acd9c543285d167beaa0591aabf08a748d09962c2f782eca8",
+        "a4de36f4b8a63480933db535af2d93705c4eca3bb6abd5462863e4ddbf04c9e8",
+        "a574a05bdd52b3a9fdcf3131bed99494fdf1b68407f26644bc1a3837009cd3ce",
+        "a8692564cebf0530d982aafb80a4ff275f528739f07a1fb96814016e4c088820",
+        "b55e48b8d8a62ce481250ff1068e90ddd13fc4d522d6c43b782e7a770a2e13a8",
+        "b61570e52bc5295924c47129af74238b9b2a90e07ba374947f0630f219aeacae",
+        "bf0181419753fd450546491e4c707ae22e2ce337b8a769f8db25b6d9c64cb3e2",
+        "d1773e558e3798c33ba2638059e07043bef3cd2b8073701184ee506ae45f9bb7",
+        "d2930e8bbbf2b462b12c5c6515a7ec40f3046c3a46ffc6180f2727953dbdf13b",
+        "dbebc00a9a52807364035bae3ee7b5f7c00e081e18950c78f485aeba21e1da9d",
+        "ede841dd39155c654aa4448e911a2ccf6f87f96f3d51351182220c82f8b2d5c7",
+        "f36c757d05360e36bb9810f293adba16d8fe58f201ccea3e6fc1c475674270c7",
+        "f82f8c8021cf9f40eda642e149a8e9bfff9134a2603a4b307df580aa412ece1b",
+        "fe2313876a67eff59906cec4c479ae8ae691fede41ed9cab936d534712bbeceb"
+      ],
+      "graph_observation_span_s": 43.97231913602445,
+      "graph_last_age_s": 0.9925631039659493,
+      "odom_age_s": {
+        "count": 854,
+        "max": 0.187564664,
+        "p95": 0.126431568
+      },
+      "seconds": 45.0097881280235,
+      "counts": {
+        "/cloud_map": 1,
+        "/rtabmap/frame_cloud": 874,
+        "/zed/rgb/image_rect_color": 830
+      },
+      "unique_stamps": {
+        "/cloud_map": 1,
+        "/rtabmap/frame_cloud": 874,
+        "/zed/rgb/image_rect_color": 830
+      },
+      "last": {
+        "/cloud_map": {
+          "width": 293,
+          "height": 1,
+          "bytes": 9376,
+          "frame": "map"
+        },
+        "/rtabmap/frame_cloud": {
+          "width": 267,
+          "height": 1,
+          "bytes": 8544,
+          "frame": "zed_left_camera_optical_frame"
+        },
+        "/zed/rgb/image_rect_color": {
+          "width": 384,
+          "height": 240,
+          "bytes": 276480,
+          "frame": "zed_left_camera_optical_frame"
+        }
+      },
+      "passive_only": true,
+      "states": {
+        "NORMAL": 1350
+      },
+      "reasons": {
+        "registered visual geometry": 1350
+      },
+      "main_write_allowed_count": 1350,
+      "graph_sizes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "last_continuity": {
+        "schema": "wbrov.mapping-continuity.v1",
+        "state": "NORMAL",
+        "reason": "registered visual geometry",
+        "epoch": 0,
+        "generation": 0,
+        "source_stamp_ns": 1791486400771428000,
+        "session_token_sha256": "235ea09c694b5b87a7ccaebea399ac107c2776083bc618102beaaa9c0f9f24a7",
+        "good_samples": 1053,
+        "registered": true,
+        "main_map_write_allowed": true,
+        "local_tracking_healthy": true,
+        "local_submap_write_allowed": true,
+        "visual_geometry": true,
+        "depth_geometry": false,
+        "imu_translation_only_allowed": false,
+        "private_recovery_observations_are_main_map": false,
+        "observing_registered_map": false,
+        "map_observation_count": 0,
+        "recovery_commit_pending": false,
+        "required_map_observations": 5,
+        "vo_width": 384,
+        "vo_height": 240,
+        "reference_node_id": 1,
+        "reference_epoch": 0,
+        "reference_stamp_ns": 1791486347623877000,
+        "reference_is_navigation_command": false
+      },
+      "last_age_s": {
+        "/cloud_map": 44.96624364797026,
+        "/rtabmap/frame_cloud": 0.0651672959793359,
+        "/zed/rgb/image_rect_color": 0.07814047997817397
+      }
+    },
+    "screenshot_sha256": "a253607953b41b4882349194a50ac0a17fd9cc307e3fa9aab24758c65c155465",
+    "launcher_exit_code": 0,
+    "lifecycle": {
+      "schema_version": 1,
+      "phase": "stopped",
+      "launcher_pid": 3052058,
+      "process_start_ticks": 26499010,
+      "boot_id": "d12a8759-0cf1-4fe9-9064-feea661c2763",
+      "nodes_stopped": true,
+      "export_succeeded": true,
+      "cleanup_succeeded": true,
+      "exit_code": 0,
+      "requested_exit_code": 0
+    },
+    "artifacts": {
+      "rtabmap.db": 53116928,
+      "rtabmap_dense.ply": 59512
+    },
+    "cloud_validation": "stationary retained cloud displayed; map growth and physical accuracy unvalidated",
+    "passed": true
+  },
+  "installed": {
+    "scope": "installed mapping launcher plus real ZED and RViz, stationary; 30 percent lights via a bounded separate light-only owner; no motion or unlock",
+    "mapping_sha256": "3737f9a09d802ff56ad566b8ea56194398e338a0f2c5c51711bdfcfb2345c022",
+    "lighting_actuation": true,
+    "propulsion_actuation": false,
+    "light_before": {
+      "phase": "on",
+      "pid": 3176570,
+      "start_ticks": "26721554",
+      "monotonic": 267278.232884672,
+      "deadline_monotonic": 268115.673193632,
+      "light_percent": 30,
+      "packets": {
+        "heartbeat": 6151,
+        "led_30": 1240
+      },
+      "motion_packets_allowed": false,
+      "unlock_called": false,
+      "teleop_sha256": "2059378cabf4243a8d7efa2eeff82a48001258736f4368b53524ccc9bb8b2602",
+      "failures": [],
+      "physical_led_ack_available": false,
+      "valid_feedback_count": 2484,
+      "motion_gate_closed": true,
+      "motion_ever_activated": false
+    },
+    "light_after_probe": {
+      "phase": "on",
+      "pid": 3176570,
+      "start_ticks": "26721554",
+      "monotonic": 267361.646296704,
+      "deadline_monotonic": 268115.673193632,
+      "light_percent": 30,
+      "packets": {
+        "heartbeat": 14240,
+        "led_30": 2888
+      },
+      "motion_packets_allowed": false,
+      "unlock_called": false,
+      "teleop_sha256": "2059378cabf4243a8d7efa2eeff82a48001258736f4368b53524ccc9bb8b2602",
+      "failures": [],
+      "physical_led_ack_available": false,
+      "valid_feedback_count": 5809,
+      "motion_gate_closed": true,
+      "motion_ever_activated": false
+    },
+    "rviz_visible_seconds": 37.078202079981565,
+    "map_run": "/home/exocean/maps/rtabmap_calibration_ab/custom_20261009_034341",
+    "probe": {
+      "retained_node_ids_unchanged": true,
+      "retained_pose_max_translation_m": 0.0,
+      "retained_pose_max_rotation_deg": 0.2786203392635512,
+      "graph_content_hashes": [
+        "042d3af931c333168d9d7847744202604d325296f7d51f816e2978e3fb6a6db0",
+        "0843bc5d362f351d58d8e7f41590c7820e4806582a8d6199084482f00f2dcb88",
+        "0fd389ccf7cac9e74e575172a765ea636f4f9c666778ae3ac3fcc57ac5e34c21",
+        "159293001066b40471fc4d934d9bfae586c351d7bcad4888f3e544ebd39c2613",
+        "270652b97d92281c0174382d7817e2246832e1df77c0cf20166cff252f074faf",
+        "2c8e2e381c3052c8d8a39abb78bb39f30c3276436b7f5fe4c49c0aaae4db347b",
+        "332617ebd66d557d39eb462d467a318303b9397296d0a9b3679fc5b18698a28a",
+        "34b89cb898bf987f8d063559842117b158836d2d9f32309f5e269cde76b8be10",
+        "3725e3ce03180ce1e25ee6e3ec848539446840b0b40fbe4c9ae9161a313494fb",
+        "389d72bb2d5ba4ac67d0b0f915bcf2749bdd2b9d269baddf5bfc48fc7de9b44e",
+        "42a5968673c00c37c951ff5ab26df508343423cec0e00d3bc06edcd9b03dce30",
+        "47f3c1a4e74a99f47e71a17f62a467907f5c0de301d49d91ef755751b47f3567",
+        "4a5a7824d3822aca54c9826d5c6bbf19f3dc96f778bac64d9b12a46ab813044f",
+        "5d30abd3a59e1e3e43dc8ea5e3c41503ec08aa7ea02e9683a6ca2789fb4e7ca9",
+        "68ffe8931ff8018607d3d931d06a8f2c1fece1bce49c2fc21f524d9f091045dc",
+        "6c7874d85683e5d6fde6adceb6b87f7e62a10afde2509958aadb461525ae3b49",
+        "6eb877a38175af214a16118e1f13436a9215468afcb325bd62cfc785da9ffe5d",
+        "74f16184cf51b43b3c00b9a546689e2a4e8bad4dbb4cad6186ef52cea519d145",
+        "799c7ba09b1d590af0771694f42cf227d1b36c419b93ec329131546c4de0a65c",
+        "7a7d5b97fe89e35595ad0335e308547343d550a50058b3550c0c812c7406d5e2",
+        "7d69c1e821d4e20552df616015f867756f95bfcdf8561d127519a6300d0a8ce9",
+        "7dfb64ae77ccfec24430fe937bfd58ab011d1a5b9e013388d3a28b554d2ca20e",
+        "920dab824b62f66e15425f70701149012d46b03524eada3aaab48df1e2493280",
+        "941a3da7fff3c01a26ded4a7e95e1627f727253c7a98d267dcdc82020af1d6ef",
+        "98b2999876691a85092bc2fbf539dbf916fe4f9a437ed72959d9e2a80b0ff338",
+        "9ac034ed8eb5a48d4551e97c3a469240a1927a65ba9ab0cbad51363ccfbc715f",
+        "9f6f50bfc7344c3a4fc7f8dac4f8c73b8a7c0a69b7aa13e48a13aff69ae64aff",
+        "a44ce7ac420761fe5458f18ec2ed4fcc57097036114549959d11a5d71b756987",
+        "aa9b79cd842485dd0ca82f47389df6e94a40b5571fb7603020bf762cf0e8912c",
+        "b21ad8aefd5ebe1a81a10140e7f635726175d3c9a37d52487de5ec4f5df399e2",
+        "b75b15f4f6a1b3cc60dcea88036da80235b6cd5083812f9c9acc8844d7e3c207",
+        "bb5cd214f0727d7b6a82caabeccb0d814b396c0a0d698d8b553795104495e79c",
+        "c75d0ab4630a72aa264636406d2ff3c4df5659c0948a9fc5f35dad6e73daebf4",
+        "c7fb7064e26e7a6cda07fb532df8a119d65e6e49b2e2d14647acad57e6a05669",
+        "c9c9659e6346cacbb40d99a184c58164897dec1f78fc20712aac28581b4e42a2",
+        "d203b73858cf31c6b371b7b6d1695786aa6a0681b098232740dc92aa6d43e7fc",
+        "d26fb48a97799ad4547099942e2cb3235c3d737f88195241da142e981f08a7ed",
+        "ddb1cb52751d473246a8f7149c1c457398973d06b70e700b6529de26f5c4f9fc",
+        "e45c0234cabcebe190b8c68f32eb9888fcf54fbb97dec4a93a4d524aaebc11ec",
+        "e95c28e0e669900bb5bd442e37e848392269dfd7266fb53ba28e432678e9b2fa",
+        "eb1fa0e42645072ea74c12439c9564cd8f742a72428737bc6684b634ba15b662",
+        "f1fbca7812d37b8be8e2ac4966322590cd8218fa7663e9c3d50096f92946cdd3",
+        "f500169827c2a468da11843c7189ec128697db4be05ba701084031c4163065cc",
+        "f89c223f89c609990a878e44c76410c0c77dea9992aac3c99b072b48eba0236d",
+        "fa07adad1ca831a4f466b32e6e0e72b5ae9b77ea58a1c780399b882e1f363fa8",
+        "fd94799a6b25f27bfc36fa4ae2a816e5fab8e14dd617fd877f37d76625b4f665"
+      ],
+      "graph_observation_span_s": 44.63582751998911,
+      "graph_last_age_s": 0.3677054080180824,
+      "odom_age_s": {
+        "count": 897,
+        "max": 0.14106804,
+        "p95": 0.122512872
+      },
+      "seconds": 45.00978284800658,
+      "counts": {
+        "/zed/rgb/image_rect_color": 897,
+        "/cloud_map": 1,
+        "/rtabmap/frame_cloud": 897
+      },
+      "unique_stamps": {
+        "/zed/rgb/image_rect_color": 897,
+        "/cloud_map": 1,
+        "/rtabmap/frame_cloud": 897
+      },
+      "last": {
+        "/zed/rgb/image_rect_color": {
+          "width": 384,
+          "height": 240,
+          "bytes": 276480,
+          "frame": "zed_left_camera_optical_frame"
+        },
+        "/cloud_map": {
+          "width": 295,
+          "height": 1,
+          "bytes": 9440,
+          "frame": "map"
+        },
+        "/rtabmap/frame_cloud": {
+          "width": 256,
+          "height": 1,
+          "bytes": 8192,
+          "frame": "zed_left_camera_optical_frame"
+        }
+      },
+      "passive_only": true,
+      "states": {
+        "NORMAL": 1380
+      },
+      "reasons": {
+        "registered visual geometry": 1380
+      },
+      "main_write_allowed_count": 1380,
+      "graph_sizes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "last_continuity": {
+        "schema": "wbrov.mapping-continuity.v1",
+        "state": "NORMAL",
+        "reason": "registered visual geometry",
+        "epoch": 0,
+        "generation": 0,
+        "source_stamp_ns": 1791488689651879000,
+        "session_token_sha256": "c858406414e6ba21ff7fa1a5e8fc2eac97a4a2c5602d29ec36c1d462ae495477",
+        "good_samples": 1079,
+        "registered": true,
+        "main_map_write_allowed": true,
+        "local_tracking_healthy": true,
+        "local_submap_write_allowed": true,
+        "visual_geometry": true,
+        "depth_geometry": false,
+        "imu_translation_only_allowed": false,
+        "private_recovery_observations_are_main_map": false,
+        "observing_registered_map": false,
+        "map_observation_count": 0,
+        "recovery_commit_pending": false,
+        "required_map_observations": 5,
+        "vo_width": 384,
+        "vo_height": 240,
+        "reference_node_id": 1,
+        "reference_epoch": 0,
+        "reference_stamp_ns": 1791488636187727000,
+        "reference_is_navigation_command": false
+      },
+      "last_age_s": {
+        "/zed/rgb/image_rect_color": 0.025049823976587504,
+        "/cloud_map": 45.00764960004017,
+        "/rtabmap/frame_cloud": 0.021758528018835932
+      }
+    },
+    "screenshot_sha256": "a9691bd847ccd5a111751b7f4d52420eba8d601ebd4cd8f526c528c9f58a6c81",
+    "launcher_exit_code": 0,
+    "lifecycle": {
+      "schema_version": 1,
+      "phase": "stopped",
+      "launcher_pid": 3176581,
+      "process_start_ticks": 26727863,
+      "boot_id": "d12a8759-0cf1-4fe9-9064-feea661c2763",
+      "nodes_stopped": true,
+      "export_succeeded": true,
+      "cleanup_succeeded": true,
+      "exit_code": 0,
+      "requested_exit_code": 0
+    },
+    "artifacts": {
+      "rtabmap.db": 20660224,
+      "rtabmap_dense.ply": 57905
+    },
+    "cloud_validation": "stationary retained cloud displayed; map growth and physical accuracy unvalidated",
+    "passed": true
+  },
+  "health": {
+    "candidate": {
+      "schema_version": 2,
+      "ready": true,
+      "elapsed_s": 145.57568208,
+      "denominator_s": 20,
+      "metrics": {
+        "odom": {
+          "received_in_window": 399,
+          "math_valid_unique_stamps": 399,
+          "valid_unique_stamps": 399,
+          "valid_unique_rate_hz": 19.95,
+          "duplicate_math_valid_stamp_count": 0,
+          "math_invalid_count": 0,
+          "math_reason_counts": {
+            "valid": 399
+          },
+          "math_valid_missing_odom_info_count": 0,
+          "math_valid_lost_count": 0,
+          "math_valid_conflicting_status_count": 0,
+          "header_gap": {
+            "p50_ms": 49.9955,
+            "p95_ms": 83.316,
+            "max_ms": 116.669
+          },
+          "header_regressions_in_window": 0
+        },
+        "odom_info_lite": {
+          "received_in_window": 399,
+          "tracking_not_lost_unique_stamps": 399,
+          "lost_unique_stamps": 0,
+          "reason_counts": {
+            "tracking_not_lost": 399
+          },
+          "header_regressions_in_window": 0
+        },
+        "high_camera_info": {
+          "received_in_window": 20,
+          "valid_unique_stamps": 20,
+          "valid_unique_rate_hz": 1,
+          "duplicate_valid_stamp_count": 0,
+          "invalid_count": 0,
+          "reason_counts": {
+            "valid": 20
+          },
+          "header_regressions_in_window": 0
+        },
+        "high_to_valid_odom_exact": {
+          "eligible_high_unique_stamps": 19,
+          "covered_unique_stamps": 19,
+          "coverage_ratio": 1,
+          "missing_count": 0,
+          "nearest_stamp_or_restamp_used": false
+        },
+        "high_integrated_proxy": {
+          "source": "exact stamp intersection with /info",
+          "observable": true,
+          "eligible_duration_s": 19.5,
+          "matched_unique_stamps": 19,
+          "rate_hz": 0.9743589743589743,
+          "coverage_ratio": 1,
+          "is_not_database_keyframe_or_dense_map_proof": true
+        },
+        "rtabmap_info": {
+          "received_in_window": 20,
+          "valid_unique_stamps": 20,
+          "header_regressions_in_window": 0
+        }
+      },
+      "gates": {
+        "hard_checks": {
+          "valid_unique_odom_rate_at_least_threshold": true,
+          "valid_unique_high_camera_info_rate_at_least_threshold": true,
+          "eligible_high_exact_valid_odom_coverage_at_least_threshold": true
+        },
+        "hard_pass": true,
+        "integration_proxy_required": true,
+        "integration_proxy_pass": true,
+        "candidate_pass": true
+      },
+      "totals_since_start": {
+        "odom": 2875,
+        "odom_info_lite": 2875,
+        "high_camera_info": 145,
+        "rtabmap_info": 146
+      },
+      "interpretation": {
+        "odom_valid_means": "same integer-nanosecond stamp has finite-position near-unit-quaternion /odom and /odom_info_lite lost=false, with any conflicting lost=true excluded; not external truth",
+        "high_topic_means": "valid 1920x1200 CameraInfo header proxy; RGB/depth payload topics are not subscribed",
+        "coverage": "integer-nanosecond equality only; no nearest match and no timestamp modification",
+        "integration_proxy": "/info same stamp indicates a processed callback only; not database persistence"
+      }
+    },
+    "installed": {
+      "schema_version": 2,
+      "ready": true,
+      "elapsed_s": 53.579842208,
+      "denominator_s": 20,
+      "metrics": {
+        "odom": {
+          "received_in_window": 397,
+          "math_valid_unique_stamps": 397,
+          "valid_unique_stamps": 397,
+          "valid_unique_rate_hz": 19.85,
+          "duplicate_math_valid_stamp_count": 0,
+          "math_invalid_count": 0,
+          "math_reason_counts": {
+            "valid": 397
+          },
+          "math_valid_missing_odom_info_count": 0,
+          "math_valid_lost_count": 0,
+          "math_valid_conflicting_status_count": 0,
+          "header_gap": {
+            "p50_ms": 49.9945,
+            "p95_ms": 83.331,
+            "max_ms": 99.986
+          },
+          "header_regressions_in_window": 0
+        },
+        "odom_info_lite": {
+          "received_in_window": 397,
+          "tracking_not_lost_unique_stamps": 397,
+          "lost_unique_stamps": 0,
+          "reason_counts": {
+            "tracking_not_lost": 397
+          },
+          "header_regressions_in_window": 0
+        },
+        "high_camera_info": {
+          "received_in_window": 20,
+          "valid_unique_stamps": 20,
+          "valid_unique_rate_hz": 1,
+          "duplicate_valid_stamp_count": 0,
+          "invalid_count": 0,
+          "reason_counts": {
+            "valid": 20
+          },
+          "header_regressions_in_window": 0
+        },
+        "high_to_valid_odom_exact": {
+          "eligible_high_unique_stamps": 20,
+          "covered_unique_stamps": 20,
+          "coverage_ratio": 1,
+          "missing_count": 0,
+          "nearest_stamp_or_restamp_used": false
+        },
+        "high_integrated_proxy": {
+          "source": "exact stamp intersection with /info",
+          "observable": true,
+          "eligible_duration_s": 19.5,
+          "matched_unique_stamps": 20,
+          "rate_hz": 1.0256410256410255,
+          "coverage_ratio": 1,
+          "is_not_database_keyframe_or_dense_map_proof": true
+        },
+        "rtabmap_info": {
+          "received_in_window": 20,
+          "valid_unique_stamps": 20,
+          "header_regressions_in_window": 0
+        }
+      },
+      "gates": {
+        "hard_checks": {
+          "valid_unique_odom_rate_at_least_threshold": true,
+          "valid_unique_high_camera_info_rate_at_least_threshold": true,
+          "eligible_high_exact_valid_odom_coverage_at_least_threshold": true
+        },
+        "hard_pass": true,
+        "integration_proxy_required": true,
+        "integration_proxy_pass": true,
+        "candidate_pass": true
+      },
+      "totals_since_start": {
+        "odom": 1050,
+        "odom_info_lite": 1050,
+        "high_camera_info": 51,
+        "rtabmap_info": 51
+      },
+      "interpretation": {
+        "odom_valid_means": "same integer-nanosecond stamp has finite-position near-unit-quaternion /odom and /odom_info_lite lost=false, with any conflicting lost=true excluded; not external truth",
+        "high_topic_means": "valid 1920x1200 CameraInfo header proxy; RGB/depth payload topics are not subscribed",
+        "coverage": "integer-nanosecond equality only; no nearest match and no timestamp modification",
+        "integration_proxy": "/info same stamp indicates a processed callback only; not database persistence"
+      }
+    }
+  },
+  "candidate_light_shutdown": {
+    "phase": "off",
+    "pid": 3052049,
+    "start_ticks": "26497119",
+    "monotonic": 265217.604072192,
+    "deadline_monotonic": 265871.298506624,
+    "light_percent": 0,
+    "packets": {
+      "heartbeat": 23923,
+      "led_30": 4867,
+      "led_0": 6
+    },
+    "motion_packets_allowed": false,
+    "unlock_called": false,
+    "teleop_sha256": "2059378cabf4243a8d7efa2eeff82a48001258736f4368b53524ccc9bb8b2602",
+    "failures": [],
+    "physical_led_ack_available": false,
+    "valid_feedback_count": 9806,
+    "motion_gate_closed": true,
+    "motion_ever_activated": false
+  },
+  "installed_light_shutdown": {
+    "phase": "off",
+    "pid": 3176570,
+    "start_ticks": "26721554",
+    "monotonic": 267548.654976416,
+    "deadline_monotonic": 268115.673193632,
+    "light_percent": 0,
+    "packets": {
+      "heartbeat": 32605,
+      "led_30": 6593,
+      "led_0": 7
+    },
+    "motion_packets_allowed": false,
+    "unlock_called": false,
+    "teleop_sha256": "2059378cabf4243a8d7efa2eeff82a48001258736f4368b53524ccc9bb8b2602",
+    "failures": [],
+    "physical_led_ack_available": false,
+    "valid_feedback_count": 13254,
+    "motion_gate_closed": true,
+    "motion_ever_activated": false
+  },
+  "local_python": {
+    "passed": 77,
+    "skipped": 3,
+    "skip_reason": "NumPy/OpenCV unavailable in local Windows Python"
+  },
+  "native": {
+    "actual_candidate_collector": "passed",
+    "raw_rgbd_transaction": "passed",
+    "prepare_close_reopen": "passed",
+    "actual_wrapper_with_new_core": "passed",
+    "portable_optional_cmake_configuration": "not independently exercised; exact collector source built by isolated native target"
+  },
+  "full_joint_teleop_entry_tested": false,
+  "stationary_camera_rviz_save_passed": true,
+  "field_validated": false,
+  "non_tag_recorded_reattachment_passed": false,
+  "runtime": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-6ecf6344d6196d705d276f5fe2979ee5732389ddadbfe684498770de11c3d531",
+  "manifest_sha256": "1a0c75bbc1cced70e9335a7d383db11d36d3617c43f6d7e0a56e2f70f51e4826",
+  "user_calendar_date": "2026-10-16",
+  "device_clock_note": "Device clock reported 2026-10-09 during these tests; run directory dates are not host calendar dates.",
+  "candidate_close_dialog": "Operator-style Discard clicked on the identity-verified RViz layout dialog; this discarded display-layout edits only. Map save then completed normally.",
+  "installed_first_attempt": {
+    "passed": false,
+    "run": "/home/exocean/maps/rtabmap_calibration_ab/custom_20261009_031105",
+    "rviz_visible_seconds": 34.40597171196714,
+    "error": "AssertionError()",
+    "launcher_exit_code": 1,
+    "probe": {
+      "retained_node_ids_unchanged": true,
+      "retained_pose_max_translation_m": 0.0,
+      "retained_pose_max_rotation_deg": 0.3598077649480481,
+      "graph_content_hashes": [
+        "0a634690c6ddef58799ca924967320a9ce5da447bbf1758037902ca3ee39efd9",
+        "0b5ef47e705042981edc6429ead09b9dbf0a2d81d2c76bcda39620315cb9ba4f",
+        "119100327cf4218737de16c13f125539caae5a5036da3435988d0197157a9e94",
+        "13b2f2d1c1aab71ee66097a14b443dcf0cfa64ebb2b10bea42ee92ea48023753",
+        "270f66509971cc69a47839e0e14aa76fd4afdfa34abbdcfa48fb848d8bd5619c",
+        "31f2a546c08a2faff81e199083d7aa0bb10d6f2d56faa7ba59b35a28409e9107",
+        "3907b8e25429b6115a5a44a06f600bcfc6117168fcc2c986a40844ab0341a876",
+        "4fe1e87571d77278bf6b8f9989014aa7764fbda8ee60751f9ef511af8bc50425",
+        "55909c442d0168d9dfa7ac0ec6a0c737cb66c9cf036c755c70413a177e4abd09",
+        "57d48699f98b7d4dd64346d246e044c8d4eb612c0809a6c0e9a94795a8f60473",
+        "5ba231559a8f9be2a179d688b2a6d0e0fe4d777df3ac17cc29c833207365a6de",
+        "5d7087cad28f9c9931704de5d4dd4c971871aadf09a5712bfd872b1b591ebb2e",
+        "5fab053b69a40d1d8f363bdd371db0d3e4b4a2da9e47ae86d3804fc9c14a0e71",
+        "6b34f65db27aadbb4d320b83414f9c4009795548f1eba270798d5200734b66a7",
+        "72f4f6a358637e7896b10b908e52118e87e05b4d0b33e40a97561f32cbef28f4",
+        "73e9a289ae9f28e8af497f02c115d9ba77fb0de5f36f802d6df0b614cff5bd02",
+        "8635ddc6aa94789786fc8402ccde33e7a1b1669acf57431953f105c8024b18fa",
+        "892473d3bd38a0df2c51402e3463a67ee8d23529aa792499fed931f74cc7d9f3",
+        "899ef0a4c26668727eb884d4395d9ca764dfcaa1f30b6a4181b01e776eecc228",
+        "934031fbe3ff08b5b59c5b8cdd39ed892c03cad9432330d4a67c9186a175620a",
+        "a80f1d37817bc6409572790a470f0adcf155743f61212ba9c8123d24260dbe59",
+        "a95e62950fddf676724be6040f50843c844125c1a39d13d26914a2ca366fda47",
+        "b4b3ae5fc03ca1b0f6a4b5e747c223f2eeb833c4bab52f798dc98d3b3b70197e",
+        "b5025bcf6a4ee6b929b0a69fca99f45f4dc3927de60c8b17b583569dc0bed864",
+        "b58ada5fcd3c12da9145d4d26f78e9ced68e43ae369ad609f90615bcc57b41b8",
+        "b5eaf9fdd3751f3e1a6be3083d831dcbc9c7aca2df4afea995e61f7f8381a3f9",
+        "b69b2fc1ea4546d8105aa9cf8e2af94067e03169536f51c11e44d1a2fd23d375",
+        "c28d6754ebbc8aa71516c837ccb760839838ab6f767d7ca81b9ddf3a6bd77645",
+        "c293c929ce2f10abc90d751a87bead9516933ccc0a7be9f0befe1ccff7c18f04",
+        "c52d822383f256737c20ccb9c6fd196f20ced23f38d684586b02cc85fab50615",
+        "c98aa0a8332b3d74bb78ca568cce89636b1b18a41b2402bba8ab20065c99f15f",
+        "cfe4e87d9e9e404a897fd563ba6b5caf618e9c06a150f3373e8b82aa79e94537",
+        "d2f64ddc7342fb86f3193967762aa5538250e9979f8132a710edd688a3d461eb",
+        "db8eaf15e3c494e874b8e7bdfca932f069971f36a7454b6c450590e716124a66",
+        "dc62b0a5a83a00e0ad408f19b8155edc4602a9596e7fee7fd122b2095341616d",
+        "e84ecdd8205f6ac80d65503cdd6b7a84670ccbaef4d938f014bb099ddb808d83",
+        "f19360e4b08a421b48871b10779486817c3e8d80027d18d17b6eea00fec21f70",
+        "f373a085cc57994f117ff1b42e3772a7314500eb3f04f915c8a8280e1a408e76",
+        "f93703995f8656edf4d2dcd98cda735df9d599ed9d9e6166c6dfec17d442bee9"
+      ],
+      "graph_observation_span_s": 44.820115712005645,
+      "graph_last_age_s": 0.18954384000971913,
+      "odom_age_s": {
+        "count": 821,
+        "max": 0.285990544,
+        "p95": 0.127290624
+      },
+      "seconds": 45.01572870404925,
+      "counts": {
+        "/zed/rgb/image_rect_color": 889,
+        "/cloud_map": 1,
+        "/rtabmap/frame_cloud": 888
+      },
+      "unique_stamps": {
+        "/zed/rgb/image_rect_color": 889,
+        "/cloud_map": 1,
+        "/rtabmap/frame_cloud": 888
+      },
+      "last": {
+        "/zed/rgb/image_rect_color": {
+          "width": 384,
+          "height": 240,
+          "bytes": 276480,
+          "frame": "zed_left_camera_optical_frame"
+        },
+        "/cloud_map": {
+          "width": 288,
+          "height": 1,
+          "bytes": 9216,
+          "frame": "map"
+        },
+        "/rtabmap/frame_cloud": {
+          "width": 247,
+          "height": 1,
+          "bytes": 7904,
+          "frame": "zed_left_camera_optical_frame"
+        }
+      },
+      "passive_only": true,
+      "states": {
+        "NORMAL": 1185,
+        "PAUSED": 7,
+        "RECOVERING": 103
+      },
+      "reasons": {
+        "registered visual geometry": 1184,
+        "source or arrival expired": 5,
+        "waiting for stable geometry and Core registration": 105,
+        "fresh continuous measured motion; same Core-registered coordinate frame": 1
+      },
+      "main_write_allowed_count": 1185,
+      "graph_sizes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "last_continuity": {
+        "schema": "wbrov.mapping-continuity.v1",
+        "state": "NORMAL",
+        "reason": "registered visual geometry",
+        "epoch": 0,
+        "generation": 6,
+        "source_stamp_ns": 1791486732389482000,
+        "session_token_sha256": "65862a07e3881c8495c2e7449a542f70eb554d6d4fad79fae9dea465830a8401",
+        "good_samples": 48,
+        "registered": true,
+        "main_map_write_allowed": true,
+        "local_tracking_healthy": true,
+        "local_submap_write_allowed": true,
+        "visual_geometry": true,
+        "depth_geometry": false,
+        "imu_translation_only_allowed": false,
+        "private_recovery_observations_are_main_map": false,
+        "observing_registered_map": false,
+        "map_observation_count": 0,
+        "recovery_commit_pending": false,
+        "required_map_observations": 5,
+        "vo_width": 384,
+        "vo_height": 240,
+        "reference_node_id": 1,
+        "reference_epoch": 0,
+        "reference_stamp_ns": 1791486681041886000,
+        "reference_is_navigation_command": false
+      },
+      "last_age_s": {
+        "/zed/rgb/image_rect_color": 0.0004960959777235985,
+        "/cloud_map": 45.01393935998203,
+        "/rtabmap/frame_cloud": 0.06444374402053654
+      }
+    },
+    "export_succeeded": true,
+    "cleanup_succeeded": false,
+    "reason": "Post-probe light_proof assertion failed before screenshot/normal close. Later owner state had no failures, motion or blocked packets. Stale light status is inferred; the first harness did not retain the failing snapshot. SIGINT cleanup saved map but stop health receipt failed.",
+    "retry_harness_change": "Same light freshness threshold <2 seconds; wait up to 3 seconds for a fresh observation, logging stale samples and full traceback. Runtime, mapping acceptance thresholds and SDK unchanged.",
+    "first_driver_sha256": "057d29581185eaebccf6ff1f42b94125217c4da242176d1f746ccd52883fcfc7",
+    "retry_driver_sha256": "575ff67bb1d93b97d0fd782b2412c9d2ac24356f9e3b08a82b3e9f8b0bda4ee6",
+    "retry_light_freshness_waits": []
+  },
+  "installed_interrupted_attempt": {
+    "passed": false,
+    "run": "/home/exocean/maps/rtabmap_calibration_ab/custom_20261009_031549",
+    "error": "TimeoutExpired(['/bin/bash', '/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh'], 100)",
+    "launcher_exit_code": 0,
+    "probe": {
+      "retained_node_ids_unchanged": true,
+      "retained_pose_max_translation_m": 0.0,
+      "retained_pose_max_rotation_deg": 0.34888168135492026,
+      "graph_content_hashes": [
+        "083ff8479507f3af308514a5e375c9e3611640e72010c685aa0add89b2a0d4ad",
+        "15ea8d50bcad9f46dd48fbb301eedc965a925cee5d66490ef4c741bdaaf59280",
+        "1989d913818912d77e061f20395d6a945a1ef6570af7b61163edace38243e062",
+        "28fbced691c61e89ca113094390aad79db097ac2394c7788271a5a9951e35449",
+        "2c1c0b82dd88994da62f9374cd5392251c321e5481bb5030e3f98259824fed45",
+        "31b9c0ef4548228a92ac91261d10115f4941121d00e2c4f87b1a3826255c6683",
+        "34eba4c85124667a9feac06a005bad5795838736847e9d8666b34e1e61478fdd",
+        "40be7e7ed393a29af642982b63ab75732e6b0f273981fdb74ecdf3dcbbe79011",
+        "56b7b9732a5c18dd76d04787459c8acd4de07972c98fae579fb690db39c67cde",
+        "61defcef58496609de506f3cffcb30905424d7b8be7d1ff18194be5bc4797542",
+        "63596e2060c8b400847b07c0faceac75636883c3686b19196824d0dc1da96cc0",
+        "635deccaa0b535fe035b2c22a9b7346d2732c64bdb3462c0db7105d1c34f889c",
+        "64baf46576e59d24eacf6fd3a683bf1e18ffa0cb62a62456c3656f7bd34f212c",
+        "65b6ad0545902410380d77a74c6bb1afe036aedc078b9dbe48e74d79208f087d",
+        "6af485d7ec17989077ab5580878aa0d2334959c754ae01ff91f5131938ca220a",
+        "6e6c76f082d8e2b9933abeb7e29c4d635a64aeaf4f0a7d3c635ad1fad17aa55e",
+        "6f7d686cbd88d8a7a8d883f64ec7100a2b4adc1ce0b9866f8c4d95f6dad054d9",
+        "775efbf9b55bbb5213e15c9a94c87f9f4022ffb892369eee91c4bc86d9c8fcc1",
+        "7c546859c9f76a33286334c2a799f54aac508b2bcafbda15d4301934fe73ad12",
+        "81a70afc613e8edf1f80401db6b91ea2e22001300c965bdd547e036100ef9a2c",
+        "82e923f24e7c54eac7dadfa74ccc04e422cfba7cfef5a91ce49221fe19c09d44",
+        "885f229418c23011b72583a6a73c743597f9edf1d6416fc17545f1f7e62dd777",
+        "93aa0c6dcbe26bebb6d1f969645b3b0cb463f430fb185b62ba1211aefffb2626",
+        "9af3cc90fcf7edb08b6c6cd88643555c39360fd356ca074a465deb79247c7ad6",
+        "9ec2580d9af0788916f98dfe08a0e472f9029fdd6a0b82fbd3a1b4ee26504296",
+        "a07918fb81344b5f2dee6af3492f7d2dbe6120da405ccd2129e6859d9c49931b",
+        "a75d6d13ee02e9a78312bcc9655bb3e0cf72b9f2b734c1b2341d8eac9339744f",
+        "ad2d35f32cc62ab7ad62ac199d35eba418c59c64902daed43cc1431439989c7f",
+        "ad3c373b48577c267a3d449b356de5e08ac2c6efeb9c4398e755537dfdc05e60",
+        "ad40ee5f010f46cc5cce31ad66e63f57251cd0750b56e461fe84b4dd0884caf0",
+        "b494c27cce2f2cb7c0891ff302d60b334a18dbe0b2d7b3db0672061279803972",
+        "bb426614cbadfc28a5becf9bb71262ae41df995cd2f726d556bab55b206d4041",
+        "bbfe3db60903f1a679fbd78710dbec8ccb7d4139023a3a73bc8cd688296a19f9",
+        "c2541b621255587b8da3d7fa67bea0b76e2fff715862da7faf6c71a57bee2326",
+        "ca44027dbde4a48bb4ecafbe37ebea2edfa91dd5c634d37e081d493339bcbe17",
+        "cdf369c54a78f7c0254fe024d77cc8a3bca3e5d42e6a0036a9724e1f3d9b190e",
+        "d3e8d2afc6d229cabf1f717d34f7c1f5fd565de53c51cc0c8fbcb9408063a75f",
+        "d40539a604f26b97034eba7a25bb31f18a72352925fbe0692dacd5ed523e9eef",
+        "d53b0b0e237a3e6ba79c1ade6b1b7226b22c73c6487e33a0ca206a260719e6e4",
+        "dd23e64c98c470b25319eed118d6f7ce224c57723802749eb855e462b4c52748",
+        "deee171cb62e974dea8f78443f5f9969f7fe9006402524e65374016604581490",
+        "e3fcca33969b37fddf8b1d8b812a560e6504662b45ed746265aa17cc4fccdc13",
+        "ee4696d0ac5885495d54ff74167a128185374a03c53304be95ba1679ff670759",
+        "f5eede268e4edd0b46e48baef02a1a995634fb9bc903ff013925739cf552418c"
+      ],
+      "graph_observation_span_s": 42.077654240012635,
+      "graph_last_age_s": 0.6170551359537058,
+      "odom_age_s": {
+        "count": 861,
+        "max": 0.206248664,
+        "p95": 0.126697992
+      },
+      "seconds": 45.00122044800082,
+      "counts": {
+        "/rtabmap/frame_cloud": 869,
+        "/zed/rgb/image_rect_color": 841,
+        "/cloud_map": 1
+      },
+      "unique_stamps": {
+        "/rtabmap/frame_cloud": 869,
+        "/zed/rgb/image_rect_color": 841,
+        "/cloud_map": 1
+      },
+      "last": {
+        "/rtabmap/frame_cloud": {
+          "width": 243,
+          "height": 1,
+          "bytes": 7776,
+          "frame": "zed_left_camera_optical_frame"
+        },
+        "/zed/rgb/image_rect_color": {
+          "width": 384,
+          "height": 240,
+          "bytes": 276480,
+          "frame": "zed_left_camera_optical_frame"
+        },
+        "/cloud_map": {
+          "width": 293,
+          "height": 1,
+          "bytes": 9376,
+          "frame": "map"
+        }
+      },
+      "passive_only": true,
+      "states": {
+        "NORMAL": 1285
+      },
+      "reasons": {
+        "registered visual geometry": 1285
+      },
+      "main_write_allowed_count": 1285,
+      "graph_sizes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "last_continuity": {
+        "schema": "wbrov.mapping-continuity.v1",
+        "state": "NORMAL",
+        "reason": "registered visual geometry",
+        "epoch": 0,
+        "generation": 0,
+        "source_stamp_ns": 1791487015876668000,
+        "session_token_sha256": "b80a63a841f3f8a8b944e4bec525c75469dfd7f7bacd02a7cea2e29b8b9e25e5",
+        "good_samples": 1016,
+        "registered": true,
+        "main_map_write_allowed": true,
+        "local_tracking_healthy": true,
+        "local_submap_write_allowed": true,
+        "visual_geometry": true,
+        "depth_geometry": false,
+        "imu_translation_only_allowed": false,
+        "private_recovery_observations_are_main_map": false,
+        "observing_registered_map": false,
+        "map_observation_count": 0,
+        "recovery_commit_pending": false,
+        "required_map_observations": 5,
+        "vo_width": 384,
+        "vo_height": 240,
+        "reference_node_id": 1,
+        "reference_epoch": 0,
+        "reference_stamp_ns": 1791486965062372000,
+        "reference_is_navigation_command": false
+      },
+      "last_age_s": {
+        "/rtabmap/frame_cloud": 0.00028537597972899675,
+        "/zed/rgb/image_rect_color": 0.00402691203635186,
+        "/cloud_map": 42.74254102399573
+      }
+    },
+    "reason": "Turn interruption left the RViz layout dialog unanswered. Harness timed out at normal-close wait and then sent SIGINT; exit code was 0. This attempt remains failed."
+  },
+  "installed_final_harness_sha256": "5b930baa065f21be65685cc198e08a30fe7e04ad88d5e8fddc492b0c5ca6bf57",
+  "installed_final_layout_dialog": null
+}

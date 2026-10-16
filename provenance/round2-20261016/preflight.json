@@ -1,0 +1,69 @@
+{
+  "schema": "wbrov.deploy8-preflight.v1",
+  "runtime": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-6ecf6344d6196d705d276f5fe2979ee5732389ddadbfe684498770de11c3d531",
+  "steps": [
+    {
+      "name": "failure_reporting",
+      "returncode": 0,
+      "log_sha256": "ac952e4e74f3c7d8db8c1153a805db88fa879b5bdc1cb71b38ef3dcf11b96f55"
+    },
+    {
+      "name": "recovery_admission",
+      "returncode": 0,
+      "log_sha256": "c06381379fd398bbac572c203070aab4dae010ab82709a88fa28da7eb8501ebb"
+    },
+    {
+      "name": "no_tag_save",
+      "returncode": 0,
+      "log_sha256": "033f2c34a5a3de4fdcd73314166869e18e3261406d5549527b7f6a980632b20b"
+    },
+    {
+      "name": "mapping_syntax",
+      "returncode": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "outer_syntax",
+      "returncode": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "camera_profile",
+      "returncode": 0,
+      "log_sha256": "64378a400dcd43be4d18c9584289759c4c864649321e2541fa7ca06949f4e5ba"
+    },
+    {
+      "name": "runtime_tree",
+      "returncode": 0,
+      "log_sha256": "818575b1651439d49c7af69f59a8e897c71dd59a6c3be0101a1648aa9377d570"
+    },
+    {
+      "name": "landmark_guard",
+      "returncode": 0,
+      "log_sha256": "50961bb125e9656de20112fc5662ad982c031b3e0128d19fad5e79105453ea5a"
+    },
+    {
+      "name": "camera_dimensions",
+      "returncode": 0,
+      "log_sha256": "3dd65dbdb9bc67f46a2ff331e9111d99e76ee3664d895db0ee73a0f02431c63c"
+    },
+    {
+      "name": "supervisor_failure",
+      "returncode": 0,
+      "log_sha256": "71fa58fa50024b2ab8a270cded5d44eb5f358ab31ed14057965a21ea010e20ff"
+    },
+    {
+      "name": "outer_readonly",
+      "returncode": 0,
+      "log_sha256": "3e1e8ab9bdc10decd2d6d6ef4b029846b666be02779bbeff42fb84d906622885"
+    }
+  ],
+  "hardware_started": false,
+  "production_switched": false,
+  "display_source": "existing X11 socket; no GUI started",
+  "status": "passed",
+  "candidate_hashes": {
+    "start_rtabmap_calib_ab.sh": "3737f9a09d802ff56ad566b8ea56194398e338a0f2c5c51711bdfcfb2345c022",
+    "run_water_mapping_with_light.sh": "73afbf9254afa49c6fee8003cc66b9cb289129ed6c289f09afdc36b2c31f3ebe"
+  }
+}

@@ -12,6 +12,7 @@ import rclpy
 from rclpy.qos import QoSProfile,ReliabilityPolicy,DurabilityPolicy
 from sensor_msgs.msg import Image,CameraInfo,Imu,PointCloud2
 from replay_audit import audit,graph_components
+from replay_timing import timing_evidence
 from rtabmap_msgs.msg import RGBDImage,OdomInfo,MapGraph
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import TransformStamped
@@ -73,8 +74,10 @@ out=TASK/('recorded_submap_tag_'+str(time.monotonic_ns()));out.mkdir(mode=0o700)
 (out/'replay_driver.py').write_bytes(Path(__file__).read_bytes())
 (out/'replay_audit.py').write_bytes((Path(__file__).parent/'replay_audit.py').read_bytes())
 (out/'submap_replay_audit.py').write_bytes((Path(__file__).parent/'submap_replay_audit.py').read_bytes())
+(out/'replay_timing.py').write_bytes((Path(__file__).parent/'replay_timing.py').read_bytes())
 report=dict(schema='wbrov.recorded-submap-tag-replay.v1',phase='starting',root=str(out),runtime=str(runtime),
     runtime_receipt_path=str(receipt_path),runtime_receipt_sha256=file_hash(receipt_path),driver_sha256=file_hash(Path(__file__)),
+    timing_audit_sha256=file_hash(Path(__file__).parent/'replay_timing.py'),
     no_tag_case=not args.tag_enabled,depth_geometry_recovery=True,inertial_translation=False,independent_local_submaps=True,
     early_gravity_measured_certificate=True,
     order=args.order,source_start=args.start,source_count=args.count,cycles=args.cycles,blank_cut_s=args.blank_cut_s,cases={},hardware_started=False,
@@ -408,7 +411,11 @@ def run_case(label,enabled):
             map_planned=len(planned),map_published=len(sent),map_accepted=len(got),map_ack_dropped=len(dropped),
             map_not_admitted=sorted(set(sent)-set(got)),map_accept_age_s=describe((row['arrival_ns']-ns)*1e-9 for ns,row in got.items()),
             graph_messages=len(graphs),graph_display_messages=len(markers),actual_native_bindings=bindings,source_stamp_preserved=True,
-            source_realtime_valid=describe(timing)['p95']<.03 and describe(timing)['max']<.15)
+            replay_timing=timing_evidence(describe(timing)))
+        # Compatibility field retains its old Boolean result, with explicit
+        # scope. It has never measured the live ZED sensor's real-time behavior.
+        result['source_realtime_valid']=result['replay_timing']['schedule_budget_met']
+        result['source_realtime_valid_scope']='deprecated alias for replay_timing.schedule_budget_met; not live sensor proof'
         result.update(continuity_audit=audit(dict(continuity=continuity,graphs=graphs,info=list(infos.values()),clouds=clouds,faults=faults)),
             cloud_messages=len(clouds),actual_vo_camera_dimensions=sorted({tuple(dim) for row in infos.values() for dim in row['camera_dimensions']}))
         result.update(faulted_images=len(faults),lost_unique_infos=sum(row['lost'] for row in infos.values()),epochs=sorted({int(row['reset_epoch']) for row in states}),
@@ -475,11 +482,13 @@ try:
         report['cases'][label]=run_case(label,enabled);write_atomic(out/'result.json',report)
     if args.latest_only:
         case=report['cases']['latest_one_pending']
-        report.update(phase='measured',source_realtime_valid=case['source_realtime_valid'],comparison=False)
+        report.update(phase='measured',source_realtime_valid=case['source_realtime_valid'],comparison=False,
+            replay_timing=case['replay_timing'],live_sensor_realtime_validated=False)
     else:
         a,b=report['cases']['legacy_drop_busy'],report['cases']['latest_one_pending']
         assert a['input_payload_sha256']==b['input_payload_sha256']
-        report.update(phase='measured',source_realtime_valid=a['source_realtime_valid'] and b['source_realtime_valid'],valid_rate_ratio=b['valid_hz']/a['valid_hz'])
+        report.update(phase='measured',source_realtime_valid=a['source_realtime_valid'] and b['source_realtime_valid'],valid_rate_ratio=b['valid_hz']/a['valid_hz'],
+            replay_timing={name:value['replay_timing'] for name,value in report['cases'].items()},live_sensor_realtime_validated=False)
 except BaseException as exc:report.update(phase='failed',error=repr(exc));raise
 finally:
     assert source_identity=={p.name:(p.stat().st_size,p.stat().st_mtime_ns) for p in SOURCE.iterdir() if p.name in source_identity}

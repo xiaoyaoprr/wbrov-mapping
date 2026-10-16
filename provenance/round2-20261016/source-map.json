@@ -1,0 +1,24 @@
+{
+  "schema": "wbrov.round2-source-map.v1",
+  "source_files": {
+    "src/rtabmap_core/corelib/src/Rtabmap.cpp": "8706f82eebcb0c444f89edb26683be4cf0d2678e8ea3b490b6c27cb6e14d9fd6",
+    "src/rtabmap_core/corelib/src/Parameters.cpp": "fcf545c4e92742ee89517b4c6f69c930e593f46745c24b84a1571a8c8af8cc7b",
+    "src/rtabmap_core/corelib/include/rtabmap/core/Parameters.h": "7b67106cdc48ae11ac025cb08e29ef976682bb98cf8018d986e76c224b58e94b",
+    "src/rtabmap_core/corelib/src/early_component_gate.inc": "9a64253c4af72d7aebab96353d130920c305094c61700442fe917a035b5be16e",
+    "src/rtabmap_core/corelib/src/early_shadow_guard.inc": "240682e319bc57cb45f840c874e02b7d737e2d87fbd429f11941bace1a2192d4",
+    "src/rtabmap_core/corelib/src/visual_recovery.inc": "79874bf7510e6d6d1538082550e2f85daab93130ae5e6c1a5c3ab23674ed97d2",
+    "tests/native/test_cross_map_candidates_native.cpp": "a58b051a7d7f2d1d1a0b88d3cb62d8fb988a848e581d7d43ad903ac52be8214a",
+    "tests/native/test_visual_recovery_native.cpp": "b8fac5e5c07b7c664df07056f708f8364cf7609f76559cef903688240ba33d39",
+    "runtime/libexec/wbrov_corner_recovery/live_bridge.py": "f43cdf06645c40152329dec303d718b5775fa29a83a47c964a84a05450ac1a15"
+  },
+  "runtime": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-6ecf6344d6196d705d276f5fe2979ee5732389ddadbfe684498770de11c3d531",
+  "manifest_sha256": "1a0c75bbc1cced70e9335a7d383db11d36d3617c43f6d7e0a56e2f70f51e4826",
+  "checker_sha256": "b77af6f7d6895484c822c86ba74586186940e0aef1a6442d9390ffd31e5306ad",
+  "core_sha256": "e19e48b9207318668bb8cd4632f1be39062e2396bae230e84f6104ef99f810aa",
+  "reused_plugin_sha256": "2c3aa231d2872e83d17eacb68148195ef8a4397fde6d41baf8edaa76a428d9a9",
+  "wrapper_abi_header_unchanged": true,
+  "native_receipt_sha256": "9807573b660ab845e0e318a044fb8c638393c572fca4258cdfbd8c6afbd632f8",
+  "runtime_regular_files": 577,
+  "verifier_functions_changed": false,
+  "parameter_header_line_endings": "Parameters.h normalized to LF with its two new declarations; compare ignoring end-of-line whitespace for the semantic diff."
+}

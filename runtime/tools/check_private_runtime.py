@@ -32,7 +32,7 @@ from typing import Any, Dict, Iterable, List, Mapping, MutableMapping, Optional,
 
 SCHEMA_VERSION = 3
 PACKAGE_KIND = "wbrov-private-rtabmap-runtime"
-EXPECTED_PRIVATE_ROOT = '/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/deploy8_measured_gap'
+EXPECTED_PRIVATE_ROOT = '/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round2_deploy_20261016'
 MANIFEST_NAME = "runtime-manifest.json"
 MAX_MANIFEST_BYTES = 32 * 1024 * 1024
 MAX_TREE_ENTRIES = 100000
@@ -42,20 +42,21 @@ READELF = "/usr/bin/readelf"
 LDD = "/usr/bin/ldd"
 
 SOURCE_HASHES = {
+    "rtabmap_core/corelib/src/Parameters.cpp": "fcf545c4e92742ee89517b4c6f69c930e593f46745c24b84a1571a8c8af8cc7b",
     "rtabmap_core/CMakeLists.txt": "9d11b078e265cbf55b6f55564fa9bb255bce513e41fad66aa39aa2a5291f189d",
     "rtabmap_core/corelib/include/rtabmap/core/DBDriver.h": "b356683ffbd4201721e10a6665880862cc699d37794bb9527abbd2ec44b933eb",
     "rtabmap_core/corelib/include/rtabmap/core/DBDriverSqlite3.h": "0a0c42db53cbeaffe4af958a0e6eb0d092108274f1425998628ac2b15de8862c",
     "rtabmap_core/corelib/include/rtabmap/core/ImageInputReceipt.h": "9c0a7fb9d4775d4b5184b3114b3eb40b0e94f3d29f0484325df17e182de04cfe",
     "rtabmap_core/corelib/include/rtabmap/core/Memory.h": "99a6c1d70cfcc6f8f0537040440962b0625bead8d4eb51677219443d56510c23",
-    "rtabmap_core/corelib/include/rtabmap/core/Parameters.h": "e1c1dd63bc8be54f9a3033ce8caf0c1671c27bdeb2ba43c0951ef8216e9e087b",
+    "rtabmap_core/corelib/include/rtabmap/core/Parameters.h": "7b67106cdc48ae11ac025cb08e29ef976682bb98cf8018d986e76c224b58e94b",
     "rtabmap_core/corelib/include/rtabmap/core/Rtabmap.h": "6df7a708295d8ab9c3b0f0daf344f291a337d49f9ae7071453940cf3fc690c0d",
     "rtabmap_core/corelib/include/rtabmap/core/optimizer/OptimizerG2O.h": "75ff6492cb7016e1f3f1a4d0012ad33000d9334da5eb9b2a1ba1da0e9cf4f752",
     "rtabmap_core/corelib/src/DBDriver.cpp": "bf6667683ac68cb4c0ffd7344fff5ffbce3888fd8023affb88309140cda70b91",
     "rtabmap_core/corelib/src/DBDriverSqlite3.cpp": "fb0e6cde7bc7f1470374cc5ce9518d80b92bce48e0ae32f1c1688f80beaf142e",
     "rtabmap_core/corelib/src/EarlyGravityCertificate.h": "143cf85afb1503bcdaf25a91abdf7baaea27f689c11ee9f65f801f8606715bca",
     "rtabmap_core/corelib/src/Memory.cpp": "ec5f623b71890df86eecd0ebdc5aa2bcbfc3ccfaa0a0e1b14e0bdb7b444e812f",
-    "rtabmap_core/corelib/src/Rtabmap.cpp": "87d4848b4222ac7076c475cc8eabbfab0cbdf7b987d57c4f8e8e78d53d4fad08",
-    "rtabmap_core/corelib/src/early_component_gate.inc": "b48274b3ad7c6e61a0dda7dfbe5e3630f5d54c6a636cf00176e96335af152713",
+    "rtabmap_core/corelib/src/Rtabmap.cpp": "8706f82eebcb0c444f89edb26683be4cf0d2678e8ea3b490b6c27cb6e14d9fd6",
+    "rtabmap_core/corelib/src/early_component_gate.inc": "9a64253c4af72d7aebab96353d130920c305094c61700442fe917a035b5be16e",
     "rtabmap_core/corelib/src/early_shadow_guard.inc": "240682e319bc57cb45f840c874e02b7d737e2d87fbd429f11941bace1a2192d4",
     "rtabmap_core/corelib/src/odometry/DepthGeometryRecovery.h": "ac904ee5a0e3c9c6de35c4b049f39828f79636a92a3d4b0c81f59bd2cb17c76a",
     "rtabmap_core/corelib/src/odometry/OdometryF2M.cpp": "6529a78d285aece8408795384c7b0f1ddb5956a2ad966facf018fcceadd80bbc",
@@ -63,7 +64,7 @@ SOURCE_HASHES = {
     "rtabmap_core/corelib/src/optimizer_trace.inc": "ca20901de5d2856aa0e45586c7f9e4cbfdd595ed84dd435d9d0bcd66518adc53",
     "rtabmap_core/corelib/src/recovery_geometry.inc": "c28a5c4b7ccaa9f533ac18da9056939f024fde241b31b7de017df265a3d43992",
     "rtabmap_core/corelib/src/safe_gravity_residual.inc": "ac88ab9dbfcfb934a32ee840ad1a793d1282c195a44a949274801e110b070a24",
-    "rtabmap_core/corelib/src/visual_recovery.inc": "7088ef53d0b13a6634af9e79b018f684dd8ea217a34f0287339860f60f2cde62",
+    "rtabmap_core/corelib/src/visual_recovery.inc": "79874bf7510e6d6d1538082550e2f85daab93130ae5e6c1a5c3ab23674ed97d2",
     "rtabmap_ros/rtabmap_conversions/src/MsgConversion.cpp": "ef9e331097a1aa4893b510c2aae7193a664b806eeca4a7019321809b9178eefa",
     "rtabmap_ros/rtabmap_odom/include/rtabmap_odom/OdometryROS.h": "5f56ae4da35a441085c68f7b2b727a9d5437bb42795bae461f5f637c0c3d3d29",
     "rtabmap_ros/rtabmap_odom/src/OdometryROS.cpp": "7f17a68d58985bc620a303b1437f5df422d001fc3555b3c4c558e27c0ad2aeee",
@@ -125,7 +126,7 @@ AUXILIARY_INPUT_HASHES = {
     "corner_recovery_module_core_pixel_join": "5b0bc22205258afde156ce3e1e4d0047fbddedb8f159b2a76380428c04db8d4d",
     "corner_recovery_module_decoded_pixel_metadata": "acb9f4778160b7fadac4db7fa1a3443a5f08cd238f634aba7a02704aab903bfc",
     "corner_recovery_module_edge_refinement": "2b030f5a6948290d62cb972b9b21be9df26f2de99d588e59ffc6d4cf34abdb33",
-    "corner_recovery_module_live_bridge": "bab7692e263412ffd01c87a8db0849d934c217301fb4025b434e9521db62c8a2",
+    "corner_recovery_module_live_bridge": "f43cdf06645c40152329dec303d718b5775fa29a83a47c964a84a05450ac1a15",
     "corner_recovery_module_managed_graph_state": "896826dfd4cd0c119513bb82fed10731ad70c5c638547ab30114722dbeea6de1",
     "corner_recovery_module_measured_bridge": "b035c7b9a1cdb8979e7c9d4011a20cf70c1b78a7e6993fdc90cbb3900d1030fa",
     "corner_recovery_module_message_info_executor": "fa4658355deb48d46e47595059ed151087322017bc3148c7ad64cdf6806797f0",

@@ -1609,6 +1609,14 @@ bool Rtabmap::acceptCrossMapLoopEvidence(
 	}
 	int currentCells = occupiedGridCells(current, inlierWords, currentWidth, currentHeight);
 	int oldCells = occupiedGridCells(old, inlierWords, oldWidth, oldHeight);
+    std::vector<cv::Point3f> currentPoints = validInlierPoints(current, inlierWords);
+    std::vector<cv::Point3f> oldPoints = validInlierPoints(old, inlierWords);
+    int minimum3DPoints = std::max(6, _crossMapLoopMinInliers/2);
+    if(_safeRelocalizationGuardEnabled)
+        UWARN("Guarded candidate support current=%d old=%d inliers=%d ids=%u unique=%u grid=(%d,%d)/%d depth=(%u,%u)/%d final_depth_min=%d candidate_only=1",
+            current.id(),old.id(),info.inliers,unsigned(info.inliersIDs.size()),unsigned(inlierWords.size()),
+            currentCells,oldCells,_crossMapLoopMinGridCells,unsigned(currentPoints.size()),unsigned(oldPoints.size()),
+            minimum3DPoints,std::max(25,_crossMapLoopMinInliers));
 	if(currentCells < _crossMapLoopMinGridCells || oldCells < _crossMapLoopMinGridCells)
 	{
 		reason = uFormat("3x3 grid coverage current=%d old=%d minimum=%d",
@@ -1616,9 +1624,6 @@ bool Rtabmap::acceptCrossMapLoopEvidence(
 		return false;
 	}
 
-	std::vector<cv::Point3f> currentPoints = validInlierPoints(current, inlierWords);
-	std::vector<cv::Point3f> oldPoints = validInlierPoints(old, inlierWords);
-	int minimum3DPoints = std::max(6, _crossMapLoopMinInliers/2);
 	if((int)currentPoints.size() < minimum3DPoints || (int)oldPoints.size() < minimum3DPoints)
 	{
 		reason = uFormat("valid 3D inliers current=%d old=%d minimum=%d",
@@ -1656,6 +1661,26 @@ bool Rtabmap::acceptCrossMapLoopEvidence(
 		reason = "invalid or unconstrained covariance";
 		return false;
 	}
+
+    if(_safeRelocalizationGuardEnabled)
+    {
+        cv::Mat eigenvalues;
+        if(!cv::checkRange(info.covariance) || cv::norm(info.covariance-info.covariance.t(),cv::NORM_INF)>1e-9 ||
+           !cv::eigen(info.covariance,eigenvalues) || eigenvalues.at<double>(5)<=0.0)
+        { reason="guarded candidate covariance is not finite symmetric positive definite"; return false; }
+    }
+
+    double minLinearSigma=0.0,minAngularSigma=0.0;
+    if(_safeRelocalizationGuardEnabled)
+    {
+        minLinearSigma=Parameters::defaultRtabmapCrossMapLoopMinLinearSigma();
+        minAngularSigma=Parameters::defaultRtabmapCrossMapLoopMinAngularSigma();
+        Parameters::parse(_parameters,Parameters::kRtabmapCrossMapLoopMinLinearSigma(),minLinearSigma);
+        Parameters::parse(_parameters,Parameters::kRtabmapCrossMapLoopMinAngularSigma(),minAngularSigma);
+        if(!std::isfinite(minLinearSigma) || minLinearSigma<0.0 || minLinearSigma>0.02 ||
+           !std::isfinite(minAngularSigma) || minAngularSigma<0.0 || minAngularSigma>3.0)
+        { reason="guarded candidate sigma floors must be within existing bridge bounds (0..0.02m, 0..3deg)"; return false; }
+    }
 
 	CrossMapLoopEvidence evidence;
 	evidence.newMapId = current.mapId();
@@ -1721,10 +1746,22 @@ bool Rtabmap::acceptCrossMapLoopEvidence(
 
 		double translationError = iter->anchor.getDistance(evidence.anchor);
 		double rotationError = iter->anchor.getAngle(evidence.anchor);
-		double normalizedTranslation = translationError /
-				std::sqrt(iter->linearVariance+evidence.linearVariance);
-		double normalizedRotation = rotationError /
-				std::sqrt(iter->angularVariance+evidence.angularVariance);
+        // These are candidate-model floors, not propagated pose covariances or
+        // calibrated confidence intervals. The anchor also contains two odom
+        // poses; a tiny registration residual alone cannot model its error.
+        // The guarded branch only retains candidates and always returns false.
+        const double linearFloor=minLinearSigma*minLinearSigma;
+        const double angularFloor=std::pow(minAngularSigma*M_PI/180.0,2.0);
+        const double linearDenominator=std::sqrt(std::max(iter->linearVariance,linearFloor)+std::max(evidence.linearVariance,linearFloor));
+        const double angularDenominator=std::sqrt(std::max(iter->angularVariance,angularFloor)+std::max(evidence.angularVariance,angularFloor));
+        const double normalizedTranslation=translationError/linearDenominator;
+        const double normalizedRotation=rotationError/angularDenominator;
+        if(_safeRelocalizationGuardEnabled)
+            UWARN("Guarded candidate consensus current=%d old=%d previous=(%d,%d) d=%.9fm a=%.9fdeg raw_variances=(%.9g,%.9g;%.9g,%.9g) floors_sigma=(%.6fm,%.6fdeg) normalized=(%.6f,%.6f) absolute_limits=(%.6fm,%.6fdeg) normalized_limit=%.6f candidate_only=1",
+                evidence.newId,evidence.oldId,iter->newId,iter->oldId,translationError,rotationError*180.0/M_PI,
+                iter->linearVariance,iter->angularVariance,evidence.linearVariance,evidence.angularVariance,
+                minLinearSigma,minAngularSigma,normalizedTranslation,normalizedRotation,
+                double(_crossMapLoopMaxTranslation),double(_crossMapLoopMaxRotation),double(_crossMapLoopMaxNormalizedError));
 		if(!std::isfinite(normalizedTranslation) || !std::isfinite(normalizedRotation) ||
 				translationError > _crossMapLoopMaxTranslation ||
 				rotationError > _crossMapLoopMaxRotation*M_PI/180.0 ||
@@ -9297,63 +9334,7 @@ bool Rtabmap::addLinksAtomicallyImpl(const std::vector<Link> & evidence,
 		return false;
 	}
     if(_safeRelocalizationGuardEnabled && !validateRecoveryCache(currentIds,evidence,limits,reason)) return false;
-    bool earlyGravityCertified = false;
-    if(currentIds.size() < 200)
-    {
-        wbrov::EarlyGravityCertificate certificate;
-        certificate.nodes=currentIds.size();
-        {
-            double firstStamp=std::numeric_limits<double>::infinity(),lastStamp=0.0;
-            for(int id : currentIds)
-            {
-                const Signature * signature=_memory->getSignature(id);
-                if(!signature || !std::isfinite(signature->getStamp()) || signature->getStamp()<=0.0)
-                { certificate.finite=false;continue; }
-                firstStamp=std::min(firstStamp,signature->getStamp());
-                lastStamp=std::max(lastStamp,signature->getStamp());
-            }
-            certificate.sourceSpan=lastStamp-firstStamp;
-            std::set<int> measuredIds;
-            double beforeSum=0.0;
-            std::vector<double> alignedSums(anchorAlignments.size(),0.0);
-            for(const auto & row : _constraints)
-            {
-                const Link & link=row.second;
-                if(link.type()!=Link::kGravity || link.from()!=link.to() || !currentIds.count(link.from()))continue;
-                if(!measuredIds.insert(link.from()).second) {certificate.finite=false;continue;}
-                const Transform & pose=initialPoses.at(link.from());
-                const double before=safeGravityDirectionError(pose,link.transform())*180.0/M_PI;
-                certificate.finite=certificate.finite && std::isfinite(before);
-                beforeSum+=before;certificate.beforeMaxDeg=std::max(certificate.beforeMaxDeg,before);
-                for(unsigned int i=0;i<anchorAlignments.size();++i)
-                {
-                    const double after=safeGravityDirectionError(anchorAlignments[i]*pose,link.transform())*180.0/M_PI;
-                    certificate.finite=certificate.finite && std::isfinite(after);
-                    alignedSums[i]+=after;
-                    certificate.alignedMaxDeg=std::max(certificate.alignedMaxDeg,after);
-                    certificate.maxResidualIncreaseDeg=std::max(certificate.maxResidualIncreaseDeg,after-before);
-                }
-            }
-            certificate.gravityNodes=measuredIds.size();
-            if(certificate.gravityNodes)
-            {
-                certificate.beforeMeanDeg=beforeSum/certificate.gravityNodes;
-                for(double sum : alignedSums)
-                    certificate.alignedMeanMaxDeg=std::max(certificate.alignedMeanMaxDeg,sum/certificate.gravityNodes);
-            }
-            std::string certificateReason;
-            earlyGravityCertified=certificate.eligible(certificateReason);
-            UWARN("single-main-map early certificate eligible=%d nodes=%u gravity=%u span=%.6fs mean=%.6f max=%.6f aligned_mean=%.6f aligned_max=%.6f increase=%.6f reason=%s",
-                earlyGravityCertified?1:0,(unsigned int)certificate.nodes,(unsigned int)certificate.gravityNodes,certificate.sourceSpan,
-                certificate.beforeMeanDeg,certificate.beforeMaxDeg,certificate.alignedMeanMaxDeg,certificate.alignedMaxDeg,
-                certificate.maxResidualIncreaseDeg,certificateReason.c_str());
-        }
-        if(!earlyGravityCertified)
-        {
-            reason=uFormat("temporary recovery segment has not passed source-time/measured-gravity stability (%u nodes); main map remains frozen",(unsigned int)currentIds.size());
-            return false;
-        }
-    }
+#include "early_component_gate.inc"
 
 	for(std::multimap<int, Link>::const_iterator iter=_safeRelocalizationTrustedConstraints.begin();
 			iter!=_safeRelocalizationTrustedConstraints.end(); ++iter)
@@ -9554,27 +9535,7 @@ bool Rtabmap::addLinksAtomicallyImpl(const std::vector<Link> & evidence,
 						beforeRelative.getAngle(afterRelative)*180.0/M_PI);
 			}
 		}
-        // An early graph is accepted only under the ORIGINAL strict rigidity
-        // limits: it never receives the mature distributed-gravity exception.
-        // Check absolute residuals after every independent shadow solve too.
-        if(earlyGravityCertified)
-        {
-            double maxEarlyGravity=0.0;
-            for(const auto & row : connectedConstraints)
-            {
-                const Link & link=row.second;
-                if(link.type()==Link::kGravity && link.from()==link.to() && currentIds.count(link.from()))
-                {
-                    const double residual=safeGravityDirectionError(optimized.at(link.from()),link.transform())*180.0/M_PI;
-                    if(!std::isfinite(residual)) {reason="early shadow has non-finite gravity";return false;}
-                    maxEarlyGravity=std::max(maxEarlyGravity,residual);
-                }
-            }
-            if(gravityResidualCount*10<currentIds.size()*9 || !gravityResidualCount ||
-               gravityResidualAfterSumDeg/gravityResidualCount>2.0 || maxEarlyGravity>5.0 ||
-               maxGravityResidualIncreaseDeg>std::min(double(limits.maxGravityResidualIncrease),0.5))
-            {reason="early shadow failed absolute measured-gravity certificate";return false;}
-        }
+#include "early_shadow_guard.inc"
 
 		const bool standardCurrentRigidityExceeded =
 				maxNewRigidTranslation > limits.maxNewRigidTranslation ||

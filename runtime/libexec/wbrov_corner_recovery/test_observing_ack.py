@@ -30,6 +30,24 @@ class Sources:
         return incoming
 
 class ObservingAckTests(unittest.TestCase):
+    def test_early_retry_is_independent_of_retired_core_switch(self):
+        self.assertFalse(LiveBridge.early_retry_enabled({}))
+        self.assertTrue(LiveBridge.early_retry_enabled({'WBROV_PRIVATE_EARLY_TAG_RETRY':'1'}))
+        self.assertTrue(LiveBridge.early_retry_enabled({'WBROV_PRIVATE_EARLY_TAG_RETRY':'1','WBROV_PRIVATE_EARLY_GRAVITY_CERTIFICATE':'0'}))
+        with self.assertRaisesRegex(ValueError,'invalid private early retry flag'):
+            LiveBridge.early_retry_enabled({'WBROV_PRIVATE_EARLY_TAG_RETRY':'yes'})
+
+    def test_current_core_certificate_rejection_can_be_retried(self):
+        self.bridge.early_retry=True
+        self.bridge.deferred=[]
+        self.bridge.deferred_score=lambda geometry:(0.,0.,0.)
+        status=deepcopy(self.status)
+        status.update(result='rejected',reason='temporary recovery segment has not passed source-time/measured-gravity stability (8 nodes); main map remains frozen')
+        self.send(status)
+        self.assertEqual(len(self.bridge.deferred),1)
+        self.assertIsNone(self.bridge.pending)
+        self.assertFalse(self.bridge.committed_epochs)
+
     def setUp(self):
         self.config={'session_token_sha256':'session-hash'}
         self.proposal=dict(transaction_token='owned-token',tag_id=42,source_reset_epoch=2,

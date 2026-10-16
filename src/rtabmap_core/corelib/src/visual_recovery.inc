@@ -154,46 +154,58 @@ bool Rtabmap::tryVisualRecoveryImpl(const SafeRelocalizationLimits & limits,
     registrationParameters[Parameters::kVisInlierDistance()]=uNumber2Str(std::min(.025f,correspondenceDistance));
 
     auto geometricEvidence=[&](const Signature & from,const Signature & to,
-            const Transform & transform,const RegistrationInfo & info)->bool {
-        if(!safeRigidTransform(transform) || info.inliers<minimumInliers) return false;
+            const Transform & transform,const RegistrationInfo & info,std::string & diagnostic)->bool {
+        if(!safeRigidTransform(transform) || info.inliers<minimumInliers)
+        { diagnostic=uFormat("transform_or_inliers valid=%d inliers=%d/%d backend=%s",safeRigidTransform(transform)?1:0,info.inliers,minimumInliers,info.rejectedMsg.c_str()); return false; }
         const std::set<int> words(info.inliersIDs.begin(),info.inliersIDs.end());
-        if(int(words.size())<minimumInliers) return false;
+        if(int(words.size())<minimumInliers)
+        { diagnostic=uFormat("unique_inliers=%u/%d",unsigned(words.size()),minimumInliers); return false; }
         for(const Signature * signature:{&from,&to})
         {
             int width=0,height=0;
-            if(!signatureImageSize(*signature,width,height) ||
-               occupiedGridCells(*signature,words,width,height)<minimumCells) return false;
+            if(!signatureImageSize(*signature,width,height))
+            { diagnostic="missing_image_dimensions"; return false; }
+            const int cells=occupiedGridCells(*signature,words,width,height);
             const std::vector<cv::Point3f> points=validInlierPoints(*signature,words);
             double span=0.0,hessian=0.0;
-            if(int(points.size())<minimumInliers || !pointSetGeometry(points,span,hessian) ||
-               span<minimumSpan || hessian<minimumHessian) return false;
+            const bool geometry=pointSetGeometry(points,span,hessian);
+            if(cells<minimumCells || int(points.size())<minimumInliers || !geometry ||
+               span<minimumSpan || hessian<minimumHessian)
+            { diagnostic=uFormat("side=%s unique=%u cells=%d/%d depth=%u/%d geometry=%d span=%.6f/%.6f hessian=%.9g/%.9g",
+                signature==&from?"from":"to",unsigned(words.size()),cells,minimumCells,unsigned(points.size()),minimumInliers,
+                geometry?1:0,span,minimumSpan,hessian,minimumHessian); return false; }
         }
         double linear=0.0,angular=0.0;
-        if(!covarianceVariances(info.covariance,linear,angular)) return false;
+        if(!covarianceVariances(info.covariance,linear,angular))
+        { diagnostic="invalid_covariance_diagonal"; return false; }
         cv::Mat covarianceEigenvalues;
         if(!cv::checkRange(info.covariance) || cv::norm(info.covariance-info.covariance.t(),cv::NORM_INF)>1e-9 ||
            !cv::eigen(info.covariance,covarianceEigenvalues) || covarianceEigenvalues.at<double>(5)<=0.0 ||
-           covarianceEigenvalues.at<double>(0)/covarianceEigenvalues.at<double>(5)>limits.maxInformationCondition) return false;
+           covarianceEigenvalues.at<double>(0)/covarianceEigenvalues.at<double>(5)>limits.maxInformationCondition)
+        { diagnostic="invalid_covariance_spectrum"; return false; }
         double squared=0.0,maximum=0.0;
         int count=0;
         for(int word:words)
         {
             const auto a=from.getWords().equal_range(word),b=to.getWords().equal_range(word);
-            if(std::distance(a.first,a.second)!=1 || std::distance(b.first,b.second)!=1) return false;
+            if(std::distance(a.first,a.second)!=1 || std::distance(b.first,b.second)!=1)
+            { diagnostic="ambiguous_word_correspondence"; return false; }
             const int ai=a.first->second,bi=b.first->second;
-            if(ai<0 || bi<0 || ai>=int(from.getWords3().size()) || bi>=int(to.getWords3().size())) return false;
+            if(ai<0 || bi<0 || ai>=int(from.getWords3().size()) || bi>=int(to.getWords3().size()))
+            { diagnostic="invalid_3d_word_index"; return false; }
             const cv::Point3f & p=from.getWords3()[ai];
             const cv::Point3f & q=to.getWords3()[bi];
-            if(!finitePoint(p) || !finitePoint(q)) return false;
+            if(!finitePoint(p) || !finitePoint(q))
+            { diagnostic="nonfinite_3d_correspondence"; return false; }
             const double residual=cv::norm(cv::Point3d(p.x,p.y,p.z)-
                 transformPoint(transform,cv::Point3d(q.x,q.y,q.z)));
-            if(!std::isfinite(residual)) return false;
+            if(!std::isfinite(residual))
+            { diagnostic="nonfinite_metric_residual"; return false; }
             squared+=residual*residual;maximum=std::max(maximum,residual);++count;
         }
-        // Same absolute metric residual limits as the existing depth-corner
-        // transaction. Planar/line degeneracy and pixel coverage are checked
-        // separately; a low RMS alone is never sufficient.
-        return count>=minimumInliers && std::sqrt(squared/double(count))<=0.018 && maximum<=0.025;
+        const double rms=count?std::sqrt(squared/double(count)):std::numeric_limits<double>::infinity();
+        diagnostic=uFormat("metric_count=%d/%d rms=%.6f/0.018000 max=%.6f/0.025000",count,minimumInliers,rms,maximum);
+        return count>=minimumInliers && rms<=0.018 && maximum<=0.025;
     };
 
     std::vector<Link> measuredEvidence;
@@ -212,9 +224,12 @@ bool Rtabmap::tryVisualRecoveryImpl(const SafeRelocalizationLimits & limits,
         RegistrationInfo forwardInfo,reverseInfo;
         const Transform currentFromOld=forward->computeTransformationMod(forwardCurrent,forwardOld,Transform(),&forwardInfo);
         const Transform oldFromCurrent=reverse->computeTransformationMod(reverseOld,reverseCurrent,Transform(),&reverseInfo);
-        if(!geometricEvidence(forwardCurrent,forwardOld,currentFromOld,forwardInfo) ||
-           !geometricEvidence(reverseOld,reverseCurrent,oldFromCurrent,reverseInfo))
-        { reason="visual recovery raw bidirectional RGB-D geometry failed"; return false; }
+        std::string forwardDiagnostic,reverseDiagnostic;
+        const bool forwardValid=geometricEvidence(forwardCurrent,forwardOld,currentFromOld,forwardInfo,forwardDiagnostic);
+        const bool reverseValid=geometricEvidence(reverseOld,reverseCurrent,oldFromCurrent,reverseInfo,reverseDiagnostic);
+        if(!forwardValid || !reverseValid)
+        { reason=uFormat("visual recovery raw bidirectional RGB-D geometry failed pair=(%d,%d) forward=(%s) reverse=(%s)",
+            endpoint.from(),endpoint.to(),forwardDiagnostic.c_str(),reverseDiagnostic.c_str()); return false; }
         const Transform reversePrediction=oldFromCurrent.inverse();
         if(currentFromOld.getDistance(reversePrediction)>std::min(0.025,double(limits.maxHoldoutTranslation)) ||
            currentFromOld.getAngle(reversePrediction)>std::min(2.0,double(limits.maxHoldoutRotation))*M_PI/180.0)

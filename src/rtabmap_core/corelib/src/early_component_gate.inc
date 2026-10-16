@@ -1,10 +1,8 @@
     bool earlyGravityCertified = false;
     if(currentIds.size() < 200)
     {
-        const char * earlySwitch = std::getenv("WBROV_PRIVATE_EARLY_GRAVITY_CERTIFICATE");
         wbrov::EarlyGravityCertificate certificate;
         certificate.nodes=currentIds.size();
-        if(earlySwitch && std::string(earlySwitch)=="1")
         {
             double firstStamp=std::numeric_limits<double>::infinity(),lastStamp=0.0;
             for(int id : currentIds)
@@ -46,14 +44,14 @@
             }
             std::string certificateReason;
             earlyGravityCertified=certificate.eligible(certificateReason);
-            UWARN("private early certificate eligible=%d nodes=%u gravity=%u span=%.6fs mean=%.6f max=%.6f aligned_mean=%.6f aligned_max=%.6f increase=%.6f reason=%s",
+            UWARN("single-main-map early certificate eligible=%d nodes=%u gravity=%u span=%.6fs mean=%.6f max=%.6f aligned_mean=%.6f aligned_max=%.6f increase=%.6f reason=%s",
                 earlyGravityCertified?1:0,(unsigned int)certificate.nodes,(unsigned int)certificate.gravityNodes,certificate.sourceSpan,
                 certificate.beforeMeanDeg,certificate.beforeMaxDeg,certificate.alignedMeanMaxDeg,certificate.alignedMaxDeg,
                 certificate.maxResidualIncreaseDeg,certificateReason.c_str());
         }
         if(!earlyGravityCertified)
         {
-            reason=uFormat("current reset component needs gravity stabilization (%u/200 nodes)",(unsigned int)currentIds.size());
+            reason=uFormat("temporary recovery segment has not passed source-time/measured-gravity stability (%u nodes); main map remains frozen",(unsigned int)currentIds.size());
             return false;
         }
     }

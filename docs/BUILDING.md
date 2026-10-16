@@ -1,8 +1,10 @@
 # 构建说明
 
-仓库包含初始设备归档和后续主图/子图候选源码。候选曾在 Jetson 隔离目录完成增量原生编译与录制回放，证据见 [候选更新说明](SUBMAP_TAG_CANDIDATE.md)；整个仓库的全新环境构建尚未验证，也未进行实时相机或水下测试。
+仓库包含初始设备归档和后续主图/子图源码。已在 Jetson 隔离目录完成增量原生编译、录制回放，以及真实相机/RViz的静止启动与保存检查，证据见 [第二轮修正](ROUND2_20261016.md) 和 [前次实机记录](RECEIPT_RESUME_20261015.md)。整个仓库的全新环境构建、移动回航接图和水下精度尚未验证。
 
 仓库提供的 `tests/native/CMakeLists.txt` 已使用提交 `601b051` 的原样源码在 Jetson AArch64 上补验：Release 配置，开启 `WBROV_TEST_DEPTH_GEOMETRY`，5 项独立 CTest 全部通过。该结果只覆盖这些几何和门控测试，不等同于完整 Core/ROS 构建或录制数据接回主图成功。
+
+第二轮新增的 `test_cross_map_candidates_native.cpp` 已链接本轮实际 Core 运行并通过。它可通过 `WBROV_TEST_CORE_CANDIDATES=ON` 接入上述 CMake，需显式提供已编译的本仓库定制 RTABMap；默认关闭。当前设备验收使用隔离构建目录中的目标，尚未单独验证该可选 CMake 配置在全新环境中的依赖发现。
 
 ## 环境与依赖
 

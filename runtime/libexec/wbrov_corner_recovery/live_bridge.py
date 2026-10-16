@@ -19,16 +19,20 @@ class LiveBridge:
         self.pending=None;self.pending_geometry=None;self.deferred=[]
         self.history_epoch=None;self.history_dirty=True;self.historic_keys=set()
         self.completed_for_retention=set();self.retention_passes=0;self.retention_reclaimed=0
-        self.early_retry=os.environ.get('WBROV_PRIVATE_EARLY_TAG_RETRY','0')=='1'
-        require(os.environ.get('WBROV_PRIVATE_EARLY_TAG_RETRY','0') in ('0','1'),'invalid private early retry flag')
-        require(not self.early_retry or os.environ.get('WBROV_PRIVATE_EARLY_GRAVITY_CERTIFICATE')=='1',
-                'private early retry requires the matching private Core experiment')
+        self.early_retry=self.early_retry_enabled(os.environ)
         self.retry_window=DeferredRetryWindow()
         self.committed_epochs=set();self.terminals={};self.proposals=0;self.required_revision=0
         qos=QoSProfile(depth=64,reliability=ReliabilityPolicy.RELIABLE)
         self.publisher=node.create_publisher(String,'/wbrov/safe_relocalization/proposal',qos)
         self.sub=node.create_subscription(String,'/wbrov/safe_relocalization/status',self.status,qos)
         self.sub._wbrov_message_info_required=True
+    @staticmethod
+    def early_retry_enabled(environment):
+        flag=environment.get('WBROV_PRIVATE_EARLY_TAG_RETRY','0')
+        require(flag in ('0','1'),'invalid private early retry flag')
+        # The retired GRAVITY_CERTIFICATE flag never controls Core acceptance.
+        # Core always validates its certificate and all subsequent geometry.
+        return flag=='1'
     def event(self,kind,**kw):
         self.counts[kind]+=1;self.log.write(json.dumps(dict(event=kind,monotonic_ns=time.monotonic_ns(),**kw),allow_nan=False)+'\n');self.log.flush()
     @staticmethod
@@ -90,7 +94,8 @@ class LiveBridge:
         validate_terminal(s,self.pending,self.config)
         if s['result']=='committed':
             self.committed_epochs.add(s['core_reset_epoch']);self.required_revision=s['core_graph_revision'];self.deferred=[]
-        elif s['reason'].startswith('current reset component needs gravity stabilization ('):
+        elif s['reason'].startswith(('current reset component needs gravity stabilization (',
+                                     'temporary recovery segment has not passed source-time/measured-gravity stability (')):
             cached=dict(proposal=deepcopy(self.pending),geometry=deepcopy(self.pending_geometry),
                         score=self.deferred_score(self.pending_geometry))
             key=tuple((e['from_id'],e['to_id']) for e in cached['proposal']['evidence'])
@@ -129,8 +134,8 @@ class LiveBridge:
         # Default production behavior is unchanged. The private source-clock
         # retry window only schedules a new proposal; Core must independently
         # pass its complete early certificate and all geometry/shadow guards.
-        # Core's 200-node floor prevents a clearly immature merge, while this
-        # replay-derived 325-node retry window lets the post-reset gravity graph
+        # Core validates a measured early certificate below 200 nodes. The
+        # default replay-derived 325-node retry window lets the post-reset gravity graph
         # settle before it is tied to the previous component. Re-submit the best
         # earlier three-view measurement once that window is complete, even if
         # the Tag has left the current image. All six original
