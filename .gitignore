@@ -18,6 +18,7 @@ credentials*
 *.svo2
 *.pcd
 *.ply
+!diagnostics/20261016_pause_and_tags/partial_saved_main_cloud.ply
 runs/
 datasets/
 maps/

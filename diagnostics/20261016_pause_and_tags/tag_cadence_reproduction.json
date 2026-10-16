@@ -1,0 +1,109 @@
+{
+  "scope": "Unmodified pure TemporalPoseGuard, static valid poses; no ROS or camera; isolates cadence mismatch, does not validate a repair.",
+  "source_file": "src/apriltag/detector/tag_pose_guard.py",
+  "source_sha256": "dfd3bb8406281d6898b9dca9565f3b68ef2e5a6ecc850c020a70670554da6c45",
+  "max_gap_s": 0.6,
+  "confirm_frames": 3,
+  "results": {
+    "1Hz": {
+      "accepted": 0,
+      "decisions": [
+        {
+          "stamp_s": 10.0,
+          "accepted": false,
+          "reason": "confirming",
+          "confirmation_samples": 1,
+          "confirmation_span_s": 0.0
+        },
+        {
+          "stamp_s": 11.0,
+          "accepted": false,
+          "reason": "confirming",
+          "confirmation_samples": 1,
+          "confirmation_span_s": 0.0
+        },
+        {
+          "stamp_s": 12.0,
+          "accepted": false,
+          "reason": "confirming",
+          "confirmation_samples": 1,
+          "confirmation_span_s": 0.0
+        },
+        {
+          "stamp_s": 13.0,
+          "accepted": false,
+          "reason": "confirming",
+          "confirmation_samples": 1,
+          "confirmation_span_s": 0.0
+        },
+        {
+          "stamp_s": 14.0,
+          "accepted": false,
+          "reason": "confirming",
+          "confirmation_samples": 1,
+          "confirmation_span_s": 0.0
+        },
+        {
+          "stamp_s": 15.0,
+          "accepted": false,
+          "reason": "confirming",
+          "confirmation_samples": 1,
+          "confirmation_span_s": 0.0
+        }
+      ]
+    },
+    "6Hz": {
+      "accepted": 4,
+      "decisions": [
+        {
+          "stamp_s": 10.0,
+          "accepted": false,
+          "reason": "confirming",
+          "confirmation_samples": 1,
+          "confirmation_span_s": 0.0
+        },
+        {
+          "stamp_s": 10.166666666666666,
+          "accepted": false,
+          "reason": "confirming",
+          "confirmation_samples": 2,
+          "confirmation_span_s": 0.16666666666666607
+        },
+        {
+          "stamp_s": 10.333333333333334,
+          "accepted": true,
+          "reason": "confirmed",
+          "confirmation_samples": 3,
+          "confirmation_span_s": 0.3333333333333339
+        },
+        {
+          "stamp_s": 10.5,
+          "accepted": true,
+          "reason": "tracking",
+          "translation_delta_m": 0.0,
+          "angular_delta_deg": 0.0,
+          "translation_limit_m": 0.09833333333333304,
+          "angular_limit_deg": 15.999999999999964
+        },
+        {
+          "stamp_s": 10.666666666666666,
+          "accepted": true,
+          "reason": "tracking",
+          "translation_delta_m": 0.0,
+          "angular_delta_deg": 0.0,
+          "translation_limit_m": 0.09833333333333304,
+          "angular_limit_deg": 15.999999999999964
+        },
+        {
+          "stamp_s": 10.833333333333334,
+          "accepted": true,
+          "reason": "tracking",
+          "translation_delta_m": 0.0,
+          "angular_delta_deg": 0.0,
+          "translation_limit_m": 0.09833333333333392,
+          "angular_limit_deg": 16.00000000000007
+        }
+      ]
+    }
+  }
+}

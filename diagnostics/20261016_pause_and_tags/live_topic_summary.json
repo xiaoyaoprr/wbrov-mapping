@@ -1,0 +1,176 @@
+{
+  "seconds": 10,
+  "counts": {
+    "/rtabmap/frame_cloud": 195,
+    "/odom_info": 155,
+    "/wbrov/mapping_continuity/status": 214,
+    "/wbrov/submaps/registry": 17,
+    "/cloud_map": 1,
+    "/mapGraph": 1,
+    "/wbrov/submaps/m0_e0_c1/cloud": 1,
+    "/wbrov/submaps/m1_e1_c54/cloud": 1,
+    "/wbrov/submaps/m2_e2_c85/cloud": 1,
+    "/wbrov/submaps/m3_e3_c93/cloud": 1,
+    "/wbrov/submaps/m4_e4_c98/cloud": 1,
+    "/wbrov/submaps/m5_e5_c105/cloud": 1,
+    "/wbrov/submaps/m6_e6_c114/cloud": 1,
+    "/wbrov/submaps/m7_e7_c139/cloud": 1,
+    "/wbrov/submaps/m8_e8_c161/cloud": 6
+  },
+  "clouds": {
+    "/rtabmap/frame_cloud": {
+      "width": 2328,
+      "height": 1,
+      "points": 2328,
+      "bytes": 74496,
+      "frame": "zed_left_camera_optical_frame"
+    },
+    "/cloud_map": {
+      "width": 5650,
+      "height": 1,
+      "points": 5650,
+      "bytes": 180800,
+      "frame": "map"
+    },
+    "/wbrov/submaps/m0_e0_c1/cloud": {
+      "width": 0,
+      "height": 1,
+      "points": 0,
+      "bytes": 0,
+      "frame": "map"
+    },
+    "/wbrov/submaps/m1_e1_c54/cloud": {
+      "width": 5029,
+      "height": 1,
+      "points": 5029,
+      "bytes": 160928,
+      "frame": "wbrov_submap_68205b310a5eb3a0_m1_e1_c54"
+    },
+    "/wbrov/submaps/m2_e2_c85/cloud": {
+      "width": 2524,
+      "height": 1,
+      "points": 2524,
+      "bytes": 80768,
+      "frame": "wbrov_submap_68205b310a5eb3a0_m2_e2_c85"
+    },
+    "/wbrov/submaps/m3_e3_c93/cloud": {
+      "width": 619,
+      "height": 1,
+      "points": 619,
+      "bytes": 19808,
+      "frame": "wbrov_submap_68205b310a5eb3a0_m3_e3_c93"
+    },
+    "/wbrov/submaps/m4_e4_c98/cloud": {
+      "width": 1010,
+      "height": 1,
+      "points": 1010,
+      "bytes": 32320,
+      "frame": "wbrov_submap_68205b310a5eb3a0_m4_e4_c98"
+    },
+    "/wbrov/submaps/m5_e5_c105/cloud": {
+      "width": 4582,
+      "height": 1,
+      "points": 4582,
+      "bytes": 146624,
+      "frame": "wbrov_submap_68205b310a5eb3a0_m5_e5_c105"
+    },
+    "/wbrov/submaps/m6_e6_c114/cloud": {
+      "width": 5190,
+      "height": 1,
+      "points": 5190,
+      "bytes": 166080,
+      "frame": "wbrov_submap_68205b310a5eb3a0_m6_e6_c114"
+    },
+    "/wbrov/submaps/m7_e7_c139/cloud": {
+      "width": 2132,
+      "height": 1,
+      "points": 2132,
+      "bytes": 68224,
+      "frame": "wbrov_submap_68205b310a5eb3a0_m7_e7_c139"
+    },
+    "/wbrov/submaps/m8_e8_c161/cloud": {
+      "width": 1222,
+      "height": 1,
+      "points": 1222,
+      "bytes": 39104,
+      "frame": "wbrov_submap_68205b310a5eb3a0_m8_e8_c161"
+    }
+  },
+  "main_graph": {
+    "nodes": 29,
+    "ids": [
+      1,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53
+    ],
+    "frame": "map"
+  },
+  "continuity": {
+    "schema": "wbrov.mapping-continuity.v1",
+    "state": "RECOVERING",
+    "reason": "waiting for stable geometry and Core registration",
+    "epoch": 8,
+    "generation": 74,
+    "source_stamp_ns": 1791497780186306000,
+    "good_samples": 909,
+    "registered": false,
+    "main_map_write_allowed": false,
+    "local_tracking_healthy": true,
+    "local_submap_write_allowed": true,
+    "visual_geometry": true,
+    "depth_geometry": false,
+    "imu_translation_only_allowed": false,
+    "private_recovery_observations_are_main_map": false,
+    "observing_registered_map": false,
+    "map_observation_count": 0,
+    "recovery_commit_pending": false,
+    "required_map_observations": 5,
+    "vo_width": 384,
+    "vo_height": 240,
+    "reference_node_id": 53,
+    "reference_epoch": 0,
+    "reference_stamp_ns": 1791497565929634000,
+    "reference_is_navigation_command": false,
+    "finite_motion": true,
+    "covariance_finite_pd": true,
+    "covariance_bounded": true,
+    "dimensions_valid": true,
+    "quality_verification_pending": false,
+    "quality_start_ns": 1791497566596279000,
+    "last_cut_source_ns": 1791497717189213000,
+    "cut_count": 13,
+    "unaligned_submap_count": 8,
+    "quality_reason": "lost=0 motion_finite=1 dimensions=1 covariance=bounded_pd visual=supported depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+    "last_cut_reason": "unverified measurement gap",
+    "last_cut_quality_reason": "lost=0 motion_finite=1 dimensions=1 covariance=bounded_pd visual=supported depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+    "last_pause_reason": "source or arrival expired",
+    "quality_trigger_reason": "lost=0 motion_finite=1 dimensions=1 covariance=bounded_pd visual=cells=5<6 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000"
+  },
+  "note": "One retained cloud publication is normal; these counts are not a camera frame-rate metric."
+}

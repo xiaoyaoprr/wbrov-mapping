@@ -1,0 +1,110 @@
+{
+  "decoded_observations_by_id": {
+    "8": 18,
+    "10": 2,
+    "0": 2,
+    "11": 17,
+    "13": 4,
+    "2": 3,
+    "12": 3
+  },
+  "exact_bound_observations_by_epoch": {
+    "0": {
+      "8": 4
+    },
+    "1": {
+      "10": 2,
+      "0": 2,
+      "11": 4
+    },
+    "2": {
+      "8": 3
+    },
+    "3": {
+      "8": 5
+    },
+    "4": {
+      "8": 6
+    },
+    "5": {
+      "13": 2
+    },
+    "6": {
+      "11": 6,
+      "13": 2
+    },
+    "7": {
+      "11": 3
+    },
+    "8": {
+      "11": 1
+    },
+    "9": {
+      "2": 1,
+      "12": 1
+    },
+    "11": {
+      "2": 2,
+      "12": 2,
+      "11": 3
+    }
+  },
+  "main_epoch": 0,
+  "note": "Main epoch contains only Tag 8 bindings. Other IDs exist in independent unregistered components; this is not a one-tag detector limit.",
+  "legacy_pose_guard": {
+    "0": {
+      "count": 2,
+      "reasons": {
+        "confirming": 2
+      },
+      "accepted": {
+        "0": 2
+      }
+    },
+    "10": {
+      "count": 2,
+      "reasons": {
+        "confirming": 2
+      },
+      "accepted": {
+        "0": 2
+      }
+    },
+    "11": {
+      "count": 5,
+      "reasons": {
+        "confirming": 5
+      },
+      "accepted": {
+        "0": 5
+      }
+    },
+    "13": {
+      "count": 1,
+      "reasons": {
+        "ambiguous_square_pose": 1
+      },
+      "accepted": {
+        "0": 1
+      }
+    },
+    "2": {
+      "count": 3,
+      "reasons": {
+        "confirming": 3
+      },
+      "accepted": {
+        "0": 3
+      }
+    },
+    "8": {
+      "count": 21,
+      "reasons": {
+        "confirming": 21
+      },
+      "accepted": {
+        "0": 21
+      }
+    }
+  }
+}

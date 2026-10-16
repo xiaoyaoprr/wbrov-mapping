@@ -1,0 +1,146 @@
+{
+  "proposals": 7,
+  "committed_epochs": [],
+  "terminal_results": [
+    {
+      "result": "rejected",
+      "reason": "submap continuity 85->86 lacks raw evidence; no gap backfill: raw bidirectional RGB-D check failed (f=0,r=0,finliers=3,rinliers=17,fbackend=Not enough inliers 3/25 (matches=69) between 85 and 86,rbackend=Not enough inliers 17/25 (matches=73) between 86 and 85)",
+      "tag_id": 8,
+      "source_reset_epoch": 2,
+      "evidence_pairs": [
+        [
+          87,
+          28
+        ],
+        [
+          89,
+          32
+        ],
+        [
+          90,
+          30
+        ]
+      ]
+    },
+    {
+      "result": "rejected",
+      "reason": "leave-one-pair-out gravity-constrained depth-corner alignment failed",
+      "tag_id": 8,
+      "source_reset_epoch": 3,
+      "evidence_pairs": [
+        [
+          94,
+          28
+        ],
+        [
+          95,
+          32
+        ],
+        [
+          96,
+          30
+        ]
+      ]
+    },
+    {
+      "result": "rejected",
+      "reason": "Tag recovery preparation ticket is no longer current",
+      "tag_id": 8,
+      "source_reset_epoch": 3,
+      "evidence_pairs": [
+        [
+          94,
+          28
+        ],
+        [
+          96,
+          32
+        ],
+        [
+          97,
+          30
+        ]
+      ]
+    },
+    {
+      "result": "rejected",
+      "reason": "temporary recovery segment has not passed source-time/measured-gravity stability (3 nodes); main map remains frozen",
+      "tag_id": 8,
+      "source_reset_epoch": 4,
+      "evidence_pairs": [
+        [
+          98,
+          28
+        ],
+        [
+          99,
+          32
+        ],
+        [
+          100,
+          30
+        ]
+      ]
+    },
+    {
+      "result": "rejected",
+      "reason": "temporary recovery segment has not passed source-time/measured-gravity stability (5 nodes); main map remains frozen",
+      "tag_id": 8,
+      "source_reset_epoch": 4,
+      "evidence_pairs": [
+        [
+          99,
+          28
+        ],
+        [
+          100,
+          32
+        ],
+        [
+          102,
+          30
+        ]
+      ]
+    },
+    {
+      "result": "rejected",
+      "reason": "submap continuity 102->103 raw motion disagrees with its odometry or measured neighbor edge",
+      "tag_id": 8,
+      "source_reset_epoch": 4,
+      "evidence_pairs": [
+        [
+          98,
+          28
+        ],
+        [
+          100,
+          32
+        ],
+        [
+          103,
+          30
+        ]
+      ]
+    },
+    {
+      "result": "rejected",
+      "reason": "submap continuity 102->103 raw motion disagrees with its odometry or measured neighbor edge",
+      "tag_id": 8,
+      "source_reset_epoch": 4,
+      "evidence_pairs": [
+        [
+          100,
+          28
+        ],
+        [
+          102,
+          32
+        ],
+        [
+          104,
+          30
+        ]
+      ]
+    }
+  ]
+}

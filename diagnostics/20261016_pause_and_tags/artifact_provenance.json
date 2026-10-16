@@ -1,0 +1,22 @@
+{
+  "code_commit": "4a06294b7f4150c44ab3a4416182ecda6ecf3b24",
+  "runtime": "74d38aba069fcfbb0872b705ca44b6ea5b95e96c5362a4f1aa214e44bb04a77f",
+  "analysis_date": "2026-10-16 Asia/Shanghai",
+  "run_name": "custom_20261009_061136",
+  "device_clock_note": "Device filenames carry 2026-10-09; no clock was changed.",
+  "source_database_bytes": 129695744,
+  "source_database_published": false,
+  "source_database_modified": false,
+  "partial_cloud_original_sha256": "181fe9c09d314795d55a1bbc143126215cd327d971c56f5a926d5ba8284007de",
+  "partial_cloud_vertices": 13611,
+  "saved_main_poses": 29,
+  "database_nodes": 237,
+  "map_ids": 12,
+  "eligible_nodes": 127,
+  "export_status": "complete_saved_graph_but_partial_database",
+  "per_node_cloud_contribution_verified": false,
+  "raw_images_published": false,
+  "credentials_or_raw_session_tokens_published": false,
+  "robot_code_changed": false,
+  "deployed": false
+}
