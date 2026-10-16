@@ -125,6 +125,17 @@ static long long mappingSteadyNs()
         std::chrono::steady_clock::now().time_since_epoch()).count();
 }
 
+static std::string mappingJsonString(const std::string & input)
+{
+    std::string out="\"";
+    for(unsigned char c:input) {
+        if(c=='"' || c=='\\') {out+='\\';out+=static_cast<char>(c);}
+        else if(c<0x20)out+=uFormat("\\u%04x",static_cast<unsigned>(c));
+        else out+=static_cast<char>(c);
+    }
+    return out+"\"";
+}
+
 static MappingContinuityGate::Evidence mappingEvidence(const rtabmap_msgs::msg::OdomInfo & msg,int expectedWidth,int expectedHeight)
 {
     MappingContinuityGate::Evidence e;
@@ -136,7 +147,9 @@ static MappingContinuityGate::Evidence mappingEvidence(const rtabmap_msgs::msg::
     const double qn=q.x*q.x+q.y*q.y+q.z*q.z+q.w*q.w;
     e.finiteMotion=std::isfinite(t.x)&&std::isfinite(t.y)&&std::isfinite(t.z)&&
         std::isfinite(qn)&&std::fabs(qn-1.0)<=1e-3;
-    e.covarianceValid=MappingContinuityGate::covarianceHealthy(msg.covariance);
+    std::string covarianceReason,visualReason;
+    e.covarianceFinitePD=MappingContinuityGate::covarianceFinitePositiveDefinite(msg.covariance);
+    e.covarianceValid=MappingContinuityGate::covarianceHealthy(msg.covariance,&covarianceReason);
     bool dimensionsSeen=false,dimensionsCorrect=expectedWidth>0&&expectedHeight>0;
     for(const auto & bundle:msg.local_bundle_models)for(const auto & model:bundle.models) {
         dimensionsSeen=true;
@@ -149,7 +162,7 @@ static MappingContinuityGate::Evidence mappingEvidence(const rtabmap_msgs::msg::
     {
         std::map<int,std::array<double,3>> spatial;
         if(msg.local_map_keys.size()!=msg.local_map_values.size() || msg.words_keys.size()!=msg.words_values.size())
-            e.visualGeometry=false;
+            {e.visualGeometry=false;visualReason="feature_array_size_mismatch";}
         else
         {
             for(std::size_t i=0;i<msg.local_map_keys.size();++i) {
@@ -166,7 +179,7 @@ static MappingContinuityGate::Evidence mappingEvidence(const rtabmap_msgs::msg::
                 if(inliers.count(id) && xyz!=spatial.end() && used.insert(id).second)
                     points.push_back({{p.x,p.y,xyz->second[0],xyz->second[1],xyz->second[2]}});
             }
-            e.visualGeometry=MappingContinuityGate::visualSupportHealthy(points,bounds);
+            e.visualGeometry=MappingContinuityGate::visualSupportHealthy(points,bounds,&visualReason);
         }
     }
     // This is the pinned F2M measured-depth fallback contract, not inference
@@ -177,7 +190,17 @@ static MappingContinuityGate::Evidence mappingEvidence(const rtabmap_msgs::msg::
         std::isfinite(msg.icp_structural_complexity) && msg.icp_structural_complexity>=1e-4f &&
         msg.icp_structural_complexity<=1.0f && std::isfinite(msg.icp_structural_distribution) &&
         msg.icp_structural_distribution>=0.5f && msg.icp_structural_distribution<=1.0f;
-    if(!dimensionsSeen || !dimensionsCorrect) {e.visualGeometry=false;e.depthGeometry=false;}
+    e.dimensionsValid=dimensionsSeen && dimensionsCorrect;
+    e.measuredRegistration=(msg.inliers>=15 && msg.matches>=msg.inliers &&
+        double(msg.inliers)/double(std::max(1,msg.matches))>=0.25) || e.depthGeometry;
+    if(!e.dimensionsValid) {e.visualGeometry=false;e.depthGeometry=false;}
+    if(visualReason.empty() && !e.visualGeometry)
+        visualReason=uFormat("inliers=%d matches=%d ratio=%.4f",msg.inliers,msg.matches,
+            double(msg.inliers)/double(std::max(1,msg.matches)));
+    e.qualityReason=uFormat("lost=%d motion_finite=%d dimensions=%d covariance=%s visual=%s depth=%d icp=%d overlap=%.4f complexity=%.6g coverage=%.4f",
+        e.lost?1:0,e.finiteMotion?1:0,e.dimensionsValid?1:0,covarianceReason.empty()?"bounded_pd":covarianceReason.c_str(),
+        e.visualGeometry?"supported":visualReason.c_str(),e.depthGeometry?1:0,msg.icp_correspondences,
+        double(msg.icp_inliers_ratio),double(msg.icp_structural_complexity),double(msg.icp_structural_distribution));
     e.recoveryGeometry=(e.visualGeometry && msg.inliers>=25 &&
         static_cast<double>(msg.inliers)/static_cast<double>(std::max(1,msg.matches))>=0.35) ||
         (e.depthGeometry && msg.icp_correspondences>=100 && msg.icp_inliers_ratio>=0.65f &&
@@ -6180,6 +6203,11 @@ bool CoreWrapper::observeResetQuarantineOdomInfo(
             stampNs-previousStampNs,continuityEvidence.measuredIntervalNs,msg.lost?"true":"false",
             continuityEvidence.visualGeometry?"true":"false",mappingContinuityGate_.localContinuitySerial()!=localSerialBefore?"true":"false");
     globalPublicationGate_.observe(stampNs, nowSteadyNs, continuityEvidence.usable());
+    const auto diagnostic=mappingContinuityGate_.snapshot(nowSteadyNs,now().nanoseconds());
+    if(mappingContinuityGate_.localContinuitySerial()!=localSerialBefore)
+        RCLCPP_WARN(get_logger(),"[CONTINUITY_CUT] count=%llu source_ns=%lld reason=%s quality=%s",
+            static_cast<unsigned long long>(diagnostic.cutCount),diagnostic.lastCutSourceNs,
+            diagnostic.lastCutReason.c_str(),diagnostic.lastCutQualityReason.c_str());
     publishMappingContinuityStatus();
 	if(msg.lost)
 	{
@@ -9252,23 +9280,33 @@ void CoreWrapper::publishMappingContinuityStatus()
     }
     std_msgs::msg::String status;
     status.data=uFormat("{\"schema\":\"wbrov.mapping-continuity.v1\",\"state\":\"%s\","
-        "\"reason\":\"%s\",\"epoch\":%llu,\"generation\":%llu,\"source_stamp_ns\":%lld,\"session_token_sha256\":\"%s\","
+        "\"reason\":%s,\"epoch\":%llu,\"generation\":%llu,\"source_stamp_ns\":%lld,\"session_token_sha256\":\"%s\","
         "\"good_samples\":%u,\"registered\":%s,\"main_map_write_allowed\":%s,"
         "\"local_tracking_healthy\":%s,\"local_submap_write_allowed\":%s,\"visual_geometry\":%s,\"depth_geometry\":%s,\"imu_translation_only_allowed\":false,"
         "\"private_recovery_observations_are_main_map\":false,\"observing_registered_map\":%s,\"map_observation_count\":%u,\"recovery_commit_pending\":%s,"
         "\"required_map_observations\":5,\"vo_width\":%d,\"vo_height\":%d,\"reference_node_id\":%d,"
         "\"reference_epoch\":%llu,\"reference_stamp_ns\":%lld,\"reference_is_navigation_command\":false}",
-        MappingContinuityGate::stateName(s.state),s.reason.c_str(),s.epoch,
+        MappingContinuityGate::stateName(s.state),mappingJsonString(s.reason).c_str(),s.epoch,
         static_cast<unsigned long long>(s.generation),s.sourceNs,safeRelocalizationSessionTokenSha256_.c_str(),s.goodSamples,
         s.registered?"true":"false",s.mainMapWriteAllowed?"true":"false",
-        localReady?"true":"false",localReady&&!s.observingMainMap?"true":"false",s.visualGeometry?"true":"false",s.depthGeometry?"true":"false",s.observingMainMap&&!s.observingCandidate?"true":"false",
+        localReady?"true":"false",localReady&&!s.observingMainMap&&!s.qualityPending&&!s.registered?"true":"false",s.visualGeometry?"true":"false",s.depthGeometry?"true":"false",s.observingMainMap&&!s.observingCandidate?"true":"false",
         s.mapObservationCount,s.observingCandidate?"true":"false",mappingContinuityVoWidth_,mappingContinuityVoHeight_,trustedNode,trustedEpoch,
         reference?static_cast<long long>(rclcpp::Time(reference->header.stamp).nanoseconds()):0LL);
+    status.data.pop_back();
+    status.data+=uFormat(",\"finite_motion\":%s,\"covariance_finite_pd\":%s,\"covariance_bounded\":%s,\"dimensions_valid\":%s,"
+        "\"quality_verification_pending\":%s,\"quality_start_ns\":%lld,\"last_cut_source_ns\":%lld,\"cut_count\":%llu,\"unaligned_submap_count\":%u,",
+        s.finiteMotion?"true":"false",s.covarianceFinitePD?"true":"false",s.covarianceBounded?"true":"false",s.dimensionsValid?"true":"false",
+        s.qualityPending?"true":"false",s.qualityStartNs,s.lastCutSourceNs,static_cast<unsigned long long>(s.cutCount),
+        submapPublisher_?submapPublisher_->unregisteredCount():0U);
+    status.data+="\"quality_reason\":"+mappingJsonString(s.qualityReason)+",\"last_cut_reason\":"+mappingJsonString(s.lastCutReason)+
+        ",\"last_cut_quality_reason\":"+mappingJsonString(s.lastCutQualityReason)+",\"last_pause_reason\":"+mappingJsonString(s.lastPauseReason)+",\"quality_trigger_reason\":"+mappingJsonString(s.qualityTriggerReason)+"}";
     mappingContinuityStatusPub_->publish(status);
     std_msgs::msg::String display;display.data=MappingContinuityGate::chinese(s.state);
     if(s.state==MappingContinuityGate::State::PAUSED && !reference)display.data="定位丢失，建图暂停；尚无可信参考图像";
     if(s.observingMainMap)display.data=uFormat("候选主图位置，正在观察验证 %u/5；主地图暂停更新",s.mapObservationCount);
+    else if(s.qualityPending)display.data="短暂定位退化，主图停写；正在核验最后可信位置";
     else if(localReady && !s.mainMapWriteAllowed)display.data="局部跟踪正常，临时子图记录中；尚未对齐主地图";
+    display.data+=uFormat("；未对齐子图 %u",submapPublisher_?submapPublisher_->unregisteredCount():0U);
     mappingContinuityTextPub_->publish(display);
     if(publishReference && mappingRecoveryReferencePub_)mappingRecoveryReferencePub_->publish(*reference);
 }

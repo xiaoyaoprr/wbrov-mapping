@@ -1,0 +1,67 @@
+{
+  "phase": "passed",
+  "production_changed": false,
+  "hardware_started": false,
+  "steps": [
+    {
+      "name": "final_compile",
+      "rc": 0,
+      "seconds": 425.0,
+      "log_sha256": "63ed6ceddbfba2860f0d2d145d2e6423b34d546d5b3d5ec670655f956c560c88"
+    },
+    {
+      "name": "final_ldd",
+      "rc": 0,
+      "seconds": 1.0,
+      "log_sha256": "cf4b0061ac52f499a7088192a862719e57fe61b19fc99064003209f0c68bd72a"
+    },
+    {
+      "name": "final_gate_tests",
+      "rc": 0,
+      "seconds": 0.5,
+      "log_sha256": "5b63b00d018822905e88feb97a39e81ed07f80169fa34f0f58227f5a0d99e1d4"
+    },
+    {
+      "name": "final_wrapper_test",
+      "rc": 0,
+      "seconds": 5.01,
+      "log_sha256": "fec28de5f438c563a3aa18bce0b0e399c6fd873a92ee39c33fb02106b6261cb8"
+    },
+    {
+      "name": "test_submap_display_ros",
+      "rc": 0,
+      "seconds": 3.01,
+      "log_sha256": "dd192c7996f083c8cbeada49b1b617d366812af63eb8e5ac76204c7e127fa61c"
+    },
+    {
+      "name": "test_continuity_display_ros",
+      "rc": 0,
+      "seconds": 2.5,
+      "log_sha256": "ea6ddd409e0ad53bfe972459ba6039173ff8dec9090ab052257aedce4bb6359b"
+    },
+    {
+      "name": "display_imports",
+      "rc": 0,
+      "seconds": 1.5,
+      "log_sha256": "77ae8a8ad6e6e0b55b245ac8e971ad203f9a8ff7f0ee46f76c98d53a8b1b49f0"
+    }
+  ],
+  "inputs": {
+    "source/include/rtabmap_slam/MappingContinuityGate.h": "a243c950b19e17cb5c807876017c5736ab81f1cfe428c4bef90b5af61dd4ce3d",
+    "source/include/rtabmap_slam/SubmapPublisher.h": "2bf792796cb378ef5ea65f595c403fa358da7d8778e0b20de2b635e9d851cd57",
+    "source/src/CoreWrapper.cpp": "b745387ad9601a03fb09ae004053bdc2180121946fbb0351e3288ffd7f5f19ea",
+    "tests/test_mapping_continuity_gate.cpp": "0044d3e9858bb1972cae2834607202aa8715907558a498a69e5d3f987a80f1ea",
+    "tests/wrapper_mapping_continuity_native_test.cpp": "884dc06fea71e43a40d2033bd6443a7aeda36be171b83e83388762ce9fa8f448",
+    "visualization/graph_display_geometry.py": "5bd28861322e8c98afedd9d61b313a2f740d143ebfd5e48429f39ba7025977df",
+    "visualization/rtabmap_dense_graph_optimized.rviz": "73ef34ba4f242ecc549afb7d95175e49202c6eb0f30f0c0a61e8ff75ba856331",
+    "visualization/rtabmap_graph_display.py": "ef46e5849d35482c14943f6d2ba4463ba1a60b91b2c9a957368af23d7db6c2e6",
+    "visualization/rtabmap_submap_display.py": "843a002677a2cba18b796f43815e57ff3b0956fd47c7e1929864db0d6e03efdc",
+    "visualization/submap_display_geometry.py": "21827d469bde4ab74e2892b79e7819ffb9b33d1e982274df6608cd7bd3bf69b0",
+    "visualization/submap_rviz_config.py": "b07466ecf249349c9048391f834e6f49ee8a21d8e269b7781a667c88a21e791a",
+    "visualization/test_continuity_display_ros.py": "46eeb58ee646e20cdb81fdd52ff6eac44e266645ec7582a4c898dc386e4fa5b1",
+    "visualization/test_submap_display_geometry.py": "fb8acabf14418d3fcac6227ea7e5b1b8a45b8e0f661b6dbe64f9bc365b792ce6",
+    "visualization/test_submap_display_ros.py": "d4cfaa722fedc6c85cf6213ff0f2f6a208290fe4da32ead3792ce9d147f39d5e"
+  },
+  "plugin_sha256": "c4210c4b84d47109f3546c30a74b3e4e5f3834476d636d2d2ff1dc4f464133c9",
+  "node_sha256": "204ef15544749422549ebff440b05a3d148c2e7527f990e67f7431a7b2306516"
+}

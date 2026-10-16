@@ -11,6 +11,7 @@
 #include <pcl/point_cloud.h>
 #include <rclcpp/rclcpp.hpp>
 #include <iomanip>
+#include <atomic>
 #include <sstream>
 #include <tuple>
 #include <mutex>
@@ -41,6 +42,7 @@ public:
     explicit SubmapPublisher(rclcpp::Node & node):node_(node) {
         registry_=node_.create_publisher<std_msgs::msg::String>("/wbrov/submaps/registry",rclcpp::QoS(1).reliable().transient_local());
     }
+    unsigned unregisteredCount() const {return unregisteredCount_.load(std::memory_order_relaxed);}
     void heartbeat() {
         std_msgs::msg::String msg;{std::lock_guard<std::mutex> lock(snapshotMutex_);msg.data=lastSnapshot_;}
         if(!msg.data.empty())registry_->publish(msg);
@@ -90,6 +92,8 @@ public:
         }
         retireCoveredHistory(core,refreshed,stamp);
         for(auto & row:entries_)if(!row.second.active) {row.second.voxels.clear();row.second.renderedPoses.clear();}
+        unsigned unaligned=0;for(const auto & row:entries_)if(!row.second.registered && !row.second.poses.empty())++unaligned;
+        unregisteredCount_.store(unaligned,std::memory_order_relaxed);
         ++revision_;std_msgs::msg::String msg;msg.data=serialize(localHealthy,stamp.nanoseconds());
         {std::lock_guard<std::mutex> lock(snapshotMutex_);lastSnapshot_=msg.data;}registry_->publish(msg);
     }
@@ -215,6 +219,7 @@ private:
     }
     rclcpp::Node & node_;std::string session_,mainFrame_;unsigned long long revision_=0;
     std::map<std::string,Entry> entries_;rclcpp::Publisher<std_msgs::msg::String>::SharedPtr registry_;
+    std::atomic<unsigned> unregisteredCount_{0};
     std::mutex snapshotMutex_;std::string lastSnapshot_;
 };
 }

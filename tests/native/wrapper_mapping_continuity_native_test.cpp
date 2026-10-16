@@ -149,6 +149,21 @@ int main(int argc,char ** argv) {
             std::this_thread::sleep_for(std::chrono::milliseconds(110));good=sample(*w);require(observe(good),"post-gap sample ignored");
         }
         require(g.resumeContinuousReceipt(core.getResetEpoch(),true,rclcpp::Time(good.header.stamp).nanoseconds(),steady(),w->now().nanoseconds()),"measured gap failed to resume after observation");
+        // Real mappingEvidence(): counts remain good, but spatial support
+        // collapses. This must pause without authorizing a receipt-only bridge.
+        const auto qualitySerial=g.localContinuitySerial();
+        std::this_thread::sleep_for(std::chrono::milliseconds(5));auto clustered=sample(*w);
+        for(auto & word:clustered.words_values){word.pt.x=100+word.pt.x/30;word.pt.y=80+word.pt.y/30;}
+        require(observe(clustered),"clustered measured frame ignored");
+        auto quality=g.snapshot(steady(),w->now().nanoseconds());
+        require(quality.qualityPending && quality.covarianceFinitePD && quality.dimensionsValid,"bounded geometry pause not entered");
+        require(quality.qualityTriggerReason.find("cells=")!=std::string::npos,"actual quality cause missing");
+        require(g.localContinuitySerial()==qualitySerial,"single weak measured frame split map before verification");
+        for(unsigned i=0;i<6;++i) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(110));good=sample(*w);require(observe(good),"quality recovery packet ignored");
+        }
+        require(!g.resumeContinuousReceipt(core.getResetEpoch(),true,rclcpp::Time(good.header.stamp).nanoseconds(),steady(),w->now().nanoseconds()),"unverified weak interval used receipt-only resume");
+        require(!g.mainMapAllowed(core.getResetEpoch(),steady(),w->now().nanoseconds()),"healthy packets alone authorized map writes");
         std::this_thread::sleep_for(std::chrono::milliseconds(5));auto lost=sample(*w);lost.lost=true;
         require(observe(lost),"lost packet ignored");
         require(!g.coreValidated(oldTicket,core.getResetEpoch(),true,true,steady(),w->now().nanoseconds()),"in-flight preloss result rearmed gate");

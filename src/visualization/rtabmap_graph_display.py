@@ -16,6 +16,9 @@ import math
 import os
 import stat
 import time
+import textwrap
+import cv2
+import numpy as np
 from pathlib import Path
 
 import graph_display_geometry as geometry
@@ -27,7 +30,7 @@ from rclpy.qos import QoSProfile, HistoryPolicy, ReliabilityPolicy, DurabilityPo
 from geometry_msgs.msg import Point
 from rtabmap_msgs.msg import MapGraph, OdomInfo
 from nav_msgs.msg import Odometry
-from sensor_msgs.msg import Imu
+from sensor_msgs.msg import Imu, Image
 from std_msgs.msg import String
 from tf2_msgs.msg import TFMessage
 from visualization_msgs.msg import Marker, MarkerArray
@@ -189,12 +192,14 @@ class GraphDisplayNode(Node):
         self.marker_pub = self.create_publisher(MarkerArray, OUTPUT_TOPIC, qos)
         self.graph_sub = self.create_subscription(MapGraph, INPUT_TOPIC, self.on_graph, qos)
         self.mapping_status = None
+        self.last_continuity_diagnostic = None
         self.mapping_status_arrival = 0.0
         self.local_submap_summary = None
         self.local_submap_registry = None
         self.retired_submap_sessions = set()
         self.local_submap_arrival = 0.0
         self.local_submap_registry_sub = self.create_subscription(String, "/wbrov/submaps/registry", self.on_submap_registry, qos)
+        self.mapping_image_pub = self.create_publisher(Image, "/mapping/continuity_image", qos)
         self.mapping_marker_pub = self.create_publisher(MarkerArray, "/mapping/continuity_display", qos)
         self.mapping_status_sub = self.create_subscription(String, "/wbrov/mapping_continuity/status", self.on_mapping_status, qos)
         self.mapping_status_timer = self.create_timer(0.25, self.publish_mapping_status)
@@ -237,6 +242,8 @@ class GraphDisplayNode(Node):
 
     def on_mapping_status(self, message):
         try:
+            if len(message.data) > 16384:
+                raise ValueError("mapping status too large")
             row = json.loads(message.data)
             if row.get("schema") != "wbrov.mapping-continuity.v1":
                 raise ValueError("unknown mapping status schema")
@@ -244,6 +251,12 @@ class GraphDisplayNode(Node):
                 raise ValueError("unknown mapping state")
             self.mapping_status = row
             self.mapping_status_arrival = time.monotonic()
+            diagnostic = tuple(row.get(k) for k in ("state", "generation", "epoch", "last_cut_source_ns", "quality_verification_pending"))
+            if diagnostic != self.last_continuity_diagnostic:
+                self.last_continuity_diagnostic = diagnostic
+                if self.pose_diagnostics and self.pose_diagnostics.tick():
+                    self.pose_diagnostics.write({"kind": "continuity_transition", "status": row,
+                                                "publisher_identity_authenticated": False})
         except (ValueError, TypeError, AttributeError):
             self.mapping_status = None
 
@@ -279,6 +292,11 @@ class GraphDisplayNode(Node):
             "PAUSED": "定位丢失，建图暂停",
             "UNKNOWN": "建图状态未更新，请检查连接",
         }[state]
+        unaligned = None
+        if fresh and 0 <= time.monotonic() - self.local_submap_arrival <= 2.0:
+            unaligned = sum(not entry.registered for entry in self.local_submap_registry.submaps)
+        if fresh and row.get("quality_verification_pending") is True:
+            label = "短暂定位退化，主图停写；正在验证最后可信位置"
         if state in ("PAUSED", "RECOVERING"):
             local_fresh = 0 <= time.monotonic() - self.local_submap_arrival <= 2.0
             local_tracking = (fresh and local_fresh and row.get("local_tracking_healthy") is True and
@@ -289,6 +307,12 @@ class GraphDisplayNode(Node):
                     label += "\n恢复验证期间局部图写入也暂停"
             else:
                 label += "\n参考右侧最后可靠视角，确认周围安全后缓慢退回"
+        label += "\n未对齐子图：" + (str(unaligned) if unaligned is not None else "状态待更新")
+        if fresh and not allowed:
+            reason = row.get("quality_trigger_reason") if row.get("quality_verification_pending") else row.get("last_cut_quality_reason")
+            if reason:
+                label += "\n检查：" + str(reason)[:220]
+        self.publish_status_image(row if fresh else None, allowed, unaligned)
         marker = Marker()
         marker.header.frame_id = "map"
         marker.ns = "mapping_continuity_status"
@@ -304,6 +328,40 @@ class GraphDisplayNode(Node):
         output = MarkerArray()
         output.markers.append(marker)
         self.mapping_marker_pub.publish(output)
+
+    def publish_status_image(self, row, allowed, unaligned):
+        # A docked Image stays visible when the 3D camera moves away from map
+        # origin. It never overlays an unregistered cloud in the main frame.
+        canvas = np.full((260, 820, 3), (30, 27, 25), dtype=np.uint8)
+        color = (80, 230, 90) if allowed else (40, 190, 255)
+        title = "MAIN MAP: BUILDING" if allowed else "MAIN MAP: PAUSED"
+        if row is None:
+            title = "STATUS STALE - CHECK CONNECTION"
+        cv2.putText(canvas, title, (16, 32), cv2.FONT_HERSHEY_SIMPLEX, .8, color, 2)
+        count = str(unaligned) if unaligned is not None else "unknown"
+        lines = ["Unaligned local submaps: " + count]
+        if row:
+            if row.get("quality_verification_pending"):
+                lines += ["Frozen map check: %s/5; no map writes" % row.get("map_observation_count", 0)]
+            elif row.get("local_submap_write_allowed"):
+                lines += ["Local cloud recording; alignment to main map NOT verified"]
+            elif not allowed:
+                lines += ["Main and local map writes paused"]
+            trigger = row.get("quality_trigger_reason") if row.get("quality_verification_pending") else row.get("last_cut_quality_reason")
+            reason = row.get("last_pause_reason") if row.get("quality_verification_pending") else row.get("last_cut_reason")
+            if not allowed:
+                lines += textwrap.wrap("Reason: " + str(reason or row.get("reason", "unknown")), 88)
+                lines += textwrap.wrap("Evidence: " + str(trigger or row.get("quality_reason", "unknown")), 88)
+        for i, line in enumerate(lines[:8]):
+            cv2.putText(canvas, line.encode("ascii", "replace").decode(), (16, 62 + i * 25),
+                        cv2.FONT_HERSHEY_SIMPLEX, .49, (230, 230, 230), 1)
+        message = Image()
+        message.header.stamp = self.get_clock().now().to_msg()
+        message.height, message.width = canvas.shape[:2]
+        message.encoding = "bgr8"
+        message.step = message.width * 3
+        message.data = canvas.tobytes()
+        self.mapping_image_pub.publish(message)
 
     def on_graph(self, message):
         try:

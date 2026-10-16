@@ -28,6 +28,14 @@ public:
         // Authenticated F2M interval since its previous successful measured pose.
         // Zero after initialization/reset, or unavailable, cannot prove a bridge.
         long long measuredIntervalNs = 0;
+        // These describe the producer's evidence, not a proof of an accurate pose.
+        bool covarianceFinitePD = false;
+        bool dimensionsValid = false;
+        bool measuredRegistration = false;
+        std::string qualityReason;
+        bool pendingVerificationEligible() const {
+            return !lost && finiteMotion && covarianceFinitePD && dimensionsValid && measuredRegistration;
+        }
         bool usable() const { return !lost && finiteMotion && covarianceValid && (visualGeometry || depthGeometry); }
     };
     struct Ticket { std::uint64_t generation; long long frameNs; };
@@ -37,11 +45,21 @@ public:
         bool mainMapWriteAllowed; bool visualGeometry; bool depthGeometry;
         bool observingMainMap; unsigned mapObservationCount; bool observingCandidate;
         std::string reason;
+        bool finiteMotion, covarianceFinitePD, covarianceBounded, dimensionsValid;
+        bool qualityPending;
+        long long qualityStartNs, lastCutSourceNs;
+        std::uint64_t cutCount;
+        std::string qualityReason, lastCutReason, lastCutQualityReason, lastPauseReason, qualityTriggerReason;
     };
     static constexpr long long MAX_AGE_NS = 300000000LL;
     static constexpr long long RECOVERY_SPAN_NS = 200000000LL;
     static constexpr unsigned RECOVERY_SAMPLES = 3;
     static constexpr long long MIN_PAUSE_NS = 200000000LL;
+    // Weak estimates may wait for verification; they NEVER certify a bridge.
+    // 500 ms bounds the weak interval. Six seconds allows five 1 Hz map
+    // observations. Neither deadline is extended by repeated weak packets.
+    static constexpr long long QUALITY_WEAK_NS = 500000000LL;
+    static constexpr long long QUALITY_VERIFY_NS = 6000000000LL;
     static constexpr unsigned MAP_OBSERVATIONS = 5;
     static constexpr long long MAP_OBSERVATION_SPAN_NS = 500000000LL;
 
@@ -58,12 +76,13 @@ public:
     // Covariance must be finite, symmetric, positive definite and bounded. A
     // zero/default covariance is not measured confidence. LDLT catches coupled
     // degeneracy, not only diagonal values. This is NOT proof of physical accuracy.
-    static bool covarianceHealthy(const std::array<double,36> & c) {
+    static bool covarianceFinitePositiveDefinite(const std::array<double,36> & c, std::string * why=nullptr) {
+        auto fail=[&](const std::string & text){if(why)*why=text;return false;};
         double l[6][6] = {}; double d[6] = {};
         for(unsigned i=0;i<6;++i) {
-            if(!std::isfinite(c[7*i]) || c[7*i] <= 0.0 || c[7*i] > (i<3?0.04:0.1218693434)) return false;
+            if(!std::isfinite(c[7*i]) || c[7*i] <= 0.0) return fail("covariance_diagonal_invalid axis="+std::to_string(i));
             for(unsigned j=0;j<6;++j)
-                if(!std::isfinite(c[6*i+j]) || std::fabs(c[6*i+j]-c[6*j+i]) > 1e-7*(1.0+std::fabs(c[6*i+j]))) return false;
+                if(!std::isfinite(c[6*i+j]) || std::fabs(c[6*i+j]-c[6*j+i]) > 1e-7*(1.0+std::fabs(c[6*i+j]))) return fail("covariance_nonfinite_or_asymmetric");
         }
         for(unsigned i=0;i<6;++i) {
             for(unsigned j=0;j<i;++j) {
@@ -71,8 +90,16 @@ public:
                 l[i][j]=v/d[j];
             }
             double v=c[7*i];for(unsigned k=0;k<i;++k)v-=l[i][k]*l[i][k]*d[k];
-            if(!std::isfinite(v) || v<=1e-14) return false;
+            if(!std::isfinite(v) || v<=1e-14) return fail("covariance_not_positive_definite");
             d[i]=v;l[i][i]=1.0;
+        }
+        return true;
+    }
+    static bool covarianceHealthy(const std::array<double,36> & c, std::string * why=nullptr) {
+        if(!covarianceFinitePositiveDefinite(c,why))return false;
+        for(unsigned i=0;i<6;++i)if(c[7*i]>(i<3?0.04:0.1218693434)) {
+            if(why)*why="covariance_bound axis="+std::to_string(i)+" value="+std::to_string(c[7*i]);
+            return false;
         }
         return true;
     }
@@ -80,18 +107,19 @@ public:
     // independent spatial axes. A line/cluster cannot certify visual recovery.
     // Rows are u,v,x,y,z with 3D points from the measured F2M local map.
     static bool visualSupportHealthy(const std::vector<std::array<double,5>> & points,
-                                     const std::array<double,4> & bounds) {
-        if(points.size()<15U)return false;
+                                     const std::array<double,4> & bounds, std::string * why=nullptr) {
+        auto fail=[&](const std::string & text){if(why)*why=text;return false;};
+        if(points.size()<15U)return fail("points="+std::to_string(points.size())+"<15");
         const double w=bounds[1]-bounds[0],h=bounds[3]-bounds[2];
-        if(!std::isfinite(w)||!std::isfinite(h)||w<32.0||h<24.0)return false;
+        if(!std::isfinite(w)||!std::isfinite(h)||w<32.0||h<24.0)return fail("image_bounds_invalid");
         double mean[5]={};std::set<unsigned> cells;
         for(const auto & p:points) {
-            for(unsigned k=0;k<5;++k) {if(!std::isfinite(p[k]))return false;mean[k]+=p[k];}
+            for(unsigned k=0;k<5;++k) {if(!std::isfinite(p[k]))return fail("support_nonfinite");mean[k]+=p[k];}
             const double u=(p[0]-bounds[0])/w,v=(p[1]-bounds[2])/h;
-            if(u<0.0||u>1.0||v<0.0||v>1.0)return false;
+            if(u<0.0||u>1.0||v<0.0||v>1.0)return fail("support_outside_image");
             cells.insert(std::min(3U,static_cast<unsigned>(u*4.0))+4U*std::min(2U,static_cast<unsigned>(v*3.0)));
         }
-        if(cells.size()<6U)return false;
+        if(cells.size()<6U)return fail("cells="+std::to_string(cells.size())+"<6");
         for(double & v:mean)v/=static_cast<double>(points.size());
         double a=0,b=0,c=0,spatial[3][3]={};
         for(const auto & p:points) {
@@ -101,11 +129,12 @@ public:
                 spatial[i][j]+=(p[i+2]-mean[i+2])*(p[j+2]-mean[j+2]);
         }
         const double imageTrace=a+c;
-        if(imageTrace<=0 || (a*c-b*b)/(imageTrace*imageTrace)<0.01)return false;
+        if(imageTrace<=0 || (a*c-b*b)/(imageTrace*imageTrace)<0.01)return fail("image_isotropy="+std::to_string(imageTrace>0?(a*c-b*b)/(imageTrace*imageTrace):0.0)+"<0.01");
         const double tr=spatial[0][0]+spatial[1][1]+spatial[2][2];
         double minors=0;for(unsigned i=0;i<3;++i)for(unsigned j=i+1;j<3;++j)
             minors+=spatial[i][i]*spatial[j][j]-spatial[i][j]*spatial[i][j];
-        return std::isfinite(tr)&&std::isfinite(minors)&&tr>1e-8&&minors/(tr*tr)>=0.01;
+        if(!std::isfinite(tr)||!std::isfinite(minors)||tr<=1e-8||minors/(tr*tr)<0.01)return fail("spatial_isotropy="+std::to_string(tr>1e-8?minors/(tr*tr):0.0)+"<0.01");
+        return true;
     }
     Ticket ticket(long long frameNs) const { std::lock_guard<std::mutex> l(mutex_);return {generation_,frameNs}; }
     // Tracks actual local-estimation discontinuities separately from failed
@@ -118,13 +147,15 @@ public:
             frameNs>0 && frameNs<=sourceNs_ && sourceNs_-frameNs<=MAX_AGE_NS;
     }
     void invalidate(const char * reason="continuity invalidated") {
-        std::lock_guard<std::mutex> l(mutex_); ++localSerial_;pauseLocked(reason);
+        std::lock_guard<std::mutex> l(mutex_);cutLocked(reason);
     }
     void rejectAlignment(const char * reason) {
-        std::lock_guard<std::mutex> l(mutex_);pauseLocked(reason);
+        std::lock_guard<std::mutex> l(mutex_);if(qualityPending_)cutLocked(reason);else pauseLocked(reason);
     }
     void reset() {
         std::lock_guard<std::mutex> l(mutex_);++generation_;++localSerial_;state_=State::PAUSED;
+        qualityPending_=false;qualityStartNs_=qualityStartSteadyNs_=qualityRecoveredNs_=0;
+        cutCount_=0;lastCutSourceNs_=0;lastCutReason_.clear();lastCutQualityReason_.clear();lastPauseReason_.clear();qualityTriggerReason_.clear();
         epoch_=0;epochKnown_=false;registered_=false;everRegistered_=false;observing_=false;candidateObservation_=candidateReady_=false;receiptOnlyPause_=false;
         sourceNs_=arrivalNs_=goodStartNs_=pauseUntilNs_=0;observationStartNs_=lastObservationNs_=0;mapObservations_=0;
         goodSamples_=visualGoodSamples_=0;visualGoodStartNs_=0;evidence_=Evidence{};reason_="waiting for authenticated geometry";
@@ -145,19 +176,36 @@ public:
                 evidence_.usable() && evidence.usable() && evidence.visualGeometry && evidence.recoveryGeometry &&
                 evidence.measuredIntervalNs>0 && std::llabs(evidence.measuredIntervalNs-gap)<=1000000LL;
             if(measuredBridge)pauseReceiptLocked("bounded measured F2M interval; observing before resume");
-            else {++localSerial_;pauseLocked("unverified measurement gap");}
+            else {cutLocked("unverified measurement gap",sourceNs,&evidence);}
         }
         sourceNs_=sourceNs;arrivalNs_=arrivalNs;evidence_=evidence;
+        if(qualityPending_ && qualityExpiredLocked(arrivalNs,rosNs))cutLocked("quality verification deadline exceeded");
         if(rosNs<sourceNs || rosNs-sourceNs>MAX_AGE_NS) {
             // Receipt latency revokes write/pose permission, not the measured
             // local coordinate chain. A subsequent source gap, lost solution,
             // bad geometry or future clock still cuts that chain explicitly.
             if(rosNs<sourceNs || !evidence.usable()) {
-                ++localSerial_;pauseLocked(rosNs<sourceNs?"future source":"stale source with invalid geometry");
+                cutLocked(rosNs<sourceNs?"future source":"stale source with invalid geometry");
             } else pauseReceiptLocked("stale source");
             return true;
         }
-        if(!evidence.usable()) {++localSerial_;pauseLocked(evidence.lost?"odometry lost":"geometry quality insufficient");return true;}
+        if(!evidence.usable()) {
+            // A bounded opportunity to verify against the frozen trusted map,
+            // never receipt-only resumption and never inferred odometry continuity.
+            if(evidence.pendingVerificationEligible() &&
+               (qualityPending_ || ((registered_ || receiptOnlyPause_) && everRegistered_ && epochKnown_ && !observing_))) {
+                if(!qualityPending_) {
+                    qualityStartNs_=sourceNs_;qualityStartSteadyNs_=arrivalNs_;qualityRecoveredNs_=0;
+                    qualityTriggerReason_=evidence.qualityReason;
+                }
+                const auto start=qualityStartNs_,arrival=qualityStartSteadyNs_;
+                pauseLocked("quality insufficient; frozen-map verification required");
+                qualityPending_=true;qualityStartNs_=start;qualityStartSteadyNs_=arrival;qualityRecoveredNs_=0;
+                if(qualityExpiredLocked(arrivalNs,rosNs))cutLocked("quality weak interval exceeded");
+            } else cutLocked(evidence.lost?"odometry lost":"geometry quality insufficient");
+            return true;
+        }
+        if(qualityPending_ && qualityRecoveredNs_==0 && evidence.recoveryGeometry)qualityRecoveredNs_=sourceNs_;
         if(evidence.recoveryGeometry) {
             if(goodSamples_==0) goodStartNs_=sourceNs;
             if(goodSamples_<1000000U)++goodSamples_;
@@ -179,11 +227,14 @@ public:
     }
     void tick(long long steadyNs,long long rosNs) {
         std::lock_guard<std::mutex> l(mutex_);
+        if(qualityPending_ && qualityExpiredLocked(steadyNs,rosNs)) {
+            cutLocked("quality verification deadline exceeded");return;
+        }
         // A timer cannot establish that the frontend lost its coordinate
         // frame. Invalidate in-flight work now; observe() decides continuity
         // from the next authenticated source stamp and measured geometry.
         if(!freshLocked(steadyNs,rosNs) && state_!=State::PAUSED) {
-            if(steadyNs<arrivalNs_ || rosNs<sourceNs_)pauseLocked("clock moved behind measurement");
+            if(steadyNs<arrivalNs_ || rosNs<sourceNs_)cutLocked("clock moved behind measurement");
             else pauseReceiptLocked("source or arrival expired");
         }
     }
@@ -194,7 +245,7 @@ public:
     // this path. No old-keyframe loop or new coordinate transform is inferred.
     bool resumeContinuousReceipt(Epoch epoch,bool coreRegistered,long long frameNs,long long steadyNs,long long rosNs) {
         std::lock_guard<std::mutex> l(mutex_);
-        if(!receiptOnlyPause_ || !epochKnown_ || epoch!=epoch_ || !coreRegistered ||
+        if(qualityPending_ || !receiptOnlyPause_ || !epochKnown_ || epoch!=epoch_ || !coreRegistered ||
            localSerial_!=receiptPauseSerial_ || !stableLocked() || !freshLocked(steadyNs,rosNs) ||
            goodSamples_<MAP_OBSERVATIONS || sourceNs_-goodStartNs_<MAP_OBSERVATION_SPAN_NS ||
            frameNs<goodStartNs_ || frameNs>sourceNs_ || sourceNs_-frameNs>MAX_AGE_NS)return false;
@@ -208,7 +259,7 @@ public:
     bool processAllowed(bool coreRegistered,long long frameNs,long long steadyNs,long long rosNs) const {
         std::lock_guard<std::mutex> l(mutex_);
         if(!freshLocked(steadyNs,rosNs) || !evidence_.usable() || frameNs<=0 || frameNs<goodStartNs_ || frameNs>sourceNs_ || sourceNs_-frameNs>MAX_AGE_NS)return false;
-        if(observing_)return false;
+        if(observing_ || qualityPending_)return false;
         if(!coreRegistered)return stableLocked();
         if(observing_ || (everRegistered_&&!registered_))return false;
         return registered_ || stableLocked();
@@ -217,7 +268,7 @@ public:
         std::lock_guard<std::mutex> l(mutex_);
         if(t.generation!=generation_)return false;
         if(epochKnown_ && epoch!=epoch_) {
-            ++generation_;registered_=false;receiptOnlyPause_=false;state_=State::RECOVERING;
+            ++generation_;registered_=false;receiptOnlyPause_=false;qualityPending_=false;state_=State::RECOVERING;
             epoch_=epoch;reason_="new private epoch needs verified registration";
             goodStartNs_=sourceNs_;goodSamples_=evidence_.usable()&&evidence_.recoveryGeometry?1U:0U;observing_=false;candidateObservation_=candidateReady_=false;
             // A Core-authenticated epoch boundary is an identity change, never
@@ -283,11 +334,16 @@ public:
                               double stepTranslation,double stepRotationDeg,
                               long long steadyNs,long long rosNs) {
         std::lock_guard<std::mutex> l(mutex_);
+        if(qualityPending_ && qualityExpiredLocked(steadyNs,rosNs)) {
+            cutLocked("quality verification deadline exceeded");return false;
+        }
         if(t.generation!=generation_ || !observing_ || epoch!=epoch_ || t.frameNs<=lastObservationNs_)return false;
         if(!directlyVerified || !std::isfinite(seedTranslation)||!std::isfinite(seedRotationDeg)||
            !std::isfinite(stepTranslation)||!std::isfinite(stepRotationDeg)||
            seedTranslation>0.05 || seedRotationDeg>3.0 || stepTranslation>0.03 || stepRotationDeg>2.0) {
-            pauseLocked("main-map observation failed or correction exceeded limits");return false;
+            if(qualityPending_)cutLocked("quality bridge observation failed or correction exceeded limits");
+            else pauseLocked("main-map observation failed or correction exceeded limits");
+            return false;
         }
         // Exact frame freshness was checked before the read-only solve. During
         // a long solve only continuous fresh measurements may retain this ticket.
@@ -299,7 +355,7 @@ public:
         if(candidateObservation_) {
             candidateReady_=true;reason_="candidate observations passed; waiting for final atomic commit";return true;
         }
-        observing_=false;registered_=true;state_=visualStableLocked()?State::NORMAL:State::DEGRADED;
+        observing_=false;qualityPending_=false;registered_=true;state_=visualStableLocked()?State::NORMAL:State::DEGRADED;
         reason_="independent registered-map observations passed; next frame may write";return true;
     }
     template<class Publish> bool withFreshMainPose(long long steadyNs,long long rosNs,Publish && publish) const {
@@ -309,9 +365,21 @@ public:
     }
     Snapshot snapshot(long long steadyNs,long long rosNs) const {
         std::lock_guard<std::mutex> l(mutex_);
-        return {state_,epoch_,generation_,sourceNs_,goodSamples_,registered_,allowedLocked(epoch_,steadyNs,rosNs),evidence_.visualGeometry,evidence_.depthGeometry,observing_,mapObservations_,candidateObservation_,reason_};
+        return {state_,epoch_,generation_,sourceNs_,goodSamples_,registered_,allowedLocked(epoch_,steadyNs,rosNs),evidence_.visualGeometry,evidence_.depthGeometry,observing_,mapObservations_,candidateObservation_,reason_,
+            evidence_.finiteMotion,evidence_.covarianceFinitePD,evidence_.covarianceValid,evidence_.dimensionsValid,
+            qualityPending_,qualityStartNs_,lastCutSourceNs_,cutCount_,evidence_.qualityReason,lastCutReason_,lastCutQualityReason_,lastPauseReason_,qualityTriggerReason_};
     }
 private:
+    bool qualityExpiredLocked(long long steadyNs,long long rosNs) const {
+        const auto budget=qualityRecoveredNs_==0?QUALITY_WEAK_NS:QUALITY_VERIFY_NS;
+        return steadyNs<qualityStartSteadyNs_ || rosNs<qualityStartNs_ ||
+            steadyNs-qualityStartSteadyNs_>budget || sourceNs_-qualityStartNs_>budget;
+    }
+    void cutLocked(const char * reason,long long source=0,const Evidence * evidence=nullptr) {
+        ++localSerial_;++cutCount_;lastCutSourceNs_=source?source:sourceNs_;
+        lastCutReason_=reason;lastCutQualityReason_=evidence?evidence->qualityReason:evidence_.qualityReason;
+        pauseLocked(reason);
+    }
     bool freshLocked(long long steadyNs,long long rosNs) const {
         return sourceNs_>0 && arrivalNs_>0 && steadyNs>=arrivalNs_ && rosNs>=sourceNs_ &&
                steadyNs-arrivalNs_<=MAX_AGE_NS && rosNs-sourceNs_<=MAX_AGE_NS;
@@ -322,14 +390,18 @@ private:
         return registered_ && epochKnown_ && epoch==epoch_ && (state_==State::NORMAL||state_==State::DEGRADED) && freshLocked(steadyNs,rosNs);
     }
     void pauseLocked(const char * reason) {
+        lastPauseReason_=reason;qualityPending_=false;
         ++generation_;registered_=false;receiptOnlyPause_=false;observing_=false;candidateObservation_=candidateReady_=false;state_=State::PAUSED;goodSamples_=visualGoodSamples_=0;goodStartNs_=visualGoodStartNs_=0;reason_=reason;
         pauseUntilNs_=sourceNs_+MIN_PAUSE_NS;mapObservations_=0;observationStartNs_=lastObservationNs_=0;
     }
     void pauseReceiptLocked(const char * reason) {
-        const bool keep=(receiptOnlyPause_ && receiptPauseSerial_==localSerial_) ||
-            (registered_ && everRegistered_ && epochKnown_ && !observing_ && !candidateObservation_);
+        const bool pending=qualityPending_;
+        const auto start=qualityStartNs_,arrival=qualityStartSteadyNs_,recovered=qualityRecoveredNs_;
+        const bool keep=!pending && ((receiptOnlyPause_ && receiptPauseSerial_==localSerial_) ||
+            (registered_ && everRegistered_ && epochKnown_ && !observing_ && !candidateObservation_));
         pauseLocked(reason);
         receiptOnlyPause_=keep;receiptPauseSerial_=localSerial_;
+        qualityPending_=pending;qualityStartNs_=start;qualityStartSteadyNs_=arrival;qualityRecoveredNs_=recovered;
     }
     void startObservationLocked() {
         registered_=true;receiptOnlyPause_=false;observing_=true;candidateObservation_=candidateReady_=false;state_=State::RECOVERING;mapObservations_=0;observationStartNs_=lastObservationNs_=0;
@@ -343,6 +415,10 @@ private:
     bool receiptOnlyPause_=false;std::uint64_t receiptPauseSerial_=0;
     long long pauseUntilNs_=0,observationStartNs_=0,lastObservationNs_=0;unsigned mapObservations_=0;
     long long visualGoodStartNs_=0;unsigned visualGoodSamples_=0;
+    bool qualityPending_=false;
+    long long qualityStartNs_=0,qualityStartSteadyNs_=0,qualityRecoveredNs_=0,lastCutSourceNs_=0;
+    std::uint64_t cutCount_=0;
+    std::string lastCutReason_,lastCutQualityReason_,lastPauseReason_,qualityTriggerReason_;
     Evidence evidence_;std::string reason_="waiting for authenticated geometry";
 };
 }

@@ -167,6 +167,19 @@ Visualization Manager:
         Durability Policy: Transient Local
         Reliability Policy: Reliable
         History Policy: Keep Last
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Name: Mapping_Status_建图状态
+      Topic:
+        Value: /mapping/continuity_image
+        Depth: 1
+        Durability Policy: Transient Local
+        Reliability Policy: Reliable
+        History Policy: Keep Last
+      Normalize Range: true
+      Min Value: 0
+      Max Value: 1
+      Median window: 5
     - Class: rviz_default_plugins/TF
       Enabled: false
       Name: Diagnostic_All_TF_Frames

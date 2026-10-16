@@ -32,7 +32,7 @@ from typing import Any, Dict, Iterable, List, Mapping, MutableMapping, Optional,
 
 SCHEMA_VERSION = 3
 PACKAGE_KIND = "wbrov-private-rtabmap-runtime"
-EXPECTED_PRIVATE_ROOT = '/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round2_deploy_20261016'
+EXPECTED_PRIVATE_ROOT = '/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_deploy_20261016'
 MANIFEST_NAME = "runtime-manifest.json"
 MAX_MANIFEST_BYTES = 32 * 1024 * 1024
 MAX_TREE_ENTRIES = 100000
@@ -72,10 +72,10 @@ SOURCE_HASHES = {
     "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/GlobalPublicationGate.h": "daedd4e70da4b7d207285d8f303ba9e114b8b006fe5f7e46ed1e8f528637bf51",
     "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/JumpQuarantineGate.h": "a24d09c476743889db76171ef5f19393ad7c053549441de48eb9c4bb9236e0ca",
     "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/ManagedImuEpochBuffer.h": "7b72f4071377c8e66bdc4d2c6daaab654be0802cdeba19142022575aa2a5d22f",
-    "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/MappingContinuityGate.h": "4c33c8f423540d7f0ff4764161389dede1b927b2f7288ffb222940861be442c4",
-    "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/SubmapPublisher.h": "3148830766e326c564ffee354473a2445ad990f56c14431480a7aee539abc797",
+    "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/MappingContinuityGate.h": "a243c950b19e17cb5c807876017c5736ab81f1cfe428c4bef90b5af61dd4ce3d",
+    "rtabmap_ros/rtabmap_slam/include/rtabmap_slam/SubmapPublisher.h": "2bf792796cb378ef5ea65f595c403fa358da7d8778e0b20de2b635e9d851cd57",
     "rtabmap_ros/rtabmap_slam/src/CoreNode.cpp": "ee64bddc87e3e35b5d063fbe5f0dd4fb37ccc26e23479ce78bf131a6f2a0d851",
-    "rtabmap_ros/rtabmap_slam/src/CoreWrapper.cpp": "5de11735df393e55ff735067096092f3ae5f26ee3ce5eb9a7acac94fa272ff91"
+    "rtabmap_ros/rtabmap_slam/src/CoreWrapper.cpp": "b745387ad9601a03fb09ae004053bdc2180121946fbb0351e3288ffd7f5f19ea"
 }
 
 ENTRYPOINTS = {
@@ -138,7 +138,7 @@ AUXILIARY_INPUT_HASHES = {
     "safe_reloc_gid_frontend": "a09155c9aa28dcf297c3373b27730ab0775ba9b50ebef1d00cc8d855611e39bd",
     "safe_reloc_ipc_engine": "e0568a37c397f99e1ae492119c6f3a41f763708ce4122e47024fa5e1c2611ba9",
     "submap_display_graph_display_geometry": "5bd28861322e8c98afedd9d61b313a2f740d143ebfd5e48429f39ba7025977df",
-    "submap_display_rtabmap_graph_display": "125772c67130460b82a6f6a38e0a764d41995314c327a7975ec709471403c238",
+    "submap_display_rtabmap_graph_display": "ef46e5849d35482c14943f6d2ba4463ba1a60b91b2c9a957368af23d7db6c2e6",
     "submap_display_rtabmap_submap_display": "843a002677a2cba18b796f43815e57ff3b0956fd47c7e1929864db0d6e03efdc",
     "submap_display_submap_display_geometry": "21827d469bde4ab74e2892b79e7819ffb9b33d1e982274df6608cd7bd3bf69b0",
     "submap_display_submap_rviz_config": "b07466ecf249349c9048391f834e6f49ee8a21d8e269b7781a667c88a21e791a",

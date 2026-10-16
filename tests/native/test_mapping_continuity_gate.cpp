@@ -6,8 +6,9 @@
 using Gate=rtabmap_slam::MappingContinuityGate;
 constexpr long long T=1000000000LL;
 constexpr long long D=100000000LL;
-Gate::Evidence visual() { return {false,true,false,true,true,true}; }
-Gate::Evidence depth() { return {false,false,true,true,true,true}; }
+Gate::Evidence visual() { Gate::Evidence e;e.lost=false;e.visualGeometry=true;
+    e.finiteMotion=e.covarianceValid=e.recoveryGeometry=e.covarianceFinitePD=e.dimensionsValid=e.measuredRegistration=true;return e; }
+Gate::Evidence depth() {auto e=visual();e.visualGeometry=false;e.depthGeometry=true;return e;}
 void observe(Gate & g,long long t,Gate::Evidence e=visual()) { assert(g.observe(t,t,t,e)); }
 void stable(Gate & g,long long t) { observe(g,t);observe(g,t+D);observe(g,t+2*D); }
 bool confirm(Gate & g,long long t,Gate::Epoch e=0,bool reg=true) {return g.coreValidated(g.ticket(t),e,reg,true,t,t);}
@@ -21,6 +22,57 @@ void mapObservations(Gate &g,long long start,Gate::Epoch epoch=0,Gate::Evidence 
     }
 }
 int main() {
+    {
+        Gate g;normal(g);const auto serial=g.localContinuitySerial();const auto old=g.ticket(T+2*D);
+        auto weak=visual();weak.visualGeometry=weak.recoveryGeometry=false;weak.qualityReason="cells=4<6";
+        observe(g,T+3*D,weak);
+        auto state=g.snapshot(T+3*D,T+3*D);
+        assert(state.qualityPending && state.qualityTriggerReason=="cells=4<6");
+        assert(g.localContinuitySerial()==serial && !g.mainMapAllowed(0,T+3*D,T+3*D));
+        assert(!g.processAllowed(false,T+3*D,T+3*D,T+3*D));
+        for(int i=4;i<=9;++i) {
+            observe(g,T+i*D);assert(!g.resumeContinuousReceipt(0,true,T+i*D,T+i*D,T+i*D));
+        }
+        assert(!g.coreValidated(old,0,true,true,T+9*D,T+9*D));
+        assert(g.beginMapObservation(0,true,T+9*D,T+9*D));
+        mapObservations(g,T+10*D);
+        assert(g.mainMapAllowed(0,T+16*D,T+16*D));
+        assert(g.localContinuitySerial()==serial);
+    }
+    for(int scenario=0;scenario<7;++scenario) {
+        Gate g;normal(g);const auto serial=g.localContinuitySerial();
+        auto weak=visual();weak.visualGeometry=weak.recoveryGeometry=false;weak.qualityReason="cells=4<6";
+        if(scenario==0)weak.lost=true;
+        if(scenario==1)weak.finiteMotion=false;
+        if(scenario==2)weak.covarianceFinitePD=false;
+        if(scenario==3)weak.dimensionsValid=false;
+        if(scenario==4)weak.measuredRegistration=false; // IMU-only/numeric-only is never a bridge
+        observe(g,T+3*D,weak);
+        if(scenario==5) {for(int i=4;i<=9;++i)observe(g,T+i*D,weak);} // no sliding weak budget
+        if(scenario==6) {stable(g,T+4*D);assert(g.beginMapObservation(0,true,T+6*D,T+6*D));
+            observe(g,T+7*D);assert(!g.observeRegisteredMap(g.ticket(T+7*D),0,false,0,0,0,0,T+7*D,T+7*D));}
+        assert(g.localContinuitySerial()>serial);
+        const auto state=g.snapshot(T+9*D,T+9*D);
+        assert(!state.qualityPending && !state.mainMapWriteAllowed && !state.lastCutReason.empty());
+        assert(state.lastCutQualityReason=="cells=4<6" || scenario==6);
+    }
+    {
+        Gate g;normal(g);const auto serial=g.localContinuitySerial();
+        auto weak=visual();weak.visualGeometry=weak.recoveryGeometry=false;
+        observe(g,T+3*D,weak);stable(g,T+4*D);
+        for(int i=7;i<=63;++i)observe(g,T+i*D);
+        assert(g.localContinuitySerial()==serial);
+        // No observer/timer scheduling can extend the six-second deadline.
+        assert(g.beginMapObservation(0,true,T+63*D,T+63*D));
+        assert(!g.observeRegisteredMap(g.ticket(T+63*D),0,true,0,0,0,0,T+63*D+1,T+63*D+1));
+        assert(g.localContinuitySerial()>serial);
+    }
+    {
+        Gate g;normal(g);auto weak=visual();weak.visualGeometry=weak.recoveryGeometry=false;
+        observe(g,T+3*D,weak);const auto serial=g.localContinuitySerial();
+        g.tick(T+8*D+1,T+8*D+1);
+        assert(g.localContinuitySerial()>serial && !g.snapshot(T+8*D+1,T+8*D+1).qualityPending);
+    }
     for(int scenario=0;scenario<8;++scenario) {
         Gate g;normal(g);const auto serial=g.localContinuitySerial();const auto ticket=g.ticket(T+2*D);
         auto e=visual();long long gap=350000000LL;e.measuredIntervalNs=gap;

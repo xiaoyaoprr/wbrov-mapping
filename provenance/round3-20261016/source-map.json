@@ -1,0 +1,27 @@
+{
+  "schema": "wbrov.round3-candidate-source-map.v1",
+  "source_files": {
+    "src/rtabmap_ros/rtabmap_slam/include/rtabmap_slam/MappingContinuityGate.h": "a243c950b19e17cb5c807876017c5736ab81f1cfe428c4bef90b5af61dd4ce3d",
+    "src/rtabmap_ros/rtabmap_slam/include/rtabmap_slam/SubmapPublisher.h": "2bf792796cb378ef5ea65f595c403fa358da7d8778e0b20de2b635e9d851cd57",
+    "src/rtabmap_ros/rtabmap_slam/src/CoreWrapper.cpp": "b745387ad9601a03fb09ae004053bdc2180121946fbb0351e3288ffd7f5f19ea",
+    "tests/native/test_mapping_continuity_gate.cpp": "0044d3e9858bb1972cae2834607202aa8715907558a498a69e5d3f987a80f1ea",
+    "tests/native/wrapper_mapping_continuity_native_test.cpp": "884dc06fea71e43a40d2033bd6443a7aeda36be171b83e83388762ce9fa8f448",
+    "src/visualization/graph_display_geometry.py": "5bd28861322e8c98afedd9d61b313a2f740d143ebfd5e48429f39ba7025977df",
+    "src/visualization/rtabmap_dense_graph_optimized.rviz": "73ef34ba4f242ecc549afb7d95175e49202c6eb0f30f0c0a61e8ff75ba856331",
+    "src/visualization/rtabmap_graph_display.py": "ef46e5849d35482c14943f6d2ba4463ba1a60b91b2c9a957368af23d7db6c2e6",
+    "src/visualization/rtabmap_submap_display.py": "843a002677a2cba18b796f43815e57ff3b0956fd47c7e1929864db0d6e03efdc",
+    "src/visualization/submap_display_geometry.py": "21827d469bde4ab74e2892b79e7819ffb9b33d1e982274df6608cd7bd3bf69b0",
+    "src/visualization/submap_rviz_config.py": "b07466ecf249349c9048391f834e6f49ee8a21d8e269b7781a667c88a21e791a",
+    "src/visualization/test_continuity_display_ros.py": "46eeb58ee646e20cdb81fdd52ff6eac44e266645ec7582a4c898dc386e4fa5b1",
+    "src/visualization/test_submap_display_geometry.py": "fb8acabf14418d3fcac6227ea7e5b1b8a45b8e0f661b6dbe64f9bc365b792ce6",
+    "src/visualization/test_submap_display_ros.py": "d4cfaa722fedc6c85cf6213ff0f2f6a208290fe4da32ead3792ce9d147f39d5e"
+  },
+  "candidate_runtime": "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-74d38aba069fcfbb0872b705ca44b6ea5b95e96c5362a4f1aa214e44bb04a77f",
+  "manifest_sha256": "1e2cfcf809e8d8ff5877bc2ee31711efbad8856e47e5c2006d086549e0dcc0c8",
+  "checker_sha256": "87e02567c08c796454172fd5e42ccc41810593964e6a1101f0664f2b5d82c539",
+  "plugin_sha256": "c4210c4b84d47109f3546c30a74b3e4e5f3834476d636d2d2ff1dc4f464133c9",
+  "core_unchanged_sha256": "e19e48b9207318668bb8cd4632f1be39062e2396bae230e84f6104ef99f810aa",
+  "native_receipt_sha256": "6bb10eef99965d371a9dc4fcdb536a3a5ce5f32ea61a6ed31ecfb52545bfe8e8",
+  "runtime_regular_files": 577,
+  "deployed": false
+}

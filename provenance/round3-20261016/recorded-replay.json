@@ -1,0 +1,183 @@
+{
+  "schema": "wbrov.recorded-submap-tag-replay.v1",
+  "root": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/recorded_submap_tag_273245786967328",
+  "runtime_receipt_sha256": "57db79f99341966e30e2bcdc14ce478652a1216b39c54dec626747716ab53a1f",
+  "driver_sha256": "239822941361e04b59c3a080ca077d943ffecb2f1a653567d540e7fee0452e07",
+  "timing_audit_sha256": "9a6f974da16e5d3fc81367e946b59da3bd7599460e8516118e6b0ec7583e0e34",
+  "phase": "measured",
+  "no_tag_case": true,
+  "source_start": 1000,
+  "source_count": 1000,
+  "cycles": 2,
+  "blank_cut_s": 0.75,
+  "hardware_started": false,
+  "production_changed": false,
+  "field_validated": false,
+  "live_sensor_realtime_validated": false,
+  "recorded_frames": 2000,
+  "source_stamp_preserved": true,
+  "replay_timing": {
+    "scope": "recorded_replay_publication_schedule",
+    "schedule_statistics_valid": true,
+    "schedule_budget_met": false,
+    "schedule_budget_s": {
+      "p95_exclusive": 0.03,
+      "max_exclusive": 0.15
+    },
+    "publish_lateness_s": {
+      "count": 2000,
+      "min": 0.003291632,
+      "mean": 0.013799248656000001,
+      "p50": 0.006528356000000001,
+      "p95": 0.035683897199999995,
+      "p99": 0.09497771848,
+      "max": 0.15034983200000002
+    },
+    "live_sensor_realtime_validated": false,
+    "live_sensor_realtime_status": "not_tested_by_recorded_replay",
+    "runtime_source_freshness_gate": "unchanged_and_enforced",
+    "algorithm_evidence_policy": "reported_separately; late input may affect runtime recovery"
+  },
+  "exit_codes": {
+    "submap_display": 0,
+    "display": 0,
+    "slam": 0,
+    "odom": 0
+  },
+  "actual_native_bindings": {
+    "odom": [
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_conversions.so",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_core.so.0.23.7",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_msgs__rosidl_typesupport_cpp.so",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_msgs__rosidl_typesupport_fastrtps_cpp.so",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_msgs__rosidl_typesupport_introspection_cpp.so",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_odom.so",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_odom_plugins.so",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_utilite.so.0.23.7"
+    ],
+    "slam": [
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_conversions.so",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_core.so.0.23.7",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_msgs__rosidl_typesupport_cpp.so",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_msgs__rosidl_typesupport_fastrtps_cpp.so",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_msgs__rosidl_typesupport_introspection_cpp.so",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_slam_plugins.so",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_sync.so",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_util.so",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_utilite.so.0.23.7"
+    ],
+    "display": [
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_msgs__rosidl_generator_c.so",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_msgs__rosidl_generator_py.so",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_msgs__rosidl_typesupport_c.so",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_msgs__rosidl_typesupport_fastrtps_c.so",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_msgs__rosidl_typesupport_introspection_c.so"
+    ],
+    "submap_display": [
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_msgs__rosidl_generator_c.so",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_msgs__rosidl_generator_py.so",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_msgs__rosidl_typesupport_c.so",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_msgs__rosidl_typesupport_fastrtps_c.so",
+      "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round3_20261016/experimental_runtime/lib/librtabmap_msgs__rosidl_typesupport_introspection_c.so"
+    ]
+  },
+  "input_payload_sha256": "579cef53fafe07ac74a7bb82155c61c89b8483bee4b3f46e8c0997160d06c0f9",
+  "valid_hz": 17.582118371832614,
+  "continuity": {
+    "main_graph_growth_during_monitored_blocked_intervals": {
+      "status": "observed_no_growth",
+      "violations": []
+    },
+    "second_disconnected_public_map": {
+      "status": "not_observed",
+      "violations": []
+    },
+    "public_cloud_payload_during_monitored_blocked_intervals": {
+      "status": "observed_unchanged",
+      "intervals_with_existing_public_cloud": 1596,
+      "payload_changes": []
+    },
+    "registered_map_observation": {
+      "status": "not_proven",
+      "completion": "not_proven"
+    },
+    "resume_after_pause": {
+      "status": "not_proven",
+      "events": []
+    }
+  },
+  "submaps": {
+    "local_healthy_submap_growth": {
+      "status": "observed"
+    },
+    "main_graph_registered_membership": {
+      "status": "observed_consistent",
+      "checked": 10,
+      "violations": [],
+      "unmatched_source_graphs": 0
+    },
+    "independent_submap_frames": {
+      "status": "observed_consistent",
+      "checked": 193,
+      "violations": [],
+      "forbidden_tf_edges": []
+    },
+    "submap_graph_registry_match": {
+      "status": "observed_consistent",
+      "checked": 89,
+      "violations": []
+    },
+    "submap_cloud_registry_frame": {
+      "status": "observed_consistent",
+      "checked": 89,
+      "violations": []
+    },
+    "untrusted_frame_write_gate": {
+      "status": "observed_consistent",
+      "checked": 85,
+      "violations": []
+    }
+  },
+  "diagnostics_excerpt": {
+    "latest_one_pending/slam.log": {
+      "count": 55,
+      "first": [
+        "[WARN] [1791494579.196373888] [rtabmap]: [CONTINUITY_CUT] count=1 source_ns=1791494579170938528 reason=geometry quality insufficient quality=lost=0 motion_finite=1 dimensions=1 covariance=covariance_bound axis=0 value=9999.000000 visual=inliers=0 matches=0 ratio=0.0000 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494590.520459360] [rtabmap]: [CONTINUITY_CUT] count=2 source_ns=1791494590353754528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=inliers=116 matches=126 ratio=0.9206 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494590.764755168] [rtabmap]: [CONTINUITY_CUT] count=3 source_ns=1791494590637399528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=inliers=38 matches=52 ratio=0.7308 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "\u001b[33m[ WARN] (2026-10-09 05:23:11.722) Rtabmap.cpp:1616::acceptCrossMapLoopEvidence() Guarded candidate support current=11 old=10 inliers=33 ids=33 unique=33 grid=(1,0)/4 depth=(1,0)/12 final_depth_min=25 candidate_only=1\u001b[0m",
+        "[WARN] [1791494623.586040640] [rtabmap]: [CONTINUITY_CUT] count=4 source_ns=1791494623435494528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=inliers=118 matches=155 ratio=0.7613 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494623.690891104] [rtabmap]: [CONTINUITY_CUT] count=5 source_ns=1791494623568837528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=cells=4<6 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494623.822189504] [rtabmap]: [CONTINUITY_CUT] count=6 source_ns=1791494623668823528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=cells=4<6 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494623.930270720] [rtabmap]: [CONTINUITY_CUT] count=7 source_ns=1791494623768814528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=cells=3<6 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494624.030821408] [rtabmap]: [CONTINUITY_CUT] count=8 source_ns=1791494623852159528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=inliers=0 matches=41 ratio=0.0000 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494624.128136288] [rtabmap]: [CONTINUITY_CUT] count=9 source_ns=1791494624018807528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=inliers=0 matches=40 ratio=0.0000 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494624.227124384] [rtabmap]: [CONTINUITY_CUT] count=10 source_ns=1791494624068848528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=inliers=0 matches=31 ratio=0.0000 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494624.405226912] [rtabmap]: [CONTINUITY_CUT] count=11 source_ns=1791494624202139528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=inliers=0 matches=34 ratio=0.0000 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494624.411874944] [rtabmap]: [CONTINUITY_CUT] count=12 source_ns=1791494624368801528 reason=geometry quality insufficient quality=lost=0 motion_finite=1 dimensions=1 covariance=covariance_bound axis=0 value=9999.000000 visual=inliers=0 matches=0 ratio=0.0000 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494629.642048352] [rtabmap]: [CONTINUITY_CUT] count=13 source_ns=1791494629618544528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=inliers=0 matches=0 ratio=0.0000 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494629.700511936] [rtabmap]: [CONTINUITY_CUT] count=14 source_ns=1791494629685203528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=inliers=0 matches=0 ratio=0.0000 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000"
+      ],
+      "last": [
+        "[WARN] [1791494642.573274752] [rtabmap]: [CONTINUITY_CUT] count=34 source_ns=1791494642501328528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=inliers=127 matches=145 ratio=0.8759 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494642.647079904] [rtabmap]: [CONTINUITY_CUT] count=35 source_ns=1791494642551316528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=inliers=120 matches=138 ratio=0.8696 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494642.716888736] [rtabmap]: [CONTINUITY_CUT] count=36 source_ns=1791494642617974528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=inliers=153 matches=168 ratio=0.9107 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494642.744514176] [rtabmap]: [CONTINUITY_CUT] count=37 source_ns=1791494642651316528 reason=geometry quality insufficient quality=lost=0 motion_finite=1 dimensions=1 covariance=bounded_pd visual=cells=5<6 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "\u001b[33m[ WARN] (2026-10-09 05:24:00.390) Rtabmap.cpp:1616::acceptCrossMapLoopEvidence() Guarded candidate support current=51 old=9 inliers=314 ids=314 unique=314 grid=(1,1)/4 depth=(1,2)/12 final_depth_min=25 candidate_only=1\u001b[0m",
+        "\u001b[33m[ WARN] (2026-10-09 05:24:01.399) Rtabmap.cpp:1616::acceptCrossMapLoopEvidence() Guarded candidate support current=52 old=10 inliers=451 ids=451 unique=451 grid=(1,2)/4 depth=(1,2)/12 final_depth_min=25 candidate_only=1\u001b[0m",
+        "[WARN] [1791494675.241274624] [rtabmap]: [CONTINUITY_CUT] count=38 source_ns=1791494675166417528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=inliers=108 matches=139 ratio=0.7770 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494675.308249024] [rtabmap]: [CONTINUITY_CUT] count=39 source_ns=1791494675233088528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=inliers=85 matches=108 ratio=0.7870 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494675.375589344] [rtabmap]: [CONTINUITY_CUT] count=40 source_ns=1791494675299760528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=cells=4<6 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494675.448275168] [rtabmap]: [CONTINUITY_CUT] count=41 source_ns=1791494675349759528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=cells=4<6 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494675.540372960] [rtabmap]: [CONTINUITY_CUT] count=42 source_ns=1791494675399746528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=cells=4<6 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494675.711111616] [rtabmap]: [CONTINUITY_CUT] count=43 source_ns=1791494675449749528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=cells=4<6 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494675.817095488] [rtabmap]: [CONTINUITY_CUT] count=44 source_ns=1791494675666418528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=inliers=0 matches=36 ratio=0.0000 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494676.026658048] [rtabmap]: [CONTINUITY_CUT] count=45 source_ns=1791494675799771528 reason=odometry lost quality=lost=1 motion_finite=0 dimensions=0 covariance=covariance_bound axis=0 value=9999.000000 visual=inliers=0 matches=38 ratio=0.0000 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+        "[WARN] [1791494676.041492256] [rtabmap]: [CONTINUITY_CUT] count=46 source_ns=1791494675999742528 reason=geometry quality insufficient quality=lost=0 motion_finite=1 dimensions=1 covariance=covariance_bound axis=0 value=9999.000000 visual=inliers=0 matches=0 ratio=0.0000 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000"
+      ]
+    }
+  },
+  "non_tag_reconnection_passed": false,
+  "quality_bridge_real_recovery_proven": false,
+  "scope_note": "This recorded sequence exercised real loss and isolation, but did not complete registered-map observations. Unit and linked Wrapper tests separately cover bounded weak-geometry handling; no field continuity improvement is claimed."
+}

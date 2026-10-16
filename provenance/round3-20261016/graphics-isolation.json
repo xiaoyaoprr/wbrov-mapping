@@ -1,0 +1,32 @@
+{
+  "driver": "",
+  "result": {
+    "scope": "synthetic graphics-only isolated ROS domain 211; no camera or actuator",
+    "runs": [
+      {
+        "label": "baseline2",
+        "pid": 4092818,
+        "still_running": true,
+        "glx_errors": 0,
+        "log": "[INFO] [1791495156.832929792] [rviz2]: Stereo is NOT SUPPORTED\n[INFO] [1791495156.833350592] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)\n[INFO] [1791495156.868796704] [rviz2]: Stereo is NOT SUPPORTED\n[INFO] [1791495157.131088320] [rviz2]: Stereo is NOT SUPPORTED\n[INFO] [1791495157.152674240] [rviz2]: Stereo is NOT SUPPORTED\n",
+        "config_sha256": "86cf66fcc8f4f8c85b1653dbcd5dd9c93876ff807a1b92e779d598471e8b7345"
+      },
+      {
+        "label": "candidate3",
+        "pid": 4092844,
+        "still_running": true,
+        "glx_errors": 0,
+        "log": "[INFO] [1791495168.174083648] [rviz2]: Stereo is NOT SUPPORTED\n[INFO] [1791495168.174387744] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)\n[INFO] [1791495168.218824800] [rviz2]: Stereo is NOT SUPPORTED\n[INFO] [1791495168.486547616] [rviz2]: Stereo is NOT SUPPORTED\n[INFO] [1791495168.509266208] [rviz2]: Stereo is NOT SUPPORTED\n[INFO] [1791495168.536728576] [rviz2]: Stereo is NOT SUPPORTED\n",
+        "config_sha256": "73ef34ba4f242ecc549afb7d95175e49202c6eb0f30f0c0a61e8ff75ba856331"
+      },
+      {
+        "label": "candidate3_repeat",
+        "pid": 4092867,
+        "still_running": true,
+        "glx_errors": 0,
+        "log": "[INFO] [1791495179.697280192] [rviz2]: Stereo is NOT SUPPORTED\n[INFO] [1791495179.697583584] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)\n[INFO] [1791495179.733029984] [rviz2]: Stereo is NOT SUPPORTED\n[INFO] [1791495179.974503840] [rviz2]: Stereo is NOT SUPPORTED\n[INFO] [1791495180.002941248] [rviz2]: Stereo is NOT SUPPORTED\n[INFO] [1791495180.027954464] [rviz2]: Stereo is NOT SUPPORTED\n",
+        "config_sha256": "73ef34ba4f242ecc549afb7d95175e49202c6eb0f30f0c0a61e8ff75ba856331"
+      }
+    ]
+  }
+}

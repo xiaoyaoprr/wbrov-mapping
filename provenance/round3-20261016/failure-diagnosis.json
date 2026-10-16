@@ -1,0 +1,18 @@
+{
+  "database_sha256": "63734cb984a7cde374ae942ce8b47c70876291fe8292efdf868aaaf94c2438bb",
+  "first_cut_logs": [
+    "[WARN] [1791494796.620990272] [rtabmap]: [CONTINUITY_CUT] count=1 source_ns=1791494796500551000 reason=geometry quality insufficient quality=lost=0 motion_finite=1 dimensions=1 covariance=bounded_pd visual=cells=5<6 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+    "[WARN] [1791494796.855456256] [rtabmap]: [CONTINUITY_CUT] count=2 source_ns=1791494796750575000 reason=geometry quality insufficient quality=lost=0 motion_finite=1 dimensions=1 covariance=bounded_pd visual=cells=5<6 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+    "[WARN] [1791494797.014335456] [rtabmap]: [CONTINUITY_CUT] count=3 source_ns=1791494796883876000 reason=geometry quality insufficient quality=lost=0 motion_finite=1 dimensions=1 covariance=bounded_pd visual=cells=5<6 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+    "[WARN] [1791494798.861161632] [rtabmap]: [CONTINUITY_CUT] count=4 source_ns=1791494798717152000 reason=quality weak interval exceeded quality=lost=0 motion_finite=1 dimensions=1 covariance=bounded_pd visual=cells=5<6 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+    "[WARN] [1791494799.775754624] [rtabmap]: [CONTINUITY_CUT] count=5 source_ns=1791494799667082000 reason=geometry quality insufficient quality=lost=0 motion_finite=1 dimensions=1 covariance=bounded_pd visual=cells=5<6 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+    "[WARN] [1791494801.053409600] [rtabmap]: [CONTINUITY_CUT] count=6 source_ns=1791494800950364000 reason=geometry quality insufficient quality=lost=0 motion_finite=1 dimensions=1 covariance=bounded_pd visual=cells=5<6 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+    "[WARN] [1791494801.437002112] [rtabmap]: [CONTINUITY_CUT] count=7 source_ns=1791494801333699000 reason=geometry quality insufficient quality=lost=0 motion_finite=1 dimensions=1 covariance=bounded_pd visual=cells=5<6 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000",
+    "[WARN] [1791494801.590549248] [rtabmap]: [CONTINUITY_CUT] count=8 source_ns=1791494801483681000 reason=geometry quality insufficient quality=lost=0 motion_finite=1 dimensions=1 covariance=bounded_pd visual=cells=5<6 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000"
+  ],
+  "export_status": "complete_saved_graph_but_partial_database",
+  "database_nodes": 17,
+  "saved_registered_poses": 1,
+  "raw_diagnosis_sha256": "4e1693dd2cd8822308c0797cc45b95ce3e665c4d4fdaa8a05146024bbd07bd6e",
+  "original_failed_run_preserved": true
+}
