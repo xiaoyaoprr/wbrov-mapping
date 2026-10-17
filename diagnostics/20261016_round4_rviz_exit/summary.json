@@ -1,0 +1,78 @@
+{
+  "schema": "wbrov.round4-rviz-exit.v1",
+  "run_name": "custom_20261009_133832",
+  "clock_note": "Device clock not corrected; review date 2026-10-16",
+  "database_sha256": "df5f38fede5e44bd8b38451d447b885eb30a93e701accfee5d780c692792fbdc",
+  "save_complete": true,
+  "cleanup_succeeded": false,
+  "launcher_exit_code": 1,
+  "main_recovery_passed": false,
+  "cause": "Authenticated rejected status had observer_graph_revision=403 and core_graph_revision=404. Python terminal validator incorrectly required equality for rejection, raised ValueError, and supervisor stopped mapping and RViz. Not probe timeout.",
+  "rviz_visible_seconds": 37.253971936,
+  "pre_loss_continuity": {
+    "epoch": 0,
+    "cut_count": 0,
+    "main_nodes_before_loss": 58
+  },
+  "saved_recording_frames": {
+    "frames": 11395,
+    "decoded": 2,
+    "first_source_ns": 1791524317027807000,
+    "last_source_ns": 1791524783323147000
+  },
+  "database_read_scope": "Closed database only, no live file descriptor holder, hash unchanged after read-only raw correspondence scan",
+  "local_edge_rejection": {
+    "from_id": 362,
+    "to_id": 363,
+    "forward_inliers": 97,
+    "reverse_inliers": 55,
+    "bidirectional_distance_m": 0.00317799,
+    "bidirectional_rotation_deg": 0.442887,
+    "raw_vs_odom_translation_m": 0.0162798,
+    "raw_vs_odom_rotation_deg": 2.57066,
+    "allowed_rotation_deg": 2.0
+  },
+  "candidates": [
+    [
+      396,
+      303
+    ],
+    [
+      397,
+      290
+    ],
+    [
+      398,
+      333
+    ]
+  ],
+  "candidate_inliers_forward_reverse": [
+    [
+      151,
+      150
+    ],
+    [
+      106,
+      111
+    ],
+    [
+      134,
+      124
+    ]
+  ],
+  "light_owner_stopped": true,
+  "udp_owner_released": true,
+  "production_switched": false,
+  "candidate_fix": "Authenticated stale rejection consumed as rejection only. Independent raw-pair confirmation revokes local continuity for an inconsistent private segment; next stable frame starts a separate private epoch. Live test driver monitors launcher and RViz while probe runs.",
+  "candidate_native_validation": {
+    "build": "build10",
+    "status": "passed",
+    "core_visual_transaction": true,
+    "wrapper_compiled_and_linked": true,
+    "wrapper_continuity_test": true,
+    "preflight_checks_passed": 13,
+    "terminal_ack_regression_tests_passed": 16,
+    "live_probe_watch_tests_passed": 4,
+    "live_recovery_retest": "v9 stopped and saved; no loss recovery proposal exercised; human assistance deferred, recovery remains unvalidated"
+  }
+}

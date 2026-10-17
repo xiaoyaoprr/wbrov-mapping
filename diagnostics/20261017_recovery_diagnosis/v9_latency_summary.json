@@ -1,0 +1,115 @@
+{
+  "run": "custom_20261009_142237",
+  "odom_info_count": 23000,
+  "lost_count": 0,
+  "final_epoch": 0,
+  "cut_count": 0,
+  "pause_episodes": 17,
+  "all_generations": [
+    0
+  ],
+  "probe_odom_info_latency_s": {
+    "count": 23000,
+    "min": 0.087922,
+    "p50": 0.117512856,
+    "p95": 0.14375052,
+    "p99": 0.169243248,
+    "max": 1.476358416
+  },
+  "odom_info_interval_s": {
+    "count": 23000,
+    "min": 0.01589512825012207,
+    "p50": 0.04999709129333496,
+    "p95": 0.08328604698181152,
+    "p99": 0.11664676666259766,
+    "max": 0.7499608993530273
+  },
+  "probe_worst_odom_info": {
+    "kind": "odom_info",
+    "arrival_ns": 1791528107019972416,
+    "arrival_steady_ns": 306778644621856,
+    "ns": 1791528105543614000,
+    "lost": false,
+    "inliers": 248,
+    "matches": 249,
+    "icp_correspondences": 0,
+    "interval_s": 0.049989938735961914,
+    "odom_type": 0
+  },
+  "same_stamp_other_subscriber": [
+    {
+      "topic": "/odom",
+      "stamp_ns": 1791528105543614000,
+      "arrival_wall_ns": 1791528105728804864,
+      "arrival_monotonic_ns": 306777353449856,
+      "arrival_age_ms": 185.190864
+    },
+    {
+      "topic": "/zed/imu/data",
+      "stamp_ns": 1791528105543614000,
+      "arrival_wall_ns": 1791528105729169376,
+      "arrival_monotonic_ns": 306777353815360,
+      "arrival_age_ms": 185.555376
+    },
+    {
+      "topic": "/odom_info_lite",
+      "stamp_ns": 1791528105543614000,
+      "arrival_wall_ns": 1791528105730362176,
+      "arrival_monotonic_ns": 306777355007968,
+      "arrival_age_ms": 186.748176
+    },
+    {
+      "topic": "/tf",
+      "stamp_ns": 1791528105543614000,
+      "arrival_wall_ns": 1791528105731963104,
+      "arrival_monotonic_ns": 306777356608992,
+      "arrival_age_ms": 188.349104
+    }
+  ],
+  "pose_diagnostic_identity_authenticated": false,
+  "slow_capture": [
+    "[WARN] [1791528107.054562432] [zed_rgbd_dual_stream_publisher]: [CAPTURE_SLOW_PATH] schema_version=1 source_ns=1791528106976888000 odom_due=true before_grab_ms=634.848 grab_ms=48.728 recording_journal_ms=0.032 sdk_recording_status_ms=0.002 sensors_ms=0.024 low_retrieve_build_publish_ms=2.469 total_ms=686.100"
+  ],
+  "capture_gaps_above_300ms": [
+    {
+      "from_ns": 1791527248383142000,
+      "to_ns": 1791527248699787000,
+      "gap_ms": 316.645,
+      "ingested": 7244
+    },
+    {
+      "from_ns": 1791527345395400000,
+      "to_ns": 1791527345845300000,
+      "gap_ms": 449.9,
+      "ingested": 9688
+    },
+    {
+      "from_ns": 1791527376360588000,
+      "to_ns": 1791527376743888000,
+      "gap_ms": 383.3,
+      "ingested": 10462
+    },
+    {
+      "from_ns": 1791527378327157000,
+      "to_ns": 1791527378793777000,
+      "gap_ms": 466.62,
+      "ingested": 10501
+    },
+    {
+      "from_ns": 1791527875387554000,
+      "to_ns": 1791527875704206000,
+      "gap_ms": 316.652,
+      "ingested": 23213
+    },
+    {
+      "from_ns": 1791528106293575000,
+      "to_ns": 1791528106976888000,
+      "gap_ms": 683.313,
+      "ingested": 29200
+    }
+  ],
+  "evidence_boundary": "Probe arrival delay is not algorithm execution time. Correlated producer and source-time gaps demonstrate a separate real stall; blocking syscall not measured.",
+  "depth_recovery_log_counts": {
+    "[DEPTH_RECOVERY] enabled=true inertia_translation=false anchor=last_visual max_age=0.500 min_hessian=0.0001": 1
+  }
+}

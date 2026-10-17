@@ -7,6 +7,20 @@ from dataclasses import dataclass
 import math
 
 
+def cadence_gap_s(expected_period_s, minimum_gap_s=0.60):
+    """Use the configured producer cadence, never learn stalls as a new rate.
+
+    One missing 1 Hz input exceeds 1.25 s and restarts confirmation. A detector
+    frame without the Tag still invalidates its track immediately.
+    """
+    period, minimum = float(expected_period_s), float(minimum_gap_s)
+    if not math.isfinite(period) or not 0 <= period <= 1.0:
+        raise ValueError("expected Tag input period must be in [0,1] seconds")
+    if not math.isfinite(minimum) or not 0 < minimum <= 1.25:
+        raise ValueError("minimum Tag gap must be in (0,1.25] seconds")
+    return max(minimum, 1.25 * period)
+
+
 @dataclass(frozen=True)
 class GuardConfig:
     confirm_frames: int = 3

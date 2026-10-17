@@ -50,14 +50,19 @@ public:
         long long qualityStartNs, lastCutSourceNs;
         std::uint64_t cutCount;
         std::string qualityReason, lastCutReason, lastCutQualityReason, lastPauseReason, qualityTriggerReason;
+        long long receiptLatencyNs, arrivalAgeNs, sourceAgeNs;
+        bool observingLocal;
     };
-    static constexpr long long MAX_AGE_NS = 300000000LL;
+    static constexpr long long MAX_AGE_NS = 300000000LL; // current-pose/receipt freshness
+    static constexpr long long MAX_RECEIPT_LATENCY_NS = 300000000LL;
+    static constexpr long long MAX_SOURCE_GAP_NS = 300000000LL; // full-rate odometry, not mapping cadence
     static constexpr long long RECOVERY_SPAN_NS = 200000000LL;
     static constexpr unsigned RECOVERY_SAMPLES = 3;
     static constexpr long long MIN_PAUSE_NS = 200000000LL;
     // Weak estimates may wait for verification; they NEVER certify a bridge.
-    // 500 ms bounds the weak interval. Six seconds allows five 1 Hz map
-    // observations. Neither deadline is extended by repeated weak packets.
+    // Each continuous weak episode is bounded by 500 ms of source AND steady
+    // time. A separate six-second window starts at the FIRST weak packet and
+    // is never extended by weak/healthy oscillation or receipt refresh.
     static constexpr long long QUALITY_WEAK_NS = 500000000LL;
     static constexpr long long QUALITY_VERIFY_NS = 6000000000LL;
     static constexpr unsigned MAP_OBSERVATIONS = 5;
@@ -155,9 +160,10 @@ public:
     void reset() {
         std::lock_guard<std::mutex> l(mutex_);++generation_;++localSerial_;state_=State::PAUSED;
         qualityPending_=false;qualityStartNs_=qualityStartSteadyNs_=qualityRecoveredNs_=0;
+        qualityWeakStartNs_=qualityWeakStartSteadyNs_=0;
         cutCount_=0;lastCutSourceNs_=0;lastCutReason_.clear();lastCutQualityReason_.clear();lastPauseReason_.clear();qualityTriggerReason_.clear();
         epoch_=0;epochKnown_=false;registered_=false;everRegistered_=false;observing_=false;candidateObservation_=candidateReady_=false;receiptOnlyPause_=false;
-        sourceNs_=arrivalNs_=goodStartNs_=pauseUntilNs_=0;observationStartNs_=lastObservationNs_=0;mapObservations_=0;
+        sourceNs_=arrivalNs_=goodStartNs_=pauseUntilNs_=receiptLatencyNs_=0;localObservation_=qualityLocalOnly_=false;observationStartNs_=lastObservationNs_=0;mapObservations_=0;
         goodSamples_=visualGoodSamples_=0;visualGoodStartNs_=0;evidence_=Evidence{};reason_="waiting for authenticated geometry";
     }
     bool observe(long long sourceNs,long long arrivalNs,long long rosNs,const Evidence & evidence) {
@@ -165,22 +171,29 @@ public:
         if(sourceNs<=0 || arrivalNs<=0 || sourceNs<=sourceNs_) return false;
         // Every unique packet advances the high-water mark; stale packets never
         // acquire confidence or refresh a previous valid registration.
-        if(sourceNs_>0 && (arrivalNs<arrivalNs_ || sourceNs-sourceNs_>MAX_AGE_NS)) {
+        if(sourceNs_>0 && (arrivalNs<arrivalNs_ || sourceNs-sourceNs_>MAX_SOURCE_GAP_NS)) {
             const long long gap=sourceNs-sourceNs_;
             // Sampling can pause while F2M still measures a transform from the
             // exact preceding successful pose. Require that explicit interval,
             // measured geometry on both sides, and a bounded gap. Missing DDS
             // samples, reset/initialization (interval zero), bad geometry and
             // longer blind intervals retain the isolated-submap behavior.
-            const bool measuredBridge=arrivalNs>=arrivalNs_ && gap>MAX_AGE_NS && gap<=750000000LL &&
+            const bool measuredBridge=arrivalNs>=arrivalNs_ && gap>MAX_SOURCE_GAP_NS && gap<=750000000LL &&
                 evidence_.usable() && evidence.usable() && evidence.visualGeometry && evidence.recoveryGeometry &&
                 evidence.measuredIntervalNs>0 && std::llabs(evidence.measuredIntervalNs-gap)<=1000000LL;
             if(measuredBridge)pauseReceiptLocked("bounded measured F2M interval; observing before resume");
-            else {cutLocked("unverified measurement gap",sourceNs,&evidence);}
+            else {
+                // One accepted source packet has one primary cut reason. Do
+                // not fall through and hide a missing interval behind quality.
+                sourceNs_=sourceNs;arrivalNs_=arrivalNs;receiptLatencyNs_=rosNs-sourceNs;evidence_=evidence;
+                cutLocked("unverified measurement gap",sourceNs,&evidence);return true;
+            }
         }
-        sourceNs_=sourceNs;arrivalNs_=arrivalNs;evidence_=evidence;
-        if(qualityPending_ && qualityExpiredLocked(arrivalNs,rosNs))cutLocked("quality verification deadline exceeded");
-        if(rosNs<sourceNs || rosNs-sourceNs>MAX_AGE_NS) {
+        sourceNs_=sourceNs;arrivalNs_=arrivalNs;receiptLatencyNs_=rosNs-sourceNs;evidence_=evidence;
+        if(qualityPending_ && qualityExpiredLocked(arrivalNs,rosNs)) {
+            cutLocked(qualityExpiryReasonLocked(arrivalNs,rosNs));return true;
+        }
+        if(rosNs<sourceNs || rosNs-sourceNs>MAX_RECEIPT_LATENCY_NS) {
             // Receipt latency revokes write/pose permission, not the measured
             // local coordinate chain. A subsequent source gap, lost solution,
             // bad geometry or future clock still cuts that chain explicitly.
@@ -193,19 +206,28 @@ public:
             // A bounded opportunity to verify against the frozen trusted map,
             // never receipt-only resumption and never inferred odometry continuity.
             if(evidence.pendingVerificationEligible() &&
-               (qualityPending_ || ((registered_ || receiptOnlyPause_) && everRegistered_ && epochKnown_ && !observing_))) {
+               (qualityPending_ || (epochKnown_ && (registered_ || receiptOnlyPause_ || goodSamples_>0 || candidateObservation_)))) {
                 if(!qualityPending_) {
                     qualityStartNs_=sourceNs_;qualityStartSteadyNs_=arrivalNs_;qualityRecoveredNs_=0;
+                    qualityWeakStartNs_=qualityWeakStartSteadyNs_=0;
                     qualityTriggerReason_=evidence.qualityReason;
+                    qualityLocalOnly_=!registered_ && !receiptOnlyPause_ && !candidateObservation_;
                 }
-                const auto start=qualityStartNs_,arrival=qualityStartSteadyNs_;
-                pauseLocked("quality insufficient; frozen-map verification required");
-                qualityPending_=true;qualityStartNs_=start;qualityStartSteadyNs_=arrival;qualityRecoveredNs_=0;
-                if(qualityExpiredLocked(arrivalNs,rosNs))cutLocked("quality weak interval exceeded");
+                if(qualityWeakStartNs_==0) {
+                    qualityWeakStartNs_=sourceNs_;qualityWeakStartSteadyNs_=arrivalNs_;
+                }
+                const auto start=qualityStartNs_,arrival=qualityStartSteadyNs_,recovered=qualityRecoveredNs_;
+                const bool preserveTicket=qualityPending_ || candidateObservation_;
+                pauseForVerificationLocked("quality insufficient; frozen-map verification required",preserveTicket);
+                qualityPending_=true;qualityStartNs_=start;qualityStartSteadyNs_=arrival;qualityRecoveredNs_=recovered;
+                if(qualityExpiredLocked(arrivalNs,rosNs))cutLocked(qualityExpiryReasonLocked(arrivalNs,rosNs));
             } else cutLocked(evidence.lost?"odometry lost":"geometry quality insufficient");
             return true;
         }
-        if(qualityPending_ && qualityRecoveredNs_==0 && evidence.recoveryGeometry)qualityRecoveredNs_=sourceNs_;
+        if(qualityPending_ && evidence.recoveryGeometry) {
+            if(qualityRecoveredNs_==0)qualityRecoveredNs_=sourceNs_;
+            qualityWeakStartNs_=qualityWeakStartSteadyNs_=0;
+        }
         if(evidence.recoveryGeometry) {
             if(goodSamples_==0) goodStartNs_=sourceNs;
             if(goodSamples_<1000000U)++goodSamples_;
@@ -228,7 +250,7 @@ public:
     void tick(long long steadyNs,long long rosNs) {
         std::lock_guard<std::mutex> l(mutex_);
         if(qualityPending_ && qualityExpiredLocked(steadyNs,rosNs)) {
-            cutLocked("quality verification deadline exceeded");return;
+            cutLocked(qualityExpiryReasonLocked(steadyNs,rosNs));return;
         }
         // A timer cannot establish that the frontend lost its coordinate
         // frame. Invalidate in-flight work now; observe() decides continuity
@@ -294,11 +316,15 @@ public:
     bool recoveryCommitAllowed(Ticket t,Epoch epoch,long long steadyNs,long long rosNs) const {
         std::lock_guard<std::mutex> l(mutex_);
         return t.generation==generation_ && epochKnown_ && epoch==epoch_ &&
-               stableLocked() && freshLocked(steadyNs,rosNs) && t.frameNs>=goodStartNs_ && t.frameNs<=sourceNs_;
+               stableLocked() && freshLocked(steadyNs,rosNs) && t.frameNs>0 && t.frameNs<=sourceNs_ && sourceNs_-t.frameNs<=QUALITY_VERIFY_NS;
     }
     bool beginMapObservation(Epoch epoch,bool coreRegistered,long long steadyNs,long long rosNs) {
         std::lock_guard<std::mutex> l(mutex_);
         if(observing_)return true;
+        if(qualityPending_ && qualityLocalOnly_ && !coreRegistered && epochKnown_ && epoch==epoch_ &&
+           stableLocked() && freshLocked(steadyNs,rosNs)) {
+            startObservationLocked();registered_=false;localObservation_=true;return true;
+        }
         if(receiptOnlyPause_ || !everRegistered_ || registered_ || !coreRegistered || !epochKnown_ || epoch!=epoch_ ||
            !stableLocked() || !freshLocked(steadyNs,rosNs))return false;
         startObservationLocked();return true;
@@ -326,6 +352,11 @@ public:
         if(t.generation!=generation_ || epoch!=epoch_ || !coreRegistered || !candidateObservation_ ||
            !candidateReady_ || !observing_ || !stableLocked() || !freshLocked(steadyNs,rosNs))return false;
         observing_=candidateObservation_=candidateReady_=false;registered_=everRegistered_=true;
+        // A weak frame may have opened a bounded window while this proposal
+        // waited. The completed independent observations resolve that window;
+        // leaving it pending would block writes and later cut a committed map.
+        qualityPending_=qualityLocalOnly_=localObservation_=false;
+        qualityWeakStartNs_=qualityWeakStartSteadyNs_=0;
         state_=visualStableLocked()?State::NORMAL:State::DEGRADED;
         reason_="observed candidate committed; next qualified frame may write";return true;
     }
@@ -335,7 +366,7 @@ public:
                               long long steadyNs,long long rosNs) {
         std::lock_guard<std::mutex> l(mutex_);
         if(qualityPending_ && qualityExpiredLocked(steadyNs,rosNs)) {
-            cutLocked("quality verification deadline exceeded");return false;
+            cutLocked(qualityExpiryReasonLocked(steadyNs,rosNs));return false;
         }
         if(t.generation!=generation_ || !observing_ || epoch!=epoch_ || t.frameNs<=lastObservationNs_)return false;
         if(!directlyVerified || !std::isfinite(seedTranslation)||!std::isfinite(seedRotationDeg)||
@@ -355,25 +386,36 @@ public:
         if(candidateObservation_) {
             candidateReady_=true;reason_="candidate observations passed; waiting for final atomic commit";return true;
         }
+        if(localObservation_) {
+            observing_=localObservation_=qualityPending_=qualityLocalOnly_=false;registered_=false;state_=State::RECOVERING;
+            reason_="independent local observations passed; private submap remains unregistered";return true;
+        }
         observing_=false;qualityPending_=false;registered_=true;state_=visualStableLocked()?State::NORMAL:State::DEGRADED;
         reason_="independent registered-map observations passed; next frame may write";return true;
     }
     template<class Publish> bool withFreshMainPose(long long steadyNs,long long rosNs,Publish && publish) const {
         std::lock_guard<std::mutex> l(mutex_);
-        if(!allowedLocked(epoch_,steadyNs,rosNs))return false;
+        if(!allowedLocked(epoch_,steadyNs,rosNs) || rosNs-sourceNs_>MAX_AGE_NS)return false;
         std::forward<Publish>(publish)();return true;
     }
     Snapshot snapshot(long long steadyNs,long long rosNs) const {
         std::lock_guard<std::mutex> l(mutex_);
         return {state_,epoch_,generation_,sourceNs_,goodSamples_,registered_,allowedLocked(epoch_,steadyNs,rosNs),evidence_.visualGeometry,evidence_.depthGeometry,observing_,mapObservations_,candidateObservation_,reason_,
             evidence_.finiteMotion,evidence_.covarianceFinitePD,evidence_.covarianceValid,evidence_.dimensionsValid,
-            qualityPending_,qualityStartNs_,lastCutSourceNs_,cutCount_,evidence_.qualityReason,lastCutReason_,lastCutQualityReason_,lastPauseReason_,qualityTriggerReason_};
+            qualityPending_,qualityStartNs_,lastCutSourceNs_,cutCount_,evidence_.qualityReason,lastCutReason_,lastCutQualityReason_,lastPauseReason_,qualityTriggerReason_,receiptLatencyNs_,steadyNs-arrivalNs_,rosNs-sourceNs_,localObservation_};
     }
 private:
     bool qualityExpiredLocked(long long steadyNs,long long rosNs) const {
-        const auto budget=qualityRecoveredNs_==0?QUALITY_WEAK_NS:QUALITY_VERIFY_NS;
-        return steadyNs<qualityStartSteadyNs_ || rosNs<qualityStartNs_ ||
-            steadyNs-qualityStartSteadyNs_>budget || sourceNs_-qualityStartNs_>budget;
+        return qualityExpiryReasonLocked(steadyNs,rosNs)!=nullptr;
+    }
+    const char * qualityExpiryReasonLocked(long long steadyNs,long long rosNs) const {
+        if(steadyNs<qualityStartSteadyNs_ || rosNs<qualityStartNs_ ||
+           steadyNs-qualityStartSteadyNs_>QUALITY_VERIFY_NS || sourceNs_-qualityStartNs_>QUALITY_VERIFY_NS)
+            return "quality verification deadline exceeded";
+        if(qualityWeakStartNs_>0 && (steadyNs<qualityWeakStartSteadyNs_ || rosNs<qualityWeakStartNs_ ||
+           steadyNs-qualityWeakStartSteadyNs_>QUALITY_WEAK_NS || sourceNs_-qualityWeakStartNs_>QUALITY_WEAK_NS))
+            return "quality weak interval exceeded";
+        return nullptr;
     }
     void cutLocked(const char * reason,long long source=0,const Evidence * evidence=nullptr) {
         ++localSerial_;++cutCount_;lastCutSourceNs_=source?source:sourceNs_;
@@ -382,7 +424,8 @@ private:
     }
     bool freshLocked(long long steadyNs,long long rosNs) const {
         return sourceNs_>0 && arrivalNs_>0 && steadyNs>=arrivalNs_ && rosNs>=sourceNs_ &&
-               steadyNs-arrivalNs_<=MAX_AGE_NS && rosNs-sourceNs_<=MAX_AGE_NS;
+               receiptLatencyNs_>=0 && receiptLatencyNs_<=MAX_RECEIPT_LATENCY_NS &&
+               steadyNs-arrivalNs_<=MAX_AGE_NS && rosNs-sourceNs_<=MAX_RECEIPT_LATENCY_NS+MAX_AGE_NS;
     }
     bool stableLocked() const {return evidence_.usable() && evidence_.recoveryGeometry && sourceNs_>=pauseUntilNs_ && goodSamples_>=RECOVERY_SAMPLES && sourceNs_-goodStartNs_>=RECOVERY_SPAN_NS;}
     bool visualStableLocked() const {return evidence_.visualGeometry && visualGoodSamples_>=RECOVERY_SAMPLES && sourceNs_-visualGoodStartNs_>=RECOVERY_SPAN_NS;}
@@ -390,16 +433,28 @@ private:
         return registered_ && epochKnown_ && epoch==epoch_ && (state_==State::NORMAL||state_==State::DEGRADED) && freshLocked(steadyNs,rosNs);
     }
     void pauseLocked(const char * reason) {
-        lastPauseReason_=reason;qualityPending_=false;
+        lastPauseReason_=reason;qualityPending_=false;localObservation_=false;
         ++generation_;registered_=false;receiptOnlyPause_=false;observing_=false;candidateObservation_=candidateReady_=false;state_=State::PAUSED;goodSamples_=visualGoodSamples_=0;goodStartNs_=visualGoodStartNs_=0;reason_=reason;
         pauseUntilNs_=sourceNs_+MIN_PAUSE_NS;mapObservations_=0;observationStartNs_=lastObservationNs_=0;
+    }
+    // Pausing output does not discard an already prepared geometric proposal.
+    // A real loss/cut, clock reset, rejection or epoch change still revokes it.
+    // Observation counts restart; no pre-pause observations can authorize a commit.
+    void pauseForVerificationLocked(const char * reason,bool preserveTicket) {
+        const auto generation=generation_;
+        const bool candidate=candidateObservation_,local=localObservation_;
+        pauseLocked(reason);
+        if(preserveTicket)generation_=generation;
+        if(candidate || local) {
+            observing_=true;candidateObservation_=candidate;localObservation_=local;
+        }
     }
     void pauseReceiptLocked(const char * reason) {
         const bool pending=qualityPending_;
         const auto start=qualityStartNs_,arrival=qualityStartSteadyNs_,recovered=qualityRecoveredNs_;
         const bool keep=!pending && ((receiptOnlyPause_ && receiptPauseSerial_==localSerial_) ||
             (registered_ && everRegistered_ && epochKnown_ && !observing_ && !candidateObservation_));
-        pauseLocked(reason);
+        pauseForVerificationLocked(reason,true);
         receiptOnlyPause_=keep;receiptPauseSerial_=localSerial_;
         qualityPending_=pending;qualityStartNs_=start;qualityStartSteadyNs_=arrival;qualityRecoveredNs_=recovered;
     }
@@ -407,6 +462,8 @@ private:
         registered_=true;receiptOnlyPause_=false;observing_=true;candidateObservation_=candidateReady_=false;state_=State::RECOVERING;mapObservations_=0;observationStartNs_=lastObservationNs_=0;
         reason_="registered main-map observation period; no graph writes";
     }
+    long long receiptLatencyNs_=0;
+    bool localObservation_=false,qualityLocalOnly_=false;
     mutable std::mutex mutex_;
     State state_=State::PAUSED;Epoch epoch_=0;std::uint64_t generation_=0,localSerial_=0;
     long long sourceNs_=0,arrivalNs_=0,goodStartNs_=0;unsigned goodSamples_=0;
@@ -417,6 +474,7 @@ private:
     long long visualGoodStartNs_=0;unsigned visualGoodSamples_=0;
     bool qualityPending_=false;
     long long qualityStartNs_=0,qualityStartSteadyNs_=0,qualityRecoveredNs_=0,lastCutSourceNs_=0;
+    long long qualityWeakStartNs_=0,qualityWeakStartSteadyNs_=0;
     std::uint64_t cutCount_=0;
     std::string lastCutReason_,lastCutQualityReason_,lastPauseReason_,qualityTriggerReason_;
     Evidence evidence_;std::string reason_="waiting for authenticated geometry";

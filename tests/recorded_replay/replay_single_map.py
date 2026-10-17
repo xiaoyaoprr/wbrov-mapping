@@ -26,6 +26,8 @@ parser=argparse.ArgumentParser();parser.add_argument('--order',choices=['ab','ba
 parser.add_argument('--count',type=int,default=1200);parser.add_argument('--start',type=int,default=1000)
 parser.add_argument('--cycles',type=int,default=1)
 parser.add_argument('--latest-only',action='store_true')
+parser.add_argument('--odom-profile',choices=['historical-latest','deployed-inline'],default='historical-latest',
+    help='deployed-inline matches the current dual-stream launcher VO parameters; recorded dimensions remain 384x240.')
 parser.add_argument('--blank-cut-s',type=float,default=0.,help='Blank each side of repeated-video cuts; actual native loss/reset, never supplied poses.')
 parser.add_argument('--runtime-receipt',type=Path,required=True,help='Exact task-owned candidate receipt, pinned for the whole run.')
 parser.add_argument('--tag-enabled',action='store_true',help='Separate optional Tag case; default no Tag process.')
@@ -80,7 +82,7 @@ report=dict(schema='wbrov.recorded-submap-tag-replay.v1',phase='starting',root=s
     timing_audit_sha256=file_hash(Path(__file__).parent/'replay_timing.py'),
     no_tag_case=not args.tag_enabled,depth_geometry_recovery=True,inertial_translation=False,independent_local_submaps=True,
     early_gravity_measured_certificate=True,
-    order=args.order,source_start=args.start,source_count=args.count,cycles=args.cycles,blank_cut_s=args.blank_cut_s,cases={},hardware_started=False,
+    order=args.order,odom_profile=args.odom_profile,source_start=args.start,source_count=args.count,cycles=args.cycles,blank_cut_s=args.blank_cut_s,cases={},hardware_started=False,
     production_changed=False,field_validated=False,
     scope='Real native ROS nodes and message_filters; original 384x240 recorded RGBD/IMU. VO recomputed. Optional Tag and graph-display workload only; no UI validation, GPU camera, RViz renderer, high-resolution mapping, or physical ground truth.')
 write_atomic(out/'result.json',report);print(json.dumps(report),flush=True)
@@ -289,6 +291,9 @@ def run_case(label,enabled):
     odom_params.update({'Odom/ResetCountdown':8,'Odom/GuessMotion':'false','Odom/FillInfoData':'true','Odom/ImageDecimation':1,'OdomF2M/BundleAdjustment':1,'OdomF2M/BundleAdjustmentMaxFrames':3,
         'OdomF2M/MaxSize':2000,'Optimizer/Iterations':5,'Optimizer/GravitySigma':.3,'GFTT/MinDistance':3,'Vis/GridRows':2,'Vis/GridCols':3,
         'Vis/MaxDepth':1.0,'Vis/MinInliers':15,'Vis/MinInliersDistribution':.01,'Vis/DepthAsMask':'true','Vis/CorGuessMatchToProjection':'true'})
+    if args.odom_profile=='deployed-inline':
+        odom_params.update(always_process_most_recent_frame=False,bounded_latest_frame_handoff=False,topic_queue_size=1,sync_queue_size=10)
+        odom_params.update({'Vis/MaxDepth':1.5,'Vis/MinInliersDistribution':0.0,'Vis/CorGuessWinSize':40})
     token=secrets.token_hex(32)
     slam_params=dict(database_path=str(folder/'private_mapping.db'),frame_id='base_link',map_frame_id='map',subscribe_depth=True,
         subscribe_rgb=True,subscribe_scan=False,subscribe_odom_info=True,odom_sensor_sync=False,approx_sync=False,topic_queue_size=10,
@@ -315,6 +320,9 @@ def run_case(label,enabled):
     remaps=dict(zip(['rgb/image','depth/image','rgb/camera_info'],topics))
     remaps.update(dict(zip(['reset_quarantine_rgb','reset_quarantine_depth','reset_quarantine_camera_info'],topics)))
     remaps.update({'odom':'/odom','reset_quarantine_odom':'/odom','odom_info':'/odom_info','reset_quarantine_odom_info':'/odom_info','imu':'/zed/imu/data'})
+    # Preserve exact effective parameters; this replay is not camera/UI acceptance.
+    write_atomic(folder/'node_parameters.json',dict(odom_profile=args.odom_profile,odom=odom_params,
+        slam={k:v for k,v in slam_params.items() if k!='safe_relocalization_session_token'}))
     try:
         start('odom',command(runtime/'bin/rgbd_odometry','rtabmap_rgbd_odometry',odom_params,{'rgbd_image':'/zed/rgbd_image','imu':'/zed/imu/data'}))
         start('slam',command(runtime/'bin/rtabmap','rtabmap',slam_params,remaps))

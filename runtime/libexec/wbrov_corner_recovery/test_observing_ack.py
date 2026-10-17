@@ -123,4 +123,45 @@ class ObservingAckTests(unittest.TestCase):
         validate_observing(self.status,self.proposal,self.config)
         with self.assertRaises(ValueError):validate_observing(dict(self.status,result='committed'),self.proposal,self.config)
 
+    def test_live_stale_rejection_consumed_without_commit(self):
+        # Hardware v8: observer revision 403, Core revision 404, no edges parsed.
+        rejected=dict(self.status,result='rejected',core_graph_revision=11,evidence_pairs=[],
+            reason='proposal is stale or does not match current epoch and graph revision')
+        self.send(rejected);self.send(rejected)
+        self.assertIsNone(self.bridge.pending)
+        self.assertIsNone(self.bridge.pending_geometry)
+        self.assertEqual(self.bridge.terminals,{'owned-token':rejected})
+        self.assertFalse(self.bridge.committed_epochs)
+        self.assertEqual(self.bridge.required_revision,0)
+        self.assertEqual(sum(kind=='terminal' for kind,_ in self.events),1)
+
+    def test_reset_overtaking_proposal_is_only_a_rejection(self):
+        rejected=dict(self.status,result='rejected',core_reset_epoch=3,core_graph_revision=12,
+            evidence_pairs=[],reason='proposal is stale or does not match current epoch and graph revision')
+        self.send(rejected)
+        self.assertIsNone(self.bridge.pending)
+        self.assertFalse(self.bridge.committed_epochs)
+        for result in ('committed','observing'):
+            with self.subTest(result=result):
+                invalid=dict(rejected,result=result,evidence_pairs=self.status['evidence_pairs'])
+                validator=validate_terminal if result=='committed' else validate_observing
+                with self.assertRaises(ValueError):validator(invalid,self.proposal,self.config)
+
+    def test_rejection_keeps_identity_link_and_monotonicity_checks(self):
+        rejected=dict(self.status,result='rejected',core_graph_revision=12,evidence_pairs=[])
+        for key,value in [('transaction_token','other'),('session_token_sha256','other'),
+                          ('database_sha256','other'),('source_reset_epoch',3),('observer_graph_revision',11),
+                          ('tag_id',43),('core_reset_epoch',1),('core_graph_revision',9),
+                          ('evidence_pairs',[[11,2]]),('core_graph_revision',True)]:
+            with self.subTest(key=key,value=value):
+                with self.assertRaises(ValueError):self.send(dict(rejected,**{key:value}))
+                self.assertIsNotNone(self.bridge.pending)
+                self.assertFalse(self.bridge.terminals)
+        with self.assertRaisesRegex(ValueError,'status publisher identity'):self.send(rejected,gid='unowned_gid')
+
+    def test_committed_revision_remains_exact(self):
+        for revision in (10,12):
+            with self.assertRaisesRegex(ValueError,'committed graph revision'):
+                validate_terminal(dict(self.status,result='committed',core_graph_revision=revision),self.proposal,self.config)
+
 if __name__=='__main__':unittest.main()

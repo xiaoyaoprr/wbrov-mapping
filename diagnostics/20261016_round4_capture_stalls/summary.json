@@ -1,0 +1,81 @@
+{
+  "schema": "wbrov.capture-gap-diagnostic.v1",
+  "run_name": "custom_20261009_111209",
+  "clock_note": "device clock not corrected; review date 2026-10-16",
+  "cuts": [
+    {
+      "source_ns": 1791515670007453000,
+      "previous_ledger_row_1based": 3240,
+      "previous_row_is_status_checkpoint": true,
+      "source_gap_s": 0.833321,
+      "odom": {
+        "kind": "odom_info",
+        "arrival_ns": 1791515670183443552,
+        "arrival_steady_ns": 294341808091936,
+        "ns": 1791515670007453000,
+        "lost": false,
+        "inliers": 303,
+        "matches": 342,
+        "icp_correspondences": 0,
+        "interval_s": 0.8333210945129395,
+        "odom_type": 0
+      }
+    },
+    {
+      "source_ns": 1791515694122980000,
+      "previous_ledger_row_1based": 3750,
+      "previous_row_is_status_checkpoint": true,
+      "source_gap_s": 0.799984,
+      "odom": {
+        "kind": "odom_info",
+        "arrival_ns": 1791515694289085920,
+        "arrival_steady_ns": 294365913734912,
+        "ns": 1791515694122980000,
+        "lost": false,
+        "inliers": 311,
+        "matches": 340,
+        "icp_correspondences": 0,
+        "interval_s": 0.7999842166900635,
+        "odom_type": 0
+      }
+    },
+    {
+      "source_ns": 1791515756720033000,
+      "previous_ledger_row_1based": 5130,
+      "previous_row_is_status_checkpoint": true,
+      "source_gap_s": 0.899742,
+      "odom": {
+        "kind": "odom_info",
+        "arrival_ns": 1791515756903269888,
+        "arrival_steady_ns": 294428527918208,
+        "ns": 1791515756720033000,
+        "lost": false,
+        "inliers": 243,
+        "matches": 297,
+        "icp_correspondences": 0,
+        "interval_s": 0.8997418880462646,
+        "odom_type": 0
+      }
+    }
+  ],
+  "total_capture_gaps_over_300ms": 25,
+  "gaps_immediately_after_every_30th_status_snapshot": 19,
+  "save_complete": true,
+  "cleanup_succeeded": true,
+  "launcher_exit_code": 0,
+  "main_recovery_passed": false,
+  "main_node_ids": [
+    1
+  ],
+  "log_sha256": {
+    "capture.jsonl": "8bc3b4ac692d5c2346717defa26f5effb733a2b06e8d296f46e157a8be1469b1",
+    "odometry.log": "341d767098689136b2a62305136914403dc518030a1f8386526086e534db564d",
+    "zed_rgbd.log": "471dda37c4278ad3505d0e48a23e34f8e05838d53db36ff440a2902e68979aaa",
+    "rtabmap.log": "42f2fd6964bebd6301118626c620be12ce60a2c9b64766854c38eb0f85307ed8"
+  },
+  "follow_up": {
+    "v6": "600 s stationary passed after removing periodic fsync; moving recovery not proven",
+    "v7": "first cuts caused by remaining synchronous journal I/O; stage logging measured 1978.652 ms at grab 1620 and 338.243 ms at grab 3960",
+    "v8": "Continuous human-assisted movement reached 58 main nodes before deliberate loss; no measured OdomInfo interval above 750 ms. Main recovery failed; authenticated stale rejection crashed consumer and supervisor closed RViz. Saved recording and isolated maps complete; cleanup failed."
+  }
+}

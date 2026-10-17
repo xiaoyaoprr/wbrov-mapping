@@ -378,11 +378,14 @@ private:
 	std::unique_ptr<SubmapPublisher> submapPublisher_; // processing lane only
 	rclcpp::TimerBase::SharedPtr submapHeartbeatTimer_;
 	bool mappingHasWrittenLocalFrame_=false;
+	int mappingLastLocalNodeId_=0;
 	std::uint64_t mappingWrittenLocalSerial_=0;
 	unsigned long long mappingWrittenLocalEpoch_=0;
 	void refreshSubmapVisualization(const rclcpp::Time & stamp,bool localHealthy);
 	void publishMappingContinuityStatus();
 	bool tryMappingVisualRecovery();
+    void isolateRejectedRecoveryMotion(const rtabmap::Rtabmap::SafeRelocalizationLimits & limits,
+        const std::string & reason);
 	bool mappingRecoveryCommitCurrent(MappingContinuityGate::Ticket ticket, unsigned long long epoch, bool requireProposal);
 	bool observeRecoveredMainMap(const rtabmap::SensorData & data, const rtabmap::Transform & odom, long long stampNs);
 	void discardPendingMappingRecovery(const std::string & reason);
@@ -410,7 +413,7 @@ private:
 	sensor_msgs::msg::Image::SharedPtr mappingLastTrustedImage_;
 	int mappingLastTrustedNodeId_ = 0;
 	unsigned long long mappingLastTrustedEpoch_ = 0;
-	std::uint64_t mappingLastReferencePublishedGeneration_ = 0;
+	sensor_msgs::msg::Image::ConstSharedPtr mappingLastPublishedReference_;
 	rclcpp::Publisher<std_msgs::msg::String>::SharedPtr mappingContinuityStatusPub_;
 	rclcpp::Publisher<std_msgs::msg::String>::SharedPtr mappingContinuityTextPub_;
 	rclcpp::TimerBase::SharedPtr mappingContinuityTimer_;

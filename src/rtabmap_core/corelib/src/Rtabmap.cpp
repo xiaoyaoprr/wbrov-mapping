@@ -1561,6 +1561,58 @@ void Rtabmap::parseParameters(const ParametersMap & parameters)
 	}
 }
 
+bool Rtabmap::collectRawCrossMapLoopEvidence(const Signature & current, const Signature & old,
+        unsigned long long currentResetEpoch, unsigned long long oldResetEpoch, std::string & reason)
+{
+    // Memory::computeTransform() registers temporary Signatures. Its inlier IDs
+    // belong to those rewritten objects, NOT to Memory's cached word tables.
+    // Keep the registration objects alive through every support lookup. Raw
+    // registration is candidate evidence only; the independent bidirectional
+    // transaction and observation period still authorize any graph change.
+    if(!_memory || !_safeRelocalizationGuardEnabled || currentResetEpoch<=oldResetEpoch)
+    { reason="raw candidate requires a guarded cross-epoch hypothesis";return false; }
+    SensorData currentData=_memory->getNodeData(current.id(),true,false,false,false);
+    SensorData oldData=_memory->getNodeData(old.id(),true,false,false,false);
+    currentData.uncompressData();oldData.uncompressData();
+    if(currentData.imageRaw().empty() || oldData.imageRaw().empty() ||
+       currentData.depthRaw().empty() || oldData.depthRaw().empty())
+    { reason="raw candidate RGB-D unavailable";return false; }
+    currentData.setFeatures({}, {},cv::Mat());oldData.setFeatures({}, {},cv::Mat());
+    Signature measuredCurrent=current,measuredOld=old;
+    measuredCurrent.removeAllWords();measuredOld.removeAllWords();
+    measuredCurrent.sensorData()=currentData;measuredOld.sensorData()=oldData;
+    ParametersMap parameters=_parameters;
+    parameters[Parameters::kRegStrategy()]="0";
+    parameters[Parameters::kRegForce3DoF()]="false";
+    parameters[Parameters::kVisEstimationType()]="0";
+    int minimum=Parameters::defaultVisMinInliers();
+    Parameters::parse(parameters,Parameters::kVisMinInliers(),minimum);
+    parameters[Parameters::kVisMinInliers()]=uNumber2Str(std::max(25,std::max(minimum,_crossMapLoopMinInliers)));
+    float distance=Parameters::defaultVisInlierDistance();
+    Parameters::parse(parameters,Parameters::kVisInlierDistance(),distance);
+    if(!std::isfinite(distance) || distance<=0)
+    { reason="raw candidate correspondence distance invalid";return false; }
+    parameters[Parameters::kVisInlierDistance()]=uNumber2Str(std::min(.025f,distance));
+    std::unique_ptr<Registration> registration(Registration::create(parameters));
+    if(!registration || !registration->isImageRequired())
+    { reason="raw candidate visual registration unavailable";return false; }
+    RegistrationInfo info;
+    const Transform currentFromOld=registration->computeTransformationMod(
+        measuredCurrent,measuredOld,Transform(),&info);
+    const std::set<int> ids(info.inliersIDs.begin(),info.inliersIDs.end());
+    auto matched=[&](const Signature & s) {
+        unsigned count=0;for(int id:ids)if(s.getWords().count(id)==1)++count;return count;
+    };
+    UWARN("[RAW_CANDIDATE_SUPPORT] current=%d old=%d inliers=%d id_range=(%d,%d) exact_lookup=(%u,%u) cached_lookup=(%u,%u) raw_words=(%u,%u) candidate_only=1",
+        current.id(),old.id(),info.inliers,ids.empty()?-1:*ids.begin(),ids.empty()?-1:*ids.rbegin(),
+        matched(measuredCurrent),matched(measuredOld),matched(current),matched(old),
+        unsigned(measuredCurrent.getWords().size()),unsigned(measuredOld.getWords().size()));
+    if(!finiteTransform(currentFromOld))
+    { reason="raw candidate registration failed: "+info.rejectedMsg;return false; }
+    return acceptCrossMapLoopEvidence(measuredCurrent,measuredOld,currentResetEpoch,oldResetEpoch,
+        currentFromOld,info,reason);
+}
+
 bool Rtabmap::acceptCrossMapLoopEvidence(
 		const Signature & current,
 		const Signature & old,
@@ -1693,7 +1745,9 @@ bool Rtabmap::acceptCrossMapLoopEvidence(
 	evidence.anchor = current.getPose() * currentToOld * old.getPose().inverse();
 	evidence.linearVariance = linearVariance;
 	evidence.angularVariance = angularVariance;
-	evidence.inlierWords = inlierWords;
+    // Raw registration IDs are local to this pair. Never compare their numeric
+    // overlap across separate guarded solves as if they were persistent words.
+	evidence.inlierWords = _safeRelocalizationGuardEnabled?std::set<int>():inlierWords;
 	evidence.featureJaccardMaximum = 0.0;
 	if(!finiteTransform(evidence.anchor))
 	{
@@ -1740,8 +1794,8 @@ bool Rtabmap::acceptCrossMapLoopEvidence(
 					_crossMapLoopMinSourceTranslation, _crossMapLoopMinSourceRotation);
 			return false;
 		}
-		evidence.featureJaccardMaximum = std::max(
-				evidence.featureJaccardMaximum,
+        if(!_safeRelocalizationGuardEnabled)
+		    evidence.featureJaccardMaximum = std::max(evidence.featureJaccardMaximum,
 				featureJaccard(iter->inlierWords, inlierWords));
 
 		double translationError = iter->anchor.getDistance(evidence.anchor);
@@ -4341,7 +4395,7 @@ bool Rtabmap::process(
                            _safeRelocalizationTrustedPoses.count(visualOld->id()) && oldResetEpoch<currentResetEpoch)
                         {
                             std::string pendingReason;
-                            acceptCrossMapLoopEvidence(*signature,*visualOld,currentResetEpoch,oldResetEpoch,transform,info,pendingReason);
+                            collectRawCrossMapLoopEvidence(*signature,*visualOld,currentResetEpoch,oldResetEpoch,pendingReason);
                             UWARN("Guarded local-submap candidate current=%d old=%d retained=%u: %s",signature->id(),visualOld->id(),unsigned(_crossMapLoopEvidence.size()),pendingReason.c_str());
                         }
 						UINFO("Observed but did not add cross-reset global loop %d -> %d (epochs %llu -> %llu): safe relocalization requires an authenticated shadow transaction",

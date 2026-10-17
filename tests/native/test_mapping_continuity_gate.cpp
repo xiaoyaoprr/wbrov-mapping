@@ -23,6 +23,72 @@ void mapObservations(Gate &g,long long start,Gate::Epoch epoch=0,Gate::Evidence 
 }
 int main() {
     {
+        Gate g;stable(g,T);assert(!confirm(g,T+2*D,0,false));
+        const auto serial=g.localContinuitySerial();
+        auto weak=visual();weak.visualGeometry=weak.recoveryGeometry=false;
+        observe(g,T+3*D,weak);
+        assert(g.snapshot(T+3*D,T+3*D).qualityPending);
+        assert(g.localContinuitySerial()==serial);
+        stable(g,T+4*D);
+        assert(g.beginMapObservation(0,false,T+6*D,T+6*D));
+        assert(g.snapshot(T+6*D,T+6*D).observingLocal);
+        mapObservations(g,T+7*D);
+        assert(!g.mainMapAllowed(0,T+13*D,T+13*D));
+        assert(g.processAllowed(false,T+13*D,T+13*D,T+13*D));
+        assert(g.localContinuitySerial()==serial);
+    }
+    {
+        // 250 ms transport + 100 ms inter-arrival is not a measurement stall.
+        // The source pose is nevertheless too old for navigation publication.
+        Gate g;
+        for(int i=0;i<3;++i)assert(g.observe(T+i*D,T+i*D+250000000LL,T+i*D+250000000LL,visual()));
+        const auto source=T+2*D,arrival=source+250000000LL;
+        assert(g.coreValidated(g.ticket(source),0,true,true,arrival,arrival));
+        g.tick(arrival+D,arrival+D);
+        assert(g.mainMapAllowed(0,arrival+D,arrival+D));
+        int sent=0;assert(!g.withFreshMainPose(arrival+D,arrival+D,[&]{++sent;}));assert(sent==0);
+        const auto generation=g.ticket(source).generation;
+        g.tick(arrival+4*D,arrival+4*D);
+        assert(g.ticket(source).generation==generation);
+        assert(!g.recoveryCommitAllowed(g.ticket(source),0,arrival+4*D,arrival+4*D));
+        observe(g,source+7*D,Gate::Evidence{});
+        assert(g.ticket(source).generation!=generation);
+    }
+    {
+        // A later weak episode must not retroactively expire the first one.
+        // Every episode remains bounded, and all observations restart after it.
+        Gate g;normal(g);const auto serial=g.localContinuitySerial();
+        auto weak=visual();weak.visualGeometry=weak.recoveryGeometry=false;
+        observe(g,T+3*D,weak);stable(g,T+4*D);
+        for(int i=7;i<=12;++i)observe(g,T+i*D);
+        const auto beforeWeak=g.ticket(T+12*D);
+        observe(g,T+13*D,weak);
+        assert(g.snapshot(T+13*D,T+13*D).qualityPending);
+        assert(g.localContinuitySerial()==serial);
+        assert(!g.recoveryCommitAllowed(beforeWeak,0,T+13*D,T+13*D));
+        stable(g,T+14*D);assert(g.beginMapObservation(0,true,T+16*D,T+16*D));
+        mapObservations(g,T+17*D);
+        assert(g.mainMapAllowed(0,T+23*D,T+23*D));
+        assert(g.localContinuitySerial()==serial);
+    }
+    {
+        Gate g;normal(g);const auto serial=g.localContinuitySerial();
+        auto weak=visual();weak.visualGeometry=weak.recoveryGeometry=false;
+        observe(g,T+3*D,weak);stable(g,T+4*D);
+        for(int i=7;i<=12;++i)observe(g,T+i*D);
+        for(int i=13;i<=19;++i)observe(g,T+i*D,weak);
+        assert(g.localContinuitySerial()>serial);
+        assert(!g.snapshot(T+19*D,T+19*D).qualityPending);
+    }
+    {
+        Gate g;normal(g);auto weak=visual();weak.visualGeometry=weak.recoveryGeometry=false;
+        const auto before=g.snapshot(T+2*D,T+2*D);
+        observe(g,T+6*D,weak);const auto after=g.snapshot(T+6*D,T+6*D);
+        assert(after.cutCount==before.cutCount+1);
+        assert(after.lastCutReason=="unverified measurement gap");
+        assert(after.sourceNs==T+6*D && !after.qualityPending && !after.mainMapWriteAllowed);
+    }
+    {
         Gate g;normal(g);const auto serial=g.localContinuitySerial();const auto old=g.ticket(T+2*D);
         auto weak=visual();weak.visualGeometry=weak.recoveryGeometry=false;weak.qualityReason="cells=4<6";
         observe(g,T+3*D,weak);
@@ -333,6 +399,28 @@ int main() {
         observe(g,T+13*D,Gate::Evidence{});
         assert(!g.candidateCommitReady(prepared,1,T+13*D,T+13*D));
         assert(!g.candidateCommitted(prepared,1,true,T+13*D,T+13*D));
+    }
+    {
+        // A prepared proposal survives a bounded weak episode, but restarts
+        // independent observations. Commit must resolve the window completely.
+        Gate g;normal(g);observe(g,T+3*D);
+        assert(!g.coreValidated(g.ticket(T+3*D),1,false,true,T+3*D,T+3*D));
+        observe(g,T+4*D);observe(g,T+5*D);const auto prepared=g.ticket(T+5*D);
+        assert(g.beginCandidateObservation(prepared,1,T+5*D,T+5*D));
+        auto weak=visual();weak.visualGeometry=weak.recoveryGeometry=false;
+        observe(g,T+6*D,weak);
+        assert(g.snapshot(T+6*D,T+6*D).qualityPending);
+        assert(g.ticket(T+6*D).generation==prepared.generation);
+        assert(!g.candidateCommitReady(prepared,1,T+6*D,T+6*D));
+        stable(g,T+7*D);mapObservations(g,T+10*D,1);
+        const auto end=T+16*D;
+        assert(g.candidateCommitReady(prepared,1,end,end));
+        assert(g.candidateCommitted(prepared,1,true,end,end));
+        assert(!g.snapshot(end,end).qualityPending);
+        assert(g.processAllowed(true,end,end,end));
+        const auto serial=g.localContinuitySerial();
+        for(int i=17;i<=75;++i)observe(g,T+i*D);
+        assert(g.localContinuitySerial()==serial && g.mainMapAllowed(1,T+75*D,T+75*D));
     }
     std::cout<<"PASS: bootstrap, measured hysteresis, unique/fresh source, observation before candidate commit, failed K/loss invalidate commit, unique final commit, same-epoch no-Tag, depth/IMU boundaries\n";
 }

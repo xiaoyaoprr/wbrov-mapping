@@ -26,6 +26,8 @@ struct Core {using type=rtabmap::Rtabmap Wrapper::*;friend type member(Core);};
 template struct Access<Core,&Wrapper::rtabmap_>;
 struct Status {using type=void(Wrapper::*)();friend type member(Status);};
 template struct Access<Status,&Wrapper::publishMappingContinuityStatus>;
+struct Reference {using type=sensor_msgs::msg::Image::SharedPtr Wrapper::*;friend type member(Reference);};
+template struct Access<Reference,&Wrapper::mappingLastTrustedImage_>;
 void require(bool condition,const char * why) {if(!condition)throw std::runtime_error(why);}
 long long steady() {return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();}
 
@@ -101,6 +103,26 @@ int main(int argc,char ** argv) {
         rclcpp::NodeOptions options;options.parameter_overrides(parameters((root/"continuity.db").string()));
         auto w=std::make_shared<Wrapper>(options);auto & g=w.get()->*member(GateMember{});
         auto & core=w.get()->*member(Core{});const auto graphSize=core.getLocalOptimizedPoses().size();
+        // The initial generation is zero. Publish before subscribing, as RViz
+        // often starts after mapping, and then update without changing tickets.
+        auto image=std::make_shared<sensor_msgs::msg::Image>();image->height=image->width=image->step=1;
+        image->encoding="mono8";image->data={42};image->header.stamp=w->now();
+        w.get()->*member(Reference{})=image;(w.get()->*member(Status{}))();
+        auto viewer=std::make_shared<rclcpp::Node>("reference_image_test_viewer");
+        unsigned pixel=0;
+        auto sub=viewer->create_subscription<sensor_msgs::msg::Image>("/wbrov/mapping/recovery_reference_image",
+            rclcpp::QoS(1).reliable().transient_local(),[&](sensor_msgs::msg::Image::ConstSharedPtr m){if(!m->data.empty())pixel=m->data[0];});
+        auto waitImage=[&](unsigned expected) {
+            const auto until=std::chrono::steady_clock::now()+std::chrono::seconds(3);
+            while(pixel!=expected && std::chrono::steady_clock::now()<until) {
+                rclcpp::spin_some(viewer);std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            }
+            require(pixel==expected,"latest trusted image unavailable to RViz subscriber");
+        };
+        waitImage(42);
+        auto next=std::make_shared<sensor_msgs::msg::Image>(*image);next->data={84};
+        w.get()->*member(Reference{})=next;(w.get()->*member(Status{}))();waitImage(84);
+        w.get()->*member(Reference{})=nullptr;sub.reset();viewer.reset();
         auto observe=[&](const rtabmap_msgs::msg::OdomInfo & m){return (w.get()->*member(Observe{}))(m);};
         auto bad=sample(*w,false);bad.inliers=200;bad.matches=200;
         require(observe(bad),"unique numeric-only sample refused by arrival observer");

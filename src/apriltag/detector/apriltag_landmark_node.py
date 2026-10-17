@@ -42,7 +42,7 @@ from sensor_msgs.msg import CameraInfo, Image
 from std_msgs.msg import String
 from tf2_ros import Buffer, TransformException, TransformListener
 from visualization_msgs.msg import Marker, MarkerArray
-from tag_pose_guard import GuardConfig, PendingTransformQueue, TemporalPoseGuard
+from tag_pose_guard import GuardConfig, PendingTransformQueue, TemporalPoseGuard, cadence_gap_s
 from tag_pose_geometry import solve_square_pose
 
 
@@ -167,7 +167,8 @@ class AprilTagLandmarkNode(Node):
         self.pose_guard = TemporalPoseGuard(GuardConfig(
             confirm_frames=env_int("APRILTAG_CONFIRM_FRAMES", 3),
             confirm_duration_s=env_float("APRILTAG_CONFIRM_DURATION_S", 0.15),
-            max_gap_s=env_float("APRILTAG_TRACK_MAX_GAP_S", 0.60),
+            max_gap_s=cadence_gap_s(env_float("APRILTAG_INPUT_PERIOD_S", 0.0),
+                env_float("APRILTAG_TRACK_MAX_GAP_S", 0.60)),
             max_angular_rate_deg_s=env_float("APRILTAG_MAX_ANGULAR_RATE_DEG_S", 60.0),
             angular_slack_deg=env_float("APRILTAG_ANGULAR_SLACK_DEG", 6.0),
             max_linear_rate_m_s=env_float("APRILTAG_MAX_LINEAR_RATE_M_S", 0.50),
@@ -291,7 +292,8 @@ class AprilTagLandmarkNode(Node):
             f"range={self.min_range:.2f}-{self.max_range:.2f} m, "
             f"RTAB landmark ID=tag ID+{ID_OFFSET}; pose confirmation="
             f"{self.pose_guard.config.confirm_frames} frames/"
-            f"{self.pose_guard.config.confirm_duration_s:.2f}s; IPPE square ambiguity gate "
+            f"{self.pose_guard.config.confirm_duration_s:.2f}s, maximum input gap="
+            f"{self.pose_guard.config.max_gap_s:.2f}s; IPPE square ambiguity gate "
             f"(15deg, 0.5px or 2x error); landmark mode={self.landmark_mode}; "
             f"exact-time TF diagnostics")
 

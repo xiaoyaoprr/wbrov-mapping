@@ -1,0 +1,164 @@
+# zed_rgbd.log
+[INFO] [1791528103.364980960] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5695 event=map_due_planned planned_sequence=1146 decision_steady_ns=306774989625504
+[INFO] [1791528103.412039424] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5696 event=queued_waiting_exact_odom map_stamp_ns=1791528103327060000 planned_sequence=1146 queue_steady_ns=306775036644736
+[INFO] [1791528103.412778912] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5697 event=map_plan_outcome planned_sequence=1146 outcome=queued map_stamp_ns=1791528103327060000
+[INFO] [1791528103.448444256] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5698 event=valid_odom_received_on_time map_stamp_ns=1791528103327060000 receipt_steady_ns=306775073087328
+[INFO] [1791528103.450895712] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5699 event=exact_valid_odom_ack map_stamp_ns=1791528103327060000 planned_sequence=1146 ack_wait_ms=36.443 map_triplet_publish_calls_completed=true dds_atomic=false downstream_rtabmap_receipt=false terminal_steady_ns=306775075534464
+[INFO] [1791528104.365464960] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5700 event=map_due_planned planned_sequence=1147 decision_steady_ns=306775990107808
+[INFO] [1791528104.434836160] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5701 event=queued_waiting_exact_odom map_stamp_ns=1791528104343676000 planned_sequence=1147 queue_steady_ns=306776059455296
+[INFO] [1791528104.434975456] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5702 event=map_plan_outcome planned_sequence=1147 outcome=queued map_stamp_ns=1791528104343676000
+[INFO] [1791528104.465032064] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5703 event=valid_odom_received_on_time map_stamp_ns=1791528104343676000 receipt_steady_ns=306776089675584
+[INFO] [1791528104.471034176] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5704 event=exact_valid_odom_ack map_stamp_ns=1791528104343676000 planned_sequence=1147 ack_wait_ms=30.220 map_triplet_publish_calls_completed=true dds_atomic=false downstream_rtabmap_receipt=false terminal_steady_ns=306776095674720
+[INFO] [1791528105.368403552] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5705 event=map_due_planned planned_sequence=1148 decision_steady_ns=306776993048096
+[INFO] [1791528105.415066816] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5706 event=queued_waiting_exact_odom map_stamp_ns=1791528105326985000 planned_sequence=1148 queue_steady_ns=306777039687040
+[INFO] [1791528105.415218848] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5707 event=map_plan_outcome planned_sequence=1148 outcome=queued map_stamp_ns=1791528105326985000
+[INFO] [1791528105.459524128] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5708 event=valid_odom_received_on_time map_stamp_ns=1791528105326985000 receipt_steady_ns=306777084167264
+[INFO] [1791528105.464607456] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5709 event=exact_valid_odom_ack map_stamp_ns=1791528105326985000 planned_sequence=1148 ack_wait_ms=44.480 map_triplet_publish_calls_completed=true dds_atomic=false downstream_rtabmap_receipt=false terminal_steady_ns=306777089247584
+[INFO] [1791528106.368463616] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5710 event=map_due_planned planned_sequence=1149 decision_steady_ns=306777993105088
+[WARN] [1791528107.054562432] [zed_rgbd_dual_stream_publisher]: [CAPTURE_SLOW_PATH] schema_version=1 source_ns=1791528106976888000 odom_due=true before_grab_ms=634.848 grab_ms=48.728 recording_journal_ms=0.032 sdk_recording_status_ms=0.002 sensors_ms=0.024 low_retrieve_build_publish_ms=2.469 total_ms=686.100
+[INFO] [1791528107.069382016] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5711 event=queued_waiting_exact_odom map_stamp_ns=1791528106976888000 planned_sequence=1149 queue_steady_ns=306778694002432
+[INFO] [1791528107.069507840] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5712 event=map_plan_outcome planned_sequence=1149 outcome=queued map_stamp_ns=1791528106976888000
+[INFO] [1791528107.128679296] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5713 event=valid_odom_received_on_time map_stamp_ns=1791528106976888000 receipt_steady_ns=306778753322624
+[INFO] [1791528107.136316320] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5714 event=exact_valid_odom_ack map_stamp_ns=1791528106976888000 planned_sequence=1149 ack_wait_ms=59.320 map_triplet_publish_calls_completed=true dds_atomic=false downstream_rtabmap_receipt=false terminal_steady_ns=306778760956160
+[INFO] [1791528107.363914368] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5715 event=map_due_planned planned_sequence=1150 decision_steady_ns=306778988558848
+[INFO] [1791528107.424150464] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5716 event=queued_waiting_exact_odom map_stamp_ns=1791528107326861000 planned_sequence=1150 queue_steady_ns=306779048763968
+[INFO] [1791528107.424357824] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5717 event=map_plan_outcome planned_sequence=1150 outcome=queued map_stamp_ns=1791528107326861000
+[INFO] [1791528107.465659136] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5718 event=valid_odom_received_on_time map_stamp_ns=1791528107326861000 receipt_steady_ns=306779090302592
+[INFO] [1791528107.470231040] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5719 event=exact_valid_odom_ack map_stamp_ns=1791528107326861000 planned_sequence=1150 ack_wait_ms=41.539 map_triplet_publish_calls_completed=true dds_atomic=false downstream_rtabmap_receipt=false terminal_steady_ns=306779094869568
+[INFO] [1791528107.765641728] [zed_rgbd_dual_stream_publisher]: [CAMERA_RATE] schema_version=1 accepted_grab_sdk_stamp_hz=22.48 odom_published_hz=16.98 valid_unique_odom_ack_hz=14.41 map_published_hz=0.99 odom_consumer_minimum_15hz=missed grab_errors=0 duplicate_image_stamps_skipped=1 map_queued=5 map_exact_valid_acks=5 map_unacknowledged_dropped=0 map_invalid_odom_dropped=0 map_due_while_pending=0 map_stamp_conflicts=0 map_late_valid_after_timeout=0 map_tombstone_evictions=0 map_shutdown_censored=0 map_publish_failed=0 invalid_odom_ack_rejected=0 duplicate_valid_odom_acks=0 regressed_valid_odom_acks=0 odom_tracking/display_valid_pct=29.8/23.2 map_tracking_valid_pct=29.5
+[INFO] [1791528107.765792960] [zed_rgbd_dual_stream_publisher]: [IMU_IMAGE_DELTA] schema_version=1 source=image_synchronized_sdk_orientation quaternion_sign_invariant=true samples=113 invalid_quaternions=0 mean_deg=0.012057 p50_deg=0.011378 p95_deg=0.023555 max_deg=0.028504
+[INFO] [1791528107.765824320] [zed_rgbd_dual_stream_publisher]: [LOW_PATH_LATENCY] schema_version=1 scope=publisher_capture_enter_to_low_publish includes_grab_retrieve_message_build=true excludes_dds_and_odometry=true samples=86 invalid_samples=0 mean_ms=51.596 p50_ms=40.831 p95_ms=62.493 max_ms=686.099
+[INFO] [1791528107.765852352] [zed_rgbd_dual_stream_publisher]: [STAMP_LATENCY] schema_version=1 clock=node_clock image_to_low_publish_samples=86 invalid=0 mean_ms=75.628 p50_ms=74.612 p95_ms=95.101 max_ms=105.440 image_to_valid_odom_samples=73 invalid=0 mean_ms=132.870 p50_ms=121.770 p95_ms=151.160 max_ms=776.085
+[INFO] [1791528107.765893504] [zed_rgbd_dual_stream_publisher]: [CAMERA_EXPOSURE] schema_version=1 settings_read_only=true aec_agc_valid=true aec_agc=1 exposure_percent_valid=true exposure_percent=-1 gain_percent_valid=true gain_percent=-1 exposure_time_valid=true exposure_time_us=-1 exposure_frame_percent=-0.006 analog_gain_valid=true analog_gain_mdb=-1 digital_gain_valid=true digital_gain_factor=-1 scene_illuminance_valid=true scene_illuminance_0p1_lux=-1 auto_exposure_range_valid=true auto_exposure_min_us=28 auto_exposure_max_us=16666 read_errors=0 read_elapsed_ms=0.010
+[INFO] [1791528108.374747072] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5720 event=map_due_planned planned_sequence=1151 decision_steady_ns=306779999391552
+[INFO] [1791528108.417854784] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5721 event=queued_waiting_exact_odom map_stamp_ns=1791528108343496000 planned_sequence=1151 queue_steady_ns=306780042473536
+[INFO] [1791528108.418080064] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5722 event=map_plan_outcome planned_sequence=1151 outcome=queued map_stamp_ns=1791528108343496000
+[INFO] [1791528108.471736288] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5723 event=valid_odom_received_on_time map_stamp_ns=1791528108343496000 receipt_steady_ns=306780096379360
+[INFO] [1791528108.473929952] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5724 event=exact_valid_odom_ack map_stamp_ns=1791528108343496000 planned_sequence=1151 ack_wait_ms=53.906 map_triplet_publish_calls_completed=true dds_atomic=false downstream_rtabmap_receipt=false terminal_steady_ns=306780098569568
+[INFO] [1791528109.379912736] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5725 event=map_due_planned planned_sequence=1152 decision_steady_ns=306781004556928
+[INFO] [1791528109.420833408] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5726 event=queued_waiting_exact_odom map_stamp_ns=1791528109343440000 planned_sequence=1152 queue_steady_ns=306781045452960
+[INFO] [1791528109.421002560] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5727 event=map_plan_outcome planned_sequence=1152 outcome=queued map_stamp_ns=1791528109343440000
+[INFO] [1791528109.459352544] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5728 event=valid_odom_received_on_time map_stamp_ns=1791528109343440000 receipt_steady_ns=306781083995648
+[INFO] [1791528109.462374208] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=2711671-305631062930528 event_sequence=5729 event=exact_valid_odom_ack map_stamp_ns=1791528109343440000 planned_sequence=1152 ack_wait_ms=38.543 map_triplet_publish_calls_completed=true dds_atomic=false downstream_rtabmap_receipt=false terminal_steady_ns=306781087013824
+# odometry.log
+[INFO] [1791528103.025905280] [rtabmap_rgbd_odometry]: Odom: quality=237, std dev=0.002087m|0.015492rad, update time=0.024967s delay=0.098822s
+[INFO] [1791528103.135687904] [rtabmap_rgbd_odometry]: Odom: quality=240, std dev=0.000488m|0.012320rad, update time=0.028185s delay=0.125271s
+[INFO] [1791528103.173049888] [rtabmap_rgbd_odometry]: Odom: quality=238, std dev=0.001205m|0.013634rad, update time=0.023083s delay=0.095973s
+[INFO] [1791528103.222740064] [rtabmap_rgbd_odometry]: Odom: quality=237, std dev=0.001613m|0.015089rad, update time=0.034762s delay=0.112036s
+[INFO] [1791528103.251863136] [rtabmap_rgbd_odometry]: Odom: quality=229, std dev=0.000603m|0.016214rad, update time=0.027780s delay=0.091454s
+[INFO] [1791528103.284919680] [rtabmap_rgbd_odometry]: Odom: quality=245, std dev=0.004013m|0.021486rad, update time=0.026963s delay=0.107843s
+[INFO] [1791528103.355872352] [rtabmap_rgbd_odometry]: Odom: quality=235, std dev=0.003999m|0.020216rad, update time=0.026110s delay=0.112128s
+[INFO] [1791528103.395165728] [rtabmap_rgbd_odometry]: Odom: quality=232, std dev=0.000488m|0.010360rad, update time=0.029820s delay=0.101432s
+[INFO] [1791528103.430090560] [rtabmap_rgbd_odometry]: Odom: quality=237, std dev=0.006494m|0.020040rad, update time=0.024560s delay=0.103023s
+[INFO] [1791528103.476521600] [rtabmap_rgbd_odometry]: Odom: quality=249, std dev=0.003044m|0.025972rad, update time=0.027162s delay=0.099464s
+[INFO] [1791528103.599254464] [rtabmap_rgbd_odometry]: Odom: quality=244, std dev=0.000759m|0.018423rad, update time=0.031809s delay=0.105437s
+[INFO] [1791528103.636420768] [rtabmap_rgbd_odometry]: Odom: quality=252, std dev=0.003918m|0.019078rad, update time=0.028133s delay=0.109345s
+[INFO] [1791528103.703693632] [rtabmap_rgbd_odometry]: Odom: quality=233, std dev=0.000160m|0.000173rad, update time=0.025996s delay=0.109979s
+[INFO] [1791528103.745100064] [rtabmap_rgbd_odometry]: Odom: quality=244, std dev=0.003481m|0.018188rad, update time=0.026023s delay=0.101391s
+[INFO] [1791528103.777979904] [rtabmap_rgbd_odometry]: Odom: quality=234, std dev=0.005917m|0.023616rad, update time=0.022358s delay=0.084294s
+[INFO] [1791528103.860890560] [rtabmap_rgbd_odometry]: Odom: quality=237, std dev=0.000180m|0.000173rad, update time=0.033042s delay=0.117184s
+[INFO] [1791528103.892205088] [rtabmap_rgbd_odometry]: Odom: quality=234, std dev=0.002099m|0.015492rad, update time=0.028012s delay=0.098480s
+[INFO] [1791528103.959898528] [rtabmap_rgbd_odometry]: Odom: quality=229, std dev=0.000548m|0.016542rad, update time=0.026119s delay=0.116204s
+[INFO] [1791528104.003016736] [rtabmap_rgbd_odometry]: Odom: quality=238, std dev=0.003039m|0.018423rad, update time=0.031816s delay=0.092662s
+[INFO] [1791528104.034355584] [rtabmap_rgbd_odometry]: Odom: quality=241, std dev=0.003884m|0.018423rad, update time=0.030049s delay=0.090676s
+[INFO] [1791528104.099974720] [rtabmap_rgbd_odometry]: Odom: quality=243, std dev=0.000237m|0.008712rad, update time=0.024732s delay=0.122752s
+[INFO] [1791528104.135510496] [rtabmap_rgbd_odometry]: Odom: quality=235, std dev=0.003523m|0.023937rad, update time=0.023632s delay=0.091746s
+[INFO] [1791528104.197850624] [rtabmap_rgbd_odometry]: Odom: quality=241, std dev=0.000716m|0.013634rad, update time=0.021573s delay=0.104019s
+[INFO] [1791528104.230513984] [rtabmap_rgbd_odometry]: Odom: quality=242, std dev=0.001386m|0.022930rad, update time=0.023725s delay=0.086826s
+[INFO] [1791528104.303217696] [rtabmap_rgbd_odometry]: Odom: quality=230, std dev=0.000177m|0.000173rad, update time=0.022101s delay=0.109539s
+[INFO] [1791528104.340483648] [rtabmap_rgbd_odometry]: Odom: quality=239, std dev=0.000991m|0.017944rad, update time=0.020267s delay=0.096790s
+[INFO] [1791528104.377160896] [rtabmap_rgbd_odometry]: Odom: quality=247, std dev=0.001046m|0.017689rad, update time=0.021544s delay=0.083480s
+[INFO] [1791528104.451094208] [rtabmap_rgbd_odometry]: Odom: quality=242, std dev=0.005772m|0.020720rad, update time=0.024946s delay=0.107409s
+[INFO] [1791528104.495918304] [rtabmap_rgbd_odometry]: Odom: quality=218, std dev=0.001695m|0.026682rad, update time=0.030687s delay=0.085582s
+[INFO] [1791528104.551017056] [rtabmap_rgbd_odometry]: Odom: quality=234, std dev=0.000500m|0.012320rad, update time=0.030559s delay=0.123844s
+[INFO] [1791528104.583737440] [rtabmap_rgbd_odometry]: Odom: quality=231, std dev=0.002474m|0.014651rad, update time=0.026065s delay=0.089831s
+[INFO] [1791528104.629127456] [rtabmap_rgbd_odometry]: Odom: quality=239, std dev=0.000930m|0.013634rad, update time=0.030675s delay=0.101889s
+[INFO] [1791528104.707559872] [rtabmap_rgbd_odometry]: Odom: quality=238, std dev=0.003874m|0.023616rad, update time=0.026485s delay=0.113890s
+[INFO] [1791528104.757002944] [rtabmap_rgbd_odometry]: Odom: quality=252, std dev=0.000929m|0.010360rad, update time=0.035950s delay=0.113323s
+[INFO] [1791528104.791845568] [rtabmap_rgbd_odometry]: Odom: quality=234, std dev=0.002544m|0.016214rad, update time=0.024826s delay=0.098175s
+[INFO] [1791528104.829047648] [rtabmap_rgbd_odometry]: Odom: quality=232, std dev=0.002205m|0.014651rad, update time=0.023363s delay=0.102042s
+[INFO] [1791528104.898923712] [rtabmap_rgbd_odometry]: Odom: quality=247, std dev=0.002692m|0.016542rad, update time=0.024607s delay=0.105286s
+[INFO] [1791528104.939959680] [rtabmap_rgbd_odometry]: Odom: quality=237, std dev=0.000301m|0.010360rad, update time=0.022944s delay=0.096304s
+[INFO] [1791528104.977188704] [rtabmap_rgbd_odometry]: Odom: quality=239, std dev=0.001133m|0.015492rad, update time=0.025252s delay=0.100198s
+[INFO] [1791528105.057386368] [rtabmap_rgbd_odometry]: Odom: quality=233, std dev=0.001842m|0.013634rad, update time=0.025512s delay=0.113754s
+[INFO] [1791528105.091880352] [rtabmap_rgbd_odometry]: Odom: quality=250, std dev=0.001136m|0.013634rad, update time=0.026592s delay=0.098262s
+[INFO] [1791528105.129932256] [rtabmap_rgbd_odometry]: Odom: quality=254, std dev=0.000901m|0.016851rad, update time=0.027972s delay=0.102975s
+[INFO] [1791528105.226061696] [rtabmap_rgbd_odometry]: Odom: quality=246, std dev=0.000561m|0.012320rad, update time=0.022730s delay=0.115772s
+[INFO] [1791528105.263760256] [rtabmap_rgbd_odometry]: Odom: quality=252, std dev=0.003379m|0.021036rad, update time=0.024096s delay=0.086786s
+[INFO] [1791528105.309310816] [rtabmap_rgbd_odometry]: Odom: quality=242, std dev=0.004406m|0.015492rad, update time=0.022188s delay=0.099020s
+[INFO] [1791528105.352557984] [rtabmap_rgbd_odometry]: Odom: quality=235, std dev=0.000165m|0.000173rad, update time=0.025573s delay=0.092271s
+[INFO] [1791528105.405618720] [rtabmap_rgbd_odometry]: Odom: quality=248, std dev=0.001268m|0.015865rad, update time=0.035319s delay=0.111987s
+[INFO] [1791528105.437289792] [rtabmap_rgbd_odometry]: Odom: quality=243, std dev=0.001429m|0.013634rad, update time=0.028040s delay=0.110293s
+[INFO] [1791528105.477107936] [rtabmap_rgbd_odometry]: Odom: quality=239, std dev=0.002268m|0.021486rad, update time=0.023242s delay=0.083476s
+[INFO] [1791528105.552508384] [rtabmap_rgbd_odometry]: Odom: quality=255, std dev=0.000812m|0.020040rad, update time=0.035824s delay=0.125541s
+[INFO] [1791528105.591827424] [rtabmap_rgbd_odometry]: Odom: quality=242, std dev=0.000529m|0.015089rad, update time=0.035215s delay=0.098192s
+[INFO] [1791528105.645857728] [rtabmap_rgbd_odometry]: Odom: quality=248, std dev=0.000536m|0.010360rad, update time=0.025387s delay=0.102232s
+[INFO] [1791528107.042779712] [rtabmap_rgbd_odometry]: Odom: quality=240, std dev=0.000384m|0.010360rad, update time=0.037667s delay=0.749192s
+[INFO] [1791528107.099380320] [rtabmap_rgbd_odometry]: Odom: quality=247, std dev=0.000788m|0.018188rad, update time=0.042963s delay=0.122485s
+[INFO] [1791528107.171561600] [rtabmap_rgbd_odometry]: Odom: quality=238, std dev=0.001075m|0.015089rad, update time=0.043669s delay=0.128016s
+[INFO] [1791528107.213618144] [rtabmap_rgbd_odometry]: Odom: quality=237, std dev=0.001507m|0.014170rad, update time=0.031256s delay=0.103418s
+[INFO] [1791528107.271269568] [rtabmap_rgbd_odometry]: Odom: quality=238, std dev=0.001316m|0.015865rad, update time=0.029534s delay=0.127589s
+[INFO] [1791528107.312058528] [rtabmap_rgbd_odometry]: Odom: quality=245, std dev=0.001590m|0.015492rad, update time=0.028247s delay=0.101847s
+[INFO] [1791528107.342223872] [rtabmap_rgbd_odometry]: Odom: quality=229, std dev=0.003236m|0.016214rad, update time=0.024293s delay=0.098685s
+[INFO] [1791528107.392212416] [rtabmap_rgbd_odometry]: Odom: quality=242, std dev=0.004153m|0.019282rad, update time=0.032554s delay=0.115353s
+[INFO] [1791528107.438268640] [rtabmap_rgbd_odometry]: Odom: quality=242, std dev=0.003841m|0.021630rad, update time=0.027009s delay=0.111399s
+[INFO] [1791528107.512987680] [rtabmap_rgbd_odometry]: Odom: quality=252, std dev=0.003693m|0.015865rad, update time=0.045764s delay=0.119450s
+[INFO] [1791528107.561359808] [rtabmap_rgbd_odometry]: Odom: quality=240, std dev=0.000715m|0.013634rad, update time=0.035235s delay=0.117788s
+[INFO] [1791528107.597728704] [rtabmap_rgbd_odometry]: Odom: quality=262, std dev=0.001862m|0.020388rad, update time=0.027933s delay=0.104192s
+[INFO] [1791528107.635647232] [rtabmap_rgbd_odometry]: Odom: quality=242, std dev=0.001362m|0.010360rad, update time=0.022814s delay=0.108748s
+[INFO] [1791528107.669367456] [rtabmap_rgbd_odometry]: Odom: quality=235, std dev=0.000366m|0.010360rad, update time=0.024326s delay=0.092065s
+[INFO] [1791528107.790747616] [rtabmap_rgbd_odometry]: Odom: quality=246, std dev=0.001908m|0.017689rad, update time=0.023707s delay=0.130562s
+[INFO] [1791528107.843482880] [rtabmap_rgbd_odometry]: Odom: quality=246, std dev=0.000693m|0.014651rad, update time=0.023086s delay=0.099945s
+[INFO] [1791528107.882291744] [rtabmap_rgbd_odometry]: Odom: quality=245, std dev=0.001770m|0.017423rad, update time=0.023367s delay=0.088661s
+[INFO] [1791528107.967375392] [rtabmap_rgbd_odometry]: Odom: quality=236, std dev=0.001552m|0.018649rad, update time=0.026862s delay=0.123843s
+[INFO] [1791528108.018415200] [rtabmap_rgbd_odometry]: Odom: quality=237, std dev=0.000790m|0.015492rad, update time=0.028447s delay=0.108228s
+[INFO] [1791528108.056300256] [rtabmap_rgbd_odometry]: Odom: quality=248, std dev=0.003461m|0.016542rad, update time=0.022495s delay=0.096094s
+[INFO] [1791528108.105541248] [rtabmap_rgbd_odometry]: Odom: quality=240, std dev=0.002419m|0.012320rad, update time=0.025970s delay=0.095373s
+[INFO] [1791528108.151955872] [rtabmap_rgbd_odometry]: Odom: quality=242, std dev=0.000770m|0.016851rad, update time=0.034876s delay=0.108481s
+[INFO] [1791528108.185303488] [rtabmap_rgbd_odometry]: Odom: quality=242, std dev=0.001879m|0.016542rad, update time=0.029581s delay=0.108483s
+[INFO] [1791528108.247553056] [rtabmap_rgbd_odometry]: Odom: quality=238, std dev=0.002601m|0.014651rad, update time=0.020322s delay=0.104065s
+[INFO] [1791528108.291400480] [rtabmap_rgbd_odometry]: Odom: quality=230, std dev=0.001765m|0.026452rad, update time=0.025287s delay=0.097908s
+[INFO] [1791528108.330297344] [rtabmap_rgbd_odometry]: Odom: quality=248, std dev=0.003970m|0.022178rad, update time=0.026050s delay=0.103463s
+[INFO] [1791528108.400044800] [rtabmap_rgbd_odometry]: Odom: quality=239, std dev=0.001335m|0.017689rad, update time=0.025116s delay=0.106455s
+[INFO] [1791528108.438714432] [rtabmap_rgbd_odometry]: Odom: quality=236, std dev=0.000517m|0.015492rad, update time=0.023923s delay=0.095210s
+[INFO] [1791528108.512380704] [rtabmap_rgbd_odometry]: Odom: quality=240, std dev=0.001848m|0.018649rad, update time=0.042141s delay=0.135571s
+[INFO] [1791528108.547794464] [rtabmap_rgbd_odometry]: Odom: quality=239, std dev=0.003280m|0.020040rad, update time=0.025368s delay=0.104328s
+[INFO] [1791528108.587277888] [rtabmap_rgbd_odometry]: Odom: quality=234, std dev=0.003671m|0.018423rad, update time=0.030310s delay=0.110475s
+[INFO] [1791528108.661628544] [rtabmap_rgbd_odometry]: Odom: quality=243, std dev=0.000508m|0.011465rad, update time=0.025868s delay=0.118157s
+[INFO] [1791528108.704560160] [rtabmap_rgbd_odometry]: Odom: quality=240, std dev=0.001980m|0.025017rad, update time=0.029968s delay=0.094417s
+[INFO] [1791528108.728943552] [rtabmap_rgbd_odometry]: Odom: quality=240, std dev=0.003739m|0.016851rad, update time=0.021372s delay=0.085471s
+[INFO] [1791528108.811883008] [rtabmap_rgbd_odometry]: Odom: quality=238, std dev=0.004547m|0.019858rad, update time=0.026056s delay=0.118399s
+[INFO] [1791528108.864570464] [rtabmap_rgbd_odometry]: Odom: quality=234, std dev=0.000190m|0.000173rad, update time=0.024068s delay=0.104428s
+[INFO] [1791528108.908979392] [rtabmap_rgbd_odometry]: Odom: quality=247, std dev=0.002113m|0.016851rad, update time=0.025448s delay=0.098829s
+[INFO] [1791528108.955000896] [rtabmap_rgbd_odometry]: Odom: quality=250, std dev=0.001178m|0.018649rad, update time=0.024820s delay=0.111394s
+[INFO] [1791528108.989323200] [rtabmap_rgbd_odometry]: Odom: quality=240, std dev=0.001157m|0.016214rad, update time=0.024279s delay=0.095762s
+[INFO] [1791528109.025586880] [rtabmap_rgbd_odometry]: Odom: quality=240, std dev=0.002774m|0.018649rad, update time=0.022448s delay=0.081925s
+[INFO] [1791528109.136226624] [rtabmap_rgbd_odometry]: Odom: quality=236, std dev=0.000619m|0.017423rad, update time=0.024918s delay=0.109447s
+[INFO] [1791528109.213208960] [rtabmap_rgbd_odometry]: Odom: quality=250, std dev=0.005010m|0.017944rad, update time=0.030314s delay=0.119747s
+[INFO] [1791528109.246070688] [rtabmap_rgbd_odometry]: Odom: quality=248, std dev=0.005360m|0.018188rad, update time=0.024138s delay=0.102568s
+[INFO] [1791528109.290038880] [rtabmap_rgbd_odometry]: Odom: quality=235, std dev=0.002011m|0.017423rad, update time=0.023543s delay=0.096561s
+[INFO] [1791528109.330620736] [rtabmap_rgbd_odometry]: Odom: quality=238, std dev=0.001352m|0.012320rad, update time=0.022437s delay=0.103759s
+[INFO] [1791528109.407221728] [rtabmap_rgbd_odometry]: Odom: quality=237, std dev=0.004814m|0.018423rad, update time=0.026744s delay=0.113768s
+[INFO] [1791528109.442012672] [rtabmap_rgbd_odometry]: Odom: quality=253, std dev=0.000184m|0.000173rad, update time=0.026029s delay=0.098565s
+[INFO] [1791528109.483825120] [rtabmap_rgbd_odometry]: Odom: quality=247, std dev=0.000625m|0.016214rad, update time=0.024183s delay=0.090372s
+[INFO] [1791528109.553561184] [rtabmap_rgbd_odometry]: Odom: quality=240, std dev=0.000483m|0.012320rad, update time=0.033351s delay=0.126780s
+[INFO] [1791528109.592433472] [rtabmap_rgbd_odometry]: Odom: quality=237, std dev=0.001271m|0.010360rad, update time=0.037826s delay=0.115607s
+[INFO] [1791528109.662639936] [rtabmap_rgbd_odometry]: Odom: quality=238, std dev=0.001772m|0.016214rad, update time=0.027155s delay=0.119181s
+[INFO] [1791528109.693884800] [rtabmap_rgbd_odometry]: Odom: quality=254, std dev=0.006640m|0.021770rad, update time=0.027272s delay=0.100448s
+[INFO] [1791528109.727828544] [rtabmap_rgbd_odometry]: Odom: quality=242, std dev=0.002072m|0.019858rad, update time=0.022549s delay=0.101000s
+[INFO] [1791528109.799084384] [rtabmap_rgbd_odometry]: Odom: quality=245, std dev=0.000558m|0.011465rad, update time=0.027142s delay=0.105646s
+[INFO] [1791528109.834249824] [rtabmap_rgbd_odometry]: Odom: quality=245, std dev=0.000586m|0.015089rad, update time=0.031172s delay=0.090729s
+[INFO] [1791528109.909149696] [rtabmap_rgbd_odometry]: Odom: quality=244, std dev=0.000690m|0.016851rad, update time=0.031755s delay=0.115702s
+[INFO] [1791528109.941965056] [rtabmap_rgbd_odometry]: Odom: quality=242, std dev=0.004419m|0.024144rad, update time=0.025291s delay=0.098537s
+[INFO] [1791528109.975907936] [rtabmap_rgbd_odometry]: Odom: quality=236, std dev=0.003176m|0.015492rad, update time=0.021900s delay=0.099138s
+# rtabmap.log
+[INFO] [1791528103.643438880] [rtabmap]: rtabmap (1107): Rate=0.20s, Limit=0.000s, Conversion=0.0033s, RTAB-Map=0.0875s, Maps update=0.0166s pub=0.0003s delay=0.3164s (local map=1, WM=1)
+[INFO] [1791528104.729799360] [rtabmap]: rtabmap (1108): Rate=0.20s, Limit=0.000s, Conversion=0.0043s, RTAB-Map=0.1517s, Maps update=0.0101s pub=0.0004s delay=0.3861s (local map=1, WM=1)
+[INFO] [1791528105.694363552] [rtabmap]: rtabmap (1109): Rate=0.20s, Limit=0.000s, Conversion=0.0058s, RTAB-Map=0.1097s, Maps update=0.0116s pub=0.0003s delay=0.3674s (local map=1, WM=1)
+[WARN] [1791528105.997079904] [rtabmap]: [CONTINUITY_RECEIPT_PAUSE] receipt_latency_ns=102879824 source_age_ns=453445744 arrival_age_ns=350819552 generation=0 local_chain_cut=false
+[INFO] [1791528107.036619360] [rtabmap]: reset quarantine odometry pause with bounded observed step (previous_stamp_ns=1791528105543614000 stamp_ns=1791528106293575000 gap_s=0.749961000 step_translation=0.000803 step_rotation_deg=0.062167 chain=1)
+[WARN] [1791528107.040143552] [rtabmap]: [MEASURED_INTERVAL_CHECK] gap_ns=749961000 measured_interval_ns=749960899 lost=false visual_geometry=true local_chain_cut=false
+[INFO] [1791528107.099490464] [rtabmap]: reset quarantine odometry pause with bounded observed step (previous_stamp_ns=1791528106293575000 stamp_ns=1791528106976888000 gap_s=0.683313000 step_translation=0.001394 step_rotation_deg=0.119709 chain=1)
+[WARN] [1791528107.100470400] [rtabmap]: [MEASURED_INTERVAL_CHECK] gap_ns=683313000 measured_interval_ns=683313370 lost=false visual_geometry=true local_chain_cut=false
+[INFO] [1791528108.671921024] [rtabmap]: rtabmap (1110): Rate=0.20s, Limit=0.000s, Conversion=0.0037s, RTAB-Map=0.1066s, Maps update=0.0089s pub=0.0006s delay=0.3284s (local map=1, WM=1)
+[INFO] [1791528109.656067232] [rtabmap]: rtabmap (1111): Rate=0.20s, Limit=0.000s, Conversion=0.0049s, RTAB-Map=0.1073s, Maps update=0.0161s pub=0.0004s delay=0.3126s (local map=1, WM=1)

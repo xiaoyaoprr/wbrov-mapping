@@ -192,7 +192,7 @@ static MappingContinuityGate::Evidence mappingEvidence(const rtabmap_msgs::msg::
         msg.icp_structural_distribution>=0.5f && msg.icp_structural_distribution<=1.0f;
     e.dimensionsValid=dimensionsSeen && dimensionsCorrect;
     e.measuredRegistration=(msg.inliers>=15 && msg.matches>=msg.inliers &&
-        double(msg.inliers)/double(std::max(1,msg.matches))>=0.25) || e.depthGeometry;
+        double(msg.inliers)/double(std::max(1,msg.matches))>=0.15) || e.depthGeometry;
     if(!e.dimensionsValid) {e.visualGeometry=false;e.depthGeometry=false;}
     if(visualReason.empty() && !e.visualGeometry)
         visualReason=uFormat("inliers=%d matches=%d ratio=%.4f",msg.inliers,msg.matches,
@@ -1743,7 +1743,14 @@ CoreWrapper::CoreWrapper(const rclcpp::NodeOptions & options) :
         mappingRecoveryReferencePub_ = this->create_publisher<sensor_msgs::msg::Image>(
             "/wbrov/mapping/recovery_reference_image", rclcpp::QoS(1).reliable().transient_local());
         mappingContinuityTimer_ = this->create_wall_timer(std::chrono::milliseconds(100), [this]() {
-            mappingContinuityGate_.tick(mappingSteadyNs(), now().nanoseconds());
+            const int64_t steady=mappingSteadyNs();
+            const int64_t ros=now().nanoseconds();
+            const auto before=mappingContinuityGate_.snapshot(steady,ros);
+            mappingContinuityGate_.tick(steady,ros);
+            const auto after=mappingContinuityGate_.snapshot(steady,ros);
+            if(after.reason!=before.reason && after.reason=="source or arrival expired")
+                RCLCPP_WARN(get_logger(),"[CONTINUITY_RECEIPT_PAUSE] receipt_latency_ns=%lld source_age_ns=%lld arrival_age_ns=%lld generation=%llu local_chain_cut=false",
+                    after.receiptLatencyNs,after.sourceAgeNs,after.arrivalAgeNs,static_cast<unsigned long long>(after.generation));
             publishMappingContinuityStatus();
         });
     }
@@ -4758,6 +4765,7 @@ void CoreWrapper::process(
 		if(processSucceeded)
 		{
 			mappingHasWrittenLocalFrame_=true;
+            mappingLastLocalNodeId_=rtabmap_.getLastLocationId();
 			mappingWrittenLocalSerial_=localSerial;
 			mappingWrittenLocalEpoch_=rtabmap_.getResetEpoch();
 			if(safeRelocalizationEnabled_)
@@ -8332,7 +8340,7 @@ void CoreWrapper::clearSafeRelocalizationProtocolState(bool firstUpdateHandled, 
 	mappingContinuityGate_.reset();
     {
         std::lock_guard<std::mutex> lock(mappingRecoveryReferenceMutex_);
-        mappingLastTrustedImage_.reset();mappingLastTrustedNodeId_=0;mappingLastTrustedEpoch_=0;
+        mappingLastTrustedImage_.reset();mappingLastPublishedReference_.reset();mappingLastTrustedNodeId_=0;mappingLastLocalNodeId_=0;mappingLastTrustedEpoch_=0;
     }
     mappingObservationSeedCorrection_.setNull();mappingObservationLastCorrection_.setNull();
 	publishMappingContinuityStatus();
@@ -8911,6 +8919,7 @@ void CoreWrapper::safeRelocalizationProposalCallback(
                 return; // Token remains reserved; exact retries replay this nonterminal status.
             }
             else if(transactionReason.empty())transactionReason="prepared candidate lost continuity before observation";
+            isolateRejectedRecoveryMotion(limits,transactionReason);
         }
         terminalStatus = publishSafeRelocalizationStatus(
                 "rejected", transactionReason, transactionToken, tagId, sourceEpoch, observerGraphRevision, evidence, false);
@@ -9048,6 +9057,25 @@ bool CoreWrapper::mappingRecoveryCommitCurrent(MappingContinuityGate::Ticket tic
     return mappingContinuityGate_.recoveryCommitAllowed(ticket,epoch,mappingSteadyNs(),now().nanoseconds());
 }
 
+void CoreWrapper::isolateRejectedRecoveryMotion(const rtabmap::Rtabmap::SafeRelocalizationLimits & limits,
+        const std::string & reason)
+{
+    // Text only schedules the independent raw check; it never authorizes a
+    // boundary. Ordinary failed old-map matches must not split a healthy map.
+    if(!safeRelocalizationEnabled_ || reason.find("submap continuity ")!=0 ||
+       reason.find(" raw motion disagrees with its odometry or measured neighbor edge")==std::string::npos)return;
+    rtabmap::Rtabmap::RecoveryLocalMotionFault fault;
+    if(!rtabmap_.findRecoveryLocalMotionFault(limits,fault) || fault.resetEpoch!=rtabmap_.getResetEpoch() ||
+       fault.fromId<=0 || fault.toId<=fault.fromId || rtabmap_.isCurrentMapFrameRegistered())return;
+    // Leave all existing graph/receipt data intact. The existing serial gate
+    // opens a new isolated epoch only on a fresh, stable authenticated frame.
+    // That prevents this known-bad old edge from vetoing every future retry.
+    mappingContinuityGate_.invalidate("raw RGB-D confirms inconsistent local motion; isolate segment before retry");
+    RCLCPP_WARN(get_logger(),"[RECOVERY_LOCAL_MOTION_FAULT] epoch=%llu from=%d to=%d; retained isolated, next stable frame starts a new recovery segment",
+        fault.resetEpoch,fault.fromId,fault.toId);
+    publishMappingContinuityStatus();
+}
+
 bool CoreWrapper::tryMappingVisualRecovery()
 {
     if(!safeRelocalizationEnabled_ || rtabmap_.isCurrentMapFrameRegistered() || pendingMappingRecovery_.active)return false;
@@ -9091,6 +9119,7 @@ bool CoreWrapper::tryMappingVisualRecovery()
     };
     rtabmap::Transform proposed;
     if(!rtabmap_.prepareVisualRecoveryWithAcceptedImages(limits,context,commitAllowed,proposed,reason) || proposed.isNull()) {
+        isolateRejectedRecoveryMotion(limits,reason);
         RCLCPP_WARN_THROTTLE(get_logger(),*get_clock(),2000,"[VISUAL_RECOVERY_REJECTED] epoch=%llu reason=%s",epoch,reason.c_str());return false;
     }
     if(!mappingContinuityGate_.beginCandidateObservation(ticket,epoch,mappingSteadyNs(),now().nanoseconds())) {
@@ -9147,9 +9176,15 @@ bool CoreWrapper::observePendingMappingRecovery(const rtabmap::SensorData & data
     const auto epoch=pendingMappingRecovery_.epoch;
     if(ticket.generation!=pendingMappingRecovery_.ticket.generation || epoch!=rtabmap_.getResetEpoch() ||
        pendingMappingRecovery_.revision!=safeRelocalizationGraphRevision_ ||
-       !mappingRecoveryCommitCurrent(pendingMappingRecovery_.ticket,epoch,pendingMappingRecovery_.requireProposal))
+       stampNs-pendingMappingRecovery_.ticket.frameNs>MappingContinuityGate::QUALITY_VERIFY_NS)
     {discardPendingMappingRecovery("prepared recovery identity or source continuity changed");return false;}
     if(!mappingContinuityGate_.observationInputAllowed(ticket,epoch,mappingSteadyNs(),now().nanoseconds()))return false;
+    if(!mappingRecoveryCommitCurrent(pendingMappingRecovery_.ticket,epoch,pendingMappingRecovery_.requireProposal))return false;
+    const auto before=mappingContinuityGate_.snapshot(mappingSteadyNs(),now().nanoseconds());
+    if(before.mapObservationCount==0) {
+        pendingMappingRecovery_.observations.clear();
+        pendingMappingRecovery_.lastCorrection=pendingMappingRecovery_.correction;
+    }
     int lastTrusted=0;
     {std::lock_guard<std::mutex> lock(mappingRecoveryReferenceMutex_);lastTrusted=mappingLastTrustedNodeId_;}
     rtabmap::Transform measured;
@@ -9234,8 +9269,11 @@ bool CoreWrapper::observeRecoveredMainMap(const rtabmap::SensorData & data,
 
     rtabmap::Transform measuredMainPose;
     std::string reason;
-    const bool verified=lastTrusted>0 && rtabmap_.validateRegisteredMapObservation(
-        data,odom,lastTrusted,limits,measuredMainPose,reason);
+    const bool localOnly=!rtabmap_.isCurrentMapFrameRegistered();
+    const bool verified=localOnly ? rtabmap_.validateLocalMapObservation(
+        data,odom,mappingLastLocalNodeId_,limits,measuredMainPose,reason) :
+        (lastTrusted>0 && rtabmap_.validateRegisteredMapObservation(
+            data,odom,lastTrusted,limits,measuredMainPose,reason));
     const bool sourcesCurrent=mappingRecoveryCommitCurrent(ticket,epoch,false);
     rtabmap::Transform correction;
     double seedTranslation=std::numeric_limits<double>::infinity(),seedRotation=seedTranslation;
@@ -9253,7 +9291,7 @@ bool CoreWrapper::observeRecoveredMainMap(const rtabmap::SensorData & data,
     if(verified && sourcesCurrent && !correction.isNull())mappingObservationLastCorrection_=correction;
     if(!verified || !sourcesCurrent)
         RCLCPP_WARN(this->get_logger(),"Registered-map observation rejected; map remains paused: %s",reason.c_str());
-    if(complete)RCLCPP_INFO(this->get_logger(),"Five independent registered-map observations passed; next qualified frame may extend main map");
+    if(complete)RCLCPP_INFO(this->get_logger(),"Five independent %s observations passed; next qualified frame may extend only that map",localOnly?"private local map":"registered main map");
     return complete;
 }
 
@@ -9275,8 +9313,11 @@ void CoreWrapper::publishMappingContinuityStatus()
     {
         std::lock_guard<std::mutex> lock(mappingRecoveryReferenceMutex_);
         reference=mappingLastTrustedImage_;trustedNode=mappingLastTrustedNodeId_;trustedEpoch=mappingLastTrustedEpoch_;
-        publishReference=reference && !s.mainMapWriteAllowed && mappingLastReferencePublishedGeneration_!=s.generation;
-        if(publishReference)mappingLastReferencePublishedGeneration_=s.generation;
+        // Retain the latest trusted view for a late RViz subscriber even before
+        // the first pause. Receipt-only pauses preserve generation, so it cannot
+        // serve as an image-publication sequence number.
+        publishReference=reference && reference!=mappingLastPublishedReference_;
+        if(publishReference)mappingLastPublishedReference_=reference;
     }
     std_msgs::msg::String status;
     status.data=uFormat("{\"schema\":\"wbrov.mapping-continuity.v1\",\"state\":\"%s\","
@@ -9289,22 +9330,26 @@ void CoreWrapper::publishMappingContinuityStatus()
         MappingContinuityGate::stateName(s.state),mappingJsonString(s.reason).c_str(),s.epoch,
         static_cast<unsigned long long>(s.generation),s.sourceNs,safeRelocalizationSessionTokenSha256_.c_str(),s.goodSamples,
         s.registered?"true":"false",s.mainMapWriteAllowed?"true":"false",
-        localReady?"true":"false",localReady&&!s.observingMainMap&&!s.qualityPending&&!s.registered?"true":"false",s.visualGeometry?"true":"false",s.depthGeometry?"true":"false",s.observingMainMap&&!s.observingCandidate?"true":"false",
+        localReady?"true":"false",localReady&&!s.observingMainMap&&!s.qualityPending&&!s.registered?"true":"false",s.visualGeometry?"true":"false",s.depthGeometry?"true":"false",s.observingMainMap&&!s.observingCandidate&&!s.observingLocal?"true":"false",
         s.mapObservationCount,s.observingCandidate?"true":"false",mappingContinuityVoWidth_,mappingContinuityVoHeight_,trustedNode,trustedEpoch,
         reference?static_cast<long long>(rclcpp::Time(reference->header.stamp).nanoseconds()):0LL);
+    UASSERT(!status.data.empty() && status.data.back()=='}');
     status.data.pop_back();
     status.data+=uFormat(",\"finite_motion\":%s,\"covariance_finite_pd\":%s,\"covariance_bounded\":%s,\"dimensions_valid\":%s,"
         "\"quality_verification_pending\":%s,\"quality_start_ns\":%lld,\"last_cut_source_ns\":%lld,\"cut_count\":%llu,\"unaligned_submap_count\":%u,",
         s.finiteMotion?"true":"false",s.covarianceFinitePD?"true":"false",s.covarianceBounded?"true":"false",s.dimensionsValid?"true":"false",
         s.qualityPending?"true":"false",s.qualityStartNs,s.lastCutSourceNs,static_cast<unsigned long long>(s.cutCount),
         submapPublisher_?submapPublisher_->unregisteredCount():0U);
+    status.data+=uFormat("\"receipt_latency_ns\":%lld,\"arrival_age_ns\":%lld,\"source_age_ns\":%lld,\"observing_local_map\":%s,",
+        s.receiptLatencyNs,s.arrivalAgeNs,s.sourceAgeNs,s.observingLocal?"true":"false");
     status.data+="\"quality_reason\":"+mappingJsonString(s.qualityReason)+",\"last_cut_reason\":"+mappingJsonString(s.lastCutReason)+
         ",\"last_cut_quality_reason\":"+mappingJsonString(s.lastCutQualityReason)+",\"last_pause_reason\":"+mappingJsonString(s.lastPauseReason)+",\"quality_trigger_reason\":"+mappingJsonString(s.qualityTriggerReason)+"}";
     mappingContinuityStatusPub_->publish(status);
     std_msgs::msg::String display;display.data=MappingContinuityGate::chinese(s.state);
     if(s.state==MappingContinuityGate::State::PAUSED && !reference)display.data="定位丢失，建图暂停；尚无可信参考图像";
-    if(s.observingMainMap)display.data=uFormat("候选主图位置，正在观察验证 %u/5；主地图暂停更新",s.mapObservationCount);
-    else if(s.qualityPending)display.data="短暂定位退化，主图停写；正在核验最后可信位置";
+    if(s.observingLocal)display.data=uFormat("正在核验临时子图连续性 %u/5；主地图仍未对齐",s.mapObservationCount);
+    else if(s.observingMainMap)display.data=uFormat("候选主图位置，正在观察验证 %u/5；主地图暂停更新",s.mapObservationCount);
+    else if(s.qualityPending)display.data="短暂定位退化，暂停写图；正在核验已有关键帧";
     else if(localReady && !s.mainMapWriteAllowed)display.data="局部跟踪正常，临时子图记录中；尚未对齐主地图";
     display.data+=uFormat("；未对齐子图 %u",submapPublisher_?submapPublisher_->unregisteredCount():0U);
     mappingContinuityTextPub_->publish(display);

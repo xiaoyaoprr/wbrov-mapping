@@ -1,0 +1,43 @@
+Selected raw pairs from a closed database. ODOM/EDGE comparison applies only to same-epoch 362 -> 363. Cross-epoch poses have different origins and are not directly compared.
+PAIR current=362 old=363 ransac_threshold=0.025 tight=1
+forward inliers=97 backend= transform=xyz=-0.006443,-0.008518,-0.058912 rpy=0.006336,0.062194,-0.019735
+ words=97 side(id=362,image=960x600,cells=5,points=97,span=0.0473212,hessian=0.00233401) side(id=363,image=960x600,cells=7,points=97,span=0.045444,hessian=0.00211347)
+ covariance finite=1 symmetry=0 min=6.98762e-05 max=6.98762e-05 condition=1
+ metric count=97 invalid=0 rms=0.010658 max=0.0160363 above_025=0
+reverse inliers=55 backend= transform=xyz=0.002325,0.010384,0.061862 rpy=-0.006168,-0.055194,0.016815
+ words=55 side(id=363,image=960x600,cells=6,points=55,span=0.0441806,hessian=0.00201012) side(id=362,image=960x600,cells=4,points=55,span=0.0457296,hessian=0.00220348)
+ covariance finite=1 symmetry=0 min=8.20028e-05 max=8.20028e-05 condition=1
+ metric count=55 invalid=0 rms=0.00912615 max=0.013193 above_025=0
+ direction_distance=0.00317799 direction_angle_deg=0.442887
+ODOM stored=xyz=-0.013049,-0.020627,-0.050265 rpy=0.000327,0.085497,0.017692 distance=0.0162798 rotation_deg=2.57066 dz=0.00864745
+EDGE stored=xyz=-0.013049,-0.020627,-0.050265 rpy=0.000327,0.085497,0.017692 distance=0.0162798 rotation_deg=2.57066 dz=0.00864745
+PAIR current=396 old=303 ransac_threshold=0.025 tight=1
+forward inliers=151 backend= transform=xyz=0.002242,-0.047574,0.008418 rpy=0.021100,-0.012811,-0.093952
+ words=151 side(id=396,image=960x600,cells=7,points=151,span=0.0613974,hessian=0.00377508) side(id=303,image=960x600,cells=9,points=151,span=0.0621215,hessian=0.00386413)
+ covariance finite=1 symmetry=0 min=6.36887e-06 max=6.36887e-06 condition=1
+ metric count=151 invalid=0 rms=0.00354868 max=0.0085642 above_025=0
+reverse inliers=150 backend= transform=xyz=-0.006436,0.047075,-0.007782 rpy=-0.017800,0.018464,0.092751
+ words=150 side(id=303,image=960x600,cells=9,points=150,span=0.0580005,hessian=0.00336939) side(id=396,image=960x600,cells=7,points=150,span=0.0573294,hessian=0.00329244)
+ covariance finite=1 symmetry=0 min=1.11144e-05 max=1.11144e-05 condition=1
+ metric count=150 invalid=0 rms=0.00348627 max=0.00866312 above_025=0
+ direction_distance=0.00148458 direction_angle_deg=0.24893
+PAIR current=397 old=290 ransac_threshold=0.025 tight=1
+forward inliers=106 backend= transform=xyz=-0.007716,-0.032164,0.007889 rpy=-0.039997,-0.027527,-0.083702
+ words=106 side(id=397,image=960x600,cells=7,points=106,span=0.0454723,hessian=0.00207269) side(id=290,image=960x600,cells=7,points=106,span=0.0452975,hessian=0.002057)
+ covariance finite=1 symmetry=0 min=1.20029e-05 max=1.20029e-05 condition=1
+ metric count=106 invalid=0 rms=0.00199226 max=0.00527482 above_025=0
+reverse inliers=111 backend= transform=xyz=0.004704,0.032062,-0.006360 rpy=0.040710,0.025551,0.087776
+ words=111 side(id=290,image=960x600,cells=7,points=111,span=0.040548,hessian=0.00164985) side(id=397,image=960x600,cells=7,points=111,span=0.0407093,hessian=0.00166293)
+ covariance finite=1 symmetry=0 min=1.30135e-05 max=1.30135e-05 condition=1
+ metric count=111 invalid=0 rms=0.00202193 max=0.00567386 above_025=0
+ direction_distance=0.00101889 direction_angle_deg=0.211748
+PAIR current=398 old=333 ransac_threshold=0.025 tight=1
+forward inliers=134 backend= transform=xyz=-0.038767,-0.046128,-0.045274 rpy=-0.094142,-0.039914,-0.091422
+ words=134 side(id=398,image=960x600,cells=7,points=134,span=0.0558548,hessian=0.00312486) side(id=333,image=960x600,cells=8,points=134,span=0.0547126,hessian=0.00299798)
+ covariance finite=1 symmetry=0 min=2.50644e-05 max=2.50644e-05 condition=1
+ metric count=134 invalid=0 rms=0.00702673 max=0.0151125 above_025=0
+reverse inliers=124 backend= transform=xyz=0.036506,0.048379,0.045998 rpy=0.099562,0.022504,0.084299
+ words=124 side(id=333,image=960x600,cells=8,points=124,span=0.0540434,hessian=0.00292456) side(id=398,image=960x600,cells=5,points=124,span=0.0551389,hessian=0.0030443)
+ covariance finite=1 symmetry=0 min=2.58253e-05 max=2.58253e-05 condition=1
+ metric count=124 invalid=0 rms=0.00687968 max=0.00995118 above_025=0
+ direction_distance=0.00467415 direction_angle_deg=0.785922

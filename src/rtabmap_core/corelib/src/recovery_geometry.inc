@@ -173,6 +173,46 @@ bool Rtabmap::validateRecoveryCache(const std::set<int> & ids,const std::vector<
     return true;
 }
 
+bool Rtabmap::findRecoveryLocalMotionFault(const SafeRelocalizationLimits & limits,
+        RecoveryLocalMotionFault & fault) const
+{
+    fault=RecoveryLocalMotionFault{};
+    if(!_safeRelocalizationGuardEnabled || !_memory || isCurrentMapFrameRegistered())return false;
+    // Recheck a rejected cache independently of its old-map/Tag hypothesis.
+    // A wrong loop, missing depth, weak registration or stale proposal is not
+    // proof that the local segment itself has a discontinuity. This read-only
+    // check can only report a contradiction supported by a valid raw pair.
+    const Signature * previous=nullptr;
+    for(const auto & entry:_optimizedPoses) {
+        if(entry.first<=0 || getSignatureResetEpoch(entry.first)!=_resetEpoch)continue;
+        const Signature * current=_memory->getSignature(entry.first);
+        AcceptedImageReceipt receipt;
+        if(!current || !getAcceptedImageReceipt(entry.first,receipt) || receipt.resetEpoch!=_resetEpoch ||
+           receipt.mapId!=current->mapId())return false;
+        if(previous) {
+            if(previous->mapId()!=current->mapId() || previous->getStamp()>=current->getStamp())return false;
+            const Link * forward=nullptr,*reverse=nullptr;
+            for(const auto & edge:previous->getLinks())if(edge.second.to()==current->id() && edge.second.type()==Link::kNeighbor) {
+                if(forward)return false;forward=&edge.second;
+            }
+            for(const auto & edge:current->getLinks())if(edge.second.to()==previous->id() && edge.second.type()==Link::kNeighbor) {
+                if(reverse)return false;reverse=&edge.second;
+            }
+            if(!forward || !reverse)return false;
+            RecoveryPairResult pair;std::string why;
+            if(!strictRecoveryPair(_memory->getNodeData(previous->id(),true,false,false,false),
+                _memory->getNodeData(current->id(),true,false,false,false),_parameters,limits.maxInformationCondition,pair,why))return false;
+            if(!strictRecoveryPoseAgreement(pair.forward,previous->getPose().inverse()*current->getPose(),limits) ||
+               !strictRecoveryPoseAgreement(pair.forward,forward->transform(),limits) ||
+               !strictRecoveryPoseAgreement(pair.reverse,reverse->transform(),limits)) {
+                fault.resetEpoch=_resetEpoch;fault.fromId=previous->id();fault.toId=current->id();return true;
+            }
+        }
+        previous=current;
+    }
+    return false;
+}
+
 bool Rtabmap::validateObservationAgainstReferences(const SensorData & observation,const Transform & predicted,
         const std::map<int,Transform> & references,int excludedId,int requiredAnchor,
         const SafeRelocalizationLimits & limits,Transform & measured,std::string & reason) const
@@ -219,6 +259,25 @@ bool Rtabmap::validateObservationAgainstReferences(const SensorData & observatio
     }
     reason=uFormat("two independent old-keyframe RGB-D observations unavailable (references=%d,nearby=%d,first=%d,raw_rejected=%d,prediction_rejected=%d,baseline_rejected=%d,agreement_rejected=%d; %s)",
         int(references.size()),int(ordered.size()),firstId,rawRejected,predictionRejected,baselineRejected,agreementRejected,lastFailure.c_str());return false;
+}
+
+bool Rtabmap::validateLocalMapObservation(const SensorData & data,const Transform & odomPose,
+        int lastLocalNodeId,const SafeRelocalizationLimits & limits,Transform & measuredLocalPose,std::string & reason) const
+{
+    const Signature * checkpoint=_memory?_memory->getSignature(lastLocalNodeId):nullptr;
+    if(!_safeRelocalizationGuardEnabled || isCurrentMapFrameRegistered() || !checkpoint ||
+       lastLocalNodeId<=0 || getSignatureResetEpoch(lastLocalNodeId)!=_resetEpoch ||
+       !safeRigidTransform(odomPose) || !safeRigidTransform(_mapCorrection))
+    {reason="same-epoch frozen local checkpoint unavailable";return false;}
+    std::map<int,Transform> local;
+    for(const auto & pose:_optimizedPoses) {
+        const Signature * node=_memory->getSignature(pose.first);
+        if(pose.first>0 && pose.first<=lastLocalNodeId && getSignatureResetEpoch(pose.first)==_resetEpoch &&
+           node && node->mapId()==checkpoint->mapId())local.insert(pose);
+    }
+    // Same raw bidirectional geometry and independent-view requirements as main
+    // recovery. This read-only result never registers the epoch or adds an edge.
+    return validateObservationAgainstReferences(data,_mapCorrection*odomPose,local,0,0,limits,measuredLocalPose,reason);
 }
 
 bool Rtabmap::validateRegisteredMapObservation(const SensorData & data,const Transform & odomPose,

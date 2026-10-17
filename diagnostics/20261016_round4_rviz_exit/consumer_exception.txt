@@ -1,0 +1,4 @@
+ValueError: terminal graph revision
+bridge_status.py::validate_terminal rejected legitimate revision advance 403 -> 404.
+Core result: rejected; evidence_pairs empty; transaction belongs to the active authenticated session.
+Session secrets and transaction tokens omitted.

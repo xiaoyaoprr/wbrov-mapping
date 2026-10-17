@@ -281,6 +281,11 @@ public:
         std::map<int,Transform> poses;
         std::multimap<int,Link> links;
     };
+    struct RecoveryLocalMotionFault
+    {
+        unsigned long long resetEpoch=0;
+        int fromId=0,toId=0;
+    };
     // Core processing lane only. Current unregistered graph, grouped by
     // epoch/map/component; first node is identity, no main-map transform.
     // Relative measured links only; excludes self priors and virtual edges.
@@ -326,9 +331,14 @@ private:
         std::string & reason);
     bool validateRecoveryCache(const std::set<int> & ids, const std::vector<Link> & evidence,
         const SafeRelocalizationLimits & limits, std::string & reason) const;
+    bool findRecoveryLocalMotionFault(const SafeRelocalizationLimits & limits,
+        RecoveryLocalMotionFault & fault) const;
     bool validateObservationAgainstReferences(const SensorData & observation, const Transform & predicted,
         const std::map<int,Transform> & references, int excludedId, int requiredAnchor,
         const SafeRelocalizationLimits & limits, Transform & measured, std::string & reason) const;
+    bool validateLocalMapObservation(const SensorData & data, const Transform & odomPose,
+            int lastLocalNodeId, const SafeRelocalizationLimits & limits,
+            Transform & measuredLocalPose, std::string & reason) const;
     bool validateRegisteredMapObservation(const SensorData & data, const Transform & odomPose,
         int lastTrustedNodeId, const SafeRelocalizationLimits & limits,
         Transform & measuredMainPose, std::string & reason) const;
@@ -425,6 +435,9 @@ private:
 	bool promoteCommittedEpochForSafeRelocalization(std::string & reason);
 	bool validateAndFreezeCommittedEpochForSafeRelocalization(std::string & reason);
 	void rebuildSafeRelocalizationTrustedComponents();
+    bool collectRawCrossMapLoopEvidence(const Signature & current, const Signature & old,
+            unsigned long long currentResetEpoch, unsigned long long oldResetEpoch,
+            std::string & reason);
 	bool acceptCrossMapLoopEvidence(
 			const Signature & current,
 			const Signature & old,

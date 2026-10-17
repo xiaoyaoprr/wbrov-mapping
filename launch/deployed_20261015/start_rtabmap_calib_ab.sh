@@ -74,6 +74,8 @@ readonly dual_stream_binary='/home/exocean/.cache/rtabmap_dense/calib_ab_2026082
 # Frozen ARM64 dual-stream bridge candidate.  The managed runtime observer is
 # still an independent fail-closed deployment prerequisite.
 readonly dual_stream_binary_sha256='2b1634ae850a340590257545e89f382b1d29625b494af318123fef6430fb9f50'
+readonly svo_verifier_binary='CANDIDATE_REQUIRES_NATIVE_BUILD'
+readonly svo_verifier_sha256='CANDIDATE_REQUIRES_NATIVE_BUILD'
 readonly private_runtime_root='/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-74d38aba069fcfbb0872b705ca44b6ea5b95e96c5362a4f1aa214e44bb04a77f'
 readonly camera_health_observer="$private_runtime_root/bin/header_health_observer"
 readonly camera_health_observer_sha256='a04aa06117bae16265f4d836406af274b1de105dff9c53e3a6b6bad7c0886018'
@@ -1289,6 +1291,7 @@ fi
 # Fixed only for this isolated launcher and its newly-created run/database.
 export APRILTAG_LANDMARK_MODE=position_g2o
 export APRILTAG_SIZE_M='0.080'
+export APRILTAG_INPUT_PERIOD_S="$(awk -v hz="$map_publish_hz" 'BEGIN {printf "%.9f", 1.0/hz}')"
 restore_trial_ranges
 validate_trial_ranges
 frame_min_depth="$(ros_double_literal "$DENSE_MIN_M")"
@@ -2394,6 +2397,8 @@ timer_pid=""
 cleaned=0
 cleanup_nodes_stopped=false
 cleanup_export_succeeded=false
+cleanup_partial_archive=false
+cleanup_saved_archive=false
 cleanup_no_tag_available=false
 cleanup_apriltag_anchor_succeeded=false
 cleanup_continuation_contract_succeeded=false
@@ -2854,8 +2859,32 @@ valid_epochs = (
     isinstance(graph_epochs, list) and graph_epochs and
     all(type(value) is int and value >= 0 for value in graph_epochs) and
     graph_epochs == sorted(set(graph_epochs)) and
-    isinstance(committed_epochs, list) and committed_epochs == graph_epochs[1:]
+    isinstance(committed_epochs, list) and
+    all(type(value) is int and value >= 0 for value in committed_epochs) and
+    committed_epochs == sorted(set(committed_epochs))
 )
+# An isolated epoch and a rejected proposal are expected mapping outcomes.
+# They do not mean that the owned observer failed to shut down. The retained
+# graph epoch list is compacted; it is not a list of successful transactions.
+# Continuation/registration permission remains a separate Core/export check.
+valid_transactions = (
+    isinstance(terminals, dict) and
+    type(result.get('bridge_proposals')) is int and
+    result['bridge_proposals'] == len(terminals) and
+    all(isinstance(value, dict) and isinstance(key, str) and key and
+        value.get('transaction_token') == key and
+        value.get('producer') == 'wbrov_rtabmap_safe_relocalization_core' and
+        value.get('schema_version') == 1 and
+        value.get('session_token_sha256') == token_sha and
+        value.get('database_sha256') == database_sha and
+        value.get('result') in ('committed', 'rejected') and
+        type(value.get('core_reset_epoch')) is int and value['core_reset_epoch'] >= 0
+        for key, value in terminals.items())
+)
+if valid_transactions and valid_epochs:
+    valid_transactions = committed_epochs == sorted({
+        value['core_reset_epoch'] for value in terminals.values()
+        if value['result'] == 'committed'})
 valid_terminal = (
     result.get('state') == 'closed' and
     result.get('fixture_mode') is False and
@@ -2868,9 +2897,7 @@ valid_terminal = (
     result.get('source_compromised') is False and
     result.get('graph_state_rejections') == 0 and
     isinstance(counts, dict) and counts.get('rejected') == 0 and
-    valid_epochs and isinstance(terminals, dict) and
-    result.get('bridge_proposals') == len(terminals) == len(committed_epochs) and
-    all(value.get('result') == 'committed' for value in terminals.values()) and
+    valid_epochs and valid_transactions and
     cleanup == {'primary_exception': None, 'cleanup_errors': [], 'bridge_complete': True}
 )
 raise SystemExit(0 if valid_terminal else 1)
@@ -3189,10 +3216,11 @@ def load_saved_graph(database):
         matrices = [list(row) for row in struct.iter_unpack("<12f", pose_bytes)]
         for matrix in matrices:
             valid_pose(matrix)
-        raw_nodes = connection.execute("SELECT id,weight,pose FROM Node WHERE id>0 LIMIT ?", (MAX_POSES + 1,)).fetchall()
+        raw_nodes = connection.execute("SELECT id,weight,pose,map_id,stamp FROM Node WHERE id>0 LIMIT ?", (MAX_POSES + 1,)).fetchall()
         require(len(raw_nodes) <= MAX_POSES, "too many database nodes")
         all_nodes, eligible, excluded, invalid = set(), set(), set(), []
-        for node, weight, blob in raw_nodes:
+        node_inventory = {}
+        for node, weight, blob, map_id, stamp in raw_nodes:
             require(type(node) is int and node > 0 and node not in all_nodes and type(weight) is int,
                     "invalid/duplicate Node id or weight")
             all_nodes.add(node)
@@ -3205,6 +3233,7 @@ def load_saved_graph(database):
                 invalid.append(node)
                 continue
             eligible.add(node)
+            node_inventory[node] = {"map_id": map_id, "stamp": stamp, "pose": pose_blob(blob)}
         require(positive <= eligible, "saved positive IDs lack eligible finite Node poses")
         data = {row[0]: row[1:] for row in connection.execute("SELECT id,length(image),length(depth) FROM Data")}
         require(all(node in data and data[node][0] and data[node][1] for node in positive),
@@ -3266,7 +3295,8 @@ def load_saved_graph(database):
                     "per_node_cloud_contribution_verified": False}
         return {"schema_version": 1, "saved_ids": ids, "saved_poses": matrices,
                 "saved_admin_payload_sha256": hashlib.sha256(admin[0][1] + admin[0][2]).hexdigest(),
-                "coverage": coverage}
+                "coverage": coverage, "node_inventory": node_inventory, "metric_edges": metric_edges,
+                "rgb_depth_available_ids": sorted(node for node in eligible if node in data and data[node][0] and data[node][1])}
 
 
 def write_json(path, value):
@@ -3429,6 +3459,55 @@ def verify_snapshot(expected, output_dir):
     return audit
 
 
+def archive_submaps(output_dir, expected):
+    inventory = {int(k):v for k,v in expected["node_inventory"].items()}
+    saved = {node for node in expected["saved_ids"] if node > 0}
+    coverage = expected["coverage"]
+    require(not coverage["dangling_metric_links"] and not coverage["invalid_node_pose_ids"],
+            "invalid/dangling graph cannot be archived as complete")
+    require(set(inventory) <= set(expected["rgb_depth_available_ids"]), "eligible archived node lacks RGB-D")
+    groups = components(set(inventory), expected["metric_edges"], set())
+    submaps = []
+    for group in groups:
+        ids = group["missing_positive_ids"]
+        overlap = set(ids) & saved
+        require(not overlap or overlap == set(ids), "saved main graph omits nodes in its own metric component")
+        if overlap: continue
+        first = inventory[ids[0]]["pose"]
+        rotation = [[first[4*j+i] for j in range(3)] for i in range(3)]
+        local = {}
+        for node in ids:
+            pose = inventory[node]["pose"]
+            result = []
+            for i in range(3):
+                result.extend(sum(rotation[i][k]*pose[4*k+j] for k in range(3)) for j in range(3))
+                result.append(sum(rotation[i][k]*(pose[4*k+3]-first[4*k+3]) for k in range(3)))
+            valid_pose(result);local[str(node)] = result
+        submaps.append({"component_id":ids[0], "map_ids":sorted({inventory[node]["map_id"] for node in ids}),
+            "node_ids":ids, "own_frame":"archived_local_c"+str(ids[0]), "attached":False,
+            "poses":local, "pose_basis":"stored local odometry, normalized at first node; not main-map optimized poses",
+            "reset_epoch":None, "reset_epoch_must_be_reestablished_on_replay":True,
+            "raw_data":{"database":"source.db","table":"Data","node_ids":ids}})
+    relations = []
+    run = output_dir.parent
+    candidates = list((run/"corner_recovery").rglob("*.json")) + list((run/"corner_recovery").rglob("*.jsonl"))
+    candidates += [run/"apriltag_keyframe_bindings.jsonl",run/"apriltag_map.json",run/"rtabmap.log"]
+    for path in sorted(set(candidates)):
+        if not path.exists(): continue
+        regular(path)
+        digest = hashlib.sha256()
+        with path.open("rb") as stream:
+            for block in iter(lambda:stream.read(1024*1024),b""):digest.update(block)
+        relations.append({"run_relative_path":str(path.relative_to(run)),"sha256":digest.hexdigest()})
+    report = {"schema":"wbrov.submap-archive.v1","complete":True,"submaps":submaps,
+        "database_sha256":expected["source_snapshot"]["sha256"],"raw_database":"source.db",
+        "relations_and_tag_bindings":relations,"saved_main_node_ids":sorted(saved),
+        "weight_excluded_node_ids_retained_in_database":coverage["weight_excluded_positive_ids"],
+        "automatic_continuation_allowed":False,"field_accuracy_validated":False}
+    write_json(output_dir/"submaps.json",report)
+    return report
+
+
 def verify(output_dir):
     output_dir = Path(output_dir)
     expected_path = output_dir / "saved_poses.expected.json"
@@ -3440,14 +3519,16 @@ def verify(output_dir):
     poses = pose_file(output_dir / "rtabmap_dense_poses.txt", expected)
     cloud = ply_file(output_dir / "rtabmap_dense_cloud.ply")
     complete = expected["coverage"]["metric_coverage_complete"]
+    archive = archive_submaps(output_dir, expected)
     summary = {"schema_version": 1,
                "status": "complete_saved_graph_and_metric_coverage" if complete else "complete_saved_graph_but_partial_database",
                "publish_allowed": complete, "poses": poses, "cloud": cloud,
+               "submaps_archived": archive["complete"], "submap_count": len(archive["submaps"]),
                "coverage": expected["coverage"], "source_holder_audit_before_publish": audit,
                "field_accuracy_validated": False}
     write_json(output_dir / "export_validation.json", summary)
     print("SAFE_EXPORT_VALIDATION " + json.dumps(summary, sort_keys=True))
-    require(complete, "saved graph exported, but database metric nodes/links remain uncovered; old PLY retained")
+    require(complete or archive["complete"], "incomplete graph archive")
 
 
 def main(arguments):
@@ -3724,7 +3805,7 @@ RUN_DATABASE_BINDING_PY
 }
 
 safe_export_saved_poses() {
-    local export_dir
+    local export_dir output_name=rtabmap_dense.ply
     export_dir="$(mktemp -d "$run_dir/.safe_export.XXXXXX")" || return 1
     printf 'private_export_directory=%s\n' "$export_dir" > "$run_dir/export.log" || return 1
     if ! safe_export_guard prepare "$database" "$export_dir" >>"$run_dir/export.log" 2>&1; then
@@ -3746,18 +3827,44 @@ safe_export_saved_poses() {
         echo "[保存未完成] 导出位姿/点云/数据库约束覆盖验证未通过；不把局部导出当整轮成功，保留旧PLY。诊断: $run_dir/export.log；临时目录: $export_dir" >&2
         return 1
     fi
-    if [[ -L "$run_dir/rtabmap_dense.ply" ]] || \
-       { [[ -e "$run_dir/rtabmap_dense.ply" ]] && [[ ! -f "$run_dir/rtabmap_dense.ply" ]]; }; then
+    if ! "$python3_runtime" -c 'import json,sys; sys.exit(0 if json.load(open(sys.argv[1]))["publish_allowed"] else 1)' "$export_dir/export_validation.json"; then
+        cleanup_partial_archive=true
+        output_name=rtabmap_partial_main.ply
+    fi
+    if [[ -L "$run_dir/$output_name" ]] || \
+       { [[ -e "$run_dir/$output_name" ]] && [[ ! -f "$run_dir/$output_name" ]]; }; then
         echo "[导出失败] 目标PLY不是可替换的普通文件，保留临时证据: $export_dir" >&2
         return 1
     fi
-    if ! mv -T -- "$export_dir/rtabmap_dense_cloud.ply" "$run_dir/rtabmap_dense.ply"; then
+    if ! mv -T -- "$export_dir/rtabmap_dense_cloud.ply" "$run_dir/$output_name"; then
         echo "[导出失败] 已验证PLY发布失败，保留临时证据: $export_dir" >&2
         return 1
     fi
     printf '已验证保存图/metric节点覆盖及非空点云；每节点点云贡献和物理精度未验收。\n点云: %s\n诊断: %s\n' \
-        "$run_dir/rtabmap_dense.ply" "$export_dir/export_validation.json" || true
-    return 0
+        "$run_dir/$output_name" "$export_dir/export_validation.json" || true
+    "$python3_runtime" - "$run_dir" "$export_dir" "$output_name" "$camera_profile" "$default_camera_profile" <<'PY_SAVE_REPORT'
+import json, pathlib, os, sys
+run, exported = pathlib.Path(sys.argv[1]), pathlib.Path(sys.argv[2])
+main = json.loads((exported/'export_validation.json').read_text())
+raw_path = run/'raw_recording/verification.json'
+raw = json.loads(raw_path.read_text()) if raw_path.is_file() else {'complete':False,'reason':'raw recording verification missing'}
+raw_required = sys.argv[4] == sys.argv[5]
+if not raw_required:
+    raw = {'complete':False, 'status':'not_supported_by_legacy_profile', 'required':False}
+submaps = json.loads((exported/'submaps.json').read_text())
+report = {'schema':'wbrov.save-report.v1','raw_recording':raw,
+          'main_map_export':dict(main, path=sys.argv[3], status='complete' if main['publish_allowed'] else 'partial'),
+          'submaps':submaps, 'archive_directory':exported.name,
+          'continuation_permission_granted_by_this_report':False,
+          'raw_recording_required':raw_required,
+          'complete':(not raw_required or raw.get('complete') is True) and submaps['complete'] is True}
+with (run/'save_report.json').open('x') as f:
+    json.dump(report,f,allow_nan=False,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
+sys.exit(0 if report['complete'] else 1)
+PY_SAVE_REPORT
+    local report_status=$?
+    if ((report_status == 0)); then cleanup_saved_archive=true; fi
+    return "$report_status"
 }
 
 no_exact_tag_observations() {
@@ -3999,9 +4106,18 @@ cleanup() {
             printf '[保存未完成] SLAM wait=%s（含abort/未知127均拒绝）；保留数据库，不导出。\n' "$slam_status" >&2
             failed=1
         elif [[ -s "$database" ]]; then
+            if [[ "$camera_profile" == "$default_camera_profile" ]] &&
+                ! "$python3_runtime" "$private_runtime_root/tools/verify_raw_recording.py" \
+                --directory "$run_dir/raw_recording" --verifier "$svo_verifier_binary" \
+                >"$run_dir/raw_recording_verification.log" 2>&1; then
+                echo '[录制未完整确认] 原始文件已保留，详情见 raw_recording_verification.log。' >&2
+                failed=1
+            fi
             if safe_export_saved_poses; then
                 cleanup_export_succeeded=true
-                if no_exact_tag_observations; then
+                if [[ "$cleanup_partial_archive" == true ]]; then
+                    echo '[已归档] 主图与未对齐子图已分别保存；本轮不列入2号自动续建候选。'
+                elif no_exact_tag_observations; then
                     cleanup_no_tag_available=true
                     echo '[地图已保存] 本轮没有精确Tag观测；未生成Tag续建锚点，不列入2号续建候选。'
                 elif build_apriltag_multiview_sidecar; then
@@ -4013,14 +4129,14 @@ cleanup() {
                     elif publish_continuation_contract; then
                         cleanup_continuation_contract_succeeded=true
                     else
-                        echo '[续建契约未发布] 不能把本轮标记为可续建成功。' >&2
-                        failed=1
+                        echo '[续建契约未发布] 已保存文件不列入自动续建候选。' >&2
+                        [[ "$cleanup_saved_archive" == true ]] || failed=1
                     fi
                 else
-                    # A database/PLY without its database-bound multi-view Tag
-                    # sidecar cannot be selected for safe continuation.  Keep
-                    # all artifacts, but do not publish a successful lifecycle.
-                    failed=1
+                    # A complete archive and a usable continuation contract are
+                    # separate outcomes. Missing Tag anchors never grant resume.
+                    echo '[Tag续建锚点未生成] 已保存文件不列入自动续建候选。' >&2
+                    [[ "$cleanup_saved_archive" == true ]] || failed=1
                 fi
             else
                 failed=1
@@ -4155,7 +4271,10 @@ on_exit() {
     publish_lifecycle stopping "$status" "$requested_status" false || lifecycle_failed=1
     cleanup || cleanup_status=$?
     if ((cleanup_status == 0 && lifecycle_failed == 0)) && [[ -z "$critical_failure_reason" ]]; then
-        if [[ "$cleanup_no_tag_available" == true && "$continuation_enabled" == false &&
+        if [[ "${cleanup_saved_archive:-false}" == true && "$cleanup_nodes_stopped" == true && "$cleanup_export_succeeded" == true ]]; then
+            succeeded=true
+            case "$requested_status" in 0|129|130|143) status=0 ;; esac
+        elif [[ "$cleanup_no_tag_available" == true && "$continuation_enabled" == false &&
               "$cleanup_nodes_stopped" == true && "$cleanup_export_succeeded" == true ]]; then
             # No Tag is a valid new-map outcome. Health/export checks already
             # passed in cleanup; do not publish a usable continuation receipt.
@@ -4217,6 +4336,13 @@ echo "单帧显示径向: $DENSE_MIN_M–$DENSE_MAX_M m；累计地图/导出前
 echo "AprilTag独立径向范围: $APRILTAG_MIN_RANGE_M–$APRILTAG_MAX_RANGE_M m（保留原尺寸和重投影门限）"
 echo "以上为试运行筛选范围，不代表NEURAL实距精度已验收。"
 echo "相机profile: $camera_profile；单一SDK owner，${camera_grab_resolution}@${camera_grab_fps} grab，SDK计算上限 ${camera_compute_cap_fps} Hz"
+unset WBROV_RAW_RECORDING_DIR
+if [[ "$camera_profile" == "$default_camera_profile" ]]; then
+    check_frozen_runtime_file "$svo_verifier_binary" "$svo_verifier_sha256" true || exit 1
+    export WBROV_RAW_RECORDING_DIR="$run_dir/raw_recording"
+else
+    echo '旧相机回退profile不支持本轮SVO录制；保存报告会明确标记未录制。'
+fi
 echo "里程计流: ${odom_width}x${odom_height}@${odom_publish_hz} Hz；建图流: ${map_width}x${map_height}@${map_publish_hz} Hz；深度模式 $RTAB_DEPTH_MODE"
 if [[ "$camera_profile" == "$default_camera_profile" ]]; then
     echo "HD1200@60是native grab/短曝光配置，不是里程计处理速率；[CAMERA_RATE] schema_version=1只证明发布侧。"
@@ -4233,7 +4359,7 @@ if [[ "$camera_profile" == "$default_camera_profile" ]]; then
     echo "dual建图输入为960x600@1 Hz，并只在同时间戳里程计确认后发布；5 Hz只是后端上限。"
 fi
 echo "视觉里程计：连续8个失败帧后在最后有效位姿重建F2M局部跟踪器；失败帧不入图，20秒健康窗只在后台记录警告。"
-echo "已撤回未验收的2x3网格、0.01内点分布门和80px搜索窗，恢复RTAB-Map默认1x1/0/40。"
+echo "视觉里程计采用2x3网格；内点分布门为默认0，投影搜索窗为默认40px。"
 echo "失锁恢复模式：新段先隔离建图；同一Tag需3个精确关键帧视角，并由核心做多桥影子优化、留出与刚体保平面门后才允许合图。"
 if [[ "$camera_profile" == "$default_camera_profile" ]]; then
     echo "dual profile使用单槽RGB-D输入队列以限制延迟；若有效/odom低于15Hz，本轮不算通过。"

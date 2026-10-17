@@ -34,6 +34,9 @@ public:
     static bool recover(Rtabmap & core,const AcceptedImageSourceContext & context,std::string & reason) {
         return core.tryVisualRecoveryWithAcceptedImages(limits(),context,[]{return true;},reason);
     }
+    static bool localMotionFault(Rtabmap & core,Rtabmap::RecoveryLocalMotionFault & fault) {
+        return core.findRecoveryLocalMotionFault(limits(),fault);
+    }
     static bool cancelAfterShadow(Rtabmap & core,const AcceptedImageSourceContext & context,std::string & reason,int & calls) {
         return core.tryVisualRecoveryWithAcceptedImages(limits(),context,[&calls]{return ++calls==1;},reason);
     }
@@ -54,6 +57,24 @@ public:
         }
     }
     static void duplicateOld(Rtabmap & core) {core._crossMapLoopEvidence[1].oldId=core._crossMapLoopEvidence[0].oldId;}
+    static void rawCandidates(Rtabmap & core) {
+        core._crossMapLoopEvidence.clear();
+        for(int id:{18,19,20}) {
+            Signature current=*core._memory->getSignature(id+20),old=*core._memory->getSignature(id);
+            // Different arbitrary cache numbering must not influence raw
+            // support. The production collector must use its own solve objects.
+            for(Signature * s:{&current,&old}) {
+                std::multimap<int,int> shifted;
+                for(const auto & word:s->getWords())shifted.emplace(word.first+1000000,word.second);
+                s->setWords(shifted,s->getWordsKpts(),s->getWords3(),s->getWordsDescriptors());
+            }
+            std::string reason;
+            require(!core.collectRawCrossMapLoopEvidence(current,old,1,0,reason),"candidate collection authorized native graph mutation");
+            require(core._crossMapLoopEvidence.size()==static_cast<size_t>(id-17),"raw candidate not retained: "+reason);
+            require(core._crossMapLoopEvidence.back().inlierWords.empty(),"pair-local IDs escaped into persistent candidate evidence");
+        }
+        core._crossMapLoopEvidence.clear();
+    }
     static bool sameEpoch(Rtabmap & core,bool wrong,std::string & reason) {
         Transform proposed=core._optimizedPoses.at(40).inverse()*core._optimizedPoses.at(38);
         if(wrong)proposed.x()+=.20f;
@@ -61,6 +82,9 @@ public:
     }
     static bool observe(Rtabmap & core,const SensorData & data,const Transform & pose,std::string & reason) {
         Transform measured;return core.validateRegisteredMapObservation(data,pose,20,limits(),measured,reason);
+    }
+    static bool localObservation(Rtabmap & core,const SensorData & data,int cutoff,std::string & reason) {
+        Transform measured;return core.validateLocalMapObservation(data,Transform(.05f+.08f*15,0,0,0,0,0),cutoff,limits(),measured,reason);
     }
     static bool prepare(Rtabmap & core,const AcceptedImageSourceContext & context,Transform & proposed,std::string & reason) {
         return core.prepareVisualRecoveryWithAcceptedImages(limits(),context,[]{return true;},proposed,reason);
@@ -235,6 +259,16 @@ int main(int argc,char ** argv) try {
     }
     SensorData liveStoredFixture(texture(cv::Rect(15*8,0,320,240)).clone(),cv::Mat(240,320,CV_32FC1,cv::Scalar(2)),camera,0,1042.5);
     Access::verifyStrictConsensus(core,liveStoredFixture);
+    {
+        std::string why;const auto before=Access::snapshot(core);
+        require(Access::localObservation(core,liveStoredFixture,40,why),
+            "healthy private checkpoint failed: "+why);
+        require(before==Access::snapshot(core) && !core.isCurrentMapFrameRegistered(),"local observation registered or mutated private graph");
+        require(!Access::localObservation(core,liveStoredFixture,20,why),
+            "historical epoch used as local continuity checkpoint");
+    }
+    Access::rawCandidates(core);
+    std::cout<<"PASS raw candidate support uses the solved signatures despite unrelated cached word IDs\n";
     std::string reason;
     auto reject=[&](const AcceptedImageSourceContext & source,const std::string & label) {
         const auto before=Access::snapshot(core);require(!Access::recover(core,source,reason),label+" unexpectedly committed");
@@ -250,13 +284,26 @@ int main(int argc,char ** argv) try {
     auto badContext=context;badContext.sessionTokenSha256=std::string(64,'9');reject(badContext,"wrong session");
     SensorData saved;Access::blankCurrentDepth(core,saved);reject(context,"zero depth cannot relocalize");Access::restoreData(core,saved);
     Access::blankCurrentDepth(core,saved,30);reject(context,"untrusted interior raw depth cannot be backfilled");Access::restoreData(core,saved,30);
+    Rtabmap::RecoveryLocalMotionFault fault;
+    const auto beforeHealthyMotionCheck=Access::snapshot(core);
+    require(!Access::localMotionFault(core,fault) && fault.fromId==0 &&
+        beforeHealthyMotionCheck==Access::snapshot(core),"healthy raw local chain reported a motion fault or changed graph");
     const auto neighbors=Access::removeInteriorNeighbor(core);
     reject(context,"disconnected interior neighbor cannot be guessed from late anchors");
+    require(!Access::localMotionFault(core,fault),"missing neighbor was treated as a measured motion disagreement");
     requireReason(core.getUnregisteredLocalSubmaps(local,snapshotReason),"split local snapshot failed: ",snapshotReason);
     require(local.size()==2 && local[0].componentId==21 && local[1].componentId==31 &&
         local[0].poses.at(21).isIdentity() && local[1].poses.at(31).isIdentity(),"disconnected submaps were implicitly connected in display");
     Access::restoreInteriorNeighbor(core,neighbors,true);
     reject(context,"false interior motion edge cannot be certified by valid late anchors");
+    const auto beforeFault=Access::snapshot(core);
+    require(Access::localMotionFault(core,fault) && fault.resetEpoch==core.getResetEpoch() &&
+        fault.fromId==30 && fault.toId==31 && beforeFault==Access::snapshot(core),
+        "raw-supported interior fault was not identified read-only with exact epoch/endpoints");
+    Access::blankCurrentDepth(core,saved,30);
+    require(!Access::localMotionFault(core,fault) && fault.fromId==0 && fault.toId==0,
+        "missing raw depth reused a previous motion fault");
+    Access::restoreData(core,saved,30);
     Access::removeInteriorNeighbor(core);Access::restoreInteriorNeighbor(core,neighbors);
     const auto beforeLoop=Access::snapshot(core);
     require(Access::sameEpoch(core,false,reason),"correct same-epoch loop failed two-anchor validation: "+reason);

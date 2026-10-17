@@ -21,8 +21,18 @@ def validate_terminal(s,p,config):
     # They are a rejection, and never evidence that omitted links were checked.
     require(pairs==expected[:len(pairs)],'terminal parsed link prefix')
     if s['result']=='committed':require(pairs==expected,'committed full links')
-    require(s['core_reset_epoch']==p['source_reset_epoch'],'Core epoch changed during synchronous replay proposal')
-    require(s['core_graph_revision']==p['observer_graph_revision']+(s['result']=='committed'),'terminal graph revision')
+    if s['result']=='committed':
+        require(s['core_reset_epoch']==p['source_reset_epoch'],'committed Core epoch')
+        require(s['core_graph_revision']==p['observer_graph_revision']+1,'committed graph revision')
+    else:
+        # A live RGB-D update or reset can overtake an authenticated proposal.
+        # Core returns its current counters with a token-bound rejection, often
+        # before parsing any edges. Consume that terminal outcome without
+        # authorizing map writes or claiming that the omitted edges passed.
+        # The proposal identity above stays exact; session counters cannot roll
+        # backwards. Commit/observing checks deliberately remain stricter.
+        require(s['core_reset_epoch']>=p['source_reset_epoch'],'rejected Core epoch regressed')
+        require(s['core_graph_revision']>=p['observer_graph_revision'],'rejected graph revision regressed')
 
 
 def validate_observing(s,p,config):

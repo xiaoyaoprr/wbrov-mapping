@@ -1,0 +1,50 @@
+{
+  "run": "custom_20261009_142237",
+  "scope": "stationary live display and normal save; human-assisted loss recovery deferred",
+  "normal_rviz_close_requested": true,
+  "launcher_exit_code": 0,
+  "nodes_stopped": true,
+  "export_succeeded": true,
+  "cleanup_succeeded": true,
+  "save_complete": true,
+  "driver_passed": false,
+  "driver_error": null,
+  "unmet_acceptance_gate": "observed odom age max 1.464198736 seconds exceeds 0.50 seconds; cause not yet diagnosed",
+  "rviz_visible_seconds": 37.36079308803892,
+  "live_main_cloud_points": 428,
+  "saved_cloud_points": 880,
+  "saved_main_node_ids": [1],
+  "final_epoch": 0,
+  "cut_count": 0,
+  "final_state": "NORMAL",
+  "bridge_proposals": 0,
+  "human_loss_recovery_validated": false,
+  "odom_age_seconds": {"p95": 0.128361352, "max": 1.464198736},
+  "raw_recording": {
+    "index_frames": 31271,
+    "sdk_ingested_frames": 31271,
+    "boundary_decoded_frames": 2,
+    "full_frame_decode_validated": false,
+    "bytes": 7836633643,
+    "sha256": "730dff2d32367e24f8052efc46c5395ca7b6c667174b4a8a4165a02e9347368f"
+  },
+  "database": {
+    "visible_holders_after_stop": [],
+    "bytes": 589058048,
+    "sha256": "23b761368f7cae54658bc5b93b1874da91308304d63f362bfe1ea405a726110a"
+  },
+  "cloud": {
+    "bytes": 84149,
+    "sha256": "d2b2aa2ee3cc87d0ef9d860a203700e115190bb545baa65e9ce1ec472c5c5e9f"
+  },
+  "save_report_sha256": "83025915fd6087c4103e018ce8226d9bc5dc48e351d926650ad9d422a44a667d",
+  "light_owner_phase": "off",
+  "led_off_packets": 7,
+  "light_owner_failures": [],
+  "physical_led_ack_available": false,
+  "udp_3333_released": true,
+  "motion_ever_activated": false,
+  "unlock_called": false,
+  "desktop8_updated": false,
+  "github_updated": false
+}

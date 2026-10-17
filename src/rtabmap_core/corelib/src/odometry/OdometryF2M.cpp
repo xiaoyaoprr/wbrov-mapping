@@ -58,6 +58,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <mutex>
 #include <cstdlib>
 #include <cerrno>
+#include <cstdio>
 
 namespace {
 struct WbrovDepthContext {
@@ -65,6 +66,8 @@ struct WbrovDepthContext {
     wbrov_depth::FixedVisualAnchor anchor;
     wbrov_depth::Config config;
     bool enabled = false;
+    double lastDiagnosticStamp=0.0;
+    unsigned long long attempted=0,accepted=0;
 };
 std::mutex wbrovDepthRegistryMutex;
 std::map<const void *,std::shared_ptr<WbrovDepthContext> > wbrovDepthRegistry;
@@ -118,7 +121,7 @@ std::shared_ptr<WbrovDepthContext> wbrovDepthContext(
     if(valid){c->config.minimumCorrespondences=int(minimumCorrespondences);c->config.iterationsPerLevel=int(iterations);}
     c->enabled=c->enabled&&valid&&c->config.valid();
     wbrovDepthRegistry[owner]=c;
-    UINFO("[DEPTH_RECOVERY] enabled=%s inertia_translation=false anchor=last_visual max_age=%.3f min_hessian=%.6g",
+    std::fprintf(stderr,"[DEPTH_RECOVERY] enabled=%s inertia_translation=false anchor=last_visual max_age=%.3f min_hessian=%.6g\n",
           c->enabled?"true":"false",c->config.maximumAge,c->config.minimumHessianRatio);
     return c;
 }
@@ -1659,6 +1662,17 @@ Transform OdometryF2M::computeTransform(
                 const wbrov_depth::Result candidate=depthContext->anchor.recover(
                     depthFrame,wbrovDepthPose(predicted),hasImu,imuRotation,
                     depthContext->config,recovered,worldCovariance);
+                ++depthContext->attempted;
+                if(candidate.accepted)++depthContext->accepted;
+                // Operational diagnostics remain visible with production WARN
+                // logging. Bound output to 1 Hz, with cumulative attempt counts.
+                if(depthContext->lastDiagnosticStamp==0 || data.stamp()<depthContext->lastDiagnosticStamp ||
+                   data.stamp()-depthContext->lastDiagnosticStamp>=1.0) {
+                    std::fprintf(stderr,"[DEPTH_RECOVERY] attempted=%llu accepted_count=%llu accepted=%s stamp=%.9f reason=%s correspondences=%d overlap=%.6f hessian_ratio=%.9g coverage=%.6f rms=%.6f\n",
+                        depthContext->attempted,depthContext->accepted,candidate.accepted?"true":"false",data.stamp(),candidate.reason.c_str(),
+                        candidate.correspondences,candidate.overlap,candidate.hessianRatio,candidate.gridCoverage,candidate.rms);
+                    depthContext->lastDiagnosticStamp=data.stamp();
+                }
                 if(candidate.accepted)
                 {
                     Eigen::Affine3d affine(recovered.matrix());
