@@ -1,0 +1,139 @@
+{
+  "phase": "finished",
+  "scope": "isolated L1 finite-vector arithmetic with whole-original fallback for special values; original failure and all exact tests retained; no Core/worker change",
+  "steps": [
+    {
+      "name": "sanitizer_build",
+      "exit": 0,
+      "seconds": 125.37690124800429
+    },
+    {
+      "name": "sanitizer",
+      "exit": 0,
+      "seconds": 5.432335040008184
+    },
+    {
+      "name": "release_build",
+      "exit": 0,
+      "seconds": 20.831510879972484
+    },
+    {
+      "name": "fixed_index_benchmark",
+      "exit": 0,
+      "seconds": 4.877673087990843
+    }
+  ],
+  "probe_sha256": "3408b1d10563f9fa7003bd5c9c6b8bfad44b21fe47d63a9aa2bf625889f6cf12",
+  "header_archive_sha256": "50b72a64e9ddfab3f094bb5c07929dfd1676e24ba301f181832b5f2e71811d5e",
+  "utilite_sha256": "c0f8f39dcc5ca17c8e943dd0b756557e84c395ce8c96a28103b16f7e463fddb2",
+  "measurements": [
+    {
+      "kind": 0,
+      "width": 256,
+      "round": 0,
+      "queries": 6000,
+      "before_ms": 202.861,
+      "after_ms": 220.774,
+      "indices_and_distances_equal": true
+    },
+    {
+      "kind": 0,
+      "width": 256,
+      "round": 1,
+      "queries": 6000,
+      "before_ms": 202.477,
+      "after_ms": 219.421,
+      "indices_and_distances_equal": true
+    },
+    {
+      "kind": 0,
+      "width": 256,
+      "round": 2,
+      "queries": 6000,
+      "before_ms": 202.267,
+      "after_ms": 220.804,
+      "indices_and_distances_equal": true
+    },
+    {
+      "kind": 0,
+      "width": 256,
+      "round": 3,
+      "queries": 6000,
+      "before_ms": 203.845,
+      "after_ms": 220.686,
+      "indices_and_distances_equal": true
+    },
+    {
+      "kind": 0,
+      "width": 256,
+      "round": 4,
+      "queries": 6000,
+      "before_ms": 201.99,
+      "after_ms": 221.084,
+      "indices_and_distances_equal": true
+    },
+    {
+      "kind": 0,
+      "width": 256,
+      "round": 5,
+      "queries": 6000,
+      "before_ms": 204.292,
+      "after_ms": 220.333,
+      "indices_and_distances_equal": true
+    },
+    {
+      "kind": 1,
+      "width": 64,
+      "round": 0,
+      "queries": 6000,
+      "before_ms": 135.097,
+      "after_ms": 138.365,
+      "indices_and_distances_equal": true
+    },
+    {
+      "kind": 1,
+      "width": 64,
+      "round": 1,
+      "queries": 6000,
+      "before_ms": 138.098,
+      "after_ms": 135.731,
+      "indices_and_distances_equal": true
+    },
+    {
+      "kind": 1,
+      "width": 64,
+      "round": 2,
+      "queries": 6000,
+      "before_ms": 137.016,
+      "after_ms": 139.205,
+      "indices_and_distances_equal": true
+    },
+    {
+      "kind": 1,
+      "width": 64,
+      "round": 3,
+      "queries": 6000,
+      "before_ms": 138.469,
+      "after_ms": 140.683,
+      "indices_and_distances_equal": true
+    },
+    {
+      "kind": 1,
+      "width": 64,
+      "round": 4,
+      "queries": 6000,
+      "before_ms": 133.409,
+      "after_ms": 141.649,
+      "indices_and_distances_equal": true
+    },
+    {
+      "kind": 1,
+      "width": 64,
+      "round": 5,
+      "queries": 6000,
+      "before_ms": 135.617,
+      "after_ms": 139.635,
+      "indices_and_distances_equal": true
+    }
+  ]
+}

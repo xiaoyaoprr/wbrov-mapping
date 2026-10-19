@@ -1,0 +1,43 @@
+{
+  "package": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_usable_v1",
+  "checks": [
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_continuous_mapping_session.py"
+      ],
+      "exit": 0,
+      "output": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.476s\n\nOK\n"
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_deferred_mapping.py"
+      ],
+      "exit": 0,
+      "output": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.100s\n\nOK\n"
+    },
+    {
+      "command": [
+        "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_usable_v1/start_rtabmap_continuous.sh",
+        "--check-only"
+      ],
+      "exit": 0,
+      "output": "{\"checked\": true, \"all_frames\": true, \"profile\": \"continuous_new_map\", \"navigation_authorized\": false}\n"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "scope": "isolated diagnostic logging only; original v35 source except file logger and Tag selection/rejection messages",
+  "changes": {
+    "DeferredMappingSession.h": {
+      "before": "fcf6f4d752e2bdedaf3901a28392b19749b29095f567cacacd6606b5afe2ea2f",
+      "after": "3c21dea26f5584161a420e33936563c2dbed20f231c96d4941c954164d15de6b"
+    },
+    "replay_worker.cpp": {
+      "before": "af94bdd3de26d2a1b324c561342fd1a6247639e215e21724cbddd74a72291141",
+      "after": "49714a3d63d46776c4ce7c6e46a802aef04f647033e603ea89b0e0ca7543060b"
+    }
+  }
+}

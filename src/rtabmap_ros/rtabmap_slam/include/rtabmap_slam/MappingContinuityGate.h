@@ -52,10 +52,13 @@ public:
         std::string qualityReason, lastCutReason, lastCutQualityReason, lastPauseReason, qualityTriggerReason;
         long long receiptLatencyNs, arrivalAgeNs, sourceAgeNs;
         bool observingLocal;
+        long long maxObservedSourceGapNs;
+        long long candidateElapsedNs, candidateProgressAgeNs;
     };
     static constexpr long long MAX_AGE_NS = 300000000LL; // current-pose/receipt freshness
     static constexpr long long MAX_RECEIPT_LATENCY_NS = 300000000LL;
     static constexpr long long MAX_SOURCE_GAP_NS = 300000000LL; // full-rate odometry, not mapping cadence
+    static constexpr long long MAX_MEASURED_BRIDGE_NS = 750000000LL;
     static constexpr long long RECOVERY_SPAN_NS = 200000000LL;
     static constexpr unsigned RECOVERY_SAMPLES = 3;
     static constexpr long long MIN_PAUSE_NS = 200000000LL;
@@ -67,6 +70,12 @@ public:
     static constexpr long long QUALITY_VERIFY_NS = 6000000000LL;
     static constexpr unsigned MAP_OBSERVATIONS = 5;
     static constexpr long long MAP_OBSERVATION_SPAN_NS = 500000000LL;
+    // A prepared immutable hypothesis gets five bounded read-only solves and
+    // one final commit solve. Only a completed new observation advances the
+    // step deadline. Fresh odometry is still required throughout; receipts or
+    // repeated ACKs never extend either deadline.
+    static constexpr long long CANDIDATE_STEP_NS = QUALITY_VERIFY_NS;
+    static constexpr long long CANDIDATE_TOTAL_NS = (MAP_OBSERVATIONS+1LL)*CANDIDATE_STEP_NS;
 
     static const char * stateName(State s) {
         switch(s) { case State::NORMAL:return "NORMAL";case State::DEGRADED:return "DEGRADED";
@@ -76,7 +85,7 @@ public:
         switch(s) { case State::NORMAL:return "定位正常，持续建图";
                     case State::DEGRADED:return "视觉退化，深度几何辅助跟踪";
                     case State::RECOVERING:return "正在恢复定位，主地图暂停更新";
-                    default:return "建图暂停，请缓慢退回此参考视角（人工操作提示，非导航指令）"; }
+                    default:return "定位丢失，建图暂停；系统搜索已知区域，无需复现最后一帧"; }
     }
     // Covariance must be finite, symmetric, positive definite and bounded. A
     // zero/default covariance is not measured confidence. LDLT catches coupled
@@ -169,6 +178,7 @@ public:
     bool observe(long long sourceNs,long long arrivalNs,long long rosNs,const Evidence & evidence) {
         std::lock_guard<std::mutex> l(mutex_);
         if(sourceNs<=0 || arrivalNs<=0 || sourceNs<=sourceNs_) return false;
+        if(sourceNs_>0)maxObservedSourceGapNs_=std::max(maxObservedSourceGapNs_,sourceNs-sourceNs_);
         // Every unique packet advances the high-water mark; stale packets never
         // acquire confidence or refresh a previous valid registration.
         if(sourceNs_>0 && (arrivalNs<arrivalNs_ || sourceNs-sourceNs_>MAX_SOURCE_GAP_NS)) {
@@ -178,7 +188,7 @@ public:
             // measured geometry on both sides, and a bounded gap. Missing DDS
             // samples, reset/initialization (interval zero), bad geometry and
             // longer blind intervals retain the isolated-submap behavior.
-            const bool measuredBridge=arrivalNs>=arrivalNs_ && gap>MAX_SOURCE_GAP_NS && gap<=750000000LL &&
+            const bool measuredBridge=arrivalNs>=arrivalNs_ && gap>MAX_SOURCE_GAP_NS && gap<=MAX_MEASURED_BRIDGE_NS &&
                 evidence_.usable() && evidence.usable() && evidence.visualGeometry && evidence.recoveryGeometry &&
                 evidence.measuredIntervalNs>0 && std::llabs(evidence.measuredIntervalNs-gap)<=1000000LL;
             if(measuredBridge)pauseReceiptLocked("bounded measured F2M interval; observing before resume");
@@ -249,6 +259,9 @@ public:
     }
     void tick(long long steadyNs,long long rosNs) {
         std::lock_guard<std::mutex> l(mutex_);
+        if(candidateObservation_ && !candidateBudgetCurrentLocked(steadyNs)) {
+            pauseLocked("candidate observation progress or total deadline exceeded");return;
+        }
         if(qualityPending_ && qualityExpiredLocked(steadyNs,rosNs)) {
             cutLocked(qualityExpiryReasonLocked(steadyNs,rosNs));return;
         }
@@ -316,7 +329,9 @@ public:
     bool recoveryCommitAllowed(Ticket t,Epoch epoch,long long steadyNs,long long rosNs) const {
         std::lock_guard<std::mutex> l(mutex_);
         return t.generation==generation_ && epochKnown_ && epoch==epoch_ &&
-               stableLocked() && freshLocked(steadyNs,rosNs) && t.frameNs>0 && t.frameNs<=sourceNs_ && sourceNs_-t.frameNs<=QUALITY_VERIFY_NS;
+               stableLocked() && freshLocked(steadyNs,rosNs) && t.frameNs>0 && t.frameNs<=sourceNs_ &&
+               (candidateObservation_ ? (t.frameNs==candidateTicketFrameNs_ && candidateBudgetCurrentLocked(steadyNs)) :
+                   sourceNs_-t.frameNs<=QUALITY_VERIFY_NS);
     }
     bool beginMapObservation(Epoch epoch,bool coreRegistered,long long steadyNs,long long rosNs) {
         std::lock_guard<std::mutex> l(mutex_);
@@ -332,8 +347,12 @@ public:
     bool beginCandidateObservation(Ticket t,Epoch epoch,long long steadyNs,long long rosNs) {
         std::lock_guard<std::mutex> l(mutex_);
         if(t.generation!=generation_ || !epochKnown_ || epoch!=epoch_ || registered_ ||
+           candidateObservation_ || t.frameNs<=0 || t.frameNs>sourceNs_ || sourceNs_-t.frameNs>QUALITY_VERIFY_NS ||
            !stableLocked() || !freshLocked(steadyNs,rosNs))return false;
         startObservationLocked();registered_=false;candidateObservation_=true;candidateReady_=false;
+        candidateTicketFrameNs_=t.frameNs;
+        candidateStartSteadyNs_=candidateProgressSteadyNs_=steadyNs;
+        candidateStartSourceNs_=candidateProgressSourceNs_=sourceNs_;
         reason_="candidate main-map alignment observation; graph is uncommitted";return true;
     }
     bool observationInputAllowed(Ticket t,Epoch epoch,long long steadyNs,long long rosNs) const {
@@ -345,11 +364,13 @@ public:
     bool candidateCommitReady(Ticket t,Epoch epoch,long long steadyNs,long long rosNs) const {
         std::lock_guard<std::mutex> l(mutex_);
         return t.generation==generation_ && epochKnown_ && epoch==epoch_ && candidateObservation_ &&
+            t.frameNs==candidateTicketFrameNs_ && candidateBudgetCurrentLocked(steadyNs) &&
             candidateReady_ && observing_ && !registered_ && stableLocked() && freshLocked(steadyNs,rosNs);
     }
     bool candidateCommitted(Ticket t,Epoch epoch,bool coreRegistered,long long steadyNs,long long rosNs) {
         std::lock_guard<std::mutex> l(mutex_);
         if(t.generation!=generation_ || epoch!=epoch_ || !coreRegistered || !candidateObservation_ ||
+           t.frameNs!=candidateTicketFrameNs_ || !candidateBudgetCurrentLocked(steadyNs) ||
            !candidateReady_ || !observing_ || !stableLocked() || !freshLocked(steadyNs,rosNs))return false;
         observing_=candidateObservation_=candidateReady_=false;registered_=everRegistered_=true;
         // A weak frame may have opened a bounded window while this proposal
@@ -360,15 +381,38 @@ public:
         state_=visualStableLocked()?State::NORMAL:State::DEGRADED;
         reason_="observed candidate committed; next qualified frame may write";return true;
     }
+    // A solve without enough correspondences is not a measured contradiction.
+    // It resets the observation streak but cannot renew either deadline, change
+    // the ticket, certify continuity or open writes. Callers must separately
+    // verify source ownership and distinguish this from an inconsistent solve.
+    bool waitForRegisteredMapObservation(Ticket t,Epoch epoch,long long steadyNs,long long rosNs) {
+        std::lock_guard<std::mutex> l(mutex_);
+        if(t.generation!=generation_ || epoch!=epoch_ || !observing_ || candidateReady_ ||
+           t.frameNs<=lastObservationNs_)return false;
+        if(candidateObservation_ && !candidateBudgetCurrentLocked(steadyNs)) {
+            pauseLocked("candidate observation progress or total deadline exceeded");return false;
+        }
+        if(qualityPending_ && qualityExpiredLocked(steadyNs,rosNs)) {
+            cutLocked(qualityExpiryReasonLocked(steadyNs,rosNs));return false;
+        }
+        if(!stableLocked() || !freshLocked(steadyNs,rosNs) || t.frameNs<goodStartNs_ || t.frameNs>sourceNs_)
+            return false;
+        lastObservationNs_=t.frameNs;observationStartNs_=0;mapObservations_=0;
+        reason_="waiting for sufficient old-map correspondences; writes remain closed";
+        return true;
+    }
     bool observeRegisteredMap(Ticket t,Epoch epoch,bool directlyVerified,
                               double seedTranslation,double seedRotationDeg,
                               double stepTranslation,double stepRotationDeg,
                               long long steadyNs,long long rosNs) {
         std::lock_guard<std::mutex> l(mutex_);
+        if(candidateObservation_ && !candidateBudgetCurrentLocked(steadyNs)) {
+            pauseLocked("candidate observation progress or total deadline exceeded");return false;
+        }
         if(qualityPending_ && qualityExpiredLocked(steadyNs,rosNs)) {
             cutLocked(qualityExpiryReasonLocked(steadyNs,rosNs));return false;
         }
-        if(t.generation!=generation_ || !observing_ || epoch!=epoch_ || t.frameNs<=lastObservationNs_)return false;
+        if(t.generation!=generation_ || !observing_ || epoch!=epoch_ || t.frameNs<=lastObservationNs_ || candidateReady_)return false;
         if(!directlyVerified || !std::isfinite(seedTranslation)||!std::isfinite(seedRotationDeg)||
            !std::isfinite(stepTranslation)||!std::isfinite(stepRotationDeg)||
            seedTranslation>0.05 || seedRotationDeg>3.0 || stepTranslation>0.03 || stepRotationDeg>2.0) {
@@ -382,6 +426,9 @@ public:
            t.frameNs>sourceNs_)return false;
         if(mapObservations_==0)observationStartNs_=t.frameNs;
         lastObservationNs_=t.frameNs;++mapObservations_;
+        if(candidateObservation_) {
+            candidateProgressSteadyNs_=steadyNs;candidateProgressSourceNs_=sourceNs_;
+        }
         if(mapObservations_<MAP_OBSERVATIONS || t.frameNs-observationStartNs_<MAP_OBSERVATION_SPAN_NS)return false;
         if(candidateObservation_) {
             candidateReady_=true;reason_="candidate observations passed; waiting for final atomic commit";return true;
@@ -402,9 +449,15 @@ public:
         std::lock_guard<std::mutex> l(mutex_);
         return {state_,epoch_,generation_,sourceNs_,goodSamples_,registered_,allowedLocked(epoch_,steadyNs,rosNs),evidence_.visualGeometry,evidence_.depthGeometry,observing_,mapObservations_,candidateObservation_,reason_,
             evidence_.finiteMotion,evidence_.covarianceFinitePD,evidence_.covarianceValid,evidence_.dimensionsValid,
-            qualityPending_,qualityStartNs_,lastCutSourceNs_,cutCount_,evidence_.qualityReason,lastCutReason_,lastCutQualityReason_,lastPauseReason_,qualityTriggerReason_,receiptLatencyNs_,steadyNs-arrivalNs_,rosNs-sourceNs_,localObservation_};
+            qualityPending_,qualityStartNs_,lastCutSourceNs_,cutCount_,evidence_.qualityReason,lastCutReason_,lastCutQualityReason_,lastPauseReason_,qualityTriggerReason_,receiptLatencyNs_,steadyNs-arrivalNs_,rosNs-sourceNs_,localObservation_,maxObservedSourceGapNs_,
+            candidateObservation_?steadyNs-candidateStartSteadyNs_:0,candidateObservation_?steadyNs-candidateProgressSteadyNs_:0};
     }
 private:
+    bool candidateBudgetCurrentLocked(long long steadyNs) const {
+        return candidateStartSteadyNs_>0 && steadyNs>=candidateProgressSteadyNs_ && sourceNs_>=candidateProgressSourceNs_ &&
+            steadyNs-candidateStartSteadyNs_<=CANDIDATE_TOTAL_NS && sourceNs_-candidateStartSourceNs_<=CANDIDATE_TOTAL_NS &&
+            steadyNs-candidateProgressSteadyNs_<=CANDIDATE_STEP_NS && sourceNs_-candidateProgressSourceNs_<=CANDIDATE_STEP_NS;
+    }
     bool qualityExpiredLocked(long long steadyNs,long long rosNs) const {
         return qualityExpiryReasonLocked(steadyNs,rosNs)!=nullptr;
     }
@@ -466,9 +519,12 @@ private:
     bool localObservation_=false,qualityLocalOnly_=false;
     mutable std::mutex mutex_;
     State state_=State::PAUSED;Epoch epoch_=0;std::uint64_t generation_=0,localSerial_=0;
+    long long maxObservedSourceGapNs_=0;
     long long sourceNs_=0,arrivalNs_=0,goodStartNs_=0;unsigned goodSamples_=0;
     bool registered_=false,epochKnown_=false,everRegistered_=false,observing_=false;
     bool candidateObservation_=false,candidateReady_=false;
+    long long candidateTicketFrameNs_=0,candidateStartSteadyNs_=0,candidateStartSourceNs_=0;
+    long long candidateProgressSteadyNs_=0,candidateProgressSourceNs_=0;
     bool receiptOnlyPause_=false;std::uint64_t receiptPauseSerial_=0;
     long long pauseUntilNs_=0,observationStartNs_=0,lastObservationNs_=0;unsigned mapObservations_=0;
     long long visualGoodStartNs_=0;unsigned visualGoodSamples_=0;

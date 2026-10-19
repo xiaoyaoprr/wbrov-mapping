@@ -1,0 +1,41 @@
+{
+  "schema": "wbrov.deferred-session.v1",
+  "session_sha256": "c939217fb1fe8272a73d77bbe685eb04637b71a2192d2f6f5212ab56a010d4c1",
+  "bindings": {
+    "worker": "4626246a0807a6fdd0dcd4a24404125a05d79df582312039d51278384597d019",
+    "verifier": "2fc9fd84d442bc3850ba8cc2c76cc4bae64741b565f592c877ea30d83d73b5bc",
+    "odom_parameters": "3ff1aec2301039d44fea47d2a276ecbf25b8de9f8a15c9bd61465e0f98f68158",
+    "map_parameters": "69e1144d14b95fe147f77bfb8d88b9992930c3123625638514b415b754194eed",
+    "cv_threads": 1,
+    "feature_prefetch": false,
+    "lookahead_segments": 1,
+    "tag_modules": {
+      "bridge_status.py": "fa6314cd45bef0e9da721b5d8b7137ebd7712d9520a2212b95a5639c506b82a5",
+      "consumer.py": "82e354c60deead17355c1bb8e19dc07e7a348740b8eca920ed5ab2a1e0a23e04",
+      "core_pixel_consumer.py": "6a003bbf0e60163bd77ee10775f0690b06818fd1325ccdb39cc9bba0b7f85f80",
+      "core_pixel_join.py": "5b0bc22205258afde156ce3e1e4d0047fbddedb8f159b2a76380428c04db8d4d",
+      "decoded_pixel_metadata.py": "acb9f4778160b7fadac4db7fa1a3443a5f08cd238f634aba7a02704aab903bfc",
+      "deferred_retry_window.py": "a11da7ae8a81c91879d6070a0149bef8a2b4a7863c6149a727a66bd8c93e2e7e",
+      "edge_refinement.py": "2b030f5a6948290d62cb972b9b21be9df26f2de99d588e59ffc6d4cf34abdb33",
+      "history_retention.py": "8e3ced3ca0e0695f80b95c1862a1047e67130a74d253eea33d4ac382ff95fab3",
+      "live_bridge.py": "1f91fe8296df41bef49eaa4f60e21dc4df90403888529312e7cfb1bf7b3da144",
+      "managed_graph_state.py": "ec2dbe3c345c384f3a3ac72860978b828cae64d136f9134a4270d13410d819e5",
+      "measured_bridge.py": "157037eb714ca8dbfc8b5dca3acf515373cd516f7db3b13b9b971cd6e7e77de7",
+      "message_info_executor.py": "fa4658355deb48d46e47595059ed151087322017bc3148c7ad64cdf6806797f0",
+      "reference_policy.py": "64dbd364ad412b459299606815e2efe8ca26bd0cfc4127b3f64ee9d271ac5e74",
+      "render_config.py": "74957100aa6f959868b55efa5c8effadb536342f7774e95fb1099aa3a9ca620e",
+      "startup_sources.py": "10305a90c0bd9be6d3c48122d56525b3353d74556ad566341900c6e41b760da7",
+      "tag_pixel_record.py": "d0dcf6bdc59f8f9522cacfa64bb7087c8ebb9e6ecbfac574632a38034f73db93",
+      "tag_visualization.py": "c12c11fc440552e35dc2937ac1824d3634821968041761c765eab573ed7215df",
+      "tag_visualization_geometry.py": "04af40f647f432cdaac644a42d93db31295ba853d4189001c42394f9beb14238",
+      "test_observing_ack.py": "d703b2b4009f611e71358574238cc6c56da24525948e2fe201704ba055ce1fe4",
+      "test_tag_visualization.py": "f842520cae95af6931bf3fcb3615773a463876be6c21a32187bf763de50cc70f",
+      "verified_corners.py": "e0a54d003d6f987e55e45f54cafea538a58ebb06e563e9daf1d19e4265bb9b72",
+      "verified_pixel_observer.py": "0d1527815244b8f241e399c284778d5cc71b61103dcc2297fc4e273a38cb8fbd"
+    }
+  },
+  "historical_only": true,
+  "navigation_authorized": false,
+  "restart_policy": "rebuild_from_first_recorded_frame",
+  "diagnostic_range": false
+}

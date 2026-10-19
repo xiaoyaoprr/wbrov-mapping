@@ -1,0 +1,41 @@
+{
+  "phase": "passed",
+  "scope": "Python tool regression only; Core6/worker39 binaries reused unchanged",
+  "steps": [
+    {
+      "name": "test_deferred_mapping",
+      "exit": 0,
+      "seconds": 0.36633843200979754
+    },
+    {
+      "name": "test_continuous_mapping_session",
+      "exit": 0,
+      "seconds": 0.8669230719679035
+    },
+    {
+      "name": "test_deferred_display_state",
+      "exit": 0,
+      "seconds": 0.11537641601171345
+    },
+    {
+      "name": "test_deferred_recorded_pixels",
+      "exit": 0,
+      "seconds": 0.41603625600691885
+    }
+  ],
+  "source_archive_sha256": "682e9de94e4054e02f2a1c0edf64654ad11ed38fdfddd5504b822d8202f622cb",
+  "tool_pins": {
+    "tools/deferred_mapping.py": "562ad769b499e1da26beb258a57dbd80dae5b0bd64466f626d22173ff7b03605",
+    "tools/spool_codec.py": "ee89796f0c29bc26187d79109031e0962ee74147c250359a7c914d245c480b60",
+    "tools/verify_raw_recording.py": "5a603f18d54cd938406999c6e14a7f401718c9256cfa6219026fd786076243f2",
+    "tools/deferred_tag_observations.py": "414261e9f3895d469793edbe57f0bee52ed751baba1b76e9ef878532029647c4",
+    "tools/continuous_mapping_session.py": "620000c8f33f521857e529bed35b95c002e11478c72461dd710628f0d6d89cc0",
+    "tools/render_continuous_entry.py": "fb2a9dc6b896bdadbd63d748471117183b61b77bc9fa28e5609c36076a9b3682",
+    "tests/test_deferred_mapping.py": "36cffb4cb15b07d932f298c93ed55323df5ad8ca29b789491194d1e8f3c7f216",
+    "tests/test_continuous_mapping_session.py": "e9ea3026b8f0bc204211c02a0319ccc78162e320b92d3f0ba1d163e64d2904fc",
+    "tests/test_deferred_display_state.py": "b66e20bf894c5bbca8eb92a065b2fc7b7243232e74959b5c344d957ca1885c09",
+    "tests/test_deferred_recorded_pixels.py": "06c83a9c8a111922e5306bc82c0aadde977d6766970744f636166b45a2f88097",
+    "src/visualization/deferred_display_state.py": "f8c01d7fb83dac25a22e75659106a8dbdd58c859d432016a11eba5ca4a4d0032",
+    "launch/candidate_receipt_resume/run_water_mapping_with_light.sh": "34cf9b3c35fa4f7977721bb94f4786d59bf662c6c552d202c14123ab06bb03d2"
+  }
+}

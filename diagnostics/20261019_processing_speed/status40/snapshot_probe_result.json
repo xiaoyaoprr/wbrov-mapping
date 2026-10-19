@@ -1,0 +1,66 @@
+{
+  "phase": "finished",
+  "scope": "status-only durability optimization; immutable-input checks, receipts, session/save and terminal status unchanged; no hardware",
+  "steps": [
+    {
+      "name": "test_deferred_mapping",
+      "exit": 0,
+      "seconds": 0.366252543986775
+    },
+    {
+      "name": "test_continuous_mapping_session",
+      "exit": 0,
+      "seconds": 0.8675723840133287
+    },
+    {
+      "name": "test_deferred_display_state",
+      "exit": 0,
+      "seconds": 0.11500678403535858
+    }
+  ],
+  "source_archive_sha256": "b047cab1ebb3aa21493757db53c0fa5dbc9a12c0ef3c7f6406f84a18459ba8f7",
+  "measurements": [
+    {
+      "round": 0,
+      "snapshots": 120,
+      "before_ms": 1196.290528,
+      "after_ms": 86.174912,
+      "outputs_equal": true
+    },
+    {
+      "round": 1,
+      "snapshots": 120,
+      "before_ms": 1202.609312,
+      "after_ms": 47.0488,
+      "outputs_equal": true
+    },
+    {
+      "round": 2,
+      "snapshots": 120,
+      "before_ms": 1200.320576,
+      "after_ms": 82.46368,
+      "outputs_equal": true
+    },
+    {
+      "round": 3,
+      "snapshots": 120,
+      "before_ms": 1220.741952,
+      "after_ms": 44.22976,
+      "outputs_equal": true
+    },
+    {
+      "round": 4,
+      "snapshots": 120,
+      "before_ms": 1195.95728,
+      "after_ms": 80.69296,
+      "outputs_equal": true
+    },
+    {
+      "round": 5,
+      "snapshots": 120,
+      "before_ms": 1199.226368,
+      "after_ms": 45.614688,
+      "outputs_equal": true
+    }
+  ]
+}

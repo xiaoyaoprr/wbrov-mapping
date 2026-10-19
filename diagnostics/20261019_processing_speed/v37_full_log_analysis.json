@@ -1,0 +1,116 @@
+{
+  "source_sha256": "dd0796df953b9f2ea900e6d11096a2ec59552be7c624ed15324f67f57c03851d",
+  "lines": 1273,
+  "categories": [
+    [
+      "Rejecting all added loop closures (#, first is # <-> #) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of #.# (edge #->#, type=#, abs error=#.# m, stddev=#.#). The maximum error ratio parameter \"RGBD/OptimizeMaxError\" is #.# of std deviation.",
+      311
+    ],
+    [
+      "Loop closure #-># rejected!",
+      311
+    ],
+    [
+      "Odometry lost! Odometry will be reset after next # consecutive unsuccessful odometry updates...",
+      215
+    ],
+    [
+      "# visual features required to initialize the odometry (only # extracted).",
+      181
+    ],
+    [
+      "Registration failed",
+      96
+    ],
+    [
+      "Trial with no guess still fail.",
+      40
+    ],
+    [
+      "WBROV gravity-aligned reset",
+      25
+    ],
+    [
+      "Failed to find a transformation with the provided guess (xyz=#.#,#.#,#.# rpy=-#.#,-#.#,-#.#), trying again without a guess.",
+      16
+    ],
+    [
+      "Failed to find a transformation with the provided guess (xyz=#.#,#.#,#.# rpy=#.#,#.#,-#.#), trying again without a guess.",
+      14
+    ],
+    [
+      "recorded Tag selection source_ns=# epoch=# tag=# old=# local=#",
+      9
+    ],
+    [
+      "Rejected same-epoch visual loop without two independent raw old-keyframe checks",
+      8
+    ],
+    [
+      "Rejected loop closure # -> #",
+      7
+    ],
+    [
+      "Failed to find a transformation with the provided guess (xyz=#.#,#.#,#.# rpy=#.#,-#.#,-#.#), trying again without a guess.",
+      6
+    ],
+    [
+      "[RAW_CANDIDATE_SUPPORT] current=# old=# inliers=# id_range=(#,#) exact_lookup=(#,#) cached_lookup=(#,#) raw_words=(#,#) candidate_only=#",
+      6
+    ],
+    [
+      "Guarded candidate support current=# old=# inliers=# ids=# unique=# grid=(#,#)/# depth=(#,#)/# final_depth_min=# candidate_only=#",
+      6
+    ],
+    [
+      "Guarded local-submap candidate current=# old=# retained=#",
+      6
+    ],
+    [
+      "Failed to find a transformation with the provided guess (xyz=#.#,#.#,#.# rpy=-#.#,#.#,-#.#), trying again without a guess.",
+      4
+    ],
+    [
+      "Guarded candidate consensus current=# old=# previous=(#,#) d=#.#m a=#.#deg raw_variances=(#.#e-#,#.#e-#;#.#e-#,#.#e-#) floors_sigma=(#.#m,#.#deg) normalized=(#.#,#.#) absolute_limits=(#.#m,#.#deg) normalized_limit=#.# candidate_only=#",
+      3
+    ],
+    [
+      "Rejecting all added loop closures (#, first is # <-> #) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of #.# (edge #->#, type=#, abs error=#.# deg, stddev=#.#). The maximum error ratio parameter \"RGBD/OptimizeMaxError\" is #.# of std deviation.",
+      2
+    ],
+    [
+      "single-main-map early certificate eligible=# nodes=# gravity=# span=#.#s mean=#.# max=#.# aligned_mean=#.# aligned_max=#.# increase=#.# reason=source-time and measured-gravity certificate eligible; full shadow checks still required",
+      2
+    ],
+    [
+      "Updated initial pose from xyz=#.#,#.#,#.# rpy=#.#,-#.#,#.# to xyz=#.#,#.#,#.# rpy=-#.#,#.#,-#.# with IMU orientation",
+      1
+    ],
+    [
+      "Converting depth data to # bits format because depth type detected is #FC#, feed #UC# depth format directly to avoid this conversion (or set parameter Mem/SaveDepth#Format=false to save #bits format). This warning is only printed once.",
+      1
+    ],
+    [
+      "recorded Tag triplets source_ns=# tag=# old=#,#,# local=#,#,#",
+      1
+    ],
+    [
+      "recorded Tag preparation source_ns=# epoch=# tag=# accepted=# reason=prepared fixed-old recovery alignment; no graph or registration state was changed",
+      1
+    ],
+    [
+      "[FROZEN_GRAPH_LOOP_REJECTED] current=# new_loops=# reason=post-commit extension conflicts with a frozen-boundary constraint #-># type=# translation=#.#/#.# m rotation=#.#/#.# deg",
+      1
+    ]
+  ],
+  "same_epoch_rejections": {
+    "required old anchor disagrees with current map pose": 5,
+    "raw bidirectional geometry": 3
+  },
+  "same_epoch_raw_examples": [
+    "raw bidirectional RGB-D check failed (f=0,r=0,finliers=221,rinliers=227,fbackend=,rbackend=)",
+    "raw bidirectional RGB-D check failed (f=1,r=0,finliers=308,rinliers=306,fbackend=,rbackend=)",
+    "raw bidirectional RGB-D check failed (f=0,r=0,finliers=304,rinliers=290,fbackend=,rbackend=)"
+  ],
+  "limits": "Warnings report rejected candidates only. No v35 core log exists, so this cannot measure A/B candidate counts or identify why total loop computation changed."
+}

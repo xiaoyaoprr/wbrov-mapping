@@ -1,0 +1,226 @@
+{
+  "version": 30,
+  "final": {
+    "main_nodes": 470,
+    "cuts": 10,
+    "recoveries": 1,
+    "verified_map_source_ns": 1791681977537264000,
+    "processed_source_ns": 1791682017335419000,
+    "cloud_points": 440297
+  },
+  "lost_frames": 0,
+  "permitted_frames": 9565,
+  "lastwrite": {
+    "source_ns": "1791681977653898000",
+    "lost": "0",
+    "inliers": "267",
+    "matches": "322",
+    "usable": "1",
+    "epoch": "1",
+    "cuts": "2",
+    "main_write": "1",
+    "main_nodes": "470",
+    "local_nodes": "470",
+    "recoveries": "1",
+    "input_present": "1",
+    "reason": "registered visual geometry; "
+  },
+  "transitions": [
+    {
+      "source_ns": "1791681604887594000",
+      "epoch": "0",
+      "recoveries": "0",
+      "main_nodes": "0",
+      "main_write": "0",
+      "reason": "geometry quality insufficient; "
+    },
+    {
+      "source_ns": "1791681965471144000",
+      "epoch": "1",
+      "recoveries": "0",
+      "main_nodes": "462",
+      "main_write": "0",
+      "reason": "waiting for stable geometry and Core registration; two independent old-keyframe RGB-D observations unavailable (references=462 nearby=323 first=0 raw_rejected=10 prediction_rejected=2 baseline_rejected=0 agreement_rejected=0; reference=179 raw bidirectional RGB-D check failed (f=0 r=0 finliers=3 rinliers=0 fbackend=Not enough inliers 3/25 (matches=34) between 0 and 179 rbackend=Not enough inliers 0/25 (matches=23) between 179 and 0))"
+    },
+    {
+      "source_ns": "1791681968087667000",
+      "epoch": "1",
+      "recoveries": "1",
+      "main_nodes": "465",
+      "main_write": "1",
+      "reason": "observed candidate committed; next qualified frame may write; committed current reanchor: epoch=1 registered_nodes=3 archived_prefix_nodes=3 detached_edges=1; three bridges and 3-fold holdout passed (dense plane RMS requires stopped-map validation)"
+    },
+    {
+      "source_ns": "1791681986153522000",
+      "epoch": "2",
+      "recoveries": "1",
+      "main_nodes": "470",
+      "main_write": "0",
+      "reason": "waiting for stable geometry and Core registration; "
+    },
+    {
+      "source_ns": "1791681995269771000",
+      "epoch": "3",
+      "recoveries": "1",
+      "main_nodes": "470",
+      "main_write": "0",
+      "reason": "waiting for stable geometry and Core registration; local-submap alignment waiting for three independent trusted-map candidates (retained=2 epoch=2 registered=0 trusted_snapshot=1)"
+    },
+    {
+      "source_ns": "1791682001136170000",
+      "epoch": "4",
+      "recoveries": "1",
+      "main_nodes": "470",
+      "main_write": "0",
+      "reason": "waiting for stable geometry and Core registration; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=3 registered=0 trusted_snapshot=1)"
+    },
+    {
+      "source_ns": "1791682004002693000",
+      "epoch": "5",
+      "recoveries": "1",
+      "main_nodes": "470",
+      "main_write": "0",
+      "reason": "waiting for stable geometry and Core registration; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=4 registered=0 trusted_snapshot=1)"
+    },
+    {
+      "source_ns": "1791682007119215000",
+      "epoch": "6",
+      "recoveries": "1",
+      "main_nodes": "470",
+      "main_write": "0",
+      "reason": "waiting for stable geometry and Core registration; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=5 registered=0 trusted_snapshot=1)"
+    },
+    {
+      "source_ns": "1791682009569314000",
+      "epoch": "7",
+      "recoveries": "1",
+      "main_nodes": "470",
+      "main_write": "0",
+      "reason": "waiting for stable geometry and Core registration; "
+    },
+    {
+      "source_ns": "1791682012702376000",
+      "epoch": "8",
+      "recoveries": "1",
+      "main_nodes": "470",
+      "main_write": "0",
+      "reason": "waiting for stable geometry and Core registration; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=7 registered=0 trusted_snapshot=1)"
+    },
+    {
+      "source_ns": "1791682016918772000",
+      "epoch": "9",
+      "recoveries": "1",
+      "main_nodes": "470",
+      "main_write": "0",
+      "reason": "waiting for stable geometry and Core registration; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=8 registered=0 trusted_snapshot=1)"
+    }
+  ]
+}
+{
+  "version": 31,
+  "final": {
+    "main_nodes": 484,
+    "cuts": 9,
+    "recoveries": 0,
+    "verified_map_source_ns": 1791681977537264000,
+    "processed_source_ns": 1791682017335419000,
+    "cloud_points": 470765
+  },
+  "lost_frames": 0,
+  "permitted_frames": 9694,
+  "lastwrite": {
+    "source_ns": "1791681977653898000",
+    "lost": "0",
+    "inliers": "291",
+    "matches": "344",
+    "usable": "1",
+    "epoch": "0",
+    "cuts": "1",
+    "main_write": "1",
+    "main_nodes": "484",
+    "local_nodes": "484",
+    "recoveries": "0",
+    "input_present": "1",
+    "reason": "registered visual geometry; "
+  },
+  "transitions": [
+    {
+      "source_ns": "1791681604887594000",
+      "epoch": "0",
+      "recoveries": "0",
+      "main_nodes": "0",
+      "main_write": "0",
+      "reason": "geometry quality insufficient; "
+    },
+    {
+      "source_ns": "1791681986153522000",
+      "epoch": "1",
+      "recoveries": "0",
+      "main_nodes": "484",
+      "main_write": "0",
+      "reason": "waiting for stable geometry and Core registration; "
+    },
+    {
+      "source_ns": "1791681995269771000",
+      "epoch": "2",
+      "recoveries": "0",
+      "main_nodes": "484",
+      "main_write": "0",
+      "reason": "waiting for stable geometry and Core registration; local-submap alignment waiting for three independent trusted-map candidates (retained=1 epoch=1 registered=0 trusted_snapshot=1)"
+    },
+    {
+      "source_ns": "1791682001136170000",
+      "epoch": "3",
+      "recoveries": "0",
+      "main_nodes": "484",
+      "main_write": "0",
+      "reason": "waiting for stable geometry and Core registration; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=2 registered=0 trusted_snapshot=1)"
+    },
+    {
+      "source_ns": "1791682004002693000",
+      "epoch": "4",
+      "recoveries": "0",
+      "main_nodes": "484",
+      "main_write": "0",
+      "reason": "waiting for stable geometry and Core registration; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=3 registered=0 trusted_snapshot=1)"
+    },
+    {
+      "source_ns": "1791682007119215000",
+      "epoch": "5",
+      "recoveries": "0",
+      "main_nodes": "484",
+      "main_write": "0",
+      "reason": "waiting for stable geometry and Core registration; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=4 registered=0 trusted_snapshot=1)"
+    },
+    {
+      "source_ns": "1791682009569314000",
+      "epoch": "6",
+      "recoveries": "0",
+      "main_nodes": "484",
+      "main_write": "0",
+      "reason": "waiting for stable geometry and Core registration; "
+    },
+    {
+      "source_ns": "1791682012702376000",
+      "epoch": "7",
+      "recoveries": "0",
+      "main_nodes": "484",
+      "main_write": "0",
+      "reason": "waiting for stable geometry and Core registration; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=6 registered=0 trusted_snapshot=1)"
+    },
+    {
+      "source_ns": "1791682016918772000",
+      "epoch": "8",
+      "recoveries": "0",
+      "main_nodes": "484",
+      "main_write": "0",
+      "reason": "waiting for stable geometry and Core registration; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=7 registered=0 trusted_snapshot=1)"
+    }
+  ]
+}
+lost different_frames 0 first_difference None
+inliers different_frames 9730 first_difference {'before': {'source_ns': '1791681605170924000', 'lost': '0', 'inliers': '389', 'matches': '422', 'usable': '1', 'epoch': '0', 'cuts': '1', 'main_write': '0', 'main_nodes': '0', 'local_nodes': '0', 'recoveries': '0', 'input_present': '1', 'reason': 'waiting for stable geometry and Core registration; '}, 'after': {'source_ns': '1791681605170924000', 'lost': '0', 'inliers': '391', 'matches': '424', 'usable': '1', 'epoch': '0', 'cuts': '1', 'main_write': '0', 'main_nodes': '0', 'local_nodes': '0', 'recoveries': '0', 'input_present': '1', 'reason': 'waiting for stable geometry and Core registration; '}}
+matches different_frames 9678 first_difference {'before': {'source_ns': '1791681605170924000', 'lost': '0', 'inliers': '389', 'matches': '422', 'usable': '1', 'epoch': '0', 'cuts': '1', 'main_write': '0', 'main_nodes': '0', 'local_nodes': '0', 'recoveries': '0', 'input_present': '1', 'reason': 'waiting for stable geometry and Core registration; '}, 'after': {'source_ns': '1791681605170924000', 'lost': '0', 'inliers': '391', 'matches': '424', 'usable': '1', 'epoch': '0', 'cuts': '1', 'main_write': '0', 'main_nodes': '0', 'local_nodes': '0', 'recoveries': '0', 'input_present': '1', 'reason': 'waiting for stable geometry and Core registration; '}}
+usable different_frames 1 first_difference {'before': {'source_ns': '1791681963287895000', 'lost': '0', 'inliers': '93', 'matches': '156', 'usable': '0', 'epoch': '0', 'cuts': '1', 'main_write': '0', 'main_nodes': '462', 'local_nodes': '462', 'recoveries': '0', 'input_present': '1', 'reason': 'quality insufficient; frozen-map verification required; '}, 'after': {'source_ns': '1791681963287895000', 'lost': '0', 'inliers': '93', 'matches': '144', 'usable': '1', 'epoch': '0', 'cuts': '1', 'main_write': '1', 'main_nodes': '464', 'local_nodes': '464', 'recoveries': '0', 'input_present': '1', 'reason': 'registered visual geometry; '}}
+epoch different_frames 538 first_difference {'before': {'source_ns': '1791681965471144000', 'lost': '0', 'inliers': '110', 'matches': '190', 'usable': '1', 'epoch': '1', 'cuts': '2', 'main_write': '0', 'main_nodes': '462', 'local_nodes': '0', 'recoveries': '0', 'input_present': '1', 'reason': 'waiting for stable geometry and Core registration; two independent old-keyframe RGB-D observations unavailable (references=462 nearby=323 first=0 raw_rejected=10 prediction_rejected=2 baseline_rejected=0 agreement_rejected=0; reference=179 raw bidirectional RGB-D check failed (f=0 r=0 finliers=3 rinliers=0 fbackend=Not enough inliers 3/25 (matches=34) between 0 and 179 rbackend=Not enough inliers 0/25 (matches=23) between 179 and 0))'}, 'after': {'source_ns': '1791681965471144000', 'lost': '0', 'inliers': '121', 'matches': '200', 'usable': '1', 'epoch': '0', 'cuts': '1', 'main_write': '1', 'main_nodes': '472', 'local_nodes': '472', 'recoveries': '0', 'input_present': '1', 'reason': 'registered visual geometry; '}}
+main_write different_frames 129 first_difference {'before': {'source_ns': '1791681963287895000', 'lost': '0', 'inliers': '93', 'matches': '156', 'usable': '0', 'epoch': '0', 'cuts': '1', 'main_write': '0', 'main_nodes': '462', 'local_nodes': '462', 'recoveries': '0', 'input_present': '1', 'reason': 'quality insufficient; frozen-map verification required; '}, 'after': {'source_ns': '1791681963287895000', 'lost': '0', 'inliers': '93', 'matches': '144', 'usable': '1', 'epoch': '0', 'cuts': '1', 'main_write': '1', 'main_nodes': '464', 'local_nodes': '464', 'recoveries': '0', 'input_present': '1', 'reason': 'registered visual geometry; '}}

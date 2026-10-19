@@ -1,0 +1,18 @@
+{
+  "entry": "/home/exocean/Desktop/机器人键盘遥控/.tools/run_water_mapping_with_light.sh",
+  "entry_sha256": "d1581976c17bc6a68b32aa45ff4eac73c7ec3930b392b79e04c82b6061a6436a",
+  "wrapper_pid": 995775,
+  "wrapper_ticks": "52608848",
+  "start_monotonic": 526088.482844288,
+  "phase": "closed",
+  "motion_keys_sent": false,
+  "inputs": [
+    "new map menu: 1",
+    "authorized existing entry confirmation: OK"
+  ],
+  "elapsed_s": 348.5915136960102,
+  "mapping_run": "/home/exocean/maps/rtabmap_calibration_ab/continuous_20261012_033708_997067",
+  "ready_elapsed_s": 17.96093107201159,
+  "normal_stop_requested": true,
+  "wrapper_exit": 0
+}

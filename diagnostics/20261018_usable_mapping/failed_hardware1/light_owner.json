@@ -1,0 +1,21 @@
+{
+  "phase": "off",
+  "pid": 488864,
+  "start_ticks": "45870334",
+  "monotonic": 459169.341802304,
+  "deadline_monotonic": 460203.505545504,
+  "light_percent": 0,
+  "packets": {
+    "heartbeat": 44478,
+    "led_30": 9179,
+    "led_0": 16
+  },
+  "motion_packets_allowed": false,
+  "unlock_called": false,
+  "teleop_sha256": "2059378cabf4243a8d7efa2eeff82a48001258736f4368b53524ccc9bb8b2602",
+  "failures": [],
+  "physical_led_ack_available": false,
+  "valid_feedback_count": 18190,
+  "motion_gate_closed": true,
+  "motion_ever_activated": false
+}

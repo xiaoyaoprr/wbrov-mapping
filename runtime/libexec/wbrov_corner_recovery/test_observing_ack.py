@@ -74,13 +74,28 @@ class ObservingAckTests(unittest.TestCase):
         self.assertEqual(self.bridge.pending,self.proposal);self.assertEqual(self.bridge.terminals,{})
         self.assertEqual(self.bridge.committed_epochs,set());self.assertEqual(self.bridge.required_revision,0)
         self.assertFalse(self.bridge.allow_ready(100,13,2))
-    def test_repeated_observing_does_not_extend_original_timeout(self):
+    def test_repeated_observing_does_not_extend_phase_deadline(self):
         created=self.bridge.pending['created_monotonic_s'];self.send();self.send()
+        deadline=self.bridge.pending_observation_deadline
+        self.assertLessEqual(deadline,created+48.)
+        self.send();self.assertEqual(self.bridge.pending_observation_deadline,deadline)
         self.assertEqual(self.bridge.pending['created_monotonic_s'],created)
-        self.assertEqual(sum(kind=='observing' for kind,_ in self.events),2)
+        self.assertEqual(sum(kind=='observing' for kind,_ in self.events),3)
         self.assertEqual(self.bridge.terminals,{})
+        self.bridge.pending_observation_deadline=time.monotonic()-1
+        with self.assertRaisesRegex(ValueError,'Core proposal did not finish'):self.bridge.allow_ready(100,13,2)
+    def test_unprepared_timeout_stays_twelve_seconds(self):
         self.bridge.pending['created_monotonic_s']=time.monotonic()-13
         with self.assertRaisesRegex(ValueError,'Core proposal did not finish'):self.bridge.allow_ready(100,13,2)
+    def test_prepared_wait_can_exceed_twelve_seconds_without_committing(self):
+        self.send()
+        with patch('time.monotonic',return_value=self.bridge.pending['created_monotonic_s']+13.):
+            self.assertFalse(self.bridge.allow_ready(100,13,2))
+        self.assertFalse(self.bridge.committed_epochs)
+        self.assertLessEqual(self.bridge.pending_observation_deadline,self.bridge.pending['created_monotonic_s']+48.)
+    def test_late_first_ack_cannot_resurrect_expired_proposal(self):
+        self.bridge.pending['created_monotonic_s']=time.monotonic()-13
+        with self.assertRaisesRegex(ValueError,'preparation ACK expired'):self.send()
     def test_observing_rejects_unowned_token_and_wrong_session_epoch_revision(self):
         for key,value in [('transaction_token','other'),('session_token_sha256','other'),
                           ('database_sha256','other'),('source_reset_epoch',3),('core_reset_epoch',3),

@@ -1,0 +1,82 @@
+{
+  "scope": "local publication checks only; no robot activity",
+  "python_tests": {
+    "passed": 100,
+    "skipped": 3,
+    "skip_reason": "NumPy/OpenCV unavailable for 3 numeric projection cases",
+    "commands": [
+      "python -B -m unittest discover -s tests -p test_deferred_mapping.py",
+      "python -B -m unittest discover -s tests -p test_deferred_display_state.py",
+      "python -B tools/test_mapping_candidate.py"
+    ]
+  },
+  "camera_frozen_inputs_verified": 31,
+  "worker_current_inputs_verified": 40,
+  "archive_crc_and_sensitive_pattern_scan": [
+    {
+      "path": "diagnostics/20261019_processing_speed/combo42/reproduce/combo42_source.zip",
+      "members": 13
+    },
+    {
+      "path": "diagnostics/20261019_processing_speed/combo42/reproduce/raw_pair_reuse_stage_v6.zip",
+      "members": 2
+    },
+    {
+      "path": "diagnostics/20261019_processing_speed/core6/reproduce/raw_pair_reuse_stage_v6.zip",
+      "members": 2
+    },
+    {
+      "path": "diagnostics/20261019_processing_speed/f2m_inverse44/f2m_inverse44_source.zip",
+      "members": 7
+    },
+    {
+      "path": "diagnostics/20261019_processing_speed/f2m_inverse44/f2m_inverse44_v2_source.zip",
+      "members": 7
+    },
+    {
+      "path": "diagnostics/20261019_processing_speed/status40/reproduce/status40_source.zip",
+      "members": 9
+    },
+    {
+      "path": "diagnostics/20261019_processing_speed/v38_components/reproduce/reader_hash_probe_source.zip",
+      "members": 6
+    },
+    {
+      "path": "diagnostics/20261019_processing_speed/v38_components/reproduce/rtflann_probe_headers.zip",
+      "members": 40
+    },
+    {
+      "path": "diagnostics/20261019_processing_speed/v39_components/reproduce/rtflann_probe_headers.zip",
+      "members": 40
+    },
+    {
+      "path": "diagnostics/20261019_processing_speed/v40_components/reproduce/codec41_source.zip",
+      "members": 7
+    },
+    {
+      "path": "diagnostics/20261019_processing_speed/v40_components/reproduce/rtflann_probe_headers.zip",
+      "members": 40
+    },
+    {
+      "path": "provenance/production8-20261019/camera6-build-source.zip",
+      "members": 31
+    }
+  ],
+  "tracked_diff_check_passed": true,
+  "native_and_live_results": "See diagnostics/20261019_production8_camera6; tests not rerun during publication.",
+  "staged_source_diff_check": {
+    "passed": true,
+    "git_core_whitespace": "cr-at-eol,-blank-at-eof",
+    "scope": [
+      "src",
+      "runtime",
+      "launch",
+      "tools",
+      "tests",
+      "README.md",
+      "docs",
+      "THIRD_PARTY_NOTICES.md"
+    ],
+    "note": "Preserve existing input hashes and CRLF evidence; ignore final blank lines."
+  }
+}

@@ -5,6 +5,10 @@ struct RecoveryPairResult {
     Transform forward,reverse;
 };
 
+// Forward/reverse solves share the same images and depth. Their agreement is
+// internal consistency, not independent sensor evidence or proof that either
+// this estimate or the separately recorded odometry is ground truth.
+
 bool strictRecoveryPair(SensorData fromData,SensorData toData,const ParametersMap & parameters,
         double maximumCondition,RecoveryPairResult & result,std::string & reason)
 {
@@ -34,6 +38,28 @@ bool strictRecoveryPair(SensorData fromData,SensorData toData,const ParametersMa
     // compression-sensitive mismatches among hundreds of valid 2.5cm matches.
     // Tighten selection; retain every posterior residual/coverage/SPD check.
     p[Parameters::kVisInlierDistance()]=uNumber2Str(std::min(.025f,correspondenceDistance));
+    // These GFTT descriptor paths were checked against raw first-pass features.
+    // Prepare each image once for the pair; matching, RANSAC, refinement and
+    // all posterior checks still run independently in both directions. Keep
+    // other detector/matcher/optical-flow configurations on their existing path.
+    int feature=Parameters::defaultVisFeatureType(),correspondences=Parameters::defaultVisCorType();
+    int matcher=Parameters::defaultVisCorNNType();bool spatial=Parameters::defaultVisSSC();
+    Parameters::parse(p,Parameters::kVisFeatureType(),feature);
+    Parameters::parse(p,Parameters::kVisCorType(),correspondences);
+    Parameters::parse(p,Parameters::kVisCorNNType(),matcher);
+    Parameters::parse(p,Parameters::kVisSSC(),spatial);
+    if(!spatial && correspondences==0 && (feature==6 || feature==8) && (matcher==1 || matcher==3)) {
+        std::unique_ptr<Registration> preparation(Registration::create(p));
+        if(!preparation || !preparation->isImageRequired())
+        {reason="raw visual feature preparation unavailable";return false;}
+        Signature preparedFrom(fromData),preparedTo(toData),emptyFrom,emptyTo;
+        if(!preparation->computeTransformationMod(emptyFrom,preparedFrom).isNull() ||
+           !preparation->computeTransformationMod(emptyTo,preparedTo).isNull())
+        {reason="unpaired raw feature preparation unexpectedly produced motion";return false;}
+        const auto &a=preparedFrom.sensorData();const auto &b=preparedTo.sensorData();
+        fromData.setFeatures(a.keypoints(),a.keypoints3D(),a.descriptors().clone());
+        toData.setFeatures(b.keypoints(),b.keypoints3D(),b.descriptors().clone());
+    }
     auto validate=[&](const Signature & a,const Signature & b,const Transform & transform,const RegistrationInfo & info)->bool {
         if(!safeRigidTransform(transform) || info.inliers<minimum) return false;
         std::set<int> words(info.inliersIDs.begin(),info.inliersIDs.end());
@@ -65,7 +91,12 @@ bool strictRecoveryPair(SensorData fromData,SensorData toData,const ParametersMa
         }
         return count>=minimum && std::sqrt(squared/count)<=.018 && maximum<=.025;
     };
-    Signature a(fromData),b(toData),reverseB(toData),reverseA(fromData);
+    // Refinement may replace feature storage. Reverse matching owns its own
+    // descriptors and cannot observe mutations made by the forward solve.
+    SensorData reverseFrom=fromData,reverseTo=toData;
+    reverseFrom.setFeatures(fromData.keypoints(),fromData.keypoints3D(),fromData.descriptors().clone());
+    reverseTo.setFeatures(toData.keypoints(),toData.keypoints3D(),toData.descriptors().clone());
+    Signature a(fromData),b(toData),reverseB(reverseTo),reverseA(reverseFrom);
     std::unique_ptr<Registration> forward(Registration::create(p)),reverse(Registration::create(p));
     if(!forward || !reverse || !forward->isImageRequired() || !reverse->isImageRequired())
     {reason="raw visual registration unavailable";return false;}
@@ -215,55 +246,152 @@ bool Rtabmap::findRecoveryLocalMotionFault(const SafeRelocalizationLimits & limi
 
 bool Rtabmap::validateObservationAgainstReferences(const SensorData & observation,const Transform & predicted,
         const std::map<int,Transform> & references,int excludedId,int requiredAnchor,
-        const SafeRelocalizationLimits & limits,Transform & measured,std::string & reason) const
+        const SafeRelocalizationLimits & limits,Transform & measured,std::string & reason,
+        RecoveryObservationDiagnostics * diagnostic,const std::vector<int> * rankedIds) const
 {
-    if(!_memory || !safeRigidTransform(predicted)) {reason="missing map or predicted observation";return false;}
+    measured.setNull();
+    RecoveryObservationDiagnostics d;d.references=int(references.size());d.globalSearch=rankedIds!=nullptr;
+    auto finish=[&](bool result){if(diagnostic)*diagnostic=d;return result;};
+    if(!_memory || (!rankedIds && !safeRigidTransform(predicted))) {reason="missing map or predicted observation";return finish(false);}
     std::vector<std::pair<float,int> > ordered;
     for(const auto & pose:references) {
         if(pose.first<=0 || pose.first==excludedId || !_memory->getSignature(pose.first)) continue;
+        if(rankedIds) {
+            const auto rank=std::find(rankedIds->begin(),rankedIds->end(),pose.first);
+            if(rank!=rankedIds->end())ordered.emplace_back(float(std::distance(rankedIds->begin(),rank)),pose.first);
+            continue;
+        }
         const float distance=pose.second.getDistance(predicted);
         if(distance<=1.0f)ordered.emplace_back(pose.first==requiredAnchor?-1.0f:distance,pose.first);
     }
     std::sort(ordered.begin(),ordered.end());
+    d.nearby=int(ordered.size());
     if(requiredAnchor>0 && (ordered.empty() || ordered.front().second!=requiredAnchor))
-    {reason="required old-loop anchor is outside the compatible map neighborhood";return false;}
-    int firstId=0;Transform firstMeasured;
-    int rawRejected=0,predictionRejected=0,baselineRejected=0,agreementRejected=0;
+    {reason="required old-loop anchor is outside the compatible map neighborhood";return finish(false);}
+    // Interleave independent old viewpoints before near-duplicate neighbors.
+    // Retain the remainder as fallbacks; never discard a view for lacking baseline.
+    std::vector<int> selected,deferred;
+    auto independent=[&](int a,int b) {
+        return std::fabs(_memory->getSignature(a)->getStamp()-_memory->getSignature(b)->getStamp())>=.2 &&
+            (references.at(a).getDistance(references.at(b))>=std::max(.03,double(limits.minBridgeTranslation)) ||
+             references.at(a).getAngle(references.at(b))>=std::max(3.0,double(limits.minBridgeRotation))*M_PI/180.0);
+    };
+    for(const auto & item:ordered) {
+        bool diverse=true;for(int id:selected)if(!independent(item.second,id)){diverse=false;break;}
+        (diverse?selected:deferred).push_back(item.second);
+    }
+    selected.insert(selected.end(),deferred.begin(),deferred.end());
+    std::vector<std::pair<int,Transform>> matches;
+    bool pairFound=false;
     std::string lastFailure;
-    for(size_t i=0;i<ordered.size() && i<12;++i) {
-        const int id=ordered[i].second;const Signature * reference=_memory->getSignature(id);
+    const size_t budget=rankedIds?6U:12U;
+    for(size_t i=0;i<selected.size() && i<budget;++i) {
+        const int id=selected[i];const Signature * reference=_memory->getSignature(id);
         if(!std::isfinite(reference->getStamp()) || reference->getStamp()<=0.0)continue;
-        if(firstId) {
-            const Signature * firstSignature=_memory->getSignature(firstId);
-            if(std::fabs(reference->getStamp()-firstSignature->getStamp())<.2 ||
-               (references.at(id).getDistance(references.at(firstId))<std::max(.03,double(limits.minBridgeTranslation)) &&
-                references.at(id).getAngle(references.at(firstId))<std::max(3.0,double(limits.minBridgeRotation))*M_PI/180.0)) {++baselineRejected;continue;}
-        }
+        ++d.tested;
         RecoveryPairResult pair;
         if(!strictRecoveryPair(observation,_memory->getNodeData(id,true,false,false,false),
                 _parameters,limits.maxInformationCondition,pair,reason)) {
-            ++rawRejected;lastFailure=uFormat("reference=%d %s",id,reason.c_str());
-            if(id==requiredAnchor)return false;
+            ++d.rawRejected;lastFailure=uFormat("reference=%d %s",id,reason.c_str());
+            if(id==requiredAnchor)return finish(false);
             continue;
         }
         const Transform candidate=references.at(id)*pair.forward.inverse();
-        if(!strictRecoveryPoseAgreement(candidate,predicted,limits)) {
-            ++predictionRejected;lastFailure=uFormat("reference=%d prediction distance=%.6f angle_deg=%.6f measured=%s predicted=%s",id,
+        if(!predicted.isNull() && !strictRecoveryPoseAgreement(candidate,predicted,limits)) {
+            ++d.predictionRejected;lastFailure=uFormat("reference=%d prediction distance=%.6f angle_deg=%.6f measured=%s predicted=%s",id,
                 candidate.getDistance(predicted),candidate.getAngle(predicted)*180.0/M_PI,candidate.prettyPrint().c_str(),predicted.prettyPrint().c_str());
-            if(id==requiredAnchor){reason="required old anchor disagrees with current map pose";return false;}
+            if(id==requiredAnchor){reason="required old anchor disagrees with current map pose";return finish(false);}
             continue;
         }
-        if(!firstId){firstId=id;firstMeasured=candidate;continue;}
-        if(!strictRecoveryPoseAgreement(candidate,firstMeasured,limits)){++agreementRejected;continue;}
-        measured=firstMeasured;reason="two source-time/viewpoint-independent old RGB-D anchors agree";return true;
+        ++d.matched;
+        for(const auto & previous:matches) {
+            if(requiredAnchor>0 && previous.first!=requiredAnchor && id!=requiredAnchor)continue;
+            if(!independent(id,previous.first)){++d.baselineRejected;continue;}
+            if(!strictRecoveryPoseAgreement(candidate,previous.second,limits)){++d.agreementRejected;continue;}
+            if(pairFound && !strictRecoveryPoseAgreement(measured,candidate,limits)) {
+                ++d.agreementRejected;measured.setNull();reason="multiple independent old-anchor pairs imply different main-map positions";return finish(false);
+            }
+            if(!pairFound){measured=previous.second;d.firstAnchor=previous.first;d.secondAnchor=id;pairFound=true;}
+            reason="two source-time/viewpoint-independent old RGB-D anchors agree";
+            if(!rankedIds)return finish(true);
+        }
+        // A poor first match must not prevent later independent pairs succeeding.
+        matches.emplace_back(id,candidate);
     }
+    if(pairFound)return finish(true);
     reason=uFormat("two independent old-keyframe RGB-D observations unavailable (references=%d,nearby=%d,first=%d,raw_rejected=%d,prediction_rejected=%d,baseline_rejected=%d,agreement_rejected=%d; %s)",
-        int(references.size()),int(ordered.size()),firstId,rawRejected,predictionRejected,baselineRejected,agreementRejected,lastFailure.c_str());return false;
+        d.references,d.nearby,matches.empty()?0:matches.front().first,d.rawRejected,d.predictionRejected,d.baselineRejected,d.agreementRejected,lastFailure.c_str());return finish(false);
+}
+
+bool Rtabmap::localizeCurrentObservation(const SafeRelocalizationLimits & limits,
+        Transform & measured,RecoveryObservationDiagnostics & diagnostic,std::string & reason,
+        const SensorData * liveData,const ImageInputIdentity * liveIdentity) const
+{
+    measured.setNull();diagnostic=RecoveryObservationDiagnostics{};
+    if(!_safeRelocalizationGuardEnabled || !_memory || isCurrentMapFrameRegistered() || !_safeRelocalizationTrustedSnapshotValid)
+    {reason="read-only main-map localization unavailable";return false;}
+    const Signature * current=_memory->getLastWorkingSignature(false);
+    AcceptedImageReceipt input;
+    if(!current || !getAcceptedImageReceipt(current->id(),input) || input.resetEpoch!=_resetEpoch)
+    {reason="current authenticated observation unavailable";return false;}
+    SensorData stored;Transform measuredGravity;
+    if(liveData || liveIdentity) {
+        // A current source-validated observation need not become a saved node.
+        // The Wrapper checks source identity, freshness and epoch continuity;
+        // Core additionally binds these exact pixels/camera to the same source.
+        if(!liveData || !liveIdentity || !receiptIdentityMatches(*liveData,*liveIdentity,reason) ||
+           liveIdentity->headerStampNs<input.input.headerStampNs ||
+           liveIdentity->sessionTokenSha256!=input.input.sessionTokenSha256 ||
+           liveIdentity->databaseSha256!=input.input.databaseSha256 ||
+           liveIdentity->rgbPublisherGidHex!=input.input.rgbPublisherGidHex ||
+           liveIdentity->infoPublisherGidHex!=input.input.infoPublisherGidHex) {
+            reason="live localization observation identity mismatch: "+reason;return false;
+        }
+        const auto & imu=liveData->imu();const auto q=imu.orientation();
+        const double norm=q[0]*q[0]+q[1]*q[1]+q[2]*q[2]+q[3]*q[3];
+        if(imu.empty() || !safeRigidTransform(imu.localTransform()) || !std::isfinite(norm) || std::abs(norm-1.)>.002) {
+            reason="live localization lacks valid measured IMU attitude";return false;
+        }
+        measuredGravity=Transform(0,0,imu.localTransform().theta()) *
+            Transform(0,0,0,q[0],q[1],q[2],q[3]) * imu.localTransform().rotation().inverse();
+    } else {
+        stored=_memory->getNodeData(current->id(),true,false,false,false);
+        const auto gravity=graph::findLink(current->getLinks(),current->id(),current->id(),false,Link::kGravity);
+        if(!_memory->isOdomGravityUsed() && gravity!=current->getLinks().end())measuredGravity=gravity->second.transform();
+    }
+    if(!safeRigidTransform(measuredGravity)){reason="read-only localization lacks measured gravity";return false;}
+    std::map<int,Transform> references;
+    std::vector<std::pair<float,int>> ranking;
+    for(const auto & pose:_safeRelocalizationTrustedPoses) {
+        const auto epoch=getSignatureResetEpoch(pose.first);
+        const Signature * old=_memory->getSignature(pose.first);AcceptedImageReceipt receipt;
+        if(pose.first<=0 || !old || epoch>=_resetEpoch || (epoch!=0 && !_safeRelocalizationCommittedEpochs.count(epoch)) ||
+           !getAcceptedImageReceipt(pose.first,receipt) || receipt.resetEpoch!=epoch)continue;
+        references.insert(pose);
+        // Shared persistent dictionary is only a retrieval hint. Every accepted
+        // match is re-extracted from raw RGB-D in its own registration dictionary.
+        ranking.emplace_back(-current->compareTo(*old),pose.first);
+    }
+    std::sort(ranking.begin(),ranking.end());
+    std::vector<int> ids;for(const auto & item:ranking) {if(ids.size()==48)break;ids.push_back(item.second);}
+    if(!validateObservationAgainstReferences(liveData?*liveData:stored,
+            Transform(),references,0,0,limits,measured,reason,&diagnostic,&ids))return false;
+    // Localization does not assume a translation/yaw prior from the lost frame.
+    // The current measured gravity direction must still agree with the main map.
+    // Memory persists IMU attitude as a gravity self-link, not in the RGB-D
+    // payload returned by getNodeData(). An odometry-derived link is not an
+    // independent measurement. Compare body-frame gravity, invariant to yaw.
+    if(safeGravityDirectionError(measured,measuredGravity)>std::min(2.0,double(limits.maxAnchorTilt))*M_PI/180.0) {
+        measured.setNull();reason="read-only localization disagrees with measured gravity or lacks IMU";return false;
+    }
+    return true;
 }
 
 bool Rtabmap::validateLocalMapObservation(const SensorData & data,const Transform & odomPose,
-        int lastLocalNodeId,const SafeRelocalizationLimits & limits,Transform & measuredLocalPose,std::string & reason) const
+        int lastLocalNodeId,const SafeRelocalizationLimits & limits,Transform & measuredLocalPose,std::string & reason,
+        RecoveryObservationDiagnostics * diagnostic) const
 {
+    if(diagnostic)*diagnostic=RecoveryObservationDiagnostics{};
     const Signature * checkpoint=_memory?_memory->getSignature(lastLocalNodeId):nullptr;
     if(!_safeRelocalizationGuardEnabled || isCurrentMapFrameRegistered() || !checkpoint ||
        lastLocalNodeId<=0 || getSignatureResetEpoch(lastLocalNodeId)!=_resetEpoch ||
@@ -277,12 +405,14 @@ bool Rtabmap::validateLocalMapObservation(const SensorData & data,const Transfor
     }
     // Same raw bidirectional geometry and independent-view requirements as main
     // recovery. This read-only result never registers the epoch or adds an edge.
-    return validateObservationAgainstReferences(data,_mapCorrection*odomPose,local,0,0,limits,measuredLocalPose,reason);
+    return validateObservationAgainstReferences(data,_mapCorrection*odomPose,local,0,0,limits,measuredLocalPose,reason,diagnostic);
 }
 
 bool Rtabmap::validateRegisteredMapObservation(const SensorData & data,const Transform & odomPose,
-        int lastTrustedNodeId,const SafeRelocalizationLimits & limits,Transform & measuredMainPose,std::string & reason) const
+        int lastTrustedNodeId,const SafeRelocalizationLimits & limits,Transform & measuredMainPose,std::string & reason,
+        RecoveryObservationDiagnostics * diagnostic) const
 {
+    if(diagnostic)*diagnostic=RecoveryObservationDiagnostics{};
     if(!_safeRelocalizationGuardEnabled || !isCurrentMapFrameRegistered() || lastTrustedNodeId<=0 ||
        !safeRigidTransform(odomPose))
     {reason="registered frozen old-map observation is unavailable";return false;}
@@ -291,7 +421,7 @@ bool Rtabmap::validateRegisteredMapObservation(const SensorData & data,const Tra
         const auto epoch=getSignatureResetEpoch(pose.first);
         if(pose.first<=lastTrustedNodeId && (epoch==0 || _safeRelocalizationCommittedEpochs.count(epoch)))old.insert(pose);
     }
-    return validateObservationAgainstReferences(data,_mapCorrection*odomPose,old,0,0,limits,measuredMainPose,reason);
+    return validateObservationAgainstReferences(data,_mapCorrection*odomPose,old,0,0,limits,measuredMainPose,reason,diagnostic);
 }
 
 bool Rtabmap::validateProposedMapObservation(const SensorData & data,const Transform & odomPose,
@@ -318,7 +448,18 @@ bool Rtabmap::getUnregisteredLocalSubmaps(std::vector<LocalSubmapSnapshot> & sna
     snapshots.clear();reason.clear();
     if(!_safeRelocalizationGuardEnabled || !_memory)
     {reason="managed local submap owner is unavailable";return false;}
-    if(isCurrentMapFrameRegistered()) {reason="current epoch is registered; no unregistered local snapshot";return true;}
+    std::vector<LocalSubmapSnapshot> archivedCopies;
+    for(const auto & saved:_safeRelocalizationArchives) {
+        LocalSubmapSnapshot copy=saved;copy.poses.clear();copy.links.clear();
+        for(const auto & pose:saved.poses)copy.poses.emplace(pose.first,pose.second.clone());
+        for(const auto & row:saved.links) {const auto & edge=row.second;
+            copy.links.emplace(row.first,Link(edge.from(),edge.to(),edge.type(),edge.transform().clone(),edge.infMatrix().clone()));}
+        archivedCopies.push_back(copy);
+    }
+    if(isCurrentMapFrameRegistered()) {
+        snapshots.swap(archivedCopies);
+        reason="current frame registered; excluded historical prefixes remain unregistered";return true;
+    }
     typedef std::pair<unsigned long long,int> Identity;
     std::map<Identity,std::set<int> > groups;
     std::map<int,Identity> membership;
@@ -340,7 +481,7 @@ bool Rtabmap::getUnregisteredLocalSubmaps(std::vector<LocalSubmapSnapshot> & sna
         {reason="unregistered local snapshot contains a cross-epoch/map or invalid inter-node edge";return false;}
         adjacent[link.from()].insert(link.to());adjacent[link.to()].insert(link.from());
     }
-    std::vector<LocalSubmapSnapshot> prepared;
+    std::vector<LocalSubmapSnapshot> prepared;prepared.swap(archivedCopies);
     for(const auto & group:groups) {
         std::set<int> remaining=group.second;
         while(!remaining.empty()) {
@@ -374,7 +515,8 @@ bool Rtabmap::getUnregisteredLocalSubmaps(std::vector<LocalSubmapSnapshot> & sna
 bool Rtabmap::validateSameEpochVisualClosure(int currentId,int oldId,const Transform & proposed,std::string & reason) const
 {
     if(!_safeRelocalizationGuardEnabled)return true;
-    if(!_memory || !_optimizedPoses.count(currentId) || !_optimizedPoses.count(oldId) || currentId==oldId)
+    if(!_memory || isRecoveryArchivedNode(currentId) || isRecoveryArchivedNode(oldId) ||
+       !_optimizedPoses.count(currentId) || !_optimizedPoses.count(oldId) || currentId==oldId)
     {reason="same-epoch closure lacks both registered graph endpoints";return false;}
     SafeRelocalizationLimits limits{};
     limits.maxHoldoutTranslation=.025f;limits.maxHoldoutRotation=2;limits.minBridgeTranslation=.03f;limits.minBridgeRotation=3;

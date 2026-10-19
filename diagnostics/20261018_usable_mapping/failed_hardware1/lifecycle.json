@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "launcher_pid": 488868,
+  "process_start_ticks": 45870775,
+  "boot_id": "d12a8759-0cf1-4fe9-9064-feea661c2763",
+  "phase": "stopped",
+  "exit_code": 1,
+  "nodes_stopped": false,
+  "export_succeeded": false,
+  "cleanup_succeeded": false,
+  "run_dir": "/home/exocean/maps/rtabmap_calibration_ab/continuous_20261011_085356_488868",
+  "entry": "continuous_all_frames",
+  "errors": [
+    "bridge exited unexpectedly",
+    "bridge exit=1",
+    "capture did not seal; partial input retained",
+    "processing exit=-15"
+  ]
+}

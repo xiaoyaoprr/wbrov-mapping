@@ -1,0 +1,18 @@
+[INFO] [1791586804.038226784] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [1791586804.038532800] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[INFO] [1791586804.102434016] [rviz2]: Stereo is NOT SUPPORTED
+[ERROR] [1791586804.384472480] [rviz2]: Failed to create an OpenGL context. GLXBadDrawable
+[INFO] [1791586804.385207328] [rviz2]: Stereo is NOT SUPPORTED
+[ERROR] [1791586804.402874240] [rviz2]: Failed to create an OpenGL context. GLXBadDrawable
+[INFO] [1791586804.403416800] [rviz2]: Stereo is NOT SUPPORTED
+[ERROR] [1791586804.412768384] [rviz2]: Failed to create an OpenGL context. GLXBadDrawable
+[INFO] [1791586804.413397344] [rviz2]: Stereo is NOT SUPPORTED
+[ERROR] [1791586806.377007680] [rviz2]: [WBROV_RVIZ_RENDER_FAILED] attempt=0 retry=1
+[INFO] [1791586807.768418848] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [1791586807.768627808] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[INFO] [1791586807.841011936] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [1791586808.275471232] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [1791586808.308096416] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [1791586808.427098784] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [1791586810.228181248] [rviz2]: [WBROV_RVIZ_RENDER_READY] attempt=1
+[rviz_rendering:info] Forcing Stereo OFF, at ./src/rviz_rendering/render_system.cpp:155

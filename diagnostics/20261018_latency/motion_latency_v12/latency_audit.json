@@ -1,0 +1,27 @@
+{
+  "scope": "closed-input replay, not production entry acceptance",
+  "frames": 1581,
+  "all_input_timestamps_match": true,
+  "lost_or_missing_write_permissions": 0,
+  "database_quick_check": "ok",
+  "cloud_differential": {
+    "exit": 0,
+    "output": "{\"passed\":true,\"nodes\":100,\"points\":96375,\"byte_exact\":true}\n"
+  },
+  "recovery_events": [
+    {
+      "source_ns": 1791653869264253000,
+      "nodes_at_recovery": 94,
+      "final_nodes": 100,
+      "continuation_seconds": 15.715997
+    }
+  ],
+  "final_main_writable": true,
+  "sha256": {
+    "map.db": "860921d7eda96348e434a74e3d466963be62113f93d68eb5ec138dec218bb1eb",
+    "main_cloud.ply": "45146cd3b4a6594ce7f9e1522883c17284f7b454638ba28dce2b0921f848dc8e",
+    "frames.csv": "94973aad5cb740a758e359b205b444310ae744b5c7b8aca868224e9f73ec7823",
+    "tags.json": "a95477226584ff6eeabf40b6a0a1c721274338f5398a7ce2d6c5666414380cd8"
+  },
+  "passed": true
+}

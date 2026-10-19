@@ -1,0 +1,27 @@
+{"round": 0, "baseline": {"seconds": 5.5823993280064315, "images": 287, "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"}, "candidate": {"seconds": 3.7726372480392456, "images": 287, "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"}}
+{"round": 1, "candidate": {"seconds": 3.7600868479930796, "images": 287, "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"}, "baseline": {"seconds": 5.577514335978776, "images": 287, "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"}}
+{"round": 2, "baseline": {"seconds": 5.572928863984998, "images": 287, "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"}, "candidate": {"seconds": 3.7596558399964124, "images": 287, "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"}}
+{"round": 3, "candidate": {"seconds": 3.7657170880120248, "images": 287, "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"}, "baseline": {"seconds": 5.842456895974465, "images": 287, "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"}}
+{"round": 4, "baseline": {"seconds": 5.838233056012541, "images": 287, "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"}, "candidate": {"seconds": 3.811123296036385, "images": 287, "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"}}
+{"round": 5, "candidate": {"seconds": 3.7576223040232435, "images": 287, "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"}, "baseline": {"seconds": 5.560761440021452, "images": 287, "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"}}
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.2.6 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/image_reader_probe/benchmark_image_reader.py", line 35, in <module>
+    observer=candidate_tags.TagObserver(r/'mapping_usable_v3/runtime/libexec/wbrov_corner_recovery')
+  File "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/image_reader_probe/deferred_tag_observations.py", line 49, in __init__
+    import cv2
+AttributeError: _ARRAY_API not found
+Traceback (most recent call last):
+  File "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/image_reader_probe/benchmark_image_reader.py", line 35, in <module>
+    observer=candidate_tags.TagObserver(r/'mapping_usable_v3/runtime/libexec/wbrov_corner_recovery')
+  File "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/image_reader_probe/deferred_tag_observations.py", line 49, in __init__
+    import cv2
+ImportError: numpy.core.multiarray failed to import

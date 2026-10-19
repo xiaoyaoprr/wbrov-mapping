@@ -1,0 +1,68 @@
+feature_preparation_probe2 {
+  "phase": "finished",
+  "scope": "closed-recording experiment only; no runtime Core changes",
+  "steps": [
+    {
+      "name": "compile",
+      "exit": 0,
+      "seconds": 21.075527840002906
+    },
+    {
+      "name": "link",
+      "exit": 0,
+      "seconds": 3.7769898880505934
+    },
+    {
+      "name": "full_recovery",
+      "exit": 2,
+      "seconds": 187.39677036798093
+    },
+    {
+      "name": "large_interrupted_capture",
+      "exit": 2,
+      "seconds": 217.81242799997563
+    }
+  ],
+  "adopted": false
+}
+full_recovery {"pairs":100,"directions":200,"feature_mismatch":0,"brute_force_control_mismatch":137,"brute_force_reuse_mismatch":138,"approximate_control_mismatch":199,"approximate_reuse_mismatch":200,"raw_bidirectional_ms":20229.5,"prepared_bidirectional_ms":9536.81,"prepare_ms":5272.64}
+large_interrupted_capture {"pairs":100,"directions":200,"feature_mismatch":0,"brute_force_control_mismatch":110,"brute_force_reuse_mismatch":109,"approximate_control_mismatch":200,"approximate_reuse_mismatch":200,"raw_bidirectional_ms":19106.9,"prepared_bidirectional_ms":8419.66,"prepare_ms":5312.19}
+direct_cloud_probe {
+  "phase": "finished",
+  "scope": "closed-recording experiment only; no runtime Core changes",
+  "steps": [
+    {
+      "name": "compile",
+      "exit": 0,
+      "seconds": 14.454321664001327
+    },
+    {
+      "name": "link",
+      "exit": 0,
+      "seconds": 3.429643423995003
+    },
+    {
+      "name": "full_recovery",
+      "exit": 0,
+      "seconds": 6.487911615986377
+    },
+    {
+      "name": "large_interrupted_capture",
+      "exit": 0,
+      "seconds": 23.539104704046622
+    }
+  ],
+  "adopted": false
+}
+full_recovery {"round":0,"nodes":157,"points":62558,"byte_exact":true,"before_ms":[234.454,60.1299,6.99629],"after_ms":[292.778,0.006656,7.03706]}
+{"round":1,"nodes":157,"points":62558,"byte_exact":true,"before_ms":[218.489,51.1053,6.98339],"after_ms":[291.668,0.007072,7.05242]}
+{"round":2,"nodes":157,"points":62558,"byte_exact":true,"before_ms":[218.474,48.2906,7.00176],"after_ms":[292.502,0.006656,7.03658]}
+{"round":3,"nodes":157,"points":62558,"byte_exact":true,"before_ms":[216.883,44.5478,6.99798],"after_ms":[277.015,0.007104,7.05526]}
+{"round":4,"nodes":157,"points":62558,"byte_exact":true,"before_ms":[216.92,45.2345,7.03219],"after_ms":[277.934,0.006624,7.07613]}
+{"round":5,"nodes":157,"points":62558,"byte_exact":true,"before_ms":[219.364,44.3919,7.0369],"after_ms":[273.474,0.006816,7.07747]}
+large_interrupted_capture {"round":0,"nodes":470,"points":440297,"byte_exact":true,"before_ms":[721.651,588.912,58.8809],"after_ms":[1406.98,0.020032,59.1784]}
+{"round":1,"nodes":470,"points":440297,"byte_exact":true,"before_ms":[713.413,580.388,58.647],"after_ms":[1392.13,0.019744,58.8756]}
+{"round":2,"nodes":470,"points":440297,"byte_exact":true,"before_ms":[714.947,580.811,58.7637],"after_ms":[1390.26,0.020032,59.0845]}
+{"round":3,"nodes":470,"points":440297,"byte_exact":true,"before_ms":[701.336,410.594,58.6244],"after_ms":[1094.88,0.020064,57.4985]}
+{"round":4,"nodes":470,"points":440297,"byte_exact":true,"before_ms":[703.88,410.239,57.3591],"after_ms":[1100.15,0.019776,57.1658]}
+{"round":5,"nodes":470,"points":440297,"byte_exact":true,"before_ms":[702.247,412.178,57.1511],"after_ms":[1099,0.02048,57.5384]}

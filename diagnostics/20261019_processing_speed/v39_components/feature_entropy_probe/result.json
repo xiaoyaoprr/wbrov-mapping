@@ -1,0 +1,55 @@
+{
+  "phase": "finished",
+  "scope": "offline feature-preparation A/A diagnostic; process-local record/replay of actual random_device values only in this test executable, no Core/worker changes or deployment",
+  "steps": [
+    {
+      "name": "compile",
+      "exit": 0,
+      "seconds": 15.91235251200851
+    },
+    {
+      "name": "link",
+      "exit": 0,
+      "seconds": 3.9267195200081915
+    },
+    {
+      "name": "full_recovery",
+      "exit": 0,
+      "seconds": 25.59520070400322
+    },
+    {
+      "name": "large_interrupted_capture",
+      "exit": 0,
+      "seconds": 26.49800281599164
+    }
+  ],
+  "source_sha256": "e0ed4e41e22ebc5527bc6ec4a984730ec1e5117cdbd19ac56ec94a59a6ef3da0",
+  "maps": [
+    {
+      "name": "full_recovery",
+      "db_sha256": "de7e71db1663ceda692220f2053c3f3116e35d5ebff49917af38e5c17a6a84b2",
+      "summary": {
+        "summary": true,
+        "pairs": 24,
+        "feature_mismatch": 0,
+        "control_mismatch": 0,
+        "reuse_mismatch": 0,
+        "entropy_calls": 420
+      }
+    },
+    {
+      "name": "large_interrupted_capture",
+      "db_sha256": "4e63c8451f8c4ce4f14fa66d7a8b3a35f6494a5f4e40e3026d31d92f872fd7a6",
+      "summary": {
+        "summary": true,
+        "pairs": 24,
+        "feature_mismatch": 0,
+        "control_mismatch": 0,
+        "reuse_mismatch": 0,
+        "entropy_calls": 432
+      }
+    }
+  ],
+  "core_sha256": "573f9a1cd6a6ac257efd5621b421b9650f14fcbfc95cfcd915f5c9f479c6eed7",
+  "adopted": false
+}

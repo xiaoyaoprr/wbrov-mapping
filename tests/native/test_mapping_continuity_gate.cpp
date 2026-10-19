@@ -23,6 +23,34 @@ void mapObservations(Gate &g,long long start,Gate::Epoch epoch=0,Gate::Evidence 
 }
 int main() {
     {
+        Gate g;normal(g);const auto serial=g.localContinuitySerial();
+        auto weak=visual();weak.visualGeometry=weak.recoveryGeometry=false;
+        observe(g,T+3*D,weak);stable(g,T+4*D);
+        assert(g.beginMapObservation(0,true,T+6*D,T+6*D));
+        observe(g,T+7*D);
+        const auto ticket=g.ticket(T+7*D);
+        assert(g.waitForRegisteredMapObservation(ticket,0,T+7*D,T+7*D));
+        assert(!g.mainMapAllowed(0,T+7*D,T+7*D) && g.localContinuitySerial()==serial);
+        assert(g.ticket(T+7*D).generation==ticket.generation);
+        assert(!g.waitForRegisteredMapObservation(ticket,0,T+7*D,T+7*D)); // no repeated evidence
+        mapObservations(g,T+8*D);
+        assert(g.mainMapAllowed(0,T+14*D,T+14*D));
+        assert(g.localContinuitySerial()==serial);
+    }
+    {
+        Gate g;normal(g);auto weak=visual();weak.visualGeometry=weak.recoveryGeometry=false;
+        observe(g,T+3*D,weak);stable(g,T+4*D);
+        assert(g.beginMapObservation(0,true,T+6*D,T+6*D));
+        const auto serial=g.localContinuitySerial();
+        for(int i=7;i<=63;++i) {
+            observe(g,T+i*D);
+            assert(g.waitForRegisteredMapObservation(g.ticket(T+i*D),0,T+i*D,T+i*D));
+            assert(!g.mainMapAllowed(0,T+i*D,T+i*D));
+        }
+        g.tick(T+63*D+1,T+63*D+1);
+        assert(g.localContinuitySerial()>serial); // misses never slide six-second budget
+    }
+    {
         Gate g;stable(g,T);assert(!confirm(g,T+2*D,0,false));
         const auto serial=g.localContinuitySerial();
         auto weak=visual();weak.visualGeometry=weak.recoveryGeometry=false;
@@ -422,5 +450,54 @@ int main() {
         for(int i=17;i<=75;++i)observe(g,T+i*D);
         assert(g.localContinuitySerial()==serial && g.mainMapAllowed(1,T+75*D,T+75*D));
     }
-    std::cout<<"PASS: bootstrap, measured hysteresis, unique/fresh source, observation before candidate commit, failed K/loss invalidate commit, unique final commit, same-epoch no-Tag, depth/IMU boundaries\n";
+    {
+        // Hardware trace: each independent old-map solve took about 2 s.
+        // The original 6 s admission ticket expired after only 2/5 solves,
+        // although fresh authenticated odometry continued without a cut.
+        Gate g;normal(g);observe(g,T+3*D);
+        assert(!g.coreValidated(g.ticket(T+3*D),1,false,true,T+3*D,T+3*D));
+        observe(g,T+4*D);observe(g,T+5*D);
+        const auto prepared=g.ticket(T+5*D);long long now=T+5*D;
+        assert(g.beginCandidateObservation(prepared,1,now,now));
+        for(unsigned i=0;i<5;++i) {
+            observe(g,now+D);now+=D;const auto frame=g.ticket(now);
+            assert(g.observationInputAllowed(frame,1,now,now));
+            for(int j=0;j<20;++j){now+=D;observe(g,now);g.tick(now,now);}
+            assert(g.recoveryCommitAllowed(prepared,1,now,now));
+            if(i==4)assert(!g.recoveryCommitAllowed(g.ticket(now),1,now,now)); // cannot replace original identity
+            assert(g.observeRegisteredMap(frame,1,true,0,0,0,0,now,now)==(i==4));
+            assert(!g.mainMapAllowed(1,now,now));
+        }
+        assert(now-prepared.frameNs>6*T);
+        assert(g.candidateCommitReady(prepared,1,now,now));
+        assert(!g.beginCandidateObservation(prepared,1,now,now)); // duplicate prepare cannot renew life
+        for(int j=0;j<20;++j){now+=D;observe(g,now);g.tick(now,now);}
+        assert(g.recoveryCommitAllowed(prepared,1,now,now));
+        assert(g.candidateCommitted(prepared,1,true,now,now));
+        assert(g.mainMapAllowed(1,now,now));
+    }
+    {
+        Gate g;normal(g);observe(g,T+3*D);
+        assert(!g.coreValidated(g.ticket(T+3*D),1,false,true,T+3*D,T+3*D));
+        observe(g,T+4*D);observe(g,T+5*D);
+        const auto prepared=g.ticket(T+5*D);long long now=T+5*D;
+        assert(g.beginCandidateObservation(prepared,1,now,now));
+        // Fresh packets alone must never renew a stalled solve.
+        for(int j=0;j<61;++j){now+=D;observe(g,now);g.tick(now,now);}
+        assert(!g.recoveryCommitAllowed(prepared,1,now,now));
+        assert(!g.candidateCommitReady(prepared,1,now,now));
+        assert(!g.candidateCommitted(prepared,1,true,now,now));
+        assert(!g.mainMapAllowed(1,now,now));
+        assert(!g.beginCandidateObservation(prepared,1,now,now));
+    }
+    {
+        Gate g;normal(g);observe(g,T+3*D);
+        assert(!g.coreValidated(g.ticket(T+3*D),1,false,true,T+3*D,T+3*D));
+        observe(g,T+4*D);observe(g,T+5*D);const auto prepared=g.ticket(T+5*D);
+        assert(g.beginCandidateObservation(prepared,1,T+5*D,T+5*D));mapObservations(g,T+6*D,1);
+        const auto end=T+12*D;assert(g.candidateCommitReady(prepared,1,end,end));
+        assert(!g.recoveryCommitAllowed(prepared,1,end+4*D,end+4*D));
+        assert(!g.candidateCommitted(prepared,1,true,end+4*D,end+4*D)); // current stream still must be fresh
+    }
+    std::cout<<"PASS: bootstrap, measured hysteresis, unique/fresh source, observation before candidate commit, failed K/loss invalidate commit, bounded slow verification, stalled solve/current freshness rejection, unique final commit, same-epoch no-Tag, depth/IMU boundaries\n";
 }

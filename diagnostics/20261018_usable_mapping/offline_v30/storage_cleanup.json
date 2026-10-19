@@ -1,0 +1,31 @@
+{
+  "scope": "closed derived replay outputs archived to verified local copy",
+  "files": 4783,
+  "uncompressed_bytes": 3210735234,
+  "archive_sha256": "2e9c4b0ed557e512aa803caf67f103f9f5679709e00b86c977985baefcd2c743",
+  "removed_closed_replay_directories": [
+    "live_latency_v18",
+    "live_latency_v24",
+    "live_latency_v25",
+    "motion_latency_v12",
+    "motion_latency_v13",
+    "motion_latency_v15",
+    "motion_latency_v19",
+    "motion_latency_v20",
+    "motion_latency_v21",
+    "motion_latency_v22",
+    "motion_latency_v23",
+    "motion_latency_v24",
+    "motion_latency_v25",
+    "motion_latency_v28",
+    "motion_latency_v29",
+    "motion_profile_v9",
+    "motion_assembly_v10",
+    "motion_prefetch_threads1",
+    "motion_prefetch_threads2",
+    "motion_input_status_v11"
+  ],
+  "original_recordings_retained": true,
+  "removed_temporary_fixture_bytes": 2630359743,
+  "free_bytes_after_cleanup": 33963540480
+}

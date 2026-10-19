@@ -1,0 +1,40 @@
+{
+  "scope": "closed replay verification, production files unchanged",
+  "production_sha256": {
+    "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh": "8b6adf33e0550465ce5e4f10ffa7d8e5f5d43db022084c2496aa81b8b3de8bb3",
+    "/home/exocean/Desktop/\u673a\u5668\u4eba\u952e\u76d8\u9065\u63a7/.tools/run_water_mapping_with_light.sh": "34cf9b3c35fa4f7977721bb94f4786d59bf662c6c552d202c14123ab06bb03d2"
+  },
+  "udp3333": "",
+  "mapping_processes": [],
+  "missing_input_rows": [
+    {
+      "source_ns": "1791653848981623000",
+      "lost": "1",
+      "inliers": "0",
+      "matches": "0",
+      "usable": "0",
+      "epoch": "0",
+      "cuts": "1",
+      "main_write": "0",
+      "main_nodes": "63",
+      "local_nodes": "63",
+      "recoveries": "0",
+      "input_present": "0",
+      "reason": "registered visual geometry; capture lacked image-time IMU"
+    }
+  ],
+  "latest_worker_sha256": "c146b655e065d0188ffbb081c04e4e1f2e1d9a8cf42b0f74436ad8d085e02887",
+  "latest_sources": {
+    "extract_recorded_rgbd.cpp": "02b01c1ac433182d001b8e7c188a2b5a44500b8da7cc300ddf546082d9f7ff3a",
+    "RecordedCloudAssembly.h": "31155944a5c641b586ea2a21b3ea73d67353cd4b0fc7e5f36f2ebde5f6eb0768",
+    "NativeMappingEvidence.h": "056e0e7814f6244f810707390fe6060f2d14adb8ac6489fb67f60d1f99d20449",
+    "bounded_async_writer.hpp": "31b70d44266cd35d745219c4d0b8066bb9beb95fdad2f1e372363eb4ea4d9c48",
+    "CMakeLists.txt": "1252627760f0639ea85af078f8ce9c33ab79766a257a954cf7aff6e51ffebb69",
+    "DeferredMappingSession.h": "200a6b4b3ad83dc2b5a4cc6f4a2c87756d277f62fad0c3a2e17c0aed06e08c2d",
+    "rgbd_spool.hpp": "c2b7b523ea3399134c988afce508b41130b45530966886faa1299a57bed92d4b",
+    "RecordedCloudCache.h": "aff58286e2d2466415ab2bfba4ae4ce74e35c2525ea495f051802ef55172a598",
+    "OrderedProcessingLane.h": "1495f7f2eddbf08a52180467c2974a7eaf7fcc3678dfcd335e22b52292ba2e53",
+    "replay_worker.cpp": "830e0f95decf3893ee5fd4e479f2c2bd5a0845c050bfc4fbbfb9fab2a252a16c",
+    "imu_frame_conversion.hpp": "c0042b7c47751e60af4dc47e6c710934305040a0d745f4c4399b31002e554de6"
+  }
+}

@@ -24,6 +24,37 @@ def sha(path):
 
 def verify(root, verifier):
     root = root.resolve(strict=True)
+    top = json.loads((root/'status.json').read_text())
+    if top.get('schema') == 'wbrov.raw-segments.v1':
+        if top.get('state') != 'closed' or top.get('clean_shutdown') is not True:
+            raise ValueError('segmented recording is still open or did not close cleanly')
+        count = top.get('sealed_segments')
+        if type(count) is not int or count <= 0:
+            raise ValueError('segmented recording is empty')
+        top_hash = sha(root/'status.json')
+        segments = []
+        previous = 0
+        largest_gap = 0
+        for index in range(count):
+            segment = root/f'segment-{index:08d}'
+            if segment.is_symlink() or not segment.is_dir():
+                raise ValueError('missing/non-regular recording segment')
+            result = verify(segment, verifier)
+            first, last = result['frames']['first_source_ns'], result['frames']['last_source_ns']
+            if first <= previous:
+                raise ValueError('recording segments overlap or regress in source time')
+            if previous: largest_gap = max(largest_gap, first-previous)
+            previous = last
+            segments.append({'directory':segment.name, **result})
+        if top_hash != sha(root/'status.json'):
+            raise ValueError('segmented recording changed during verification')
+        return {'schema':'wbrov.raw-segment-verification.v1', 'complete':True,
+                'scope':'closed per-segment SVO indexes and boundary decode; rotation gaps explicitly measured',
+                'sensor_capture_losslessness_proven':False,'largest_boundary_gap_ns':largest_gap,
+                'segments':segments,'status_sha256':top_hash,
+                'frames':{'frames':sum(s['frames']['frames'] for s in segments),
+                          'first_source_ns':segments[0]['frames']['first_source_ns'],
+                          'last_source_ns':previous}}
     required = ['stereo.svo2', 'status.json', 'capture.jsonl', 'init.json',
                 'runtime.json', 'recording.json', 'water_calibration.yml', 'sdk_version.txt',
                 'camera_imu_extrinsics.json']

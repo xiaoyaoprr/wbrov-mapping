@@ -1,0 +1,10 @@
+{
+  "scope": "local candidate source only, identical to native/replay-tested Core6; no runtime or launcher/GitHub update",
+  "before_sha256": "e1232c2def05514131b647d48585ead3d7b0e25245ded95c011b29d2ed33e8f7",
+  "after_sha256": "d22a016b2ffb86c9eef1f00acaa68bd97f313a1319daf97475535b9adb0245c2",
+  "core_binary_sha256": "0e68b8fe830df0c60b23d0043d94f2cf20a27ea61795e83726ed40a67eb6b14b",
+  "replay_archive_sha256": "fed700e8acc6225c5269cbf3d2a89afa4a3d91d01f51589f301cdcecd4995176",
+  "all_frames": 23967,
+  "real_hardware_acceptance_pending": true,
+  "wall_clock_speedup_not_established": true
+}

@@ -1,0 +1,165 @@
+{
+  "scope": "whole replay has trajectory variance; phase times overlap and are not additive wall savings",
+  "versions": {
+    "v35": {
+      "short_recovery": {
+        "wall_seconds": 94.49215766397538,
+        "frames": 1581,
+        "tag_export_ms": 779.849,
+        "cloud_export_ms": 4036.01,
+        "odometry_compute_ms": 62296.5,
+        "mapping_compute_ms": 62849.6,
+        "main_nodes": 101,
+        "cloud_points": 115612,
+        "continuity_state": "NORMAL",
+        "recoveries": 1,
+        "loop_closure_ms": 31947.8,
+        "recovery_accepted": null
+      },
+      "full_recovery": {
+        "wall_seconds": 460.90921964799054,
+        "frames": 10746,
+        "tag_export_ms": 3846.96,
+        "cloud_export_ms": 12215,
+        "odometry_compute_ms": 383642,
+        "mapping_compute_ms": 211440,
+        "main_nodes": 157,
+        "cloud_points": 63631,
+        "continuity_state": "NORMAL",
+        "recoveries": 1,
+        "loop_closure_ms": 108873,
+        "recovery_accepted": null
+      },
+      "large_interrupted_capture": {
+        "wall_seconds": 547.3141023999779,
+        "frames": 10059,
+        "tag_export_ms": 23849.3,
+        "cloud_export_ms": 142562,
+        "odometry_compute_ms": 363964,
+        "mapping_compute_ms": 233463,
+        "main_nodes": 471,
+        "cloud_points": 481314,
+        "continuity_state": "RECOVERING",
+        "recoveries": 1,
+        "loop_closure_ms": 63144.1,
+        "recovery_accepted": null
+      }
+    },
+    "v37": {
+      "short_recovery": {
+        "wall_seconds": 88.17656633601291,
+        "frames": 1581,
+        "tag_export_ms": 757.314,
+        "cloud_export_ms": 3689.94,
+        "odometry_compute_ms": 61457.4,
+        "mapping_compute_ms": 56483.7,
+        "main_nodes": 100,
+        "cloud_points": 112124,
+        "continuity_state": "NORMAL",
+        "recoveries": 1,
+        "loop_closure_ms": 29801.9,
+        "recovery_accepted": true
+      },
+      "full_recovery": {
+        "wall_seconds": 500.1293024959741,
+        "frames": 10746,
+        "tag_export_ms": 3923.36,
+        "cloud_export_ms": 9563.35,
+        "odometry_compute_ms": 381450,
+        "mapping_compute_ms": 271232,
+        "main_nodes": 155,
+        "cloud_points": 62623,
+        "continuity_state": "NORMAL",
+        "recoveries": 1,
+        "loop_closure_ms": 171661,
+        "recovery_accepted": true
+      },
+      "large_interrupted_capture": {
+        "wall_seconds": 522.0224666240392,
+        "frames": 10059,
+        "tag_export_ms": 23517.6,
+        "cloud_export_ms": 130102,
+        "odometry_compute_ms": 365833,
+        "mapping_compute_ms": 219415,
+        "main_nodes": 492,
+        "cloud_points": 452584,
+        "continuity_state": "RECOVERING",
+        "recoveries": 0,
+        "loop_closure_ms": 73485.4,
+        "recovery_accepted": false
+      },
+      "short_compressed_recovery": {
+        "wall_seconds": 92.10869622399332,
+        "frames": 1581,
+        "tag_export_ms": 786.277,
+        "cloud_export_ms": 3623.78,
+        "odometry_compute_ms": 62302,
+        "mapping_compute_ms": 63387.7,
+        "main_nodes": 99,
+        "cloud_points": 92529,
+        "continuity_state": "NORMAL",
+        "recoveries": 1,
+        "loop_closure_ms": 30981.1,
+        "recovery_accepted": true
+      }
+    },
+    "v38": {
+      "short_recovery": {
+        "wall_seconds": 110.53873564797686,
+        "frames": 1581,
+        "tag_export_ms": 465.454,
+        "cloud_export_ms": 3372.63,
+        "odometry_compute_ms": 62845.9,
+        "mapping_compute_ms": 74859.2,
+        "main_nodes": 93,
+        "cloud_points": 97902,
+        "continuity_state": "NORMAL",
+        "recoveries": 1,
+        "loop_closure_ms": 31094.9,
+        "recovery_accepted": false
+      },
+      "full_recovery": {
+        "wall_seconds": 475.4774833919946,
+        "frames": 10746,
+        "tag_export_ms": 2128.22,
+        "cloud_export_ms": 10955.2,
+        "odometry_compute_ms": 383265,
+        "mapping_compute_ms": 241908,
+        "main_nodes": 154,
+        "cloud_points": 62313,
+        "continuity_state": "NORMAL",
+        "recoveries": 1,
+        "loop_closure_ms": 135128,
+        "recovery_accepted": true
+      },
+      "large_interrupted_capture": {
+        "wall_seconds": 528.1271778239752,
+        "frames": 10059,
+        "tag_export_ms": 11120.2,
+        "cloud_export_ms": 129104,
+        "odometry_compute_ms": 366763,
+        "mapping_compute_ms": 237565,
+        "main_nodes": 477,
+        "cloud_points": 454992,
+        "continuity_state": "RECOVERING",
+        "recoveries": 1,
+        "loop_closure_ms": 68360.4,
+        "recovery_accepted": false
+      },
+      "short_compressed_recovery": {
+        "wall_seconds": 94.56225811195327,
+        "frames": 1581,
+        "tag_export_ms": 464.841,
+        "cloud_export_ms": 3722.85,
+        "odometry_compute_ms": 61588.3,
+        "mapping_compute_ms": 65268.8,
+        "main_nodes": 101,
+        "cloud_points": 98615,
+        "continuity_state": "NORMAL",
+        "recoveries": 1,
+        "loop_closure_ms": 28244.7,
+        "recovery_accepted": true
+      }
+    }
+  }
+}

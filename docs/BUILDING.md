@@ -1,5 +1,7 @@
 # 构建说明
 
+2026-10-19版本对应关系见[源码绑定](../provenance/production8-20261019/README.md)。已部署相机6的精确输入使用该目录的源码ZIP；`src/zed_rgbd_publisher/` 的共享读入头文件已包含worker39优化，不能将此组合未经重测便称为已安装相机原样源码。相机链接还需提供系统Zstandard开发静态库`libzstd.a`，SDK与库本体不在仓库中。后台模块另有`src/deferred_mapping/CMakeLists.txt`；继续使用隔离构建和明确的Core前缀。
+
 仓库包含初始设备归档和后续主图/子图源码。已在 Jetson 隔离目录完成增量原生编译、录制回放，以及真实相机/RViz的静止启动与保存检查，证据见 [第二轮修正](ROUND2_20261016.md) 和 [前次实机记录](RECEIPT_RESUME_20261015.md)。整个仓库的全新环境构建、移动回航接图和水下精度尚未验证。
 
 仓库提供的 `tests/native/CMakeLists.txt` 已使用提交 `601b051` 的原样源码在 Jetson AArch64 上补验：Release 配置，开启 `WBROV_TEST_DEPTH_GEOMETRY`，5 项独立 CTest 全部通过。该结果只覆盖这些几何和门控测试，不等同于完整 Core/ROS 构建或录制数据接回主图成功。

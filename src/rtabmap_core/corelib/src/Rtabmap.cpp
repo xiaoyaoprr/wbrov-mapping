@@ -1165,6 +1165,8 @@ void Rtabmap::close(bool databaseSaved, const std::string & ouputDatabasePath)
 	_safeRelocalizationTrustedComponents.clear();
 	_safeRelocalizationTrustedSnapshotValid = false;
 	_safeRelocalizationCommittedEpochs.clear();
+    _safeRelocalizationArchivedIds.clear();
+    _safeRelocalizationArchives.clear();
 	_safeRelocalizationPromotionLimitsValid = false;
 	_safeRelocalizationPromotionMaxOldPoseTranslation = 0.0f;
 	_safeRelocalizationPromotionMaxOldPoseRotation = 0.0f;
@@ -1747,6 +1749,8 @@ bool Rtabmap::acceptCrossMapLoopEvidence(
 	evidence.angularVariance = angularVariance;
     // Raw registration IDs are local to this pair. Never compare their numeric
     // overlap across separate guarded solves as if they were persistent words.
+    // Guarded independence is instead enforced by distinct old/current IDs,
+    // separated viewpoints, and the transaction's distinct source timestamps.
 	evidence.inlierWords = _safeRelocalizationGuardEnabled?std::set<int>():inlierWords;
 	evidence.featureJaccardMaximum = 0.0;
 	if(!finiteTransform(evidence.anchor))
@@ -1769,21 +1773,18 @@ bool Rtabmap::acceptCrossMapLoopEvidence(
 		_crossMapLoopEvidence.erase(_crossMapLoopEvidence.begin());
 	}
 
-    if(_safeRelocalizationGuardEnabled)
-    {
-        for(auto previous=_crossMapLoopEvidence.begin();previous!=_crossMapLoopEvidence.end();)
-            if(previous->oldId==evidence.oldId && previous->newId!=evidence.newId)
-                previous=_crossMapLoopEvidence.erase(previous);
-            else ++previous;
-    }
 	for(std::vector<CrossMapLoopEvidence>::const_iterator iter=_crossMapLoopEvidence.begin();
 			iter!=_crossMapLoopEvidence.end(); ++iter)
 	{
-		if(iter->newId == evidence.newId || (_safeRelocalizationGuardEnabled && iter->oldId == evidence.oldId))
+		if(iter->newId == evidence.newId)
 		{
 			reason = uFormat("duplicate current keyframe id=%d", evidence.newId);
 			return false;
 		}
+        // Evaluate a replacement against the OTHER retained views first.
+        // A rejected new view must not erase the usable old-endpoint entry.
+        // The transaction still rechecks all endpoints, receipts and geometry.
+        if(_safeRelocalizationGuardEnabled && iter->oldId==evidence.oldId) continue;
 		double sourceTranslation = iter->sourcePose.getDistance(evidence.sourcePose);
 		double sourceRotation = iter->sourcePose.getAngle(evidence.sourcePose);
 		if(sourceTranslation < _crossMapLoopMinSourceTranslation &&
@@ -1831,6 +1832,12 @@ bool Rtabmap::acceptCrossMapLoopEvidence(
 		}
 	}
 
+    if(_safeRelocalizationGuardEnabled)
+    {
+        _crossMapLoopEvidence.erase(std::remove_if(_crossMapLoopEvidence.begin(),_crossMapLoopEvidence.end(),
+            [&](const CrossMapLoopEvidence & previous) { return previous.oldId==evidence.oldId; }),
+            _crossMapLoopEvidence.end());
+    }
 	_crossMapLoopEvidence.push_back(evidence);
     if(_safeRelocalizationGuardEnabled)
     {
@@ -2248,6 +2255,8 @@ void Rtabmap::resetMemory()
 	_safeRelocalizationTrustedComponents.clear();
 	_safeRelocalizationTrustedSnapshotValid = false;
 	_safeRelocalizationCommittedEpochs.clear();
+    _safeRelocalizationArchivedIds.clear();
+    _safeRelocalizationArchives.clear();
 	_safeRelocalizationPromotionLimitsValid = false;
 	_safeRelocalizationPromotionMaxOldPoseTranslation = 0.0f;
 	_safeRelocalizationPromotionMaxOldPoseRotation = 0.0f;
@@ -2756,7 +2765,7 @@ bool Rtabmap::process(
 				{
 					float x,y,z, roll,pitch,yaw;
 					t.getTranslationAndEulerAngles(x,y,z, roll,pitch,yaw);
-					bool isMoving = (_rgbdLinearUpdate > 0.0f && (
+                    bool isMoving = (_rgbdLinearUpdate > 0.0f && (
 										fabs(x) > _rgbdLinearUpdate ||
 										fabs(y) > _rgbdLinearUpdate ||
 										fabs(z) > _rgbdLinearUpdate)) ||
@@ -2764,6 +2773,12 @@ bool Rtabmap::process(
 										fabs(roll) > _rgbdAngularUpdate ||
 										fabs(pitch) > _rgbdAngularUpdate ||
 										fabs(yaw) > _rgbdAngularUpdate));
+                    // Capture a naturally separated reference before the ordinary
+                    // 5 cm keyframe threshold. The authenticated wrapper already
+                    // admitted measured pose quality; static duplicates add none.
+                    const auto referenceCapture=externalStats.find("Recovery/ReferenceCapture/");
+                    if(_safeRelocalizationGuardEnabled && referenceCapture!=externalStats.end() && referenceCapture->second==1.0f)
+                        isMoving=true;
 					if(!isMoving)
 					{
 						// This will disable global loop closure detection, only retrieval will be done.
@@ -5263,6 +5278,7 @@ bool Rtabmap::process(
 					if(_optimizationMaxError > 0.0f && maxGraphErrors.linearRatio > _optimizationMaxError)
 					{
 						if( _optimizationMaxErrorRepairRadius > 0.0 &&
+                            !(_safeRelocalizationGuardEnabled && _safeRelocalizationCommittedEpochs.count(_resetEpoch)) &&
 							maxGraphErrorsLinearIds == _lastRejectedLoopClosureIds &&
 							graph::findLink(constraints, maxGraphErrorsLinearIds.first, maxGraphErrorsLinearIds.second) != constraints.end())
 						{
@@ -5390,6 +5406,29 @@ bool Rtabmap::process(
 					rejectedLoopClosure = true;
 				}
 			}
+
+            // A newly proposed loop may satisfy the statistical optimizer
+            // error bound yet conflict with the exact frozen recovery boundary.
+            // Check the candidate graph before adopting it. Reuse RTAB-Map's
+            // normal rejection path: only this iteration's new loop edges are
+            // removed; the pre-optimization odometry extension stays intact.
+            if(updateConstraints && _safeRelocalizationGuardEnabled &&
+               _safeRelocalizationCommittedEpochs.count(_resetEpoch) && !loopClosureLinksAdded.empty())
+            {
+                std::map<int,Transform> proposedTrusted;
+                std::multimap<int,Link> proposedConstraints;
+                std::string frozenReason;
+                if(!evaluateCommittedEpochPromotion(poses,constraints,proposedTrusted,proposedConstraints,frozenReason))
+                {
+                    UWARN("[FROZEN_GRAPH_LOOP_REJECTED] current=%d new_loops=%u reason=%s",
+                        signature->id(),unsigned(loopClosureLinksAdded.size()),frozenReason.c_str());
+                    for(const auto & edge:loopClosureLinksAdded)_memory->removeLink(edge.first,edge.second);
+                    updateConstraints=false;
+                    _loopClosureHypothesis.first=0;
+                    lastProximitySpaceClosureId=0;
+                    rejectedLoopClosure=true;
+                }
+            }
 
 			if(updateConstraints)
 			{
@@ -5897,6 +5936,16 @@ bool Rtabmap::process(
 	}
 	_lastProcessTime = totalTime;
 
+	// Candidates are collected before cleanup/rehearsal/forget decides which
+	// signatures remain usable. Never carry an evicted endpoint into a proposal.
+    if(_safeRelocalizationGuardEnabled && !signaturesRemoved.empty()) {
+        const std::set<int> removed(signaturesRemoved.begin(),signaturesRemoved.end());
+        for(auto candidate=_crossMapLoopEvidence.begin();candidate!=_crossMapLoopEvidence.end();)
+            if(removed.count(candidate->newId) || removed.count(candidate->oldId))
+                candidate=_crossMapLoopEvidence.erase(candidate);
+            else ++candidate;
+    }
+
 	// cleanup cached gps values
 	for(std::list<int>::iterator iter=signaturesRemoved.begin(); iter!=signaturesRemoved.end() && _gpsGeocentricCache.size(); ++iter)
 	{
@@ -6330,7 +6379,14 @@ bool Rtabmap::processWithAuthenticatedImage(
     if(eligible) eligible = receiptIdentityMatches(data, input, receiptReason);
     if(eligible && input.headerStampNs <= _lastAcceptedImageStampNs)
         { eligible = false; receiptReason = "nonmonotonic_or_repeated_input_header"; }
-    const bool succeeded = process(data, odomPose, covariance, velocity, externalStats);
+    auto stats=externalStats;
+    stats.erase("Recovery/ReferenceCapture/");
+    const Signature * previous=_memory?_memory->getLastWorkingSignature(false):nullptr;
+    if(eligible && _safeRelocalizationGuardEnabled && previous && !odomPose.isNull() &&
+       data.stamp()-previous->getStamp()>=.2 &&
+       (odomPose.getDistance(previous->getPose())>=.035 || odomPose.getAngle(previous->getPose())>=3.5*M_PI/180.0))
+        stats["Recovery/ReferenceCapture/"]=1.0f;
+    const bool succeeded = process(data, odomPose, covariance, velocity, stats);
     if(!succeeded) { receiptReason = "core_process_failed"; return false; }
     if(!eligible) return true;
     // Rehearsal can copy OLD SensorData into a NEW Signature with a NEW
@@ -6905,6 +6961,15 @@ std::map<int, Transform> Rtabmap::optimizeGraph(
 	std::multimap<int, Link> edgeConstraints;
 	UDEBUG("ids=%d", (int)ids.size());
 	_memory->getMetricConstraints(ids, poses, edgeConstraints, lookInDatabase, !_graphOptimizer->landmarksIgnored());
+    // A later retrieval/optimization must not promote an excluded prefix just
+    // because it shares a historical map ID with the registered suffix.
+    if(_safeRelocalizationGuardEnabled && !_safeRelocalizationArchivedIds.empty()) {
+        for(int id:_safeRelocalizationArchivedIds)poses.erase(id);
+        for(auto edge=edgeConstraints.begin();edge!=edgeConstraints.end();)
+            if(isRecoveryArchivedNode(edge->second.from()) || isRecoveryArchivedNode(edge->second.to()))
+                edge=edgeConstraints.erase(edge);
+            else ++edge;
+    }
 	UINFO("get constraints (ids=%d, %d poses, %d edges) time %f s", (int)ids.size(), (int)poses.size(), (int)edgeConstraints.size(), timer.ticks());
 
 	// add landmark priors if there are some
@@ -8475,7 +8540,12 @@ void Rtabmap::rememberCurrentGraphForSafeRelocalization()
 	rebuildSafeRelocalizationTrustedComponents();
 }
 
-bool Rtabmap::promoteCommittedEpochForSafeRelocalization(std::string & reason)
+bool Rtabmap::evaluateCommittedEpochPromotion(
+        const std::map<int, Transform> & livePoses,
+        const std::multimap<int, Link> & candidateConstraints,
+        std::map<int, Transform> & promotedPoses,
+        std::multimap<int, Link> & promotedConstraints,
+        std::string & reason) const
 {
 	reason.clear();
 	if(_safeRelocalizationCommittedEpochs.find(_resetEpoch) ==
@@ -8486,7 +8556,7 @@ bool Rtabmap::promoteCommittedEpochForSafeRelocalization(std::string & reason)
 			_safeRelocalizationPromotionMaxOldPoseTranslation <= 0.0f ||
 			_safeRelocalizationPromotionMaxOldPoseRotation <= 0.0f ||
 			!_safeRelocalizationTrustedSnapshotValid ||
-			_safeRelocalizationTrustedPoses.empty() || _optimizedPoses.empty())
+			_safeRelocalizationTrustedPoses.empty() || livePoses.empty())
 	{
 		reason = "committed epoch or complete trusted/live graph is unavailable";
 		return false;
@@ -8494,8 +8564,8 @@ bool Rtabmap::promoteCommittedEpochForSafeRelocalization(std::string & reason)
 
 	std::set<int> representedComponents;
 	std::set<int> liveIds;
-	for(std::map<int, Transform>::const_iterator iter=_optimizedPoses.begin();
-			iter!=_optimizedPoses.end(); ++iter)
+	for(std::map<int, Transform>::const_iterator iter=livePoses.begin();
+			iter!=livePoses.end(); ++iter)
 	{
 		if(iter->first <= 0)
 		{
@@ -8507,6 +8577,10 @@ bool Rtabmap::promoteCommittedEpochForSafeRelocalization(std::string & reason)
 			return false;
 		}
 		liveIds.insert(iter->first);
+        if(isRecoveryArchivedNode(iter->first)) {
+            reason="committed graph attempted to promote an archived recovery node";
+            return false;
+        }
 		std::map<int, int>::const_iterator trusted =
 				_safeRelocalizationTrustedComponents.find(iter->first);
 		if(trusted != _safeRelocalizationTrustedComponents.end())
@@ -8547,7 +8621,7 @@ bool Rtabmap::promoteCommittedEpochForSafeRelocalization(std::string & reason)
 	const int gaugeReference = *replacedTrustedIds.begin();
 	const Transform liveToFrozen =
 			_safeRelocalizationTrustedPoses.at(gaugeReference) *
-			_optimizedPoses.at(gaugeReference).inverse();
+			livePoses.at(gaugeReference).inverse();
 	if(!safeRigidTransform(liveToFrozen))
 	{
 		reason = "cannot establish a finite rigid gauge from live to frozen trusted poses";
@@ -8556,7 +8630,7 @@ bool Rtabmap::promoteCommittedEpochForSafeRelocalization(std::string & reason)
 	for(std::set<int>::const_iterator iter=replacedTrustedIds.begin();
 			iter!=replacedTrustedIds.end(); ++iter)
 	{
-		const Transform aligned = liveToFrozen * _optimizedPoses.at(*iter);
+		const Transform aligned = liveToFrozen * livePoses.at(*iter);
 		const Transform & frozen = _safeRelocalizationTrustedPoses.at(*iter);
 		if(!safeRigidTransform(aligned) ||
 				aligned.getDistance(frozen) >
@@ -8575,8 +8649,8 @@ bool Rtabmap::promoteCommittedEpochForSafeRelocalization(std::string & reason)
 	{
 		adjacency[*iter];
 	}
-	for(std::multimap<int, Link>::const_iterator iter=_constraints.begin();
-			iter!=_constraints.end(); ++iter)
+	for(std::multimap<int, Link>::const_iterator iter=candidateConstraints.begin();
+			iter!=candidateConstraints.end(); ++iter)
 	{
 		const Link & link = iter->second;
 		if(link.from() <= 0 || link.to() <= 0)
@@ -8695,7 +8769,7 @@ bool Rtabmap::promoteCommittedEpochForSafeRelocalization(std::string & reason)
 						_safeRelocalizationTrustedPoses.at(frozenId)*link.transform():
 						_safeRelocalizationTrustedPoses.at(frozenId)*link.transform().inverse();
 				const Transform correction = expectedExtension*
-						_optimizedPoses.at(extensionId).inverse();
+						livePoses.at(extensionId).inverse();
 				if(!safeRigidTransform(expectedExtension) || !safeRigidTransform(correction))
 				{
 					reason = "cannot establish a finite frozen-boundary correction for the post-commit extension";
@@ -8710,9 +8784,9 @@ bool Rtabmap::promoteCommittedEpochForSafeRelocalization(std::string & reason)
 			return false;
 		}
 	}
-	std::map<int, Transform> promotedPoses = _safeRelocalizationTrustedPoses;
-	for(std::map<int, Transform>::const_iterator iter=_optimizedPoses.begin();
-			iter!=_optimizedPoses.end(); ++iter)
+	promotedPoses = _safeRelocalizationTrustedPoses;
+	for(std::map<int, Transform>::const_iterator iter=livePoses.begin();
+			iter!=livePoses.end(); ++iter)
 	{
 		if(iter->first > 0 &&
 				_safeRelocalizationTrustedPoses.find(iter->first) ==
@@ -8751,12 +8825,15 @@ bool Rtabmap::promoteCommittedEpochForSafeRelocalization(std::string & reason)
 					predicted.getAngle(link.transform()) >
 							_safeRelocalizationPromotionMaxOldPoseRotation*M_PI/180.0f)
 			{
-				reason = "post-commit extension conflicts with a frozen-boundary constraint";
+				reason = uFormat("post-commit extension conflicts with a frozen-boundary constraint %d->%d type=%d translation=%.6f/%.6f m rotation=%.6f/%.6f deg",
+                    link.from(),link.to(),int(link.type()),predicted.getDistance(link.transform()),
+                    _safeRelocalizationPromotionMaxOldPoseTranslation,
+                    predicted.getAngle(link.transform())*180.0/M_PI,_safeRelocalizationPromotionMaxOldPoseRotation);
 				return false;
 			}
 		}
 	}
-	std::multimap<int, Link> promotedConstraints;
+	promotedConstraints.clear();
 	for(std::multimap<int, Link>::const_iterator iter=_safeRelocalizationTrustedConstraints.begin();
 			iter!=_safeRelocalizationTrustedConstraints.end(); ++iter)
 	{
@@ -8767,11 +8844,19 @@ bool Rtabmap::promoteCommittedEpochForSafeRelocalization(std::string & reason)
 		}
 	}
 	promotedConstraints.insert(liveConstraints.begin(), liveConstraints.end());
-	_safeRelocalizationTrustedPoses.swap(promotedPoses);
-	_safeRelocalizationTrustedConstraints.swap(promotedConstraints);
-	_safeRelocalizationTrustedSnapshotValid = true;
-	rebuildSafeRelocalizationTrustedComponents();
 	return true;
+}
+
+bool Rtabmap::promoteCommittedEpochForSafeRelocalization(std::string & reason)
+{
+    std::map<int, Transform> promotedPoses;
+    std::multimap<int, Link> promotedConstraints;
+    if(!evaluateCommittedEpochPromotion(_optimizedPoses,_constraints,promotedPoses,promotedConstraints,reason))return false;
+    _safeRelocalizationTrustedPoses.swap(promotedPoses);
+    _safeRelocalizationTrustedConstraints.swap(promotedConstraints);
+    _safeRelocalizationTrustedSnapshotValid=true;
+    rebuildSafeRelocalizationTrustedComponents();
+    return true;
 }
 
 bool Rtabmap::validateAndFreezeCommittedEpochForSafeRelocalization(std::string & reason)
@@ -8904,7 +8989,8 @@ bool Rtabmap::validateAcceptedImagesForTransaction(
        !receiptHex(context.databaseSha256, 64) || gidSize < 32 || gidSize > 64 || gidSize % 2 ||
        !receiptHex(context.rgbPublisherGidHex, gidSize) || !receiptHex(context.infoPublisherGidHex, gidSize) ||
        context.rgbPublisherGidHex == std::string(gidSize, '0') || context.infoPublisherGidHex == std::string(gidSize, '0') ||
-       (context.provenanceScope != "managed_ros_rgbd" && context.provenanceScope != "offline_native_fixture"))
+       (context.provenanceScope != "managed_ros_rgbd" && context.provenanceScope != "offline_native_fixture" &&
+        context.provenanceScope != "verified_recording_rgbd"))
         { reason = "image receipt transaction context is invalid or stale"; return false; }
     std::set<int> currentIds, oldIds, endpoints, seen;
     for(const Link & link : evidence)
@@ -9342,7 +9428,12 @@ bool Rtabmap::addLinksAtomicallyImpl(const std::vector<Link> & evidence,
 					std::fabs(anchorAlignments[i].z()-anchorAlignments[j].z()) > limits.maxAnchorZ ||
 					safeTiltError(anchorAlignments[i], anchorAlignments[j]) > limits.maxAnchorTilt*M_PI/180.0f)
 			{
-				reason = "three anchor alignments disagree in SE3, z or tilt";
+				reason = uFormat("three anchor alignments disagree in SE3, z or tilt pairs=(%d,%d)/(%d,%d) translation=%.6fm/%.6f rotation=%.6fdeg/%.6f z=%.6fm/%.6f tilt=%.6fdeg/%.6f",
+                    evidence[i].from(),evidence[i].to(),evidence[j].from(),evidence[j].to(),
+                    anchorAlignments[i].getDistance(anchorAlignments[j]),double(limits.maxHoldoutTranslation),
+                    anchorAlignments[i].getAngle(anchorAlignments[j])*180.0/M_PI,double(limits.maxHoldoutRotation),
+                    std::fabs(anchorAlignments[i].z()-anchorAlignments[j].z()),double(limits.maxAnchorZ),
+                    safeTiltError(anchorAlignments[i],anchorAlignments[j])*180.0/M_PI,double(limits.maxAnchorTilt));
 				return false;
 			}
 		}
@@ -9350,6 +9441,13 @@ bool Rtabmap::addLinksAtomicallyImpl(const std::vector<Link> & evidence,
 
 	std::set<int> oldIds;
 	std::set<int> currentIds;
+    // Only the prepare + five-observation commit API may register a suffix.
+    // Existing immediate/legacy transactions retain full-segment certification.
+    const RecoveryScope recoveryScope=_safeRelocalizationGuardEnabled &&
+        (preparedMapCorrection || observedAlignmentAllowed)?RecoveryScope::CurrentReanchor:RecoveryScope::FullSegment;
+    std::set<int> archivedPrefix;
+    int firstBridge=std::numeric_limits<int>::max();
+    for(const Link & bridge:evidence)firstBridge=std::min(firstBridge,bridge.from());
 	std::map<int, Transform> initialPoses;
 	std::multimap<int, Link> baseConstraints;
 	for(std::map<int, int>::const_iterator iter=_safeRelocalizationTrustedComponents.begin();
@@ -9367,6 +9465,12 @@ bool Rtabmap::addLinksAtomicallyImpl(const std::vector<Link> & evidence,
 	{
 		if(iter->first > 0 && getSignatureResetEpoch(iter->first) == sourceResetEpoch)
 		{
+            // Current reanchor and historical backfill have different scopes.
+            // Keep the COMPLETE retained suffix, not just the three endpoints.
+            if(recoveryScope==RecoveryScope::CurrentReanchor && iter->first<firstBridge) {
+                archivedPrefix.insert(iter->first);
+                continue;
+            }
 			currentIds.insert(iter->first);
 			initialPoses.insert(std::make_pair(
 					iter->first, iter->second));
@@ -9376,7 +9480,8 @@ bool Rtabmap::addLinksAtomicallyImpl(const std::vector<Link> & evidence,
 			iter!=_signatureResetEpochs.end(); ++iter)
 	{
 		if(iter->first > 0 && iter->second == sourceResetEpoch &&
-				currentIds.find(iter->first) == currentIds.end())
+				currentIds.find(iter->first) == currentIds.end() &&
+                !archivedPrefix.count(iter->first) && !isRecoveryArchivedNode(iter->first))
 		{
 			reason = "live optimized graph omits a positive node from the current reset epoch";
 			return false;
@@ -9387,7 +9492,71 @@ bool Rtabmap::addLinksAtomicallyImpl(const std::vector<Link> & evidence,
 		reason = "shadow graph lacks a complete old component or current epoch";
 		return false;
 	}
+    if(recoveryScope==RecoveryScope::CurrentReanchor && currentIds.size()>32) {
+        reason="current reanchor suffix exceeds 32 retained nodes; collect newer bridge evidence";
+        return false;
+    }
     if(_safeRelocalizationGuardEnabled && !validateRecoveryCache(currentIds,evidence,limits,reason)) return false;
+    // Stage a separate archive before any mutation. Its coordinates and receipt
+    // identity stay local; its boundary edges are excluded from both components.
+    auto nextArchives=_safeRelocalizationArchives;
+    auto nextArchivedIds=_safeRelocalizationArchivedIds;
+    std::set<std::pair<int,int> > detachedEdges;
+    if(!archivedPrefix.empty()) {
+        LocalSubmapSnapshot archive;
+        archive.resetEpoch=sourceResetEpoch;archive.componentId=*archivedPrefix.begin();
+        const Signature * firstArchived=_memory->getSignature(archive.componentId);
+        if(!firstArchived || !safeRigidTransform(_optimizedPoses.at(archive.componentId))) {
+            reason="archive prefix root disappeared or has no finite pose";return false;
+        }
+        archive.mapId=firstArchived->mapId();archive.registeredToMain=false;
+        const Transform origin=_optimizedPoses.at(archive.componentId).inverse();
+        std::map<int,std::set<int> > archiveAdjacency;
+        for(int id:archivedPrefix) {
+            const Signature * node=_memory->getSignature(id);
+            if(!node || node->mapId()!=archive.mapId || isRecoveryArchivedNode(id) || !safeRigidTransform(_optimizedPoses.at(id))) {
+                reason="current reanchor archive prefix identity changed";return false;
+            }
+            archive.poses.emplace(id,(origin*_optimizedPoses.at(id)).clone());
+            for(const auto & row:node->getLinks()) {
+                const Link & edge=row.second;
+                if(edge.to()<=0 || edge.to()==id || edge.type()==Link::kVirtualClosure)continue;
+                if(archivedPrefix.count(edge.to())) {
+                    archive.links.emplace(id,Link(edge.from(),edge.to(),edge.type(),edge.transform().clone(),edge.infMatrix().clone()));
+                    archiveAdjacency[id].insert(edge.to());archiveAdjacency[edge.to()].insert(id);
+                }
+                else if(currentIds.count(edge.to())) {
+                    const Signature * other=_memory->getSignature(edge.to());
+                    if(!other || !other->hasLink(id)) {reason="archive boundary lacks its reverse edge";return false;}
+                    detachedEdges.emplace(std::min(id,edge.to()),std::max(id,edge.to()));
+                } else {reason="archive prefix has a link outside the isolated recovery segment";return false;}
+            }
+        }
+        // A damaged historical prefix may itself contain disconnected pieces.
+        // Preserve each piece in its own local frame rather than implying a
+        // measured transform across a missing historical neighbor.
+        std::set<int> remaining=archivedPrefix;
+        while(!remaining.empty()) {
+            LocalSubmapSnapshot component;
+            component.resetEpoch=archive.resetEpoch;component.mapId=archive.mapId;
+            component.componentId=*remaining.begin();component.registeredToMain=false;
+            std::vector<int> pending{component.componentId};
+            std::set<int> ids;
+            while(!pending.empty()) {
+                const int id=pending.back();pending.pop_back();
+                if(!ids.insert(id).second)continue;
+                remaining.erase(id);
+                for(int neighbor:archiveAdjacency[id])if(!ids.count(neighbor))pending.push_back(neighbor);
+            }
+            const Transform localOrigin=archive.poses.at(component.componentId).inverse();
+            for(int id:ids)component.poses.emplace(id,(localOrigin*archive.poses.at(id)).clone());
+            for(const auto & row:archive.links)if(ids.count(row.second.from()) && ids.count(row.second.to()))
+                component.links.emplace(row.first,Link(row.second.from(),row.second.to(),row.second.type(),
+                    row.second.transform().clone(),row.second.infMatrix().clone()));
+            nextArchives.push_back(component);
+        }
+        nextArchivedIds.insert(archivedPrefix.begin(),archivedPrefix.end());
+    }
 #include "early_component_gate.inc"
 
 	for(std::multimap<int, Link>::const_iterator iter=_safeRelocalizationTrustedConstraints.begin();
@@ -9417,6 +9586,7 @@ bool Rtabmap::addLinksAtomicallyImpl(const std::vector<Link> & evidence,
 		{
 			continue;
 		}
+		if(archivedPrefix.count(iter->second.from()) || archivedPrefix.count(iter->second.to()))continue;
 		const bool fromCurrent = currentIds.find(iter->second.from()) != currentIds.end();
 		const bool toCurrent = currentIds.find(iter->second.to()) != currentIds.end();
 		if(fromCurrent != toCurrent)
@@ -9773,6 +9943,11 @@ bool Rtabmap::addLinksAtomicallyImpl(const std::vector<Link> & evidence,
     // correction, not merely against an earlier proposal or a correction delta.
     if(observedAlignmentAllowed && (!*observedAlignmentAllowed || !(*observedAlignmentAllowed)(finalMapCorrection)))
     { reason="recovery observation certificate rejected final alignment or current continuity ticket"; return false; }
+    // The same serial transaction isolates the uncertified prefix before adding
+    // any bridge. No later graph traversal can follow its old neighbor into R.
+    for(const auto & edge:detachedEdges)_memory->removeLink(edge.first,edge.second);
+	_safeRelocalizationArchivedIds.swap(nextArchivedIds);
+	_safeRelocalizationArchives.swap(nextArchives);
 	for(std::vector<Link>::const_iterator iter=evidence.begin(); iter!=evidence.end(); ++iter)
 	{
 		// After the exhaustive preflight, Memory::addLink(addInDatabase=false)
@@ -9825,7 +10000,7 @@ bool Rtabmap::addLinksAtomicallyImpl(const std::vector<Link> & evidence,
 	_safeRelocalizationTrustedConstraints.swap(promotedTrustedConstraints);
 	_safeRelocalizationTrustedSnapshotValid = true;
 	rebuildSafeRelocalizationTrustedComponents();
-	reason = uFormat("committed three bridges after 3-fold leave-one-out for reset epoch %llu; graph-rigidity guard passed (dense plane RMS requires stopped-map validation)", sourceResetEpoch);
+	reason = uFormat("committed current reanchor: epoch=%llu registered_nodes=%u archived_prefix_nodes=%u detached_edges=%u; three bridges and 3-fold holdout passed (dense plane RMS requires stopped-map validation)", sourceResetEpoch,unsigned(currentIds.size()),unsigned(archivedPrefix.size()),unsigned(detachedEdges.size()));
 	return true;
 }
 

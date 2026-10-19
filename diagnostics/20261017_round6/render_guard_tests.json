@@ -1,0 +1,21 @@
+{
+  "phase": "passed",
+  "camera_started": false,
+  "control_started": false,
+  "steps": [
+    {
+      "name": "compile",
+      "returncode": 0
+    },
+    {
+      "name": "retry_then_success",
+      "returncode": 0
+    },
+    {
+      "name": "bounded_failure",
+      "returncode": 75
+    }
+  ],
+  "binary_sha256": "6ce75960305230fe63ad2ce41dbcf3f2fb865e67e6e5216059929eedc1dfce78",
+  "production_contains_fault_injection": false
+}

@@ -1,0 +1,25 @@
+{
+  "phase": "failed",
+  "scope": "offline reader prototype only; no runtime or deployment change",
+  "steps": [
+    {
+      "name": "unit_tests",
+      "exit": 0,
+      "seconds": 3.925746112014167
+    },
+    {
+      "name": "real_fixture_comparison",
+      "exit": 1,
+      "seconds": 68.31263903999934
+    }
+  ],
+  "sources": {
+    "baseline_spool_codec.py": "dd5955d2f864b96f07065c72a48cdad13c2aac57c31bddd148fddfa1de0f7d07",
+    "spool_codec.py": "7f3089ba57f2ef99600d44dacd20b26944cb65263c8a04a52bd73f819a41268d",
+    "baseline_deferred_tag_observations.py": "52a038dd0fbc8a85e8b341e2e0302cfb8e9a1197038d3ee44249dd5da34ba9b4",
+    "deferred_tag_observations.py": "2fbd689ec36290ca0c0d9c43b219ce769bed87f7d6dcf1cdd20833550f3cf413",
+    "benchmark_image_reader.py": "a4c7933aa7ad985d97212b3205d4704afbaddebe9b222c44015d206c1da20e30",
+    "test_image_reader.py": "1c61e64ed2198a978fae234092b74710e2a41af7922a2d2d25229ffe2d4ff2f0"
+  },
+  "error": "AssertionError('real_fixture_comparison')"
+}

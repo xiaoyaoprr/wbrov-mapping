@@ -1,0 +1,87 @@
+{
+  "scope": "closed-input throughput comparison; no camera or actuation",
+  "runs": [
+    {
+      "threads": 1,
+      "exit": 0,
+      "elapsed_s": 182.7575782079948,
+      "status": {
+        "schema": "wbrov.deferred-queue.v1",
+        "state": "closed",
+        "error": null,
+        "historical_only": true,
+        "navigation_authorized": false,
+        "recorded_source_ns": 1791653884980250000,
+        "recording_state": "closed",
+        "processed_source_ns": 1791653884980250000,
+        "acknowledged_source_ns": 1791653884980250000,
+        "verified_map_source_ns": 1791653884980250000,
+        "backlog_seconds": 0.0,
+        "completed_segments": 61,
+        "mapping": {
+          "schema": "wbrov.deferred-mapping.v1",
+          "state": "closed",
+          "historical_only": true,
+          "navigation_authorized": false,
+          "processed_source_ns": 1791653884980250000,
+          "verified_map_source_ns": 1791653884980250000,
+          "frames": 1581,
+          "input_gaps": 1,
+          "odometry_compute_ms": 82497.6,
+          "mapping_compute_ms": 88831.8,
+          "continuity_state": "NORMAL",
+          "main_map_write_allowed": true,
+          "observation_count": 5,
+          "observation_required": 5,
+          "epoch": 2,
+          "cuts": 25,
+          "recoveries": 1,
+          "main_nodes": 101,
+          "cloud_points": 119387,
+          "database_closed": true
+        }
+      }
+    },
+    {
+      "threads": 2,
+      "exit": 0,
+      "elapsed_s": 183.78860630403506,
+      "status": {
+        "schema": "wbrov.deferred-queue.v1",
+        "state": "closed",
+        "error": null,
+        "historical_only": true,
+        "navigation_authorized": false,
+        "recorded_source_ns": 1791653884980250000,
+        "recording_state": "closed",
+        "processed_source_ns": 1791653884980250000,
+        "acknowledged_source_ns": 1791653884980250000,
+        "verified_map_source_ns": 1791653884980250000,
+        "backlog_seconds": 0.0,
+        "completed_segments": 61,
+        "mapping": {
+          "schema": "wbrov.deferred-mapping.v1",
+          "state": "closed",
+          "historical_only": true,
+          "navigation_authorized": false,
+          "processed_source_ns": 1791653884980250000,
+          "verified_map_source_ns": 1791653884980250000,
+          "frames": 1581,
+          "input_gaps": 1,
+          "odometry_compute_ms": 79988.2,
+          "mapping_compute_ms": 90525.4,
+          "continuity_state": "NORMAL",
+          "main_map_write_allowed": true,
+          "observation_count": 5,
+          "observation_required": 5,
+          "epoch": 2,
+          "cuts": 19,
+          "recoveries": 1,
+          "main_nodes": 97,
+          "cloud_points": 92294,
+          "database_closed": true
+        }
+      }
+    }
+  ]
+}

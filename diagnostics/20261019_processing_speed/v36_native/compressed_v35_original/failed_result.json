@@ -1,0 +1,13 @@
+{
+  "phase": "failed",
+  "scope": "offline closed-recording compatibility and speed; no hardware or deployment",
+  "steps": [],
+  "codec": {
+    "frames": 1581,
+    "raw_bytes": 2176746203,
+    "packed_bytes": 1315167008,
+    "segments": 61,
+    "seconds": 28.037994999999995
+  },
+  "error": "AssertionError()"
+}

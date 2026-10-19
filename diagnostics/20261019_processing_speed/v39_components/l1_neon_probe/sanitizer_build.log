@@ -1,0 +1,13 @@
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/probe_l1_neon.cpp: In instantiation of ‘float CandidateL1::operator()(A, B, std::size_t, float) const [with A = float*; B = double*; std::size_t = long unsigned int]’:
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/hamming_neon_probe4/source/rtflann/algorithms/kmeans_index.h:586:45:   required from ‘void rtflann::KMeansIndex<Distance>::computeClustering(rtflann::KMeansIndex<Distance>::NodePtr, int*, int, int) [with Distance = CandidateL1; rtflann::KMeansIndex<Distance>::NodePtr = rtflann::KMeansIndex<CandidateL1>::Node*]’
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/hamming_neon_probe4/source/rtflann/algorithms/kmeans_index.h:344:9:   required from ‘void rtflann::KMeansIndex<Distance>::buildIndexImpl() [with Distance = CandidateL1]’
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/hamming_neon_probe4/source/rtflann/algorithms/kmeans_index.h:329:10:   required from here
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/probe_l1_neon.cpp:24:76: error: cannot convert ‘double*’ to ‘const float32_t*’ {aka ‘const float*’}
+   24 |                 const auto d=vabsq_f32(vsubq_f32(vld1q_f32(a+i),vld1q_f32(b+i)));
+      |                                                                           ~^~
+      |                                                                            |
+      |                                                                            double*
+In file included from /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/probe_l1_neon.cpp:2:
+/usr/lib/gcc/aarch64-linux-gnu/11/include/arm_neon.h:16063:29: note:   initializing argument 1 of ‘float32x4_t vld1q_f32(const float32_t*)’
+16063 | vld1q_f32 (const float32_t *__a)
+      |            ~~~~~~~~~~~~~~~~~^~~

@@ -1,0 +1,187 @@
+[RGBD_SPOOL_SEAL_LATENCY] sequence=238 flush_ms=0.058016 data_sync_ms=6371 receipt_sync_ms=145.713
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=4124.8
+[RGBD_SPOOL_SEAL_LATENCY] sequence=239 flush_ms=0.052416 data_sync_ms=29124.8 receipt_sync_ms=88.3971
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=27927.1
+[RGBD_SPOOL_SEAL_LATENCY] sequence=240 flush_ms=0.049536 data_sync_ms=4827.44 receipt_sync_ms=115.497
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=3704.02
+[RGBD_SPOOL_SEAL_LATENCY] sequence=241 flush_ms=0.060064 data_sync_ms=1878.16 receipt_sync_ms=145.915
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=1517.52
+[RGBD_SPOOL_SEAL_LATENCY] sequence=242 flush_ms=0.055584 data_sync_ms=4751.12 receipt_sync_ms=113.736
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=3799.06
+[RGBD_SPOOL_SEAL_LATENCY] sequence=243 flush_ms=0.086688 data_sync_ms=4677.55 receipt_sync_ms=1640.63
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=6037.58
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=1.11606
+[RGBD_SPOOL_SEAL_LATENCY] sequence=244 flush_ms=0.058912 data_sync_ms=20304.4 receipt_sync_ms=53.1372
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=19333.8
+[RGBD_SPOOL_SEAL_LATENCY] sequence=245 flush_ms=0.04896 data_sync_ms=680.509 receipt_sync_ms=79.664
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=476.607
+[RGBD_SPOOL_SEAL_LATENCY] sequence=246 flush_ms=0.047136 data_sync_ms=1024.23 receipt_sync_ms=89.6964
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=714.472
+[RGBD_SPOOL_SEAL_LATENCY] sequence=247 flush_ms=0.041152 data_sync_ms=2272.66 receipt_sync_ms=109.249
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=1397.42
+[RGBD_SPOOL_SEAL_LATENCY] sequence=248 flush_ms=0.048064 data_sync_ms=719.905 receipt_sync_ms=97.5535
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=520.183
+[RGBD_SPOOL_SEAL_LATENCY] sequence=249 flush_ms=0.054048 data_sync_ms=1742.51 receipt_sync_ms=78.9561
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=848.512
+[RGBD_SPOOL_SEAL_LATENCY] sequence=250 flush_ms=0.05888 data_sync_ms=816.15 receipt_sync_ms=73.979
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=338.875
+[RGBD_SPOOL_SEAL_LATENCY] sequence=251 flush_ms=0.080448 data_sync_ms=694.099 receipt_sync_ms=74.0569
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=491.723
+[RGBD_SPOOL_SEAL_LATENCY] sequence=252 flush_ms=0.05632 data_sync_ms=1414.34 receipt_sync_ms=74.5603
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=626.113
+[RGBD_SPOOL_SEAL_LATENCY] sequence=253 flush_ms=0.054208 data_sync_ms=980.084 receipt_sync_ms=58.156
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=572.447
+[RGBD_SPOOL_SEAL_LATENCY] sequence=254 flush_ms=0.058592 data_sync_ms=1656.58 receipt_sync_ms=104.913
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=964.593
+[RGBD_SPOOL_SEAL_LATENCY] sequence=255 flush_ms=0.069952 data_sync_ms=1315.48 receipt_sync_ms=69.9071
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=796.461
+[RGBD_SPOOL_SEAL_LATENCY] sequence=256 flush_ms=0.053664 data_sync_ms=1345.79 receipt_sync_ms=73.9979
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=877.853
+[RGBD_SPOOL_SEAL_LATENCY] sequence=257 flush_ms=0.053536 data_sync_ms=882.033 receipt_sync_ms=75.881
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=455.703
+[RGBD_SPOOL_SEAL_LATENCY] sequence=258 flush_ms=0.057984 data_sync_ms=1114.33 receipt_sync_ms=84.4081
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=726.018
+[RGBD_SPOOL_SEAL_LATENCY] sequence=259 flush_ms=0.059424 data_sync_ms=1599.26 receipt_sync_ms=78.9018
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=893.862
+[RGBD_SPOOL_SEAL_LATENCY] sequence=260 flush_ms=0.052416 data_sync_ms=1244.84 receipt_sync_ms=64.8004
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=643.667
+[RGBD_SPOOL_SEAL_LATENCY] sequence=261 flush_ms=0.067328 data_sync_ms=690.709 receipt_sync_ms=54.6038
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=193.759
+[RGBD_SPOOL_SEAL_LATENCY] sequence=262 flush_ms=0.066592 data_sync_ms=676.763 receipt_sync_ms=54.2418
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=281.87
+[RGBD_SPOOL_SEAL_LATENCY] sequence=263 flush_ms=0.049984 data_sync_ms=616.866 receipt_sync_ms=49.5534
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=329.054
+[RGBD_SPOOL_SEAL_LATENCY] sequence=264 flush_ms=0.05728 data_sync_ms=948.766 receipt_sync_ms=49.0644
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=307.028
+[RGBD_SPOOL_SEAL_LATENCY] sequence=265 flush_ms=0.046464 data_sync_ms=943.522 receipt_sync_ms=63.1205
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=459.612
+[RGBD_SPOOL_SEAL_LATENCY] sequence=266 flush_ms=0.057888 data_sync_ms=1135.84 receipt_sync_ms=44.6005
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=339.709
+[RGBD_SPOOL_SEAL_LATENCY] sequence=267 flush_ms=0.058016 data_sync_ms=850.639 receipt_sync_ms=58.6488
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=394.944
+[RGBD_SPOOL_SEAL_LATENCY] sequence=268 flush_ms=0.155104 data_sync_ms=1295.4 receipt_sync_ms=59.8304
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=607.458
+[RGBD_SPOOL_SEAL_LATENCY] sequence=269 flush_ms=0.05664 data_sync_ms=1195.93 receipt_sync_ms=63.6223
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=664.356
+[RGBD_SPOOL_SEAL_LATENCY] sequence=270 flush_ms=0.048544 data_sync_ms=4870.65 receipt_sync_ms=5278.42
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=9380.43
+[RGBD_SPOOL_SEAL_LATENCY] sequence=271 flush_ms=0.068864 data_sync_ms=1049.85 receipt_sync_ms=77.3892
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=381.73
+[RGBD_SPOOL_SEAL_LATENCY] sequence=272 flush_ms=0.053728 data_sync_ms=1316.04 receipt_sync_ms=50.1155
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=671.554
+[RGBD_SPOOL_SEAL_LATENCY] sequence=273 flush_ms=0.049056 data_sync_ms=1046.08 receipt_sync_ms=58.9936
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=471.254
+[RGBD_SPOOL_SEAL_LATENCY] sequence=274 flush_ms=0.041984 data_sync_ms=1600.3 receipt_sync_ms=84.0905
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=912.264
+[RGBD_SPOOL_SEAL_LATENCY] sequence=275 flush_ms=0.056 data_sync_ms=1520.79 receipt_sync_ms=83.8086
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=927.731
+[RGBD_SPOOL_SEAL_LATENCY] sequence=276 flush_ms=0.05184 data_sync_ms=2079.17 receipt_sync_ms=104.588
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=1515.09
+[RGBD_SPOOL_SEAL_LATENCY] sequence=277 flush_ms=0.061792 data_sync_ms=2556.59 receipt_sync_ms=123.979
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=1956.91
+[RGBD_SPOOL_SEAL_LATENCY] sequence=278 flush_ms=0.049376 data_sync_ms=3315.77 receipt_sync_ms=134.315
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=2557.98
+[RGBD_SPOOL_SEAL_LATENCY] sequence=279 flush_ms=0.048512 data_sync_ms=3142.13 receipt_sync_ms=133.131
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=2495.14
+[RGBD_SPOOL_SEAL_LATENCY] sequence=280 flush_ms=0.04672 data_sync_ms=3026.86 receipt_sync_ms=78.8404
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=2327.74
+[RGBD_SPOOL_SEAL_LATENCY] sequence=281 flush_ms=0.065376 data_sync_ms=2079.39 receipt_sync_ms=96.9538
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=1484.73
+[RGBD_SPOOL_SEAL_LATENCY] sequence=282 flush_ms=0.055808 data_sync_ms=3067.65 receipt_sync_ms=84.3
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=2337.73
+[RGBD_SPOOL_SEAL_LATENCY] sequence=283 flush_ms=0.051264 data_sync_ms=1482.4 receipt_sync_ms=79.855
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=784.538
+[RGBD_SPOOL_SEAL_LATENCY] sequence=284 flush_ms=0.076928 data_sync_ms=1562.06 receipt_sync_ms=61.1381
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=926.15
+[RGBD_SPOOL_SEAL_LATENCY] sequence=285 flush_ms=0.046112 data_sync_ms=1355.84 receipt_sync_ms=74.5804
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=757.19
+[RGBD_SPOOL_SEAL_LATENCY] sequence=286 flush_ms=0.046528 data_sync_ms=1604.47 receipt_sync_ms=84.9379
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=815.785
+[RGBD_SPOOL_SEAL_LATENCY] sequence=287 flush_ms=0.051808 data_sync_ms=9757.42 receipt_sync_ms=95.4217
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=9112.95
+[RGBD_SPOOL_SEAL_LATENCY] sequence=288 flush_ms=0.096608 data_sync_ms=1543.28 receipt_sync_ms=62.4065
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=855.081
+[RGBD_SPOOL_SEAL_LATENCY] sequence=289 flush_ms=0.05776 data_sync_ms=1262.88 receipt_sync_ms=102.896
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=695.169
+[RGBD_SPOOL_SEAL_LATENCY] sequence=290 flush_ms=0.056288 data_sync_ms=1572.34 receipt_sync_ms=74.5765
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=882.795
+[RGBD_SPOOL_SEAL_LATENCY] sequence=291 flush_ms=0.057216 data_sync_ms=1264.11 receipt_sync_ms=54.0546
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=621.122
+[RGBD_SPOOL_SEAL_LATENCY] sequence=292 flush_ms=0.065184 data_sync_ms=797.247 receipt_sync_ms=39.542
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=149.276
+[RGBD_SPOOL_SEAL_LATENCY] sequence=293 flush_ms=0.058112 data_sync_ms=778.784 receipt_sync_ms=69.9754
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=309.708
+[RGBD_SPOOL_SEAL_LATENCY] sequence=294 flush_ms=0.051232 data_sync_ms=875.672 receipt_sync_ms=45.2037
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=225.187
+[RGBD_SPOOL_SEAL_LATENCY] sequence=295 flush_ms=0.048608 data_sync_ms=832.536 receipt_sync_ms=75.7519
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=297.335
+[RGBD_SPOOL_SEAL_LATENCY] sequence=296 flush_ms=0.055936 data_sync_ms=1114.8 receipt_sync_ms=59.636
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=355.294
+[RGBD_SPOOL_SEAL_LATENCY] sequence=297 flush_ms=0.059072 data_sync_ms=843.704 receipt_sync_ms=121.54
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=196.194
+[RGBD_SPOOL_SEAL_LATENCY] sequence=298 flush_ms=0.05824 data_sync_ms=1088.66 receipt_sync_ms=59.6449
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=380.412
+[RGBD_SPOOL_SEAL_LATENCY] sequence=299 flush_ms=0.06432 data_sync_ms=678.252 receipt_sync_ms=45.5891
+[RGBD_SPOOL_SEAL_LATENCY] sequence=300 flush_ms=0.052512 data_sync_ms=470.662 receipt_sync_ms=36.2351
+[RGBD_SPOOL_SEAL_LATENCY] sequence=301 flush_ms=0.060032 data_sync_ms=867.006 receipt_sync_ms=63.6421
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=45.5597
+[RGBD_SPOOL_SEAL_LATENCY] sequence=302 flush_ms=0.056576 data_sync_ms=623.903 receipt_sync_ms=49.3756
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=139.153
+[RGBD_SPOOL_SEAL_LATENCY] sequence=303 flush_ms=0.052416 data_sync_ms=2226.76 receipt_sync_ms=71.2292
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=1344.92
+[RGBD_SPOOL_SEAL_LATENCY] sequence=304 flush_ms=0.057408 data_sync_ms=1419.07 receipt_sync_ms=63.6176
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=303.831
+[RGBD_SPOOL_SEAL_LATENCY] sequence=305 flush_ms=0.054464 data_sync_ms=1507.92 receipt_sync_ms=72.2812
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=695.777
+[RGBD_SPOOL_SEAL_LATENCY] sequence=306 flush_ms=0.059904 data_sync_ms=882.371 receipt_sync_ms=59.3364
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=375.823
+[RGBD_SPOOL_SEAL_LATENCY] sequence=307 flush_ms=0.080032 data_sync_ms=1538.34 receipt_sync_ms=44.7212
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=579.897
+[RGBD_SPOOL_SEAL_LATENCY] sequence=308 flush_ms=0.051136 data_sync_ms=1063.75 receipt_sync_ms=65.109
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=390.712
+[RGBD_SPOOL_SEAL_LATENCY] sequence=309 flush_ms=0.06144 data_sync_ms=622.315 receipt_sync_ms=78.6551
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=295.455
+[RGBD_SPOOL_SEAL_LATENCY] sequence=310 flush_ms=0.060608 data_sync_ms=1109.54 receipt_sync_ms=46.8793
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=521.299
+[RGBD_SPOOL_SEAL_LATENCY] sequence=311 flush_ms=0.05824 data_sync_ms=1408.01 receipt_sync_ms=67.6372
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=702.137
+[RGBD_SPOOL_SEAL_LATENCY] sequence=312 flush_ms=0.051712 data_sync_ms=1331.78 receipt_sync_ms=82.7359
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=567.551
+[RGBD_SPOOL_SEAL_LATENCY] sequence=313 flush_ms=0.099776 data_sync_ms=1150.53 receipt_sync_ms=69.8139
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=465.078
+[RGBD_SPOOL_SEAL_LATENCY] sequence=314 flush_ms=0.05824 data_sync_ms=8567.26 receipt_sync_ms=7263.74
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=15304.9
+[RGBD_SPOOL_SEAL_LATENCY] sequence=315 flush_ms=0.056032 data_sync_ms=1552.84 receipt_sync_ms=104.325
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=1019.43
+[RGBD_SPOOL_SEAL_LATENCY] sequence=316 flush_ms=0.05472 data_sync_ms=1856.38 receipt_sync_ms=44.2546
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=980.918
+[RGBD_SPOOL_SEAL_LATENCY] sequence=317 flush_ms=0.05376 data_sync_ms=1222 receipt_sync_ms=94.5511
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=506.075
+[RGBD_SPOOL_SEAL_LATENCY] sequence=318 flush_ms=0.12832 data_sync_ms=1388.14 receipt_sync_ms=78.7668
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=868.31
+[RGBD_SPOOL_SEAL_LATENCY] sequence=319 flush_ms=0.054624 data_sync_ms=1196.82 receipt_sync_ms=93.8927
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=569.655
+[RGBD_SPOOL_SEAL_LATENCY] sequence=320 flush_ms=0.0616 data_sync_ms=1787.01 receipt_sync_ms=64.1964
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=1079.34
+[RGBD_SPOOL_SEAL_LATENCY] sequence=321 flush_ms=0.063104 data_sync_ms=1458.6 receipt_sync_ms=79.0039
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=756.087
+[RGBD_SPOOL_SEAL_LATENCY] sequence=322 flush_ms=0.04896 data_sync_ms=536.277 receipt_sync_ms=69.4293
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=35.7093
+[RGBD_SPOOL_SEAL_LATENCY] sequence=323 flush_ms=0.049408 data_sync_ms=1162.97 receipt_sync_ms=74.3422
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=703.821
+[RGBD_SPOOL_SEAL_LATENCY] sequence=324 flush_ms=0.038656 data_sync_ms=1380.38 receipt_sync_ms=78.9188
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=630.533
+[RGBD_SPOOL_SEAL_LATENCY] sequence=325 flush_ms=0.06864 data_sync_ms=1352.8 receipt_sync_ms=92.7493
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=700.728
+[RGBD_SPOOL_SEAL_LATENCY] sequence=326 flush_ms=0.057152 data_sync_ms=1742.79 receipt_sync_ms=44.0547
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=756.508
+[RGBD_SPOOL_SEAL_LATENCY] sequence=327 flush_ms=0.0592 data_sync_ms=593.723 receipt_sync_ms=93.6348
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=332.168
+[RGBD_SPOOL_SEAL_LATENCY] sequence=328 flush_ms=0.052672 data_sync_ms=948.804 receipt_sync_ms=90.516
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=398.443
+[RGBD_SPOOL_SEAL_LATENCY] sequence=329 flush_ms=0.068704 data_sync_ms=1195.08 receipt_sync_ms=79.1551
+[RGBD_SPOOL_BACKPRESSURE] retained_frame=true capacity=64 wait_ms=488.161
+[RGBD_SPOOL_SEAL_LATENCY] sequence=330 flush_ms=0.054848 data_sync_ms=1596.51 receipt_sync_ms=83.1619
+[RGBD_SPOOL_SEAL_LATENCY] sequence=331 flush_ms=0.063712 data_sync_ms=967.924 receipt_sync_ms=60.3193
+[RGBD_SPOOL_SEAL_LATENCY] sequence=332 flush_ms=0.064352 data_sync_ms=1015.75 receipt_sync_ms=144.672
+[RGBD_SPOOL_SEAL_LATENCY] sequence=333 flush_ms=0.046496 data_sync_ms=846.09 receipt_sync_ms=41.1525

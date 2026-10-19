@@ -28,6 +28,20 @@ struct Status {using type=void(Wrapper::*)();friend type member(Status);};
 template struct Access<Status,&Wrapper::publishMappingContinuityStatus>;
 struct Reference {using type=sensor_msgs::msg::Image::SharedPtr Wrapper::*;friend type member(Reference);};
 template struct Access<Reference,&Wrapper::mappingLastTrustedImage_>;
+struct SourceValidation {using type=bool(Wrapper::*)(const std::string &,const char *,const std::string &,const std::string &,bool &,bool &,std::array<uint8_t,RMW_GID_STORAGE_SIZE> &,const rmw_gid_t *);friend type member(SourceValidation);};
+template struct Access<SourceValidation,&Wrapper::validateResetQuarantinePublisher>;
+struct OdomPose {using type=rtabmap::Transform Wrapper::*;friend type member(OdomPose);};
+template struct Access<OdomPose,&Wrapper::resetQuarantineContinuityPose_>;
+struct OdomStamp {using type=long long Wrapper::*;friend type member(OdomStamp);};
+template struct Access<OdomStamp,&Wrapper::resetQuarantineContinuityStampNs_>;
+struct OdomChain {using type=unsigned long long Wrapper::*;friend type member(OdomChain);};
+template struct Access<OdomChain,&Wrapper::resetQuarantineContinuityChain_>;
+struct AdmittedChain {using type=unsigned long long Wrapper::*;friend type member(AdmittedChain);};
+template struct Access<AdmittedChain,&Wrapper::resetQuarantineContinuityAnchorChain_>;
+struct OdomBound {using type=bool Wrapper::*;friend type member(OdomBound);};
+template struct Access<OdomBound,&Wrapper::resetQuarantineOdomPublisherBound_>;
+struct OdomMutex {using type=std::mutex Wrapper::*;friend type member(OdomMutex);};
+template struct Access<OdomMutex,&Wrapper::resetQuarantineOdomAuthMutex_>;
 void require(bool condition,const char * why) {if(!condition)throw std::runtime_error(why);}
 long long steady() {return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();}
 
@@ -208,6 +222,55 @@ int main(int argc,char ** argv) {
         require(core.getLocalOptimizedPoses().size()==graphSize,"adapter-only evidence mutated graph");
         (w.get()->*member(Status{}))();
         std::cout<<"PASS native linked Wrapper adapter: full-frame support/dimension binding, numeric-only reject, hysteresis, bootstrap, receipt expiry preserves local continuity but revokes writes, registration observation period, loss/old ticket, depth evidence, IMU-only PAUSED, no graph writes\n";
-        w.reset();rclcpp::shutdown();return 0;
+        // Current-pose display follows the full-rate measured stream even when
+        // lastPose_ has no recent mapping image. Fixture injection, not a claim
+        // of DDS authentication: real transport is covered by hardware tests.
+        g.reset();
+        for(unsigned i=0;i<3;++i) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(110));good=sample(*w);observe(good);
+        }
+        require(g.coreValidated(g.ticket(rclcpp::Time(good.header.stamp).nanoseconds()),core.getResetEpoch(),true,true,steady(),w->now().nanoseconds()),"display fixture registration");
+        auto statusViewer=std::make_shared<rclcpp::Node>("current_pose_status_test_viewer");std::string statusText;
+        auto statusSub=statusViewer->create_subscription<std_msgs::msg::String>("/wbrov/mapping_continuity/status",
+            rclcpp::QoS(1).reliable().transient_local(),[&](std_msgs::msg::String::ConstSharedPtr m){statusText=m->data;});
+        w.get()->*member(OdomBound{})=true;w.get()->*member(OdomPose{})=rtabmap::Transform(.1f,0,0,0,0,0);
+        w.get()->*member(AdmittedChain{})=7;
+        auto checkStatus=[&](unsigned long long chain,bool stale,bool authBusy,bool expected) {
+            statusText.clear();
+            const auto deadline=std::chrono::steady_clock::now()+std::chrono::seconds(3);
+            auto frame=sample(*w);
+            const auto stamp=rclcpp::Time(frame.header.stamp).nanoseconds();
+            const auto expectedStamp=std::string("\"source_stamp_ns\":")+std::to_string(stamp)+",";
+            w.get()->*member(OdomChain{})=chain;
+            w.get()->*member(OdomStamp{})=stamp-(stale?1000000000LL:0LL);
+            if(authBusy) {
+                std::lock_guard<std::mutex> hold(w.get()->*member(OdomMutex{}));observe(frame);
+            } else observe(frame);
+            do {
+                rclcpp::spin_some(statusViewer);
+                if(statusText.find(expectedStamp)!=std::string::npos)break;
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            } while(std::chrono::steady_clock::now()<deadline);
+            require(statusText.find(expectedStamp)!=std::string::npos &&
+                statusText.find(expected?"\"localization_valid\":true":"\"localization_valid\":false")!=std::string::npos,
+                "current localization did not respect full-rate pose/chain/freshness/auth lock");
+        };
+        checkStatus(7,false,false,true);
+        checkStatus(8,false,false,false);
+        checkStatus(7,true,false,false);
+        checkStatus(7,false,true,false);
+        statusSub.reset();statusViewer.reset();
+        std::cout<<"PASS full-rate measured pose display; mismatched chain, stale pose and busy auth lock fail closed without waiting\n";
+        // Model SIGINT while a long geometry callback is returning. Graph
+        // discovery must reject authorization without throwing after shutdown,
+        // so the destructor can still execute its database close path.
+        bool bound=true,compromised=false;std::array<uint8_t,RMW_GID_STORAGE_SIZE> gid{};
+        rclcpp::shutdown();
+        require(!(w.get()->*member(SourceValidation{}))("/shutdown_probe","test","private_test_odom_source","/",bound,compromised,gid,nullptr),"shutdown source query authorized input");
+        require(!compromised && !w->safeRelocalizationFatal(),"normal shutdown marked map unsafe");
+        w.reset();
+        require(std::filesystem::exists(root/"continuity.db"),"shutdown destructor did not retain database");
+        std::cout<<"PASS invalid ROS context rejects source authorization without exception; Wrapper destructor completed\n";
+        return 0;
     }catch(const std::exception & e){std::cerr<<e.what()<<'\n';rclcpp::shutdown();return 1;}
 }

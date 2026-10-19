@@ -44,6 +44,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <rtabmap/utilite/UTimer.h>
 #include <rtabmap/utilite/UMath.h>
 #include <opencv2/core/core_c.h>
+#include "ProjectionHammingMatch.h"
 
 #if defined(HAVE_OPENCV_XFEATURES2D) && (CV_MAJOR_VERSION > 3 || (CV_MAJOR_VERSION==3 && CV_MINOR_VERSION >=4 && CV_SUBMINOR_VERSION >= 1))
 #include <opencv2/xfeatures2d.hpp> // For GMS matcher
@@ -1109,7 +1110,11 @@ Transform RegistrationVis::computeTransformationImpl(
 							for(unsigned int i = 0; i < pointsToMat.rows; ++i)
 							{
 								int matchedIndex = -1;
-								if(indices[i].size() >= 2)
+								if(indices[i].size() >= 2 && descriptors.type()==CV_8U)
+								{
+									matchedIndex = projectionHammingMatch(descriptorsTo.row(i), descriptorsFrom, indices[i], &projectedIndexToDescIndex, _nnType==5, _nndr);
+								}
+								else if(indices[i].size() >= 2)
 								{
 									std::vector<int> descriptorsIndices(indices[i].size());
 									int oi=0;
@@ -1260,7 +1265,11 @@ Transform RegistrationVis::computeTransformationImpl(
 								if(util3d::isFinite(kptsFrom3D[matchedIndexFrom]))
 								{
 									int matchedIndexTo = -1;
-									if(indices[i].size() >= 2)
+									if(indices[i].size() >= 2 && descriptors.type()==CV_8U)
+									{
+										matchedIndexTo = projectionHammingMatch(descriptorsFrom.row(matchedIndexFrom), descriptorsTo, indices[i], nullptr, _nnType==5, _nndr);
+									}
+									else if(indices[i].size() >= 2)
 									{
 										bruteForceTimer.restart();
 										std::vector<int> descriptorsIndices(indices[i].size());

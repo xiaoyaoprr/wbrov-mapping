@@ -91,8 +91,18 @@ bool Rtabmap::tryVisualRecoveryImpl(const SafeRelocalizationLimits & limits,
     if(!commitAllowed || !commitAllowed())
     { reason="visual recovery continuity ticket is no longer current"; return false; }
     const Signature * last=_memory->getLastWorkingSignature(false);
-    if(!last || last->id()!=_crossMapLoopEvidence.back().newId)
-    { reason=uFormat("local-submap newest bridge is stale (current=%d newest_candidate=%d)",last?last->id():0,_crossMapLoopEvidence.back().newId); return false; }
+    const auto & newest=_crossMapLoopEvidence.back();
+    const Signature * bridge=_memory->getSignature(newest.newId);
+    AcceptedImageReceipt latestReceipt,bridgeReceipt;
+    if(!last || !bridge || newest.newId>last->id() || newest.newResetEpoch!=_resetEpoch ||
+       bridge->mapId()!=last->mapId() || !getAcceptedImageReceipt(last->id(),latestReceipt) ||
+       !getAcceptedImageReceipt(newest.newId,bridgeReceipt) ||
+       latestReceipt.resetEpoch!=_resetEpoch || bridgeReceipt.resetEpoch!=_resetEpoch ||
+       latestReceipt.input.headerStampNs<bridgeReceipt.input.headerStampNs ||
+       latestReceipt.input.headerStampNs-bridgeReceipt.input.headerStampNs>6000000000LL)
+    { reason=uFormat("local-submap newest bridge is missing or source-stale (current=%d newest_candidate=%d)",last?last->id():0,newest.newId); return false; }
+    // This age check is only admission. The transaction certifies EVERY retained
+    // neighbor from the earliest bridge through last, including newer nodes.
 
     std::vector<Link> endpointEvidence;
     std::vector<AcceptedImageReceipt> receipts;

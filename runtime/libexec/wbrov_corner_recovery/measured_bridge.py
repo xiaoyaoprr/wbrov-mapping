@@ -113,10 +113,19 @@ def observation(binding,body):
                 epoch=int(binding['reset_epoch']),body=matrix(body),binding=binding,objects=objects,uv=uv,K=K,D=D,
                 scale=scale,area=float(abs(cv2.contourArea(uv.astype(np.float32)))),branches=branches)
 
+def reference_reservoir(rows,capacity=24):
+    """Keep useful view diversity even after many larger static Tag images."""
+    eligible=sorted((r for r in rows if r['branches']),key=lambda r:(-r['area'],r['stamp'],r['id']))
+    distinct=[];duplicates=[]
+    for row in eligible:
+        if all(independent((row,other)) for other in distinct):distinct.append(row)
+        else:duplicates.append(row)
+    return (distinct+duplicates)[:capacity]
+
 def best_old_triplet(rows):
     # Select reference geometry solely from the completed old component.
     # Prefer well-resolved quads; deterministic stamp tie-break, no future input.
-    eligible=sorted((r for r in rows if r['branches']),key=lambda r:(-r['area'],r['stamp']))[:24]
+    eligible=reference_reservoir(rows)
     for triplet in combinations(eligible,3):
         if not independent(triplet):continue
         modes=[]
@@ -165,6 +174,23 @@ def information(current,old,cb,ob,epsilon=.001):
                   measurement_dimensions=16,coordinate='nominal_link_inverse_times_perturbed_link_xyz_rpy',
                   calibration_and_size_uncertainty_included=False,physical_covariance=False)
 
+def proposal_measurements(currents,olds,current_modes,old_modes,links,metric):
+    evidence=[];weights=[]
+    for c,o,cb,ob,l in zip(currents,olds,current_modes,old_modes,links):
+        H,diagnostic=information(c,o,cb,ob)
+        # Quaternion from OpenCV Rodrigues via a stable rotation-vector formula.
+        rv=cv2.Rodrigues(l[:3,:3])[0].ravel();angle=np.linalg.norm(rv)
+        q=np.r_[rv*(math.sin(angle/2)/angle if angle>1e-12 else .5),math.cos(angle/2)]
+        evidence.append(dict(from_id=c['id'],to_id=o['id'],translation=l[:3,3].tolist(),quaternion_xyzw=q.tolist(),information_row_major=H.ravel().tolist()))
+        weights.append(diagnostic)
+    return dict(evidence=evidence,weights=weights,old_ids=[r['id'] for r in olds],current_ids=[r['id'] for r in currents],
+                old_stamps=[r['stamp'] for r in olds],current_stamps=[r['stamp'] for r in currents],
+                corner_rms_at_960=[b['rms'] for b in (*old_modes,*current_modes)],
+                alignment_consistency=metric,
+                alignment_evaluation='all_three_current_body_positions',
+                alignment_support_body_positions=[r['body'][:3,3].tolist() for r in currents],
+                link_measurements_use_only_own_endpoint_pixels=True,shared_fit_used=False)
+
 def propose(old_reference,current_rows):
     if old_reference is None:return None,'no_independent_consistent_old_triplet'
     olds,old_modes=old_reference
@@ -197,21 +223,47 @@ def propose(old_reference,current_rows):
         # consistent three-view set in the recorded loss. Rank every bounded
         # combination before asking Core to reopen and validate metric depth.
         ranked.sort(key=lambda x:(x[0],x[1],x[2]));_,_,_,currents,best=ranked[0]
-        evidence=[];weights=[]
-        for c,o,cb,ob,l in zip(currents,olds,best[2],best[3],best[4]):
-            H,diagnostic=information(c,o,cb,ob)
-            # Quaternion from OpenCV Rodrigues via a stable rotation-vector formula.
-            rv=cv2.Rodrigues(l[:3,:3])[0].ravel();angle=np.linalg.norm(rv)
-            q=np.r_[rv*(math.sin(angle/2)/angle if angle>1e-12 else .5),math.cos(angle/2)]
-            evidence.append(dict(from_id=c['id'],to_id=o['id'],translation=l[:3,3].tolist(),quaternion_xyzw=q.tolist(),information_row_major=H.ravel().tolist()))
-            weights.append(diagnostic)
-        return dict(evidence=evidence,weights=weights,old_ids=[r['id'] for r in olds],current_ids=[r['id'] for r in currents],
-                    old_stamps=[r['stamp'] for r in olds],current_stamps=[r['stamp'] for r in currents],
-                    corner_rms_at_960=[b['rms'] for b in (*best[3],*best[2])],
-                    alignment_consistency=dict(max_translation_m=best[0][0],max_rotation_deg=best[0][1],
-                                               max_z_m=best[0][2],max_tilt_deg=best[0][3]),
-                    alignment_evaluation='all_three_current_body_positions',
-                    alignment_support_body_positions=[r['body'][:3,3].tolist() for r in currents],
-                    link_measurements_use_only_own_endpoint_pixels=True,shared_fit_used=False), 'three_independent_measured_links'
+        metric=dict(zip(('max_translation_m','max_rotation_deg','max_z_m','max_tilt_deg'),best[0]))
+        return proposal_measurements(currents,olds,best[2],best[3],best[4],metric), 'three_independent_measured_links'
     if ambiguous:return None,'multiple_consistent_planar_branches'
     return None,'three_view_alignment_disagreement_or_baseline'
+
+
+def propose_depth_candidate(old_reference,current_rows):
+    """Select endpoints for Core depth validation; NEVER certify a PnP alignment.
+
+    The schema-3 bridge fields remain individual pixel estimates for protocol
+    compatibility. Core discards these transforms/information and rebuilds
+    metric links from its owned RGB-D corners before any prepare or commit.
+    Planar pose disagreement is diagnostic here; depth/holdout/IMU and all
+    subsequent observations still have to pass in Core.
+    """
+    if old_reference is None or not current_rows:return None,'no_depth_candidate_reference'
+    olds,old_modes=old_reference
+    now=max(r['stamp'] for r in current_rows)
+    recent=sorted((r for r in current_rows if r['branches'] and now-r['stamp']<=8*10**9),
+                  key=lambda r:(r['stamp'],r['id']))[-12:]
+    if len(recent)<3 or recent[-1]['stamp']!=now:return None,'fewer_than_three_current_views'
+    if len(olds)!=3 or not old_modes or not independent(olds):return None,'invalid_depth_candidate_reference'
+    ranked=[]
+    for pair in combinations(recent[:-1],2):
+        currents=(*pair,recent[-1]);all_rows=(*olds,*currents)
+        if len({r['id'] for r in all_rows})!=6 or len({r['tag_id'] for r in all_rows})!=1:continue
+        if len({r['epoch'] for r in olds})!=1 or len({r['epoch'] for r in currents})!=1 or olds[0]['epoch']>=currents[0]['epoch']:continue
+        if any(len({r['stamp'] for r in side})!=3 or max(r['stamp'] for r in side)-min(r['stamp'] for r in side)<200000000 for side in (olds,currents)):continue
+        if not independent(currents):continue
+        # Deterministic geometry-independent scheduling. Do not search for a
+        # PnP branch that merely happens to satisfy an alignment threshold.
+        ranked.append((currents[-1]['stamp']-currents[0]['stamp'],
+                       -min(r['area'] for r in currents),tuple(r['id'] for r in currents),currents))
+    if not ranked:return None,'no_independent_depth_candidate'
+    ranked.sort(key=lambda x:x[:3]);currents=ranked[0][3]
+    cb=tuple(min(r['branches'],key=lambda b:b['rms']) for r in currents)
+    ob=min(old_modes,key=lambda branches:sum(b['rms']**2 for b in branches))
+    links=[relative(c,o) for c,o in zip(cb,ob)]
+    aligns=[o['body']@np.linalg.inv(l)@np.linalg.inv(c['body']) for c,o,l in zip(currents,olds,links)]
+    metric=alignment_metrics(aligns,body_support_points([r['body'] for r in currents]))
+    result=proposal_measurements(currents,olds,cb,ob,links,metric)
+    result.update(candidate_only=True,requires_core_depth_verification=True,
+                  pnp_alignment_certified=False,selection='independent_recent_endpoints_for_depth_verification')
+    return result,'three_independent_tag_views_for_core_depth_verification'

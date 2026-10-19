@@ -1,0 +1,39 @@
+{
+  "scope": "offline only; actual camera/SVO/RViz/robot integration pending",
+  "audits": [
+    {
+      "run": "short_recovery",
+      "frames": 1581,
+      "all_source_timestamps_equal": true,
+      "source_seconds": 64.947313,
+      "supervisor_exit": 0,
+      "queue_state": "closed",
+      "lost_frames": 18,
+      "lost_or_missing_main_writes": 0
+    },
+    {
+      "run": "full_recovery",
+      "frames": 10746,
+      "all_source_timestamps_equal": true,
+      "source_seconds": 397.831865,
+      "supervisor_exit": 0,
+      "queue_state": "closed",
+      "lost_frames": 216,
+      "lost_or_missing_main_writes": 0
+    },
+    {
+      "run": "large_interrupted_capture",
+      "frames": 10059,
+      "all_source_timestamps_equal": true,
+      "source_seconds": 412.447825,
+      "supervisor_exit": 2,
+      "queue_state": "interrupted_saved",
+      "lost_frames": 0,
+      "lost_or_missing_main_writes": 0
+    }
+  ],
+  "worker_sha256": "191316d9dada445b58d31e88dc92b77d916f963c76b67a76b9f71dae50027bc5",
+  "core_sha256": "573f9a1cd6a6ac257efd5621b421b9650f14fcbfc95cfcd915f5c9f479c6eed7",
+  "no_hardware_started": true,
+  "production_entry_changed": false
+}

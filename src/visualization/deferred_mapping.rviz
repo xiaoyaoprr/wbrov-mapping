@@ -1,0 +1,105 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Name: 相机图像
+      Topic:
+        Value: /zed/rgb/image_rect_color
+        Depth: 1
+        Durability Policy: Volatile
+        Reliability Policy: Best Effort
+        History Policy: Keep Last
+      Normalize Range: true
+      Min Value: 0
+      Max Value: 1
+      Median window: 5
+    - Class: rviz_default_plugins/Grid
+      Enabled: true
+      Name: Grid
+      Cell Size: 0.25
+      Plane Cell Count: 12
+      Color: 100; 100; 100
+      Reference Frame: <Fixed Frame>
+    - Class: rviz_default_plugins/PointCloud2
+      Enabled: true
+      Name: Verified_Recorded_Main_Map
+      Topic:
+        Value: /wbrov/deferred/main_cloud
+        Depth: 1
+        Durability Policy: Transient Local
+        Reliability Policy: Reliable
+        History Policy: Keep Last
+      Color Transformer: RGB8
+      Style: Points
+      Size (Pixels): 3
+      Decay Time: 0
+      Position Transformer: XYZ
+    - Class: rviz_default_plugins/Marker
+      Enabled: false
+      Name: Processing_Backlog_Not_Current_Pose
+      Topic:
+        Value: /wbrov/deferred/status_label
+        Depth: 1
+        Durability Policy: Transient Local
+        Reliability Policy: Reliable
+        History Policy: Keep Last
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Name: 建图状态与处理进度
+      Topic:
+        Value: /wbrov/deferred/status_image
+        Depth: 1
+        Durability Policy: Transient Local
+        Reliability Policy: Reliable
+        History Policy: Keep Last
+      Normalize Range: true
+      Min Value: 0
+      Max Value: 1
+      Median window: 5
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: Tag位置与参考数量
+      Topic:
+        Value: /wbrov/deferred/tags
+        Depth: 1
+        Durability Policy: Transient Local
+        Reliability Policy: Reliable
+        History Policy: Keep Last
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: 可信历史轨迹与记录位姿
+      Topic:
+        Value: /wbrov/deferred/trajectory
+        Depth: 1
+        Durability Policy: Transient Local
+        Reliability Policy: Reliable
+        History Policy: Keep Last
+  Global Options:
+    Background Color: 25; 25; 30
+    Fixed Frame: deferred_map
+    Frame Rate: 30
+  Tools:
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/FocusCamera
+    - Class: rviz_default_plugins/Measure
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Name: Current View
+      Distance: 1.8
+      Pitch: 0.55
+      Yaw: 0.785
+      Focal Point:
+        X: 0.35
+        Y: 0
+        Z: 0
+    Saved: ~
+Window Geometry:
+  Height: 850
+  Width: 1300

@@ -1,0 +1,25 @@
+test_closed_only_and_hole_is_error (dirscan43_queue_tests.DeferredQueueTest.test_closed_only_and_hole_is_error) ... ok
+test_command_receipt_session_and_save_writes_remain_durable_by_default (dirscan43_queue_tests.DeferredQueueTest.test_command_receipt_session_and_save_writes_remain_durable_by_default) ... ok
+test_configuration_change_and_regressed_interval_cannot_advance (dirscan43_queue_tests.DeferredQueueTest.test_configuration_change_and_regressed_interval_cannot_advance) ... ok
+test_exact_ack_only_and_no_skipped_input (dirscan43_queue_tests.DeferredQueueTest.test_exact_ack_only_and_no_skipped_input) ... ok
+test_native_lookahead_is_one_sealed_bounded_input_and_never_an_ack (dirscan43_queue_tests.DeferredQueueTest.test_native_lookahead_is_one_sealed_bounded_input_and_never_an_ack) ... ok
+test_preparation_failure_cannot_be_treated_as_completed_input (dirscan43_queue_tests.DeferredQueueTest.test_preparation_failure_cannot_be_treated_as_completed_input) ... ok
+test_preparation_overlaps_without_advancing_or_skipping_receipts (dirscan43_queue_tests.DeferredQueueTest.test_preparation_overlaps_without_advancing_or_skipping_receipts) ... ok
+test_progress_snapshot_is_complete_atomic_telemetry_without_sync (dirscan43_queue_tests.DeferredQueueTest.test_progress_snapshot_is_complete_atomic_telemetry_without_sync) ... ok
+test_startup_waits_and_only_sealed_spool_is_read (dirscan43_queue_tests.DeferredQueueTest.test_startup_waits_and_only_sealed_spool_is_read) ... ok
+test_terminal_or_unknown_status_sync_failure_keeps_previous_snapshot (dirscan43_queue_tests.DeferredQueueTest.test_terminal_or_unknown_status_sync_failure_keeps_previous_snapshot) ... ok
+test_unclosed_legacy_recording_is_not_read (dirscan43_queue_tests.DeferredQueueTest.test_unclosed_legacy_recording_is_not_read) ... ok
+test_wider_lookahead_does_not_jump_over_unusable_segment (dirscan43_queue_tests.DeferredQueueTest.test_wider_lookahead_does_not_jump_over_unusable_segment) ... ok
+test_wider_lookahead_keeps_contiguous_pinned_overlap_and_never_acks (dirscan43_queue_tests.DeferredQueueTest.test_wider_lookahead_keeps_contiguous_pinned_overlap_and_never_acks) ... ok
+test_absent_empty_legacy_and_open_status (__main__.InventoryContract.test_absent_empty_legacy_and_open_status) ... ok
+test_actual_file_and_directory_symlinks_rejected (__main__.InventoryContract.test_actual_file_and_directory_symlinks_rejected) ... skipped 'Windows symlink privilege unavailable; Linux validation pending'
+test_count_schema_writer_and_json_fail_closed (__main__.InventoryContract.test_count_schema_writer_and_json_fail_closed) ... ok
+test_fifo_rejected (__main__.InventoryContract.test_fifo_rejected) ... skipped 'POSIX FIFO type check requires Linux'
+test_hole_wrong_type_and_replacement_between_calls (__main__.InventoryContract.test_hole_wrong_type_and_replacement_between_calls) ... ok
+test_order_extras_open_tail_and_closed (__main__.InventoryContract.test_order_extras_open_tail_and_closed) ... ok
+test_raw_directory_format_and_new_seal_between_calls (__main__.InventoryContract.test_raw_directory_format_and_new_seal_between_calls) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.088s
+
+OK (skipped=2)

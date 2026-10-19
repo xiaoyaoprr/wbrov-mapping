@@ -1,0 +1,86 @@
+{
+  "scope": "diagnostic wrapper only; measures pinned implementation without additional skips or state changes; nested and concurrent times are not additive",
+  "elapsed_ns": 527043103360,
+  "return_code": 2,
+  "measurements": {
+    "sha/other": {
+      "calls": 16171,
+      "total_ns": 1689397024,
+      "maximum_ns": 2655840
+    },
+    "atomic_json/session.json": {
+      "calls": 1,
+      "total_ns": 8508288,
+      "maximum_ns": 8508288
+    },
+    "atomic_json/status.json": {
+      "calls": 1146,
+      "total_ns": 1092192928,
+      "maximum_ns": 9598976
+    },
+    "closed_inputs": {
+      "calls": 735,
+      "total_ns": 6073056480,
+      "maximum_ns": 23616736
+    },
+    "sha/recorded_frames": {
+      "calls": 1100,
+      "total_ns": 92820274528,
+      "maximum_ns": 192681536
+    },
+    "descriptor": {
+      "calls": 733,
+      "total_ns": 72806710560,
+      "maximum_ns": 195237216
+    },
+    "tag_observer": {
+      "calls": 367,
+      "total_ns": 45025493856,
+      "maximum_ns": 235293344
+    },
+    "prepared_take_wait": {
+      "calls": 367,
+      "total_ns": 675103008,
+      "maximum_ns": 486175936
+    },
+    "atomic_json/input": {
+      "calls": 367,
+      "total_ns": 3838432640,
+      "maximum_ns": 43269696
+    },
+    "sha/main_cloud": {
+      "calls": 368,
+      "total_ns": 2206154720,
+      "maximum_ns": 14058944
+    },
+    "sha/tags": {
+      "calls": 368,
+      "total_ns": 69241184,
+      "maximum_ns": 538784
+    },
+    "atomic_json/receipt": {
+      "calls": 367,
+      "total_ns": 7316045376,
+      "maximum_ns": 635341536
+    },
+    "sha/map_db": {
+      "calls": 1,
+      "total_ns": 1053559456,
+      "maximum_ns": 1053559456
+    },
+    "atomic_json/save.json": {
+      "calls": 1,
+      "total_ns": 10062464,
+      "maximum_ns": 10062464
+    }
+  },
+  "tools_sha256": {
+    "continuous_mapping_session.py": "620000c8f33f521857e529bed35b95c002e11478c72461dd710628f0d6d89cc0",
+    "deferred_mapping.py": "562ad769b499e1da26beb258a57dbd80dae5b0bd64466f626d22173ff7b03605",
+    "deferred_tag_observations.py": "2fbd689ec36290ca0c0d9c43b219ce769bed87f7d6dcf1cdd20833550f3cf413",
+    "render_continuous_entry.py": "fb2a9dc6b896bdadbd63d748471117183b61b77bc9fa28e5609c36076a9b3682",
+    "spool_codec.py": "7f3089ba57f2ef99600d44dacd20b26944cb65263c8a04a52bd73f819a41268d",
+    "verify_raw_recording.py": "5a603f18d54cd938406999c6e14a7f401718c9256cfa6219026fd786076243f2"
+  },
+  "tools_unchanged": true
+}

@@ -1,0 +1,91 @@
+{
+  "scope": "diagnostic wrapper only; measures pinned implementation without additional skips or state changes; nested and concurrent times are not additive",
+  "elapsed_ns": 466715690368,
+  "return_code": 0,
+  "measurements": {
+    "sha/other": {
+      "calls": 16523,
+      "total_ns": 1748961088,
+      "maximum_ns": 4860864
+    },
+    "atomic_json/session.json": {
+      "calls": 1,
+      "total_ns": 14011616,
+      "maximum_ns": 14011616
+    },
+    "atomic_json/status.json": {
+      "calls": 1075,
+      "total_ns": 1027753824,
+      "maximum_ns": 9672768
+    },
+    "closed_inputs": {
+      "calls": 751,
+      "total_ns": 6649869920,
+      "maximum_ns": 25690720
+    },
+    "sha/recorded_frames": {
+      "calls": 1124,
+      "total_ns": 53066793280,
+      "maximum_ns": 98146784
+    },
+    "descriptor": {
+      "calls": 749,
+      "total_ns": 41426293568,
+      "maximum_ns": 102443392
+    },
+    "python_decode": {
+      "calls": 10746,
+      "total_ns": 22081797568,
+      "maximum_ns": 16968768
+    },
+    "tag_observer": {
+      "calls": 375,
+      "total_ns": 69335171488,
+      "maximum_ns": 508680544
+    },
+    "prepared_take_wait": {
+      "calls": 375,
+      "total_ns": 2901123904,
+      "maximum_ns": 434835616
+    },
+    "atomic_json/input": {
+      "calls": 375,
+      "total_ns": 3738212256,
+      "maximum_ns": 12611648
+    },
+    "sha/main_cloud": {
+      "calls": 376,
+      "total_ns": 418016576,
+      "maximum_ns": 2169024
+    },
+    "sha/tags": {
+      "calls": 376,
+      "total_ns": 45134464,
+      "maximum_ns": 780768
+    },
+    "atomic_json/receipt": {
+      "calls": 375,
+      "total_ns": 3739167008,
+      "maximum_ns": 62828768
+    },
+    "sha/map_db": {
+      "calls": 1,
+      "total_ns": 699939520,
+      "maximum_ns": 699939520
+    },
+    "atomic_json/save.json": {
+      "calls": 1,
+      "total_ns": 11603744,
+      "maximum_ns": 11603744
+    }
+  },
+  "tools_sha256": {
+    "continuous_mapping_session.py": "620000c8f33f521857e529bed35b95c002e11478c72461dd710628f0d6d89cc0",
+    "deferred_mapping.py": "562ad769b499e1da26beb258a57dbd80dae5b0bd64466f626d22173ff7b03605",
+    "deferred_tag_observations.py": "414261e9f3895d469793edbe57f0bee52ed751baba1b76e9ef878532029647c4",
+    "render_continuous_entry.py": "fb2a9dc6b896bdadbd63d748471117183b61b77bc9fa28e5609c36076a9b3682",
+    "spool_codec.py": "ee89796f0c29bc26187d79109031e0962ee74147c250359a7c914d245c480b60",
+    "verify_raw_recording.py": "5a603f18d54cd938406999c6e14a7f401718c9256cfa6219026fd786076243f2"
+  },
+  "tools_unchanged": true
+}

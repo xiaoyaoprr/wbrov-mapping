@@ -1,0 +1,7 @@
+{
+  "archive_sha256": "94a8d81cdea8e15ac2f4af3be24d1e70df9d79bd71b4c55873eb260f787c388f",
+  "bytes": 995255,
+  "files": 20,
+  "scope": "closed timing-only full replay and failed L1 special-value regression",
+  "crc_and_all_member_sha256_verified": true
+}

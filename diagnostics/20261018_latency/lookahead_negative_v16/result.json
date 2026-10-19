@@ -1,0 +1,20 @@
+{
+  "changed_identity": {
+    "passed": true,
+    "exit": 1,
+    "processed_frames": 27,
+    "reason": "[DEPTH_RECOVERY] enabled=true inertia_translation=false anchor=last_visual max_age=0.500 min_hessian=0.0001\nWBROV_WORKER_FAILED lookahead input identity changed\n"
+  },
+  "missing_next": {
+    "passed": true,
+    "exit": 1,
+    "processed_frames": 27,
+    "reason": "[DEPTH_RECOVERY] enabled=true inertia_translation=false anchor=last_visual max_age=0.500 min_hessian=0.0001\nWBROV_WORKER_FAILED close before prepared recording input was consumed\n"
+  },
+  "changed_pin": {
+    "passed": true,
+    "exit": 1,
+    "processed_frames": 27,
+    "reason": "[DEPTH_RECOVERY] enabled=true inertia_translation=false anchor=last_visual max_age=0.500 min_hessian=0.0001\nWBROV_WORKER_FAILED recorded input changed: segment-00000001.frames\n"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "scope": "interrupted hardware capture; sealed prefix salvaged, not full acceptance",
+  "camera_failure": "RGB-D spool writer backpressure exceeded artificial 10-second limit",
+  "accepted_spool_frames": 10059,
+  "processed_frames": 10059,
+  "all_sealed_timestamps_match": true,
+  "all_artifact_hashes_match": true,
+  "database_quick_check": "ok",
+  "lost_or_missing_main_writes": 0,
+  "partial_saved": true,
+  "complete": false,
+  "recoveries": 0,
+  "main_nodes": 490,
+  "cloud_points": 473595,
+  "source_seconds": 412.447825,
+  "entry_exits": {
+    "bridge": 1,
+    "processing": 2,
+    "graph_display": 0,
+    "rviz": 0
+  },
+  "original_input_retained": true,
+  "production_entry_changed": false
+}

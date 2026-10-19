@@ -1,0 +1,5 @@
+{
+  "exit": 1,
+  "stdout": "{\"checked\": true, \"all_frames\": true, \"profile\": \"continuous_new_map\", \"navigation_authorized\": false}\n",
+  "stderr": "[拒绝启动/继续] 另一个联合入口正在运行。\n"
+}

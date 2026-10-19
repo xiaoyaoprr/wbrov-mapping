@@ -16,7 +16,7 @@ class LiveBridge:
         from rclpy.qos import QoSProfile,ReliabilityPolicy
         self.String=String;self.node=node;self.consumer=consumer;self.graph=graph;self.config=config
         self.log=(out/'measured_bridge.jsonl').open('x');self.counts=Counter();self.processed=set();self.rows={};self.references={}
-        self.pending=None;self.pending_geometry=None;self.deferred=[]
+        self.pending=None;self.pending_geometry=None;self.pending_observation_deadline=None;self.deferred=[]
         self.history_epoch=None;self.history_dirty=True;self.historic_keys=set()
         self.completed_for_retention=set();self.retention_passes=0;self.retention_reclaimed=0
         self.early_retry=self.early_retry_enabled(os.environ)
@@ -26,6 +26,30 @@ class LiveBridge:
         self.publisher=node.create_publisher(String,'/wbrov/safe_relocalization/proposal',qos)
         self.sub=node.create_subscription(String,'/wbrov/safe_relocalization/status',self.status,qos)
         self.sub._wbrov_message_info_required=True
+        from rclpy.qos import DurabilityPolicy
+        self.readiness_publisher=node.create_publisher(String,'/wbrov/mapping/reference_readiness',
+            QoSProfile(depth=1,reliability=ReliabilityPolicy.RELIABLE,durability=DurabilityPolicy.TRANSIENT_LOCAL))
+        self.readiness_path=out/'reference_readiness.json';self.readiness_key=None;self.readiness_tags=[]
+        self.readiness_timer=node.create_timer(.5,self.publish_readiness)
+    def publish_readiness(self):
+        from reference_policy import reference_readiness
+        if self.graph.current is None:return
+        valid=True;reason='retained authenticated main-map references'
+        try:
+            self.consumer.sources.all_current()
+            key=(self.graph.last_revision,tuple(sorted(self.rows)),tuple(sorted(self.committed_epochs)))
+            if key!=self.readiness_key:
+                self.readiness_tags=reference_readiness(self);self.readiness_key=key
+        except (ValueError,TypeError,KeyError,OverflowError,RecursionError) as exc:
+            # Display cannot terminate the recovery consumer during teardown,
+            # nor keep advertising references after their source disappears.
+            self.readiness_tags=[];self.readiness_key=None;valid=False;reason=str(exc)
+        payload=dict(schema='wbrov.reference-readiness.v1',session_token_sha256=self.config['session_token_sha256'],
+            epoch=self.graph.current['state']['reset_epoch'],graph_revision=self.graph.last_revision,
+            tags=self.readiness_tags,source_valid=valid,reason=reason,graph_update_authorized=False)
+        encoded=json.dumps(payload,ensure_ascii=False,allow_nan=False)
+        self.readiness_publisher.publish(self.String(data=encoded))
+        temp=self.readiness_path.with_suffix('.tmp');temp.write_text(encoded,encoding='utf-8');temp.replace(self.readiness_path)
     @staticmethod
     def early_retry_enabled(environment):
         flag=environment.get('WBROV_PRIVATE_EARLY_TAG_RETRY','0')
@@ -64,7 +88,7 @@ class LiveBridge:
         proposal['transaction_token']=token
         proposal['observer_graph_revision']=state['graph_revision']
         proposal['created_monotonic_s']=time.monotonic()
-        self.pending=deepcopy(proposal);self.pending_geometry=deepcopy(geometry)
+        self.pending=deepcopy(proposal);self.pending_geometry=deepcopy(geometry);self.pending_observation_deadline=None
         self.event(kind,proposal=proposal,geometry=geometry)
         self.publisher.publish(self.String(data=json.dumps(proposal,allow_nan=False)))
     def proposal_for(self,candidate,tag,epoch,state):
@@ -86,14 +110,20 @@ class LiveBridge:
         require(token and self.pending is not None and token==self.pending['transaction_token'],'unowned terminal result')
         if s.get('result')=='observing':
             # Prepared geometry is not a terminal result or a committed map.
-            # Keep the same pending proposal and its original timeout; exact
-            # repeated ACKs cannot authorize another proposal or extend life.
+            # A first authenticated preparation ACK enters a bounded observation
+            # phase. Core allows 5 x 6 s checks plus 6 s final revalidation;
+            # this transport watchdog adds 4 s, with an absolute 48 s ceiling.
+            # Repeated ACKs cannot renew either deadline or authorize a map.
             validate_observing(s,self.pending,self.config)
+            if getattr(self,'pending_observation_deadline',None) is None:
+                require(time.monotonic()<self.pending['created_monotonic_s']+12.,'Core preparation ACK expired')
+                self.pending_observation_deadline=min(time.monotonic()+40.,self.pending['created_monotonic_s']+48.)
             self.event('observing',actual_message_gid=gid,status=s)
             return
         validate_terminal(s,self.pending,self.config)
         if s['result']=='committed':
             self.committed_epochs.add(s['core_reset_epoch']);self.required_revision=s['core_graph_revision'];self.deferred=[]
+            self.history_dirty=True
         elif s['reason'].startswith(('current reset component needs gravity stabilization (',
                                      'temporary recovery segment has not passed source-time/measured-gravity stability (')):
             cached=dict(proposal=deepcopy(self.pending),geometry=deepcopy(self.pending_geometry),
@@ -106,12 +136,14 @@ class LiveBridge:
                     self.event('deferred_capacity_bounded',capacity=8)
                 self.event('deferred_cached',transaction_token=token,source_reset_epoch=s['source_reset_epoch'],
                            observer_graph_revision=s['observer_graph_revision'],score=cached['score'])
-        self.terminals[token]=s;self.pending=None;self.pending_geometry=None
+        self.terminals[token]=s;self.pending=None;self.pending_geometry=None;self.pending_observation_deadline=None
         self.event('terminal',actual_message_gid=gid,status=s)
     def allow_ready(self,ns,node_id,epoch):
         if self.graph.last_revision<self.required_revision:return False
         if self.pending is not None:
-            require(time.monotonic()-self.pending['created_monotonic_s']<12,'Core proposal did not finish')
+            deadline=getattr(self,'pending_observation_deadline',None)
+            if deadline is None:deadline=self.pending['created_monotonic_s']+12.
+            require(time.monotonic()<deadline,'Core proposal did not finish within its bounded phase')
             return False
         current_epoch=self.graph.current['state']['reset_epoch']
         if self.early_retry and epoch==current_epoch:
@@ -125,9 +157,13 @@ class LiveBridge:
         # the previous component cannot be retried against this one, even if
         # its original endpoints remain in the session receipt table.
         if self.deferred:
-            discarded=[x for x in self.deferred if x['proposal']['source_reset_epoch']!=current_epoch]
+            def usable_cached(item):
+                return item['proposal']['source_reset_epoch']==current_epoch and all(
+                    i in self.consumer.node_receipts and self.graph.has_pose_for_receipt(self.consumer.node_receipts[i])
+                    for edge in item['proposal']['evidence'] for i in (edge['from_id'],edge['to_id']))
+            discarded=[x for x in self.deferred if not usable_cached(x)]
             if discarded:
-                self.deferred=[x for x in self.deferred if x['proposal']['source_reset_epoch']==current_epoch]
+                self.deferred=[x for x in self.deferred if usable_cached(x)]
                 self.event('deferred_discarded_on_reset',epoch=current_epoch,count=len(discarded),
                            source_epochs=sorted({x['proposal']['source_reset_epoch'] for x in discarded}))
         if epoch>current_epoch:return False
@@ -177,6 +213,10 @@ class LiveBridge:
         if epoch==0 or epoch in self.committed_epochs:return True
         for binding in bindings:
             tag=binding['tag_id']
+            for key,reference in list(self.references.items()):
+                if any(not self.graph.has_pose_for_receipt(r['binding']['accepted_image_receipt']) for r in reference[0]):
+                    del self.references[key]
+                    self.event('reference_endpoints_retired',source_epoch=key[2],tag_id=key[1])
             options=[dict(epoch=k[2],reference=ref) for k,ref in self.references.items() if k[:2]==(epoch,tag)]
             if not options:
                 options=historical_options(self,tag,epoch)
@@ -185,7 +225,8 @@ class LiveBridge:
                     self.event('historical_reference',epoch=epoch,tag_id=tag,source_epoch=old_epoch,
                         observations=option['observations'],preference_rank=rank,policy='stable_origin_then_recent')
             if not options:continue
-            current=[r for (e,i,t),r in self.rows.items() if e==epoch and t==tag]
+            current=[r for (e,i,t),r in self.rows.items() if e==epoch and t==tag and
+                     self.graph.has_pose_for_receipt(r['binding']['accepted_image_receipt'])]
             for r in current:
                 pose,_=self.graph.pose_for_receipt(r['binding']['accepted_image_receipt'])
                 from measured_bridge import matrix
@@ -199,6 +240,7 @@ class LiveBridge:
             self.publish(self.proposal_for(candidate,tag,epoch,state),candidate,'proposal',node_id);return False
         return True
     def close(self):
+        if hasattr(self,'readiness_timer'):self.readiness_timer.cancel()
         try:
             self.event('closed',proposals=self.proposals,committed_epochs=sorted(self.committed_epochs),
                        counts=dict(self.counts),pending_transaction=self.pending,deferred_candidate=self.deferred,

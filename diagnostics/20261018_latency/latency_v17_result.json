@@ -1,0 +1,4 @@
+{
+  "scope": "isolated release library and native lookahead; closed input only",
+  "error": "RuntimeError(\"AssertionError('test_wrapper')\")"
+}

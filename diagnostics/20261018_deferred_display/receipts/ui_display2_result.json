@@ -1,0 +1,39 @@
+{
+  "scope": "RViz replay of the newly captured real movement/occlusion; no camera or actuation",
+  "screens": {
+    "NORMAL": {
+      "exit": 0,
+      "source_ns": 1791659893790681000,
+      "main_nodes": 13,
+      "file": "NORMAL.png"
+    },
+    "PAUSED": {
+      "exit": 0,
+      "source_ns": 1791660015385047000,
+      "main_nodes": 74,
+      "file": "PAUSED.png"
+    },
+    "RECOVERING": {
+      "exit": 0,
+      "source_ns": 1791660023601326000,
+      "main_nodes": 74,
+      "file": "RECOVERING.png"
+    },
+    "SAVED": {
+      "exit": 0,
+      "source_ns": 1791660184994010000,
+      "main_nodes": 159,
+      "file": "SAVED.png"
+    }
+  },
+  "states_seen": {
+    "NORMAL": 4374,
+    "PAUSED": 17,
+    "RECOVERING": 52
+  },
+  "exits": [
+    0,
+    0
+  ],
+  "elapsed_s": 1137.0191801919718
+}

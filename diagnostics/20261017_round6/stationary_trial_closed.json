@@ -1,0 +1,144 @@
+{
+  "schema": "wbrov.round6.closed-trial.v1",
+  "checked_monotonic": 368492.63761488,
+  "run": "/home/exocean/maps/rtabmap_calibration_ab/custom_20261010_065941",
+  "launcher_exit_code": 0,
+  "normal_rviz_close_requested": true,
+  "lifecycle": {
+    "schema_version": 1,
+    "phase": "stopped",
+    "launcher_pid": 3904522,
+    "process_start_ticks": 36543704,
+    "boot_id": "d12a8759-0cf1-4fe9-9064-feea661c2763",
+    "nodes_stopped": true,
+    "export_succeeded": true,
+    "cleanup_succeeded": true,
+    "exit_code": 0,
+    "requested_exit_code": 0
+  },
+  "generic_probe_passed": false,
+  "error": null,
+  "render_ready": true,
+  "render_startup_failures": 1,
+  "rviz_visible_seconds": 45.01415497600101,
+  "health_gates": {
+    "hard_checks": {
+      "valid_unique_odom_rate_at_least_threshold": true,
+      "valid_unique_high_camera_info_rate_at_least_threshold": true,
+      "eligible_high_exact_valid_odom_coverage_at_least_threshold": true
+    },
+    "hard_pass": true,
+    "integration_proxy_required": true,
+    "integration_proxy_pass": true,
+    "candidate_pass": true
+  },
+  "isolated_odom_age_s": {
+    "count": 22660,
+    "max": 0.575436904,
+    "p95": 0.126446624
+  },
+  "multitopic_odom_age_s": {
+    "count": 22641,
+    "max": 0.576352296,
+    "p95": 0.127249336
+  },
+  "states": {
+    "NORMAL": 31940,
+    "PAUSED": 27,
+    "RECOVERING": 797
+  },
+  "final_continuity": {
+    "state": "NORMAL",
+    "epoch": 0,
+    "cut_count": 0,
+    "generation": 0,
+    "registered": true,
+    "main_map_write_allowed": true,
+    "localization_status": "TRACKING",
+    "localization_valid": true,
+    "last_pause_reason": "stale source"
+  },
+  "graph_size_range": [
+    1,
+    1
+  ],
+  "graph_last_age_s": 0.7408975360449404,
+  "main_write_allowed_count": 31933,
+  "topic_unique_stamps": {
+    "/rtabmap/frame_cloud": 23290,
+    "/mapping/continuity_image": 4798,
+    "/zed/rgb/image_rect_color": 23247,
+    "/cloud_map": 1,
+    "/wbrov/mapping/recovery_reference_image": 1
+  },
+  "main_cloud": {
+    "width": 443,
+    "height": 1,
+    "bytes": 14176,
+    "frame": "map"
+  },
+  "save_complete": true,
+  "saved_cloud": {
+    "bbox_max_m": [
+      1.0034759,
+      -0.19985725,
+      0.23604096
+    ],
+    "bbox_min_m": [
+      0.33565074,
+      -0.35095075,
+      -0.45130521
+    ],
+    "per_node_cloud_contribution_verified": false,
+    "vertex_count": 901
+  },
+  "raw_recording": {
+    "complete": true,
+    "scope": "SDK-ingested frames, closed SVO index and boundary decode; full-frame decode is a separate replay check",
+    "frames": {
+      "frames": 30692,
+      "decoded": 2,
+      "first_source_ns": 1791586785667285000,
+      "last_source_ns": 1791588016994080000
+    },
+    "sensor_capture_losslessness_proven": false
+  },
+  "artifacts": {
+    "rtabmap.db": {
+      "bytes": 484638720,
+      "sha256": "679766520d2775d996da8deba832d3977b5b10ad9c4ee2e1764dd4a3aba4fa83"
+    },
+    "rtabmap_dense.ply": {
+      "bytes": 84089,
+      "sha256": "7a7dd3e1f74126048bddc29139bfaf76cce5fe1b9a326c1825beccab949d144c"
+    },
+    "save_report.json": {
+      "bytes": 111749,
+      "sha256": "116f68f44501c4dd2dbb53f11d80b71ecde888ae97f5516b5828e496762555bb"
+    }
+  },
+  "test_only_continuation": false,
+  "production_continuation_receipt_present": false,
+  "light": {
+    "phase": "off",
+    "packets": {
+      "heartbeat": 143666,
+      "led_30": 29620,
+      "led_0": 6
+    },
+    "failures": [],
+    "motion_packets_allowed": false,
+    "unlock_called": false,
+    "physical_led_ack_available": false
+  },
+  "light_owner_exists": false,
+  "udp3333": "",
+  "remaining_owned_processes": [],
+  "production_sha256": {
+    "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh": "8b6adf33e0550465ce5e4f10ffa7d8e5f5d43db022084c2496aa81b8b3de8bb3",
+    "/home/exocean/Desktop/机器人键盘遥控/.tools/run_water_mapping_with_light.sh": "34cf9b3c35fa4f7977721bb94f4786d59bf662c6c552d202c14123ab06bb03d2"
+  },
+  "physical_movement_acceptance": "not exercised; operator unavailable",
+  "full_acceptance_passed": false,
+  "production_deployed": false
+}

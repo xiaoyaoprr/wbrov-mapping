@@ -1,0 +1,32 @@
+Internal ctest changing into directory: /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/camera_build_usable5/build
+Test project /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/camera_build_usable5/build
+      Start  1: rgbd_frame_codec_offline
+ 1/13 Test  #1: rgbd_frame_codec_offline .........   Passed    0.30 sec
+      Start  2: rgbd_spool_offline
+ 2/13 Test  #2: rgbd_spool_offline ...............   Passed    0.01 sec
+      Start  3: async_diagnostics_offline
+ 3/13 Test  #3: async_diagnostics_offline ........   Passed    0.01 sec
+      Start  4: bounded_async_writer_offline
+ 4/13 Test  #4: bounded_async_writer_offline .....   Passed    0.13 sec
+      Start  5: raw_calibration_audit_offline
+ 5/13 Test  #5: raw_calibration_audit_offline ....   Passed    0.01 sec
+      Start  6: depth_range_filter_offline
+ 6/13 Test  #6: depth_range_filter_offline .......   Passed    0.00 sec
+      Start  7: dual_stream_schedule_offline
+ 7/13 Test  #7: dual_stream_schedule_offline .....   Passed    0.00 sec
+      Start  8: exact_odom_stamp_gate_offline
+ 8/13 Test  #8: exact_odom_stamp_gate_offline ....   Passed    0.00 sec
+      Start  9: map_frame_lifecycle_offline
+ 9/13 Test  #9: map_frame_lifecycle_offline ......   Passed    0.00 sec
+      Start 10: map_stamp_audit_offline
+10/13 Test #10: map_stamp_audit_offline ..........   Passed    0.00 sec
+      Start 11: valid_odom_pose_offline
+11/13 Test #11: valid_odom_pose_offline ..........   Passed    0.00 sec
+      Start 12: imu_frame_conversion_offline
+12/13 Test #12: imu_frame_conversion_offline .....   Passed    0.00 sec
+      Start 13: capture_telemetry_offline
+13/13 Test #13: capture_telemetry_offline ........   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 13
+
+Total Test time (real) =   0.49 sec

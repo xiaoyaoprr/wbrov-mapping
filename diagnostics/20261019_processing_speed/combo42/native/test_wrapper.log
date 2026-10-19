@@ -1,0 +1,88 @@
+[INFO] [1791720388.531653920] [rtabmap]: rtabmap(maps): latch                      = true
+[INFO] [1791720388.532228032] [rtabmap]: rtabmap(maps): map_filter_radius          = 0.000000
+[INFO] [1791720388.532271136] [rtabmap]: rtabmap(maps): map_filter_angle           = 30.000000
+[INFO] [1791720388.532296352] [rtabmap]: rtabmap(maps): map_cleanup                = true
+[INFO] [1791720388.532312608] [rtabmap]: rtabmap(maps): map_always_update          = false
+[INFO] [1791720388.532325856] [rtabmap]: rtabmap(maps): map_empty_ray_tracing      = true
+[INFO] [1791720388.532338624] [rtabmap]: rtabmap(maps): map_cache_loaded_on_init   = true
+[INFO] [1791720388.532351552] [rtabmap]: rtabmap(maps): cloud_output_voxelized     = true
+[INFO] [1791720388.532363296] [rtabmap]: rtabmap(maps): cloud_subtract_filtering   = false
+[INFO] [1791720388.532375168] [rtabmap]: rtabmap(maps): cloud_subtract_filtering_min_neighbors = 2
+[INFO] [1791720388.532425536] [rtabmap]: rtabmap(maps): octomap_tree_depth         = 16
+[WARN] [1791720388.598110208] [rtabmap]: reset quarantine enabled: lost_count=8 odom_info_max_age=5.000s expected_odom_node=private_test_odom_source namespace=/; both /odom and /odom_info source endpoints are bound once and any second publisher fails closed
+[INFO] [1791720388.598241920] [rtabmap]: rtabmap: frame_id      = "base_link"
+[INFO] [1791720388.598271168] [rtabmap]: rtabmap: odom_frame_id = ""
+[INFO] [1791720388.598289344] [rtabmap]: rtabmap: ground_truth_frame_id = "" -> ground_truth_base_frame_id = "base_link"
+[INFO] [1791720388.598304320] [rtabmap]: rtabmap: map_frame_id  = "map"
+[INFO] [1791720388.598316704] [rtabmap]: rtabmap: log_to_rosout_level  = 4
+[INFO] [1791720388.598328288] [rtabmap]: rtabmap: initial_pose  = ""
+[INFO] [1791720388.598338912] [rtabmap]: rtabmap: use_action_for_goal  = false
+[INFO] [1791720388.598351872] [rtabmap]: rtabmap: tf_delay      = 0.050000
+[INFO] [1791720388.598365728] [rtabmap]: rtabmap: tf_tolerance  = 0.100000
+[INFO] [1791720388.598378944] [rtabmap]: rtabmap: odom_sensor_sync   = false
+[INFO] [1791720388.598390304] [rtabmap]: rtabmap: pub_loc_pose_only_when_localizing = false
+[INFO] [1791720388.598401888] [rtabmap]: rtabmap: wait_for_transform = 0.000000
+[INFO] [1791720388.598425344] [rtabmap]: rtabmap: staleness_factor = 0.000000
+[INFO] [1791720388.598438976] [rtabmap]: rtabmap: gen_scan  = false
+[INFO] [1791720388.598450304] [rtabmap]: rtabmap: gen_depth  = false
+[WARN] [1791720388.610672864] [rtabmap]: safe relocalization enabled: one JSON transaction with exactly three bridges is required; all three leave-one-out folds must pass before commit; database identity=0000000000000000000000000000000000000000000000000000000000000000 (new-map sentinel)
+[INFO] [1791720388.622319968] [rtabmap]: Setting RTAB-Map parameter "Mem/IncrementalMemory"="true" (rosparam)
+[INFO] [1791720388.622441056] [rtabmap]: Setting RTAB-Map parameter "Mem/InitWMWithAllNodes"="true" (rosparam)
+[INFO] [1791720388.622818176] [rtabmap]: Setting RTAB-Map parameter "Mem/ReduceGraph"="false" (rosparam)
+[INFO] [1791720388.622884672] [rtabmap]: Setting RTAB-Map parameter "Mem/RehearsalIdUpdatedToNewOne"="false" (rosparam)
+[INFO] [1791720388.622940576] [rtabmap]: Setting RTAB-Map parameter "Mem/RehearsalSimilarity"="1" (rosparam)
+[INFO] [1791720388.623447776] [rtabmap]: Setting RTAB-Map parameter "Optimizer/Iterations"="20" (rosparam)
+[INFO] [1791720388.623506816] [rtabmap]: Setting RTAB-Map parameter "Optimizer/LandmarksIgnored"="true" (rosparam)
+[INFO] [1791720388.623564736] [rtabmap]: Setting RTAB-Map parameter "Optimizer/PriorsIgnored"="true" (rosparam)
+[INFO] [1791720388.624689440] [rtabmap]: Setting RTAB-Map parameter "RGBD/OptimizeMaxErrorRepairRadius"="0" (rosparam)
+[INFO] [1791720388.625274176] [rtabmap]: Setting RTAB-Map parameter "Reg/Force3DoF"="false" (rosparam)
+[INFO] [1791720388.625936000] [rtabmap]: Setting RTAB-Map parameter "Rtabmap/LoopGPS"="false" (rosparam)
+[INFO] [1791720388.626111936] [rtabmap]: Setting RTAB-Map parameter "Rtabmap/MemoryThr"="0" (rosparam)
+[INFO] [1791720388.626527552] [rtabmap]: Setting RTAB-Map parameter "Rtabmap/TimeThr"="0" (rosparam)
+[INFO] [1791720388.631163904] [rtabmap]: RTAB-Map detection rate = 1.000000 Hz
+[INFO] [1791720388.631300480] [rtabmap]: rtabmap: Using database from "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/native_release_v6/fixture_wrapper/continuity.db" (0 MB).
+[INFO] [1791720388.970230592] [rtabmap]: rtabmap: Database version = "0.23.7".
+[INFO] [1791720388.970370880] [rtabmap]: rtabmap: SLAM mode (Mem/IncrementalMemory=true)
+[INFO] [1791720389.001062208] [rtabmap]: Setup callbacks
+[INFO] [1791720389.001413472] [rtabmap]: rtabmap: subscribe_depth = true
+[INFO] [1791720389.001489376] [rtabmap]: rtabmap: subscribe_rgb = true
+[INFO] [1791720389.001527808] [rtabmap]: rtabmap: subscribe_stereo = false
+[INFO] [1791720389.001560768] [rtabmap]: rtabmap: subscribe_rgbd = false (rgbd_cameras=1)
+[INFO] [1791720389.001591168] [rtabmap]: rtabmap: subscribe_sensor_data = false
+[INFO] [1791720389.001617120] [rtabmap]: rtabmap: subscribe_odom = true
+[INFO] [1791720389.001643232] [rtabmap]: rtabmap: subscribe_odom_info = false
+[INFO] [1791720389.001668288] [rtabmap]: rtabmap: subscribe_user_data = false
+[INFO] [1791720389.001692448] [rtabmap]: rtabmap: subscribe_scan = false
+[INFO] [1791720389.001717504] [rtabmap]: rtabmap: subscribe_scan_cloud = false
+[INFO] [1791720389.001741920] [rtabmap]: rtabmap: subscribe_scan_descriptor = false
+[INFO] [1791720389.001766496] [rtabmap]: rtabmap: topic_queue_size = 10
+[INFO] [1791720389.001791872] [rtabmap]: rtabmap: sync_queue_size  = 10
+[INFO] [1791720389.001816384] [rtabmap]: rtabmap: qos_image       = 0
+[INFO] [1791720389.001841312] [rtabmap]: rtabmap: qos_camera_info = 0
+[INFO] [1791720389.001864352] [rtabmap]: rtabmap: qos_scan        = 0
+[INFO] [1791720389.001887456] [rtabmap]: rtabmap: qos_odom        = 0
+[INFO] [1791720389.001912256] [rtabmap]: rtabmap: qos_user_data   = 0
+[INFO] [1791720389.001937088] [rtabmap]: rtabmap: approx_sync     = true
+[INFO] [1791720389.001960832] [rtabmap]: rtabmap: image_transport = raw
+[INFO] [1791720389.001984480] [rtabmap]: rtabmap: depth_transport = raw
+[INFO] [1791720389.003434048] [rtabmap]: Setup depth callback
+[INFO] [1791720389.028390272] [rtabmap]: 
+rtabmap subscribed to (approx sync):
+   /odom \
+   /rgb/image \
+   /depth/image \
+   /rgb/camera_info
+[WARN] [1791720389.208072512] [rtabmap]: [CONTINUITY_CUT] count=1 source_ns=1791720389207994176 reason=geometry quality insufficient quality=lost=0 motion_finite=1 dimensions=1 covariance=bounded_pd visual=points=0<15 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000
+[WARN] [1791720389.213578240] [rtabmap]: [CONTINUITY_CUT] count=2 source_ns=1791720389213451584 reason=geometry quality insufficient quality=lost=0 motion_finite=1 dimensions=0 covariance=bounded_pd visual=inliers=30 matches=30 ratio=1.0000 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000
+[WARN] [1791720389.856568416] [rtabmap]: [CONTINUITY_RECEIPT_PAUSE] receipt_latency_ns=128608 source_age_ns=311679648 arrival_age_ns=311647456 generation=2 local_chain_cut=false
+[WARN] [1791720390.881643552] [rtabmap]: [CONTINUITY_RECEIPT_PAUSE] receipt_latency_ns=148832 source_age_ns=361386528 arrival_age_ns=361346016 generation=2 local_chain_cut=false
+[WARN] [1791720390.882305184] [rtabmap]: [MEASURED_INTERVAL_CHECK] gap_ns=361933536 measured_interval_ns=361933529 lost=false visual_geometry=true local_chain_cut=false
+[WARN] [1791720392.216695936] [rtabmap]: [CONTINUITY_CUT] count=3 source_ns=1791720392216606176 reason=odometry lost quality=lost=1 motion_finite=1 dimensions=1 covariance=bounded_pd visual=supported depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000
+[WARN] [1791720392.217000640] [rtabmap]: reset quarantine ignored duplicate/out-of-order OdomInfo stamp_ns=1791720392211234688 last_unique_stamp_ns=1791720392216606176 lost=false
+[WARN] [1791720392.553288032] [rtabmap]: [CONTINUITY_CUT] count=4 source_ns=1791720392553261920 reason=geometry quality insufficient quality=lost=0 motion_finite=1 dimensions=1 covariance=bounded_pd visual=inliers=0 matches=0 ratio=0.0000 depth=0 icp=0 overlap=0.0000 complexity=0 coverage=0.0000
+[INFO] [1791720392.907049120] [rtabmap]: Parameters are not saved (No configuration file provided...)
+PASS native linked Wrapper adapter: full-frame support/dimension binding, numeric-only reject, hysteresis, bootstrap, receipt expiry preserves local continuity but revokes writes, registration observation period, loss/old ticket, depth evidence, IMU-only PAUSED, no graph writes
+PASS full-rate measured pose display; mismatched chain, stale pose and busy auth lock fail closed without waiting
+rtabmap: Saving database/long-term memory... (located at /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/native_release_v6/fixture_wrapper/continuity.db)
+rtabmap: Database/long-term memory close done (save=true, located at /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/native_release_v6/fixture_wrapper/continuity.db, 0 MB)
+PASS invalid ROS context rejects source authorization without exception; Wrapper destructor completed

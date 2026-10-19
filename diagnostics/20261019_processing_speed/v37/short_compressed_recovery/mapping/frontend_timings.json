@@ -1,0 +1,1 @@
+{"input_read_ms":9761.25,"map_copy_ms":203.865,"input_hash_ms":7256.14,"control_wait_ms":3079.36,"mapping_drain_ms":47542.1,"feature_preparation_ms":0,"feature_prefetch_enabled":false,"prefetched_segments":60,"maximum_lookahead_segments":1}

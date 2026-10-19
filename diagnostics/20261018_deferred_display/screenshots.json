@@ -1,0 +1,17 @@
+{
+  "scope": "actual Jetson RViz screenshots, original pixels; closed-recording replay, no propulsion",
+  "images_sha256": {
+    "rviz_paused_before_label_fix.png": "5899bfcf692e5294205acc4f8b456a8ebef19ab1ba29fb07c00f0ee95cba49ac",
+    "rviz_recovering_before_label_fix.png": "9aff1b2a35691b6a0f1399c30edfa42077429f31197025006983c8fbac816442",
+    "rviz_saved.png": "91bd147b80547c9e28ce5aaed4485d5d1abc03d3eab98ec9fbb9daefc6184cfd"
+  },
+  "visually_checked": [
+    "PAUSED state",
+    "RECOVERING state",
+    "SAVED state",
+    "Tag8 and Tag13 leaders and positions",
+    "trusted cyan trajectory",
+    "orange recorded pose arrow"
+  ],
+  "production_entry8_acceptance_passed": false
+}

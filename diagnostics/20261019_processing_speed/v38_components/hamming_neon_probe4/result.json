@@ -1,0 +1,26 @@
+{
+  "phase": "failed",
+  "scope": "same isolated exact Hamming experiment; correct build dependencies after probe3 compile failure; Core/runtime unchanged",
+  "steps": [
+    {
+      "name": "sanitizer_compile",
+      "exit": 0,
+      "seconds": 55.273982559971046
+    },
+    {
+      "name": "sanitizer_link",
+      "exit": 0,
+      "seconds": 4.327037727984134
+    },
+    {
+      "name": "sanitizer",
+      "exit": 127,
+      "seconds": 0.0046973120188340545
+    }
+  ],
+  "header_archive_sha256": "50b72a64e9ddfab3f094bb5c07929dfd1676e24ba301f181832b5f2e71811d5e",
+  "header_source": "current repository headers; standalone experiment, not proof of the headers used to compile installed Core",
+  "baseline_dist_sha256": "70252e0120bd344bb4728dbe862e1714cd1db23662230c5f18836ca87e3c367a",
+  "probe_sha256": "d6bc408ba2bf2c32f349a9dd843891798d58b15f4ffc5f55202e8cb8138322d8",
+  "error": "AssertionError('sanitizer')"
+}

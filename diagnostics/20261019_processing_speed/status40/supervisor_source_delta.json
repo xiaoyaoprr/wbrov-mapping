@@ -1,0 +1,29 @@
+{
+  "scope": "only processing/waiting status snapshots omit sync; critical/default and terminal/unknown-state writes retain file+directory durability, no source-check/frame/gate change",
+  "baseline_tool_pins": {
+    "verify_raw_recording.py": "5a603f18d54cd938406999c6e14a7f401718c9256cfa6219026fd786076243f2",
+    "spool_codec.py": "7f3089ba57f2ef99600d44dacd20b26944cb65263c8a04a52bd73f819a41268d",
+    "deferred_mapping.py": "57ede07d6dfee01ddf357ac995dba570fae8ea4f1c9b270fb2e0ba435c8b792b",
+    "deferred_tag_observations.py": "2fbd689ec36290ca0c0d9c43b219ce769bed87f7d6dcf1cdd20833550f3cf413"
+  },
+  "members_sha256": {
+    "tools/deferred_mapping.py": "562ad769b499e1da26beb258a57dbd80dae5b0bd64466f626d22173ff7b03605",
+    "tools/continuous_mapping_session.py": "620000c8f33f521857e529bed35b95c002e11478c72461dd710628f0d6d89cc0",
+    "tools/render_continuous_entry.py": "fb2a9dc6b896bdadbd63d748471117183b61b77bc9fa28e5609c36076a9b3682",
+    "tests/test_deferred_mapping.py": "36cffb4cb15b07d932f298c93ed55323df5ad8ca29b789491194d1e8f3c7f216",
+    "tests/test_continuous_mapping_session.py": "e9ea3026b8f0bc204211c02a0319ccc78162e320b92d3f0ba1d163e64d2904fc",
+    "tests/test_deferred_display_state.py": "b66e20bf894c5bbca8eb92a065b2fc7b7243232e74959b5c344d957ca1885c09",
+    "src/visualization/deferred_display_state.py": "f8c01d7fb83dac25a22e75659106a8dbdd58c859d432016a11eba5ca4a4d0032",
+    "launch/candidate_receipt_resume/run_water_mapping_with_light.sh": "34cf9b3c35fa4f7977721bb94f4786d59bf662c6c552d202c14123ab06bb03d2"
+  },
+  "diff": "--- v37/deferred_mapping.py\n+++ status40/deferred_mapping.py\n@@ -18,16 +18,24 @@\n from verify_raw_recording import sha, verify\n \n \n-def atomic_json(path, value):\n+def atomic_json(path, value, *, durable=True):\n     temp = path.with_suffix('.tmp')\n     with temp.open('w', encoding='utf-8') as f:\n         json.dump(value, f, ensure_ascii=False, allow_nan=False, indent=2)\n-        f.write('\\n'); f.flush(); os.fsync(f.fileno())\n+        f.write('\\n'); f.flush()\n+        if durable: os.fsync(f.fileno())\n     os.replace(temp, path)\n-    if os.name != 'nt':\n+    if durable and os.name != 'nt':\n         fd = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY)\n         try: os.fsync(fd)\n         finally: os.close(fd)\n+\n+\n+def atomic_status_snapshot(path, value):\n+    # Progress is replaceable telemetry. Restart always creates a fresh attempt;\n+    # its authority comes from input/segment receipts and the final save record.\n+    # Terminal and unknown states retain the same durable publication contract.\n+    atomic_json(path, value, durable=value.get('state') not in ('processing','waiting_for_recording'))\n \n \n def closed_inputs(root):\n@@ -222,7 +230,7 @@\n         worker_path=out/'mapping/status.json'\n         worker=json.loads(worker_path.read_text()) if worker_path.exists() else {}\n         done=int(worker.get('processed_source_ns',receipts.source_ns))\n-        atomic_json(out/'status.json',{'schema':'wbrov.deferred-queue.v1','state':state,'error':error,\n+        atomic_status_snapshot(out/'status.json',{'schema':'wbrov.deferred-queue.v1','state':state,'error':error,\n             'historical_only':True,'navigation_authorized':False,'recorded_source_ns':latest,\n             'recording_state':capture_state.get('state','waiting'),\n             'processed_source_ns':done,'acknowledged_source_ns':receipts.source_ns,\n",
+  "test_support_files": [
+    "tools/continuous_mapping_session.py",
+    "tools/render_continuous_entry.py",
+    "tests/test_deferred_mapping.py",
+    "tests/test_continuous_mapping_session.py",
+    "tests/test_deferred_display_state.py",
+    "src/visualization/deferred_display_state.py",
+    "launch/candidate_receipt_resume/run_water_mapping_with_light.sh"
+  ]
+}

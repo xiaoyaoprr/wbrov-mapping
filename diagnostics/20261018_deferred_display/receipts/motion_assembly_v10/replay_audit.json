@@ -1,0 +1,70 @@
+{
+  "scope": "closed recording replay, not new field test or production entry acceptance",
+  "frames": 1581,
+  "lost_frames": 18,
+  "lost_frame_main_write_permissions": 1,
+  "recovery_events": [
+    {
+      "source_ns": 1791653868380707000,
+      "nodes_at_recovery": 95,
+      "nodes_final": 101,
+      "continued_seconds": 16.599543,
+      "main_write_permissions_after": 403
+    }
+  ],
+  "database_quick_check": "ok",
+  "trajectory_nodes": 101,
+  "trajectory_edges": 99,
+  "trajectory_edges_within_trusted_epoch": true,
+  "sha256": {
+    "map.db": "5f75b2f1b6b5f3b81e71aa3d2d8acbf4216545f0ddceb44411053cd109afffbc",
+    "main_cloud.ply": "c9bdeda7c2514a773f5bdb12843046f704be6b6539fa971c61314242b7f2a96b",
+    "frames.csv": "8576b5bf88410a1d149ae98f7d6f8ba8c0938c7786f4aceee4b26df2c72638d9",
+    "tags.json": "ddb0be1637f06717576c9b5bed2574c3ff738174bd5e51cfff89e1a3b926539f"
+  },
+  "status": {
+    "schema": "wbrov.deferred-queue.v1",
+    "state": "closed",
+    "error": null,
+    "historical_only": true,
+    "navigation_authorized": false,
+    "recorded_source_ns": 1791653884980250000,
+    "recording_state": "closed",
+    "processed_source_ns": 1791653884980250000,
+    "acknowledged_source_ns": 1791653884980250000,
+    "verified_map_source_ns": 1791653884980250000,
+    "backlog_seconds": 0.0,
+    "completed_segments": 61,
+    "mapping": {
+      "schema": "wbrov.deferred-mapping.v1",
+      "state": "closed",
+      "historical_only": true,
+      "navigation_authorized": false,
+      "processed_source_ns": 1791653884980250000,
+      "verified_map_source_ns": 1791653884980250000,
+      "frames": 1581,
+      "input_gaps": 1,
+      "odometry_compute_ms": 77733.3,
+      "mapping_compute_ms": 84389,
+      "odometry_estimation_ms": 77357.2,
+      "odometry_bundle_ms": 16355.7,
+      "core_process_ms": 75045.8,
+      "frozen_graph_check_ms": 106.501,
+      "recovery_observation_ms": 4954.99,
+      "tag_preparation_ms": 544.188,
+      "cloud_export_ms": 45637.5,
+      "tag_export_ms": 1166.96,
+      "continuity_state": "NORMAL",
+      "main_map_write_allowed": true,
+      "observation_count": 5,
+      "observation_required": 5,
+      "epoch": 2,
+      "cuts": 19,
+      "recoveries": 1,
+      "main_nodes": 101,
+      "cloud_points": 110473,
+      "database_closed": true
+    }
+  },
+  "passed": false
+}

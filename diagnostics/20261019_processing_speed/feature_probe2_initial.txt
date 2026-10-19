@@ -1,0 +1,28 @@
+feature_preparation_probe2 {
+  "phase": "large_interrupted_capture",
+  "scope": "closed-recording experiment only; no runtime Core changes",
+  "steps": [
+    {
+      "name": "compile",
+      "exit": 0,
+      "seconds": 21.075527840002906
+    },
+    {
+      "name": "link",
+      "exit": 0,
+      "seconds": 3.7769898880505934
+    },
+    {
+      "name": "full_recovery",
+      "exit": 2,
+      "seconds": 187.39677036798093
+    }
+  ]
+}
+full_recovery {"pairs":100,"directions":200,"feature_mismatch":0,"brute_force_control_mismatch":137,"brute_force_reuse_mismatch":138,"approximate_control_mismatch":199,"approximate_reuse_mismatch":200,"raw_bidirectional_ms":20229.5,"prepared_bidirectional_ms":9536.81,"prepare_ms":5272.64}
+large_interrupted_capture (no completed result yet)
+direct_cloud_probe {
+  "phase": "waiting_for_feature_probe2",
+  "scope": "closed-recording experiment only; no runtime Core changes",
+  "steps": []
+}

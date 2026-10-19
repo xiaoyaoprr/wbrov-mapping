@@ -193,14 +193,11 @@ inline bool receiptHex(const std::string & value, size_t size)
     return true;
 }
 
-inline std::string canonicalImageSha256(const cv::Mat & image)
-{
-    if(image.empty() || image.dims != 2 || (image.type() != CV_8UC1 && image.type() != CV_8UC3)) return std::string();
-    image_receipt_detail::SafeSha256Stream hash;
-    const size_t bytes = static_cast<size_t>(image.cols) * image.elemSize();
-    for(int row = 0; row < image.rows; ++row) hash.update(image.ptr<unsigned char>(row), bytes);
-    return hash.finish();
-}
+// Hash the same logical pixel rows, excluding stride padding. The compiled
+// implementation uses the platform SHA-256 provider; no receipt is cached and
+// every caller still validates its current bytes. Empty means invalid input or
+// a digest-provider failure and cannot satisfy a valid 64-character receipt.
+RTABMAP_CORE_EXPORT std::string canonicalImageSha256(const cv::Mat & image);
 
 inline bool receiptCameraMatches(const CameraModel & camera, const ImageInputIdentity & input)
 {
@@ -229,7 +226,8 @@ inline bool receiptIdentityMatches(const SensorData & data, const ImageInputIden
     if(input.headerStampNs <= 0 || !std::isfinite(data.stamp()) ||
        data.stamp() != static_cast<double>(input.headerStampNs) / 1e9)
         { reason = "integer_header_and_sensor_stamp_mismatch"; return false; }
-    if(input.provenanceScope != "managed_ros_rgbd" && input.provenanceScope != "offline_native_fixture")
+    if(input.provenanceScope != "managed_ros_rgbd" && input.provenanceScope != "offline_native_fixture" &&
+       input.provenanceScope != "verified_recording_rgbd")
         { reason = "unsupported_provenance_scope"; return false; }
     if(!receiptHex(input.pixelSha256, 64) || !receiptHex(input.sessionTokenSha256, 64) ||
        input.sessionTokenSha256 == std::string(64, '0') || !receiptHex(input.databaseSha256, 64) ||

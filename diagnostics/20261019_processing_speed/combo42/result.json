@@ -1,0 +1,771 @@
+{
+  "scope": "Core6 + status40 + Python copy-only41; fixed all-frame replay recovery/save acceptance, no hardware or deployment",
+  "phase": "passed",
+  "steps": [
+    {
+      "name": "short_raw",
+      "cloud_verifier_exit": 0,
+      "supervisor_exit": 0,
+      "seconds": 93.99730028799968,
+      "frames": 1581,
+      "invalid_write_frames": 0,
+      "database_check": "ok",
+      "recovery_events": [
+        {
+          "source_ns": "1791653869264253000",
+          "nodes_at_recovery": 95,
+          "nodes_final": 101,
+          "continued_seconds": 15.715997
+        }
+      ],
+      "final": {
+        "schema": "wbrov.deferred-mapping.v1",
+        "state": "closed",
+        "historical_only": true,
+        "navigation_authorized": false,
+        "processed_source_ns": 1791653884980250000,
+        "verified_map_source_ns": 1791653884980250000,
+        "frames": 1581,
+        "input_gaps": 1,
+        "odometry_compute_ms": 62064.3,
+        "mapping_compute_ms": 61815,
+        "odometry_estimation_ms": 61734.8,
+        "odometry_bundle_ms": 14267.6,
+        "core_process_ms": 50422.8,
+        "frozen_graph_check_ms": 52.9191,
+        "recovery_observation_ms": 8206.74,
+        "tag_preparation_ms": 488.993,
+        "cloud_export_ms": 3674,
+        "tag_export_ms": 460.587,
+        "cloud_node_visits": 1863,
+        "cloud_node_builds": 1863,
+        "cloud_node_build_ms": 4934.09,
+        "cloud_decode_ms": 561.132,
+        "cloud_prepare_ms": 1195.21,
+        "cloud_transform_cpu_ms": 3738.88,
+        "cloud_parallel_exports": 40,
+        "cloud_parallel_nodes": 1856,
+        "cloud_export_workers": 2,
+        "cloud_serialize_ms": 531.117,
+        "core_calls": 181,
+        "cloud_sample_builds": 101,
+        "cloud_samples_bytes": 105400876,
+        "redundant_core_frames_deferred": 81,
+        "continuity_state": "NORMAL",
+        "main_map_write_allowed": true,
+        "input_present": true,
+        "observation_count": 5,
+        "observation_required": 5,
+        "epoch": 2,
+        "cuts": 18,
+        "recoveries": 1,
+        "main_nodes": 101,
+        "cloud_points": 94826,
+        "database_closed": true,
+        "core_timings_ms": {
+          "Timing/Add_loop_closure_link/ms": 31394,
+          "Timing/Cleaning_neighbors/ms": 0,
+          "Timing/Emptying_trash/ms": 1543.39,
+          "Timing/Finalizing_statistics/ms": 223.65,
+          "Timing/Forgetting/ms": 1.38259,
+          "Timing/Hypotheses_creation/ms": 2.5959,
+          "Timing/Hypotheses_validation/ms": 0.336409,
+          "Timing/Joining_trash/ms": 1.05548,
+          "Timing/Likelihood_computation/ms": 128.158,
+          "Timing/Map_optimization/ms": 721.168,
+          "Timing/Memory_cleanup/ms": 99.9882,
+          "Timing/Memory_update/ms": 16892.5,
+          "Timing/Neighbor_link_refining/ms": 0,
+          "Timing/Posterior_computation/ms": 77.6517,
+          "Timing/Proximity_by_space/ms": 0.067234,
+          "Timing/Proximity_by_space_search/ms": 0,
+          "Timing/Proximity_by_space_visual/ms": 0,
+          "Timing/Proximity_by_time/ms": 10.747,
+          "Timing/Reactivation/ms": 0.185251,
+          "Timing/Statistics_creation/ms": 36.885,
+          "Timing/Total/ms": 49365.7,
+          "TimingMem/Add_new_words/ms": 6590,
+          "TimingMem/Compressing_data/ms": 1203.09,
+          "TimingMem/Descriptors_extraction/ms": 904.138,
+          "TimingMem/Joining_dictionary_update/ms": 432.414,
+          "TimingMem/Keypoints_3D/ms": 83.9407,
+          "TimingMem/Keypoints_detection/ms": 2982.05,
+          "TimingMem/Occupancy_grid/ms": 4595.9,
+          "TimingMem/Pre_update/ms": 0.762939,
+          "TimingMem/Rehearsal/ms": 4.67205,
+          "TimingMem/Signature_creation/ms": 16879.1
+        }
+      },
+      "cloud_differential": "{\"passed\":true,\"nodes\":101,\"points\":94826,\"byte_exact\":true}\n",
+      "complete": true,
+      "core_sha256": "0e68b8fe830df0c60b23d0043d94f2cf20a27ea61795e83726ed40a67eb6b14b",
+      "supervisor_profile": {
+        "scope": "diagnostic wrapper only; measures pinned implementation without additional skips or state changes; nested and concurrent times are not additive",
+        "elapsed_ns": 93728818720,
+        "return_code": 0,
+        "measurements": {
+          "sha/other": {
+            "calls": 2707,
+            "total_ns": 282997184,
+            "maximum_ns": 1821408
+          },
+          "atomic_json/session.json": {
+            "calls": 1,
+            "total_ns": 12042752,
+            "maximum_ns": 12042752
+          },
+          "atomic_json/status.json": {
+            "calls": 199,
+            "total_ns": 202177984,
+            "maximum_ns": 24226656
+          },
+          "closed_inputs": {
+            "calls": 123,
+            "total_ns": 223292064,
+            "maximum_ns": 3605408
+          },
+          "sha/recorded_frames": {
+            "calls": 182,
+            "total_ns": 13433284320,
+            "maximum_ns": 137207808
+          },
+          "descriptor": {
+            "calls": 121,
+            "total_ns": 10483860160,
+            "maximum_ns": 141351648
+          },
+          "tag_observer": {
+            "calls": 61,
+            "total_ns": 7853647360,
+            "maximum_ns": 156337856
+          },
+          "prepared_take_wait": {
+            "calls": 61,
+            "total_ns": 422260128,
+            "maximum_ns": 420134848
+          },
+          "atomic_json/input": {
+            "calls": 61,
+            "total_ns": 538392800,
+            "maximum_ns": 12490144
+          },
+          "sha/main_cloud": {
+            "calls": 62,
+            "total_ns": 109758240,
+            "maximum_ns": 2551296
+          },
+          "sha/tags": {
+            "calls": 62,
+            "total_ns": 7400448,
+            "maximum_ns": 292704
+          },
+          "atomic_json/receipt": {
+            "calls": 61,
+            "total_ns": 589975840,
+            "maximum_ns": 12343744
+          },
+          "sha/map_db": {
+            "calls": 1,
+            "total_ns": 160571392,
+            "maximum_ns": 160571392
+          },
+          "atomic_json/save.json": {
+            "calls": 1,
+            "total_ns": 104035424,
+            "maximum_ns": 104035424
+          }
+        },
+        "tools_sha256": {
+          "continuous_mapping_session.py": "620000c8f33f521857e529bed35b95c002e11478c72461dd710628f0d6d89cc0",
+          "deferred_mapping.py": "562ad769b499e1da26beb258a57dbd80dae5b0bd64466f626d22173ff7b03605",
+          "deferred_tag_observations.py": "414261e9f3895d469793edbe57f0bee52ed751baba1b76e9ef878532029647c4",
+          "render_continuous_entry.py": "fb2a9dc6b896bdadbd63d748471117183b61b77bc9fa28e5609c36076a9b3682",
+          "spool_codec.py": "ee89796f0c29bc26187d79109031e0962ee74147c250359a7c914d245c480b60",
+          "verify_raw_recording.py": "5a603f18d54cd938406999c6e14a7f401718c9256cfa6219026fd786076243f2"
+        },
+        "tools_unchanged": true
+      },
+      "worker_version": "v39",
+      "worker_sha256": "fbdef013dca8540dad16a30b732ba2a0e991ac29bfaf211efc064f47ead72cdc",
+      "recording": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/motion_spool1",
+      "recovery_required": true,
+      "recovery_accepted": true,
+      "last_reason": "registered visual geometry; "
+    },
+    {
+      "name": "full_compressed",
+      "cloud_verifier_exit": 0,
+      "supervisor_exit": 0,
+      "seconds": 467.0939290559618,
+      "frames": 10746,
+      "invalid_write_frames": 0,
+      "database_check": "ok",
+      "recovery_events": [
+        {
+          "source_ns": "1791660025967892000",
+          "nodes_at_recovery": 74,
+          "nodes_final": 155,
+          "continued_seconds": 159.026118
+        }
+      ],
+      "final": {
+        "schema": "wbrov.deferred-mapping.v1",
+        "state": "closed",
+        "historical_only": true,
+        "navigation_authorized": false,
+        "processed_source_ns": 1791660184994010000,
+        "verified_map_source_ns": 1791660184510704000,
+        "frames": 10746,
+        "input_gaps": 0,
+        "odometry_compute_ms": 384811,
+        "mapping_compute_ms": 246812,
+        "odometry_estimation_ms": 384083,
+        "odometry_bundle_ms": 98985,
+        "core_process_ms": 236423,
+        "frozen_graph_check_ms": 701.934,
+        "recovery_observation_ms": 3144.43,
+        "tag_preparation_ms": 430.327,
+        "cloud_export_ms": 11429.1,
+        "tag_export_ms": 2150.49,
+        "cloud_node_visits": 6273,
+        "cloud_node_builds": 6273,
+        "cloud_node_build_ms": 15523.9,
+        "cloud_decode_ms": 958.708,
+        "cloud_prepare_ms": 2450.75,
+        "cloud_transform_cpu_ms": 13073.2,
+        "cloud_parallel_exports": 114,
+        "cloud_parallel_nodes": 6093,
+        "cloud_export_workers": 2,
+        "cloud_serialize_ms": 1650.21,
+        "core_calls": 816,
+        "cloud_sample_builds": 155,
+        "cloud_samples_bytes": 162558420,
+        "redundant_core_frames_deferred": 940,
+        "continuity_state": "NORMAL",
+        "main_map_write_allowed": true,
+        "input_present": true,
+        "observation_count": 5,
+        "observation_required": 5,
+        "epoch": 1,
+        "cuts": 221,
+        "recoveries": 1,
+        "main_nodes": 155,
+        "cloud_points": 61015,
+        "database_closed": true,
+        "core_timings_ms": {
+          "Timing/Add_loop_closure_link/ms": 144337,
+          "Timing/Cleaning_neighbors/ms": 0,
+          "Timing/Emptying_trash/ms": 7266.65,
+          "Timing/Finalizing_statistics/ms": 1208.88,
+          "Timing/Forgetting/ms": 26.8149,
+          "Timing/Hypotheses_creation/ms": 16.871,
+          "Timing/Hypotheses_validation/ms": 1.26171,
+          "Timing/Joining_trash/ms": 6.70481,
+          "Timing/Likelihood_computation/ms": 590.58,
+          "Timing/Map_optimization/ms": 3341.76,
+          "Timing/Memory_cleanup/ms": 808.916,
+          "Timing/Memory_update/ms": 81851.2,
+          "Timing/Neighbor_link_refining/ms": 0,
+          "Timing/Posterior_computation/ms": 130.05,
+          "Timing/Proximity_by_space/ms": 0.290155,
+          "Timing/Proximity_by_space_search/ms": 0,
+          "Timing/Proximity_by_space_visual/ms": 0,
+          "Timing/Proximity_by_time/ms": 46.6888,
+          "Timing/Reactivation/ms": 0.830412,
+          "Timing/Statistics_creation/ms": 189.229,
+          "Timing/Total/ms": 231323,
+          "TimingMem/Add_new_words/ms": 31666.6,
+          "TimingMem/Compressing_data/ms": 5626.07,
+          "TimingMem/Descriptors_extraction/ms": 4772.65,
+          "TimingMem/Joining_dictionary_update/ms": 746.436,
+          "TimingMem/Keypoints_3D/ms": 409.903,
+          "TimingMem/Keypoints_detection/ms": 16460.3,
+          "TimingMem/Occupancy_grid/ms": 21657.1,
+          "TimingMem/Pre_update/ms": 3.6335,
+          "TimingMem/Rehearsal/ms": 22.2187,
+          "TimingMem/Signature_creation/ms": 81788.3
+        }
+      },
+      "cloud_differential": "{\"passed\":true,\"nodes\":155,\"points\":61015,\"byte_exact\":true}\n",
+      "complete": true,
+      "core_sha256": "0e68b8fe830df0c60b23d0043d94f2cf20a27ea61795e83726ed40a67eb6b14b",
+      "supervisor_profile": {
+        "scope": "diagnostic wrapper only; measures pinned implementation without additional skips or state changes; nested and concurrent times are not additive",
+        "elapsed_ns": 466715690368,
+        "return_code": 0,
+        "measurements": {
+          "sha/other": {
+            "calls": 16523,
+            "total_ns": 1748961088,
+            "maximum_ns": 4860864
+          },
+          "atomic_json/session.json": {
+            "calls": 1,
+            "total_ns": 14011616,
+            "maximum_ns": 14011616
+          },
+          "atomic_json/status.json": {
+            "calls": 1075,
+            "total_ns": 1027753824,
+            "maximum_ns": 9672768
+          },
+          "closed_inputs": {
+            "calls": 751,
+            "total_ns": 6649869920,
+            "maximum_ns": 25690720
+          },
+          "sha/recorded_frames": {
+            "calls": 1124,
+            "total_ns": 53066793280,
+            "maximum_ns": 98146784
+          },
+          "descriptor": {
+            "calls": 749,
+            "total_ns": 41426293568,
+            "maximum_ns": 102443392
+          },
+          "python_decode": {
+            "calls": 10746,
+            "total_ns": 22081797568,
+            "maximum_ns": 16968768
+          },
+          "tag_observer": {
+            "calls": 375,
+            "total_ns": 69335171488,
+            "maximum_ns": 508680544
+          },
+          "prepared_take_wait": {
+            "calls": 375,
+            "total_ns": 2901123904,
+            "maximum_ns": 434835616
+          },
+          "atomic_json/input": {
+            "calls": 375,
+            "total_ns": 3738212256,
+            "maximum_ns": 12611648
+          },
+          "sha/main_cloud": {
+            "calls": 376,
+            "total_ns": 418016576,
+            "maximum_ns": 2169024
+          },
+          "sha/tags": {
+            "calls": 376,
+            "total_ns": 45134464,
+            "maximum_ns": 780768
+          },
+          "atomic_json/receipt": {
+            "calls": 375,
+            "total_ns": 3739167008,
+            "maximum_ns": 62828768
+          },
+          "sha/map_db": {
+            "calls": 1,
+            "total_ns": 699939520,
+            "maximum_ns": 699939520
+          },
+          "atomic_json/save.json": {
+            "calls": 1,
+            "total_ns": 11603744,
+            "maximum_ns": 11603744
+          }
+        },
+        "tools_sha256": {
+          "continuous_mapping_session.py": "620000c8f33f521857e529bed35b95c002e11478c72461dd710628f0d6d89cc0",
+          "deferred_mapping.py": "562ad769b499e1da26beb258a57dbd80dae5b0bd64466f626d22173ff7b03605",
+          "deferred_tag_observations.py": "414261e9f3895d469793edbe57f0bee52ed751baba1b76e9ef878532029647c4",
+          "render_continuous_entry.py": "fb2a9dc6b896bdadbd63d748471117183b61b77bc9fa28e5609c36076a9b3682",
+          "spool_codec.py": "ee89796f0c29bc26187d79109031e0962ee74147c250359a7c914d245c480b60",
+          "verify_raw_recording.py": "5a603f18d54cd938406999c6e14a7f401718c9256cfa6219026fd786076243f2"
+        },
+        "tools_unchanged": true
+      },
+      "worker_version": "v39",
+      "worker_sha256": "fbdef013dca8540dad16a30b732ba2a0e991ac29bfaf211efc064f47ead72cdc",
+      "recording": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/compressed_full39/rgbd_spool",
+      "recovery_required": true,
+      "recovery_accepted": true,
+      "last_reason": "registered visual geometry; "
+    },
+    {
+      "name": "large_interrupted_capture",
+      "cloud_verifier_exit": 0,
+      "supervisor_exit": 2,
+      "seconds": 495.5192406399874,
+      "frames": 10059,
+      "invalid_write_frames": 0,
+      "database_check": "ok",
+      "recovery_events": [],
+      "final": {
+        "schema": "wbrov.deferred-mapping.v1",
+        "state": "closed",
+        "historical_only": true,
+        "navigation_authorized": false,
+        "processed_source_ns": 1791682017335419000,
+        "verified_map_source_ns": 1791681977537264000,
+        "frames": 10059,
+        "input_gaps": 0,
+        "odometry_compute_ms": 364909,
+        "mapping_compute_ms": 200253,
+        "odometry_estimation_ms": 364327,
+        "odometry_bundle_ms": 86959.9,
+        "core_process_ms": 193698,
+        "frozen_graph_check_ms": 0.751232,
+        "recovery_observation_ms": 0,
+        "tag_preparation_ms": 101.499,
+        "cloud_export_ms": 131942,
+        "tag_export_ms": 10997.6,
+        "cloud_node_visits": 87920,
+        "cloud_node_builds": 87920,
+        "cloud_node_build_ms": 188387,
+        "cloud_decode_ms": 2845.33,
+        "cloud_prepare_ms": 18239.3,
+        "cloud_transform_cpu_ms": 170148,
+        "cloud_parallel_exports": 267,
+        "cloud_parallel_nodes": 87843,
+        "cloud_export_workers": 2,
+        "cloud_serialize_ms": 14023.3,
+        "core_calls": 960,
+        "cloud_sample_builds": 491,
+        "cloud_samples_bytes": 501835924,
+        "redundant_core_frames_deferred": 740,
+        "continuity_state": "RECOVERING",
+        "main_map_write_allowed": false,
+        "input_present": true,
+        "observation_count": 0,
+        "observation_required": 5,
+        "epoch": 8,
+        "cuts": 9,
+        "recoveries": 0,
+        "main_nodes": 491,
+        "cloud_points": 449247,
+        "database_closed": true,
+        "core_timings_ms": {
+          "Timing/Add_loop_closure_link/ms": 60064.8,
+          "Timing/Cleaning_neighbors/ms": 0,
+          "Timing/Emptying_trash/ms": 8151.69,
+          "Timing/Finalizing_statistics/ms": 1817.14,
+          "Timing/Forgetting/ms": 46.4289,
+          "Timing/Hypotheses_creation/ms": 105.313,
+          "Timing/Hypotheses_validation/ms": 1.42431,
+          "Timing/Joining_trash/ms": 25.1529,
+          "Timing/Likelihood_computation/ms": 1204.22,
+          "Timing/Map_optimization/ms": 21174,
+          "Timing/Memory_cleanup/ms": 770.147,
+          "Timing/Memory_update/ms": 102044,
+          "Timing/Neighbor_link_refining/ms": 0,
+          "Timing/Posterior_computation/ms": 1058.98,
+          "Timing/Proximity_by_space/ms": 0.361919,
+          "Timing/Proximity_by_space_search/ms": 0,
+          "Timing/Proximity_by_space_visual/ms": 0,
+          "Timing/Proximity_by_time/ms": 64.4906,
+          "Timing/Reactivation/ms": 1.05405,
+          "Timing/Statistics_creation/ms": 504.066,
+          "Timing/Total/ms": 187019,
+          "TimingMem/Add_new_words/ms": 45079.1,
+          "TimingMem/Compressing_data/ms": 6352.05,
+          "TimingMem/Descriptors_extraction/ms": 4765.66,
+          "TimingMem/Joining_dictionary_update/ms": 1978.94,
+          "TimingMem/Keypoints_3D/ms": 451.922,
+          "TimingMem/Keypoints_detection/ms": 17237.2,
+          "TimingMem/Occupancy_grid/ms": 25542.8,
+          "TimingMem/Pre_update/ms": 4.28891,
+          "TimingMem/Rehearsal/ms": 30.8151,
+          "TimingMem/Signature_creation/ms": 101960
+        }
+      },
+      "cloud_differential": "{\"passed\":true,\"nodes\":491,\"points\":449247,\"byte_exact\":true}\n",
+      "complete": false,
+      "core_sha256": "0e68b8fe830df0c60b23d0043d94f2cf20a27ea61795e83726ed40a67eb6b14b",
+      "supervisor_profile": {
+        "scope": "diagnostic wrapper only; measures pinned implementation without additional skips or state changes; nested and concurrent times are not additive",
+        "elapsed_ns": 495129532512,
+        "return_code": 2,
+        "measurements": {
+          "sha/other": {
+            "calls": 16171,
+            "total_ns": 1686964032,
+            "maximum_ns": 3265280
+          },
+          "atomic_json/session.json": {
+            "calls": 1,
+            "total_ns": 8162816,
+            "maximum_ns": 8162816
+          },
+          "atomic_json/status.json": {
+            "calls": 1094,
+            "total_ns": 1022519552,
+            "maximum_ns": 9578528
+          },
+          "closed_inputs": {
+            "calls": 735,
+            "total_ns": 5871336544,
+            "maximum_ns": 25582912
+          },
+          "sha/recorded_frames": {
+            "calls": 1100,
+            "total_ns": 91097647136,
+            "maximum_ns": 188316736
+          },
+          "descriptor": {
+            "calls": 733,
+            "total_ns": 72212724608,
+            "maximum_ns": 192488096
+          },
+          "tag_observer": {
+            "calls": 367,
+            "total_ns": 45020228416,
+            "maximum_ns": 243412256
+          },
+          "prepared_take_wait": {
+            "calls": 367,
+            "total_ns": 650018656,
+            "maximum_ns": 409064256
+          },
+          "atomic_json/input": {
+            "calls": 367,
+            "total_ns": 3492885184,
+            "maximum_ns": 47256032
+          },
+          "sha/main_cloud": {
+            "calls": 368,
+            "total_ns": 2138426336,
+            "maximum_ns": 13084736
+          },
+          "sha/tags": {
+            "calls": 368,
+            "total_ns": 70100768,
+            "maximum_ns": 1349088
+          },
+          "atomic_json/receipt": {
+            "calls": 367,
+            "total_ns": 3634085632,
+            "maximum_ns": 49864160
+          },
+          "sha/map_db": {
+            "calls": 1,
+            "total_ns": 956945760,
+            "maximum_ns": 956945760
+          },
+          "atomic_json/save.json": {
+            "calls": 1,
+            "total_ns": 8304192,
+            "maximum_ns": 8304192
+          }
+        },
+        "tools_sha256": {
+          "continuous_mapping_session.py": "620000c8f33f521857e529bed35b95c002e11478c72461dd710628f0d6d89cc0",
+          "deferred_mapping.py": "562ad769b499e1da26beb258a57dbd80dae5b0bd64466f626d22173ff7b03605",
+          "deferred_tag_observations.py": "414261e9f3895d469793edbe57f0bee52ed751baba1b76e9ef878532029647c4",
+          "render_continuous_entry.py": "fb2a9dc6b896bdadbd63d748471117183b61b77bc9fa28e5609c36076a9b3682",
+          "spool_codec.py": "ee89796f0c29bc26187d79109031e0962ee74147c250359a7c914d245c480b60",
+          "verify_raw_recording.py": "5a603f18d54cd938406999c6e14a7f401718c9256cfa6219026fd786076243f2"
+        },
+        "tools_unchanged": true
+      },
+      "worker_version": "v39",
+      "worker_sha256": "fbdef013dca8540dad16a30b732ba2a0e991ac29bfaf211efc064f47ead72cdc",
+      "recording": "/home/exocean/maps/rtabmap_calibration_ab/continuous_20261011_092000_500034/rgbd_spool",
+      "recovery_required": false,
+      "recovery_accepted": false,
+      "last_reason": "waiting for stable geometry and Core registration; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=8 registered=0 trusted_snapshot=1)"
+    },
+    {
+      "name": "short_compressed",
+      "cloud_verifier_exit": 0,
+      "supervisor_exit": 0,
+      "seconds": 81.26933023997117,
+      "frames": 1581,
+      "invalid_write_frames": 0,
+      "database_check": "ok",
+      "recovery_events": [
+        {
+          "source_ns": "1791653868380707000",
+          "nodes_at_recovery": 91,
+          "nodes_final": 97,
+          "continued_seconds": 16.599543
+        }
+      ],
+      "final": {
+        "schema": "wbrov.deferred-mapping.v1",
+        "state": "closed",
+        "historical_only": true,
+        "navigation_authorized": false,
+        "processed_source_ns": 1791653884980250000,
+        "verified_map_source_ns": 1791653884980250000,
+        "frames": 1581,
+        "input_gaps": 1,
+        "odometry_compute_ms": 61707.7,
+        "mapping_compute_ms": 51634.7,
+        "odometry_estimation_ms": 61390.3,
+        "odometry_bundle_ms": 13966.2,
+        "core_process_ms": 44986.3,
+        "frozen_graph_check_ms": 47.6668,
+        "recovery_observation_ms": 3162.72,
+        "tag_preparation_ms": 674.048,
+        "cloud_export_ms": 3600.89,
+        "tag_export_ms": 447.092,
+        "cloud_node_visits": 1810,
+        "cloud_node_builds": 1810,
+        "cloud_node_build_ms": 4705.41,
+        "cloud_decode_ms": 544.815,
+        "cloud_prepare_ms": 1138.41,
+        "cloud_transform_cpu_ms": 3566.99,
+        "cloud_parallel_exports": 39,
+        "cloud_parallel_nodes": 1804,
+        "cloud_export_workers": 2,
+        "cloud_serialize_ms": 583.502,
+        "core_calls": 185,
+        "cloud_sample_builds": 97,
+        "cloud_samples_bytes": 101730108,
+        "redundant_core_frames_deferred": 86,
+        "continuity_state": "NORMAL",
+        "main_map_write_allowed": true,
+        "input_present": true,
+        "observation_count": 5,
+        "observation_required": 5,
+        "epoch": 2,
+        "cuts": 18,
+        "recoveries": 1,
+        "main_nodes": 97,
+        "cloud_points": 103494,
+        "database_closed": true,
+        "core_timings_ms": {
+          "Timing/Add_loop_closure_link/ms": 25070.8,
+          "Timing/Cleaning_neighbors/ms": 0,
+          "Timing/Emptying_trash/ms": 1509.96,
+          "Timing/Finalizing_statistics/ms": 231.373,
+          "Timing/Forgetting/ms": 1.59025,
+          "Timing/Hypotheses_creation/ms": 2.92444,
+          "Timing/Hypotheses_validation/ms": 0.384808,
+          "Timing/Joining_trash/ms": 1.12915,
+          "Timing/Likelihood_computation/ms": 138.938,
+          "Timing/Map_optimization/ms": 638.592,
+          "Timing/Memory_cleanup/ms": 107.081,
+          "Timing/Memory_update/ms": 17840.1,
+          "Timing/Neighbor_link_refining/ms": 0,
+          "Timing/Posterior_computation/ms": 42.9699,
+          "Timing/Proximity_by_space/ms": 0.0727177,
+          "Timing/Proximity_by_space_search/ms": 0,
+          "Timing/Proximity_by_space_visual/ms": 0,
+          "Timing/Proximity_by_time/ms": 11.0307,
+          "Timing/Reactivation/ms": 0.188589,
+          "Timing/Statistics_creation/ms": 37.004,
+          "Timing/Total/ms": 43891.5,
+          "TimingMem/Add_new_words/ms": 6993.41,
+          "TimingMem/Compressing_data/ms": 1205.26,
+          "TimingMem/Descriptors_extraction/ms": 969.488,
+          "TimingMem/Joining_dictionary_update/ms": 436.605,
+          "TimingMem/Keypoints_3D/ms": 86.6513,
+          "TimingMem/Keypoints_detection/ms": 3298.91,
+          "TimingMem/Occupancy_grid/ms": 4744.36,
+          "TimingMem/Pre_update/ms": 0.790596,
+          "TimingMem/Rehearsal/ms": 4.7431,
+          "TimingMem/Signature_creation/ms": 17826.1
+        }
+      },
+      "cloud_differential": "{\"passed\":true,\"nodes\":97,\"points\":103494,\"byte_exact\":true}\n",
+      "complete": true,
+      "core_sha256": "0e68b8fe830df0c60b23d0043d94f2cf20a27ea61795e83726ed40a67eb6b14b",
+      "supervisor_profile": {
+        "scope": "diagnostic wrapper only; measures pinned implementation without additional skips or state changes; nested and concurrent times are not additive",
+        "elapsed_ns": 81024071936,
+        "return_code": 0,
+        "measurements": {
+          "sha/other": {
+            "calls": 2707,
+            "total_ns": 284173568,
+            "maximum_ns": 2698912
+          },
+          "atomic_json/session.json": {
+            "calls": 1,
+            "total_ns": 12152384,
+            "maximum_ns": 12152384
+          },
+          "atomic_json/status.json": {
+            "calls": 177,
+            "total_ns": 173551744,
+            "maximum_ns": 9505888
+          },
+          "closed_inputs": {
+            "calls": 123,
+            "total_ns": 232494016,
+            "maximum_ns": 4358112
+          },
+          "sha/recorded_frames": {
+            "calls": 182,
+            "total_ns": 7400409632,
+            "maximum_ns": 68286848
+          },
+          "descriptor": {
+            "calls": 121,
+            "total_ns": 5691921440,
+            "maximum_ns": 72403904
+          },
+          "python_decode": {
+            "calls": 1581,
+            "total_ns": 3390376608,
+            "maximum_ns": 24218272
+          },
+          "tag_observer": {
+            "calls": 61,
+            "total_ns": 10361716640,
+            "maximum_ns": 204245696
+          },
+          "prepared_take_wait": {
+            "calls": 61,
+            "total_ns": 420273152,
+            "maximum_ns": 323847968
+          },
+          "atomic_json/input": {
+            "calls": 61,
+            "total_ns": 561846976,
+            "maximum_ns": 12096064
+          },
+          "sha/main_cloud": {
+            "calls": 62,
+            "total_ns": 129789920,
+            "maximum_ns": 4207136
+          },
+          "sha/tags": {
+            "calls": 62,
+            "total_ns": 8357760,
+            "maximum_ns": 224448
+          },
+          "atomic_json/receipt": {
+            "calls": 61,
+            "total_ns": 594424160,
+            "maximum_ns": 13785088
+          },
+          "sha/map_db": {
+            "calls": 1,
+            "total_ns": 138225312,
+            "maximum_ns": 138225312
+          },
+          "atomic_json/save.json": {
+            "calls": 1,
+            "total_ns": 14128672,
+            "maximum_ns": 14128672
+          }
+        },
+        "tools_sha256": {
+          "continuous_mapping_session.py": "620000c8f33f521857e529bed35b95c002e11478c72461dd710628f0d6d89cc0",
+          "deferred_mapping.py": "562ad769b499e1da26beb258a57dbd80dae5b0bd64466f626d22173ff7b03605",
+          "deferred_tag_observations.py": "414261e9f3895d469793edbe57f0bee52ed751baba1b76e9ef878532029647c4",
+          "render_continuous_entry.py": "fb2a9dc6b896bdadbd63d748471117183b61b77bc9fa28e5609c36076a9b3682",
+          "spool_codec.py": "ee89796f0c29bc26187d79109031e0962ee74147c250359a7c914d245c480b60",
+          "verify_raw_recording.py": "5a603f18d54cd938406999c6e14a7f401718c9256cfa6219026fd786076243f2"
+        },
+        "tools_unchanged": true
+      },
+      "worker_version": "v39",
+      "worker_sha256": "fbdef013dca8540dad16a30b732ba2a0e991ac29bfaf211efc064f47ead72cdc",
+      "recording": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/compressed_v35/motion_spool_v2",
+      "recovery_required": true,
+      "recovery_accepted": true,
+      "last_reason": "registered visual geometry; "
+    }
+  ],
+  "core_sha256": "0e68b8fe830df0c60b23d0043d94f2cf20a27ea61795e83726ed40a67eb6b14b",
+  "recovery_acceptance_passed": true
+}

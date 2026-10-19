@@ -45,4 +45,27 @@ int main() {
     assert(failed);
   }
   {BoundedAsyncWriter<int> empty(1,[](int){assert(false);});empty.close();}
+  {
+    std::promise<void> entered,release;auto released=release.get_future().share();std::vector<int> written;
+    BoundedAsyncWriter<int> writer(1,[&](int i){if(i==1){entered.set_value();released.wait();}written.push_back(i);});
+    writer.append(1);entered.get_future().wait();writer.append(2);
+    auto producer=std::async(std::launch::async,[&]{return writer.append_wait(3,0ms);});
+    assert(producer.wait_for(50ms)==std::future_status::timeout);
+    release.set_value();assert(producer.get());writer.close();assert((written==std::vector<int>{1,2,3}));
+  }
+  {
+    std::promise<void> entered,release;auto released=release.get_future().share();
+    BoundedAsyncWriter<int> writer(1,[&](int i){if(i==1){entered.set_value();released.wait();}});
+    writer.append(1);entered.get_future().wait();writer.append(2);bool timed=false;
+    try{writer.append_wait(3,20ms);}catch(const std::runtime_error &e){timed=std::string(e.what()).find("timeout")!=std::string::npos;}
+    release.set_value();writer.close();assert(timed);
+  }
+  {
+    std::promise<void> entered,fail;auto failed=fail.get_future().share();
+    BoundedAsyncWriter<int> writer(1,[&](int){entered.set_value();failed.wait();throw std::runtime_error("disk failed");});
+    writer.append(1);entered.get_future().wait();writer.append(2);
+    auto producer=std::async(std::launch::async,[&]{try{writer.append_wait(3,2s);}catch(const std::runtime_error &e){return std::string(e.what())=="disk failed";}return false;});
+    assert(producer.wait_for(50ms)==std::future_status::timeout);fail.set_value();assert(producer.get());
+    try{writer.close();}catch(const std::runtime_error &){}
+  }
 }

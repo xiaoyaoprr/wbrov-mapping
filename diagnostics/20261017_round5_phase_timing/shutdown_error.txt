@@ -1,0 +1,15 @@
+[rclcpp]: signal_handler(SIGINT/SIGTERM)
+
+>>> [rcutils|error_handling.c:108] rcutils_set_error_state()
+This error state is being overwritten:
+
+  'Handle's typesupport identifier (rosidl_typesupport_cpp) is not supported by this library, at ./src/type_support_dispatch.hpp:111'
+
+with this new error message:
+
+  'publisher's context is invalid, at ./src/rcl/publisher.c:389'
+
+rcutils_reset_error() should be called after error handling to avoid this.
+<<<
+terminate called after throwing an instance of 'rclcpp::exceptions::RCLError'
+  what():  Failed to get information by topic for publishers:rcl node's context is invalid, at ./src/rcl/node.c:428: error not set

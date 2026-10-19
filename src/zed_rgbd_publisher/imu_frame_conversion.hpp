@@ -128,62 +128,18 @@ inline Matrix3 scale_covariance(const Matrix3 &covariance, double scale)
   return out;
 }
 
-// Build the orientation consumed by RTAB-Map from the measured specific-force
-// direction.  The ZED optical camera frame is x-right, y-down, z-forward and
-// RTAB-Map's base_link conversion is x-forward, y-left, z-up.  Yaw is
-// deliberately fixed: an accelerometer observes roll/pitch, but not yaw.
-//
-// Memory later computes
-//   Rz(yaw(base_T_sensor)) * R_message * R_base_camera^-1.
-// Returning the inverse-composed message rotation makes that result map the
-// measured base-frame specific force to world +Z exactly.
-inline bool acceleration_gravity_world_from_camera(
-  const Vector3 &acceleration_camera_m_s2,
-  Quaternion &world_from_camera)
+// Specific force is a gravity-quality check, not a complete orientation.
+// Reconstructing roll/pitch with yaw=0 on each sample makes small acceleration
+// noise near base pitch +/-90 degrees become an arbitrary large rotation.
+// RTAB-Map also differences these orientations for its motion guess, so that
+// reconstruction must never replace the SDK's gyro/accelerometer fusion.
+inline bool gravity_magnitude_valid(const Vector3 &acceleration_camera_m_s2)
 {
   const double norm = std::sqrt(
     acceleration_camera_m_s2[0] * acceleration_camera_m_s2[0] +
     acceleration_camera_m_s2[1] * acceleration_camera_m_s2[1] +
     acceleration_camera_m_s2[2] * acceleration_camera_m_s2[2]);
-  if (!std::isfinite(norm) || norm < 8.0 || norm > 12.0) {
-    return false;
-  }
-
-  // R_base_camera for the optical frame used by the publisher.
-  const Matrix3 base_from_camera{
-    0.0, 0.0, 1.0,
-   -1.0, 0.0, 0.0,
-    0.0,-1.0, 0.0};
-  auto acceleration_base = multiply(base_from_camera, acceleration_camera_m_s2);
-  for (double &value : acceleration_base) {
-    value /= norm;
-  }
-  const double roll = std::atan2(acceleration_base[1], acceleration_base[2]);
-  const double pitch = std::atan2(
-    -acceleration_base[0],
-    std::hypot(acceleration_base[1], acceleration_base[2]));
-  const double cr = std::cos(roll);
-  const double sr = std::sin(roll);
-  const double cp = std::cos(pitch);
-  const double sp = std::sin(pitch);
-  const Matrix3 desired_world_from_base{
-    cp, sp * sr, sp * cr,
-    0.0, cr, -sr,
-    -sp, cp * sr, cp * cr};
-
-  // yaw(base_T_sensor) is -90 degrees, so its inverse is +90 degrees.
-  const Matrix3 inverse_memory_yaw{
-    0.0, -1.0, 0.0,
-    1.0,  0.0, 0.0,
-    0.0,  0.0, 1.0};
-  try {
-    world_from_camera = quaternion_from_rotation(
-      multiply(multiply(inverse_memory_yaw, desired_world_from_base),
-               base_from_camera));
-  } catch (const std::runtime_error &) {
-    return false;
-  }
-  return finite(world_from_camera);
+  return std::isfinite(norm) && norm >= 8.0 && norm <= 12.0;
 }
 
 struct ConvertedImu

@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "seconds": 12.005808608024381,
+  "output": "PASS: 12-second blocked sink, bounded capacity, retained pending frame, ordered close\n"
+}

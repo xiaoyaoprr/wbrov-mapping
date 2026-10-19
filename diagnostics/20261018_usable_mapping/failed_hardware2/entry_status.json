@@ -1,0 +1,27 @@
+{
+  "schema": "wbrov.continuous-entry-status.v1",
+  "phase": "failed",
+  "elapsed_s": 2074.12454831996,
+  "stop_requested": true,
+  "saved": false,
+  "partial_saved": true,
+  "errors": [
+    "bridge exited unexpectedly",
+    "bridge exit=1",
+    "capture interrupted; sealed observations saved, recording incomplete"
+  ],
+  "pids": {
+    "bridge": 500039,
+    "processing": 500158,
+    "graph_display": 500159,
+    "rviz": 500160
+  },
+  "exits": {
+    "bridge": 1,
+    "processing": 2,
+    "graph_display": 0,
+    "rviz": 0
+  },
+  "historical_only": true,
+  "navigation_authorized": false
+}

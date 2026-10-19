@@ -1,0 +1,428 @@
+{
+  "checked_monotonic": 360474.983140768,
+  "counts": {
+    "historical_reference": 11,
+    "geometry": 58,
+    "proposal": 16,
+    "received_status": 27,
+    "observing": 11,
+    "terminal": 16,
+    "closed": 1
+  },
+  "recent_proposals": [
+    {
+      "event": "proposal",
+      "monotonic_ns": 360162234496992,
+      "geometry": {
+        "old_ids": [
+          46,
+          27,
+          82
+        ],
+        "current_ids": [
+          217,
+          218,
+          219
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.006507483425277632,
+          "max_rotation_deg": 1.2590280482168998,
+          "max_z_m": 0.005544624608121773,
+          "max_tilt_deg": 1.2563459468389986
+        },
+        "candidate_only": null,
+        "requires_core_depth_verification": null,
+        "pnp_alignment_certified": null
+      }
+    },
+    {
+      "event": "proposal",
+      "monotonic_ns": 360164176208704,
+      "geometry": {
+        "old_ids": [
+          46,
+          27,
+          82
+        ],
+        "current_ids": [
+          217,
+          218,
+          221
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.01052042749035502,
+          "max_rotation_deg": 1.7695405592638471,
+          "max_z_m": 0.01021926043451546,
+          "max_tilt_deg": 1.7069013439417347
+        },
+        "candidate_only": null,
+        "requires_core_depth_verification": null,
+        "pnp_alignment_certified": null
+      }
+    },
+    {
+      "event": "proposal",
+      "monotonic_ns": 360168429456544,
+      "geometry": {
+        "old_ids": [
+          46,
+          27,
+          82
+        ],
+        "current_ids": [
+          218,
+          221,
+          223
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.006258188461735616,
+          "max_rotation_deg": 1.4255521368717068,
+          "max_z_m": 0.006199078522079043,
+          "max_tilt_deg": 1.3795639240998998
+        },
+        "candidate_only": null,
+        "requires_core_depth_verification": null,
+        "pnp_alignment_certified": null
+      }
+    },
+    {
+      "event": "proposal",
+      "monotonic_ns": 360197471018240,
+      "geometry": {
+        "old_ids": [
+          46,
+          27,
+          82
+        ],
+        "current_ids": [
+          236,
+          238,
+          240
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.021082469693187184,
+          "max_rotation_deg": 2.21181998540627,
+          "max_z_m": 0.016785655775545777,
+          "max_tilt_deg": 2.166635338540646
+        },
+        "candidate_only": true,
+        "requires_core_depth_verification": true,
+        "pnp_alignment_certified": false
+      }
+    },
+    {
+      "event": "proposal",
+      "monotonic_ns": 360200068759232,
+      "geometry": {
+        "old_ids": [
+          46,
+          27,
+          82
+        ],
+        "current_ids": [
+          238,
+          240,
+          241
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.00991456952294571,
+          "max_rotation_deg": 1.679358419474232,
+          "max_z_m": 0.007388373242285751,
+          "max_tilt_deg": 1.2430792393818784
+        },
+        "candidate_only": null,
+        "requires_core_depth_verification": null,
+        "pnp_alignment_certified": null
+      }
+    },
+    {
+      "event": "proposal",
+      "monotonic_ns": 360218124216288,
+      "geometry": {
+        "old_ids": [
+          46,
+          27,
+          82
+        ],
+        "current_ids": [
+          242,
+          243,
+          244
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.009812052435725385,
+          "max_rotation_deg": 1.4467703572149009,
+          "max_z_m": 0.009210262598066427,
+          "max_tilt_deg": 1.3546009914728414
+        },
+        "candidate_only": null,
+        "requires_core_depth_verification": null,
+        "pnp_alignment_certified": null
+      }
+    },
+    {
+      "event": "proposal",
+      "monotonic_ns": 360240321735168,
+      "geometry": {
+        "old_ids": [
+          46,
+          27,
+          82
+        ],
+        "current_ids": [
+          245,
+          248,
+          249
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.008921933476594627,
+          "max_rotation_deg": 1.9696837482952525,
+          "max_z_m": 0.00829660394773668,
+          "max_tilt_deg": 1.964417313269478
+        },
+        "candidate_only": null,
+        "requires_core_depth_verification": null,
+        "pnp_alignment_certified": null
+      }
+    },
+    {
+      "event": "proposal",
+      "monotonic_ns": 360254388438496,
+      "geometry": {
+        "old_ids": [
+          46,
+          27,
+          82
+        ],
+        "current_ids": [
+          253,
+          254,
+          255
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.007903645608561142,
+          "max_rotation_deg": 1.7776981114519959,
+          "max_z_m": 0.007443546713133298,
+          "max_tilt_deg": 1.7367833218085302
+        },
+        "candidate_only": null,
+        "requires_core_depth_verification": null,
+        "pnp_alignment_certified": null
+      }
+    }
+  ],
+  "observing_or_terminal": [
+    {
+      "event": "terminal",
+      "monotonic_ns": 360164587891584,
+      "status": {
+        "result": "rejected",
+        "reason": "submap continuity 217->218 lacks raw evidence; no gap backfill: raw bidirectional RGB-D check failed (f=0,r=0,finliers=23,rinliers=22,fbackend=Not enough inliers 23/25 (matches=81) between 217 and 218,rbackend=Not enough inliers after bundle adjustment 22/25 (matches=28) between 218 and 217)",
+        "core_reset_epoch": 4,
+        "source_reset_epoch": 4,
+        "core_graph_revision": 227
+      }
+    },
+    {
+      "event": "observing",
+      "monotonic_ns": 360169587055072,
+      "status": {
+        "result": "observing",
+        "reason": "geometry prepared; graph remains uncommitted until five direct old-map observations pass",
+        "core_reset_epoch": 4,
+        "source_reset_epoch": 4,
+        "core_graph_revision": 229
+      }
+    },
+    {
+      "event": "terminal",
+      "monotonic_ns": 360176568109856,
+      "status": {
+        "result": "committed",
+        "reason": "committed current reanchor: epoch=4 registered_nodes=4 archived_prefix_nodes=1 detached_edges=1; three bridges and 3-fold holdout passed (dense plane RMS requires stopped-map validation)",
+        "core_reset_epoch": 4,
+        "source_reset_epoch": 4,
+        "core_graph_revision": 230
+      }
+    },
+    {
+      "event": "terminal",
+      "monotonic_ns": 360197925745728,
+      "status": {
+        "result": "rejected",
+        "reason": "submap continuity 236->237 lacks raw evidence; no gap backfill: raw bidirectional RGB-D check failed (f=0,r=0,finliers=12,rinliers=13,fbackend=Not enough inliers 12/25 (matches=40) between 236 and 237,rbackend=Not enough inliers 13/25 (matches=52) between 237 and 236)",
+        "core_reset_epoch": 5,
+        "source_reset_epoch": 5,
+        "core_graph_revision": 248
+      }
+    },
+    {
+      "event": "observing",
+      "monotonic_ns": 360200916201184,
+      "status": {
+        "result": "observing",
+        "reason": "geometry prepared; graph remains uncommitted until five direct old-map observations pass",
+        "core_reset_epoch": 5,
+        "source_reset_epoch": 5,
+        "core_graph_revision": 249
+      }
+    },
+    {
+      "event": "terminal",
+      "monotonic_ns": 360212337846560,
+      "status": {
+        "result": "rejected",
+        "reason": "candidate observation failed correction or continuity limits",
+        "core_reset_epoch": 5,
+        "source_reset_epoch": 5,
+        "core_graph_revision": 249
+      }
+    },
+    {
+      "event": "observing",
+      "monotonic_ns": 360219043159936,
+      "status": {
+        "result": "observing",
+        "reason": "geometry prepared; graph remains uncommitted until five direct old-map observations pass",
+        "core_reset_epoch": 5,
+        "source_reset_epoch": 5,
+        "core_graph_revision": 252
+      }
+    },
+    {
+      "event": "terminal",
+      "monotonic_ns": 360234518961440,
+      "status": {
+        "result": "rejected",
+        "reason": "two independent old-keyframe RGB-D observations unavailable (references=89,nearby=89,first=60,raw_rejected=11,prediction_rejected=0,baseline_rejected=0,agreement_rejected=0; reference=55 raw bidirectional RGB-D check failed (f=0,r=0,finliers=8,rinliers=21,fbackend=Not enough inliers after bundle adjustment 8/25 (matches=27) between 0 and 55,rbackend=Not enough inliers 21/25 (matches=51) between 55 and 0))",
+        "core_reset_epoch": 5,
+        "source_reset_epoch": 5,
+        "core_graph_revision": 252
+      }
+    },
+    {
+      "event": "observing",
+      "monotonic_ns": 360241179397248,
+      "status": {
+        "result": "observing",
+        "reason": "geometry prepared; graph remains uncommitted until five direct old-map observations pass",
+        "core_reset_epoch": 5,
+        "source_reset_epoch": 5,
+        "core_graph_revision": 257
+      }
+    },
+    {
+      "event": "terminal",
+      "monotonic_ns": 360245086971936,
+      "status": {
+        "result": "rejected",
+        "reason": "two independent old-keyframe RGB-D observations unavailable (references=89,nearby=89,first=0,raw_rejected=12,prediction_rejected=0,baseline_rejected=0,agreement_rejected=0; reference=84 raw bidirectional RGB-D check failed (f=0,r=0,finliers=5,rinliers=4,fbackend=Not enough inliers 5/25 (matches=51) between 0 and 84,rbackend=Not enough inliers 4/25 (matches=40) between 84 and 0))",
+        "core_reset_epoch": 5,
+        "source_reset_epoch": 5,
+        "core_graph_revision": 257
+      }
+    },
+    {
+      "event": "observing",
+      "monotonic_ns": 360255257091136,
+      "status": {
+        "result": "observing",
+        "reason": "geometry prepared; graph remains uncommitted until five direct old-map observations pass",
+        "core_reset_epoch": 6,
+        "source_reset_epoch": 6,
+        "core_graph_revision": 264
+      }
+    },
+    {
+      "event": "terminal",
+      "monotonic_ns": 360258824038784,
+      "status": {
+        "result": "rejected",
+        "reason": "candidate observation failed correction or continuity limits",
+        "core_reset_epoch": 6,
+        "source_reset_epoch": 6,
+        "core_graph_revision": 264
+      }
+    }
+  ],
+  "selection_reasons": {
+    "fewer_than_three_current_views": 42,
+    "three_independent_measured_links": 15,
+    "three_independent_tag_views_for_core_depth_verification": 1
+  },
+  "tail": [
+    {
+      "event": "proposal",
+      "monotonic_ns": 360254388438496,
+      "geometry": {
+        "old_ids": [
+          46,
+          27,
+          82
+        ],
+        "current_ids": [
+          253,
+          254,
+          255
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.007903645608561142,
+          "max_rotation_deg": 1.7776981114519959,
+          "max_z_m": 0.007443546713133298,
+          "max_tilt_deg": 1.7367833218085302
+        },
+        "candidate_only": null,
+        "requires_core_depth_verification": null,
+        "pnp_alignment_certified": null
+      }
+    },
+    {
+      "event": "received_status",
+      "monotonic_ns": 360255256932960,
+      "status": {
+        "result": "observing",
+        "reason": "geometry prepared; graph remains uncommitted until five direct old-map observations pass",
+        "core_reset_epoch": 6,
+        "source_reset_epoch": 6,
+        "core_graph_revision": 264
+      }
+    },
+    {
+      "event": "observing",
+      "monotonic_ns": 360255257091136,
+      "status": {
+        "result": "observing",
+        "reason": "geometry prepared; graph remains uncommitted until five direct old-map observations pass",
+        "core_reset_epoch": 6,
+        "source_reset_epoch": 6,
+        "core_graph_revision": 264
+      }
+    },
+    {
+      "event": "received_status",
+      "monotonic_ns": 360258823737280,
+      "status": {
+        "result": "rejected",
+        "reason": "candidate observation failed correction or continuity limits",
+        "core_reset_epoch": 6,
+        "source_reset_epoch": 6,
+        "core_graph_revision": 264
+      }
+    },
+    {
+      "event": "terminal",
+      "monotonic_ns": 360258824038784,
+      "status": {
+        "result": "rejected",
+        "reason": "candidate observation failed correction or continuity limits",
+        "core_reset_epoch": 6,
+        "source_reset_epoch": 6,
+        "core_graph_revision": 264
+      }
+    },
+    {
+      "event": "closed",
+      "monotonic_ns": 360370601753568
+    }
+  ]
+}

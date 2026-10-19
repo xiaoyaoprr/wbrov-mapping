@@ -1,0 +1,129 @@
+{
+  "phase": "finished",
+  "scope": "same standalone Hamming experiment; minimal utilite/lz4 link after probe4 unnecessary Core dependency failure; no Core/runtime mutation",
+  "steps": [
+    {
+      "name": "sanitizer_relink",
+      "exit": 0,
+      "seconds": 0.41669171198736876
+    },
+    {
+      "name": "sanitizer",
+      "exit": 0,
+      "seconds": 6.181448320043273
+    },
+    {
+      "name": "release_build",
+      "exit": 0,
+      "seconds": 12.400735968025401
+    },
+    {
+      "name": "fixed_index_benchmark",
+      "exit": 0,
+      "seconds": 12.650871328020003
+    }
+  ],
+  "probe_sha256": "d6bc408ba2bf2c32f349a9dd843891798d58b15f4ffc5f55202e8cb8138322d8",
+  "header_archive_sha256": "50b72a64e9ddfab3f094bb5c07929dfd1676e24ba301f181832b5f2e71811d5e",
+  "baseline_dist_sha256": "70252e0120bd344bb4728dbe862e1714cd1db23662230c5f18836ca87e3c367a",
+  "sanitizer_object_sha256": "aa0a58066071dc8e79dce1584b11116a40d66ac08d95a6bbaba339f95f47dec2",
+  "utilite_sha256": "c0f8f39dcc5ca17c8e943dd0b756557e84c395ce8c96a28103b16f7e463fddb2",
+  "measurements": [
+    {
+      "width": 32,
+      "round": 0,
+      "queries": 6000,
+      "before_ms": 420.06,
+      "after_ms": 428.862,
+      "indices_and_distances_equal": true
+    },
+    {
+      "width": 32,
+      "round": 1,
+      "queries": 6000,
+      "before_ms": 423.474,
+      "after_ms": 427.337,
+      "indices_and_distances_equal": true
+    },
+    {
+      "width": 32,
+      "round": 2,
+      "queries": 6000,
+      "before_ms": 412.584,
+      "after_ms": 448.407,
+      "indices_and_distances_equal": true
+    },
+    {
+      "width": 32,
+      "round": 3,
+      "queries": 6000,
+      "before_ms": 425.593,
+      "after_ms": 422.495,
+      "indices_and_distances_equal": true
+    },
+    {
+      "width": 32,
+      "round": 4,
+      "queries": 6000,
+      "before_ms": 412.86,
+      "after_ms": 435.918,
+      "indices_and_distances_equal": true
+    },
+    {
+      "width": 32,
+      "round": 5,
+      "queries": 6000,
+      "before_ms": 423.655,
+      "after_ms": 429.486,
+      "indices_and_distances_equal": true
+    },
+    {
+      "width": 64,
+      "round": 0,
+      "queries": 6000,
+      "before_ms": 431.571,
+      "after_ms": 437.923,
+      "indices_and_distances_equal": true
+    },
+    {
+      "width": 64,
+      "round": 1,
+      "queries": 6000,
+      "before_ms": 433.65,
+      "after_ms": 438.22,
+      "indices_and_distances_equal": true
+    },
+    {
+      "width": 64,
+      "round": 2,
+      "queries": 6000,
+      "before_ms": 429.318,
+      "after_ms": 440.595,
+      "indices_and_distances_equal": true
+    },
+    {
+      "width": 64,
+      "round": 3,
+      "queries": 6000,
+      "before_ms": 434.594,
+      "after_ms": 437.19,
+      "indices_and_distances_equal": true
+    },
+    {
+      "width": 64,
+      "round": 4,
+      "queries": 6000,
+      "before_ms": 421.255,
+      "after_ms": 440.577,
+      "indices_and_distances_equal": true
+    },
+    {
+      "width": 64,
+      "round": 5,
+      "queries": 6000,
+      "before_ms": 441.288,
+      "after_ms": 438.511,
+      "indices_and_distances_equal": true
+    }
+  ]
+}

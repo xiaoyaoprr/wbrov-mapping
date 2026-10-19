@@ -1,0 +1,206 @@
+{
+  "transactions": [
+    {
+      "duration_s": 6.760193344,
+      "reason": "committed current reanchor: epoch=1 registered_nodes=3 archived_prefix_nodes=0 detached_edges=0; three bridges and 3-fold holdout passed (dense plane RMS requires stopped-map validation)",
+      "max_observations": 5,
+      "frames": [
+        {
+          "after_proposal_s": -0.991030336,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791581277533502000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 141576720,
+            "arrival_age_ns": 617472,
+            "source_age_ns": 141583504,
+            "cut_count": 82
+          }
+        },
+        {
+          "after_proposal_s": -0.239476512,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791581278283474000,
+            "state": "RECOVERING",
+            "reason": "private recovery observations only",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 133520208,
+            "arrival_age_ns": 3271264,
+            "source_age_ns": 135926192,
+            "cut_count": 82
+          }
+        },
+        {
+          "after_proposal_s": -0.190404288,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791581278333457000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 168283224,
+            "arrival_age_ns": 813792,
+            "source_age_ns": 168293656,
+            "cut_count": 82
+          }
+        },
+        {
+          "after_proposal_s": 0.796276,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791581279266910000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map alignment observation; graph is uncommitted",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 158686288,
+            "arrival_age_ns": 62894144,
+            "source_age_ns": 220748304,
+            "cut_count": 82
+          }
+        },
+        {
+          "after_proposal_s": 0.807637504,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791581279333438000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 165892080,
+            "arrival_age_ns": 760736,
+            "source_age_ns": 165899376,
+            "cut_count": 82
+          }
+        },
+        {
+          "after_proposal_s": 2.064631232,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791581280583388000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 1,
+            "receipt_latency_ns": 141239744,
+            "arrival_age_ns": 31234048,
+            "source_age_ns": 171748800,
+            "cut_count": 82
+          }
+        },
+        {
+          "after_proposal_s": 3.0744416,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791581281566664000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 2,
+            "receipt_latency_ns": 156795136,
+            "arrival_age_ns": 32304640,
+            "source_age_ns": 188323616,
+            "cut_count": 82
+          }
+        },
+        {
+          "after_proposal_s": 4.026911008,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791581282516650000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 3,
+            "receipt_latency_ns": 170942736,
+            "arrival_age_ns": 29088960,
+            "source_age_ns": 198736336,
+            "cut_count": 82
+          }
+        },
+        {
+          "after_proposal_s": 5.04157712,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791581283533240000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 4,
+            "receipt_latency_ns": 157896000,
+            "arrival_age_ns": 42425568,
+            "source_age_ns": 199705952,
+            "cut_count": 82
+          }
+        },
+        {
+          "after_proposal_s": 6.062556,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791581284583196000,
+            "state": "RECOVERING",
+            "reason": "candidate observations passed; waiting for final atomic commit",
+            "map_observation_count": 5,
+            "receipt_latency_ns": 120588704,
+            "arrival_age_ns": 52012096,
+            "source_age_ns": 171781536,
+            "cut_count": 82
+          }
+        },
+        {
+          "after_proposal_s": 6.107437952,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791581284633200000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 5,
+            "receipt_latency_ns": 140899488,
+            "arrival_age_ns": 757824,
+            "source_age_ns": 140906688,
+            "cut_count": 82
+          }
+        },
+        {
+          "after_proposal_s": 6.762828384,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791581285233144000,
+            "state": "NORMAL",
+            "reason": "observed candidate committed; next qualified frame may write",
+            "map_observation_count": 5,
+            "receipt_latency_ns": 177805728,
+            "arrival_age_ns": 44626368,
+            "source_age_ns": 221834848,
+            "cut_count": 82
+          }
+        },
+        {
+          "after_proposal_s": 6.782683296,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791581285283386000,
+            "state": "NORMAL",
+            "reason": "registered visual geometry",
+            "map_observation_count": 5,
+            "receipt_latency_ns": 191781360,
+            "arrival_age_ns": 628096,
+            "source_age_ns": 191788656,
+            "cut_count": 82
+          }
+        }
+      ]
+    }
+  ]
+}

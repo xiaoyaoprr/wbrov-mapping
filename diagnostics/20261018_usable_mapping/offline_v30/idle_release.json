@@ -1,0 +1,12 @@
+{
+  "production_hashes": {
+    "/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh": "8b6adf33e0550465ce5e4f10ffa7d8e5f5d43db022084c2496aa81b8b3de8bb3",
+    "/home/exocean/Desktop/\u673a\u5668\u4eba\u952e\u76d8\u9065\u63a7/.tools/run_water_mapping_with_light.sh": "34cf9b3c35fa4f7977721bb94f4786d59bf662c6c552d202c14123ab06bb03d2"
+  },
+  "production_unchanged": true,
+  "camera_display_or_test_processes": [],
+  "udp3333_owner": "",
+  "free_bytes": 33963536384,
+  "candidate": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_usable_v4",
+  "field_acceptance_pending": true
+}

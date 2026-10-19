@@ -1,0 +1,11 @@
+{
+  "complete": true,
+  "historical_only": true,
+  "recovery_acceptance_passed": false,
+  "sha256": {
+    "map.db": "e974eb268b5fd89e27a6871deec025e5571a2b60a2333aeee06a3cecd0740fef",
+    "main_cloud.ply": "b22391c7e25a7b3f44bc1ae43d70d41ffffaae21a37ebd60df75b619be77dd20",
+    "frames.csv": "2debebcd255e8a551e1aef83880be97999bac6116b9e6f1c161f857e6ec24942",
+    "tags.json": "64b229279da5fcb0c39ababfad77622f1aa653bccc176ca56137a66be78efe03"
+  }
+}

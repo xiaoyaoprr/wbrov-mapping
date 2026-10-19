@@ -1,0 +1,368 @@
+{
+  "phase": "finished",
+  "scope": "offline component experiments only; native full RGB-D read equality and unchanged per-file SHA-256 checks; no Core, runtime, hardware or production mutation",
+  "steps": [
+    {
+      "name": "reader_sanitizer_build",
+      "exit": 0,
+      "seconds": 22.37761430401588
+    },
+    {
+      "name": "reader_sanitizer",
+      "exit": 0,
+      "seconds": 6.077544831961859
+    },
+    {
+      "name": "reader_release_build",
+      "exit": 0,
+      "seconds": 3.8776260479935445
+    },
+    {
+      "name": "hash_release_build",
+      "exit": 0,
+      "seconds": 1.569660000037402
+    },
+    {
+      "name": "hash_benchmark",
+      "exit": 0,
+      "seconds": 6.582231935986783
+    },
+    {
+      "name": "reader_benchmark",
+      "exit": 0,
+      "seconds": 82.0635206400184
+    }
+  ],
+  "source_sha256": {
+    "probe_record_decode.cpp": "8601043195f0d676cb24500c9246ad206858007f022330f394b420b71524f3d2",
+    "probe_input_hash.cpp": "3d12614bb286c6baee3e62a89b7fd3df70e1aef5bd2cf616a6bd92f315218406",
+    "rgbd_spool.hpp": "2bfff51646703da618e59600b41fa7d332d9505133bfddf5368acd4f20c55f78",
+    "rgbd_frame_codec.hpp": "8d9fa77868f3fa78458434c494ccfe808a096c2baee0c840dc7d70ca85e72257",
+    "bounded_async_writer.hpp": "30dc2609fa02182e0d5a3ec2d710cc976fde98c2a406308ee47cfe313f6ea8a0"
+  },
+  "hash": {
+    "rounds": [
+      {
+        "round": 0,
+        "mode": 0,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 381.151,
+        "sha256_equal": true
+      },
+      {
+        "round": 0,
+        "mode": 1,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 363.209,
+        "sha256_equal": true
+      },
+      {
+        "round": 0,
+        "mode": 2,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 363.618,
+        "sha256_equal": true
+      },
+      {
+        "round": 1,
+        "mode": 1,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 358.565,
+        "sha256_equal": true
+      },
+      {
+        "round": 1,
+        "mode": 2,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 363.331,
+        "sha256_equal": true
+      },
+      {
+        "round": 1,
+        "mode": 0,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 362.348,
+        "sha256_equal": true
+      },
+      {
+        "round": 2,
+        "mode": 2,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 363.286,
+        "sha256_equal": true
+      },
+      {
+        "round": 2,
+        "mode": 0,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 362.542,
+        "sha256_equal": true
+      },
+      {
+        "round": 2,
+        "mode": 1,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 360.88,
+        "sha256_equal": true
+      },
+      {
+        "round": 3,
+        "mode": 0,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 367.23,
+        "sha256_equal": true
+      },
+      {
+        "round": 3,
+        "mode": 1,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 363.694,
+        "sha256_equal": true
+      },
+      {
+        "round": 3,
+        "mode": 2,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 364.666,
+        "sha256_equal": true
+      },
+      {
+        "round": 4,
+        "mode": 1,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 359.966,
+        "sha256_equal": true
+      },
+      {
+        "round": 4,
+        "mode": 2,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 363.159,
+        "sha256_equal": true
+      },
+      {
+        "round": 4,
+        "mode": 0,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 363.333,
+        "sha256_equal": true
+      },
+      {
+        "round": 5,
+        "mode": 2,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 364.529,
+        "sha256_equal": true
+      },
+      {
+        "round": 5,
+        "mode": 0,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 361.647,
+        "sha256_equal": true
+      },
+      {
+        "round": 5,
+        "mode": 1,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 360.539,
+        "sha256_equal": true
+      }
+    ],
+    "median_ms_excluding_warmup": {
+      "0": 362.542,
+      "1": 360.539,
+      "2": 363.331
+    }
+  },
+  "reader": {
+    "rounds": [
+      {
+        "round": 0,
+        "mode": 0,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 4063.17,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 0,
+        "mode": 1,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3926.94,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 0,
+        "mode": 2,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3754.71,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 1,
+        "mode": 1,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3797.28,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 1,
+        "mode": 2,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3711.45,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 1,
+        "mode": 0,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 4009.76,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 2,
+        "mode": 2,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3704.46,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 2,
+        "mode": 0,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 4103.69,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 2,
+        "mode": 1,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3923.63,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 3,
+        "mode": 0,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 4154.58,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 3,
+        "mode": 1,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3794.38,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 3,
+        "mode": 2,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3711.52,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 4,
+        "mode": 1,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3796.66,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 4,
+        "mode": 2,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3702.79,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 4,
+        "mode": 0,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 4001.87,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 5,
+        "mode": 2,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3753.09,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 5,
+        "mode": 0,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3994.41,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 5,
+        "mode": 1,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3786.39,
+        "all_frame_bytes_equal": true
+      }
+    ],
+    "median_ms_excluding_warmup": {
+      "0": 4009.76,
+      "1": 3796.66,
+      "2": 3711.45
+    }
+  },
+  "input_hashes_unchanged": true
+}

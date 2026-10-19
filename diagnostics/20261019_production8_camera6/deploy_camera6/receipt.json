@@ -1,0 +1,9 @@
+{
+  "before_sha256": "35c46ce930e7d0bea10e0fb6370f4c32389ffa611f5ee7c49577d84bd272d30b",
+  "after_sha256": "d1581976c17bc6a68b32aa45ff4eac73c7ec3930b392b79e04c82b6061a6436a",
+  "package": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_combo42_camera6",
+  "package_wrapper_sha256": "727683484e856fc393e494810fe8d2a929a8bec740046162f82ff658e11ee1ec",
+  "preflight_exit": 0,
+  "camera_sha256": "a0ec0bf27ed775cac1b94f384a396b55bb4fef8599d15331dd93f838ab035a31",
+  "real_acceptance": "pending"
+}

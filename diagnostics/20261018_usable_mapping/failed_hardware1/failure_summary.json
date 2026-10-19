@@ -1,0 +1,34 @@
+{
+  "scope": "failed hardware candidate; original database not normally closed, no complete save claim",
+  "camera_failure": "RGB-D queue overflow; SVO write_errors=0, 11365 raw grabs vs 11364 accepted spool frames",
+  "frames_in_original_worker_ledger": 7454,
+  "recovery_events": [
+    {
+      "source_ns": "1791680116835476000",
+      "nodes": "68",
+      "recoveries": "1"
+    },
+    {
+      "source_ns": "1791680174916139000",
+      "nodes": "137",
+      "recoveries": "2"
+    }
+  ],
+  "lost_or_missing_main_writes": 0,
+  "last_processed": {
+    "source_ns": "1791680327775995000",
+    "lost": "0",
+    "inliers": "278",
+    "matches": "298",
+    "usable": "1",
+    "epoch": "2",
+    "cuts": "85",
+    "main_write": "1",
+    "main_nodes": "447",
+    "local_nodes": "447",
+    "recoveries": "2",
+    "input_present": "1",
+    "reason": "registered visual geometry; "
+  },
+  "input_retained": true
+}

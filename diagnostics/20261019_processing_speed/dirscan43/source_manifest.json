@@ -1,0 +1,9 @@
+{
+  "experiment": "dirscan43",
+  "scope": "local Windows only; Jetson validation pending",
+  "adopted": false,
+  "only_changed_function": "closed_inputs",
+  "baseline_sha256": "562ad769b499e1da26beb258a57dbd80dae5b0bd64466f626d22173ff7b03605",
+  "candidate_sha256": "3294acc1a2b3d7e6d9be2d49ac867208065ea96128bad0f7ab05b72cdcb25d80",
+  "repository_source_sha256": "0a6ce28c1adf518d87bd9fa77255f4a5f3cc65d6a57fffa7faf7c43359d8d277"
+}

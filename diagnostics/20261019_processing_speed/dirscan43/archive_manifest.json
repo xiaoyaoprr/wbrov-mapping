@@ -1,0 +1,38 @@
+{
+  "baseline.py": {
+    "bytes": 20149,
+    "sha256": "562ad769b499e1da26beb258a57dbd80dae5b0bd64466f626d22173ff7b03605"
+  },
+  "candidate.py": {
+    "bytes": 20798,
+    "sha256": "3294acc1a2b3d7e6d9be2d49ac867208065ea96128bad0f7ab05b72cdcb25d80"
+  },
+  "source_manifest.json": {
+    "bytes": 442,
+    "sha256": "4fb028d553a5a6c77802174f8c05ba2e6dc27b6875267d42065ee5287fe94063"
+  },
+  "result.json": {
+    "bytes": 2187,
+    "sha256": "95fd9651dc46dab8e5b8e774d8bab8209c6128d3d1f3d4a68e0ac8364ac84f6d"
+  },
+  "tests.log": {
+    "bytes": 3248,
+    "sha256": "f52c6511e5c149b456c49b7a14a679e78108d42bdd25fe99e4d7d93bfdde52ec"
+  },
+  "prepare_dirscan43.py": {
+    "bytes": 2700,
+    "sha256": "15f08d02b66bae40d77b825ffb2b4263a72085e0d544bcf3bba766ef9bac038e"
+  },
+  "probe_dirscan43.py": {
+    "bytes": 8665,
+    "sha256": "d0f2abfecccd84a023641d9a3f9fa9c9950e6d045ddbac47c4df33bc8663ffbf"
+  },
+  "archive_dirscan43.py": {
+    "bytes": 2171,
+    "sha256": "f2053288051e8ef87b3691df0c785f0804c96fbe788f4e9c5489728692386ae3"
+  },
+  "existing_queue_tests.py": {
+    "bytes": 10365,
+    "sha256": "36cffb4cb15b07d932f298c93ed55323df5ad8ca29b789491194d1e8f3c7f216"
+  }
+}

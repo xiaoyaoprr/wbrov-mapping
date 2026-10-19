@@ -1,0 +1,11 @@
+{
+  "scope": "candidate mapping entry with packet-gated lights only; no teleop/motion/unlock",
+  "phase": "closed",
+  "errors": [],
+  "light_pid": 680734,
+  "elapsed_s": 548.9231560960179,
+  "mapping_pid": 680738,
+  "run_dir": "/home/exocean/maps/rtabmap_calibration_ab/continuous_20261011_095946_680738",
+  "light_exit": 0,
+  "mapping_exit": 0
+}

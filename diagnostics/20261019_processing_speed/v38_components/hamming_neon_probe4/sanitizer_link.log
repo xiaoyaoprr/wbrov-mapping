@@ -1,0 +1,5 @@
+/usr/bin/ld: warning: libopencv_photo.so.4.5d, needed by /home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/vendor_shadow/lib/libgrid_map_cv.so, may conflict with libopencv_photo.so.408
+/usr/bin/ld: warning: libopencv_imgproc.so.4.5d, needed by /home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/vendor_shadow/lib/libgrid_map_cv.so, may conflict with libopencv_imgproc.so.408
+/usr/bin/ld: warning: libopencv_core.so.4.5d, needed by /home/exocean/.cache/wbrov_mapping_builds/discovery_20260905/vendor_shadow/lib/libgrid_map_cv.so, may conflict with libopencv_core.so.408
+/usr/bin/ld: warning: libopencv_imgcodecs.so.4.5d, needed by /opt/ros/humble/lib/libcv_bridge.so, may conflict with libopencv_imgcodecs.so.408
+/usr/bin/ld: warning: libtbb.so.2, needed by /lib/aarch64-linux-gnu/libopencv_core.so.4.5d, may conflict with libtbb.so.12

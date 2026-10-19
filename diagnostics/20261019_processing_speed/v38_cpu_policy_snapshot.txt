@@ -1,0 +1,11 @@
+/sys/devices/system/cpu/cpufreq/policy4 {"scaling_governor": "schedutil", "scaling_min_freq": "729600", "scaling_max_freq": "1984000", "cpuinfo_min_freq": "115200", "cpuinfo_max_freq": "1984000", "scaling_cur_freq": "1984000", "affected_cpus": "4 5 6 7"}
+/sys/devices/system/cpu/cpufreq/policy0 {"scaling_governor": "schedutil", "scaling_min_freq": "729600", "scaling_max_freq": "1984000", "cpuinfo_min_freq": "115200", "cpuinfo_max_freq": "1984000", "scaling_cur_freq": "1984000", "affected_cpus": "0 1 2 3"}
+/sys/class/thermal/thermal_zone2 {"type": "cv0-thermal", "temp": "72156"}
+/sys/class/thermal/thermal_zone0 {"type": "cpu-thermal", "temp": "76343"}
+/sys/class/thermal/thermal_zone7 {"type": "soc2-thermal", "temp": "68906"}
+/sys/class/thermal/thermal_zone5 {"type": "soc0-thermal", "temp": "71593"}
+/sys/class/thermal/thermal_zone3 {"type": "cv1-thermal", "temp": "71750"}
+/sys/class/thermal/thermal_zone1 {"type": "gpu-thermal", "temp": "72875"}
+/sys/class/thermal/thermal_zone8 {"type": "tj-thermal", "temp": "76156"}
+/sys/class/thermal/thermal_zone6 {"type": "soc1-thermal", "temp": "70781"}
+/sys/class/thermal/thermal_zone4 {"type": "cv2-thermal", "temp": "67000"}

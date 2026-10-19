@@ -76,7 +76,8 @@ public:
                 fillStamps(core,entry);publishGraph(entry,stamp);clearCloud(entry,stamp);
                 refreshed.insert(entry.key);
             }
-        } else {
+        }
+        {
             std::vector<rtabmap::Rtabmap::LocalSubmapSnapshot> snapshots;std::string reason;
             if(!core.getUnregisteredLocalSubmaps(snapshots,reason)) {
                 RCLCPP_WARN(node_.get_logger(),"Local submap snapshot unavailable: %s",reason.c_str());
@@ -85,13 +86,16 @@ public:
                 if(snapshot.poses.empty() || snapshot.registeredToMain)continue;
                 Entry & entry=findOrCreate(snapshot.mapId,snapshot.resetEpoch,snapshot.componentId);
                 entry.poses=snapshot.poses;entry.links=snapshot.links;entry.registered=false;
-                entry.active=snapshot.resetEpoch==core.getResetEpoch();
+                entry.active=snapshot.resetEpoch==core.getResetEpoch() && !core.isCurrentMapFrameRegistered();
                 fillStamps(core,entry);publishGraph(entry,stamp);publishCloud(core,entry,stamp);
                 refreshed.insert(entry.key);
             }
         }
         retireCoveredHistory(core,refreshed,stamp);
-        for(auto & row:entries_)if(!row.second.active) {row.second.voxels.clear();row.second.renderedPoses.clear();}
+        // Inactive clouds are already latched by DDS. Release their bulky voxel
+        // cache, but retain the small pose fingerprint so an unchanged archive
+        // is not decompressed and rendered again on every main-map update.
+        for(auto & row:entries_)if(!row.second.active)row.second.voxels.clear();
         unsigned unaligned=0;for(const auto & row:entries_)if(!row.second.registered && !row.second.poses.empty())++unaligned;
         unregisteredCount_.store(unaligned,std::memory_order_relaxed);
         ++revision_;std_msgs::msg::String msg;msg.data=serialize(localHealthy,stamp.nanoseconds());
@@ -100,7 +104,7 @@ public:
 private:
     Entry & findOrCreate(int mapId,unsigned long long epoch,int componentId) {
         for(auto & row:entries_)if(row.second.mapId==mapId && row.second.epoch==epoch &&
-                (row.second.componentId==componentId || row.second.poses.count(componentId)))return row.second;
+                row.second.componentId==componentId)return row.second;
         std::string key="m"+std::to_string(mapId)+"_e"+std::to_string(epoch)+"_c"+std::to_string(componentId);
         auto & e=entries_[key];e.mapId=mapId;e.epoch=epoch;e.componentId=componentId;e.key=key;
         e.frame="wbrov_submap_"+session_.substr(0,16)+"_"+key;
@@ -172,7 +176,12 @@ private:
             auto now=e.poses.find(old.first);
             if(now==e.poses.end() || now->second.getDistance(old.second)>1e-6 || now->second.getAngle(old.second)>1e-6) {changed=true;break;}
         }
-        if(changed) {e.voxels.clear();e.renderedPoses.clear();e.truncated=false;}
+        if(!changed && e.renderedPoses.size()==e.poses.size())return;
+        // An inactive entry may become active/grow after releasing its voxels.
+        // Rebuild all retained contributions, not only the newly added node.
+        if(changed || (e.voxels.empty() && !e.renderedPoses.empty())) {
+            e.voxels.clear();e.renderedPoses.clear();e.truncated=false;
+        }
         for(const auto & row:e.poses) {
             if(e.renderedPoses.count(row.first))continue;
             auto data=core.getMemory()->getNodeData(row.first,true,false,false,false);data.uncompressData();

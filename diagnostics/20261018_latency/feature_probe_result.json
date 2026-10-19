@@ -1,0 +1,18 @@
+{
+  "compile": {
+    "exit": 0,
+    "log": ""
+  },
+  "link": {
+    "exit": 0,
+    "log": ""
+  },
+  "motion_spool1": {
+    "exit": 0,
+    "output": "{\"passed\":true,\"frames\":81,\"empty\":0,\"preparation_ms\":455.151,\"mean_ms\":5.61914}\n"
+  },
+  "live_candidate1/rgbd_spool": {
+    "exit": 0,
+    "output": "{\"passed\":true,\"frames\":77,\"empty\":0,\"preparation_ms\":377.264,\"mean_ms\":4.89953}\n"
+  }
+}

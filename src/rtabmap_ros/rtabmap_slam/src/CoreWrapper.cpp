@@ -1742,6 +1742,10 @@ CoreWrapper::CoreWrapper(const rclcpp::NodeOptions & options) :
             "/wbrov/mapping_continuity/text", rclcpp::QoS(1).reliable().transient_local());
         mappingRecoveryReferencePub_ = this->create_publisher<sensor_msgs::msg::Image>(
             "/wbrov/mapping/recovery_reference_image", rclcpp::QoS(1).reliable().transient_local());
+        independentLocalizationPosePub_ = this->create_publisher<geometry_msgs::msg::PoseStamped>(
+            "/wbrov/localization/pose", rclcpp::QoS(1).reliable());
+        independentLocalizationMarkersPub_ = this->create_publisher<visualization_msgs::msg::MarkerArray>(
+            "/wbrov/localization/markers", rclcpp::QoS(1).reliable());
         mappingContinuityTimer_ = this->create_wall_timer(std::chrono::milliseconds(100), [this]() {
             const int64_t steady=mappingSteadyNs();
             const int64_t ros=now().nanoseconds();
@@ -4795,6 +4799,8 @@ void CoreWrapper::process(
                     publishAcceptedImageReceipt(receipt);
                 else RCLCPP_DEBUG(this->get_logger(), "No accepted-image receipt: %s", receiptReason.c_str());
             }
+            if(receiptSourceValid && !rtabmap_.isCurrentMapFrameRegistered())
+                updateIndependentLocalization(data,odom,imageIdentity,stamp.nanoseconds());
             if(receiptSourceValid && !rtabmap_.isCurrentMapFrameRegistered() && tryMappingVisualRecovery())
                 publishResetEpoch();
 			timeRtabmap = timer.ticks();
@@ -5570,6 +5576,20 @@ void CoreWrapper::interOdomInfoCallback(const nav_msgs::msg::Odometry::ConstShar
 	}
 }
 
+std::vector<rclcpp::TopicEndpointInfo> CoreWrapper::managedPublishersWhileRunning(const std::string & topic)
+{
+    const auto context=get_node_base_interface()->get_context();
+    if(!rclcpp::ok(context))return {};
+    try {return this->get_publishers_info_by_topic(topic);}
+    catch(const rclcpp::exceptions::RCLError &) {
+        // SIGINT can invalidate the context between the check and the query.
+        // No endpoints means no authorization. Let the executor unwind and
+        // the normal Wrapper destructor save the existing graph.
+        if(!rclcpp::ok(context))return {};
+        throw; // Runtime graph errors must not masquerade as normal shutdown.
+    }
+}
+
 bool CoreWrapper::validateResetQuarantinePublisher(
 		const std::string & topicName,
 		const char * streamName,
@@ -5585,7 +5605,7 @@ bool CoreWrapper::validateResetQuarantinePublisher(
 		return false;
 	}
 	const std::vector<rclcpp::TopicEndpointInfo> publishers =
-			this->get_publishers_info_by_topic(topicName);
+			managedPublishersWhileRunning(topicName);
 	if(publishers.size() != 1U)
 	{
 		if(publishers.size() > 1U)
@@ -8341,6 +8361,7 @@ void CoreWrapper::clearSafeRelocalizationProtocolState(bool firstUpdateHandled, 
     {
         std::lock_guard<std::mutex> lock(mappingRecoveryReferenceMutex_);
         mappingLastTrustedImage_.reset();mappingLastPublishedReference_.reset();mappingLastTrustedNodeId_=0;mappingLastLocalNodeId_=0;mappingLastTrustedEpoch_=0;
+        localizationEvidenceGate_.reset();localizationCorrection_.setNull();independentLocalizationDiagnostic_={};localizationReason_.clear();
     }
     mappingObservationSeedCorrection_.setNull();mappingObservationLastCorrection_.setNull();
 	publishMappingContinuityStatus();
@@ -8824,7 +8845,7 @@ void CoreWrapper::safeRelocalizationProposalCallback(
                     const std::string & expectedNamespace, bool bound, bool compromised,
                     const std::array<uint8_t, RMW_GID_STORAGE_SIZE> & gid) {
                 if(!bound || compromised) return false;
-                const auto publishers = this->get_publishers_info_by_topic(topic);
+                const auto publishers = managedPublishersWhileRunning(topic);
                 return publishers.size() == 1 && publishers.front().node_name() == expectedNode &&
                     publishers.front().node_namespace() == expectedNamespace &&
                     publishers.front().endpoint_gid().size() == gid.size() &&
@@ -9040,7 +9061,7 @@ bool CoreWrapper::mappingRecoveryCommitCurrent(MappingContinuityGate::Ticket tic
        !resetQuarantineOdomInfoPublisherBound_) return false;
     auto endpointCurrent = [&](const std::string & topic, const std::string & expectedNode,
             const std::string & expectedNamespace, const std::array<uint8_t,RMW_GID_STORAGE_SIZE> & gid) {
-        const auto publishers=this->get_publishers_info_by_topic(topic);
+        const auto publishers=managedPublishersWhileRunning(topic);
         return publishers.size()==1 && publishers.front().node_name()==expectedNode &&
             publishers.front().node_namespace()==expectedNamespace && publishers.front().endpoint_gid().size()==gid.size() &&
             std::equal(gid.begin(),gid.end(),publishers.front().endpoint_gid().begin());
@@ -9074,6 +9095,35 @@ void CoreWrapper::isolateRejectedRecoveryMotion(const rtabmap::Rtabmap::SafeRelo
     RCLCPP_WARN(get_logger(),"[RECOVERY_LOCAL_MOTION_FAULT] epoch=%llu from=%d to=%d; retained isolated, next stable frame starts a new recovery segment",
         fault.resetEpoch,fault.fromId,fault.toId);
     publishMappingContinuityStatus();
+}
+
+void CoreWrapper::updateIndependentLocalization(const rtabmap::SensorData & data,const rtabmap::Transform & odom,
+    const rtabmap::ImageInputIdentity & identity,long long stampNs)
+{
+    const auto epoch=rtabmap_.getResetEpoch();
+    const auto serial=mappingContinuityGate_.localContinuitySerial();
+    rtabmap::Rtabmap::SafeRelocalizationLimits limits{};
+    limits.maxHoldoutTranslation=safeRelocalizationMaxTranslation_;limits.maxHoldoutRotation=safeRelocalizationMaxRotation_;
+    limits.minBridgeTranslation=safeRelocalizationMinBridgeTranslation_;limits.minBridgeRotation=safeRelocalizationMinBridgeRotation_;
+    limits.maxAnchorZ=safeRelocalizationMaxAnchorZ_;limits.maxAnchorTilt=safeRelocalizationMaxAnchorTilt_;
+    limits.maxInformationCondition=safeRelocalizationMaxInformationCondition_;
+    rtabmap::Transform measured;rtabmap::Rtabmap::RecoveryObservationDiagnostics diagnostic;std::string reason;
+    if(odom.isNull() || identity.headerStampNs!=stampNs)return;
+    const bool valid=rtabmap_.localizeCurrentObservation(limits,measured,diagnostic,reason,&data,&identity) &&
+        serial==mappingContinuityGate_.localContinuitySerial() && epoch==rtabmap_.getResetEpoch() &&
+        now().nanoseconds()>=stampNs && now().nanoseconds()-stampNs<=LocalizationEvidenceGate::MAX_ANCHOR_AGE_NS;
+    std::lock_guard<std::mutex> lock(mappingRecoveryReferenceMutex_);
+    independentLocalizationDiagnostic_=diagnostic;localizationReason_=reason;
+    double translation=0,rotation=0;
+    if(valid && !localizationCorrection_.isNull()) {
+        const auto prediction=localizationCorrection_*odom;
+        translation=prediction.getDistance(measured);rotation=prediction.getAngle(measured)*180.0/M_PI;
+    }
+    localizationEvidenceGate_.observe(epoch,serial,stampNs,mappingSteadyNs(),valid,translation,rotation);
+    if(valid)localizationCorrection_=measured*odom.inverse();
+    else localizationCorrection_.setNull();
+    RCLCPP_INFO(get_logger(),"[READ_ONLY_LOCALIZATION] epoch=%llu valid=%d observations=%u anchors=%d,%d tested=%d reason=%s",
+        epoch,valid?1:0,localizationEvidenceGate_.observations(),diagnostic.firstAnchor,diagnostic.secondAnchor,diagnostic.tested,reason.c_str());
 }
 
 bool CoreWrapper::tryMappingVisualRecovery()
@@ -9175,11 +9225,12 @@ bool CoreWrapper::observePendingMappingRecovery(const rtabmap::SensorData & data
     const auto ticket=mappingContinuityGate_.ticket(stampNs);
     const auto epoch=pendingMappingRecovery_.epoch;
     if(ticket.generation!=pendingMappingRecovery_.ticket.generation || epoch!=rtabmap_.getResetEpoch() ||
-       pendingMappingRecovery_.revision!=safeRelocalizationGraphRevision_ ||
-       stampNs-pendingMappingRecovery_.ticket.frameNs>MappingContinuityGate::QUALITY_VERIFY_NS)
+       pendingMappingRecovery_.revision!=safeRelocalizationGraphRevision_)
     {discardPendingMappingRecovery("prepared recovery identity or source continuity changed");return false;}
     if(!mappingContinuityGate_.observationInputAllowed(ticket,epoch,mappingSteadyNs(),now().nanoseconds()))return false;
-    if(!mappingRecoveryCommitCurrent(pendingMappingRecovery_.ticket,epoch,pendingMappingRecovery_.requireProposal))return false;
+    if(!mappingRecoveryCommitCurrent(pendingMappingRecovery_.ticket,epoch,pendingMappingRecovery_.requireProposal)) {
+        discardPendingMappingRecovery("prepared recovery sources or bounded observation progress invalidated");return false;
+    }
     const auto before=mappingContinuityGate_.snapshot(mappingSteadyNs(),now().nanoseconds());
     if(before.mapObservationCount==0) {
         pendingMappingRecovery_.observations.clear();
@@ -9195,6 +9246,13 @@ bool CoreWrapper::observePendingMappingRecovery(const rtabmap::SensorData & data
     if(!verified || !current || measured.isNull() || odom.isNull())
     {discardPendingMappingRecovery(verified?"candidate observation source invalidated":reason);return false;}
     const auto correction=measured*odom.inverse();
+    {
+        std::lock_guard<std::mutex> lock(mappingRecoveryReferenceMutex_);
+        const auto predicted=localizationCorrection_.isNull()?measured:localizationCorrection_*odom;
+        localizationEvidenceGate_.observe(epoch,mappingContinuityGate_.localContinuitySerial(),stampNs,mappingSteadyNs(),true,
+            predicted.getDistance(measured),predicted.getAngle(measured)*180.0/M_PI);
+        localizationCorrection_=correction;localizationReason_="direct two-anchor observation; graph commit still separate";
+    }
     const bool ready=mappingContinuityGate_.observeRegisteredMap(ticket,epoch,true,
         correction.getDistance(pendingMappingRecovery_.correction),correction.getAngle(pendingMappingRecovery_.correction)*180.0/M_PI,
         correction.getDistance(pendingMappingRecovery_.lastCorrection),correction.getAngle(pendingMappingRecovery_.lastCorrection)*180.0/M_PI,
@@ -9269,12 +9327,22 @@ bool CoreWrapper::observeRecoveredMainMap(const rtabmap::SensorData & data,
 
     rtabmap::Transform measuredMainPose;
     std::string reason;
+    rtabmap::Rtabmap::RecoveryObservationDiagnostics diagnostic;
     const bool localOnly=!rtabmap_.isCurrentMapFrameRegistered();
     const bool verified=localOnly ? rtabmap_.validateLocalMapObservation(
-        data,odom,mappingLastLocalNodeId_,limits,measuredMainPose,reason) :
+        data,odom,mappingLastLocalNodeId_,limits,measuredMainPose,reason,&diagnostic) :
         (lastTrusted>0 && rtabmap_.validateRegisteredMapObservation(
-            data,odom,lastTrusted,limits,measuredMainPose,reason));
+            data,odom,lastTrusted,limits,measuredMainPose,reason,&diagnostic));
     const bool sourcesCurrent=mappingRecoveryCommitCurrent(ticket,epoch,false);
+    if(!verified && sourcesCurrent && diagnostic.tested>0 && diagnostic.predictionRejected==0 &&
+       diagnostic.agreementRejected==0 && diagnostic.firstAnchor==0 && diagnostic.secondAnchor==0) {
+        // No measured conflicting alignment. Preserve the original bounded
+        // window; additional dense observations may supply missing overlap.
+        mappingContinuityGate_.waitForRegisteredMapObservation(ticket,epoch,mappingSteadyNs(),now().nanoseconds());
+        RCLCPP_WARN(get_logger(),"[OBSERVATION_PENDING] source_ns=%lld tested=%d matched=%d raw_rejected=%d baseline_rejected=%d; no write or deadline extension: %s",
+            stampNs,diagnostic.tested,diagnostic.matched,diagnostic.rawRejected,diagnostic.baselineRejected,reason.c_str());
+        return false;
+    }
     rtabmap::Transform correction;
     double seedTranslation=std::numeric_limits<double>::infinity(),seedRotation=seedTranslation;
     double stepTranslation=seedTranslation,stepRotation=seedTranslation;
@@ -9308,6 +9376,32 @@ void CoreWrapper::publishMappingContinuityStatus()
     if(!safeRelocalizationEnabled_ || !mappingContinuityStatusPub_) return;
     const auto s=mappingContinuityGate_.snapshot(mappingSteadyNs(), now().nanoseconds());
     const bool localReady=mappingContinuityGate_.localGeometryReady(s.sourceNs,mappingSteadyNs(),now().nanoseconds());
+    const auto localSerial=mappingContinuityGate_.localContinuitySerial();
+    rtabmap::Transform latestOdom;long long latestOdomStamp=0;
+    // lastPose_ follows the 1 Hz mapping image stream. Current localization
+    // must use the independent full-rate, source-bound measured odometry.
+    // Keep its chain tied to an admitted RGB-D pose, so a jump cannot be
+    // propagated through a previously validated main-map correction.
+    unsigned long long acceptedChain=0;
+    if(lastPoseMutex_.lockTry()==0) {
+        std::unique_lock<UMutex> lock(lastPoseMutex_,std::adopt_lock);
+        acceptedChain=resetQuarantineContinuityAnchorChain_;
+    }
+    {
+        // This function is also called while the OdomInfo state lock is held.
+        // Never invert its order against a recovery commit's auth->state locks.
+        std::unique_lock<std::mutex> lock(resetQuarantineOdomAuthMutex_,std::try_to_lock);
+        if(lock.owns_lock() && resetQuarantineOdomPublisherBound_ && !resetQuarantineOdomPublisherCompromised_ &&
+           acceptedChain!=0 && resetQuarantineContinuityChain_==acceptedChain) {
+            latestOdom=resetQuarantineContinuityPose_;latestOdomStamp=resetQuarantineContinuityStampNs_;
+        }
+    }
+    const auto rosNs=now().nanoseconds();
+    const bool freshOdom=localReady && !latestOdom.isNull() && latestOdomStamp>0 && rosNs>=latestOdomStamp &&
+        rosNs-latestOdomStamp<=MappingContinuityGate::MAX_AGE_NS;
+    bool localized=false,positionCandidate=false;unsigned localizationSamples=0;long long anchorStamp=0;
+    std::string localizationReason;rtabmap::Transform localizedPose;
+    rtabmap::Rtabmap::RecoveryObservationDiagnostics diagnostic;
     sensor_msgs::msg::Image::SharedPtr reference;
     int trustedNode=0;unsigned long long trustedEpoch=0;bool publishReference=false;
     {
@@ -9318,6 +9412,11 @@ void CoreWrapper::publishMappingContinuityStatus()
         // serve as an image-publication sequence number.
         publishReference=reference && reference!=mappingLastPublishedReference_;
         if(publishReference)mappingLastPublishedReference_=reference;
+        localized=localizationEvidenceGate_.current(s.epoch,localSerial,mappingSteadyNs(),freshOdom);
+        positionCandidate=localizationEvidenceGate_.candidate(s.epoch,localSerial,mappingSteadyNs());
+        localizationSamples=localizationEvidenceGate_.observations();anchorStamp=localizationEvidenceGate_.stamp();
+        localizationReason=localizationReason_;diagnostic=independentLocalizationDiagnostic_;
+        if(localized && !localizationCorrection_.isNull())localizedPose=localizationCorrection_*latestOdom;
     }
     std_msgs::msg::String status;
     status.data=uFormat("{\"schema\":\"wbrov.mapping-continuity.v1\",\"state\":\"%s\","
@@ -9342,15 +9441,40 @@ void CoreWrapper::publishMappingContinuityStatus()
         submapPublisher_?submapPublisher_->unregisteredCount():0U);
     status.data+=uFormat("\"receipt_latency_ns\":%lld,\"arrival_age_ns\":%lld,\"source_age_ns\":%lld,\"observing_local_map\":%s,",
         s.receiptLatencyNs,s.arrivalAgeNs,s.sourceAgeNs,s.observingLocal?"true":"false");
+    status.data+=uFormat("\"max_observed_source_gap_ns\":%lld,\"measured_bridge_limit_ns\":%lld,\"max_gap_bridge_limit_ratio\":%.6f,",
+        s.maxObservedSourceGapNs,MappingContinuityGate::MAX_MEASURED_BRIDGE_NS,
+        double(s.maxObservedSourceGapNs)/MappingContinuityGate::MAX_MEASURED_BRIDGE_NS);
+    status.data+=uFormat("\"candidate_elapsed_ns\":%lld,\"candidate_progress_age_ns\":%lld,\"candidate_step_budget_ns\":%lld,\"candidate_total_budget_ns\":%lld,",
+        s.candidateElapsedNs,s.candidateProgressAgeNs,MappingContinuityGate::CANDIDATE_STEP_NS,MappingContinuityGate::CANDIDATE_TOTAL_NS);
+    status.data+=uFormat("\"localization_status\":\"%s\",\"localization_valid\":%s,\"localization_observations\":%u,\"localization_anchor_stamp_ns\":%lld,\"localization_navigation_authorized\":false,",
+        s.registered&&freshOdom?"TRACKING":localized?"LOCALIZED":positionCandidate?"CANDIDATE":"LOST",
+        ((s.registered&&freshOdom)||localized)?"true":"false",localizationSamples,anchorStamp);
+    status.data+=uFormat("\"localization_diagnostics\":{\"references\":%d,\"candidates\":%d,\"tested\":%d,\"matched\":%d,\"raw_rejected\":%d,\"prediction_rejected\":%d,\"baseline_rejected\":%d,\"agreement_rejected\":%d,\"first_anchor\":%d,\"second_anchor\":%d,\"global_search\":%s},\"localization_reason\":%s,",
+        diagnostic.references,diagnostic.nearby,diagnostic.tested,diagnostic.matched,diagnostic.rawRejected,diagnostic.predictionRejected,
+        diagnostic.baselineRejected,diagnostic.agreementRejected,diagnostic.firstAnchor,diagnostic.secondAnchor,diagnostic.globalSearch?"true":"false",mappingJsonString(localizationReason).c_str());
     status.data+="\"quality_reason\":"+mappingJsonString(s.qualityReason)+",\"last_cut_reason\":"+mappingJsonString(s.lastCutReason)+
         ",\"last_cut_quality_reason\":"+mappingJsonString(s.lastCutQualityReason)+",\"last_pause_reason\":"+mappingJsonString(s.lastPauseReason)+",\"quality_trigger_reason\":"+mappingJsonString(s.qualityTriggerReason)+"}";
     mappingContinuityStatusPub_->publish(status);
+    if(localized && !localizedPose.isNull() && independentLocalizationPosePub_) {
+        geometry_msgs::msg::PoseStamped pose;pose.header.stamp=rclcpp::Time(latestOdomStamp);pose.header.frame_id=mapFrameId_;
+        rtabmap_conversions::transformToPoseMsg(localizedPose,pose.pose);
+        independentLocalizationPosePub_->publish(pose);
+        visualization_msgs::msg::MarkerArray markers;visualization_msgs::msg::Marker arrow;
+        arrow.header=pose.header;arrow.ns="validated_localization_not_map_commit";arrow.id=0;
+        arrow.type=visualization_msgs::msg::Marker::ARROW;arrow.action=visualization_msgs::msg::Marker::ADD;
+        arrow.pose=pose.pose;arrow.scale.x=.12;arrow.scale.y=.025;arrow.scale.z=.025;
+        arrow.color.r=.2;arrow.color.g=1.;arrow.color.b=.8;arrow.color.a=1.;
+        arrow.lifetime=rclcpp::Duration::from_seconds(.5);markers.markers.push_back(arrow);
+        independentLocalizationMarkersPub_->publish(markers);
+    }
     std_msgs::msg::String display;display.data=MappingContinuityGate::chinese(s.state);
     if(s.state==MappingContinuityGate::State::PAUSED && !reference)display.data="定位丢失，建图暂停；尚无可信参考图像";
     if(s.observingLocal)display.data=uFormat("正在核验临时子图连续性 %u/5；主地图仍未对齐",s.mapObservationCount);
     else if(s.observingMainMap)display.data=uFormat("候选主图位置，正在观察验证 %u/5；主地图暂停更新",s.mapObservationCount);
     else if(s.qualityPending)display.data="短暂定位退化，暂停写图；正在核验已有关键帧";
     else if(localReady && !s.mainMapWriteAllowed)display.data="局部跟踪正常，临时子图记录中；尚未对齐主地图";
+    if(localized && !s.mainMapWriteAllowed)display.data="当前位置已定位；主图写入仍在独立验证，临时数据未合并";
+    else if(positionCandidate && !s.mainMapWriteAllowed)display.data=uFormat("已找到主图位置候选，定位验证 %u/3；建图暂停",localizationSamples);
     display.data+=uFormat("；未对齐子图 %u",submapPublisher_?submapPublisher_->unregisteredCount():0U);
     mappingContinuityTextPub_->publish(display);
     if(publishReference && mappingRecoveryReferencePub_)mappingRecoveryReferencePub_->publish(*reference);

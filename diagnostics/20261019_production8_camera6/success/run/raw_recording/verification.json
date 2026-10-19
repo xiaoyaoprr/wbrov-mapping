@@ -1,0 +1,44 @@
+{
+  "schema": "wbrov.raw-recording-verification.v1",
+  "complete": true,
+  "scope": "SDK-ingested frames, closed SVO index and boundary decode; full-frame decode is a separate replay check",
+  "sensor_capture_losslessness_proven": false,
+  "computed_depth_stored": false,
+  "sdk_version": "5.2.0",
+  "frames": {
+    "frames": 6412,
+    "decoded": 2,
+    "first_source_ns": 1791747431527955000,
+    "last_source_ns": 1791747737580371000
+  },
+  "status": {
+    "schema": "wbrov.raw-recording.v1",
+    "state": "closed",
+    "clean_shutdown": true,
+    "complete": false,
+    "requires_post_stop_verification": true,
+    "first_source_ns": 1791747431527955000,
+    "last_source_ns": 1791747737580371000,
+    "grab_calls": 6412,
+    "unique_computed_stamps": 6412,
+    "sdk_frames_ingested": 6412,
+    "sdk_frames_encoded_before_close": 6410,
+    "status_false_samples": 2,
+    "duplicate_grabs": 0,
+    "grab_errors": 0,
+    "write_errors": 0
+  },
+  "sha256": {
+    "stereo.svo2": "3cc17886f9b535feebccb4c8090dc3b4295ee7f0ccbd218b1e82d09559ec344a",
+    "status.json": "0618c81687c90a337c3310397bbecc9e961433ef2984be740382958ab2ceb66f",
+    "capture.jsonl": "76e0841c5e61f2b4162cf0eb505b11f32ea0ff447f620d87aea128dd7f9ad23f",
+    "init.json": "9701b6487701e0527c3333b8565e6c7f77a4da09648b04d37f2b4b6200c8170f",
+    "runtime.json": "b227ed5ddd6abe53946e80c2c9b2e01b1c120ec0d0b0088edf6e30348f53af8e",
+    "recording.json": "dee9ef6b99c4b198042974e772d6f14b86c3701f74a95ec4d4d8fc4e70174a46",
+    "water_calibration.yml": "d0a5f4486794add80330be1b89bea5aa890d3fed124456418ff1c98a59708389",
+    "sdk_version.txt": "e791457c25b99d69f3d5ca028f6a7f6d88f7e2d85af5162a92a8c5f3aecf59b0",
+    "camera_imu_extrinsics.json": "c56ecf7366335da18577a9d09d57b90ee6e17cd85b0795cd009573eac22ba4aa"
+  },
+  "sdk_instant_write_status_is_diagnostic_final_index_controls_coverage": true,
+  "replay_requires_same_sdk_calibration_and_depth_configuration": true
+}

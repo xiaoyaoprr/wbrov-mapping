@@ -1,0 +1,97 @@
+{
+  "scope": "nested/concurrent cumulative timings, total differences not proof of stable end-to-end speedup; Core5 worker39 unchanged",
+  "comparison": {
+    "sha/other": {
+      "before_calls": 16523,
+      "after_calls": 16523,
+      "before_seconds": 1.718309792,
+      "after_seconds": 1.694631552
+    },
+    "atomic_json/session.json": {
+      "before_calls": 1,
+      "after_calls": 1,
+      "before_seconds": 0.009864608,
+      "after_seconds": 0.011555744
+    },
+    "atomic_json/status.json": {
+      "before_calls": 1059,
+      "after_calls": 1100,
+      "before_seconds": 14.87948528,
+      "after_seconds": 1.046677344
+    },
+    "closed_inputs": {
+      "before_calls": 751,
+      "after_calls": 751,
+      "before_seconds": 6.838408288,
+      "after_seconds": 6.562549664
+    },
+    "sha/recorded_frames": {
+      "before_calls": 1124,
+      "after_calls": 1124,
+      "before_seconds": 56.412955424,
+      "after_seconds": 51.543708416
+    },
+    "descriptor": {
+      "before_calls": 749,
+      "after_calls": 749,
+      "before_seconds": 44.552279488,
+      "after_seconds": 40.397088128
+    },
+    "python_decode": {
+      "before_calls": 10746,
+      "after_calls": 10746,
+      "before_seconds": 30.035437472,
+      "after_seconds": 30.004042144
+    },
+    "tag_observer": {
+      "before_calls": 375,
+      "after_calls": 375,
+      "before_seconds": 79.12684672,
+      "after_seconds": 78.808637312
+    },
+    "prepared_take_wait": {
+      "before_calls": 375,
+      "after_calls": 375,
+      "before_seconds": 3.189723104,
+      "after_seconds": 3.112644768
+    },
+    "atomic_json/input": {
+      "before_calls": 375,
+      "after_calls": 375,
+      "before_seconds": 4.001483232,
+      "after_seconds": 3.826095872
+    },
+    "sha/main_cloud": {
+      "before_calls": 376,
+      "after_calls": 376,
+      "before_seconds": 0.418604032,
+      "after_seconds": 0.409531424
+    },
+    "sha/tags": {
+      "before_calls": 376,
+      "after_calls": 376,
+      "before_seconds": 0.046976736,
+      "after_seconds": 0.044573536
+    },
+    "atomic_json/receipt": {
+      "before_calls": 375,
+      "after_calls": 375,
+      "before_seconds": 4.252187584,
+      "after_seconds": 3.687141056
+    },
+    "sha/map_db": {
+      "before_calls": 1,
+      "after_calls": 1,
+      "before_seconds": 0.643963904,
+      "after_seconds": 0.639947584
+    },
+    "atomic_json/save.json": {
+      "before_calls": 1,
+      "after_calls": 1,
+      "before_seconds": 0.007955328,
+      "after_seconds": 0.011702272
+    }
+  },
+  "baseline_wall_seconds": 464.2851670400123,
+  "candidate_wall_seconds": 472.9209513600217
+}

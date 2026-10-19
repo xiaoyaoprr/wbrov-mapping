@@ -1,0 +1,412 @@
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+[2026-10-12 03:30:46 UTC][ZED][INFO] Logging level INFO
+[2026-10-12 03:30:48 UTC][ZED][INFO] [Init]  Camera FW version: 2001
+[2026-10-12 03:30:48 UTC][ZED][INFO] [Init]  Video mode: HD1200@60
+[2026-10-12 03:30:48 UTC][ZED][INFO] [Init]  Serial Number: S/N 40408468
+[2026-10-12 03:30:48 UTC][ZED][INFO] [Init]  Depth mode selected: NEURAL. Ensure this mode matches your application's performance and accuracy requirements. See https://www.stereolabs.com/docs/depth-sensing/depth-modes for help.
+[INFO] [1791747048.919831008] [zed_rgbd_dual_stream_publisher]: [CALIB_AUDIT] version=2 SDK=5.2.0 serial=40408468 model=ZED X native_size=1920x1200 native_fps=60.000 self_calibration=disabled source=/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_combo42/config/water_calibration.yml diagnostic_enqueued_steady_ns=525720544358464
+[INFO] [1791747048.920169696] [zed_rgbd_dual_stream_publisher]: [CALIB_AUDIT] RAW_UNRECTIFIED.left image_size=1920x1200 K_px=[fx=986.227478,fy=986.639038,cx=997.52832,cy=614.111938] diagnostic_enqueued_steady_ns=525720544377056
+[INFO] [1791747048.920235680] [zed_rgbd_dual_stream_publisher]: [CALIB_AUDIT] RAW_UNRECTIFIED.left D_first5=[0.37245584516763408,0.091235928188563895,0.0017545982424767789,-4.066398407105886e-05,-0.0825864575048849] diagnostic_enqueued_steady_ns=525720544389920
+[INFO] [1791747048.920265248] [zed_rgbd_dual_stream_publisher]: [CALIB_AUDIT] RAW_UNRECTIFIED.right image_size=1920x1200 K_px=[fx=989.456787,fy=989.579468,cx=941.461426,cy=632.411255] diagnostic_enqueued_steady_ns=525720544461152
+[INFO] [1791747048.920290848] [zed_rgbd_dual_stream_publisher]: [CALIB_AUDIT] RAW_UNRECTIFIED.right D_first5=[0.38738767980474997,0.02270293228732688,0.0043875628549967793,-0.0075980833583041809,0.0547975066417336] diagnostic_enqueued_steady_ns=525720544465600
+[INFO] [1791747048.920312832] [zed_rgbd_dual_stream_publisher]: [CALIB_AUDIT] RAW_UNRECTIFIED.stereo T_m=[0.120515764,-0.0002606895,0.00265093381] Rodrigues_rad=[0.0045881574,0.0163848717,0.00021676482] baseline_m=0.120545201 diagnostic_enqueued_steady_ns=525720544506752
+[INFO] [1791747048.920335520] [zed_rgbd_dual_stream_publisher]: [CALIB_AUDIT] RECTIFIED_NATIVE.left image_size=1920x1200 K_px=[fx=1304.099,fy=1304.099,cx=982.897522,cy=617.382324] diagnostic_enqueued_steady_ns=525720544511232
+[INFO] [1791747048.920357120] [zed_rgbd_dual_stream_publisher]: [CALIB_AUDIT] RECTIFIED_NATIVE.left D_first5=[0,0,0,0,0] diagnostic_enqueued_steady_ns=525720544518720
+[INFO] [1791747048.920378624] [zed_rgbd_dual_stream_publisher]: [CALIB_AUDIT] RECTIFIED_NATIVE.right image_size=1920x1200 K_px=[fx=1304.099,fy=1304.099,cx=982.897522,cy=617.382324] diagnostic_enqueued_steady_ns=525720544521312
+[INFO] [1791747048.920399584] [zed_rgbd_dual_stream_publisher]: [CALIB_AUDIT] RECTIFIED_NATIVE.right D_first5=[0,0,0,0,0] diagnostic_enqueued_steady_ns=525720544529696
+[INFO] [1791747048.920420384] [zed_rgbd_dual_stream_publisher]: [CALIB_AUDIT] RECTIFIED_NATIVE.stereo T_m=[0.120545194,0,0] Rodrigues_rad=[0,0,0] baseline_m=0.120545194 diagnostic_enqueued_steady_ns=525720544536192
+[INFO] [1791747048.920441312] [zed_rgbd_dual_stream_publisher]: [CALIB_AUDIT] custom_raw_gate=PASS verified=native_Size,left/right_raw_K,left/right_D_first5 diagnostic_enqueued_steady_ns=525720544836128
+Parameters saved in /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/debug_camera42/raw_recording/init.json
+[2026-10-12 03:30:48 UTC][ZED][INFO] [Init]  Notice: This recording uses SVO version 2, which includes high-frequency IMU data. To revert to legacy SVO mode, set the ZED_SDK_SVO_VERSION environment variable to 1.
+NvMMLiteOpen : Block : BlockType = 8 
+===== NvVideo: NVENC =====
+NvMMLiteBlockCreate : Block : BlockType = 8 
+NvVideo: H265 : Profile : 1 
+NVMEDIA: Need to set EMC bandwidth : 5744000 
+[INFO] [1791747048.981673696] [zed_rgbd_dual_stream_publisher]: [DUAL_STREAM] native=HD1200@60 sdk_compute_cap=30.00 depth=NEURAL odom=384x240@20.00 map=960x600@1.00 same_grab=true map_stamp_subset_of_odom=true map_publish_requires_exact_valid_odom_ack=true low_published_before_high_retrieve=true self_calibration=disabled diagnostic_enqueued_steady_ns=525720606274464
+[INFO] [1791747048.981893632] [zed_rgbd_dual_stream_publisher]: [DUAL_STREAM] odom_K=[260.819794 260.819794 196.579498 123.476463] map_K=[652.049500 652.049500 491.448761 308.691162] diagnostic_enqueued_steady_ns=525720606290976
+[INFO] [1791747048.981936288] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=995066-525717695534720 event_sequence=1 event=run_started timeout_ns=750000000 single_threaded_executor=true one_authoritative_odom_verdict_per_stamp_required=true producer_pid=995066 log_stream=dedicated_bridge_stdout_stderr map_triplet_semantics=local_publish_calls_only diagnostic_enqueued_steady_ns=525720606298112
+[INFO] [1791747048.982176576] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=995066-525717695534720 event_sequence=2 event=map_due_planned planned_sequence=1 decision_steady_ns=525720606791200 diagnostic_enqueued_steady_ns=525720606792160
+NvVideo: bBlitMode is set to TRUE 
+[INFO] [1791747049.150250688] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=995066-525717695534720 event_sequence=3 event=queued_waiting_exact_odom map_stamp_ns=1791747048944206000 planned_sequence=1 queue_steady_ns=525720774834336 diagnostic_enqueued_steady_ns=525720774837440
+[INFO] [1791747049.150452832] [zed_rgbd_dual_stream_publisher]: [MAP_STAMP_EVENT] schema_version=2 run_id=995066-525717695534720 event_sequence=4 event=map_plan_outcome planned_sequence=1 outcome=queued map_stamp_ns=1791747048944206000 diagnostic_enqueued_steady_ns=525720774856096
+
+Thread 39 "zed_rgbd_publis" received signal SIGSEGV, Segmentation fault.
+[Switching to Thread 0xffff6d3a7840 (LWP 995185)]
+0x0000fffff43e74d4 in ?? () from /lib/aarch64-linux-gnu/libzstd.so.1
+
+Thread 39 (Thread 0xffff6d3a7840 (LWP 995185) "zed_rgbd_publis"):
+#0  0x0000fffff43e74d4 in ?? () from /lib/aarch64-linux-gnu/libzstd.so.1
+#1  0x0000fffff43e7c00 in ZSTD_compressStream2 () from /lib/aarch64-linux-gnu/libzstd.so.1
+#2  0x0000fffff43e8144 in ZSTD_compressStream2_simpleArgs () from /lib/aarch64-linux-gnu/libzstd.so.1
+#3  0x0000fffff43e81fc in ZSTD_compress2 () from /lib/aarch64-linux-gnu/libzstd.so.1
+#4  0x0000aaaaaaadc230 in wbrov_spool::writeCompressedFrame(std::ostream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) ()
+#5  0x0000aaaaaaaeadbc in wbrov_spool::Writer::consume(wbrov_spool::Frame const&) ()
+#6  0x0000aaaaaaaf163c in BoundedAsyncWriter<wbrov_spool::Frame>::run() ()
+#7  0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#8  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#9  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 38 (Thread 0xffff6dbb7840 (LWP 995184) "zed_rgbd_publis"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0x0, op=393, expected=0, futex_word=0xaaaab0bfe754) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0x0, clockid=0, expected=0, futex_word=0xaaaab0bfe754) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0xaaaab0bfe754, expected=expected@entry=0, clockid=clockid@entry=0, abstime=abstime@entry=0x0, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x0000fffff3e6c8ec in __pthread_cond_wait_common (abstime=0x0, clockid=0, mutex=0xaaaab0bfe6f8, cond=0xaaaab0bfe728) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_wait (cond=0xaaaab0bfe728, mutex=0xaaaab0bfe6f8) at ./nptl/pthread_cond_wait.c:627
+#5  0x0000aaaaaaad89b8 in std::thread::_State_impl<std::thread::_Invoker<std::tuple<BoundedAsyncWriter<RawSvoFile::JournalRecord>::BoundedAsyncWriter(unsigned long, std::function<void (RawSvoFile::JournalRecord const&)>)::{lambda()#1}> > >::_M_run() ()
+#6  0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#7  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#8  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 37 (Thread 0xffff6e3c7840 (LWP 995183) "V4L2_EncThread"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0x0, op=393, expected=0, futex_word=0xaaaab0297c3c) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0x0, clockid=0, expected=0, futex_word=0xaaaab0297c3c) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0xaaaab0297c3c, expected=expected@entry=0, clockid=clockid@entry=0, abstime=abstime@entry=0x0, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x0000fffff3e6c8ec in __pthread_cond_wait_common (abstime=0x0, clockid=0, mutex=0xaaaab0297be0, cond=0xaaaab0297c10) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_wait (cond=0xaaaab0297c10, mutex=0xaaaab0297be0) at ./nptl/pthread_cond_wait.c:627
+#5  0x0000ffffeeadb6fc in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libnvos.so
+#6  0x0000ffffed94e30c [PAC] in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libnvmmlite_video.so
+#7  0x0000ffffeead9b78 [PAC] in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libnvos.so
+#8  0x0000fffff3e6d5b8 [PAC] in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#9  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 36 (Thread 0xffff6ebd7840 (LWP 995182) "V4L2_EncThread"):
+#0  ioctl () at ../sysdeps/unix/sysv/linux/aarch64/ioctl.S:25
+#1  0x0000ffffeeb4b264 in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libnvrm_host1x.so
+#2  0x0000ffffeeb48cbc [PAC] in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libnvrm_host1x.so
+#3  0x0000ffffed9535fc [PAC] in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libnvmmlite_video.so
+#4  0x0000ffffed94aef8 [PAC] in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libnvmmlite_video.so
+#5  0x0000ffffeead9b78 [PAC] in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libnvos.so
+#6  0x0000fffff3e6d5b8 [PAC] in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#7  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 35 (Thread 0xffff753d5840 (LWP 995181) "zed_rgbd_publis"):
+#0  __memcpy_generic () at ../sysdeps/aarch64/multiarch/../memcpy.S:181
+#1  0x0000fffff4d28388 in MCAPWriter::writeImageData() () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+#2  0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#4  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 34 (Thread 0xffff75be5840 (LWP 995180) "zed_rgbd_publis"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0xffff75be4ee0, op=137, expected=0, futex_word=0xaaaaad3760ac) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0xffff75be4ee0, clockid=0, expected=0, futex_word=0xaaaaad3760ac) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0xaaaaad3760ac, expected=expected@entry=0, clockid=clockid@entry=1, abstime=abstime@entry=0xffff75be4ee0, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x0000fffff3e6ced8 in __pthread_cond_wait_common (abstime=0xffff75be4ee0, clockid=1, mutex=0xaaaaad3760b0, cond=0xaaaaad376080) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_clockwait64 (abstime=0xffff75be4ee0, clockid=1, mutex=0xaaaaad3760b0, cond=0xaaaaad376080) at ./nptl/pthread_cond_wait.c:691
+#5  ___pthread_cond_clockwait64 (cond=0xaaaaad376080, mutex=0xaaaaad3760b0, clockid=1, abstime=0xffff75be4ee0) at ./nptl/pthread_cond_wait.c:679
+#6  0x0000fffff4d277f4 in MCAPWriter::writeData() () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+#7  0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#8  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#9  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 33 (Thread 0xffff763f5840 (LWP 995179) "Capture Plane"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0x0, op=393, expected=0, futex_word=0xaaaaada5df38) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0x0, clockid=0, expected=0, futex_word=0xaaaaada5df38) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0xaaaaada5df38, expected=expected@entry=0, clockid=clockid@entry=0, abstime=abstime@entry=0x0, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x0000fffff3e6c8ec in __pthread_cond_wait_common (abstime=0x0, clockid=0, mutex=0xaaaaada5dee0, cond=0xaaaaada5df10) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_wait (cond=0xaaaaada5df10, mutex=0xaaaaada5dee0) at ./nptl/pthread_cond_wait.c:627
+#5  0x0000ffffeeadb6fc in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libnvos.so
+#6  0x0000ffffab7a2e20 [PAC] in TegraV4L2_Poll_CPlane () from /usr/lib/aarch64-linux-gnu/nvidia/libtegrav4l2.so
+#7  0x0000ffffe32a1420 [PAC] in plugin_ioctl () from /usr/lib/aarch64-linux-gnu/libv4l/plugins/nv/libv4l2_nvvideocodec.so
+#8  0x0000fffff11d4118 [PAC] in v4l2_ioctl () from /lib/aarch64-linux-gnu/libv4l2.so.0
+#9  0x0000fffff4e6e184 [PAC] in ?? () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+#10 0x0000fffff4e6e36c in ?? () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+#11 0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+
+Thread 32 (Thread 0xffff76c05840 (LWP 995178) "V4L2_EncThread"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0x0, op=393, expected=0, futex_word=0xaaaaabac8b6c) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0x0, clockid=0, expected=0, futex_word=0xaaaaabac8b6c) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0xaaaaabac8b6c, expected=expected@entry=0, clockid=clockid@entry=0, abstime=abstime@entry=0x0, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x0000fffff3e6c8ec in __pthread_cond_wait_common (abstime=0x0, clockid=0, mutex=0xaaaaabac8b10, cond=0xaaaaabac8b40) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_wait (cond=0xaaaaabac8b40, mutex=0xaaaaabac8b10) at ./nptl/pthread_cond_wait.c:627
+#5  0x0000ffffeeadb6fc in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libnvos.so
+#6  0x0000ffffab7c1cc4 [PAC] in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libtegrav4l2.so
+#7  0x0000ffffeead9b78 [PAC] in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libnvos.so
+#8  0x0000fffff3e6d5b8 [PAC] in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#9  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 31 (Thread 0xffffabff7840 (LWP 995177) "zed_rgbd_publis"):
+#0  ioctl () at ../sysdeps/unix/sysv/linux/aarch64/ioctl.S:25
+#1  0x0000ffffeeb4b264 in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libnvrm_host1x.so
+#2  0x0000ffffe3276fd0 [PAC] in ?? () from /lib/aarch64-linux-gnu/libnvcucompat.so
+#3  0x0000fffff178eee4 in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libcuda.so.1
+#4  0x0000fffff178f1cc in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libcuda.so.1
+#5  0x0000fffff15dc6e0 in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libcuda.so.1
+#6  0x0000fffff1689ce4 in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libcuda.so.1
+#7  0x0000fffff168cc48 in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libcuda.so.1
+#8  0x0000fffff1703b40 in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libcuda.so.1
+#9  0x0000fffff662adb8 in ?? () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+#10 0x0000fffff6695b9c [PAC] in ?? () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+#11 0x0000fffff58ac294 [PAC] in ?? () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+
+Thread 30 (Thread 0xffffc5fb7840 (LWP 995176) "zed_rgbd_publis"):
+#0  0x0000fffff3ea1994 in __GI___clock_nanosleep (clock_id=<optimized out>, clock_id@entry=0, flags=flags@entry=0, req=0xffffc5fb6d98, rem=0xffffc5fb6d98) at ../sysdeps/unix/sysv/linux/clock_nanosleep.c:78
+#1  0x0000fffff3ea6b6c in __GI___nanosleep (req=<optimized out>, rem=<optimized out>) at ../sysdeps/unix/sysv/linux/nanosleep.c:25
+#2  0x0000fffff4e0f5b0 in sl::ZEDmcu::runIMUFusion() () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+#3  0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#4  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#5  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 29 (Thread 0xffffc67c7840 (LWP 995175) "zed_rgbd_publis"):
+#0  0x0000fffff3ecbe38 in __GI___poll (fds=0xffffc67c6f08, nfds=1, timeout=<optimized out>) at ../sysdeps/unix/sysv/linux/poll.c:41
+#1  0x0000fffff4dc6ddc in ?? () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+#2  0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#4  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 27 (Thread 0xffffc4edb840 (LWP 995173) "zed_rgbd_publis"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0x0, op=393, expected=0, futex_word=0xaaaaab193a94) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0x0, clockid=0, expected=0, futex_word=0xaaaaab193a94) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0xaaaaab193a94, expected=expected@entry=0, clockid=clockid@entry=0, abstime=abstime@entry=0x0, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x0000fffff3e6c8ec in __pthread_cond_wait_common (abstime=0x0, clockid=0, mutex=0xaaaaab193aa0, cond=0xaaaaab193a68) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_wait (cond=0xaaaaab193a68, mutex=0xaaaaab193aa0) at ./nptl/pthread_cond_wait.c:627
+#5  0x0000fffff54f6228 in sl::CorruptedFrameDetectorImpl::run() () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+#6  0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#7  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#8  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 24 (Thread 0xffffc6fd7840 (LWP 995168) "ZMQbg/IO/0"):
+#0  0x0000fffff3ed607c in __GI_epoll_pwait (epfd=<optimized out>, events=0xffffc6fd5ec0, maxevents=256, timeout=-1, set=0x0) at ../sysdeps/unix/sysv/linux/epoll_pwait.c:40
+#1  0x0000fffff4f7da04 in ?? () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+#2  0x0000fffff4fb4854 in ?? () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+#3  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#4  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 23 (Thread 0xffffc77e7840 (LWP 995167) "ZMQbg/Reaper"):
+#0  0x0000fffff3ed607c in __GI_epoll_pwait (epfd=<optimized out>, events=0xffffc77e5ec0, maxevents=256, timeout=-1, set=0x0) at ../sysdeps/unix/sysv/linux/epoll_pwait.c:40
+#1  0x0000fffff4f7da04 in ?? () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+#2  0x0000fffff4fb4854 in ?? () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+#3  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#4  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 22 (Thread 0xffffc7ff7840 (LWP 995166) "ZMQbg/IO/0"):
+#0  0x0000fffff3ed607c in __GI_epoll_pwait (epfd=<optimized out>, events=0xffffc7ff5ec0, maxevents=256, timeout=-1, set=0x0) at ../sysdeps/unix/sysv/linux/epoll_pwait.c:40
+#1  0x0000fffff4f7da04 in ?? () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+#2  0x0000fffff4fb4854 in ?? () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+#3  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#4  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 21 (Thread 0xffffccfd7840 (LWP 995165) "ZMQbg/Reaper"):
+#0  0x0000fffff3ed607c in __GI_epoll_pwait (epfd=<optimized out>, events=0xffffccfd5ec0, maxevents=256, timeout=-1, set=0x0) at ../sysdeps/unix/sysv/linux/epoll_pwait.c:40
+#1  0x0000fffff4f7da04 in ?? () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+#2  0x0000fffff4fb4854 in ?? () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+#3  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#4  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 20 (Thread 0xffffcd7e7840 (LWP 995164) "zed_rgbd_publis"):
+#0  0x0000fffff3ea1994 in __GI___clock_nanosleep (clock_id=<optimized out>, clock_id@entry=0, flags=flags@entry=0, req=req@entry=0xffffcd7e6cf8, rem=rem@entry=0x0) at ../sysdeps/unix/sysv/linux/clock_nanosleep.c:78
+#1  0x0000fffff3ea6b6c in __GI___nanosleep (req=req@entry=0xffffcd7e6cf8, rem=rem@entry=0x0) at ../sysdeps/unix/sysv/linux/nanosleep.c:25
+#2  0x0000fffff3ecf4b4 in usleep (useconds=<optimized out>) at ../sysdeps/posix/usleep.c:31
+#3  0x0000fffff4ece0fc in sl::ArgusCamera::control() () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+#4  0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#6  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 19 (Thread 0xffffcdff7840 (LWP 995163) "zed_rgbd_publis"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0xffffcdff6ab8, op=137, expected=0, futex_word=0xaaaaabacec1c) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0xffffcdff6ab8, clockid=0, expected=0, futex_word=0xaaaaabacec1c) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0xaaaaabacec1c, expected=expected@entry=0, clockid=clockid@entry=1, abstime=abstime@entry=0xffffcdff6ab8, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x0000fffff3e6ced8 in __pthread_cond_wait_common (abstime=0xffffcdff6ab8, clockid=1, mutex=0xaaaaabacec20, cond=0xaaaaabacebf0) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_clockwait64 (abstime=0xffffcdff6ab8, clockid=1, mutex=0xaaaaabacec20, cond=0xaaaaabacebf0) at ./nptl/pthread_cond_wait.c:691
+#5  ___pthread_cond_clockwait64 (cond=0xaaaaabacebf0, mutex=0xaaaaabacec20, clockid=1, abstime=0xffffcdff6ab8) at ./nptl/pthread_cond_wait.c:679
+#6  0x0000fffff4eac084 in sl::ArgusCamera::readSBSFromDual(unsigned char*, unsigned long long&) () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+#7  0x0000fffff4eaddc4 in sl::ArgusCamera::consume() () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+#8  0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#9  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#10 0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 18 (Thread 0xffffe2030840 (LWP 995161) "zed_rgbd_publis"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0xffffe202f6c8, op=137, expected=0, futex_word=0xffffc80040f8) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0xffffe202f6c8, clockid=-202990136, expected=0, futex_word=0xffffc80040f8) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0xffffc80040f8, expected=expected@entry=0, clockid=clockid@entry=1, abstime=abstime@entry=0xffffe202f6c8, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x0000fffff3e6cc00 in __pthread_cond_wait_common (abstime=0xffffe202f6c8, clockid=1, mutex=0xaaaaabada4e0, cond=0xffffc80040d0) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_timedwait64 (cond=0xffffc80040d0, mutex=0xaaaaabada4e0, abstime=0xffffe202f6c8) at ./nptl/pthread_cond_wait.c:652
+#5  0x0000ffffeead99bc in NvOsConditionWaitTimeout () from /usr/lib/aarch64-linux-gnu/nvidia/libnvos.so
+#6  0x0000ffffeeb9b14c [PAC] in nvcamerautils::ConditionVariable::wait(nvcamerautils::Mutex const&, nvcamerautils::UnscaledTimeout const&) const () from /usr/lib/aarch64-linux-gnu/nvidia/libnvcamerautils.so
+#7  0x0000fffff0fb04dc in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libnvargus_socketclient.so
+#8  0x0000fffff0fb33c4 [PAC] in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libnvargus_socketclient.so
+#9  0x0000fffff0fb2798 [PAC] in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libnvargus_socketclient.so
+#10 0x0000fffff4ebbb90 [PAC] in sl::ArgusCamera::produceDualV5() () from /home/exocean/.cache/rtabmap_dense/calib_ab_20260826/rtabmap_runtime_candidates/sha256-439961e59d783abc416c2507a947dfe222965bd6a7ad9da4eed6e203d4d3b31b/lib/libsl_zed.so
+#11 0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+
+Thread 17 (Thread 0xffffe2840840 (LWP 995084) "zed_rgbd_publis"):
+#0  0x0000fffff3ecbe38 in __GI___poll (fds=0xffffe283fea0, nfds=1, timeout=<optimized out>) at ../sysdeps/unix/sysv/linux/poll.c:41
+#1  0x0000fffff0fb4548 in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libnvargus_socketclient.so
+#2  0x0000fffff0fafb9c [PAC] in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libnvargus_socketclient.so
+#3  0x0000fffff0fb02dc [PAC] in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libnvargus_socketclient.so
+#4  0x0000fffff3e6d5b8 [PAC] in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#5  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 15 (Thread 0xffffe31a6840 (LWP 995081) "cuda-EvtHandlr"):
+#0  0x0000fffff3ecbe38 in __GI___poll (fds=0xffffd8000c20, nfds=10, timeout=<optimized out>) at ../sysdeps/unix/sysv/linux/poll.c:41
+#1  0x0000fffff169f2b0 in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libcuda.so.1
+#2  0x0000fffff173c640 in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libcuda.so.1
+#3  0x0000fffff169c0e4 in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libcuda.so.1
+#4  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#5  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 14 (Thread 0xffffe3e47840 (LWP 995080) "zed_rgbd_publis"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0x0, op=393, expected=0, futex_word=0xffffd4000c08) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0x0, clockid=0, expected=0, futex_word=0xffffd4000c08) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0xffffd4000c08, expected=expected@entry=0, clockid=clockid@entry=0, abstime=abstime@entry=0x0, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x0000fffff3e6c8ec in __pthread_cond_wait_common (abstime=0x0, clockid=0, mutex=0xffffd4000bb0, cond=0xffffd4000be0) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_wait (cond=0xffffd4000be0, mutex=0xffffd4000bb0) at ./nptl/pthread_cond_wait.c:627
+#5  0x0000ffffea1d9714 in eprosima::fastdds::dds::detail::WaitSetImpl::wait(std::vector<eprosima::fastdds::dds::Condition*, std::allocator<eprosima::fastdds::dds::Condition*> >&, eprosima::fastrtps::Time_t const&) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#6  0x0000ffffea1d97c8 in eprosima::fastdds::dds::WaitSet::wait(std::vector<eprosima::fastdds::dds::Condition*, std::allocator<eprosima::fastdds::dds::Condition*> >&, eprosima::fastrtps::Time_t) const () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#7  0x0000ffffea625bd4 in rmw_fastrtps_shared_cpp::__rmw_wait(char const*, rmw_subscriptions_s*, rmw_guard_conditions_s*, rmw_services_s*, rmw_clients_s*, rmw_events_s*, rmw_wait_set_s*, rmw_time_s const*) () from /opt/ros/humble/lib/librmw_fastrtps_shared_cpp.so
+#8  0x0000ffffea612b74 in ?? () from /opt/ros/humble/lib/librmw_fastrtps_shared_cpp.so
+#9  0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#10 0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#11 0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 13 (Thread 0xffffe4670840 (LWP 995079) "zed_rgbd_publis"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0x0, op=393, expected=0, futex_word=0xaaaaaae95ef4) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0x0, clockid=0, expected=0, futex_word=0xaaaaaae95ef4) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0xaaaaaae95ef4, expected=expected@entry=0, clockid=clockid@entry=0, abstime=abstime@entry=0x0, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x0000fffff3e6c8ec in __pthread_cond_wait_common (abstime=0x0, clockid=0, mutex=0xaaaaaae95f60, cond=0xaaaaaae95ec8) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_wait (cond=0xaaaaaae95ec8, mutex=0xaaaaaae95f60) at ./nptl/pthread_cond_wait.c:627
+#5  0x0000ffffea229100 in eprosima::fastdds::rtps::FlowControllerImpl<eprosima::fastdds::rtps::FlowControllerSyncPublishMode, eprosima::fastdds::rtps::FlowControllerFifoSchedule>::run() () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#6  0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#7  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#8  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 12 (Thread 0xffffe4f40840 (LWP 995078) "zed_rgbd_publis"):
+#0  __futex_abstimed_wait_common64 (private=<optimized out>, cancel=true, abstime=0xffffe4f3f758, op=265, expected=0, futex_word=0xfffff47c7120) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=<optimized out>, abstime=0xffffe4f3f758, clockid=0, expected=0, futex_word=0xfffff47c7120) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0xfffff47c7120, expected=expected@entry=0, clockid=clockid@entry=0, abstime=abstime@entry=0xffffe4f3f758, private=<optimized out>) at ./nptl/futex-internal.c:139
+#3  0x0000fffff3e756e4 in do_futex_wait (sem=sem@entry=0xfffff47c7120, abstime=abstime@entry=0xffffe4f3f758, clockid=0) at ./nptl/sem_waitcommon.c:111
+#4  0x0000fffff3e757ac in __new_sem_wait_slow64 (sem=0xfffff47c7120, abstime=0xffffe4f3f758, clockid=0) at ./nptl/sem_waitcommon.c:183
+#5  0x0000ffffea065440 in ?? () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#6  0x0000ffffea2b2f78 in ?? () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#7  0x0000ffffea2b90a0 in ?? () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#8  0x0000ffffea2b88d0 in eprosima::fastdds::rtps::SharedMemChannelResource::perform_listen_operation(eprosima::fastrtps::rtps::Locator_t) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#9  0x0000ffffea2b3edc in ?? () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#10 0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#11 0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+
+Thread 11 (Thread 0xffffe5750840 (LWP 995077) "zed_rgbd_publis"):
+#0  0x0000fffff3ed7e24 in __libc_recvfrom (fd=19, buf=0xaaaaaae7d6f0, len=65500, flags=0, addr=..., addrlen=0xffffe574fa88) at ../sysdeps/unix/sysv/linux/recvfrom.c:27
+#1  0x0000ffffea115030 in eprosima::fastdds::rtps::UDPChannelResource::Receive(unsigned char*, unsigned int, unsigned int&, eprosima::fastrtps::rtps::Locator_t&) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#2  0x0000ffffea1154e0 in eprosima::fastdds::rtps::UDPChannelResource::perform_listen_operation(eprosima::fastrtps::rtps::Locator_t) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#3  0x0000ffffea110758 in ?? () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#4  0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#6  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 10 (Thread 0xffffe5f60840 (LWP 995076) "zed_rgbd_publis"):
+#0  0x0000fffff3ed7e24 in __libc_recvfrom (fd=18, buf=0xaaaaaae6d570, len=65500, flags=0, addr=..., addrlen=0xffffe5f5fa88) at ../sysdeps/unix/sysv/linux/recvfrom.c:27
+#1  0x0000ffffea115030 in eprosima::fastdds::rtps::UDPChannelResource::Receive(unsigned char*, unsigned int, unsigned int&, eprosima::fastrtps::rtps::Locator_t&) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#2  0x0000ffffea1154e0 in eprosima::fastdds::rtps::UDPChannelResource::perform_listen_operation(eprosima::fastrtps::rtps::Locator_t) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#3  0x0000ffffea110758 in ?? () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#4  0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#6  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 9 (Thread 0xffffe6770840 (LWP 995075) "zed_rgbd_publis"):
+#0  0x0000fffff3ed7e24 in __libc_recvfrom (fd=17, buf=0xaaaaaae5d580, len=65500, flags=0, addr=..., addrlen=0xffffe676fa88) at ../sysdeps/unix/sysv/linux/recvfrom.c:27
+#1  0x0000ffffea115030 in eprosima::fastdds::rtps::UDPChannelResource::Receive(unsigned char*, unsigned int, unsigned int&, eprosima::fastrtps::rtps::Locator_t&) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#2  0x0000ffffea1154e0 in eprosima::fastdds::rtps::UDPChannelResource::perform_listen_operation(eprosima::fastrtps::rtps::Locator_t) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#3  0x0000ffffea110758 in ?? () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#4  0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#6  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 8 (Thread 0xffffe6f80840 (LWP 995074) "zed_rgbd_publis"):
+#0  0x0000fffff3ed7e24 in __libc_recvfrom (fd=16, buf=0xaaaaaae4d590, len=65500, flags=0, addr=..., addrlen=0xffffe6f7fa88) at ../sysdeps/unix/sysv/linux/recvfrom.c:27
+#1  0x0000ffffea115030 in eprosima::fastdds::rtps::UDPChannelResource::Receive(unsigned char*, unsigned int, unsigned int&, eprosima::fastrtps::rtps::Locator_t&) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#2  0x0000ffffea1154e0 in eprosima::fastdds::rtps::UDPChannelResource::perform_listen_operation(eprosima::fastrtps::rtps::Locator_t) () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#3  0x0000ffffea110758 in ?? () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#4  0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#6  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 7 (Thread 0xffffe7790840 (LWP 995073) "zed_rgbd_publis"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0xffffe778fec8, op=137, expected=0, futex_word=0xaaaaaae45810) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0xffffe778fec8, clockid=0, expected=0, futex_word=0xaaaaaae45810) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0xaaaaaae45810, expected=expected@entry=0, clockid=clockid@entry=1, abstime=abstime@entry=0xffffe778fec8, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x0000fffff3e6ced8 in __pthread_cond_wait_common (abstime=0xffffe778fec8, clockid=1, mutex=0xaaaaaae42d60, cond=0xaaaaaae457e8) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_clockwait64 (abstime=0xffffe778fec8, clockid=1, mutex=0xaaaaaae42d60, cond=0xaaaaaae457e8) at ./nptl/pthread_cond_wait.c:691
+#5  ___pthread_cond_clockwait64 (cond=0xaaaaaae457e8, mutex=0xaaaaaae42d60, clockid=1, abstime=0xffffe778fec8) at ./nptl/pthread_cond_wait.c:679
+#6  0x0000ffffea038e50 in eprosima::fastrtps::rtps::ResourceEvent::event_service() () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#7  0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#8  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#9  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 6 (Thread 0xffffe8027840 (LWP 995072) "zed_rgbd_publis"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0xffffe8026ec8, op=137, expected=0, futex_word=0xaaaaaae446f8) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0xffffe8026ec8, clockid=0, expected=0, futex_word=0xaaaaaae446f8) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0xaaaaaae446f8, expected=expected@entry=0, clockid=clockid@entry=1, abstime=abstime@entry=0xffffe8026ec8, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x0000fffff3e6ced8 in __pthread_cond_wait_common (abstime=0xffffe8026ec8, clockid=1, mutex=0xaaaaaae44700, cond=0xaaaaaae446d0) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_clockwait64 (abstime=0xffffe8026ec8, clockid=1, mutex=0xaaaaaae44700, cond=0xaaaaaae446d0) at ./nptl/pthread_cond_wait.c:691
+#5  ___pthread_cond_clockwait64 (cond=0xaaaaaae446d0, mutex=0xaaaaaae44700, clockid=1, abstime=0xffffe8026ec8) at ./nptl/pthread_cond_wait.c:679
+#6  0x0000ffffea2a4368 in eprosima::fastdds::rtps::SharedMemWatchdog::run() () from /opt/ros/humble/lib/libfastrtps.so.2.6
+#7  0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#8  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#9  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 5 (Thread 0xffffe8837840 (LWP 995071) "zed_rgbd_publis"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0x0, op=393, expected=0, futex_word=0xaaaaaab59890 <(anonymous namespace)::diagnostics()::output+160>) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0x0, clockid=0, expected=0, futex_word=0xaaaaaab59890 <(anonymous namespace)::diagnostics()::output+160>) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0xaaaaaab59890 <(anonymous namespace)::diagnostics()::output+160>, expected=expected@entry=0, clockid=clockid@entry=0, abstime=abstime@entry=0x0, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x0000fffff3e6c8ec in __pthread_cond_wait_common (abstime=0x0, clockid=0, mutex=0xaaaaaab59838 <(anonymous namespace)::diagnostics()::output+72>, cond=0xaaaaaab59868 <(anonymous namespace)::diagnostics()::output+120>) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_wait (cond=0xaaaaaab59868 <(anonymous namespace)::diagnostics()::output+120>, mutex=0xaaaaaab59838 <(anonymous namespace)::diagnostics()::output+72>) at ./nptl/pthread_cond_wait.c:627
+#5  0x0000aaaaaaae8ec4 in BoundedAsyncWriter<AsyncDiagnostics::Record>::run() ()
+#6  0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#7  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#8  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 4 (Thread 0xffffe9047840 (LWP 995070) "zed_rgbd_publis"):
+#0  __futex_abstimed_wait_common64 (private=<optimized out>, cancel=true, abstime=0x0, op=393, expected=0, futex_word=0xaaaaaac9ac40) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=<optimized out>, abstime=0x0, clockid=0, expected=0, futex_word=0xaaaaaac9ac40) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0xaaaaaac9ac40, expected=expected@entry=0, clockid=clockid@entry=0, abstime=abstime@entry=0x0, private=<optimized out>) at ./nptl/futex-internal.c:139
+#3  0x0000fffff3e75994 in do_futex_wait (sem=sem@entry=0xaaaaaac9ac40, abstime=0x0, clockid=0) at ./nptl/sem_waitcommon.c:111
+#4  0x0000fffff3e75a4c in __new_sem_wait_slow64 (sem=0xaaaaaac9ac40, abstime=0x0, clockid=0) at ./nptl/sem_waitcommon.c:183
+#5  0x0000fffff7ef6b0c in rclcpp::SignalHandler::wait_for_signal() () from /opt/ros/humble/lib/librclcpp.so
+#6  0x0000fffff7ef7c4c in rclcpp::SignalHandler::deferred_signal_handler() () from /opt/ros/humble/lib/librclcpp.so
+#7  0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#8  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#9  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 3 (Thread 0xffffe9857840 (LWP 995069) "zed_rgbd_publis"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0xffffe9856f28, op=137, expected=0, futex_word=0xaaaaaae3e1a8) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0xffffe9856f28, clockid=0, expected=0, futex_word=0xaaaaaae3e1a8) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0xaaaaaae3e1a8, expected=expected@entry=0, clockid=clockid@entry=1, abstime=abstime@entry=0xffffe9856f28, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x0000fffff3e6ced8 in __pthread_cond_wait_common (abstime=0xffffe9856f28, clockid=1, mutex=0xaaaaaae3e150, cond=0xaaaaaae3e180) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_clockwait64 (abstime=0xffffe9856f28, clockid=1, mutex=0xaaaaaae3e150, cond=0xaaaaaae3e180) at ./nptl/pthread_cond_wait.c:691
+#5  ___pthread_cond_clockwait64 (cond=0xaaaaaae3e180, mutex=0xaaaaaae3e150, clockid=1, abstime=0xffffe9856f28) at ./nptl/pthread_cond_wait.c:679
+#6  0x0000ffffee7c5b28 in ?? () from /lib/aarch64-linux-gnu/libspdlog.so.1
+#7  0x0000fffff41431fc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#8  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#9  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 2 (Thread 0xffffeaed2840 (LWP 995068) "zed_rgbd_publis"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0xffffeaed1d98, op=137, expected=0, futex_word=0xfffff0e79c10) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0xffffeaed1d98, clockid=0, expected=0, futex_word=0xfffff0e79c10) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0xfffff0e79c10, expected=expected@entry=0, clockid=clockid@entry=1, abstime=abstime@entry=0xffffeaed1d98, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x0000fffff3e6ced8 in __pthread_cond_wait_common (abstime=0xffffeaed1d98, clockid=1, mutex=0xfffff0e79bb8, cond=0xfffff0e79be8) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_clockwait64 (abstime=0xffffeaed1d98, clockid=1, mutex=0xfffff0e79bb8, cond=0xfffff0e79be8) at ./nptl/pthread_cond_wait.c:691
+#5  ___pthread_cond_clockwait64 (cond=0xfffff0e79be8, mutex=0xfffff0e79bb8, clockid=1, abstime=0xffffeaed1d98) at ./nptl/pthread_cond_wait.c:679
+#6  0x0000ffffef7ef6b8 in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libnvbufsurftransform.so.1.0.0
+#7  0x0000fffff41431fc [PAC] in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#8  0x0000fffff3e6d5b8 in start_thread (arg=0x0) at ./nptl/pthread_create.c:442
+#9  0x0000fffff3ed5edc in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 1 (Thread 0xfffff7d74840 (LWP 995066) "zed_rgbd_publis"):
+#0  0x0000fffff15550c0 in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libcuda.so.1
+#1  0x0000fffff188e020 in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libcuda.so.1
+#2  0x0000fffff157dc34 in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libcuda.so.1
+#3  0x0000fffff157e2e8 in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libcuda.so.1
+#4  0x0000fffff157f61c in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libcuda.so.1
+#5  0x0000fffff1704140 in ?? () from /usr/lib/aarch64-linux-gnu/nvidia/libcuda.so.1
+#6  0x0000ffff88c9d75c in ?? () from /lib/aarch64-linux-gnu/libnvinfer.so.10
+#7  0x0000ffff88d06698 [PAC] in ?? () from /lib/aarch64-linux-gnu/libnvinfer.so.10
+#8  0x0000ffff888047c0 [PAC] in ?? () from /lib/aarch64-linux-gnu/libnvinfer.so.10
+#9  0x0000ffff886d6334 in ?? () from /lib/aarch64-linux-gnu/libnvinfer.so.10
+#10 0x0000ffff886d3484 in ?? () from /lib/aarch64-linux-gnu/libnvinfer.so.10
+#11 0x0000ffff88564c04 in ?? () from /lib/aarch64-linux-gnu/libnvinfer.so.10
+A debugging session is active.
+
+	Inferior 1 [process 995066] will be killed.
+
+Quit anyway? (y or n) [answered Y; input not from terminal]

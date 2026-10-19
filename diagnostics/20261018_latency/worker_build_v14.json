@@ -1,0 +1,21 @@
+{
+  "compile_exit": 0,
+  "compile_output": "",
+  "sources": {
+    "extract_recorded_rgbd.cpp": "02b01c1ac433182d001b8e7c188a2b5a44500b8da7cc300ddf546082d9f7ff3a",
+    "RecordedCloudAssembly.h": "31155944a5c641b586ea2a21b3ea73d67353cd4b0fc7e5f36f2ebde5f6eb0768",
+    "NativeMappingEvidence.h": "056e0e7814f6244f810707390fe6060f2d14adb8ac6489fb67f60d1f99d20449",
+    "bounded_async_writer.hpp": "31b70d44266cd35d745219c4d0b8066bb9beb95fdad2f1e372363eb4ea4d9c48",
+    "RecordedCloudSamples.h": "35b30a0a75f4c33485de7dcea04298925231793e068c74445973f49430d956f0",
+    "CMakeLists.txt": "1252627760f0639ea85af078f8ce9c33ab79766a257a954cf7aff6e51ffebb69",
+    "RecordedKeyframeSchedule.h": "30e5fed53ca755bef48f50c8e128ce0233d68e585e3f78cad94987f47b3c5b12",
+    "DeferredMappingSession.h": "73ed4aaa4b8b8bd9620696efe9b5ec99586458e08a21c565f19e104ba2c4cae2",
+    "rgbd_spool.hpp": "c2b7b523ea3399134c988afce508b41130b45530966886faa1299a57bed92d4b",
+    "RecordedCloudCache.h": "677a7cf0db3ded9b8c60b144c2354c71310a6a2826ecdbd98f8171ccf9838673",
+    "OrderedProcessingLane.h": "1495f7f2eddbf08a52180467c2974a7eaf7fcc3678dfcd335e22b52292ba2e53",
+    "replay_worker.cpp": "830e0f95decf3893ee5fd4e479f2c2bd5a0845c050bfc4fbbfb9fab2a252a16c",
+    "imu_frame_conversion.hpp": "c0042b7c47751e60af4dc47e6c710934305040a0d745f4c4399b31002e554de6"
+  },
+  "link_exit": 0,
+  "link_output": ""
+}

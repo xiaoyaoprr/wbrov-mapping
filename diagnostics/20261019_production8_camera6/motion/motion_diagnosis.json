@@ -1,0 +1,164 @@
+{
+  "first_motion_s": 191.424421,
+  "first_quality_pause_s": 191.724441,
+  "first_quality_pause": {
+    "source_ns": "1791747623252396000",
+    "lost": "0",
+    "inliers": "155",
+    "matches": "211",
+    "usable": "0",
+    "epoch": "0",
+    "cuts": "1",
+    "main_write": "0",
+    "main_nodes": "3",
+    "local_nodes": "3",
+    "recoveries": "0",
+    "input_present": "1",
+    "reason": "quality insufficient; frozen-map verification required; "
+  },
+  "first_lost_s": 204.473843,
+  "first_lost": {
+    "source_ns": "1791747636001798000",
+    "lost": "1",
+    "inliers": "0",
+    "matches": "47",
+    "usable": "0",
+    "epoch": "2",
+    "cuts": "4",
+    "main_write": "0",
+    "main_nodes": "3",
+    "local_nodes": "3",
+    "recoveries": "0",
+    "input_present": "1",
+    "reason": "unverified measurement gap; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=2 registered=0 trusted_snapshot=1)"
+  },
+  "before_motion": {
+    "count": 5127,
+    "gap_median_ms": 33.345,
+    "gap_p95_ms": 50.038,
+    "gap_max_ms": 199.886,
+    "gaps_over300ms": 0,
+    "lost": 0
+  },
+  "after_motion": {
+    "count": 1285,
+    "gap_median_ms": 33.881,
+    "gap_p95_ms": 68.339,
+    "gap_max_ms": 14032.396,
+    "gaps_over300ms": 31,
+    "lost": 32
+  },
+  "cut_causes": {
+    "geometry quality insufficient; ": 1,
+    "quality verification deadline exceeded; two independent old-keyframe RGB-D observations unavailable (references=3 nearby=3 first=0 raw_rejected=3 prediction_rejected=0 baseline_rejected=0 agreement_rejected=0; reference=1 raw bidirectional RGB-D check failed (f=0 r=0 finliers=3 rinliers=3 fbackend=Not enough inliers 3/25 (matches=47) between 0 and 1 rbackend=Not enough inliers 3/25 (matches=44) between 1 and 0))": 1,
+    "unverified measurement gap; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=1 registered=0 trusted_snapshot=1)": 1,
+    "unverified measurement gap; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=2 registered=0 trusted_snapshot=1)": 1,
+    "odometry lost; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=2 registered=0 trusted_snapshot=1)": 7,
+    "unverified measurement gap; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=3 registered=0 trusted_snapshot=1)": 1,
+    "odometry lost; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=3 registered=0 trusted_snapshot=1)": 7,
+    "unverified measurement gap; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=4 registered=0 trusted_snapshot=1)": 1,
+    "odometry lost; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=4 registered=0 trusted_snapshot=1)": 7,
+    "unverified measurement gap; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=5 registered=0 trusted_snapshot=1)": 1,
+    "unverified measurement gap; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=6 registered=0 trusted_snapshot=1)": 1,
+    "unverified measurement gap; ": 3,
+    "odometry lost; ": 7,
+    "unverified measurement gap; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=8 registered=0 trusted_snapshot=1)": 1,
+    "unverified measurement gap; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=9 registered=0 trusted_snapshot=1)": 1,
+    "unverified measurement gap; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=10 registered=0 trusted_snapshot=1)": 1,
+    "unverified measurement gap; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=11 registered=0 trusted_snapshot=1)": 1,
+    "unverified measurement gap; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=12 registered=0 trusted_snapshot=1)": 1,
+    "unverified measurement gap; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=13 registered=0 trusted_snapshot=1)": 1,
+    "unverified measurement gap; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=15 registered=0 trusted_snapshot=1)": 1,
+    "unverified measurement gap; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=16 registered=0 trusted_snapshot=1)": 1,
+    "unverified measurement gap; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=17 registered=0 trusted_snapshot=1)": 1
+  },
+  "main_tags": {
+    "historical_only": true,
+    "frame_id": "deferred_map",
+    "tags": [],
+    "trajectory": [
+      {
+        "node_id": 1,
+        "source_ns": 1791747432027843000,
+        "epoch": 0,
+        "position": [
+          -0.000541945,
+          -0.00127595,
+          -0.000556926
+        ],
+        "orientation_xyzw": [
+          -0.00365672,
+          0.649833,
+          0.00635722,
+          0.760042
+        ]
+      },
+      {
+        "node_id": 175,
+        "source_ns": 1791747622952376000,
+        "epoch": 0,
+        "position": [
+          -0.00942772,
+          -0.0148676,
+          0.0228784
+        ],
+        "orientation_xyzw": [
+          0.0233505,
+          0.617714,
+          -0.000590758,
+          0.786056
+        ]
+      },
+      {
+        "node_id": 176,
+        "source_ns": 1791747623169045000,
+        "epoch": 0,
+        "position": [
+          -0.0342144,
+          -0.0183826,
+          0.0399342
+        ],
+        "orientation_xyzw": [
+          0.000776959,
+          0.583876,
+          0.0202281,
+          0.811591
+        ]
+      }
+    ],
+    "trajectory_edges": [
+      [
+        1,
+        175
+      ],
+      [
+        175,
+        176
+      ]
+    ]
+  },
+  "raw_capture": {
+    "schema": "wbrov.raw-recording.v1",
+    "state": "closed",
+    "clean_shutdown": true,
+    "complete": false,
+    "requires_post_stop_verification": true,
+    "first_source_ns": 1791747431527955000,
+    "last_source_ns": 1791747737580371000,
+    "grab_calls": 6412,
+    "unique_computed_stamps": 6412,
+    "sdk_frames_ingested": 6412,
+    "sdk_frames_encoded_before_close": 6410,
+    "status_false_samples": 2,
+    "duplicate_grabs": 0,
+    "grab_errors": 0,
+    "write_errors": 0
+  },
+  "slow_events": 99,
+  "backpressure_events": 36,
+  "image_extract": {
+    "exit": 0,
+    "stdout": "before_raise 1791747621802438000\nfirst_pause 1791747623169045000\nfirst_lost 1791747636001798000\nlater_view 1791747737580371000\n",
+    "stderr": ""
+  }
+}

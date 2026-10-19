@@ -1,0 +1,69 @@
+{
+  "schema": "wbrov.round5-v7-stopped-trial.v1",
+  "run": "custom_20261010_052538",
+  "rviz_visible_s": 39.94372832000954,
+  "mapping_sha256": "c1d7419168b70e99992cc9619940c82294399f8d7d534436c0fc3ec7e1fa7bb5",
+  "runtime": "93b2225b49117eb4604ed01dafaf5e6bd6ec2fe5960cea7ea16a3d3fd00c4566",
+  "terminal_counts": {
+    "committed": 2,
+    "rejected": 14
+  },
+  "commit_windows": [
+    {
+      "epoch": 1,
+      "seconds_until_next_cut_or_end": 115.150466048,
+      "first_main_nodes": 43,
+      "final_main_nodes": 78,
+      "added_main_nodes": 35,
+      "reason": "committed current reanchor: epoch=1 registered_nodes=3 archived_prefix_nodes=0 detached_edges=0; three bridges and 3-fold holdout passed (dense plane RMS requires stopped-map validation)"
+    },
+    {
+      "epoch": 4,
+      "seconds_until_next_cut_or_end": 12.498843456,
+      "first_main_nodes": 84,
+      "final_main_nodes": 89,
+      "added_main_nodes": 5,
+      "reason": "committed current reanchor: epoch=4 registered_nodes=4 archived_prefix_nodes=1 detached_edges=1; three bridges and 3-fold holdout passed (dense plane RMS requires stopped-map validation)"
+    }
+  ],
+  "frozen_loop_rejections": 5,
+  "core_fatal_count": 0,
+  "final_state": {
+    "state": "RECOVERING",
+    "epoch": 6,
+    "cut_count": 175,
+    "registered": false,
+    "main_map_write_allowed": false,
+    "reason": "waiting for stable geometry and Core registration"
+  },
+  "last_registered_main_nodes": 89,
+  "launcher_exit_code": 0,
+  "nodes_stopped": true,
+  "cleanup_succeeded": true,
+  "save_complete": true,
+  "main_points": 7223,
+  "raw_recording_complete": true,
+  "recording_frames": {
+    "frames": 13356,
+    "decoded": 2,
+    "first_source_ns": 1791581142772958000,
+    "last_source_ns": 1791581699730888000
+  },
+  "database_bytes": 181911552,
+  "database_sha256": "ab721a24a64ab93e34e346fb4f110afabe2f75d4bccb04ba6f28f8cf0e77e600",
+  "save_report_sha256": "ffe5978b2a66b5674c4e02c04dab4e3e8053ad25cd125bde18ec9979d495a0ef",
+  "isolated_odom_age_s": {
+    "count": 7823,
+    "max": 0.43569244,
+    "p95": 0.195526096
+  },
+  "aggregate_acceptance_passed": false,
+  "production_switched": false,
+  "github_updated": false,
+  "light_off_packets": 7,
+  "udp_released": true,
+  "propulsion_activated": false,
+  "operator_report": "additional motion or occlusion after first requested small-angle turn; declined final fixed-view interval and requested save/exit",
+  "production_mapping_sha256": "8b6adf33e0550465ce5e4f10ffa7d8e5f5d43db022084c2496aa81b8b3de8bb3",
+  "production_outer_sha256": "34cf9b3c35fa4f7977721bb94f4786d59bf662c6c552d202c14123ab06bb03d2"
+}

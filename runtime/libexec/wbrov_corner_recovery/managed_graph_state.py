@@ -9,6 +9,7 @@ class ManagedGraphState:
         from std_msgs.msg import String
         from rclpy.qos import QoSProfile,ReliabilityPolicy,DurabilityPolicy
         self.consumer=consumer;self.config=config;self.record=record;self.by_epoch={};self.current=None
+        self.retired_by_epoch={}
         self.last_revision=-1;self.last_epoch=-1;self.received=0;self.rejected=0
         self.subscription=node.create_subscription(String,config['sources']['state']['topic'],self.receive,
             QoSProfile(depth=1,reliability=ReliabilityPolicy.RELIABLE,durability=DurabilityPolicy.TRANSIENT_LOCAL))
@@ -41,7 +42,11 @@ class ManagedGraphState:
                         all(type(v) in (int,float) and math.isfinite(v) for v in row[key]),'invalid graph pose values')
                 require(abs(sum(v*v for v in row['quaternion_xyzw'])-1)<.002,'nonunit graph quaternion')
                 poses[row['id']]=row
-            self.last_epoch=state['reset_epoch'];self.last_revision=state['graph_revision'];self.received+=1
+            epoch=state['reset_epoch'];previous=self.by_epoch.get(epoch)
+            retired=self.retired_by_epoch.setdefault(epoch,set())
+            if previous is not None:retired.update(set(previous['poses'])-set(poses))
+            retired.difference_update(poses)
+            self.last_epoch=epoch;self.last_revision=state['graph_revision'];self.received+=1
             # Both indexes reference the one validated, privately decoded JSON
             # object. No need to duplicate every pose in the current snapshot.
             self.current=dict(state=state,poses=poses,publisher_gid=gid,arrival_monotonic_ns=time.monotonic_ns())
@@ -55,6 +60,9 @@ class ManagedGraphState:
         if self.current is None:return
         retained={}
         for receipt in receipts:retained.setdefault(int(receipt['reset_epoch']),set()).add(receipt['node_id'])
+        for epoch in list(self.retired_by_epoch):
+            self.retired_by_epoch[epoch].intersection_update(retained.get(epoch,set()))
+            if not self.retired_by_epoch[epoch]:del self.retired_by_epoch[epoch]
         current_epoch=self.current['state']['reset_epoch']
         for epoch,snapshot in list(self.by_epoch.items()):
             # Different DDS topics can arrive out of order. The first receipt
@@ -67,6 +75,15 @@ class ManagedGraphState:
             # graph state. Full current snapshots and raw evidence are intact.
             self.by_epoch[epoch]=dict(snapshot,state={k:v for k,v in snapshot['state'].items() if k!='graph_poses'},
                 poses={i:p for i,p in snapshot['poses'].items() if i in ids},compacted=True)
+
+    def has_pose_for_receipt(self,receipt):
+        snapshot=self.by_epoch.get(int(receipt['reset_epoch']))
+        return snapshot is not None and receipt['node_id'] in snapshot['poses']
+
+    def receipt_retired(self,receipt):
+        # Absence alone may be ordinary DDS ordering. Only a node actually
+        # removed by a later authenticated snapshot is known to be retired.
+        return receipt['node_id'] in self.retired_by_epoch.get(int(receipt['reset_epoch']),set())
 
     def pose_for_receipt(self,receipt):
         epoch=int(receipt['reset_epoch']);snapshot=self.by_epoch.get(epoch)

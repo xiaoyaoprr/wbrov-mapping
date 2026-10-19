@@ -1,0 +1,62 @@
+{
+  "phase": "native_passed_replay_pending",
+  "scope": "isolated native validation only; compressed recovery acceptance remains unresolved; no replay pass or release approval implied",
+  "steps": [
+    {
+      "name": "build_v36",
+      "exit": 0,
+      "seconds": 62.39453980803955
+    },
+    {
+      "name": "test_recorded_cloud_cache_sanitizer_build",
+      "exit": 0,
+      "seconds": 18.21903340803692
+    },
+    {
+      "name": "test_recorded_cloud_cache_sanitizer",
+      "exit": 0,
+      "seconds": 5.829977119981777
+    },
+    {
+      "name": "test_recorded_cloud_order_sanitizer_build",
+      "exit": 0,
+      "seconds": 6.73548169597052
+    },
+    {
+      "name": "test_recorded_cloud_order_sanitizer",
+      "exit": 0,
+      "seconds": 6.178666528023314
+    },
+    {
+      "name": "rgbd_frame_codec_test_sanitizer_build",
+      "exit": 0,
+      "seconds": 3.7834589119884185
+    },
+    {
+      "name": "rgbd_frame_codec_test_sanitizer",
+      "exit": 0,
+      "seconds": 5.977226592018269
+    },
+    {
+      "name": "rgbd_spool_test_sanitizer_build",
+      "exit": 0,
+      "seconds": 5.135470687993802
+    },
+    {
+      "name": "rgbd_spool_test_sanitizer",
+      "exit": 0,
+      "seconds": 5.225677920039743
+    },
+    {
+      "name": "camera5_build_and_tests",
+      "exit": 0,
+      "seconds": 44.90247894404456
+    }
+  ],
+  "baseline_recovery_results": {
+    "raw_v35_a": true,
+    "compressed_v35_a": false,
+    "compressed_v30_control": false,
+    "raw_v35_b": true
+  }
+}

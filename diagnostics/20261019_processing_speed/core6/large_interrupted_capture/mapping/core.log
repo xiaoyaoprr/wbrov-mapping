@@ -1,0 +1,712 @@
+[ WARN] (2026-10-11 20:19:01.570) Odometry.cpp:332::process() Updated initial pose from xyz=0.000000,0.000000,0.000000 rpy=0.000000,-0.000000,0.000000 to xyz=0.000000,0.000000,0.000000 rpy=-0.135682,1.443266,-0.131043 with IMU orientation
+[ WARN] (2026-10-11 20:19:01.851) Memory.cpp:6373::createSignature() Converting depth data to 16 bits format because depth type detected is 32FC1, feed 16UC1 depth format directly to avoid this conversion (or set parameter Mem/SaveDepth16Format=false to save 32bits format). This warning is only printed once.
+[ WARN] (2026-10-11 20:20:20.770) Rtabmap.cpp:4385::process() Rejected loop closure 95 -> 114: Not enough inliers 9/25 (matches=76) between 95 and 114
+[ WARN] (2026-10-11 20:20:21.206) Rtabmap.cpp:4385::process() Rejected loop closure 97 -> 115: Not enough inliers 0/25 (matches=102) between 97 and 115
+[ WARN] (2026-10-11 20:20:21.376) Rtabmap.cpp:4385::process() Rejected loop closure 97 -> 116: Not enough inliers 0/25 (matches=90) between 97 and 116
+[ WARN] (2026-10-11 20:20:21.529) Rtabmap.cpp:4385::process() Rejected loop closure 101 -> 117: Not enough inliers 0/25 (matches=104) between 101 and 117
+[ WARN] (2026-10-11 20:20:21.678) Rtabmap.cpp:4385::process() Rejected loop closure 99 -> 118: Not enough inliers 0/25 (matches=83) between 99 and 118
+[ WARN] (2026-10-11 20:20:21.886) Rtabmap.cpp:4385::process() Rejected loop closure 106 -> 119: Not enough inliers 0/25 (matches=68) between 106 and 119
+[ WARN] (2026-10-11 20:20:22.363) Rtabmap.cpp:4385::process() Rejected loop closure 99 -> 120: Not enough inliers 0/25 (matches=62) between 99 and 120
+[ WARN] (2026-10-11 20:20:22.529) Rtabmap.cpp:4385::process() Rejected loop closure 101 -> 121: Not enough inliers 0/25 (matches=61) between 101 and 121
+[ WARN] (2026-10-11 20:20:39.952) Rtabmap.cpp:4385::process() Rejected loop closure 153 -> 187: Not enough inliers 6/25 (matches=69) between 153 and 187
+[ WARN] (2026-10-11 20:20:40.120) Rtabmap.cpp:4385::process() Rejected loop closure 153 -> 188: Not enough inliers 0/25 (matches=52) between 153 and 188
+[ WARN] (2026-10-11 20:20:40.287) Rtabmap.cpp:4385::process() Rejected loop closure 153 -> 189: Not enough inliers 0/25 (matches=32) between 153 and 189
+[ WARN] (2026-10-11 20:20:44.046) Rtabmap.cpp:4385::process() Rejected loop closure 118 -> 197: Not enough inliers 15/25 (matches=83) between 118 and 197
+[ WARN] (2026-10-11 20:20:44.217) Rtabmap.cpp:4385::process() Rejected loop closure 119 -> 198: Not enough inliers 0/25 (matches=51) between 119 and 198
+[ WARN] (2026-10-11 20:20:51.392) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: raw bidirectional RGB-D check failed (f=1,r=0,finliers=285,rinliers=278,fbackend=,rbackend=)
+[ WARN] (2026-10-11 20:21:02.445) Rtabmap.cpp:5363::process() Rejecting all added loop closures (1, first is 249 <-> 203) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of 1.737260 (edge 204->205, type=0, abs error=2.543295 deg, stddev=0.025551). The maximum error ratio parameter "RGBD/OptimizeMaxError" is 1.000000 of std deviation.
+[ WARN] (2026-10-11 20:21:02.445) Rtabmap.cpp:5401::process() Loop closure 249->203 rejected!
+[ WARN] (2026-10-11 20:21:02.929) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: native loop proposal disagrees with two raw old-keyframe observations
+[ WARN] (2026-10-11 20:21:03.101) Rtabmap.cpp:4385::process() Rejected loop closure 200 -> 251: Not enough inliers 9/25 (matches=71) between 200 and 251
+[ WARN] (2026-10-11 20:21:03.786) Rtabmap.cpp:4385::process() Rejected loop closure 201 -> 252: Not enough inliers 14/25 (matches=65) between 201 and 252
+[ WARN] (2026-10-11 20:21:04.290) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: native loop proposal disagrees with two raw old-keyframe observations
+[ WARN] (2026-10-11 20:21:04.463) Rtabmap.cpp:4385::process() Rejected loop closure 199 -> 254: Not enough inliers 9/25 (matches=77) between 199 and 254
+[ WARN] (2026-10-11 20:21:04.777) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: raw bidirectional RGB-D check failed (f=0,r=0,finliers=23,rinliers=44,fbackend=Not enough inliers 23/25 (matches=72) between 255 and 199,rbackend=)
+[ WARN] (2026-10-11 20:21:04.958) Rtabmap.cpp:4385::process() Rejected loop closure 198 -> 256: Not enough inliers 11/25 (matches=74) between 198 and 256
+[ WARN] (2026-10-11 20:21:05.655) Rtabmap.cpp:4385::process() Rejected loop closure 198 -> 257: Not enough inliers 0/25 (matches=75) between 198 and 257
+[ WARN] (2026-10-11 20:21:05.835) Rtabmap.cpp:4385::process() Rejected loop closure 197 -> 258: Not enough inliers 8/25 (matches=68) between 197 and 258
+[ WARN] (2026-10-11 20:21:06.486) Rtabmap.cpp:4385::process() Rejected loop closure 197 -> 259: Not enough inliers 0/25 (matches=66) between 197 and 259
+[ WARN] (2026-10-11 20:21:06.663) Rtabmap.cpp:4385::process() Rejected loop closure 195 -> 260: Not enough inliers 0/25 (matches=66) between 195 and 260
+[ WARN] (2026-10-11 20:21:07.294) Rtabmap.cpp:4385::process() Rejected loop closure 195 -> 261: Not enough inliers 0/25 (matches=47) between 195 and 261
+[ WARN] (2026-10-11 20:21:29.073) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: raw bidirectional RGB-D check failed (f=0,r=1,finliers=260,rinliers=267,fbackend=,rbackend=)
+[ WARN] (2026-10-11 20:21:31.672) Rtabmap.cpp:5319::process() Rejecting all added loop closures (1, first is 312 <-> 247) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of 1.065197 (edge 247->312, type=1, abs error=0.003039 m, stddev=0.002853). The maximum error ratio parameter "RGBD/OptimizeMaxError" is 1.000000 of std deviation.
+[ WARN] (2026-10-11 20:21:31.672) Rtabmap.cpp:5401::process() Loop closure 312->247 rejected!
+[ WARN] (2026-10-11 20:21:31.843) Rtabmap.cpp:4385::process() Rejected loop closure 247 -> 313: Not enough inliers 0/25 (matches=72) between 247 and 313
+[ WARN] (2026-10-11 20:21:32.026) Rtabmap.cpp:4385::process() Rejected loop closure 247 -> 314: Not enough inliers 0/25 (matches=58) between 247 and 314
+[ WARN] (2026-10-11 20:21:32.208) Rtabmap.cpp:4385::process() Rejected loop closure 247 -> 315: Not enough inliers 0/25 (matches=48) between 247 and 315
+[ WARN] (2026-10-11 20:21:44.847) Rtabmap.cpp:4385::process() Rejected loop closure 97 -> 364: Not enough inliers 8/25 (matches=132) between 97 and 364
+[ WARN] (2026-10-11 20:21:45.222) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: raw bidirectional RGB-D check failed (f=0,r=0,finliers=98,rinliers=88,fbackend=,rbackend=)
+[ WARN] (2026-10-11 20:21:45.394) Rtabmap.cpp:4385::process() Rejected loop closure 99 -> 366: Not enough inliers 0/25 (matches=76) between 99 and 366
+[ WARN] (2026-10-11 20:21:45.569) Rtabmap.cpp:4385::process() Rejected loop closure 99 -> 367: Not enough inliers 0/25 (matches=86) between 99 and 367
+[ WARN] (2026-10-11 20:21:45.748) Rtabmap.cpp:4385::process() Rejected loop closure 101 -> 368: Not enough inliers 0/25 (matches=78) between 101 and 368
+[ WARN] (2026-10-11 20:21:46.538) Rtabmap.cpp:4385::process() Rejected loop closure 99 -> 369: Not enough inliers 0/25 (matches=62) between 99 and 369
+[ WARN] (2026-10-11 20:21:46.712) Rtabmap.cpp:4385::process() Rejected loop closure 101 -> 370: Not enough inliers 0/25 (matches=70) between 101 and 370
+[ WARN] (2026-10-11 20:21:46.882) Rtabmap.cpp:4385::process() Rejected loop closure 97 -> 371: Not enough inliers 0/25 (matches=77) between 97 and 371
+[ WARN] (2026-10-11 20:21:51.173) Rtabmap.cpp:4385::process() Rejected loop closure 355 -> 384: Not enough inliers 0/25 (matches=74) between 355 and 384
+[ WARN] (2026-10-11 20:21:51.875) Rtabmap.cpp:5363::process() Rejecting all added loop closures (1, first is 386 <-> 342) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of 1.017063 (edge 342->386, type=1, abs error=3.105302 deg, stddev=0.053288). The maximum error ratio parameter "RGBD/OptimizeMaxError" is 1.000000 of std deviation.
+[ WARN] (2026-10-11 20:21:51.875) Rtabmap.cpp:5401::process() Loop closure 386->342 rejected!
+[ WARN] (2026-10-11 20:21:52.224) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: required old anchor disagrees with current map pose
+[ WARN] (2026-10-11 20:22:07.565) Rtabmap.cpp:5363::process() Rejecting all added loop closures (1, first is 434 <-> 389) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of 1.085676 (edge 389->390, type=0, abs error=1.462153 deg, stddev=0.023506). The maximum error ratio parameter "RGBD/OptimizeMaxError" is 1.000000 of std deviation.
+[ WARN] (2026-10-11 20:22:07.565) Rtabmap.cpp:5401::process() Loop closure 434->389 rejected!
+[ WARN] (2026-10-11 20:22:08.872) Rtabmap.cpp:5319::process() Rejecting all added loop closures (1, first is 435 <-> 388) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of 1.512440 (edge 388->435, type=1, abs error=0.009317 m, stddev=0.006160). The maximum error ratio parameter "RGBD/OptimizeMaxError" is 1.000000 of std deviation.
+[ WARN] (2026-10-11 20:22:08.872) Rtabmap.cpp:5363::process() Rejecting all added loop closures (1, first is 435 <-> 388) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of 2.036055 (edge 389->390, type=0, abs error=2.742095 deg, stddev=0.023506). The maximum error ratio parameter "RGBD/OptimizeMaxError" is 1.000000 of std deviation.
+[ WARN] (2026-10-11 20:22:08.872) Rtabmap.cpp:5401::process() Loop closure 435->388 rejected!
+[ WARN] (2026-10-11 20:22:10.513) Rtabmap.cpp:5319::process() Rejecting all added loop closures (1, first is 436 <-> 387) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of 1.159400 (edge 387->436, type=1, abs error=0.007360 m, stddev=0.006348). The maximum error ratio parameter "RGBD/OptimizeMaxError" is 1.000000 of std deviation.
+[ WARN] (2026-10-11 20:22:10.513) Rtabmap.cpp:5363::process() Rejecting all added loop closures (1, first is 436 <-> 387) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of 1.340535 (edge 389->390, type=0, abs error=1.805391 deg, stddev=0.023506). The maximum error ratio parameter "RGBD/OptimizeMaxError" is 1.000000 of std deviation.
+[ WARN] (2026-10-11 20:22:10.513) Rtabmap.cpp:5401::process() Loop closure 436->387 rejected!
+[ WARN] (2026-10-11 20:22:11.086) Rtabmap.cpp:5363::process() Rejecting all added loop closures (1, first is 437 <-> 387) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of 1.190263 (edge 389->390, type=0, abs error=1.603008 deg, stddev=0.023506). The maximum error ratio parameter "RGBD/OptimizeMaxError" is 1.000000 of std deviation.
+[ WARN] (2026-10-11 20:22:11.086) Rtabmap.cpp:5401::process() Loop closure 437->387 rejected!
+[ WARN] (2026-10-11 20:22:11.640) Rtabmap.cpp:5363::process() Rejecting all added loop closures (1, first is 438 <-> 386) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of 1.324406 (edge 389->390, type=0, abs error=1.783668 deg, stddev=0.023506). The maximum error ratio parameter "RGBD/OptimizeMaxError" is 1.000000 of std deviation.
+[ WARN] (2026-10-11 20:22:11.640) Rtabmap.cpp:5401::process() Loop closure 438->386 rejected!
+[ WARN] (2026-10-11 20:22:11.974) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: raw bidirectional RGB-D check failed (f=0,r=0,finliers=62,rinliers=64,fbackend=,rbackend=)
+[ WARN] (2026-10-11 20:22:12.894) Rtabmap.cpp:4385::process() Rejected loop closure 386 -> 440: Not enough inliers 0/25 (matches=34) between 386 and 440
+[ WARN] (2026-10-11 20:22:13.092) Rtabmap.cpp:4385::process() Rejected loop closure 386 -> 441: Not enough inliers 0/25 (matches=34) between 386 and 441
+[ WARN] (2026-10-11 20:22:13.287) Rtabmap.cpp:4385::process() Rejected loop closure 384 -> 442: Not enough inliers 0/25 (matches=45) between 384 and 442
+[ WARN] (2026-10-11 20:22:13.480) Rtabmap.cpp:4385::process() Rejected loop closure 384 -> 443: Not enough inliers 0/25 (matches=38) between 384 and 443
+[ WARN] (2026-10-11 20:22:37.590) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: raw bidirectional RGB-D check failed (f=0,r=1,finliers=137,rinliers=161,fbackend=,rbackend=)
+[ WARN] (2026-10-11 20:22:37.979) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: raw bidirectional RGB-D check failed (f=0,r=1,finliers=129,rinliers=130,fbackend=,rbackend=)
+[ WARN] (2026-10-11 20:22:39.061) Rtabmap.cpp:4385::process() Rejected loop closure 488 -> 515: Not enough inliers 11/25 (matches=87) between 488 and 515
+[ WARN] (2026-10-11 20:22:39.266) Rtabmap.cpp:4385::process() Rejected loop closure 487 -> 516: Not enough inliers 10/25 (matches=81) between 487 and 516
+[ WARN] (2026-10-11 20:22:39.629) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: raw bidirectional RGB-D check failed (f=0,r=1,finliers=22,rinliers=80,fbackend=Not enough inliers after bundle adjustment 22/25 (matches=26) between 517 and 488,rbackend=)
+[ WARN] (2026-10-11 20:22:51.574) Rtabmap.cpp:4385::process() Rejected loop closure 526 -> 544: Not enough inliers 0/25 (matches=61) between 526 and 544
+[ WARN] (2026-10-11 20:23:01.550) Rtabmap.cpp:5319::process() Rejecting all added loop closures (1, first is 568 <-> 545) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of 1.400635 (edge 545->568, type=1, abs error=0.008000 m, stddev=0.005711). The maximum error ratio parameter "RGBD/OptimizeMaxError" is 1.000000 of std deviation.
+[ WARN] (2026-10-11 20:23:01.550) Rtabmap.cpp:5401::process() Loop closure 568->545 rejected!
+[ WARN] (2026-10-11 20:23:02.156) Rtabmap.cpp:5319::process() Rejecting all added loop closures (1, first is 569 <-> 544) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of 1.426109 (edge 544->569, type=1, abs error=0.007864 m, stddev=0.005514). The maximum error ratio parameter "RGBD/OptimizeMaxError" is 1.000000 of std deviation.
+[ WARN] (2026-10-11 20:23:02.156) Rtabmap.cpp:5401::process() Loop closure 569->544 rejected!
+[ WARN] (2026-10-11 20:23:02.765) Rtabmap.cpp:5319::process() Rejecting all added loop closures (1, first is 570 <-> 544) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of 1.228456 (edge 544->570, type=1, abs error=0.009317 m, stddev=0.007585). The maximum error ratio parameter "RGBD/OptimizeMaxError" is 1.000000 of std deviation.
+[ WARN] (2026-10-11 20:23:02.765) Rtabmap.cpp:5401::process() Loop closure 570->544 rejected!
+[ WARN] (2026-10-11 20:23:11.602) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: raw bidirectional RGB-D check failed (f=0,r=1,finliers=355,rinliers=337,fbackend=,rbackend=)
+[ WARN] (2026-10-11 20:23:12.264) Rtabmap.cpp:5319::process() Rejecting all added loop closures (1, first is 587 <-> 541) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of 1.384678 (edge 541->587, type=1, abs error=0.003504 m, stddev=0.002531). The maximum error ratio parameter "RGBD/OptimizeMaxError" is 1.000000 of std deviation.
+[ WARN] (2026-10-11 20:23:12.264) Rtabmap.cpp:5363::process() Rejecting all added loop closures (1, first is 587 <-> 541) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of 2.275849 (edge 541->542, type=0, abs error=2.942188 deg, stddev=0.022563). The maximum error ratio parameter "RGBD/OptimizeMaxError" is 1.000000 of std deviation.
+[ WARN] (2026-10-11 20:23:12.264) Rtabmap.cpp:5401::process() Loop closure 587->541 rejected!
+[ WARN] (2026-10-11 20:23:13.797) Rtabmap.cpp:5363::process() Rejecting all added loop closures (1, first is 588 <-> 541) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of 1.457808 (edge 541->542, type=0, abs error=1.884636 deg, stddev=0.022563). The maximum error ratio parameter "RGBD/OptimizeMaxError" is 1.000000 of std deviation.
+[ WARN] (2026-10-11 20:23:13.797) Rtabmap.cpp:5401::process() Loop closure 588->541 rejected!
+[ WARN] (2026-10-11 20:23:14.444) Rtabmap.cpp:5319::process() Rejecting all added loop closures (1, first is 589 <-> 541) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of 1.147368 (edge 588->589, type=0, abs error=0.003238 m, stddev=0.002822). The maximum error ratio parameter "RGBD/OptimizeMaxError" is 1.000000 of std deviation.
+[ WARN] (2026-10-11 20:23:14.444) Rtabmap.cpp:5363::process() Rejecting all added loop closures (1, first is 589 <-> 541) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of 2.097889 (edge 541->542, type=0, abs error=2.712124 deg, stddev=0.022563). The maximum error ratio parameter "RGBD/OptimizeMaxError" is 1.000000 of std deviation.
+[ WARN] (2026-10-11 20:23:14.444) Rtabmap.cpp:5401::process() Loop closure 589->541 rejected!
+[ WARN] (2026-10-11 20:23:18.480) Rtabmap.cpp:5319::process() Rejecting all added loop closures (1, first is 594 <-> 540) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of 1.387031 (edge 540->594, type=1, abs error=0.004753 m, stddev=0.003427). The maximum error ratio parameter "RGBD/OptimizeMaxError" is 1.000000 of std deviation.
+[ WARN] (2026-10-11 20:23:18.480) Rtabmap.cpp:5363::process() Rejecting all added loop closures (1, first is 594 <-> 540) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of 1.138433 (edge 540->541, type=0, abs error=1.391897 deg, stddev=0.021339). The maximum error ratio parameter "RGBD/OptimizeMaxError" is 1.000000 of std deviation.
+[ WARN] (2026-10-11 20:23:18.480) Rtabmap.cpp:5401::process() Loop closure 594->540 rejected!
+[ WARN] (2026-10-11 20:23:25.397) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: raw bidirectional RGB-D check failed (f=0,r=0,finliers=285,rinliers=269,fbackend=,rbackend=)
+[ WARN] (2026-10-11 20:23:25.813) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: raw bidirectional RGB-D check failed (f=0,r=1,finliers=246,rinliers=255,fbackend=,rbackend=)
+[ WARN] (2026-10-11 20:23:31.041) Rtabmap.cpp:4385::process() Rejected loop closure 537 -> 612: Not enough inliers 0/25 (matches=84) between 537 and 612
+[ WARN] (2026-10-11 20:23:31.278) Rtabmap.cpp:4385::process() Rejected loop closure 537 -> 613: Not enough inliers 0/25 (matches=51) between 537 and 613
+[ WARN] (2026-10-11 20:24:34.172) Rtabmap.cpp:5319::process() Rejecting all added loop closures (1, first is 724 <-> 608) in this iteration because a wrong loop closure has been detected after graph optimization, resulting in a maximum graph error ratio of 1.019812 (edge 602->719, type=1, abs error=0.003572 m, stddev=0.003503). The maximum error ratio parameter "RGBD/OptimizeMaxError" is 1.000000 of std deviation.
+[ WARN] (2026-10-11 20:24:34.172) Rtabmap.cpp:5401::process() Loop closure 724->608 rejected!
+[ WARN] (2026-10-11 20:24:36.136) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: required old anchor disagrees with current map pose
+[ WARN] (2026-10-11 20:24:36.507) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: raw bidirectional RGB-D check failed (f=0,r=0,finliers=168,rinliers=139,fbackend=,rbackend=)
+[ WARN] (2026-10-11 20:24:36.871) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: raw bidirectional RGB-D check failed (f=0,r=0,finliers=73,rinliers=66,fbackend=,rbackend=)
+[ WARN] (2026-10-11 20:25:04.724) Rtabmap.cpp:4385::process() Rejected loop closure 371 -> 794: Not enough inliers 0/25 (matches=55) between 371 and 794
+[ WARN] (2026-10-11 20:25:04.934) Rtabmap.cpp:4385::process() Rejected loop closure 371 -> 795: Not enough inliers 0/25 (matches=66) between 371 and 795
+[ WARN] (2026-10-11 20:25:05.137) Rtabmap.cpp:4385::process() Rejected loop closure 367 -> 796: Not enough inliers 0/25 (matches=75) between 367 and 796
+[ WARN] (2026-10-11 20:25:06.289) Rtabmap.cpp:4385::process() Rejected loop closure 367 -> 797: Not enough inliers 0/25 (matches=83) between 367 and 797
+[ WARN] (2026-10-11 20:25:06.508) Rtabmap.cpp:4385::process() Rejected loop closure 367 -> 798: Not enough inliers 0/25 (matches=62) between 367 and 798
+[ WARN] (2026-10-11 20:25:07.656) Rtabmap.cpp:4385::process() Rejected loop closure 367 -> 799: Not enough inliers 0/25 (matches=79) between 367 and 799
+[ WARN] (2026-10-11 20:25:07.870) Rtabmap.cpp:4385::process() Rejected loop closure 367 -> 800: Not enough inliers 0/25 (matches=67) between 367 and 800
+[ WARN] (2026-10-11 20:25:08.074) Rtabmap.cpp:4385::process() Rejected loop closure 367 -> 801: Not enough inliers 0/25 (matches=73) between 367 and 801
+[ WARN] (2026-10-11 20:25:09.258) Rtabmap.cpp:4385::process() Rejected loop closure 367 -> 802: Not enough inliers 0/25 (matches=69) between 367 and 802
+[ WARN] (2026-10-11 20:25:10.353) Rtabmap.cpp:4385::process() Rejected loop closure 365 -> 803: Not enough inliers 0/25 (matches=74) between 365 and 803
+[ WARN] (2026-10-11 20:25:10.568) Rtabmap.cpp:4385::process() Rejected loop closure 367 -> 804: Not enough inliers 0/25 (matches=61) between 367 and 804
+[ WARN] (2026-10-11 20:25:11.704) Rtabmap.cpp:4385::process() Rejected loop closure 367 -> 805: Not enough inliers 0/25 (matches=64) between 367 and 805
+[ WARN] (2026-10-11 20:25:11.931) Rtabmap.cpp:4385::process() Rejected loop closure 367 -> 806: Not enough inliers 0/25 (matches=66) between 367 and 806
+[ WARN] (2026-10-11 20:25:12.139) Rtabmap.cpp:4385::process() Rejected loop closure 101 -> 807: Not enough inliers 0/25 (matches=65) between 101 and 807
+[ WARN] (2026-10-11 20:25:12.343) Rtabmap.cpp:4385::process() Rejected loop closure 101 -> 808: Not enough inliers 0/25 (matches=55) between 101 and 808
+[ WARN] (2026-10-11 20:25:13.534) Rtabmap.cpp:4385::process() Rejected loop closure 101 -> 809: Not enough inliers 0/25 (matches=74) between 101 and 809
+[ WARN] (2026-10-11 20:25:14.657) Rtabmap.cpp:4385::process() Rejected loop closure 101 -> 810: Not enough inliers 0/25 (matches=72) between 101 and 810
+[ WARN] (2026-10-11 20:25:14.864) Rtabmap.cpp:4385::process() Rejected loop closure 101 -> 811: Not enough inliers 0/25 (matches=61) between 101 and 811
+[ WARN] (2026-10-11 20:25:15.066) Rtabmap.cpp:4385::process() Rejected loop closure 101 -> 812: Not enough inliers 0/25 (matches=72) between 101 and 812
+[ WARN] (2026-10-11 20:25:15.272) Rtabmap.cpp:4385::process() Rejected loop closure 101 -> 813: Not enough inliers 0/25 (matches=46) between 101 and 813
+[ WARN] (2026-10-11 20:25:16.431) Rtabmap.cpp:4385::process() Rejected loop closure 99 -> 814: Not enough inliers 0/25 (matches=75) between 99 and 814
+[ WARN] (2026-10-11 20:25:17.560) Rtabmap.cpp:4385::process() Rejected loop closure 101 -> 815: Not enough inliers 0/25 (matches=54) between 101 and 815
+[ WARN] (2026-10-11 20:25:18.691) Rtabmap.cpp:4385::process() Rejected loop closure 101 -> 816: Not enough inliers 0/25 (matches=54) between 101 and 816
+[ WARN] (2026-10-11 20:25:18.906) Rtabmap.cpp:4385::process() Rejected loop closure 101 -> 817: Not enough inliers 0/25 (matches=47) between 101 and 817
+[ WARN] (2026-10-11 20:25:19.109) Rtabmap.cpp:4385::process() Rejected loop closure 101 -> 818: Not enough inliers 0/25 (matches=56) between 101 and 818
+[ WARN] (2026-10-11 20:25:25.666) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 828: Not enough inliers 0/25 (matches=53) between 165 and 828
+[ WARN] (2026-10-11 20:25:25.872) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 829: Not enough inliers 0/25 (matches=40) between 165 and 829
+[ WARN] (2026-10-11 20:25:26.079) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 830: Not enough inliers 0/25 (matches=47) between 165 and 830
+[ WARN] (2026-10-11 20:25:27.251) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 831: Not enough inliers 0/25 (matches=56) between 165 and 831
+[ WARN] (2026-10-11 20:25:27.461) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 832: Not enough inliers 0/25 (matches=44) between 165 and 832
+[ WARN] (2026-10-11 20:25:28.638) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 833: Not enough inliers 0/25 (matches=49) between 165 and 833
+[ WARN] (2026-10-11 20:25:29.832) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 834: Not enough inliers 0/25 (matches=52) between 165 and 834
+[ WARN] (2026-10-11 20:25:31.059) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 835: Not enough inliers 0/25 (matches=38) between 165 and 835
+[ WARN] (2026-10-11 20:25:32.213) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 836: Not enough inliers 0/25 (matches=53) between 165 and 836
+[ WARN] (2026-10-11 20:25:33.363) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 837: Not enough inliers 0/25 (matches=43) between 165 and 837
+[ WARN] (2026-10-11 20:25:34.594) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 838: Not enough inliers 0/25 (matches=46) between 165 and 838
+[ WARN] (2026-10-11 20:25:35.735) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 839: Not enough inliers 0/25 (matches=54) between 165 and 839
+[ WARN] (2026-10-11 20:25:36.903) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 840: Not enough inliers 0/25 (matches=61) between 165 and 840
+[ WARN] (2026-10-11 20:25:38.028) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 841: Not enough inliers 0/25 (matches=40) between 165 and 841
+[ WARN] (2026-10-11 20:25:39.149) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 842: Not enough inliers 0/25 (matches=50) between 165 and 842
+[ WARN] (2026-10-11 20:25:40.253) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 843: Not enough inliers 0/25 (matches=52) between 165 and 843
+[ WARN] (2026-10-11 20:25:41.388) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 844: Not enough inliers 0/25 (matches=48) between 165 and 844
+[ WARN] (2026-10-11 20:25:42.552) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 845: Not enough inliers 0/25 (matches=51) between 165 and 845
+[ WARN] (2026-10-11 20:25:43.713) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 846: Not enough inliers 0/25 (matches=41) between 165 and 846
+[ WARN] (2026-10-11 20:25:45.160) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 847: Not enough inliers 0/25 (matches=47) between 165 and 847
+[ WARN] (2026-10-11 20:25:46.684) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 848: Not enough inliers 0/25 (matches=54) between 165 and 848
+[ WARN] (2026-10-11 20:25:47.860) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 849: Not enough inliers 0/25 (matches=41) between 165 and 849
+[ WARN] (2026-10-11 20:25:49.071) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 850: Not enough inliers 0/25 (matches=43) between 165 and 850
+[ WARN] (2026-10-11 20:25:49.292) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 851: Not enough inliers 0/25 (matches=46) between 165 and 851
+[ WARN] (2026-10-11 20:25:49.493) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 852: Not enough inliers 0/25 (matches=37) between 165 and 852
+[ WARN] (2026-10-11 20:25:50.655) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 853: Not enough inliers 0/25 (matches=42) between 165 and 853
+[ WARN] (2026-10-11 20:25:50.868) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 854: Not enough inliers 0/25 (matches=45) between 165 and 854
+[ WARN] (2026-10-11 20:25:51.075) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 855: Not enough inliers 0/25 (matches=47) between 165 and 855
+[ WARN] (2026-10-11 20:25:51.279) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 856: Not enough inliers 0/25 (matches=37) between 165 and 856
+[ WARN] (2026-10-11 20:25:52.444) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 857: Not enough inliers 0/25 (matches=57) between 165 and 857
+[ WARN] (2026-10-11 20:25:52.663) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 858: Not enough inliers 0/25 (matches=43) between 165 and 858
+[ WARN] (2026-10-11 20:25:52.868) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 859: Not enough inliers 0/25 (matches=47) between 165 and 859
+[ WARN] (2026-10-11 20:25:53.072) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 860: Not enough inliers 0/25 (matches=45) between 165 and 860
+[ WARN] (2026-10-11 20:25:53.278) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 861: Not enough inliers 0/25 (matches=42) between 165 and 861
+[ WARN] (2026-10-11 20:25:54.424) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 862: Not enough inliers 0/25 (matches=30) between 165 and 862
+[ WARN] (2026-10-11 20:25:54.639) Rtabmap.cpp:4385::process() Rejected loop closure 164 -> 863: Not enough inliers 0/25 (matches=40) between 164 and 863
+[ WARN] (2026-10-11 20:25:54.845) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 864: Not enough inliers 0/25 (matches=52) between 165 and 864
+[ WARN] (2026-10-11 20:25:55.061) Rtabmap.cpp:4385::process() Rejected loop closure 166 -> 865: Not enough inliers 0/25 (matches=40) between 166 and 865
+[ WARN] (2026-10-11 20:25:56.217) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 866: Not enough inliers 0/25 (matches=46) between 165 and 866
+[ WARN] (2026-10-11 20:25:57.349) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 867: Not enough inliers 0/25 (matches=59) between 165 and 867
+[ WARN] (2026-10-11 20:25:58.491) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 868: Not enough inliers 0/25 (matches=54) between 165 and 868
+[ WARN] (2026-10-11 20:25:59.594) Rtabmap.cpp:4385::process() Rejected loop closure 166 -> 869: Not enough inliers 0/25 (matches=45) between 166 and 869
+[ WARN] (2026-10-11 20:26:00.784) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 870: Not enough inliers 0/25 (matches=43) between 165 and 870
+[ WARN] (2026-10-11 20:26:01.945) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 871: Not enough inliers 0/25 (matches=42) between 165 and 871
+[ WARN] (2026-10-11 20:26:03.099) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 872: Not enough inliers 0/25 (matches=42) between 165 and 872
+[ WARN] (2026-10-11 20:26:04.296) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 873: Not enough inliers 0/25 (matches=51) between 165 and 873
+[ WARN] (2026-10-11 20:26:05.407) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 874: Not enough inliers 0/25 (matches=38) between 165 and 874
+[ WARN] (2026-10-11 20:26:05.611) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 875: Not enough inliers 0/25 (matches=45) between 165 and 875
+[ WARN] (2026-10-11 20:26:05.813) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 876: Not enough inliers 0/25 (matches=36) between 165 and 876
+[ WARN] (2026-10-11 20:26:06.014) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 877: Not enough inliers 0/25 (matches=38) between 165 and 877
+[ WARN] (2026-10-11 20:26:06.221) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 878: Not enough inliers 0/25 (matches=48) between 165 and 878
+[ WARN] (2026-10-11 20:26:07.338) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 879: Not enough inliers 0/25 (matches=51) between 165 and 879
+[ WARN] (2026-10-11 20:26:07.544) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 880: Not enough inliers 0/25 (matches=32) between 165 and 880
+[ WARN] (2026-10-11 20:26:07.747) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 881: Not enough inliers 0/25 (matches=45) between 165 and 881
+[ WARN] (2026-10-11 20:26:07.952) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 882: Not enough inliers 0/25 (matches=34) between 165 and 882
+[ WARN] (2026-10-11 20:26:08.155) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 883: Not enough inliers 0/25 (matches=30) between 165 and 883
+[ WARN] (2026-10-11 20:26:09.327) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 884: Not enough inliers 0/25 (matches=51) between 165 and 884
+[ WARN] (2026-10-11 20:26:09.534) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 885: Not enough inliers 0/25 (matches=44) between 165 and 885
+[ WARN] (2026-10-11 20:26:09.738) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 886: Not enough inliers 0/25 (matches=37) between 165 and 886
+[ WARN] (2026-10-11 20:26:10.933) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 887: Not enough inliers 0/25 (matches=37) between 165 and 887
+[ WARN] (2026-10-11 20:26:12.109) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 888: Not enough inliers 0/25 (matches=40) between 165 and 888
+[ WARN] (2026-10-11 20:26:13.212) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 889: Not enough inliers 0/25 (matches=44) between 165 and 889
+[ WARN] (2026-10-11 20:26:14.377) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 890: Not enough inliers 0/25 (matches=42) between 165 and 890
+[ WARN] (2026-10-11 20:26:14.583) Rtabmap.cpp:4385::process() Rejected loop closure 166 -> 891: Not enough inliers 0/25 (matches=37) between 166 and 891
+[ WARN] (2026-10-11 20:26:15.753) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 892: Not enough inliers 0/25 (matches=42) between 165 and 892
+[ WARN] (2026-10-11 20:26:15.958) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 893: Not enough inliers 0/25 (matches=40) between 165 and 893
+[ WARN] (2026-10-11 20:26:16.160) Rtabmap.cpp:4385::process() Rejected loop closure 166 -> 894: Not enough inliers 0/25 (matches=42) between 166 and 894
+[ WARN] (2026-10-11 20:26:16.366) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 895: Not enough inliers 0/25 (matches=50) between 165 and 895
+[ WARN] (2026-10-11 20:26:16.570) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 896: Not enough inliers 0/25 (matches=36) between 165 and 896
+[ WARN] (2026-10-11 20:26:17.743) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 897: Not enough inliers 0/25 (matches=37) between 165 and 897
+[ WARN] (2026-10-11 20:26:18.915) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 898: Not enough inliers 0/25 (matches=46) between 165 and 898
+[ WARN] (2026-10-11 20:26:20.073) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 899: Not enough inliers 0/25 (matches=40) between 165 and 899
+[ WARN] (2026-10-11 20:26:21.234) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 900: Not enough inliers 0/25 (matches=47) between 165 and 900
+[ WARN] (2026-10-11 20:26:21.456) Rtabmap.cpp:4385::process() Rejected loop closure 166 -> 901: Not enough inliers 0/25 (matches=46) between 166 and 901
+[ WARN] (2026-10-11 20:26:21.663) Rtabmap.cpp:4385::process() Rejected loop closure 165 -> 902: Not enough inliers 0/25 (matches=49) between 165 and 902
+[ WARN] (2026-10-11 20:26:22.866) Rtabmap.cpp:4385::process() Rejected loop closure 801 -> 903: Not enough inliers 21/25 (matches=89) between 801 and 903
+[ WARN] (2026-10-11 20:26:23.074) Rtabmap.cpp:4385::process() Rejected loop closure 801 -> 904: Not enough inliers 15/25 (matches=81) between 801 and 904
+[ WARN] (2026-10-11 20:26:23.485) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: raw bidirectional RGB-D check failed (f=0,r=0,finliers=67,rinliers=54,fbackend=,rbackend=)
+[ WARN] (2026-10-11 20:26:23.695) Rtabmap.cpp:4385::process() Rejected loop closure 801 -> 906: Not enough inliers 21/25 (matches=97) between 801 and 906
+[ WARN] (2026-10-11 20:26:27.375) Rtabmap.cpp:4385::process() Rejected loop closure 798 -> 911: Not enough inliers after bundle adjustment 24/25 (matches=25) between 798 and 911
+[ WARN] (2026-10-11 20:26:29.932) Rtabmap.cpp:4385::process() Rejected loop closure 796 -> 914: Not enough inliers 6/25 (matches=101) between 796 and 914
+[ WARN] (2026-10-11 20:26:30.132) Rtabmap.cpp:4385::process() Rejected loop closure 796 -> 915: Not enough inliers 0/25 (matches=84) between 796 and 915
+[ WARN] (2026-10-11 20:26:30.331) Rtabmap.cpp:4385::process() Rejected loop closure 796 -> 916: Not enough inliers 0/25 (matches=74) between 796 and 916
+[ WARN] (2026-10-11 20:26:31.542) Rtabmap.cpp:4385::process() Rejected loop closure 796 -> 917: Not enough inliers 0/25 (matches=59) between 796 and 917
+[ WARN] (2026-10-11 20:26:31.752) Rtabmap.cpp:4385::process() Rejected loop closure 801 -> 918: Not enough inliers 0/25 (matches=54) between 801 and 918
+[ WARN] (2026-10-11 20:26:31.960) Rtabmap.cpp:4385::process() Rejected loop closure 801 -> 919: Not enough inliers 0/25 (matches=72) between 801 and 919
+[ WARN] (2026-10-11 20:26:32.171) Rtabmap.cpp:4385::process() Rejected loop closure 907 -> 920: Not enough inliers 0/25 (matches=56) between 907 and 920
+[ WARN] (2026-10-11 20:26:32.390) Rtabmap.cpp:4385::process() Rejected loop closure 801 -> 921: Not enough inliers 0/25 (matches=62) between 801 and 921
+[ WARN] (2026-10-11 20:26:33.608) Rtabmap.cpp:4385::process() Rejected loop closure 907 -> 922: Not enough inliers 0/25 (matches=52) between 907 and 922
+[ WARN] (2026-10-11 20:26:33.836) Rtabmap.cpp:4385::process() Rejected loop closure 796 -> 923: Not enough inliers 0/25 (matches=41) between 796 and 923
+[ WARN] (2026-10-11 20:26:34.058) Rtabmap.cpp:4385::process() Rejected loop closure 796 -> 924: Not enough inliers 0/25 (matches=39) between 796 and 924
+[ WARN] (2026-10-11 20:26:34.276) Rtabmap.cpp:4385::process() Rejected loop closure 907 -> 925: Not enough inliers 0/25 (matches=30) between 907 and 925
+[ WARN] (2026-10-11 20:26:34.491) Rtabmap.cpp:4385::process() Rejected loop closure 907 -> 926: Not enough inliers 0/25 (matches=27) between 907 and 926
+[ WARN] (2026-10-11 20:26:35.921) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: required old anchor disagrees with current map pose
+[ WARN] (2026-10-11 20:26:36.328) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: required old anchor disagrees with current map pose
+[ WARN] (2026-10-11 20:26:36.752) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: required old anchor disagrees with current map pose
+[ WARN] (2026-10-11 20:26:37.178) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: required old anchor disagrees with current map pose
+[ WARN] (2026-10-11 20:26:37.615) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: required old anchor disagrees with current map pose
+[ WARN] (2026-10-11 20:26:38.984) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: required old anchor disagrees with current map pose
+[ WARN] (2026-10-11 20:26:39.381) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: required old anchor disagrees with current map pose
+[ WARN] (2026-10-11 20:26:39.784) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: required old anchor disagrees with current map pose
+[ WARN] (2026-10-11 20:26:41.168) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: required old anchor disagrees with current map pose
+[ WARN] (2026-10-11 20:26:41.591) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: required old anchor disagrees with current map pose
+[ WARN] (2026-10-11 20:26:42.981) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: required old anchor disagrees with current map pose
+[ WARN] (2026-10-11 20:26:44.485) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: required old anchor disagrees with current map pose
+[ WARN] (2026-10-11 20:26:45.843) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: required old anchor disagrees with current map pose
+[ WARN] (2026-10-11 20:26:46.241) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: required old anchor disagrees with current map pose
+[ WARN] (2026-10-11 20:26:47.466) Rtabmap.cpp:4385::process() Rejected loop closure 140 -> 941: Not enough inliers 0/25 (matches=80) between 140 and 941
+[ WARN] (2026-10-11 20:26:49.204) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: required old anchor disagrees with current map pose
+[ WARN] (2026-10-11 20:26:50.539) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: required old anchor disagrees with current map pose
+[ WARN] (2026-10-11 20:26:51.910) Rtabmap.cpp:4472::process() Rejected same-epoch visual loop without two independent raw old-keyframe checks: required old anchor disagrees with current map pose
+[ WARN] (2026-10-11 20:26:53.300) Rtabmap.cpp:1608::collectRawCrossMapLoopEvidence() [RAW_CANDIDATE_SUPPORT] current=945 old=932 inliers=253 id_range=(1,935) exact_lookup=(253,253) cached_lookup=(0,0) raw_words=(939,866) candidate_only=1
+[ WARN] (2026-10-11 20:26:53.300) Rtabmap.cpp:1670::acceptCrossMapLoopEvidence() Guarded candidate support current=945 old=932 inliers=253 ids=253 unique=253 grid=(9,8)/4 depth=(253,253)/12 final_depth_min=25 candidate_only=1
+[ WARN] (2026-10-11 20:26:53.303) Rtabmap.cpp:4414::process() Guarded local-submap candidate current=945 old=932 retained=1: retained 1/3 independent native visual candidates; raw RGB-D and shadow transaction still required
+[ WARN] (2026-10-11 20:26:53.594) Rtabmap.cpp:1608::collectRawCrossMapLoopEvidence() [RAW_CANDIDATE_SUPPORT] current=946 old=942 inliers=242 id_range=(2,933) exact_lookup=(242,242) cached_lookup=(0,0) raw_words=(935,839) candidate_only=1
+[ WARN] (2026-10-11 20:26:53.594) Rtabmap.cpp:1670::acceptCrossMapLoopEvidence() Guarded candidate support current=946 old=942 inliers=242 ids=242 unique=242 grid=(9,8)/4 depth=(242,242)/12 final_depth_min=25 candidate_only=1
+[ WARN] (2026-10-11 20:26:53.596) Rtabmap.cpp:4414::process() Guarded local-submap candidate current=946 old=942 retained=1: source view is not independent: d=0.002486m a=0.489885deg minimum=(0.030000m or 3.000000deg)
+[ WARN] (2026-10-11 20:26:53.602) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986786830000 epoch=1 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:26:53.603) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986786830000 epoch=1 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:26:53.603) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986786830000 epoch=1 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:26:53.603) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986786830000 epoch=1 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:26:53.603) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986786830000 epoch=1 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:26:53.604) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986786830000 epoch=1 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:26:53.604) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986786830000 epoch=1 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:26:53.604) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986786830000 epoch=1 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:26:53.604) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986786830000 epoch=1 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:26:53.604) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986786830000 epoch=1 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:26:53.604) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986786830000 epoch=1 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:26:53.605) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986786830000 epoch=1 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:26:53.605) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986786830000 epoch=1 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.128) Rtabmap.cpp:1608::collectRawCrossMapLoopEvidence() [RAW_CANDIDATE_SUPPORT] current=947 old=942 inliers=233 id_range=(1,929) exact_lookup=(233,233) cached_lookup=(0,0) raw_words=(933,833) candidate_only=1
+[ WARN] (2026-10-11 20:26:54.128) Rtabmap.cpp:1670::acceptCrossMapLoopEvidence() Guarded candidate support current=947 old=942 inliers=233 ids=233 unique=233 grid=(9,8)/4 depth=(233,233)/12 final_depth_min=25 candidate_only=1
+[ WARN] (2026-10-11 20:26:54.130) Rtabmap.cpp:4414::process() Guarded local-submap candidate current=947 old=942 retained=1: source view is not independent: d=0.002515m a=0.846304deg minimum=(0.030000m or 3.000000deg)
+[ WARN] (2026-10-11 20:26:54.137) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986986838000 epoch=1 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.137) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986986838000 epoch=1 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.137) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986986838000 epoch=1 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.138) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986986838000 epoch=1 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.138) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986986838000 epoch=1 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:26:54.138) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986986838000 epoch=1 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.138) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986986838000 epoch=1 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.138) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986986838000 epoch=1 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.139) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986986838000 epoch=1 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.139) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986986838000 epoch=1 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:26:54.139) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986986838000 epoch=1 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.139) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986986838000 epoch=1 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:26:54.139) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681986986838000 epoch=1 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.436) Rtabmap.cpp:1608::collectRawCrossMapLoopEvidence() [RAW_CANDIDATE_SUPPORT] current=948 old=942 inliers=225 id_range=(1,927) exact_lookup=(225,225) cached_lookup=(0,0) raw_words=(948,818) candidate_only=1
+[ WARN] (2026-10-11 20:26:54.436) Rtabmap.cpp:1670::acceptCrossMapLoopEvidence() Guarded candidate support current=948 old=942 inliers=225 ids=225 unique=225 grid=(9,7)/4 depth=(225,225)/12 final_depth_min=25 candidate_only=1
+[ WARN] (2026-10-11 20:26:54.439) Rtabmap.cpp:4414::process() Guarded local-submap candidate current=948 old=942 retained=1: source view is not independent: d=0.001612m a=0.480445deg minimum=(0.030000m or 3.000000deg)
+[ WARN] (2026-10-11 20:26:54.445) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681987203472000 epoch=1 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.445) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681987203472000 epoch=1 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.445) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681987203472000 epoch=1 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.445) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681987203472000 epoch=1 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.445) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681987203472000 epoch=1 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:26:54.446) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681987203472000 epoch=1 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.446) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681987203472000 epoch=1 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.446) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681987203472000 epoch=1 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.446) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681987203472000 epoch=1 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.446) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681987203472000 epoch=1 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:26:54.447) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681987203472000 epoch=1 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.447) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681987203472000 epoch=1 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:26:54.447) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681987203472000 epoch=1 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.917) Rtabmap.cpp:1608::collectRawCrossMapLoopEvidence() [RAW_CANDIDATE_SUPPORT] current=949 old=942 inliers=237 id_range=(1,935) exact_lookup=(237,237) cached_lookup=(0,0) raw_words=(939,850) candidate_only=1
+[ WARN] (2026-10-11 20:26:54.918) Rtabmap.cpp:1670::acceptCrossMapLoopEvidence() Guarded candidate support current=949 old=942 inliers=237 ids=237 unique=237 grid=(9,8)/4 depth=(237,237)/12 final_depth_min=25 candidate_only=1
+[ WARN] (2026-10-11 20:26:54.920) Rtabmap.cpp:4414::process() Guarded local-submap candidate current=949 old=942 retained=1: source view is not independent: d=0.002821m a=1.083704deg minimum=(0.030000m or 3.000000deg)
+[ WARN] (2026-10-11 20:26:54.926) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988086766000 epoch=1 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.926) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988086766000 epoch=1 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.926) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988086766000 epoch=1 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.927) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988086766000 epoch=1 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.927) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988086766000 epoch=1 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:26:54.927) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988086766000 epoch=1 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.927) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988086766000 epoch=1 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.927) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988086766000 epoch=1 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.928) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988086766000 epoch=1 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.928) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988086766000 epoch=1 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:26:54.928) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988086766000 epoch=1 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:26:54.928) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988086766000 epoch=1 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:26:54.928) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988086766000 epoch=1 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.213) Rtabmap.cpp:1608::collectRawCrossMapLoopEvidence() [RAW_CANDIDATE_SUPPORT] current=950 old=942 inliers=235 id_range=(1,939) exact_lookup=(235,235) cached_lookup=(0,0) raw_words=(942,853) candidate_only=1
+[ WARN] (2026-10-11 20:26:55.214) Rtabmap.cpp:1670::acceptCrossMapLoopEvidence() Guarded candidate support current=950 old=942 inliers=235 ids=235 unique=235 grid=(9,9)/4 depth=(235,235)/12 final_depth_min=25 candidate_only=1
+[ WARN] (2026-10-11 20:26:55.216) Rtabmap.cpp:4414::process() Guarded local-submap candidate current=950 old=942 retained=1: source view is not independent: d=0.002415m a=0.492400deg minimum=(0.030000m or 3.000000deg)
+[ WARN] (2026-10-11 20:26:55.222) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988320097000 epoch=1 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.222) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988320097000 epoch=1 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.223) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988320097000 epoch=1 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.223) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988320097000 epoch=1 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.223) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988320097000 epoch=1 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:26:55.223) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988320097000 epoch=1 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.223) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988320097000 epoch=1 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.224) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988320097000 epoch=1 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.224) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988320097000 epoch=1 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.224) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988320097000 epoch=1 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:26:55.224) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988320097000 epoch=1 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.224) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988320097000 epoch=1 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:26:55.224) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988320097000 epoch=1 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.517) Rtabmap.cpp:1608::collectRawCrossMapLoopEvidence() [RAW_CANDIDATE_SUPPORT] current=951 old=942 inliers=237 id_range=(1,921) exact_lookup=(237,237) cached_lookup=(0,0) raw_words=(939,830) candidate_only=1
+[ WARN] (2026-10-11 20:26:55.517) Rtabmap.cpp:1670::acceptCrossMapLoopEvidence() Guarded candidate support current=951 old=942 inliers=237 ids=237 unique=237 grid=(9,8)/4 depth=(237,237)/12 final_depth_min=25 candidate_only=1
+[ WARN] (2026-10-11 20:26:55.519) Rtabmap.cpp:4414::process() Guarded local-submap candidate current=951 old=942 retained=1: source view is not independent: d=0.002479m a=0.988434deg minimum=(0.030000m or 3.000000deg)
+[ WARN] (2026-10-11 20:26:55.525) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988553404000 epoch=1 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.526) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988553404000 epoch=1 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.526) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988553404000 epoch=1 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.526) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988553404000 epoch=1 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.526) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988553404000 epoch=1 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:26:55.526) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988553404000 epoch=1 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.526) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988553404000 epoch=1 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.527) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988553404000 epoch=1 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.527) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988553404000 epoch=1 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.527) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988553404000 epoch=1 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:26:55.527) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988553404000 epoch=1 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.527) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988553404000 epoch=1 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:26:55.528) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681988553404000 epoch=1 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.816) Rtabmap.cpp:1608::collectRawCrossMapLoopEvidence() [RAW_CANDIDATE_SUPPORT] current=952 old=942 inliers=238 id_range=(1,946) exact_lookup=(238,238) cached_lookup=(0,0) raw_words=(948,853) candidate_only=1
+[ WARN] (2026-10-11 20:26:55.816) Rtabmap.cpp:1670::acceptCrossMapLoopEvidence() Guarded candidate support current=952 old=942 inliers=238 ids=238 unique=238 grid=(9,7)/4 depth=(238,238)/12 final_depth_min=25 candidate_only=1
+[ WARN] (2026-10-11 20:26:55.819) Rtabmap.cpp:4414::process() Guarded local-submap candidate current=952 old=942 retained=1: source view is not independent: d=0.002304m a=0.897161deg minimum=(0.030000m or 3.000000deg)
+[ WARN] (2026-10-11 20:26:55.825) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989120251000 epoch=1 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.825) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989120251000 epoch=1 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.825) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989120251000 epoch=1 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.826) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989120251000 epoch=1 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.826) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989120251000 epoch=1 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:26:55.826) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989120251000 epoch=1 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.826) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989120251000 epoch=1 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.826) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989120251000 epoch=1 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.827) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989120251000 epoch=1 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.827) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989120251000 epoch=1 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:26:55.827) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989120251000 epoch=1 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:26:55.827) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989120251000 epoch=1 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:26:55.827) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989120251000 epoch=1 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:26:56.406) Rtabmap.cpp:1608::collectRawCrossMapLoopEvidence() [RAW_CANDIDATE_SUPPORT] current=953 old=942 inliers=224 id_range=(1,927) exact_lookup=(224,224) cached_lookup=(0,0) raw_words=(938,837) candidate_only=1
+[ WARN] (2026-10-11 20:26:56.406) Rtabmap.cpp:1670::acceptCrossMapLoopEvidence() Guarded candidate support current=953 old=942 inliers=224 ids=224 unique=224 grid=(9,8)/4 depth=(224,224)/12 final_depth_min=25 candidate_only=1
+[ WARN] (2026-10-11 20:26:56.409) Rtabmap.cpp:4414::process() Guarded local-submap candidate current=953 old=942 retained=1: source view is not independent: d=0.002961m a=0.566687deg minimum=(0.030000m or 3.000000deg)
+[ WARN] (2026-10-11 20:26:56.416) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989353393000 epoch=1 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:26:56.416) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989353393000 epoch=1 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:26:56.416) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989353393000 epoch=1 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:26:56.417) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989353393000 epoch=1 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:26:56.417) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989353393000 epoch=1 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:26:56.417) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989353393000 epoch=1 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:26:56.417) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989353393000 epoch=1 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:26:56.417) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989353393000 epoch=1 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:26:56.418) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989353393000 epoch=1 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:26:56.418) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989353393000 epoch=1 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:26:56.418) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989353393000 epoch=1 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:26:56.418) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989353393000 epoch=1 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:26:56.418) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989353393000 epoch=1 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:26:56.703) Rtabmap.cpp:1608::collectRawCrossMapLoopEvidence() [RAW_CANDIDATE_SUPPORT] current=954 old=942 inliers=235 id_range=(1,913) exact_lookup=(235,235) cached_lookup=(0,0) raw_words=(944,842) candidate_only=1
+[ WARN] (2026-10-11 20:26:56.703) Rtabmap.cpp:1670::acceptCrossMapLoopEvidence() Guarded candidate support current=954 old=942 inliers=235 ids=235 unique=235 grid=(9,8)/4 depth=(235,235)/12 final_depth_min=25 candidate_only=1
+[ WARN] (2026-10-11 20:26:56.705) Rtabmap.cpp:4414::process() Guarded local-submap candidate current=954 old=942 retained=1: source view is not independent: d=0.002492m a=1.145567deg minimum=(0.030000m or 3.000000deg)
+[ WARN] (2026-10-11 20:26:56.711) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989586942000 epoch=1 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:26:56.712) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989586942000 epoch=1 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:26:56.712) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989586942000 epoch=1 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:26:56.712) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989586942000 epoch=1 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:26:56.712) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989586942000 epoch=1 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:26:56.712) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989586942000 epoch=1 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:26:56.712) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989586942000 epoch=1 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:26:56.713) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989586942000 epoch=1 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:26:56.713) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989586942000 epoch=1 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:26:56.713) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989586942000 epoch=1 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:26:56.713) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989586942000 epoch=1 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:26:56.713) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989586942000 epoch=1 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:26:56.714) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989586942000 epoch=1 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:26:56.994) Rtabmap.cpp:1608::collectRawCrossMapLoopEvidence() [RAW_CANDIDATE_SUPPORT] current=955 old=942 inliers=209 id_range=(1,940) exact_lookup=(209,209) cached_lookup=(0,0) raw_words=(940,823) candidate_only=1
+[ WARN] (2026-10-11 20:26:56.994) Rtabmap.cpp:1670::acceptCrossMapLoopEvidence() Guarded candidate support current=955 old=942 inliers=209 ids=209 unique=209 grid=(8,8)/4 depth=(209,209)/12 final_depth_min=25 candidate_only=1
+[ WARN] (2026-10-11 20:26:56.996) Rtabmap.cpp:4414::process() Guarded local-submap candidate current=955 old=942 retained=1: source view is not independent: d=0.003259m a=0.335489deg minimum=(0.030000m or 3.000000deg)
+[ WARN] (2026-10-11 20:26:57.002) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989820023000 epoch=1 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.002) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989820023000 epoch=1 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.002) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989820023000 epoch=1 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.002) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989820023000 epoch=1 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.003) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989820023000 epoch=1 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:26:57.003) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989820023000 epoch=1 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.003) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989820023000 epoch=1 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.003) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989820023000 epoch=1 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.004) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989820023000 epoch=1 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.004) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989820023000 epoch=1 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:26:57.004) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989820023000 epoch=1 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.004) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989820023000 epoch=1 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:26:57.004) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681989820023000 epoch=1 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.559) Rtabmap.cpp:1608::collectRawCrossMapLoopEvidence() [RAW_CANDIDATE_SUPPORT] current=956 old=942 inliers=224 id_range=(1,921) exact_lookup=(224,224) cached_lookup=(0,0) raw_words=(939,824) candidate_only=1
+[ WARN] (2026-10-11 20:26:57.559) Rtabmap.cpp:1670::acceptCrossMapLoopEvidence() Guarded candidate support current=956 old=942 inliers=224 ids=224 unique=224 grid=(9,8)/4 depth=(224,224)/12 final_depth_min=25 candidate_only=1
+[ WARN] (2026-10-11 20:26:57.562) Rtabmap.cpp:4414::process() Guarded local-submap candidate current=956 old=942 retained=1: source view is not independent: d=0.004380m a=0.843540deg minimum=(0.030000m or 3.000000deg)
+[ WARN] (2026-10-11 20:26:57.568) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681990803332000 epoch=1 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.568) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681990803332000 epoch=1 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.568) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681990803332000 epoch=1 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.568) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681990803332000 epoch=1 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.569) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681990803332000 epoch=1 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:26:57.569) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681990803332000 epoch=1 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.569) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681990803332000 epoch=1 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.569) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681990803332000 epoch=1 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.569) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681990803332000 epoch=1 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.570) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681990803332000 epoch=1 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:26:57.570) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681990803332000 epoch=1 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.570) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681990803332000 epoch=1 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:26:57.570) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681990803332000 epoch=1 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.865) Rtabmap.cpp:1608::collectRawCrossMapLoopEvidence() [RAW_CANDIDATE_SUPPORT] current=957 old=942 inliers=243 id_range=(1,926) exact_lookup=(243,243) cached_lookup=(0,0) raw_words=(943,850) candidate_only=1
+[ WARN] (2026-10-11 20:26:57.865) Rtabmap.cpp:1670::acceptCrossMapLoopEvidence() Guarded candidate support current=957 old=942 inliers=243 ids=243 unique=243 grid=(9,8)/4 depth=(243,243)/12 final_depth_min=25 candidate_only=1
+[ WARN] (2026-10-11 20:26:57.867) Rtabmap.cpp:4414::process() Guarded local-submap candidate current=957 old=942 retained=1: source view is not independent: d=0.004197m a=0.786438deg minimum=(0.030000m or 3.000000deg)
+[ WARN] (2026-10-11 20:26:57.873) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991019978000 epoch=1 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.873) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991019978000 epoch=1 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.874) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991019978000 epoch=1 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.874) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991019978000 epoch=1 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.874) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991019978000 epoch=1 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:26:57.874) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991019978000 epoch=1 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.874) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991019978000 epoch=1 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.875) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991019978000 epoch=1 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.875) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991019978000 epoch=1 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.875) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991019978000 epoch=1 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:26:57.875) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991019978000 epoch=1 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:26:57.875) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991019978000 epoch=1 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:26:57.876) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991019978000 epoch=1 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:26:58.169) Rtabmap.cpp:1608::collectRawCrossMapLoopEvidence() [RAW_CANDIDATE_SUPPORT] current=958 old=942 inliers=241 id_range=(1,924) exact_lookup=(241,241) cached_lookup=(0,0) raw_words=(935,828) candidate_only=1
+[ WARN] (2026-10-11 20:26:58.170) Rtabmap.cpp:1670::acceptCrossMapLoopEvidence() Guarded candidate support current=958 old=942 inliers=241 ids=241 unique=241 grid=(9,8)/4 depth=(241,241)/12 final_depth_min=25 candidate_only=1
+[ WARN] (2026-10-11 20:26:58.172) Rtabmap.cpp:4414::process() Guarded local-submap candidate current=958 old=942 retained=1: source view is not independent: d=0.005859m a=0.494030deg minimum=(0.030000m or 3.000000deg)
+[ WARN] (2026-10-11 20:26:58.178) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991236617000 epoch=1 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:26:58.179) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991236617000 epoch=1 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:26:58.179) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991236617000 epoch=1 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:26:58.179) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991236617000 epoch=1 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:26:58.179) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991236617000 epoch=1 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:26:58.180) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991236617000 epoch=1 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:26:58.180) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991236617000 epoch=1 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:26:58.180) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991236617000 epoch=1 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:26:58.180) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991236617000 epoch=1 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:26:58.180) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991236617000 epoch=1 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:26:58.180) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991236617000 epoch=1 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:26:58.181) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991236617000 epoch=1 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:26:58.181) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681991236617000 epoch=1 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:26:58.705) Rtabmap.cpp:1608::collectRawCrossMapLoopEvidence() [RAW_CANDIDATE_SUPPORT] current=959 old=942 inliers=234 id_range=(2,907) exact_lookup=(234,234) cached_lookup=(0,0) raw_words=(941,821) candidate_only=1
+[ WARN] (2026-10-11 20:26:58.705) Rtabmap.cpp:1670::acceptCrossMapLoopEvidence() Guarded candidate support current=959 old=942 inliers=234 ids=234 unique=234 grid=(9,8)/4 depth=(234,234)/12 final_depth_min=25 candidate_only=1
+[ WARN] (2026-10-11 20:26:58.707) Rtabmap.cpp:4414::process() Guarded local-submap candidate current=959 old=942 retained=1: source view is not independent: d=0.008880m a=1.543436deg minimum=(0.030000m or 3.000000deg)
+[ WARN] (2026-10-11 20:26:58.713) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992169917000 epoch=1 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:26:58.714) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992169917000 epoch=1 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:26:58.714) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992169917000 epoch=1 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:26:58.714) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992169917000 epoch=1 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:26:58.714) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992169917000 epoch=1 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:26:58.714) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992169917000 epoch=1 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:26:58.715) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992169917000 epoch=1 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:26:58.715) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992169917000 epoch=1 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:26:58.715) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992169917000 epoch=1 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:26:58.715) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992169917000 epoch=1 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:26:58.715) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992169917000 epoch=1 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:26:58.716) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992169917000 epoch=1 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:26:58.716) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992169917000 epoch=1 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:26:59.009) Rtabmap.cpp:1608::collectRawCrossMapLoopEvidence() [RAW_CANDIDATE_SUPPORT] current=960 old=941 inliers=190 id_range=(2,948) exact_lookup=(190,190) cached_lookup=(0,0) raw_words=(951,813) candidate_only=1
+[ WARN] (2026-10-11 20:26:59.009) Rtabmap.cpp:1670::acceptCrossMapLoopEvidence() Guarded candidate support current=960 old=941 inliers=190 ids=190 unique=190 grid=(9,8)/4 depth=(190,190)/12 final_depth_min=25 candidate_only=1
+[ WARN] (2026-10-11 20:26:59.010) Rtabmap.cpp:1815::acceptCrossMapLoopEvidence() Guarded candidate consensus current=960 old=941 previous=(945,932) d=0.016137864m a=1.247291153deg raw_variances=(1.44917381e-05,1.44917381e-05;1.10677733e-05,1.10677733e-05) floors_sigma=(0.020000m,3.000000deg) normalized=(0.570560,0.293989) absolute_limits=(0.100000m,10.000000deg) normalized_limit=3.000000 candidate_only=1
+[ WARN] (2026-10-11 20:26:59.012) Rtabmap.cpp:4414::process() Guarded local-submap candidate current=960 old=941 retained=2: retained 2/3 independent native visual candidates; raw RGB-D and shadow transaction still required
+[ WARN] (2026-10-11 20:26:59.018) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992386586000 epoch=1 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:26:59.018) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992386586000 epoch=1 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:26:59.018) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992386586000 epoch=1 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:26:59.018) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992386586000 epoch=1 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:26:59.019) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992386586000 epoch=1 tag=8 old=3 local=2
+[ WARN] (2026-10-11 20:26:59.019) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992386586000 epoch=1 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:26:59.019) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992386586000 epoch=1 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:26:59.019) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992386586000 epoch=1 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:26:59.019) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992386586000 epoch=1 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:26:59.020) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992386586000 epoch=1 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:26:59.020) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992386586000 epoch=1 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:26:59.020) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992386586000 epoch=1 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:26:59.020) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681992386586000 epoch=1 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:26:59.666) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681993619870000 epoch=2 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:26:59.667) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681993619870000 epoch=2 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:26:59.667) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681993619870000 epoch=2 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:26:59.667) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681993619870000 epoch=2 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:26:59.667) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681993619870000 epoch=2 tag=8 old=3 local=0
+[ WARN] (2026-10-11 20:26:59.668) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681993619870000 epoch=2 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:26:59.668) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681993619870000 epoch=2 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:26:59.668) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681993619870000 epoch=2 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:26:59.668) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681993619870000 epoch=2 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:26:59.668) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681993619870000 epoch=2 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:26:59.669) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681993619870000 epoch=2 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:26:59.669) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681993619870000 epoch=2 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:26:59.669) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681993619870000 epoch=2 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.336) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995653077000 epoch=3 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.336) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995653077000 epoch=3 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.336) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995653077000 epoch=3 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.336) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995653077000 epoch=3 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.337) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995653077000 epoch=3 tag=8 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.337) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995653077000 epoch=3 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.337) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995653077000 epoch=3 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.337) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995653077000 epoch=3 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.337) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995653077000 epoch=3 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.338) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995653077000 epoch=3 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:27:00.338) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995653077000 epoch=3 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.338) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995653077000 epoch=3 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:27:00.338) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995653077000 epoch=3 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.528) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995919740000 epoch=3 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.529) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995919740000 epoch=3 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.529) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995919740000 epoch=3 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.529) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995919740000 epoch=3 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.529) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995919740000 epoch=3 tag=8 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.529) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995919740000 epoch=3 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.529) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995919740000 epoch=3 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.530) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995919740000 epoch=3 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.530) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995919740000 epoch=3 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.530) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995919740000 epoch=3 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:27:00.530) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995919740000 epoch=3 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.530) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995919740000 epoch=3 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:27:00.531) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681995919740000 epoch=3 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.963) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681996986341000 epoch=3 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.963) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681996986341000 epoch=3 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.963) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681996986341000 epoch=3 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.963) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681996986341000 epoch=3 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.964) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681996986341000 epoch=3 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:27:00.964) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681996986341000 epoch=3 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.964) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681996986341000 epoch=3 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.964) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681996986341000 epoch=3 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.964) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681996986341000 epoch=3 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.964) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681996986341000 epoch=3 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:27:00.965) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681996986341000 epoch=3 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:27:00.965) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681996986341000 epoch=3 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:27:00.965) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681996986341000 epoch=3 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.157) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997186369000 epoch=3 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.157) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997186369000 epoch=3 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.157) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997186369000 epoch=3 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.157) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997186369000 epoch=3 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.158) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997186369000 epoch=3 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:27:01.158) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997186369000 epoch=3 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.158) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997186369000 epoch=3 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.158) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997186369000 epoch=3 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.158) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997186369000 epoch=3 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.158) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997186369000 epoch=3 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:27:01.159) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997186369000 epoch=3 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.159) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997186369000 epoch=3 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:27:01.159) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997186369000 epoch=3 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.344) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997403012000 epoch=3 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.344) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997403012000 epoch=3 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.344) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997403012000 epoch=3 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.344) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997403012000 epoch=3 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.344) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997403012000 epoch=3 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:27:01.345) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997403012000 epoch=3 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.345) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997403012000 epoch=3 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.345) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997403012000 epoch=3 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.345) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997403012000 epoch=3 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.345) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997403012000 epoch=3 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:27:01.345) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997403012000 epoch=3 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.346) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997403012000 epoch=3 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:27:01.346) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681997403012000 epoch=3 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.753) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998419673000 epoch=3 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.754) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998419673000 epoch=3 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.754) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998419673000 epoch=3 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.754) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998419673000 epoch=3 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.754) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998419673000 epoch=3 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:27:01.755) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998419673000 epoch=3 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.755) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998419673000 epoch=3 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.755) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998419673000 epoch=3 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.755) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998419673000 epoch=3 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.755) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998419673000 epoch=3 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:27:01.755) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998419673000 epoch=3 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.756) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998419673000 epoch=3 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:27:01.756) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998419673000 epoch=3 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.946) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998652940000 epoch=3 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.946) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998652940000 epoch=3 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.946) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998652940000 epoch=3 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.946) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998652940000 epoch=3 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.946) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998652940000 epoch=3 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:27:01.947) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998652940000 epoch=3 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.947) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998652940000 epoch=3 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.947) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998652940000 epoch=3 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.947) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998652940000 epoch=3 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.947) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998652940000 epoch=3 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:27:01.948) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998652940000 epoch=3 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:27:01.948) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998652940000 epoch=3 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:27:01.948) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681998652940000 epoch=3 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.330) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999502893000 epoch=3 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.330) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999502893000 epoch=3 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.330) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999502893000 epoch=3 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.331) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999502893000 epoch=3 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.331) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999502893000 epoch=3 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:27:02.331) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999502893000 epoch=3 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.331) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999502893000 epoch=3 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.331) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999502893000 epoch=3 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.332) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999502893000 epoch=3 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.332) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999502893000 epoch=3 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:27:02.332) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999502893000 epoch=3 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.332) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999502893000 epoch=3 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:27:02.332) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999502893000 epoch=3 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.523) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999702897000 epoch=3 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.524) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999702897000 epoch=3 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.524) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999702897000 epoch=3 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.524) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999702897000 epoch=3 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.524) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999702897000 epoch=3 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:27:02.524) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999702897000 epoch=3 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.525) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999702897000 epoch=3 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.525) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999702897000 epoch=3 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.525) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999702897000 epoch=3 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.525) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999702897000 epoch=3 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:27:02.525) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999702897000 epoch=3 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.526) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999702897000 epoch=3 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:27:02.526) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999702897000 epoch=3 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.720) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999936230000 epoch=3 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.721) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999936230000 epoch=3 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.721) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999936230000 epoch=3 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.721) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999936230000 epoch=3 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.721) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999936230000 epoch=3 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:27:02.721) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999936230000 epoch=3 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.721) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999936230000 epoch=3 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.722) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999936230000 epoch=3 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.722) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999936230000 epoch=3 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.722) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999936230000 epoch=3 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:27:02.722) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999936230000 epoch=3 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:27:02.722) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999936230000 epoch=3 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:27:02.722) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791681999936230000 epoch=3 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.388) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001452918000 epoch=4 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.388) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001452918000 epoch=4 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.388) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001452918000 epoch=4 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.389) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001452918000 epoch=4 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.389) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001452918000 epoch=4 tag=8 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.389) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001452918000 epoch=4 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.389) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001452918000 epoch=4 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.389) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001452918000 epoch=4 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.390) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001452918000 epoch=4 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.390) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001452918000 epoch=4 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:27:03.390) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001452918000 epoch=4 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.390) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001452918000 epoch=4 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:27:03.390) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001452918000 epoch=4 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.573) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001686196000 epoch=4 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.573) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001686196000 epoch=4 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.573) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001686196000 epoch=4 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.573) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001686196000 epoch=4 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.573) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001686196000 epoch=4 tag=8 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.574) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001686196000 epoch=4 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.574) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001686196000 epoch=4 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.574) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001686196000 epoch=4 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.574) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001686196000 epoch=4 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.574) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001686196000 epoch=4 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:27:03.574) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001686196000 epoch=4 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:27:03.575) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001686196000 epoch=4 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:27:03.575) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682001686196000 epoch=4 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:27:04.218) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682004302678000 epoch=5 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:27:04.218) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682004302678000 epoch=5 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:27:04.218) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682004302678000 epoch=5 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:27:04.219) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682004302678000 epoch=5 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:27:04.219) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682004302678000 epoch=5 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:27:04.219) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682004302678000 epoch=5 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:27:04.219) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682004302678000 epoch=5 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:27:04.219) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682004302678000 epoch=5 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:27:04.220) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682004302678000 epoch=5 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:27:04.220) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682004302678000 epoch=5 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:27:04.220) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682004302678000 epoch=5 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:27:04.220) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682004302678000 epoch=5 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:27:04.220) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682004302678000 epoch=5 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:27:05.340) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682009869108000 epoch=7 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:27:05.340) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682009869108000 epoch=7 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:27:05.340) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682009869108000 epoch=7 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:27:05.341) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682009869108000 epoch=7 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:27:05.341) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682009869108000 epoch=7 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:27:05.341) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682009869108000 epoch=7 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:27:05.341) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682009869108000 epoch=7 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:27:05.341) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682009869108000 epoch=7 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:27:05.342) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682009869108000 epoch=7 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:27:05.342) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682009869108000 epoch=7 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:27:05.342) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682009869108000 epoch=7 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:27:05.342) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682009869108000 epoch=7 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:27:05.342) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682009869108000 epoch=7 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.020) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013068923000 epoch=8 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.020) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013068923000 epoch=8 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.020) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013068923000 epoch=8 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.021) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013068923000 epoch=8 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.021) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013068923000 epoch=8 tag=8 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.021) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013068923000 epoch=8 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.021) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013068923000 epoch=8 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.021) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013068923000 epoch=8 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.021) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013068923000 epoch=8 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.022) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013068923000 epoch=8 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:27:06.022) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013068923000 epoch=8 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.022) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013068923000 epoch=8 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:27:06.022) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013068923000 epoch=8 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.208) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013285777000 epoch=8 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.208) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013285777000 epoch=8 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.208) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013285777000 epoch=8 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.209) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013285777000 epoch=8 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.209) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013285777000 epoch=8 tag=8 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.209) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013285777000 epoch=8 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.209) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013285777000 epoch=8 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.209) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013285777000 epoch=8 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.210) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013285777000 epoch=8 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.210) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013285777000 epoch=8 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:27:06.210) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013285777000 epoch=8 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.210) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013285777000 epoch=8 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:27:06.210) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682013285777000 epoch=8 tag=44 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.860) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682017235402000 epoch=9 tag=4 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.860) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682017235402000 epoch=9 tag=5 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.860) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682017235402000 epoch=9 tag=6 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.860) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682017235402000 epoch=9 tag=7 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.860) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682017235402000 epoch=9 tag=8 old=3 local=1
+[ WARN] (2026-10-11 20:27:06.861) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682017235402000 epoch=9 tag=9 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.861) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682017235402000 epoch=9 tag=12 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.861) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682017235402000 epoch=9 tag=13 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.861) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682017235402000 epoch=9 tag=14 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.861) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682017235402000 epoch=9 tag=24 old=1 local=0
+[ WARN] (2026-10-11 20:27:06.861) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682017235402000 epoch=9 tag=32 old=3 local=0
+[ WARN] (2026-10-11 20:27:06.862) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682017235402000 epoch=9 tag=42 old=1 local=0
+[ WARN] (2026-10-11 20:27:06.862) DeferredMappingSession.h:234::prepareTag() recorded Tag selection source_ns=1791682017235402000 epoch=9 tag=44 old=3 local=0

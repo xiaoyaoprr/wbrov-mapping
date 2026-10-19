@@ -2979,6 +2979,24 @@ wait_for_display_session() {
 }
 # END GRAPH_DISPLAY_SESSION_MONITOR
 
+wait_for_rviz_render_startup() {
+    local attempt
+    # The private RViz entry point retries context creation at most twice
+    # within the same PID. A visible black window is not startup readiness.
+    for ((attempt=0; attempt<300; attempt++)); do
+        verify_critical_children_alive "RViz render startup" || return 1
+        owned_process_alive "$rviz_pid" || return 1
+        if [[ -f "$run_dir/rviz.log" ]] &&
+           grep -Fq '[WBROV_RVIZ_RENDER_READY]' "$run_dir/rviz.log"; then
+            echo "RViz渲染初始化已通过；点云与恢复状态请查看窗口。"
+            return 0
+        fi
+        sleep 0.1
+    done
+    echo "[RViz渲染失败] 未收到初始化完成回执，停止并保存。日志: $run_dir/rviz.log" >&2
+    return 1
+}
+
 stop_pid() {
     local pid="${1:-}"
     if owned_process_alive "$pid"; then
@@ -4365,8 +4383,8 @@ if [[ "$camera_profile" == "$default_camera_profile" ]]; then
     echo "dual profile使用单槽RGB-D输入队列以限制延迟；若有效/odom低于15Hz，本轮不算通过。"
 fi
 echo "运动速度平移外推已关闭，避免失锁后预测位移无限增长；仍保留同步IMU的帧间旋转预测。"
-echo "恢复未获得核心同token提交回执前不能冒充已定位；普通跨epoch回环不能绕过安全事务入口。"
-echo "安全事务不降低里程计15内点门，也不把单帧、单Tag视角或裸/add_link当成定位成功。"
+echo "当前位置与主图写入分别核验；定位显示不代表子图已合并，主图写入仍需核心同token提交回执。"
+echo "安全事务不降低里程计15内点门；单帧、单Tag视角或裸/add_link均不能直接授权主图写入。"
 echo "独立图结构显示: /mapGraph → /mapping/graph_display；显示节点失效也会停止并保存，不自动重启。"
 echo "建图更新 2026-10-15：主图隔离、临时子图、AprilTag位置标注；无Tag自动接回和实时性仍待验收。"
 echo "未对齐子图保存在独立坐标；对应RViz配置将在 $run_dir/submap_views 生成。"
@@ -4845,8 +4863,9 @@ else
     check_frozen_runtime_file "$rviz_binary" "$rviz_binary_sha256" true || exit 1
     check_frozen_runtime_file "$run_rviz_config" "$test_rviz_sha256" false || exit 1
     LD_LIBRARY_PATH="$managed_runtime_ld_library_path:/opt/ros/humble/opt/rviz_ogre_vendor/lib" \
-    "$rviz_binary" -d "$run_rviz_config" &
+    "$rviz_binary" -d "$run_rviz_config" >"$run_dir/rviz.log" 2>&1 &
     rviz_pid=$!
     record_child rviz "$rviz_pid" "$rviz_binary" "$rviz_binary_sha256" "$run_rviz_config"
+    wait_for_rviz_render_startup || exit 1
     wait_for_display_session "$rviz_pid" rviz
 fi

@@ -89,10 +89,19 @@ Visualization Manager:
         History Policy: Keep Last
     - Class: rviz_default_plugins/Axes
       Enabled: true
-      Name: Robot_base_link
+      Name: Registered_Robot_base_link
       Reference Frame: base_link
       Length: 0.15
       Radius: 0.01
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: Validated_Position_Separate_From_Map_Writes
+      Topic:
+        Value: /wbrov/localization/markers
+        Depth: 1
+        Durability Policy: Volatile
+        Reliability Policy: Reliable
+        History Policy: Keep Last
     - Class: rviz_default_plugins/MarkerArray
       Enabled: false
       Name: AprilTag_Current
@@ -147,7 +156,7 @@ Visualization Manager:
       Median window: 5
     - Class: rviz_default_plugins/Image
       Enabled: true
-      Name: Last_Trusted_View_Return_Reference
+      Name: Optional_Historical_View_Not_Required_Return_Pose
       Topic:
         Value: /wbrov/mapping/recovery_reference_image
         Depth: 1

@@ -1,0 +1,33 @@
+{
+  "scope": "fixed-map export/compiler and serialization microbenchmarks only",
+  "compiler": {
+    "full_recovery": {
+      "O2": 179.504745,
+      "O3": 215.61955,
+      "reduction_fraction": -0.2011913668354559
+    },
+    "large_interrupted_capture": {
+      "O2": 783.78295,
+      "O3": 690.47425,
+      "reduction_fraction": 0.11904915767815571
+    }
+  },
+  "packed_ply": {
+    "full_recovery": {
+      "before_ms": 12.7375,
+      "after_ms": 8.1239,
+      "reduction_fraction": 0.36220608439646707,
+      "points": 62558,
+      "byte_exact": true
+    },
+    "large_interrupted_capture": {
+      "before_ms": 180.431,
+      "after_ms": 73.943,
+      "reduction_fraction": 0.59018683042271,
+      "points": 440297,
+      "byte_exact": true
+    }
+  },
+  "compiler_adopted": false,
+  "compiler_decision": "O3 regresses the smaller map; retain O2 pending a more targeted change"
+}

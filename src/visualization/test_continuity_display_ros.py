@@ -44,6 +44,17 @@ def main():
         assert 'cells=1<6' in markers[-1].markers[0].text
         assert '未对齐子图：1' in markers[-1].markers[0].text
 
+        display.on_reference_readiness(String(data=json.dumps(dict(schema='wbrov.reference-readiness.v1',
+            graph_update_authorized=False,source_valid=True,session_token_sha256=registry['session_token_sha256'],
+            tags=[dict(tag_id=8,distinct_saved_nodes=4,independent_consistent_triplet=True)]))))
+        row.update(localization_status='LOCALIZED',localization_valid=True)
+        display.on_mapping_status(String(data=json.dumps(row)))
+        wait_for(lambda: '当前位置已定位' in markers[-1].markers[0].text and '三组有效参考齐备' in markers[-1].markers[0].text)
+        assert '缓慢退回' not in markers[-1].markers[0].text
+        assert row['main_map_write_allowed'] is False
+        display.reference_readiness_arrival -= 3
+        wait_for(lambda: 'Tag 8' not in markers[-1].markers[0].text)
+
         row.update(state='NORMAL', main_map_write_allowed=True, quality_verification_pending=False)
         display.on_mapping_status(String(data=json.dumps(row)))
         wait_for(lambda: bool(images) and bytes(images[-1].data) != paused and

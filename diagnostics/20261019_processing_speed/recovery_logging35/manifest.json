@@ -1,0 +1,82 @@
+{
+  "result.json": {
+    "bytes": 15880,
+    "sha256": "79132ed738cf85da4961fec3a563aee204bfe5db41e96d922517da12b00e17f7"
+  },
+  "worker_build.json": {
+    "bytes": 3946,
+    "sha256": "7ffa2620d77082ce2b664a02c949068a1f74888feb1510dc1e96fc2afc51b61e"
+  },
+  "raw/session.json": {
+    "bytes": 2914,
+    "sha256": "d3c5610fbccc88557d0d0789458fa93f1c98e7b6ec28a1d0986f28b5bfbb289f"
+  },
+  "raw/save.json": {
+    "bytes": 533,
+    "sha256": "1c4271cc56d71cd891aec0b40e232c1225be080de2485ed891c0781bd00d154e"
+  },
+  "raw/status.json": {
+    "bytes": 3279,
+    "sha256": "8429ba3b1c5642369c39e3f9ccd01441d4f762b7d2345069e232de63c32ff948"
+  },
+  "raw/worker.log": {
+    "bytes": 3754,
+    "sha256": "6fd481ea436a45d48a8c34e9255dc2dae9ec9955427cd3e7f9f246be620f6f0c"
+  },
+  "raw/mapping/status.json": {
+    "bytes": 2330,
+    "sha256": "edcb3eeee258aa122ca5e1d0e3ce7d8260a81fc426363c89a2615664ac246a55"
+  },
+  "raw/mapping/frames.csv": {
+    "bytes": 154360,
+    "sha256": "893c2651bff318a94f496feeb7347cba218aa01e81748c168c30daf9c6558ba4"
+  },
+  "raw/mapping/tags.json": {
+    "bytes": 17022,
+    "sha256": "8d772194b831812ec11bf4ae28ad4def297cb06f67bffaf783f80bc9f7fb4339"
+  },
+  "raw/mapping/frontend_timings.json": {
+    "bytes": 241,
+    "sha256": "875674014fa24746668ae972495bdc93fb6324a50c4a4e27ecd449ec594214a6"
+  },
+  "raw/mapping/core.log": {
+    "bytes": 63115,
+    "sha256": "6179462900bfeca5df3ea914a071bc2612fbc432ab626fa7e9322e791409d585"
+  },
+  "compressed/session.json": {
+    "bytes": 2914,
+    "sha256": "9a45a80223081e199dab7667cf12f13e33668b5e57d6289872694682257b7286"
+  },
+  "compressed/save.json": {
+    "bytes": 533,
+    "sha256": "bb663d3695bb8c5c5db7dd0517f72e3675536fcfd54bf4517560a655b45e9848"
+  },
+  "compressed/status.json": {
+    "bytes": 3278,
+    "sha256": "484b01b8d940d027c25a9f5bb710fe3819afbd2a51aec1d0fc5aca40706a9b2e"
+  },
+  "compressed/worker.log": {
+    "bytes": 3542,
+    "sha256": "92c05b4bfca34457520231a05aed909b3733cb8a85e82a60a7ef54068aa6b410"
+  },
+  "compressed/mapping/status.json": {
+    "bytes": 2329,
+    "sha256": "4c395da3e49a145f1bcadd2af18b415e1c45c2f9536f599f9ccf719412fe3d04"
+  },
+  "compressed/mapping/frames.csv": {
+    "bytes": 166372,
+    "sha256": "361f51994a738649fb23488fc2b5f3d0176c336c0bc7ed42c4e19300bea9091b"
+  },
+  "compressed/mapping/tags.json": {
+    "bytes": 17560,
+    "sha256": "f0fce1c5c6840a0319a6debd4fc5b2e21d8fce41e5167ef4b91525051a02f8a7"
+  },
+  "compressed/mapping/frontend_timings.json": {
+    "bytes": 239,
+    "sha256": "7997e3ce89430abe0c54da4c8d572c36265f40ecfbc53689b328bf2abf9a0c4c"
+  },
+  "compressed/mapping/core.log": {
+    "bytes": 40872,
+    "sha256": "991db07901082a975e802fd673d2af81eaed83d60f6d21bdf0105e1db9fb0688"
+  }
+}

@@ -1,0 +1,1006 @@
+{
+  "transactions": [
+    {
+      "duration_s": 5.579953248,
+      "reason": "two independent old-keyframe RGB-D observations unavailable (references=45,nearby=45,first=0,raw_rejected=3,prediction_rejected=9,baseline_rejected=0,agreement_rejected=0; reference=107 prediction distance=0.019584 angle_deg=2.732135 measured=xyz=-0.224423,-0.067055,-0.298072 rpy=0.887168,1.448186,1.516873 predicted=xyz=-0.212040,-0.052355,-0.294314 rpy=1.206559,1.481885,1.840836)",
+      "max_observations": 0,
+      "frames": [
+        {
+          "after_proposal_s": -0.994844512,
+          "status": {
+            "generation": 79,
+            "epoch": 1,
+            "source_stamp_ns": 1791578128886740000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 163686624,
+            "arrival_age_ns": 667200,
+            "source_age_ns": 163694080,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": -0.3796536,
+          "status": {
+            "generation": 79,
+            "epoch": 1,
+            "source_stamp_ns": 1791578129453760000,
+            "state": "RECOVERING",
+            "reason": "private recovery observations only",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 192122656,
+            "arrival_age_ns": 45619872,
+            "source_age_ns": 236980032,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": -0.367259392,
+          "status": {
+            "generation": 79,
+            "epoch": 1,
+            "source_stamp_ns": 1791578129536778000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 174193456,
+            "arrival_age_ns": 699520,
+            "source_age_ns": 174199600,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 0.872423872,
+          "status": {
+            "generation": 79,
+            "epoch": 1,
+            "source_stamp_ns": 1791578130736660000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map alignment observation; graph is uncommitted",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 156765920,
+            "arrival_age_ns": 30249952,
+            "source_age_ns": 186483360,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 0.924743488,
+          "status": {
+            "generation": 79,
+            "epoch": 1,
+            "source_stamp_ns": 1791578130803334000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 158600912,
+            "arrival_age_ns": 816384,
+            "source_age_ns": 158607888,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 5.57679424,
+          "status": {
+            "generation": 80,
+            "epoch": 1,
+            "source_stamp_ns": 1791578135436452000,
+            "state": "PAUSED",
+            "reason": "two independent old-keyframe RGB-D observations unavailable (references=45,nearby=45,first=0,raw_rejected=3,prediction_rejected=9,baseline_rejected=0,agreement_rejected=0; reference=107 prediction distance=0.019584 angle_deg=2.732135 measured=xyz=-0.224423,-0.067055,-0.298072 rpy=0.887168,1.448186,1.516873 predicted=xyz=-0.212040,-0.052355,-0.294314 rpy=1.206559,1.481885,1.840836)",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 155535456,
+            "arrival_age_ns": 65287136,
+            "source_age_ns": 220092576,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 5.613314624,
+          "status": {
+            "generation": 80,
+            "epoch": 1,
+            "source_stamp_ns": 1791578135486577000,
+            "state": "PAUSED",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 176091768,
+            "arrival_age_ns": 567200,
+            "source_age_ns": 176097880,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 5.767552896,
+          "status": {
+            "generation": 80,
+            "epoch": 1,
+            "source_stamp_ns": 1791578135636659000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 176825032,
+            "arrival_age_ns": 18199424,
+            "source_age_ns": 194185864,
+            "cut_count": 77
+          }
+        }
+      ]
+    },
+    {
+      "duration_s": 7.417981856,
+      "reason": "candidate observation source invalidated",
+      "max_observations": 2,
+      "frames": [
+        {
+          "after_proposal_s": -0.889383936,
+          "status": {
+            "generation": 80,
+            "epoch": 1,
+            "source_stamp_ns": 1791578143669425000,
+            "state": "RECOVERING",
+            "reason": "private recovery observations only",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 180209880,
+            "arrival_age_ns": 4451872,
+            "source_age_ns": 184009208,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": -0.845552416,
+          "status": {
+            "generation": 80,
+            "epoch": 1,
+            "source_stamp_ns": 1791578143752752000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 168305600,
+            "arrival_age_ns": 721184,
+            "source_age_ns": 168313728,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 1.291549408,
+          "status": {
+            "generation": 80,
+            "epoch": 1,
+            "source_stamp_ns": 1791578145802629000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map alignment observation; graph is uncommitted",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 197357912,
+            "arrival_age_ns": 60449632,
+            "source_age_ns": 256771992,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 1.325701024,
+          "status": {
+            "generation": 80,
+            "epoch": 1,
+            "source_stamp_ns": 1791578145902632000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 161985824,
+            "arrival_age_ns": 681856,
+            "source_age_ns": 161992608,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 3.11909088,
+          "status": {
+            "generation": 80,
+            "epoch": 1,
+            "source_stamp_ns": 1791578147685887000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 1,
+            "receipt_latency_ns": 202160264,
+            "arrival_age_ns": 1110496,
+            "source_age_ns": 202167848,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 4.684006656,
+          "status": {
+            "generation": 80,
+            "epoch": 1,
+            "source_stamp_ns": 1791578149202478000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 2,
+            "receipt_latency_ns": 174257392,
+            "arrival_age_ns": 76292736,
+            "source_age_ns": 249666160,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 7.416929088,
+          "status": {
+            "generation": 81,
+            "epoch": 1,
+            "source_stamp_ns": 1791578151985674000,
+            "state": "PAUSED",
+            "reason": "candidate observation source invalidated",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 126683888,
+            "arrival_age_ns": 74701792,
+            "source_age_ns": 200732464,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 7.494519712,
+          "status": {
+            "generation": 81,
+            "epoch": 1,
+            "source_stamp_ns": 1791578152052434000,
+            "state": "PAUSED",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 171072624,
+            "arrival_age_ns": 4779360,
+            "source_age_ns": 171079568,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 7.618401504,
+          "status": {
+            "generation": 81,
+            "epoch": 1,
+            "source_stamp_ns": 1791578152185777000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 169524120,
+            "arrival_age_ns": 790496,
+            "source_age_ns": 169532024,
+            "cut_count": 77
+          }
+        }
+      ]
+    },
+    {
+      "duration_s": 6.635628672,
+      "reason": "candidate observation source invalidated",
+      "max_observations": 4,
+      "frames": [
+        {
+          "after_proposal_s": -0.991510432,
+          "status": {
+            "generation": 81,
+            "epoch": 1,
+            "source_stamp_ns": 1791578156852165000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 136845912,
+            "arrival_age_ns": 21133696,
+            "source_age_ns": 157321016,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": -0.485598496,
+          "status": {
+            "generation": 81,
+            "epoch": 1,
+            "source_stamp_ns": 1791578157352113000,
+            "state": "RECOVERING",
+            "reason": "private recovery observations only",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 139268024,
+            "arrival_age_ns": 35548544,
+            "source_age_ns": 174058712,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": -0.424872896,
+          "status": {
+            "generation": 81,
+            "epoch": 1,
+            "source_stamp_ns": 1791578157385437000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 182924888,
+            "arrival_age_ns": 736416,
+            "source_age_ns": 182931320,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 0.832968,
+          "status": {
+            "generation": 81,
+            "epoch": 1,
+            "source_stamp_ns": 1791578158585524000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map alignment observation; graph is uncommitted",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 174875360,
+            "arrival_age_ns": 99742240,
+            "source_age_ns": 273282400,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 0.836128864,
+          "status": {
+            "generation": 81,
+            "epoch": 1,
+            "source_stamp_ns": 1791578158652042000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 209730288,
+            "arrival_age_ns": 741344,
+            "source_age_ns": 209737456,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 1.539698496,
+          "status": {
+            "generation": 81,
+            "epoch": 1,
+            "source_stamp_ns": 1791578159368675000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 1,
+            "receipt_latency_ns": 151969288,
+            "arrival_age_ns": 45089120,
+            "source_age_ns": 196316840,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 3.503625984,
+          "status": {
+            "generation": 81,
+            "epoch": 1,
+            "source_stamp_ns": 1791578161351932000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 2,
+            "receipt_latency_ns": 142101728,
+            "arrival_age_ns": 19031232,
+            "source_age_ns": 160221024,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 4.683145504,
+          "status": {
+            "generation": 81,
+            "epoch": 1,
+            "source_stamp_ns": 1791578162485199000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 3,
+            "receipt_latency_ns": 150801544,
+            "arrival_age_ns": 66977472,
+            "source_age_ns": 216837544,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 5.706764384,
+          "status": {
+            "generation": 81,
+            "epoch": 1,
+            "source_stamp_ns": 1791578163501830000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 4,
+            "receipt_latency_ns": 187825168,
+            "arrival_age_ns": 42153248,
+            "source_age_ns": 229268496,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 6.663944224,
+          "status": {
+            "generation": 82,
+            "epoch": 1,
+            "source_stamp_ns": 1791578164501767000,
+            "state": "PAUSED",
+            "reason": "candidate observation source invalidated",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 148467336,
+            "arrival_age_ns": 10653984,
+            "source_age_ns": 158506568,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 6.698271648,
+          "status": {
+            "generation": 82,
+            "epoch": 1,
+            "source_stamp_ns": 1791578164568443000,
+            "state": "PAUSED",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 151890664,
+            "arrival_age_ns": 770592,
+            "source_age_ns": 151898632,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 6.880587168,
+          "status": {
+            "generation": 82,
+            "epoch": 1,
+            "source_stamp_ns": 1791578164785099000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 118801928,
+            "arrival_age_ns": 994144,
+            "source_age_ns": 118811272,
+            "cut_count": 77
+          }
+        }
+      ]
+    },
+    {
+      "duration_s": 6.744127296,
+      "reason": "candidate observation source invalidated",
+      "max_observations": 2,
+      "frames": [
+        {
+          "after_proposal_s": -0.978859328,
+          "status": {
+            "generation": 82,
+            "epoch": 1,
+            "source_stamp_ns": 1791578172434748000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 146372928,
+            "arrival_age_ns": 1558784,
+            "source_age_ns": 146388288,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": -0.50018016,
+          "status": {
+            "generation": 82,
+            "epoch": 1,
+            "source_stamp_ns": 1791578172901393000,
+            "state": "RECOVERING",
+            "reason": "private recovery observations only",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 129498200,
+            "arrival_age_ns": 18508672,
+            "source_age_ns": 147278488,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": -0.484717216,
+          "status": {
+            "generation": 82,
+            "epoch": 1,
+            "source_stamp_ns": 1791578172934757000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 156991096,
+            "arrival_age_ns": 816416,
+            "source_age_ns": 156998488,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 1.49282544,
+          "status": {
+            "generation": 82,
+            "epoch": 1,
+            "source_stamp_ns": 1791578174884672000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map alignment observation; graph is uncommitted",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 142723968,
+            "arrival_age_ns": 7359328,
+            "source_age_ns": 149331744,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 1.555388544,
+          "status": {
+            "generation": 82,
+            "epoch": 1,
+            "source_stamp_ns": 1791578174934650000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 167785232,
+            "arrival_age_ns": 8188448,
+            "source_age_ns": 174955920,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 2.97079472,
+          "status": {
+            "generation": 82,
+            "epoch": 1,
+            "source_stamp_ns": 1791578176334596000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 1,
+            "receipt_latency_ns": 168229376,
+            "arrival_age_ns": 45295680,
+            "source_age_ns": 212750752,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 4.952799008,
+          "status": {
+            "generation": 82,
+            "epoch": 1,
+            "source_stamp_ns": 1791578178284495000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 2,
+            "receipt_latency_ns": 192973096,
+            "arrival_age_ns": 52975392,
+            "source_age_ns": 245209224,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 6.758650368,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791578180117812000,
+            "state": "PAUSED",
+            "reason": "candidate observation source invalidated",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 184856256,
+            "arrival_age_ns": 20808096,
+            "source_age_ns": 202346976,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 6.787614112,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791578180167961000,
+            "state": "PAUSED",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 193197912,
+            "arrival_age_ns": 739936,
+            "source_age_ns": 193205784,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 6.974928416,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791578180334511000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 181375080,
+            "arrival_age_ns": 772576,
+            "source_age_ns": 181383464,
+            "cut_count": 77
+          }
+        }
+      ]
+    },
+    {
+      "duration_s": 6.370248352,
+      "reason": "two independent old-keyframe RGB-D observations unavailable (references=45,nearby=45,first=0,raw_rejected=0,prediction_rejected=12,baseline_rejected=0,agreement_rejected=0; reference=105 prediction distance=0.015387 angle_deg=2.241419 measured=xyz=-0.176383,-0.082561,-0.300089 rpy=0.014647,1.483893,0.605776 predicted=xyz=-0.170087,-0.068778,-0.302765 rpy=-0.322244,1.513830,0.278555)",
+      "max_observations": 1,
+      "frames": [
+        {
+          "after_proposal_s": -0.999382912,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791578216982705000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 193517720,
+            "arrival_age_ns": 38309536,
+            "source_age_ns": 226698424,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": -0.773139712,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791578217249337000,
+            "state": "RECOVERING",
+            "reason": "private recovery observations only",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 157059640,
+            "arrival_age_ns": 36235520,
+            "source_age_ns": 192629336,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": -0.733656256,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791578217282697000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 199890360,
+            "arrival_age_ns": 2057792,
+            "source_age_ns": 199899864,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 0.829501184,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791578218799312000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map alignment observation; graph is uncommitted",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 189488192,
+            "arrival_age_ns": 59184480,
+            "source_age_ns": 245926208,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 0.877725056,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791578218882637000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 174105144,
+            "arrival_age_ns": 700960,
+            "source_age_ns": 174111576,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 1.682995008,
+          "status": {
+            "generation": 83,
+            "epoch": 1,
+            "source_stamp_ns": 1791578219682799000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 1,
+            "receipt_latency_ns": 151555464,
+            "arrival_age_ns": 30865344,
+            "source_age_ns": 181727816,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 6.391559744,
+          "status": {
+            "generation": 84,
+            "epoch": 1,
+            "source_stamp_ns": 1791578224399056000,
+            "state": "PAUSED",
+            "reason": "two independent old-keyframe RGB-D observations unavailable (references=45,nearby=45,first=0,raw_rejected=0,prediction_rejected=12,baseline_rejected=0,agreement_rejected=0; reference=105 prediction distance=0.015387 angle_deg=2.241419 measured=xyz=-0.176383,-0.082561,-0.300089 rpy=0.014647,1.483893,0.605776 predicted=xyz=-0.170087,-0.068778,-0.302765 rpy=-0.322244,1.513830,0.278555)",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 175455232,
+            "arrival_age_ns": 35738048,
+            "source_age_ns": 210447680,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 6.450493984,
+          "status": {
+            "generation": 84,
+            "epoch": 1,
+            "source_stamp_ns": 1791578224499040000,
+            "state": "PAUSED",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 140026080,
+            "arrival_age_ns": 952384,
+            "source_age_ns": 140034080,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 6.682492832,
+          "status": {
+            "generation": 84,
+            "epoch": 1,
+            "source_stamp_ns": 1791578224699018000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 166406640,
+            "arrival_age_ns": 638560,
+            "source_age_ns": 166416304,
+            "cut_count": 77
+          }
+        }
+      ]
+    },
+    {
+      "duration_s": 0.775904416,
+      "reason": "temporary recovery segment has not passed source-time/measured-gravity stability (3 nodes); main map remains frozen",
+      "max_observations": 0,
+      "frames": [
+        {
+          "after_proposal_s": -0.995458816,
+          "status": {
+            "generation": 84,
+            "epoch": 1,
+            "source_stamp_ns": 1791578231932029000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 205789240,
+            "arrival_age_ns": 72298848,
+            "source_age_ns": 277412440,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": -0.28464512,
+          "status": {
+            "generation": 84,
+            "epoch": 1,
+            "source_stamp_ns": 1791578232681986000,
+            "state": "RECOVERING",
+            "reason": "private recovery observations only",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 223315888,
+            "arrival_age_ns": 17849472,
+            "source_age_ns": 240488976,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": -0.21245696,
+          "status": {
+            "generation": 84,
+            "epoch": 1,
+            "source_stamp_ns": 1791578232731978000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 214915792,
+            "arrival_age_ns": 743648,
+            "source_age_ns": 214923760,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 1.4486952,
+          "status": {
+            "generation": 84,
+            "epoch": 1,
+            "source_stamp_ns": 1791578234398788000,
+            "state": "RECOVERING",
+            "reason": "private recovery observations only",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 188262368,
+            "arrival_age_ns": 23115712,
+            "source_age_ns": 210694496,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 1.46030608,
+          "status": {
+            "generation": 84,
+            "epoch": 1,
+            "source_stamp_ns": 1791578234481940000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 184865696,
+            "arrival_age_ns": 2167040,
+            "source_age_ns": 184877312,
+            "cut_count": 77
+          }
+        }
+      ]
+    },
+    {
+      "duration_s": 7.366056672,
+      "reason": "candidate observation source invalidated",
+      "max_observations": 1,
+      "frames": [
+        {
+          "after_proposal_s": -0.98121776,
+          "status": {
+            "generation": 84,
+            "epoch": 1,
+            "source_stamp_ns": 1791578234265253000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 236932504,
+            "arrival_age_ns": 11322240,
+            "source_age_ns": 244244120,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": -0.880620928,
+          "status": {
+            "generation": 84,
+            "epoch": 1,
+            "source_stamp_ns": 1791578234398788000,
+            "state": "RECOVERING",
+            "reason": "private recovery observations only",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 188262368,
+            "arrival_age_ns": 23115712,
+            "source_age_ns": 210694496,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": -0.869010048,
+          "status": {
+            "generation": 84,
+            "epoch": 1,
+            "source_stamp_ns": 1791578234481940000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 184865696,
+            "arrival_age_ns": 2167040,
+            "source_age_ns": 184877312,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 0.725518784,
+          "status": {
+            "generation": 84,
+            "epoch": 1,
+            "source_stamp_ns": 1791578236065176000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map alignment observation; graph is uncommitted",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 163132736,
+            "arrival_age_ns": 10299744,
+            "source_age_ns": 172258048,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 0.921123104,
+          "status": {
+            "generation": 84,
+            "epoch": 1,
+            "source_stamp_ns": 1791578236231826000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 179820816,
+            "arrival_age_ns": 774432,
+            "source_age_ns": 179827472,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 3.583222016,
+          "status": {
+            "generation": 84,
+            "epoch": 1,
+            "source_stamp_ns": 1791578238848427000,
+            "state": "RECOVERING",
+            "reason": "candidate main-map observation; no graph commit",
+            "map_observation_count": 1,
+            "receipt_latency_ns": 199228872,
+            "arrival_age_ns": 71563936,
+            "source_age_ns": 270052040,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 7.318923008,
+          "status": {
+            "generation": 85,
+            "epoch": 1,
+            "source_stamp_ns": 1791578242581756000,
+            "state": "PAUSED",
+            "reason": "candidate observation source invalidated",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 223775616,
+            "arrival_age_ns": 41464768,
+            "source_age_ns": 264546464,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 7.488537728,
+          "status": {
+            "generation": 85,
+            "epoch": 1,
+            "source_stamp_ns": 1791578242731756000,
+            "state": "PAUSED",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 245418112,
+            "arrival_age_ns": 33493408,
+            "source_age_ns": 277777568,
+            "cut_count": 77
+          }
+        },
+        {
+          "after_proposal_s": 7.51691664,
+          "status": {
+            "generation": 85,
+            "epoch": 1,
+            "source_stamp_ns": 1791578242864840000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 174721728,
+            "arrival_age_ns": 621120,
+            "source_age_ns": 174728448,
+            "cut_count": 77
+          }
+        }
+      ]
+    },
+    {
+      "duration_s": 0.882760608,
+      "reason": "temporary recovery segment has not passed source-time/measured-gravity stability (3 nodes); main map remains frozen",
+      "max_observations": 0,
+      "frames": [
+        {
+          "after_proposal_s": -0.988403808,
+          "status": {
+            "generation": 85,
+            "epoch": 1,
+            "source_stamp_ns": 1791578258947458000,
+            "state": "RECOVERING",
+            "reason": "waiting for stable geometry and Core registration",
+            "map_observation_count": 0,
+            "receipt_latency_ns": 192567440,
+            "arrival_age_ns": 70159360,
+            "source_age_ns": 261943216,
+            "cut_count": 77
+          }
+        }
+      ]
+    }
+  ],
+  "scope": "Live read-only observer timestamps and sanitized owned Core outcomes; no authenticated source secrets included."
+}

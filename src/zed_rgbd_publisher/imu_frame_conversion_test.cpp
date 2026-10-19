@@ -78,18 +78,16 @@ int main()
     for (std::size_t k=0;k<3;++k) near(c.linear_acceleration_camera_m_s2[k],accelerations[i][k]);
   }
 
-  // The production gravity orientation derives roll/pitch from acceleration,
-  // independent of the SDK visual/world orientation.
-  const std::array<Vector3, 5> gravity_samples{{
-    {0,-9.81,0}, {0,0,-9.81}, {0,0,9.81}, {-9.81,0,0}, {1.2,-9.6,0.8}}};
+  // RTAB-Map applies an extra fixed world-yaw and camera-to-base transform.
+  // Neither changes the fact that the physical fixtures have gravity +Z.
   const Matrix3 base_from_camera{0,0,1,-1,0,0,0,-1,0};
   const Matrix3 memory_yaw{0,1,0,-1,0,0,0,0,1};
-  for (const auto &sample : gravity_samples) {
-    Quaternion message;
-    if (!acceleration_gravity_world_from_camera(sample, message)) {
+  for (std::size_t i=0; i<orientations.size(); ++i) {
+    const auto &sample=accelerations[i];
+    if (!gravity_magnitude_valid(sample)) {
       throw std::runtime_error("valid acceleration gravity sample rejected");
     }
-    const auto &q=message;
+    const auto q=convert(orientations[i],identity,{0,0,0},sample,diagonal,diagonal,diagonal).world_from_camera;
     const Matrix3 message_rotation{
       1-2*(q.y*q.y+q.z*q.z),2*(q.x*q.y-q.z*q.w),2*(q.x*q.z+q.y*q.w),
       2*(q.x*q.y+q.z*q.w),1-2*(q.x*q.x+q.z*q.z),2*(q.y*q.z-q.x*q.w),
@@ -104,11 +102,25 @@ int main()
     const auto mapped=multiply(world_from_base,base_acceleration);
     near(mapped[0],0); near(mapped[1],0); near(mapped[2],1);
   }
-  Quaternion invalid_message;
-  if (acceleration_gravity_world_from_camera({0,0,0},invalid_message) ||
-      acceleration_gravity_world_from_camera({0,0,13},invalid_message)) {
+  if (gravity_magnitude_valid({0,0,0}) || gravity_magnitude_valid({0,0,13}) ||
+      gravity_magnitude_valid({NAN,0,9.81})) {
     throw std::runtime_error("unsafe acceleration magnitude was accepted");
   }
+
+  // The recorded failure is near optical -Z specific force (base pitch +90).
+  // Acceleration noise on either side of that singularity must not create a
+  // heading or override the continuous SDK quaternion, including sign flips.
+  const Quaternion down{-s,0,0,s};
+  const auto first=convert(down,identity,{0,0,0},{.088,-.046,-9.839},diagonal,diagonal,diagonal);
+  const auto noisy=convert({s,0,0,-s},identity,{0,0,0},{-.019,.040,-9.815},diagonal,diagonal,diagonal);
+  same_rotation(first.world_from_camera,noisy.world_from_camera);
+  // An actual five-degree turn about gravity must survive near vertical.
+  const double turn=5*kDegreesToRadians;
+  const Quaternion sdk_world_turn{0,-std::sin(turn/2),0,std::cos(turn/2)};
+  const auto turned=convert(multiply(sdk_world_turn,down),identity,{0,0,0},
+    {-.019,.040,-9.815},diagonal,diagonal,diagonal);
+  const auto delta=multiply(conjugate(first.world_from_camera),turned.world_from_camera);
+  near(2*std::acos(std::min(1.0,std::abs(delta.w))),turn);
 
   bool rejected = false;
   try {

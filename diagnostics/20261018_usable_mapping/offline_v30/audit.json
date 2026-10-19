@@ -1,0 +1,45 @@
+{
+  "scope": "offline only; actual camera/SVO/RViz/robot integration pending",
+  "audits": [
+    {
+      "run": "short_compressed_recovery",
+      "frames": 1581,
+      "all_source_timestamps_equal": true,
+      "source_seconds": 64.947313,
+      "supervisor_exit_asserted_by_driver": 0,
+      "queue_state": "closed",
+      "lost_frames": 17,
+      "lost_or_missing_main_writes": 0
+    },
+    {
+      "run": "full_recovery",
+      "frames": 10746,
+      "all_source_timestamps_equal": true,
+      "source_seconds": 397.831865,
+      "supervisor_exit_asserted_by_driver": 0,
+      "queue_state": "closed",
+      "lost_frames": 215,
+      "lost_or_missing_main_writes": 0
+    },
+    {
+      "run": "large_interrupted_capture",
+      "frames": 10059,
+      "all_source_timestamps_equal": true,
+      "source_seconds": 412.447825,
+      "supervisor_exit_asserted_by_driver": 2,
+      "queue_state": "interrupted_saved",
+      "lost_frames": 0,
+      "lost_or_missing_main_writes": 0
+    }
+  ],
+  "pins": {
+    "wbrov_replay_worker_v30": "8910ba34bc2161b1ed9757c0ba9e7e8b65d250d28d3ebd4341e6c51bdf81e9e3",
+    "native_release_v5/librtabmap_core.so.0.23.7": "573f9a1cd6a6ac257efd5621b421b9650f14fcbfc95cfcd915f5c9f479c6eed7",
+    "camera_build_usable4/build/zed_rgbd_publisher_rate_ab": "9f20e56da2a8dea94d14e256faadb1e56e1f28037adeca8c1e650a0a88363bde"
+  },
+  "no_hardware_started": true,
+  "production_entry_changed": false,
+  "result_exit_field": "steps.exit is the cloud differential verifier exit; queue exit is audited separately",
+  "paced_io_log_threshold_ms": 500,
+  "paced_io_zero_means_no_thresholded_log": true
+}

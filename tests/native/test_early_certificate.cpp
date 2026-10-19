@@ -21,5 +21,11 @@ int main() {
     v=base;v.sourceSpan=std::numeric_limits<double>::infinity();assert(!v.eligible(reason));
     v=base;v.beforeMeanDeg=std::numeric_limits<double>::quiet_NaN();assert(!v.eligible(reason));
     v=base;v.nodes=200;v.gravityNodes=200;assert(!v.eligible(reason));
-    std::cout << "PASS 14 early-certificate predicates; this is not a graph-merge test\n";
+    v=base;v.nodes=3;v.gravityNodes=3;v.sourceSpan=.2;
+    assert(v.eligible(reason,true));assert(!v.eligible(reason));
+    v.gravityNodes=2;assert(!v.eligible(reason,true));
+    v.gravityNodes=3;v.sourceSpan=.199;assert(!v.eligible(reason,true));
+    v.sourceSpan=.2;v.maxResidualIncreaseDeg=.501;assert(!v.eligible(reason,true));
+    v=base;v.nodes=33;v.gravityNodes=33;assert(!v.eligible(reason,true));
+    std::cout << "PASS legacy and observed-reanchor certificate predicates; this is not a graph-merge test\n";
 }

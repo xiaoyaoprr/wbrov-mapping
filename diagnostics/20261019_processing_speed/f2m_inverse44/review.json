@@ -1,0 +1,88 @@
+{
+  "schema": "wbrov.local-source-timing-review.v1",
+  "remote_verified_this_turn": false,
+  "native_tests_run": false,
+  "candidate_adopted": false,
+  "performance_claim": null,
+  "source_sha256": {
+    "src/rtabmap_core/corelib/src/odometry/OdometryF2M.cpp": "3bfa9313023c1744aafb48ee38f4850f834a617449d778167bb650d9e6db6131",
+    "src/rtabmap_core/corelib/src/Transform.cpp": "53db258a3f67be77a57731624809174a29a56ab6db1ec6cb4c570c3dec07e68d",
+    "src/rtabmap_core/corelib/src/util3d_transforms.cpp": "acfdd52ff2b03392a78fd5ffb8fdae17b63f0538a0fd70b2434e510778982b01",
+    "src/rtabmap_core/corelib/src/CameraModel.cpp": "3fb17f28c2835c2c5cbf20bfb4c4ec431b4c9d3870f2437fb3cd0859a1eeebf4",
+    "src/rtabmap_core/corelib/src/optimizer/OptimizerG2O.cpp": "e7e6a4fb2c2ba8fac1f9f7b891ec7e872394ef711ff244ce5dc213d8e12198fc",
+    "src/rtabmap_core/corelib/src/Odometry.cpp": "0855ce8dd4f70ec97953dc5a776a722be34ca6705138a54d4de66d8cc3eb8d06",
+    "src/deferred_mapping/DeferredMappingSession.h": "838b71ff9ca17b55308e09310c3a697882385fd103d80ba2b76db655610e6492"
+  },
+  "runs": [
+    {
+      "frames": 10746,
+      "odometry_compute_ms": 384370,
+      "odometry_estimation_ms": 383640,
+      "odometry_bundle_ms": 98352.1,
+      "mapping_compute_ms": 231767,
+      "reported_bundle_fraction_of_odom": 0.2558787106173739,
+      "source": "core6/full_compressed/status.json",
+      "source_sha256": "ee446f1d8de4a024d177f157d238e5c74d120995e1e416851bd89aa9d1804590"
+    },
+    {
+      "frames": 10746,
+      "odometry_compute_ms": 387447,
+      "odometry_estimation_ms": 386726,
+      "odometry_bundle_ms": 100176,
+      "mapping_compute_ms": 235526,
+      "reported_bundle_fraction_of_odom": 0.25855407320227025,
+      "source": "status40/full_compressed/status.json",
+      "source_sha256": "b003cdfff3db0045fadeb791c1908d4721bc6b368ded1cc3662bbcd401420902"
+    },
+    {
+      "frames": 10746,
+      "odometry_compute_ms": 384777,
+      "odometry_estimation_ms": 384074,
+      "odometry_bundle_ms": 98067.3,
+      "mapping_compute_ms": 246112,
+      "reported_bundle_fraction_of_odom": 0.2548678845149268,
+      "source": "v39/v39_full_compressed/status.json",
+      "source_sha256": "11d27d57d2990e71f4d7c9da62d4a2c5aadeadf006f4561ec852cc46e513080e"
+    },
+    {
+      "frames": 10746,
+      "odometry_compute_ms": 386745,
+      "odometry_estimation_ms": 386014,
+      "odometry_bundle_ms": 99714,
+      "mapping_compute_ms": 243681,
+      "reported_bundle_fraction_of_odom": 0.2578288019237482,
+      "source": "v39/v38_full_compressed/status.json",
+      "source_sha256": "1ed8cbfeff42eeec4a39e8b00c63322c7f1e05fbfdb99c2cfae785f0fdfee92a"
+    }
+  ],
+  "interpretation": [
+    "Odometry::timeEstimation includes computeTransform and therefore local BA; do not add bundle and estimation totals.",
+    "Deferred frontend and map consumer can overlap; do not sum their CPU-stage totals as wall-clock duration.",
+    "OdometryF2M::bundleTime surrounds optimizeBA only, excludes per-feature camera inversions in this candidate.",
+    "bundleTime is assigned, not accumulated, per successful-entry attempt; it is a reported substage, not a complete exclusive timing partition.",
+    "The four repeat-inverse sites are a source-level opportunity, not a measured hotspot; no percentage speedup is inferred.",
+    "Keep optimizer iterations, references, robust kernels, inliers, depth, density, all frame processing and save checks unchanged."
+  ],
+  "source_locations": {
+    "camera_models_populated_before_cache": "OdometryF2M.cpp:338-361",
+    "inverse_calls": [
+      549,
+      935,
+      1004,
+      1477
+    ],
+    "bundle_timer_scope": "OdometryF2M.cpp:565-567",
+    "general_inverse_with_invertibility_check": "Transform.cpp:198-212",
+    "same_point_multiplication_order": "util3d_transforms.cpp:211-219",
+    "null_model_construction_rejected": "CameraModel.cpp:84,129",
+    "outer_estimation_timer": "Odometry.cpp:832"
+  },
+  "required_next_checks": [
+    "Wait for legitimate remote permission, inspect existing combo42 receipts before any new heavy work.",
+    "Build isolated f2m_inverse44_v2 probe against actual candidate RTABMap; ASan/UBSan and Release.",
+    "Require bitwise equality of 90000 inverse/point observations and failure for both singular modes.",
+    "Run fixed six alternating microbenchmark rounds once and preserve all outcomes, including slower results.",
+    "Only if component result is useful, build isolated Core overlay and run all four fixed replays with timestamp, recovery, DB/save and own-cloud audits.",
+    "No production/source adoption or 8/GitHub update based on static review or the component benchmark alone."
+  ]
+}

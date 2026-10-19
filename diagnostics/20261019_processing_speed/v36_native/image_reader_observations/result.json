@@ -1,0 +1,95 @@
+{
+  "phase": "passed",
+  "scope": "complete the observation check under PYTHONNOUSERSITE; original probe failure retained; reuse already completed fixed timing rounds",
+  "rounds": [
+    {
+      "round": 0,
+      "baseline": {
+        "seconds": 5.5823993280064315,
+        "images": 287,
+        "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"
+      },
+      "candidate": {
+        "seconds": 3.7726372480392456,
+        "images": 287,
+        "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"
+      }
+    },
+    {
+      "round": 1,
+      "candidate": {
+        "seconds": 3.7600868479930796,
+        "images": 287,
+        "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"
+      },
+      "baseline": {
+        "seconds": 5.577514335978776,
+        "images": 287,
+        "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"
+      }
+    },
+    {
+      "round": 2,
+      "baseline": {
+        "seconds": 5.572928863984998,
+        "images": 287,
+        "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"
+      },
+      "candidate": {
+        "seconds": 3.7596558399964124,
+        "images": 287,
+        "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"
+      }
+    },
+    {
+      "round": 3,
+      "candidate": {
+        "seconds": 3.7657170880120248,
+        "images": 287,
+        "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"
+      },
+      "baseline": {
+        "seconds": 5.842456895974465,
+        "images": 287,
+        "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"
+      }
+    },
+    {
+      "round": 4,
+      "baseline": {
+        "seconds": 5.838233056012541,
+        "images": 287,
+        "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"
+      },
+      "candidate": {
+        "seconds": 3.811123296036385,
+        "images": 287,
+        "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"
+      }
+    },
+    {
+      "round": 5,
+      "candidate": {
+        "seconds": 3.7576223040232435,
+        "images": 287,
+        "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"
+      },
+      "baseline": {
+        "seconds": 5.560761440021452,
+        "images": 287,
+        "sha256": "57700b7e993be38b0ffc5c83c354db9b278e9268d0ac886aeefae5179dc470b0"
+      }
+    }
+  ],
+  "baseline_median_seconds": 5.577514335978776,
+  "candidate_median_seconds": 3.7600868479930796,
+  "reduction_fraction": 0.32584900342829215,
+  "libraries": {
+    "numpy": "/usr/lib/python3/dist-packages/numpy/__init__.py",
+    "cv2": "/usr/lib/python3/dist-packages/cv2.cpython-310-aarch64-linux-gnu.so"
+  },
+  "frames": 1581,
+  "observations": 235,
+  "all_observations_equal": true,
+  "source_pins_unchanged": true
+}

@@ -1,0 +1,448 @@
+{
+  "checked_monotonic": 356950.272186368,
+  "counts": {
+    "historical_reference": 1,
+    "geometry": 38,
+    "proposal": 13,
+    "received_status": 19,
+    "terminal": 13,
+    "observing": 6,
+    "deferred_cached": 2
+  },
+  "recent_proposals": [
+    {
+      "event": "proposal",
+      "monotonic_ns": 356801705291008,
+      "geometry": {
+        "old_ids": [
+          112,
+          114,
+          109
+        ],
+        "current_ids": [
+          143,
+          144,
+          145
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.07047533337566746,
+          "max_rotation_deg": 9.528588373827677,
+          "max_z_m": 0.021846583056428115,
+          "max_tilt_deg": 9.520270746290091
+        },
+        "candidate_only": true,
+        "requires_core_depth_verification": true,
+        "pnp_alignment_certified": false
+      }
+    },
+    {
+      "event": "proposal",
+      "monotonic_ns": 356816395059392,
+      "geometry": {
+        "old_ids": [
+          112,
+          114,
+          109
+        ],
+        "current_ids": [
+          146,
+          147,
+          149
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.052462147015446846,
+          "max_rotation_deg": 6.57820893105766,
+          "max_z_m": 0.0267160965238461,
+          "max_tilt_deg": 6.529861002596606
+        },
+        "candidate_only": true,
+        "requires_core_depth_verification": true,
+        "pnp_alignment_certified": false
+      }
+    },
+    {
+      "event": "proposal",
+      "monotonic_ns": 356829650879040,
+      "geometry": {
+        "old_ids": [
+          112,
+          114,
+          109
+        ],
+        "current_ids": [
+          150,
+          151,
+          152
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.08806617860009931,
+          "max_rotation_deg": 12.448418873752226,
+          "max_z_m": 0.0260269389282356,
+          "max_tilt_deg": 12.428381697531433
+        },
+        "candidate_only": true,
+        "requires_core_depth_verification": true,
+        "pnp_alignment_certified": false
+      }
+    },
+    {
+      "event": "proposal",
+      "monotonic_ns": 356845202300768,
+      "geometry": {
+        "old_ids": [
+          112,
+          114,
+          109
+        ],
+        "current_ids": [
+          153,
+          155,
+          156
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.01253870361715546,
+          "max_rotation_deg": 1.8971542974836564,
+          "max_z_m": 0.007240246639701353,
+          "max_tilt_deg": 1.3276295934701523
+        },
+        "candidate_only": null,
+        "requires_core_depth_verification": null,
+        "pnp_alignment_certified": null
+      }
+    },
+    {
+      "event": "proposal",
+      "monotonic_ns": 356889844050016,
+      "geometry": {
+        "old_ids": [
+          112,
+          114,
+          109
+        ],
+        "current_ids": [
+          172,
+          173,
+          174
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.04660913707389569,
+          "max_rotation_deg": 6.56603083792113,
+          "max_z_m": 0.0054725250874944065,
+          "max_tilt_deg": 6.5467613151778545
+        },
+        "candidate_only": true,
+        "requires_core_depth_verification": true,
+        "pnp_alignment_certified": false
+      }
+    },
+    {
+      "event": "proposal",
+      "monotonic_ns": 356904832491136,
+      "geometry": {
+        "old_ids": [
+          112,
+          114,
+          109
+        ],
+        "current_ids": [
+          175,
+          176,
+          177
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.08896191562802691,
+          "max_rotation_deg": 12.236666287882867,
+          "max_z_m": 0.020948619379563382,
+          "max_tilt_deg": 12.216179933989785
+        },
+        "candidate_only": true,
+        "requires_core_depth_verification": true,
+        "pnp_alignment_certified": false
+      }
+    },
+    {
+      "event": "proposal",
+      "monotonic_ns": 356907161807264,
+      "geometry": {
+        "old_ids": [
+          112,
+          114,
+          109
+        ],
+        "current_ids": [
+          176,
+          177,
+          178
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.1028399762008833,
+          "max_rotation_deg": 14.231554079303184,
+          "max_z_m": 0.02747187021724873,
+          "max_tilt_deg": 14.22433836044174
+        },
+        "candidate_only": true,
+        "requires_core_depth_verification": true,
+        "pnp_alignment_certified": false
+      }
+    },
+    {
+      "event": "proposal",
+      "monotonic_ns": 356931823724288,
+      "geometry": {
+        "old_ids": [
+          112,
+          114,
+          109
+        ],
+        "current_ids": [
+          184,
+          185,
+          186
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.07377071457052518,
+          "max_rotation_deg": 10.267620929217939,
+          "max_z_m": 0.008124215636915233,
+          "max_tilt_deg": 10.266554243746565
+        },
+        "candidate_only": true,
+        "requires_core_depth_verification": true,
+        "pnp_alignment_certified": false
+      }
+    }
+  ],
+  "observing_or_terminal": [
+    {
+      "event": "observing",
+      "monotonic_ns": 356817685522752,
+      "status": {
+        "result": "observing",
+        "reason": "geometry prepared; graph remains uncommitted until five direct old-map observations pass",
+        "core_reset_epoch": 1,
+        "source_reset_epoch": 1,
+        "core_graph_revision": 151
+      }
+    },
+    {
+      "event": "terminal",
+      "monotonic_ns": 356823813041248,
+      "status": {
+        "result": "rejected",
+        "reason": "candidate observation source invalidated",
+        "core_reset_epoch": 1,
+        "source_reset_epoch": 1,
+        "core_graph_revision": 151
+      }
+    },
+    {
+      "event": "observing",
+      "monotonic_ns": 356830485881888,
+      "status": {
+        "result": "observing",
+        "reason": "geometry prepared; graph remains uncommitted until five direct old-map observations pass",
+        "core_reset_epoch": 1,
+        "source_reset_epoch": 1,
+        "core_graph_revision": 154
+      }
+    },
+    {
+      "event": "terminal",
+      "monotonic_ns": 356836286507712,
+      "status": {
+        "result": "rejected",
+        "reason": "candidate observation source invalidated",
+        "core_reset_epoch": 1,
+        "source_reset_epoch": 1,
+        "core_graph_revision": 154
+      }
+    },
+    {
+      "event": "observing",
+      "monotonic_ns": 356846659950080,
+      "status": {
+        "result": "observing",
+        "reason": "geometry prepared; graph remains uncommitted until five direct old-map observations pass",
+        "core_reset_epoch": 1,
+        "source_reset_epoch": 1,
+        "core_graph_revision": 158
+      }
+    },
+    {
+      "event": "terminal",
+      "monotonic_ns": 356851946428064,
+      "status": {
+        "result": "rejected",
+        "reason": "candidate observation source invalidated",
+        "core_reset_epoch": 1,
+        "source_reset_epoch": 1,
+        "core_graph_revision": 158
+      }
+    },
+    {
+      "event": "observing",
+      "monotonic_ns": 356890677096832,
+      "status": {
+        "result": "observing",
+        "reason": "geometry prepared; graph remains uncommitted until five direct old-map observations pass",
+        "core_reset_epoch": 1,
+        "source_reset_epoch": 1,
+        "core_graph_revision": 176
+      }
+    },
+    {
+      "event": "terminal",
+      "monotonic_ns": 356896214298368,
+      "status": {
+        "result": "rejected",
+        "reason": "two independent old-keyframe RGB-D observations unavailable (references=45,nearby=45,first=0,raw_rejected=0,prediction_rejected=12,baseline_rejected=0,agreement_rejected=0; reference=105 prediction distance=0.015387 angle_deg=2.241419 measured=xyz=-0.176383,-0.082561,-0.300089 rpy=0.014647,1.483893,0.605776 predicted=xyz=-0.170087,-0.068778,-0.302765 rpy=-0.322244,1.513830,0.278555)",
+        "core_reset_epoch": 1,
+        "source_reset_epoch": 1,
+        "core_graph_revision": 176
+      }
+    },
+    {
+      "event": "terminal",
+      "monotonic_ns": 356905608395552,
+      "status": {
+        "result": "rejected",
+        "reason": "temporary recovery segment has not passed source-time/measured-gravity stability (3 nodes); main map remains frozen",
+        "core_reset_epoch": 1,
+        "source_reset_epoch": 1,
+        "core_graph_revision": 179
+      }
+    },
+    {
+      "event": "observing",
+      "monotonic_ns": 356907975464384,
+      "status": {
+        "result": "observing",
+        "reason": "geometry prepared; graph remains uncommitted until five direct old-map observations pass",
+        "core_reset_epoch": 1,
+        "source_reset_epoch": 1,
+        "core_graph_revision": 180
+      }
+    },
+    {
+      "event": "terminal",
+      "monotonic_ns": 356914527863936,
+      "status": {
+        "result": "rejected",
+        "reason": "candidate observation source invalidated",
+        "core_reset_epoch": 1,
+        "source_reset_epoch": 1,
+        "core_graph_revision": 180
+      }
+    },
+    {
+      "event": "terminal",
+      "monotonic_ns": 356932706484896,
+      "status": {
+        "result": "rejected",
+        "reason": "temporary recovery segment has not passed source-time/measured-gravity stability (3 nodes); main map remains frozen",
+        "core_reset_epoch": 1,
+        "source_reset_epoch": 1,
+        "core_graph_revision": 188
+      }
+    }
+  ],
+  "selection_reasons": {
+    "fewer_than_three_current_views": 24,
+    "three_independent_tag_views_for_core_depth_verification": 12,
+    "no_independent_depth_candidate": 1,
+    "three_independent_measured_links": 1
+  },
+  "tail": [
+    {
+      "event": "geometry",
+      "monotonic_ns": 356931816055008,
+      "node_id": 186,
+      "epoch": 1,
+      "tag_id": 13,
+      "reason": "three_independent_tag_views_for_core_depth_verification",
+      "source_epoch": 0,
+      "preference_rank": 0,
+      "candidate": {
+        "old_ids": [
+          112,
+          114,
+          109
+        ],
+        "current_ids": [
+          184,
+          185,
+          186
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.07377071457052518,
+          "max_rotation_deg": 10.267620929217939,
+          "max_z_m": 0.008124215636915233,
+          "max_tilt_deg": 10.266554243746565
+        },
+        "candidate_only": true,
+        "requires_core_depth_verification": true,
+        "pnp_alignment_certified": false
+      }
+    },
+    {
+      "event": "proposal",
+      "monotonic_ns": 356931823724288,
+      "geometry": {
+        "old_ids": [
+          112,
+          114,
+          109
+        ],
+        "current_ids": [
+          184,
+          185,
+          186
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.07377071457052518,
+          "max_rotation_deg": 10.267620929217939,
+          "max_z_m": 0.008124215636915233,
+          "max_tilt_deg": 10.266554243746565
+        },
+        "candidate_only": true,
+        "requires_core_depth_verification": true,
+        "pnp_alignment_certified": false
+      }
+    },
+    {
+      "event": "received_status",
+      "monotonic_ns": 356932705121952,
+      "status": {
+        "result": "rejected",
+        "reason": "temporary recovery segment has not passed source-time/measured-gravity stability (3 nodes); main map remains frozen",
+        "core_reset_epoch": 1,
+        "source_reset_epoch": 1,
+        "core_graph_revision": 188
+      }
+    },
+    {
+      "event": "deferred_cached",
+      "monotonic_ns": 356932706355584
+    },
+    {
+      "event": "terminal",
+      "monotonic_ns": 356932706484896,
+      "status": {
+        "result": "rejected",
+        "reason": "temporary recovery segment has not passed source-time/measured-gravity stability (3 nodes); main map remains frozen",
+        "core_reset_epoch": 1,
+        "source_reset_epoch": 1,
+        "core_graph_revision": 188
+      }
+    },
+    {
+      "event": "geometry",
+      "monotonic_ns": 356944000207456,
+      "node_id": 192,
+      "epoch": 1,
+      "tag_id": 13,
+      "reason": "fewer_than_three_current_views",
+      "source_epoch": 0,
+      "preference_rank": 0
+    }
+  ]
+}

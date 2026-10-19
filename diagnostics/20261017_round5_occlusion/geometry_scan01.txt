@@ -1,0 +1,155 @@
+SCAN current=111 old=79 ba=1
+PAIR current=111 old=79 ransac_threshold=0.025 tight=1
+forward inliers=238 backend= transform=xyz=-0.006114,-0.023564,0.004601 rpy=-0.032847,-0.092911,-0.010520
+ words=238 side(id=111,image=960x600,cells=9,points=238,span=0.103152,hessian=0.0106437) side(id=79,image=960x600,cells=9,points=238,span=0.102777,hessian=0.0105673)
+ covariance finite=1 symmetry=0 min=7.87392e-06 max=7.87392e-06 condition=1
+ metric count=238 invalid=0 rms=0.00480584 max=0.0128492 above_025=0
+reverse inliers=237 backend= transform=xyz=0.005278,0.024125,-0.003266 rpy=0.033941,0.094129,0.012928
+ words=237 side(id=79,image=960x600,cells=9,points=237,span=0.105667,hessian=0.0111697) side(id=111,image=960x600,cells=9,points=237,span=0.105953,hessian=0.0112298)
+ covariance finite=1 symmetry=0 min=9.31771e-06 max=9.31771e-06 condition=1
+ metric count=237 invalid=0 rms=0.00495008 max=0.0138371 above_025=0
+ direction_distance=0.00115312 direction_angle_deg=0.100887
+SCAN current=111 old=79 ba=0
+PAIR current=111 old=79 ransac_threshold=0.025 tight=1
+forward inliers=242 backend= transform=xyz=-0.004457,-0.012118,0.004934 rpy=-0.032680,-0.092416,-0.026230
+ words=242 side(id=111,image=960x600,cells=9,points=242,span=0.103345,hessian=0.0106835) side(id=79,image=960x600,cells=9,points=242,span=0.102971,hessian=0.0106074)
+ covariance finite=1 symmetry=0 min=7.6418e-06 max=7.6418e-06 condition=1
+ metric count=242 invalid=0 rms=0.00263639 max=0.00751808 above_025=0
+reverse inliers=249 backend= transform=xyz=0.003678,0.011993,-0.004866 rpy=0.035048,0.091538,0.029711
+ words=249 side(id=79,image=960x600,cells=9,points=249,span=0.107266,hessian=0.0115105) side(id=111,image=960x600,cells=9,points=249,span=0.107589,hessian=0.0115788)
+ covariance finite=1 symmetry=0 min=8.58513e-06 max=8.58513e-06 condition=1
+ metric count=249 invalid=0 rms=0.0029373 max=0.0084671 above_025=0
+ direction_distance=0.000406394 direction_angle_deg=0.0242433
+SCAN current=114 old=103 ba=1
+PAIR current=114 old=103 ransac_threshold=0.025 tight=1
+forward inliers=216 backend= transform=xyz=-0.045908,-0.063083,0.042452 rpy=-0.013783,-0.052790,-0.095616
+ words=216 side(id=114,image=960x600,cells=9,points=216,span=0.0963827,hessian=0.00929218) side(id=103,image=960x600,cells=7,points=216,span=0.0946698,hessian=0.00896813)
+ covariance finite=1 symmetry=0 min=2.67192e-05 max=2.67192e-05 condition=1
+ metric count=216 invalid=0 rms=0.0109123 max=0.0238518 above_025=0
+reverse inliers=241 backend= transform=xyz=0.037818,0.066397,-0.044340 rpy=0.018543,0.049942,0.098767
+ words=241 side(id=103,image=960x600,cells=8,points=241,span=0.0957964,hessian=0.00918271) side(id=114,image=960x600,cells=9,points=241,span=0.0976167,hessian=0.00953222)
+ covariance finite=1 symmetry=0 min=2.75508e-05 max=2.75508e-05 condition=1
+ metric count=241 invalid=0 rms=0.0111708 max=0.0239144 above_025=0
+ direction_distance=0.00176859 direction_angle_deg=0.152424
+SCAN current=114 old=103 ba=0
+PAIR current=114 old=103 ransac_threshold=0.025 tight=1
+forward inliers=230 backend= transform=xyz=-0.036513,-0.061256,0.035262 rpy=-0.012791,-0.063182,-0.096935
+ words=230 side(id=114,image=960x600,cells=9,points=230,span=0.0964541,hessian=0.00930597) side(id=103,image=960x600,cells=7,points=230,span=0.0947393,hessian=0.0089812)
+ covariance finite=1 symmetry=0 min=2.7139e-05 max=2.7139e-05 condition=1
+ metric count=230 invalid=0 rms=0.00478798 max=0.0134011 above_025=0
+reverse inliers=255 backend= transform=xyz=0.028241,0.064443,-0.036318 rpy=0.018203,0.061773,0.098703
+ words=255 side(id=103,image=960x600,cells=8,points=255,span=0.0969168,hessian=0.00939868) side(id=114,image=960x600,cells=9,points=255,span=0.0987581,hessian=0.00975731)
+ covariance finite=1 symmetry=0 min=2.79105e-05 max=2.79105e-05 condition=1
+ metric count=255 invalid=0 rms=0.00498958 max=0.0145957 above_025=0
+ direction_distance=0.000555118 direction_angle_deg=0.0614761
+SCAN current=131 old=98 ba=1
+PAIR current=131 old=98 ransac_threshold=0.025 tight=1
+forward inliers=162 backend= transform=xyz=-0.098019,0.008239,-0.051997 rpy=-0.109242,-0.023158,0.019353
+ words=162 side(id=131,image=960x600,cells=9,points=162,span=0.103262,hessian=0.0106742) side(id=98,image=960x600,cells=9,points=162,span=0.103979,hessian=0.0108219)
+ covariance finite=1 symmetry=0 min=1.48307e-05 max=1.48307e-05 condition=1
+ metric count=162 invalid=0 rms=0.00725585 max=0.0184477 above_025=0
+reverse inliers=148 backend= transform=xyz=0.099045,-0.015591,0.048439 rpy=0.107991,0.025426,-0.016426
+ words=148 side(id=98,image=960x600,cells=9,points=148,span=0.0975211,hessian=0.00952038) side(id=131,image=960x600,cells=9,points=148,span=0.0966328,hessian=0.00935094)
+ covariance finite=1 symmetry=0 min=1.601e-05 max=1.601e-05 condition=1
+ metric count=148 invalid=0 rms=0.00755727 max=0.019806 above_025=0
+ direction_distance=0.00021892 direction_angle_deg=0.0529568
+SCAN current=131 old=98 ba=0
+PAIR current=131 old=98 ransac_threshold=0.025 tight=1
+forward inliers=176 backend= transform=xyz=-0.104316,0.004938,-0.043401 rpy=-0.109158,-0.010527,0.022912
+ words=176 side(id=131,image=960x600,cells=9,points=176,span=0.107507,hessian=0.0115712) side(id=98,image=960x600,cells=9,points=176,span=0.108345,hessian=0.0117513)
+ covariance finite=1 symmetry=0 min=1.55434e-05 max=1.55434e-05 condition=1
+ metric count=176 invalid=0 rms=0.00410576 max=0.0112327 above_025=0
+reverse inliers=166 backend= transform=xyz=0.104673,-0.011804,0.042655 rpy=0.108401,0.015637,-0.021801
+ words=166 side(id=98,image=960x600,cells=9,points=166,span=0.10283,hessian=0.0105869) side(id=131,image=960x600,cells=9,points=166,span=0.101845,hessian=0.010387)
+ covariance finite=1 symmetry=0 min=1.61878e-05 max=1.61878e-05 condition=1
+ metric count=166 invalid=0 rms=0.00404827 max=0.012009 above_025=0
+ direction_distance=0.00168289 direction_angle_deg=0.156408
+SCAN current=132 old=92 ba=1
+PAIR current=132 old=92 ransac_threshold=0.025 tight=1
+forward inliers=184 backend= transform=xyz=-0.115909,0.052993,-0.024462 rpy=-0.053350,-0.056859,0.063343
+ words=184 side(id=132,image=960x600,cells=9,points=184,span=0.0870661,hessian=0.00758676) side(id=92,image=960x600,cells=8,points=184,span=0.08862,hessian=0.00785682)
+ covariance finite=1 symmetry=0 min=2.35781e-05 max=2.35781e-05 condition=1
+ metric count=184 invalid=0 rms=0.00846429 max=0.0195483 above_025=0
+reverse inliers=182 backend= transform=xyz=0.113974,-0.061122,0.016412 rpy=0.049550,0.063027,-0.060235
+ words=182 side(id=92,image=960x600,cells=8,points=182,span=0.08915,hessian=0.00795083) side(id=132,image=960x600,cells=9,points=182,span=0.0877697,hessian=0.00771033)
+ covariance finite=1 symmetry=0 min=2.65756e-05 max=2.65756e-05 condition=1
+ metric count=182 invalid=0 rms=0.008094 max=0.0183548 above_025=0
+ direction_distance=0.00198747 direction_angle_deg=0.171313
+SCAN current=132 old=92 ba=0
+PAIR current=132 old=92 ransac_threshold=0.025 tight=1
+forward inliers=196 backend= transform=xyz=-0.118615,0.061189,0.012805 rpy=-0.053509,0.000228,0.050701
+ words=196 side(id=132,image=960x600,cells=9,points=196,span=0.0851539,hessian=0.00725753) side(id=92,image=960x600,cells=8,points=196,span=0.0867376,hessian=0.00752667)
+ covariance finite=1 symmetry=0 min=2.46718e-05 max=2.46718e-05 condition=1
+ metric count=196 invalid=0 rms=0.00485571 max=0.0131612 above_025=0
+reverse inliers=192 backend= transform=xyz=0.115617,-0.065046,-0.013658 rpy=0.054166,0.008430,-0.052634
+ words=192 side(id=92,image=960x600,cells=7,points=192,span=0.0891797,hessian=0.00795608) side(id=132,image=960x600,cells=8,points=192,span=0.0877348,hessian=0.00770419)
+ covariance finite=1 symmetry=0 min=2.51608e-05 max=2.51608e-05 condition=1
+ metric count=192 invalid=0 rms=0.00448411 max=0.0118042 above_025=0
+ direction_distance=0.00378802 direction_angle_deg=0.361718
+SCAN current=135 old=79 ba=1
+PAIR current=135 old=79 ransac_threshold=0.025 tight=1
+forward inliers=178 backend= transform=xyz=-0.139953,0.012756,0.001909 rpy=0.032990,-0.094029,-0.055590
+ words=178 side(id=135,image=960x600,cells=8,points=178,span=0.0943189,hessian=0.00889995) side(id=79,image=960x600,cells=8,points=178,span=0.0954091,hessian=0.00910745)
+ covariance finite=1 symmetry=0 min=1.46925e-05 max=1.46925e-05 condition=1
+ metric count=178 invalid=0 rms=0.00601583 max=0.0168901 above_025=0
+reverse inliers=174 backend= transform=xyz=0.140991,-0.005907,-0.012347 rpy=-0.027742,0.100755,0.053937
+ words=174 side(id=79,image=960x600,cells=7,points=174,span=0.0938164,hessian=0.00880602) side(id=135,image=960x600,cells=9,points=174,span=0.0932064,hessian=0.00869049)
+ covariance finite=1 symmetry=0 min=1.42028e-05 max=1.42028e-05 condition=1
+ metric count=174 invalid=0 rms=0.00592547 max=0.0140869 above_025=0
+ direction_distance=0.00362337 direction_angle_deg=0.299535
+SCAN current=135 old=79 ba=0
+PAIR current=135 old=79 ransac_threshold=0.025 tight=1
+forward inliers=197 backend= transform=xyz=-0.140402,0.013613,0.032804 rpy=0.030075,-0.048828,-0.057028
+ words=197 side(id=135,image=960x600,cells=9,points=197,span=0.0984071,hessian=0.00968798) side(id=79,image=960x600,cells=9,points=197,span=0.0991323,hessian=0.00983171)
+ covariance finite=1 symmetry=0 min=1.38943e-05 max=1.38943e-05 condition=1
+ metric count=197 invalid=0 rms=0.00392293 max=0.0110145 above_025=0
+reverse inliers=197 backend= transform=xyz=0.139298,-0.006962,-0.039033 rpy=-0.028010,0.050888,0.055783
+ words=197 side(id=79,image=960x600,cells=8,points=197,span=0.0961108,hessian=0.00924173) side(id=135,image=960x600,cells=9,points=197,span=0.0955666,hessian=0.00913627)
+ covariance finite=1 symmetry=0 min=1.43121e-05 max=1.43121e-05 condition=1
+ metric count=197 invalid=0 rms=0.00389647 max=0.0111912 above_025=0
+ direction_distance=0.000528097 direction_angle_deg=0.0505435
+SCAN current=174 old=106 ba=1
+PAIR current=174 old=106 ransac_threshold=0.025 tight=1
+forward inliers=89 backend= transform=xyz=-0.101052,0.072997,-0.051705 rpy=-0.062100,0.116421,-0.004572
+ words=89 side(id=174,image=960x600,cells=8,points=89,span=0.111832,hessian=0.0133161) side(id=106,image=960x600,cells=7,points=89,span=0.111598,hessian=0.0132824)
+ covariance finite=1 symmetry=0 min=3.37102e-05 max=3.37102e-05 condition=1
+ metric count=89 invalid=0 rms=0.00518779 max=0.0134748 above_025=0
+reverse inliers=83 backend= transform=xyz=0.094615,-0.076448,0.054718 rpy=0.063124,-0.123369,-0.003491
+ words=83 side(id=106,image=960x600,cells=7,points=83,span=0.112807,hessian=0.0133958) side(id=174,image=960x600,cells=8,points=83,span=0.11327,hessian=0.0134881)
+ covariance finite=1 symmetry=0 min=2.54138e-05 max=2.54138e-05 condition=1
+ metric count=83 invalid=0 rms=0.00520647 max=0.011903 above_025=0
+ direction_distance=0.00437385 direction_angle_deg=0.401906
+SCAN current=174 old=106 ba=0
+PAIR current=174 old=106 ransac_threshold=0.025 tight=1
+forward inliers=105 backend= transform=xyz=-0.101627,0.080598,-0.051864 rpy=-0.060696,0.115850,-0.016237
+ words=105 side(id=174,image=960x600,cells=8,points=105,span=0.107041,hessian=0.0126) side(id=106,image=960x600,cells=6,points=105,span=0.10711,hessian=0.0126934)
+ covariance finite=1 symmetry=0 min=3.2251e-05 max=3.2251e-05 condition=1
+ metric count=105 invalid=0 rms=0.00612123 max=0.0164374 above_025=0
+reverse inliers=98 backend= transform=xyz=0.095514,-0.083029,0.058900 rpy=0.063183,-0.115234,0.009426
+ words=98 side(id=106,image=960x600,cells=7,points=98,span=0.117153,hessian=0.0145656) side(id=174,image=960x600,cells=9,points=98,span=0.116626,hessian=0.0143943)
+ covariance finite=1 symmetry=0 min=3.37289e-05 max=3.37289e-05 condition=1
+ metric count=98 invalid=0 rms=0.00693212 max=0.0191945 above_025=0
+ direction_distance=0.00122921 direction_angle_deg=0.24195
+SCAN current=176 old=108 ba=1
+PAIR current=176 old=108 ransac_threshold=0.025 tight=1
+forward inliers=100 backend= transform=xyz=-0.078596,0.016231,0.006903 rpy=-0.061434,-0.001612,-0.127101
+ words=100 side(id=176,image=960x600,cells=9,points=100,span=0.134928,hessian=0.0213308) side(id=108,image=960x600,cells=9,points=100,span=0.138952,hessian=0.0227325)
+ covariance finite=1 symmetry=0 min=0.00023301 max=0.00023301 condition=1
+ metric count=100 invalid=0 rms=0.0238468 max=0.0474279 above_025=34
+reverse inliers=83 backend= transform=xyz=0.079503,-0.006170,-0.007521 rpy=0.060900,-0.006463,0.127319
+ words=83 side(id=108,image=960x600,cells=9,points=83,span=0.133918,hessian=0.0210312) side(id=176,image=960x600,cells=9,points=83,span=0.130535,hessian=0.0198833)
+ covariance finite=1 symmetry=0 min=0.000244903 max=0.000244903 condition=1
+ metric count=83 invalid=0 rms=0.0232579 max=0.0395536 above_025=30
+ direction_distance=0.000731457 direction_angle_deg=0.0293348
+SCAN current=176 old=108 ba=0
+PAIR current=176 old=108 ransac_threshold=0.025 tight=1
+forward inliers=172 backend= transform=xyz=-0.098401,-0.003328,0.002977 rpy=-0.061852,-0.007493,-0.100736
+ words=172 side(id=176,image=960x600,cells=9,points=172,span=0.136848,hessian=0.0217063) side(id=108,image=960x600,cells=9,points=172,span=0.141625,hessian=0.0233178)
+ covariance finite=1 symmetry=0 min=0.000235324 max=0.000235324 condition=1
+ metric count=172 invalid=0 rms=0.0124766 max=0.0251067 above_025=1
+reverse inliers=167 backend= transform=xyz=0.096033,0.012311,-0.003188 rpy=0.064266,-0.000137,0.100033
+ words=167 side(id=108,image=960x600,cells=9,points=167,span=0.146566,hessian=0.0243291) side(id=176,image=960x600,cells=9,points=167,span=0.141556,hessian=0.0226864)
+ covariance finite=1 symmetry=0 min=0.000235746 max=0.000235746 condition=1
+ metric count=167 invalid=0 rms=0.0121884 max=0.0244905 above_025=0
+ direction_distance=0.00188298 direction_angle_deg=0.148341
+{"passed": true, "database_sha256": "d0686029d773e2b64e1c9c0ca27a1ee62a22b1507b7021e23378b4133f9a3bce", "source_mutated": false, "purpose": "offline unchanged 2.5 cm geometry test with and without image bundle adjustment; no runtime changes"}

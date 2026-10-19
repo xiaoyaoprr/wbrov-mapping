@@ -1,0 +1,41 @@
+{
+  "run": "custom_20261010_043206",
+  "candidate": "sha256-77e53584b98401decb6b280e9a306b349cbe014242c2607246073f53f431a47a",
+  "rviz_visible_s": 37.2885120640276,
+  "pointcloud_and_rgb_screenshot_checked": true,
+  "preloss_movement_cut_count": 0,
+  "postloss_epoch": 1,
+  "postloss_cut_count": 77,
+  "retained_main_nodes": 45,
+  "tag_prepare_count": 6,
+  "core_commit_count": 0,
+  "real_recovery_passed": false,
+  "normal_save_passed": false,
+  "launcher_exit_code": 1,
+  "nodes_stopped": true,
+  "export_succeeded": false,
+  "failure": "ROS context invalidated by normal SIGINT while a callback queried publisher discovery; uncaught RCLError aborted before database close/export.",
+  "preserved_database": {
+    "sha256": "9722095279668fe4f9a80e9412875cbf924af7976f2e967c33f0756fe5105f16",
+    "bytes": 103788544
+  },
+  "sqlite_quick_check": [
+    [
+      "ok"
+    ]
+  ],
+  "persisted_counts": {
+    "Node": 204,
+    "Link": 303,
+    "Data": 204
+  },
+  "sqlite_check_is_not_complete_map_save": true,
+  "svo_bytes": 2392618250,
+  "full_recording_validation_passed": false,
+  "motion_ever_activated": false,
+  "light_off_packets": 7,
+  "physical_led_ack_available": false,
+  "udp_released": true,
+  "production_entry_updated": false,
+  "github_main_updated": false
+}

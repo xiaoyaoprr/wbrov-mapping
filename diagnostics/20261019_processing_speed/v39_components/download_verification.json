@@ -1,0 +1,7 @@
+{
+  "archive_sha256": "bb74dbed1b113e5b2aeec86de1d9d80eeab04cdaffe0e4c49a91a36da563cda0",
+  "bytes": 161616,
+  "files": 12,
+  "scope": "isolated saved-index L1 benchmark and entropy-controlled feature diagnostic only; no Core or worker changes",
+  "crc_and_all_member_sha256_verified": true
+}

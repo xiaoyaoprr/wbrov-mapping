@@ -1,0 +1,457 @@
+{
+  "archive_sha256": "199581b04d9667eb7501bac3a57228c47a93578b71e8d4398d8044c8a55283a3",
+  "bytes": 2482715,
+  "files": 112,
+  "scope": "offline experiments, includes prior failed Hamming harness builds and actual saved randomized indexes; no runtime adoption",
+  "all_entries_crc_valid": true,
+  "members_sha256": {
+    "hamming_neon_probe3/sanitizer_build.log": {
+      "bytes": 1036,
+      "sha256": "bca4be19be54c8bab26b0fef80906cbb4c06a5f25839195f54ee2f54e4773e90"
+    },
+    "hamming_neon_probe3/result.json": {
+      "bytes": 677,
+      "sha256": "ba740287b07176412c71a054f8095908260f181a7cf25909f84255cead0181a2"
+    },
+    "hamming_neon_probe3/source/rtflann/defines.h": {
+      "bytes": 4523,
+      "sha256": "548febeb08120960c7126eafac15b18914b7d039760fbabaaad39c323afbefce"
+    },
+    "hamming_neon_probe3/source/rtflann/readme.txt": {
+      "bytes": 344,
+      "sha256": "0131833cc6333009484a2a1e7613b35c0a1818d89039d91cf090fbeeade814d6"
+    },
+    "hamming_neon_probe3/source/rtflann/general.h": {
+      "bytes": 5373,
+      "sha256": "091bb538132784de0873a9ee5fcc39b029469d8546c7a99c2977e70a67a5fc96"
+    },
+    "hamming_neon_probe3/source/rtflann/config.h": {
+      "bytes": 1829,
+      "sha256": "254dfb72cc9053d30cbb742b17d0618972f386e9494b0df22249cf862a3575c6"
+    },
+    "hamming_neon_probe3/source/rtflann/flann.hpp": {
+      "bytes": 15169,
+      "sha256": "fdbb4d7b5f5ccf900f52a82ef9578813b7e202e3a4c468ef889e6f51a2cffe0a"
+    },
+    "hamming_neon_probe3/source/rtflann/util/saving.h": {
+      "bytes": 3984,
+      "sha256": "42b099fc53f0da73656886568a4fe468017175b9518311279dc23ee104d9c213"
+    },
+    "hamming_neon_probe3/source/rtflann/util/any.h": {
+      "bytes": 7742,
+      "sha256": "1fa71ccf51418fb846b3ad64202784483d073c6bf31cd13ad6ee939a853a173a"
+    },
+    "hamming_neon_probe3/source/rtflann/util/params.h": {
+      "bytes": 4469,
+      "sha256": "7aa0908e6b498dfac7fda9120361f9ffc74e13163513858431b5f6aaec502a9c"
+    },
+    "hamming_neon_probe3/source/rtflann/util/result_set.h": {
+      "bytes": 24999,
+      "sha256": "92bf5b8f716c09fcf28e3496f821ef2b8f902ed86a9d9548f75c8bdadb29a91c"
+    },
+    "hamming_neon_probe3/source/rtflann/util/sampling.h": {
+      "bytes": 2690,
+      "sha256": "8fed3a68c8fe83583891f6c30cab9f077f179f5916d0295680a4123931b87b09"
+    },
+    "hamming_neon_probe3/source/rtflann/util/heap.h": {
+      "bytes": 10755,
+      "sha256": "f7cdfd1161f63ac41b2df4b9a78b6b2681e6e445ab247032a0c90a6d6ba19eba"
+    },
+    "hamming_neon_probe3/source/rtflann/util/logger.h": {
+      "bytes": 4064,
+      "sha256": "89e29cdec34c5dde20ed44c12c228c4971c46cda07a3b4d22b08027b8f4b1850"
+    },
+    "hamming_neon_probe3/source/rtflann/util/allocator.h": {
+      "bytes": 6542,
+      "sha256": "5a4538177c46e6bd4b4c976d902f0adfead83f5423e8b21d168b5b00cba7b220"
+    },
+    "hamming_neon_probe3/source/rtflann/util/serialization.h": {
+      "bytes": 21403,
+      "sha256": "df0f89352cffe08fedf9aa81a9ef4939c6179516ad0029320574f5da9828b39e"
+    },
+    "hamming_neon_probe3/source/rtflann/util/object_factory.h": {
+      "bytes": 2984,
+      "sha256": "f0793da34e335f7ab635a747c81653e491c32c737d7ca7737d0a69537bce8b3d"
+    },
+    "hamming_neon_probe3/source/rtflann/util/lsh_table.h": {
+      "bytes": 18376,
+      "sha256": "22ac597b238f258cf2584e6075a0a2ed438c70219a4d107578bf1d54acb61215"
+    },
+    "hamming_neon_probe3/source/rtflann/util/random.h": {
+      "bytes": 3932,
+      "sha256": "9ce5f236514204d7b0794120af72e511fab23177d441cab39a1eff7b5fc76cff"
+    },
+    "hamming_neon_probe3/source/rtflann/util/dynamic_bitset.h": {
+      "bytes": 4852,
+      "sha256": "6b145e50fcae7bdf00a46ac3e2dea9b53d33f5e302fdda5f4a778c22725cf4d9"
+    },
+    "hamming_neon_probe3/source/rtflann/util/matrix.h": {
+      "bytes": 3930,
+      "sha256": "90d94924c35af92135fc608b2661c31c3aa09952e69cbfe87f0ab09470efd56c"
+    },
+    "hamming_neon_probe3/source/rtflann/util/timer.h": {
+      "bytes": 2571,
+      "sha256": "cfa45340a6d05445a260e5b308bf3e6293f2c07bb850c8424e0de921ff2c0039"
+    },
+    "hamming_neon_probe3/source/rtflann/ext/lz4hc.h": {
+      "bytes": 9807,
+      "sha256": "d630b4ba6c7951e357df37315e8f2986cb478526389689854e3b5a51920b965e"
+    },
+    "hamming_neon_probe3/source/rtflann/ext/lz4.h": {
+      "bytes": 19190,
+      "sha256": "8ac474909250588627a4a5bab70d5696610f8ed7dd8c747e890e14f25ccf34ed"
+    },
+    "hamming_neon_probe3/source/rtflann/ext/lz4.c": {
+      "bytes": 56390,
+      "sha256": "e530568c1f00c98934e6383a7c1688d86615f8edefbbc885398834e6d89a3fe3"
+    },
+    "hamming_neon_probe3/source/rtflann/ext/lz4hc.c": {
+      "bytes": 27757,
+      "sha256": "8752de52b09a2c72587be2ab08d5dd14c4635c7b05ae42163d46d6218c9e6fca"
+    },
+    "hamming_neon_probe3/source/rtflann/algorithms/kdtree_index.h": {
+      "bytes": 37292,
+      "sha256": "8834822925b49e14067b6a4f1daa17d265f5b725f176b8383a3b23856f1da2d4"
+    },
+    "hamming_neon_probe3/source/rtflann/algorithms/autotuned_index.h": {
+      "bytes": 27201,
+      "sha256": "adccd8a0e87a74868c8cae39aa89c79dccb3e96529bbf19bbc2520f6d28c555e"
+    },
+    "hamming_neon_probe3/source/rtflann/algorithms/kdtree_single_index.h": {
+      "bytes": 22273,
+      "sha256": "ef634639159bab2f1bd0883511fd5b556f1615b573b60daa3c267145ae5916e3"
+    },
+    "hamming_neon_probe3/source/rtflann/algorithms/dist.h": {
+      "bytes": 27060,
+      "sha256": "70252e0120bd344bb4728dbe862e1714cd1db23662230c5f18836ca87e3c367a"
+    },
+    "hamming_neon_probe3/source/rtflann/algorithms/lsh_index.h": {
+      "bytes": 20812,
+      "sha256": "7479f71faa8b3141b4b8d54942d0d142705a704434a427f2b8c0e645435031c8"
+    },
+    "hamming_neon_probe3/source/rtflann/algorithms/center_chooser.h": {
+      "bytes": 12936,
+      "sha256": "8045302b4c0910c0be1cca8cf06a9be85c38ca62e8ceb055069e5ea3d08e8ac0"
+    },
+    "hamming_neon_probe3/source/rtflann/algorithms/nn_index.h": {
+      "bytes": 26992,
+      "sha256": "40843b79b0255f3d2cecafe3bcda0099606a5adfc591f8055f255193306df128"
+    },
+    "hamming_neon_probe3/source/rtflann/algorithms/linear_index.h": {
+      "bytes": 4537,
+      "sha256": "4c4743938cf8bb5cd058516ac74e955025942b481f32c7bf04514283b2b47877"
+    },
+    "hamming_neon_probe3/source/rtflann/algorithms/kmeans_index.h": {
+      "bytes": 34245,
+      "sha256": "7bb2f427f1ca3f4ca5b51101c960182ff9eb791fb295e14a43fe8851c3fded00"
+    },
+    "hamming_neon_probe3/source/rtflann/algorithms/all_indices.h": {
+      "bytes": 7052,
+      "sha256": "cf0a432a596d27f586c36d0f081658bc9cda98a0de2114a14ac5063eb4e7fc85"
+    },
+    "hamming_neon_probe3/source/rtflann/algorithms/composite_index.h": {
+      "bytes": 7383,
+      "sha256": "9719b119a1532e142dcba23d0dd70168ad6e035bcfc939caaec8919cab895d55"
+    },
+    "hamming_neon_probe3/source/rtflann/algorithms/hierarchical_clustering_index.h": {
+      "bytes": 22081,
+      "sha256": "2bca369450daa2145705da91f1a705a1e26eb7140e9243494c4020cfbadf64ee"
+    },
+    "hamming_neon_probe3/source/rtflann/nn/ground_truth.h": {
+      "bytes": 3532,
+      "sha256": "d6523376432b1fb0ffb6046714492a1c76243e57084894f5066e1c5db6127f18"
+    },
+    "hamming_neon_probe3/source/rtflann/nn/simplex_downhill.h": {
+      "bytes": 5930,
+      "sha256": "4e0d4b3cc31b631c5aa0134ae87cff40371b69c2793924a20e90384f151e4583"
+    },
+    "hamming_neon_probe3/source/rtflann/nn/index_testing.h": {
+      "bytes": 11392,
+      "sha256": "533553b86b6cc0c56a8d91d1bfab08c02e8593a8b161f28a9581605f7fb2bde9"
+    },
+    "hamming_neon_probe4/sanitizer_link.log": {
+      "bytes": 856,
+      "sha256": "179e71015d7431d5b96cc15248a1655d8ae935c9423c75a08cdc4a2a61be14f5"
+    },
+    "hamming_neon_probe4/sanitizer_compile.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "hamming_neon_probe4/result.json": {
+      "bytes": 916,
+      "sha256": "62fa306a41edef7b42f12d5bc6e72132145e5943a03bc6059b72d680a25cb1f1"
+    },
+    "hamming_neon_probe4/sanitizer.log": {
+      "bytes": 248,
+      "sha256": "b46af0c4045eadc04adf01ce3ea73ff3417089e394091f4ffbd6cd500d5103d4"
+    },
+    "hamming_neon_probe4/source/rtflann/defines.h": {
+      "bytes": 4523,
+      "sha256": "548febeb08120960c7126eafac15b18914b7d039760fbabaaad39c323afbefce"
+    },
+    "hamming_neon_probe4/source/rtflann/readme.txt": {
+      "bytes": 344,
+      "sha256": "0131833cc6333009484a2a1e7613b35c0a1818d89039d91cf090fbeeade814d6"
+    },
+    "hamming_neon_probe4/source/rtflann/general.h": {
+      "bytes": 5373,
+      "sha256": "091bb538132784de0873a9ee5fcc39b029469d8546c7a99c2977e70a67a5fc96"
+    },
+    "hamming_neon_probe4/source/rtflann/config.h": {
+      "bytes": 1829,
+      "sha256": "254dfb72cc9053d30cbb742b17d0618972f386e9494b0df22249cf862a3575c6"
+    },
+    "hamming_neon_probe4/source/rtflann/flann.hpp": {
+      "bytes": 15169,
+      "sha256": "fdbb4d7b5f5ccf900f52a82ef9578813b7e202e3a4c468ef889e6f51a2cffe0a"
+    },
+    "hamming_neon_probe4/source/rtflann/util/saving.h": {
+      "bytes": 3984,
+      "sha256": "42b099fc53f0da73656886568a4fe468017175b9518311279dc23ee104d9c213"
+    },
+    "hamming_neon_probe4/source/rtflann/util/any.h": {
+      "bytes": 7742,
+      "sha256": "1fa71ccf51418fb846b3ad64202784483d073c6bf31cd13ad6ee939a853a173a"
+    },
+    "hamming_neon_probe4/source/rtflann/util/params.h": {
+      "bytes": 4469,
+      "sha256": "7aa0908e6b498dfac7fda9120361f9ffc74e13163513858431b5f6aaec502a9c"
+    },
+    "hamming_neon_probe4/source/rtflann/util/result_set.h": {
+      "bytes": 24999,
+      "sha256": "92bf5b8f716c09fcf28e3496f821ef2b8f902ed86a9d9548f75c8bdadb29a91c"
+    },
+    "hamming_neon_probe4/source/rtflann/util/sampling.h": {
+      "bytes": 2690,
+      "sha256": "8fed3a68c8fe83583891f6c30cab9f077f179f5916d0295680a4123931b87b09"
+    },
+    "hamming_neon_probe4/source/rtflann/util/heap.h": {
+      "bytes": 10755,
+      "sha256": "f7cdfd1161f63ac41b2df4b9a78b6b2681e6e445ab247032a0c90a6d6ba19eba"
+    },
+    "hamming_neon_probe4/source/rtflann/util/logger.h": {
+      "bytes": 4064,
+      "sha256": "89e29cdec34c5dde20ed44c12c228c4971c46cda07a3b4d22b08027b8f4b1850"
+    },
+    "hamming_neon_probe4/source/rtflann/util/allocator.h": {
+      "bytes": 6542,
+      "sha256": "5a4538177c46e6bd4b4c976d902f0adfead83f5423e8b21d168b5b00cba7b220"
+    },
+    "hamming_neon_probe4/source/rtflann/util/serialization.h": {
+      "bytes": 21403,
+      "sha256": "df0f89352cffe08fedf9aa81a9ef4939c6179516ad0029320574f5da9828b39e"
+    },
+    "hamming_neon_probe4/source/rtflann/util/object_factory.h": {
+      "bytes": 2984,
+      "sha256": "f0793da34e335f7ab635a747c81653e491c32c737d7ca7737d0a69537bce8b3d"
+    },
+    "hamming_neon_probe4/source/rtflann/util/lsh_table.h": {
+      "bytes": 18376,
+      "sha256": "22ac597b238f258cf2584e6075a0a2ed438c70219a4d107578bf1d54acb61215"
+    },
+    "hamming_neon_probe4/source/rtflann/util/random.h": {
+      "bytes": 3932,
+      "sha256": "9ce5f236514204d7b0794120af72e511fab23177d441cab39a1eff7b5fc76cff"
+    },
+    "hamming_neon_probe4/source/rtflann/util/dynamic_bitset.h": {
+      "bytes": 4852,
+      "sha256": "6b145e50fcae7bdf00a46ac3e2dea9b53d33f5e302fdda5f4a778c22725cf4d9"
+    },
+    "hamming_neon_probe4/source/rtflann/util/matrix.h": {
+      "bytes": 3930,
+      "sha256": "90d94924c35af92135fc608b2661c31c3aa09952e69cbfe87f0ab09470efd56c"
+    },
+    "hamming_neon_probe4/source/rtflann/util/timer.h": {
+      "bytes": 2571,
+      "sha256": "cfa45340a6d05445a260e5b308bf3e6293f2c07bb850c8424e0de921ff2c0039"
+    },
+    "hamming_neon_probe4/source/rtflann/ext/lz4hc.h": {
+      "bytes": 9807,
+      "sha256": "d630b4ba6c7951e357df37315e8f2986cb478526389689854e3b5a51920b965e"
+    },
+    "hamming_neon_probe4/source/rtflann/ext/lz4.h": {
+      "bytes": 19190,
+      "sha256": "8ac474909250588627a4a5bab70d5696610f8ed7dd8c747e890e14f25ccf34ed"
+    },
+    "hamming_neon_probe4/source/rtflann/ext/lz4.c": {
+      "bytes": 56390,
+      "sha256": "e530568c1f00c98934e6383a7c1688d86615f8edefbbc885398834e6d89a3fe3"
+    },
+    "hamming_neon_probe4/source/rtflann/ext/lz4hc.c": {
+      "bytes": 27757,
+      "sha256": "8752de52b09a2c72587be2ab08d5dd14c4635c7b05ae42163d46d6218c9e6fca"
+    },
+    "hamming_neon_probe4/source/rtflann/algorithms/kdtree_index.h": {
+      "bytes": 37292,
+      "sha256": "8834822925b49e14067b6a4f1daa17d265f5b725f176b8383a3b23856f1da2d4"
+    },
+    "hamming_neon_probe4/source/rtflann/algorithms/autotuned_index.h": {
+      "bytes": 27201,
+      "sha256": "adccd8a0e87a74868c8cae39aa89c79dccb3e96529bbf19bbc2520f6d28c555e"
+    },
+    "hamming_neon_probe4/source/rtflann/algorithms/kdtree_single_index.h": {
+      "bytes": 22273,
+      "sha256": "ef634639159bab2f1bd0883511fd5b556f1615b573b60daa3c267145ae5916e3"
+    },
+    "hamming_neon_probe4/source/rtflann/algorithms/dist.h": {
+      "bytes": 27060,
+      "sha256": "70252e0120bd344bb4728dbe862e1714cd1db23662230c5f18836ca87e3c367a"
+    },
+    "hamming_neon_probe4/source/rtflann/algorithms/lsh_index.h": {
+      "bytes": 20812,
+      "sha256": "7479f71faa8b3141b4b8d54942d0d142705a704434a427f2b8c0e645435031c8"
+    },
+    "hamming_neon_probe4/source/rtflann/algorithms/center_chooser.h": {
+      "bytes": 12936,
+      "sha256": "8045302b4c0910c0be1cca8cf06a9be85c38ca62e8ceb055069e5ea3d08e8ac0"
+    },
+    "hamming_neon_probe4/source/rtflann/algorithms/nn_index.h": {
+      "bytes": 26992,
+      "sha256": "40843b79b0255f3d2cecafe3bcda0099606a5adfc591f8055f255193306df128"
+    },
+    "hamming_neon_probe4/source/rtflann/algorithms/linear_index.h": {
+      "bytes": 4537,
+      "sha256": "4c4743938cf8bb5cd058516ac74e955025942b481f32c7bf04514283b2b47877"
+    },
+    "hamming_neon_probe4/source/rtflann/algorithms/kmeans_index.h": {
+      "bytes": 34245,
+      "sha256": "7bb2f427f1ca3f4ca5b51101c960182ff9eb791fb295e14a43fe8851c3fded00"
+    },
+    "hamming_neon_probe4/source/rtflann/algorithms/all_indices.h": {
+      "bytes": 7052,
+      "sha256": "cf0a432a596d27f586c36d0f081658bc9cda98a0de2114a14ac5063eb4e7fc85"
+    },
+    "hamming_neon_probe4/source/rtflann/algorithms/composite_index.h": {
+      "bytes": 7383,
+      "sha256": "9719b119a1532e142dcba23d0dd70168ad6e035bcfc939caaec8919cab895d55"
+    },
+    "hamming_neon_probe4/source/rtflann/algorithms/hierarchical_clustering_index.h": {
+      "bytes": 22081,
+      "sha256": "2bca369450daa2145705da91f1a705a1e26eb7140e9243494c4020cfbadf64ee"
+    },
+    "hamming_neon_probe4/source/rtflann/nn/ground_truth.h": {
+      "bytes": 3532,
+      "sha256": "d6523376432b1fb0ffb6046714492a1c76243e57084894f5066e1c5db6127f18"
+    },
+    "hamming_neon_probe4/source/rtflann/nn/simplex_downhill.h": {
+      "bytes": 5930,
+      "sha256": "4e0d4b3cc31b631c5aa0134ae87cff40371b69c2793924a20e90384f151e4583"
+    },
+    "hamming_neon_probe4/source/rtflann/nn/index_testing.h": {
+      "bytes": 11392,
+      "sha256": "533553b86b6cc0c56a8d91d1bfab08c02e8593a8b161f28a9581605f7fb2bde9"
+    },
+    "hamming_neon_probe5/saved32.index": {
+      "bytes": 1355287,
+      "sha256": "41c90a848e8a6a3cc7cb124c4eb0254ff1515df45b9330975b136bdbb6538345"
+    },
+    "hamming_neon_probe5/release_build.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "hamming_neon_probe5/fixed_index_benchmark.log": {
+      "bytes": 1376,
+      "sha256": "5a776ec80a849bf2f32e37f434f81154c71be4f66833fdcdbf3bfde3fccb74ad"
+    },
+    "hamming_neon_probe5/saved64.index": {
+      "bytes": 1355672,
+      "sha256": "e9e1871c91bf0e0a88a50fb8e22a376708d0617fd50dc26409c9a43e57ed476a"
+    },
+    "hamming_neon_probe5/result.json": {
+      "bytes": 3106,
+      "sha256": "82f9178e28019651bd43f8493d4ad52fbf231319a6b2ac0ad0458a5c57e5c0d3"
+    },
+    "hamming_neon_probe5/sanitizer_relink.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "hamming_neon_probe5/sanitizer.log": {
+      "bytes": 37,
+      "sha256": "15b39ffd7104a9597b6580a46baf114b1d3b3a5bfb1002f67336b2faa8d2a8c6"
+    },
+    "reader_hash_probe/reader_sanitizer_build.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "reader_hash_probe/inputs.json": {
+      "bytes": 15903,
+      "sha256": "8a4e74e2921339fb978a787d2596d0f0141aae6a7078e9183c2e134e78863971"
+    },
+    "reader_hash_probe/hash_inputs.txt": {
+      "bytes": 1799,
+      "sha256": "c3ce5f3a4fda7e244d00e3655175b97333e3796c4f3ba245d0189bec29174ea1"
+    },
+    "reader_hash_probe/reader_sanitizer.log": {
+      "bytes": 94,
+      "sha256": "3b3b3d4ce83a11955719dc53af2923fe0ce3d3e53bbbb3c61ce8ac8bed853615"
+    },
+    "reader_hash_probe/reader_benchmark.log": {
+      "bytes": 2398,
+      "sha256": "2ef632eaeefd8773ce2a2a49797dc198ea3809930945fbc03d2275bad716d91b"
+    },
+    "reader_hash_probe/result.json": {
+      "bytes": 8279,
+      "sha256": "38da15519cd6edaea40fcb7173a7aadff669b0b6f9373053f6477ddf691469fc"
+    },
+    "reader_hash_probe/hash_release_build.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "reader_hash_probe/hash_benchmark.log": {
+      "bytes": 1492,
+      "sha256": "977738f4b37a0ecd4bdecf9872e506330690d1485202a68fa33352ce0541bca2"
+    },
+    "reader_hash_probe/reader_release_build.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "reader_hash_probe/source/bounded_async_writer.hpp": {
+      "bytes": 3476,
+      "sha256": "30dc2609fa02182e0d5a3ec2d710cc976fde98c2a406308ee47cfe313f6ea8a0"
+    },
+    "reader_hash_probe/source/probe_record_decode.cpp": {
+      "bytes": 8633,
+      "sha256": "8601043195f0d676cb24500c9246ad206858007f022330f394b420b71524f3d2"
+    },
+    "reader_hash_probe/source/rgbd_frame_codec.hpp": {
+      "bytes": 4946,
+      "sha256": "8d9fa77868f3fa78458434c494ccfe808a096c2baee0c840dc7d70ca85e72257"
+    },
+    "reader_hash_probe/source/rgbd_spool.hpp": {
+      "bytes": 9537,
+      "sha256": "2bfff51646703da618e59600b41fa7d332d9505133bfddf5368acd4f20c55f78"
+    },
+    "reader_hash_probe/source/probe_input_hash.cpp": {
+      "bytes": 2636,
+      "sha256": "3d12614bb286c6baee3e62a89b7fd3df70e1aef5bd2cf616a6bd92f315218406"
+    },
+    "reproduce/probe_hamming_neon.cpp": {
+      "bytes": 4670,
+      "sha256": "d6bc408ba2bf2c32f349a9dd843891798d58b15f4ffc5f55202e8cb8138322d8"
+    },
+    "reproduce/hamming_neon_probe3.py": {
+      "bytes": 2902,
+      "sha256": "0a1ba2f657dbc10896912ab33c5539631dbc6a65e84e5a44af4043fee2acf291"
+    },
+    "reproduce/hamming_neon_probe4.py": {
+      "bytes": 4029,
+      "sha256": "0a59dedd46abe00fcebbe94481e267c69951cf3530ca09cbc25b73a9fac086ee"
+    },
+    "reproduce/hamming_neon_probe5.py": {
+      "bytes": 3532,
+      "sha256": "9ccabc62f6f80400fb5c1783b32512f4714d74c149798520520ed976ffa7452d"
+    },
+    "reproduce/rtflann_probe_headers.zip": {
+      "bytes": 141025,
+      "sha256": "50b72a64e9ddfab3f094bb5c07929dfd1676e24ba301f181832b5f2e71811d5e"
+    },
+    "reproduce/reader_hash_probe.py": {
+      "bytes": 3822,
+      "sha256": "5c90819624f533d92cd6a0c7d27e4540fc4d10424d569baf4285f996dc426e83"
+    },
+    "reproduce/reader_hash_probe_source.zip": {
+      "bytes": 10812,
+      "sha256": "3db601c193f6826051e05d1f459974088fef0670689de7adf552d117afb7e6bb"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+In file included from /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/hamming_neon_probe3/source/rtflann/algorithms/kdtree_index.h:47,
+                 from /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/hamming_neon_probe3/source/rtflann/algorithms/all_indices.h:36,
+                 from /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/hamming_neon_probe3/source/rtflann/flann.hpp:45,
+                 from /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/probe_hamming_neon.cpp:1:
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/hamming_neon_probe3/source/rtflann/util/heap.h:36:10: fatal error: rtabmap/utilite/ULogger.h: No such file or directory
+   36 | #include <rtabmap/utilite/ULogger.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.

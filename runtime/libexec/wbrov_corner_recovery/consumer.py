@@ -109,6 +109,12 @@ def ready():
     for ns,tags in list(pending_ready.items()):
         if ns not in consumer.receipts or ns not in pixel_consumed:continue
         receipt=consumer.receipts[ns]['receipt'];epoch=int(receipt['reset_epoch']);node_id=receipt['node_id']
+        if graph.receipt_retired(receipt):
+            pending_ready.pop(ns);pixel_consumed.discard(ns)
+            live.completed_for_retention.add(ns);last_retention_key=None
+            emit(dict(event='frame_retired_from_core_graph',image_stamp_ns=str(ns),node_id=node_id,
+                reset_epoch=epoch,graph_revision=graph.last_revision,graph_update_authorized=False))
+            continue
         if epoch not in graph.by_epoch or node_id not in graph.by_epoch[epoch]['poses']:continue
         if not all((node_id,tag) in consumer.bindings for tag in tags):continue
         if not live.allow_ready(ns,node_id,epoch):continue

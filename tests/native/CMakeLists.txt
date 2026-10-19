@@ -8,9 +8,9 @@ get_filename_component(WBROV_SOURCE_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../.." ABS
 set(WBROV_CORE_SOURCE "${WBROV_SOURCE_ROOT}/src/rtabmap_core/corelib/src")
 set(WBROV_SLAM_INCLUDE "${WBROV_SOURCE_ROOT}/src/rtabmap_ros/rtabmap_slam/include")
 
-foreach(name early_certificate jump_gate global_publication_gate mapping_continuity_gate)
+foreach(name early_certificate jump_gate global_publication_gate mapping_continuity_gate localization_evidence_gate deferred_processing_lane recorded_cloud_cache recorded_keyframe_schedule recorded_lookahead recorded_lookahead_window recorded_task_pool recorded_ordered_prefetch recorded_cloud_order)
   add_executable(test_${name} test_${name}.cpp)
-  target_include_directories(test_${name} PRIVATE "${WBROV_CORE_SOURCE}" "${WBROV_SLAM_INCLUDE}")
+  target_include_directories(test_${name} PRIVATE "${WBROV_CORE_SOURCE}" "${WBROV_SLAM_INCLUDE}" "${WBROV_SOURCE_ROOT}/src/deferred_mapping")
   target_link_libraries(test_${name} PRIVATE Threads::Threads)
   if(MSVC)
     target_compile_options(test_${name} PRIVATE /W4 /UNDEBUG /utf-8)
@@ -21,6 +21,14 @@ foreach(name early_certificate jump_gate global_publication_gate mapping_continu
 endforeach()
 
 option(WBROV_TEST_DEPTH_GEOMETRY "Build the Eigen/OpenCV numerical depth tests" OFF)
+option(WBROV_TEST_PROJECTION_MATCH "Compare allocation-free projected Hamming matching with OpenCV" OFF)
+if(WBROV_TEST_PROJECTION_MATCH)
+  find_package(OpenCV REQUIRED COMPONENTS core features2d)
+  add_executable(test_projection_hamming_match test_projection_hamming_match.cpp)
+  target_include_directories(test_projection_hamming_match PRIVATE "${WBROV_CORE_SOURCE}" ${OpenCV_INCLUDE_DIRS})
+  target_link_libraries(test_projection_hamming_match PRIVATE ${OpenCV_LIBS})
+  add_test(NAME projection_hamming_match COMMAND test_projection_hamming_match)
+endif()
 if(WBROV_TEST_DEPTH_GEOMETRY)
   find_package(Eigen3 REQUIRED)
   find_package(OpenCV REQUIRED COMPONENTS core)
@@ -36,12 +44,48 @@ if(WBROV_TEST_DEPTH_GEOMETRY)
 endif()
 
 option(WBROV_TEST_CORE_CANDIDATES "Build the collector tests against an explicitly supplied patched RTABMap" OFF)
+option(WBROV_TEST_RGBD_CODEC "Build the lossless recorded RGB-D verification tool (requires libzstd)" OFF)
+if(WBROV_TEST_RGBD_CODEC)
+  find_library(ZSTD_LIBRARY NAMES zstd REQUIRED)
+  foreach(name verify_rgbd_spool_codec pace_rgbd_spool_writer)
+    add_executable(${name} ${name}.cpp)
+    target_include_directories(${name} PRIVATE "${WBROV_SOURCE_ROOT}/src/zed_rgbd_publisher")
+    target_link_libraries(${name} ${ZSTD_LIBRARY} Threads::Threads)
+  endforeach()
+endif()
 if(WBROV_TEST_CORE_CANDIDATES)
   find_package(RTABMap REQUIRED)
+  add_executable(test_canonical_image_digest test_canonical_image_digest.cpp)
+  target_include_directories(test_canonical_image_digest BEFORE PRIVATE
+    "${WBROV_SOURCE_ROOT}/src/rtabmap_core/corelib/include" ${RTABMap_INCLUDE_DIRS})
+  target_link_libraries(test_canonical_image_digest rtabmap::core Threads::Threads)
+  add_test(NAME canonical_image_digest COMMAND test_canonical_image_digest)
   add_executable(test_cross_map_candidates_native test_cross_map_candidates_native.cpp)
   target_include_directories(test_cross_map_candidates_native BEFORE PRIVATE
     "${WBROV_SOURCE_ROOT}/src/rtabmap_core/corelib/include" ${RTABMap_INCLUDE_DIRS})
   target_link_libraries(test_cross_map_candidates_native rtabmap::core)
+  # Run manually with a closed mapping directory. The program refuses active DBs.
+  add_executable(verify_recorded_cloud_export verify_recorded_cloud_export.cpp)
+  target_include_directories(verify_recorded_cloud_export BEFORE PRIVATE
+    "${WBROV_SOURCE_ROOT}/src/rtabmap_core/corelib/include" ${RTABMap_INCLUDE_DIRS})
+  target_link_libraries(verify_recorded_cloud_export rtabmap::core)
+  add_executable(benchmark_recorded_cloud benchmark_recorded_cloud.cpp)
+  target_include_directories(benchmark_recorded_cloud BEFORE PRIVATE
+    "${WBROV_SOURCE_ROOT}/src/deferred_mapping"
+    "${WBROV_SOURCE_ROOT}/src/rtabmap_core/corelib/include" ${RTABMap_INCLUDE_DIRS})
+  target_link_libraries(benchmark_recorded_cloud rtabmap::core)
+  # Fixed closed DB + exact accepted Tag observation manifest; no SLAM run.
+  add_executable(probe_tag_depth_decode probe_tag_depth_decode.cpp)
+  target_include_directories(probe_tag_depth_decode BEFORE PRIVATE
+    "${WBROV_SOURCE_ROOT}/src/rtabmap_core/corelib/include" ${RTABMap_INCLUDE_DIRS})
+  target_link_libraries(probe_tag_depth_decode rtabmap::core)
+  # Run manually with the pinned odometry parameters, a sealed RGB-D spool
+  # directory and segment count. Compare raw extraction against prepared data.
+  add_executable(test_recorded_feature_preparation test_recorded_feature_preparation.cpp)
+  target_include_directories(test_recorded_feature_preparation BEFORE PRIVATE
+    "${WBROV_SOURCE_ROOT}/src/deferred_mapping" "${WBROV_SOURCE_ROOT}/src/zed_rgbd_publisher"
+    "${WBROV_SOURCE_ROOT}/src/rtabmap_core/corelib/include" ${RTABMap_INCLUDE_DIRS})
+  target_link_libraries(test_recorded_feature_preparation rtabmap::core Threads::Threads)
   if(MSVC)
     target_compile_options(test_cross_map_candidates_native PRIVATE /UNDEBUG)
   else()

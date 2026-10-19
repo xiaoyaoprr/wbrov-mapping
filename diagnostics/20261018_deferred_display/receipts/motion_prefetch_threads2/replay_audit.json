@@ -1,0 +1,62 @@
+{
+  "scope": "closed recording replay, not new field test or production entry acceptance",
+  "frames": 1581,
+  "lost_frames": 18,
+  "lost_frame_main_write_permissions": 1,
+  "recovery_events": [
+    {
+      "source_ns": 1791653868380707000,
+      "nodes_at_recovery": 91,
+      "nodes_final": 97,
+      "continued_seconds": 16.599543,
+      "main_write_permissions_after": 403
+    }
+  ],
+  "database_quick_check": "ok",
+  "trajectory_nodes": 97,
+  "trajectory_edges": 95,
+  "trajectory_edges_within_trusted_epoch": true,
+  "sha256": {
+    "map.db": "4eafed84afeb4818c1b1b2ed950efc43d4dfcc2bdd972b06c1fc70877ca8091c",
+    "main_cloud.ply": "72c1a77f26be1ced5eefb6d72b517e0499c290b688d99c64eacf1f1a62cd1e72",
+    "frames.csv": "c7ad0eaf80151316dc967269fb7d7b290c679c4871c4eb0bc34dd84b7b92574a",
+    "tags.json": "c58bfd3e3b67c71322c7a8252ca3223634b0c41069b21aaf74e4cd089514e7fd"
+  },
+  "status": {
+    "schema": "wbrov.deferred-queue.v1",
+    "state": "closed",
+    "error": null,
+    "historical_only": true,
+    "navigation_authorized": false,
+    "recorded_source_ns": 1791653884980250000,
+    "recording_state": "closed",
+    "processed_source_ns": 1791653884980250000,
+    "acknowledged_source_ns": 1791653884980250000,
+    "verified_map_source_ns": 1791653884980250000,
+    "backlog_seconds": 0.0,
+    "completed_segments": 61,
+    "mapping": {
+      "schema": "wbrov.deferred-mapping.v1",
+      "state": "closed",
+      "historical_only": true,
+      "navigation_authorized": false,
+      "processed_source_ns": 1791653884980250000,
+      "verified_map_source_ns": 1791653884980250000,
+      "frames": 1581,
+      "input_gaps": 1,
+      "odometry_compute_ms": 79988.2,
+      "mapping_compute_ms": 90525.4,
+      "continuity_state": "NORMAL",
+      "main_map_write_allowed": true,
+      "observation_count": 5,
+      "observation_required": 5,
+      "epoch": 2,
+      "cuts": 19,
+      "recoveries": 1,
+      "main_nodes": 97,
+      "cloud_points": 92294,
+      "database_closed": true
+    }
+  },
+  "passed": false
+}

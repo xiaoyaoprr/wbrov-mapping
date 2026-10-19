@@ -1,0 +1,40 @@
+{
+  "run": "custom_20261010_050110",
+  "candidate": "sha256-2aa934956f16dee79131fdf45f5c364a2516c4933f21987a3154705dbca45333",
+  "rviz_visible_s": 40.06021577602951,
+  "pointcloud_screenshots_checked": 2,
+  "preloss_cut_count": 0,
+  "postloss_epoch": 1,
+  "postloss_cut_count": 75,
+  "registered_main_nodes_before_occlusion": 45,
+  "registered_main_nodes_after_recovery": 58,
+  "newly_registered_by_commit": 3,
+  "subsequent_new_main_nodes": 10,
+  "core_commit_count": 1,
+  "passed_observations": 5,
+  "registered_and_write_allowed_before_failure": true,
+  "moving_recovery_end_to_end_passed": false,
+  "normal_save_passed": false,
+  "failure": "ordinary same-epoch loop accepted before frozen-boundary validation; subsequent invariant failure stopped Core and refused normal save",
+  "launcher_exit_code": 1,
+  "nodes_stopped": true,
+  "preserved_database": {
+    "sha256": "28b1b402db72d13c7049261bad40eb0396fc4589c47e306a4d3a28733ffb6169",
+    "bytes": 102330368
+  },
+  "sqlite_quick_check": [
+    [
+      "ok"
+    ]
+  ],
+  "persisted_counts": {
+    "Node": 202,
+    "Link": 272,
+    "Data": 202
+  },
+  "sqlite_check_is_not_final_map_save": true,
+  "light_off_packets": 7,
+  "udp_released": true,
+  "propulsion_activated": false,
+  "production_switched": false
+}

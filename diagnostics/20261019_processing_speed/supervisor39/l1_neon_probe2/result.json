@@ -1,0 +1,20 @@
+{
+  "phase": "failed",
+  "scope": "isolated fixed KD-tree L1 experiment, unchanged summation order and early exits; no Core or worker modification",
+  "steps": [
+    {
+      "name": "sanitizer_build",
+      "exit": 0,
+      "seconds": 102.08380915201269
+    },
+    {
+      "name": "sanitizer",
+      "exit": -6,
+      "seconds": 0.36623427201993763
+    }
+  ],
+  "probe_sha256": "d00e02c0b3a432b8c61cf136d81ef99cac425e2cf96cc413e06b5330a5c5f7a4",
+  "header_archive_sha256": "50b72a64e9ddfab3f094bb5c07929dfd1676e24ba301f181832b5f2e71811d5e",
+  "utilite_sha256": "c0f8f39dcc5ca17c8e943dd0b756557e84c395ce8c96a28103b16f7e463fddb2",
+  "error": "AssertionError('sanitizer')"
+}

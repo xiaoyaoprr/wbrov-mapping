@@ -1,0 +1,19 @@
+/proc/loadavg 1.76 1.55 1.70 2/788 877514
+memory MemTotal:       16030420 kB
+MemFree:          124732 kB
+MemAvailable:   13429540 kB
+Buffers:           44168 kB
+Cached:         13396384 kB
+SwapTotal:       8015200 kB
+SwapFree:        6349664 kB
+Dirty:              4128 kB
+Writeback:             0 kB
+processes ['    PID COMMAND         STAT %CPU %MEM   RSS', ' 874957 wbrov_replay_wo SLl   156  4.0 654904', ' 874954 python3         SLl  18.7  0.7 116960', ' 877514 python3         Ss    4.0  0.0 12336', '   2970 nxnode.bin      S<l   3.4  0.9 156748', '   1501 Xorg            Sl+   3.1  0.3 55300', '   2141 gnome-shell     Ssl   2.7  0.8 137756', '2814016 nvargus-daemon  Ss    2.7  0.0  8024', '    631 sugov:4         S     1.4  0.0     0', '   1483 pulseaudio      S<sl  0.8  0.0 12356', '    629 sugov:0         S     0.5  0.0     0', '    575 NetworkManager  Ssl   0.4  0.0 10424', '    893 nvgpu_channel_p S     0.4  0.0     0', '    314 irq/187-host1x_ S     0.3  0.0     0', '   1131 nxserver.bin    Ssl   0.3  0.8 133228', '    332 irq/198-gk20a_s S     0.2  0.0     0']
+temperatures [('/sys/class/thermal/thermal_zone2', '70656'), ('/sys/class/thermal/thermal_zone0', '74250'), ('/sys/class/thermal/thermal_zone7', '68593'), ('/sys/class/thermal/thermal_zone5', '71656'), ('/sys/class/thermal/thermal_zone3', '71218'), ('/sys/class/thermal/thermal_zone1', '72750'), ('/sys/class/thermal/thermal_zone8', '74250'), ('/sys/class/thermal/thermal_zone6', '70937'), ('/sys/class/thermal/thermal_zone4', '67093')]
+cpu_frequencies [('/sys/devices/system/cpu/cpu7/cpufreq', '1036800'), ('/sys/devices/system/cpu/cpu5/cpufreq', '1036800'), ('/sys/devices/system/cpu/cpu3/cpufreq', '1113600'), ('/sys/devices/system/cpu/cpu1/cpufreq', '1113600'), ('/sys/devices/system/cpu/cpu6/cpufreq', '1036800'), ('/sys/devices/system/cpu/cpu4/cpufreq', '1036800'), ('/sys/devices/system/cpu/cpu2/cpufreq', '1113600'), ('/sys/devices/system/cpu/cpu0/cpufreq', '1113600')]
+vmstat procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 1  0 1665536 123472  44176 13640588    1    1    94    56    2    4  5  3 92  0  0
+ 1  0 1665536 123220  44176 13640808    0    0     0     0 3368 4191  4  1 95  0  0
+ 1  0 1665536 736204  44224 13643088    0    0    20  6620 4004 4693  7  6 87  1  0
+

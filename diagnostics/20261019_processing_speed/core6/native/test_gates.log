@@ -1,0 +1,12 @@
+Internal ctest changing into directory: /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round4_20261016/build
+Test project /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round4_20261016/build
+    Start 1: jump_gate
+1/3 Test #1: jump_gate ........................   Passed    0.01 sec
+    Start 2: global_publication_gate
+2/3 Test #2: global_publication_gate ..........   Passed    0.02 sec
+    Start 3: mapping_continuity_gate
+3/3 Test #3: mapping_continuity_gate ..........   Passed    0.01 sec
+
+100% tests passed, 0 tests failed out of 3
+
+Total Test time (real) =   0.03 sec

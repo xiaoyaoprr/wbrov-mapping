@@ -1,0 +1,56 @@
+{
+  "scope": "real camera, operator movement and occlusion; historical mapper; no propulsion, not underwater navigation acceptance",
+  "recorded_seconds": 397.831865,
+  "frame_count": 10746,
+  "capture_spool_processed_counts_equal": true,
+  "raw_svo_verification_passed": true,
+  "capture_grab_errors": 0,
+  "capture_write_errors": 0,
+  "lost_frames": 216,
+  "lost_frame_main_writes": 0,
+  "recovery_events": [
+    {
+      "source_ns": 1791660025717899000,
+      "main_nodes_at_recovery": 83,
+      "main_nodes_final": 163,
+      "main_write_frames_after": 4298,
+      "continued_source_seconds": 159.276111
+    }
+  ],
+  "database_quick_check": "ok",
+  "backend_closed": true,
+  "backlog_seconds": 0.0,
+  "final_map": {
+    "schema": "wbrov.deferred-mapping.v1",
+    "state": "closed",
+    "historical_only": true,
+    "navigation_authorized": false,
+    "processed_source_ns": 1791660184994010000,
+    "verified_map_source_ns": 1791660184960687000,
+    "frames": 10746,
+    "input_gaps": 0,
+    "odometry_compute_ms": 467077,
+    "mapping_compute_ms": 487665,
+    "epoch": 1,
+    "cuts": 221,
+    "recoveries": 1,
+    "main_nodes": 163,
+    "cloud_points": 62682,
+    "database_closed": true
+  },
+  "subprocess_exits": {
+    "camera": 0,
+    "queue": 0,
+    "display": 0,
+    "rviz": 0,
+    "verify_recording": 0
+  },
+  "field_sequence_passed": true,
+  "production_entry8_acceptance_passed": false,
+  "sha256": {
+    "map.db": "8971e36617c2f53df62bcd9ac776ecce6727d66a0132337f2b620fdf4cc63963",
+    "main_cloud.ply": "9582e0627654f79d4f8e9827509ebb901b3030ac69ca196aaf4fc72a23494dd0",
+    "frames.csv": "99bd5108d7002aa474cd896ecb9bc8e3208556ee56415da9c88199408c4983ec",
+    "tags.json": "2f0358ebbfe23d89c0b754dc9d4bd535b88db6aedd9ac039c833807c8ff9ee26"
+  }
+}

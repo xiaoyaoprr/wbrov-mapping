@@ -1,0 +1,6 @@
+{
+  "all_10746_source_timestamps_equal_to_audited_v39": true,
+  "all_375_source_manifests_equal_to_audited_v39": true,
+  "invalid_main_writes": 0,
+  "scope": "timing-only diagnostic, original slower v39 result preserved"
+}

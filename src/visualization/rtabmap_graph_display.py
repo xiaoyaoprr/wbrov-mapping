@@ -194,6 +194,9 @@ class GraphDisplayNode(Node):
         self.mapping_status = None
         self.last_continuity_diagnostic = None
         self.mapping_status_arrival = 0.0
+        self.reference_readiness = None
+        self.reference_readiness_arrival = 0.0
+        self.reference_readiness_sub = self.create_subscription(String, "/wbrov/mapping/reference_readiness", self.on_reference_readiness, qos)
         self.local_submap_summary = None
         self.local_submap_registry = None
         self.retired_submap_sessions = set()
@@ -260,6 +263,25 @@ class GraphDisplayNode(Node):
         except (ValueError, TypeError, AttributeError):
             self.mapping_status = None
 
+    def on_reference_readiness(self, message):
+        try:
+            if len(message.data)>65536:raise ValueError("readiness too large")
+            row=json.loads(message.data)
+            if row.get('schema')!='wbrov.reference-readiness.v1' or row.get('graph_update_authorized') is not False:
+                raise ValueError("invalid readiness")
+            if not isinstance(row.get('tags'),list):raise ValueError("invalid tags")
+            self.reference_readiness=row;self.reference_readiness_arrival=time.monotonic()
+        except (ValueError,TypeError,AttributeError):self.reference_readiness=None
+
+    def current_reference_tags(self, row):
+        readiness=self.reference_readiness
+        if not row or not readiness or readiness.get('source_valid') is not True or \
+                readiness.get('session_token_sha256')!=row.get('session_token_sha256') or \
+                not 0<=time.monotonic()-self.reference_readiness_arrival<=2.:
+            return []
+        return [t for t in readiness['tags'] if isinstance(t,dict) and type(t.get('tag_id')) is int and
+                type(t.get('distinct_saved_nodes')) is int][:4]
+
     def on_submap_registry(self, message):
         try:
             registry = submap_geometry.parse_registry(json.loads(message.data))
@@ -296,7 +318,7 @@ class GraphDisplayNode(Node):
         if fresh and 0 <= time.monotonic() - self.local_submap_arrival <= 2.0:
             unaligned = sum(not entry.registered for entry in self.local_submap_registry.submaps)
         if fresh and row.get("quality_verification_pending") is True:
-            label = "短暂定位退化，主图停写；正在验证最后可信位置"
+            label = "短暂定位退化，主图停写；正在验证历史参考"
         if state in ("PAUSED", "RECOVERING"):
             local_fresh = 0 <= time.monotonic() - self.local_submap_arrival <= 2.0
             local_tracking = (fresh and local_fresh and row.get("local_tracking_healthy") is True and
@@ -306,7 +328,14 @@ class GraphDisplayNode(Node):
                 if row.get("local_submap_write_allowed") is not True:
                     label += "\n恢复验证期间局部图写入也暂停"
             else:
-                label += "\n参考右侧最后可靠视角，确认周围安全后缓慢退回"
+                label += "\n系统搜索已建区域；右侧历史图像仅供参考，无需复现原视角"
+        if fresh and not allowed and row.get('localization_valid') is True:
+            label = "当前位置已定位；主图写入仍在独立验证\n临时数据尚未合并，历史图像仅供参考"
+        elif fresh and not allowed and row.get('localization_status')=='CANDIDATE':
+            label = "已找到主图位置候选，正在连续验证；主图停写"
+        for tag in self.current_reference_tags(row if fresh else None):
+            label += "\nTag %d：%d 个参考节点；%s" % (tag['tag_id'],tag['distinct_saved_nodes'],
+                "三组有效参考齐备" if tag.get('independent_consistent_triplet') else "不同视角参考仍在积累")
         label += "\n未对齐子图：" + (str(unaligned) if unaligned is not None else "状态待更新")
         if fresh and not allowed:
             reason = row.get("quality_trigger_reason") if row.get("quality_verification_pending") else row.get("last_cut_quality_reason")
@@ -341,6 +370,14 @@ class GraphDisplayNode(Node):
         count = str(unaligned) if unaligned is not None else "unknown"
         lines = ["Unaligned local submaps: " + count]
         if row:
+            lines.insert(0,"POSITION: "+str(row.get('localization_status','UNKNOWN'))+" (map write checked separately)")
+            for tag in self.current_reference_tags(row)[:2]:
+                lines += ["Tag %d: %d reference nodes; %s" % (tag['tag_id'],tag['distinct_saved_nodes'],
+                    '3-view reference READY' if tag.get('independent_consistent_triplet') else 'collecting diverse views')]
+            if not allowed:
+                d=row.get('localization_diagnostics',{})
+                lines += ["Reference matches: %s; raw rejects: %s; baseline rejects: %s" %
+                          (d.get('matched',0),d.get('raw_rejected',0),d.get('baseline_rejected',0))]
             if row.get("quality_verification_pending"):
                 lines += ["Frozen map check: %s/5; no map writes" % row.get("map_observation_count", 0)]
             elif row.get("local_submap_write_allowed"):

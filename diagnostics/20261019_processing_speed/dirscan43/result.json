@@ -1,0 +1,74 @@
+{
+  "schema": "wbrov.local-inventory-probe.v1",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "native_jetson_validation": false,
+  "adopted": false,
+  "source_manifest": {
+    "experiment": "dirscan43",
+    "scope": "local Windows only; Jetson validation pending",
+    "adopted": false,
+    "only_changed_function": "closed_inputs",
+    "baseline_sha256": "562ad769b499e1da26beb258a57dbd80dae5b0bd64466f626d22173ff7b03605",
+    "candidate_sha256": "3294acc1a2b3d7e6d9be2d49ac867208065ea96128bad0f7ab05b72cdcb25d80",
+    "repository_source_sha256": "0a6ce28c1adf518d87bd9fa77255f4a5f3cc65d6a57fffa7faf7c43359d8d277"
+  },
+  "state": "local_probe_complete",
+  "tests": {
+    "run": 20,
+    "failures": 0,
+    "errors": 0,
+    "skipped": [
+      "Windows symlink privilege unavailable; Linux validation pending",
+      "POSIX FIFO type check requires Linux"
+    ]
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "scans_per_variant": 120,
+      "baseline_ms": 2214.4766,
+      "candidate_ms": 983.7011
+    },
+    {
+      "round": 1,
+      "scans_per_variant": 120,
+      "candidate_ms": 956.9743,
+      "baseline_ms": 2317.0597
+    },
+    {
+      "round": 2,
+      "scans_per_variant": 120,
+      "baseline_ms": 2336.058,
+      "candidate_ms": 983.2726
+    },
+    {
+      "round": 3,
+      "scans_per_variant": 120,
+      "candidate_ms": 916.339,
+      "baseline_ms": 2129.6203
+    },
+    {
+      "round": 4,
+      "scans_per_variant": 120,
+      "baseline_ms": 2165.7697,
+      "candidate_ms": 954.6276
+    },
+    {
+      "round": 5,
+      "scans_per_variant": 120,
+      "candidate_ms": 883.7019,
+      "baseline_ms": 2212.3141
+    }
+  ],
+  "median_excluding_round0_ms": {
+    "baseline": 2212.3141,
+    "candidate": 954.6276
+  },
+  "repository_source_unchanged": true,
+  "limits": [
+    "Windows synthetic directory inventory only, not recorded pixels or a replay",
+    "No whole-pipeline speed claim; Jetson/Linux and mutation checks still required",
+    "Candidate is isolated and not applied to the repository or production"
+  ]
+}

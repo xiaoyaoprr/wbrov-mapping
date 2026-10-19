@@ -45,17 +45,21 @@ class SubmapDisplayNode(Node):
         self.dirty_entries = set()
         self.last_render = {}
         self.main_dirty = False
+        self.last_main_render = 0.0
         self.tags = ()
         self.unplaced = ()
         self.tag_row = None
         self.future_tag_row = None
         self.continuity_status = None
         self.continuity_arrival = 0.0
+        self.readiness = None
+        self.readiness_arrival = 0.0
         self.rviz_directory = rviz_directory
         self.main_pub = self.create_publisher(MarkerArray, MAIN_TAG_TOPIC, self.qos)
         self.registry_sub = self.create_subscription(String, REGISTRY_TOPIC, self.on_registry, self.qos)
         self.tag_sub = self.create_subscription(String, TAG_TOPIC, self.on_tags, self.qos)
         self.continuity_sub = self.create_subscription(String, "/wbrov/mapping_continuity/status", self.on_continuity_status, self.qos)
+        self.readiness_sub = self.create_subscription(String, "/wbrov/mapping/reference_readiness", self.on_readiness, self.qos)
         # Status can arrive at odometry rate. Coalesce display work so a history
         # of frozen submaps cannot multiply each status into dozens of messages.
         self.timer = self.create_timer(.2, self.render_pending)
@@ -80,6 +84,7 @@ class SubmapDisplayNode(Node):
         self.continuity_status = None
         self.continuity_arrival = 0.0
         self.main_pub.publish(marker_array(geometry.main_tag_specs(())))
+        self.readiness=None;self.readiness_arrival=0.0
 
     def on_registry(self, message):
         try:
@@ -195,10 +200,21 @@ class SubmapDisplayNode(Node):
             self.continuity_arrival = time.monotonic()
         except (ValueError, TypeError, AttributeError):
             self.continuity_status = None
+        self.main_dirty = True
         fields = ('session_token_sha256', 'epoch', 'local_tracking_healthy', 'local_submap_write_allowed')
         current = self.continuity_status
         if any((old or {}).get(k) != (current or {}).get(k) for k in fields):
             self.dirty_entries.update(self.entries)
+
+    def on_readiness(self, message):
+        try:
+            if len(message.data)>65536:raise ValueError('reference status too large')
+            row=json.loads(message.data)
+            if row.get('schema')!='wbrov.reference-readiness.v1' or row.get('graph_update_authorized') is not False:
+                raise ValueError('invalid reference status')
+            self.readiness=row;self.readiness_arrival=time.monotonic()
+        except (ValueError,TypeError):self.readiness=None
+        self.main_dirty=True
 
     def render_entry(self, key):
         entry = self.entries[key]
@@ -224,10 +240,26 @@ class SubmapDisplayNode(Node):
         self.dirty_entries.clear()
         for key in sorted(due & self.entries.keys()):
             self.render_entry(key)
-        if not self.main_dirty:
+        if not self.main_dirty and now-self.last_main_render<1.:
             return
         self.main_dirty = False
+        self.last_main_render=now
         specs = list(geometry.main_tag_specs(self.tags, self.unplaced))
+        lines=[]
+        state=self.continuity_status or {}
+        if self.registry and state.get('session_token_sha256')==self.registry.session_token_sha256 and now-self.continuity_arrival<=1.:
+            loc=state.get('localization_status','LOST')
+            lines.append({'TRACKING':'定位正常','LOCALIZED':'当前位置已定位','CANDIDATE':'位置候选验证中','LOST':'尚未找回主图位置'}.get(loc,'定位状态未知'))
+            lines.append('主图持续写入' if state.get('main_map_write_allowed') else '主图写入暂停；临时数据独立保留')
+        readiness=self.readiness or {}
+        if self.registry and readiness.get('session_token_sha256')==self.registry.session_token_sha256 and now-self.readiness_arrival<=2.:
+            for tag in readiness.get('tags',[])[:8]:
+                if type(tag.get('tag_id')) is not int or type(tag.get('distinct_saved_nodes')) is not int:continue
+                suffix='三组参考齐备，恢复仍需验证' if tag.get('independent_consistent_triplet') is True else '需积累不同视角的有效参考'
+                lines.append(f"Tag {tag['tag_id']}：有效参考节点 {tag['distinct_saved_nodes']}；{suffix}")
+        if lines:
+            specs.append(graph_geometry.MarkerSpec('text',frame_id='map',namespace='localization_and_reference_readiness',marker_id=0,
+                position=(0,0,1.),scale=(0,0,.04),color=(.3,1.,.8,1.),text='\n'.join(lines)))
         if self.registry_error:
             specs.append(graph_geometry.MarkerSpec("text", frame_id="map", namespace="submap_display_error", marker_id=0,
                 position=(0, 0, .8), scale=(0, 0, .05), color=(1.0, .35, .1, 1.0), text=self.registry_error))

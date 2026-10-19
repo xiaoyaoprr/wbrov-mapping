@@ -1,0 +1,19 @@
+{
+  "phase": "finished",
+  "scope": "lossless copy of closed full raw recording; originals retained, no camera or SDK use",
+  "segments": 375,
+  "frames": 10746,
+  "raw_bytes": 14191911957,
+  "packed_bytes": 9078777379,
+  "seconds": 409.5002330240095,
+  "source_metadata_sha256": {
+    "sdk_version.txt": "e791457c25b99d69f3d5ca028f6a7f6d88f7e2d85af5162a92a8c5f3aecf59b0",
+    "metadata.json": "7caf8fc9b501561e3b4327e3b21244f70e6333173ddd554eb2696eaf13a11b52",
+    "water_calibration.yml": "d0a5f4486794add80330be1b89bea5aa890d3fed124456418ff1c98a59708389",
+    "camera_imu_extrinsics.json": "c56ecf7366335da18577a9d09d57b90ee6e17cd85b0795cd009573eac22ba4aa",
+    "runtime.json": "b227ed5ddd6abe53946e80c2c9b2e01b1c120ec0d0b0088edf6e30348f53af8e",
+    "init.json": "5f10c8e60382d35ba3af7a34874ac06abc530303890e4d71799e457f3f777590",
+    "status.json": "306c6c4de4cf110b8c025d85c1529b241c91bd6aac46c86f3eeda535ef80a0d6"
+  },
+  "converter_sha256": "24a1483dfdf31bfd73011bb5d50827aa4be1cdbbe82bea15ce9834db59ae9a86"
+}

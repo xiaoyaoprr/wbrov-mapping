@@ -1,0 +1,18 @@
+ply_differential.log {"round":0,"points":440297,"before_ms":366.525,"after_ms":193.068,"byte_exact":true}
+{"round":1,"points":440297,"before_ms":360.858,"after_ms":188.85,"byte_exact":true}
+{"round":2,"points":440297,"before_ms":364.704,"after_ms":188.371,"byte_exact":true}
+{"round":3,"points":440297,"before_ms":363.723,"after_ms":185.863,"byte_exact":true}
+{"round":4,"points":440297,"before_ms":364.246,"after_ms":186.042,"byte_exact":true}
+
+feature_probe.log {"pairs":100,"raw_reverse_ms":9809.7,"reuse_reverse_ms":4423.86,"feature_mismatch":70,"registration_mismatch":100,"raw_nonnull":69}
+
+feature_probe_compile.log /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/speed32_pipeline/probe_bidirectional_feature_reuse.cpp: In function ‘int main(int, char**)’:
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/speed32_pipeline/probe_bidirectional_feature_reuse.cpp:61:9: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+   61 |         if(!features)++featureMismatch;if(!match)++registrationMismatch;if(!before.isNull())++accepted;++count;
+      |         ^~
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/speed32_pipeline/probe_bidirectional_feature_reuse.cpp:61:40: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   61 |         if(!features)++featureMismatch;if(!match)++registrationMismatch;if(!before.isNull())++accepted;++count;
+      |                                        ^~
+
+worker_build_v32.json {"phase": null, "error": null, "worker_sha256": "8579c82bb0da08882992aa25b408bb8d1605805cdbe9c39f44801779a03ba524", "future_lookahead_test": "passed", "stable_cache_scan_test": "passed", "steps": null}
+speed32_pipeline/result.json {"phase": "replay_v32", "error": null, "worker_sha256": null, "future_lookahead_test": null, "stable_cache_scan_test": null, "steps": [{"name": "audit_v31", "exit": 0, "seconds": 4.92693119996693}, {"name": "build_v32", "exit": 0, "seconds": 39.57676467200508}, {"name": "ply_build", "exit": 0, "seconds": 2.271539743989706}, {"name": "ply_differential", "exit": 0, "seconds": 4.577921792049892}, {"name": "feature_probe_compile", "exit": 0, "seconds": 13.15716592001263}, {"name": "feature_probe_link", "exit": 0, "seconds": 3.3762333119520918}, {"name": "feature_probe", "exit": 2, "seconds": 44.24403526401147}]}

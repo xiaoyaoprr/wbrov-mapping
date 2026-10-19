@@ -1,0 +1,41 @@
+{
+  "schema": "wbrov.isolated-source-proposal.v1",
+  "experiment": "f2m_inverse44_v2",
+  "adopted": false,
+  "compiled": false,
+  "native_tests_run": false,
+  "replays_run": false,
+  "performance_claim": null,
+  "scope": "same inverse arithmetic and transformPoint, frame-local lazy reuse",
+  "replaced_calls": 4,
+  "source_reversibility_verified": true,
+  "baseline_repository_raw_sha256": "3bfa9313023c1744aafb48ee38f4850f834a617449d778167bb650d9e6db6131",
+  "members": {
+    "OdometryF2M.baseline.cpp": {
+      "sha256": "3bfa9313023c1744aafb48ee38f4850f834a617449d778167bb650d9e6db6131",
+      "bytes": 73408
+    },
+    "OdometryF2M.candidate.cpp": {
+      "sha256": "acb93915ad8d2e40ba93547375904978826f18a19d9a75efd9c2083462bfa47b",
+      "bytes": 74207
+    },
+    "frame_inverse_cache.inc": {
+      "sha256": "a5a8cef4e874c1d9a5ceb3686435784999e2b30a82010dc3b4adbff64f87a289",
+      "bytes": 894
+    },
+    "candidate.patch": {
+      "sha256": "c102e2ee0f881b0240625467ba48316eed0803757d323791cd7afe81466de986",
+      "bytes": 3156
+    },
+    "native_probe.cpp": {
+      "sha256": "d0dbcb310e411a63eed269e0d86267eae5bee2f897ea6a578e8a50837821f73a",
+      "bytes": 4794
+    },
+    "CMakeLists.txt": {
+      "sha256": "fbba0eab08a54e02d32477edee590d03a41aeb83d5c10d5818e74e73e5d156ae",
+      "bytes": 445
+    }
+  },
+  "supersedes_unbuilt_probe": "f2m_inverse44",
+  "fixture_correction": "CameraModel rejects a null Transform at construction, before inverse. Use a non-null singular transform to exercise lazy inverse and fail-closed behavior. Discovered by source review; neither version has been compiled or run."
+}

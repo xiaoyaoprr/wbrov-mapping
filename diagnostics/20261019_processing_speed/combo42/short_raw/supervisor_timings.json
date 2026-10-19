@@ -1,0 +1,86 @@
+{
+  "scope": "diagnostic wrapper only; measures pinned implementation without additional skips or state changes; nested and concurrent times are not additive",
+  "elapsed_ns": 93728818720,
+  "return_code": 0,
+  "measurements": {
+    "sha/other": {
+      "calls": 2707,
+      "total_ns": 282997184,
+      "maximum_ns": 1821408
+    },
+    "atomic_json/session.json": {
+      "calls": 1,
+      "total_ns": 12042752,
+      "maximum_ns": 12042752
+    },
+    "atomic_json/status.json": {
+      "calls": 199,
+      "total_ns": 202177984,
+      "maximum_ns": 24226656
+    },
+    "closed_inputs": {
+      "calls": 123,
+      "total_ns": 223292064,
+      "maximum_ns": 3605408
+    },
+    "sha/recorded_frames": {
+      "calls": 182,
+      "total_ns": 13433284320,
+      "maximum_ns": 137207808
+    },
+    "descriptor": {
+      "calls": 121,
+      "total_ns": 10483860160,
+      "maximum_ns": 141351648
+    },
+    "tag_observer": {
+      "calls": 61,
+      "total_ns": 7853647360,
+      "maximum_ns": 156337856
+    },
+    "prepared_take_wait": {
+      "calls": 61,
+      "total_ns": 422260128,
+      "maximum_ns": 420134848
+    },
+    "atomic_json/input": {
+      "calls": 61,
+      "total_ns": 538392800,
+      "maximum_ns": 12490144
+    },
+    "sha/main_cloud": {
+      "calls": 62,
+      "total_ns": 109758240,
+      "maximum_ns": 2551296
+    },
+    "sha/tags": {
+      "calls": 62,
+      "total_ns": 7400448,
+      "maximum_ns": 292704
+    },
+    "atomic_json/receipt": {
+      "calls": 61,
+      "total_ns": 589975840,
+      "maximum_ns": 12343744
+    },
+    "sha/map_db": {
+      "calls": 1,
+      "total_ns": 160571392,
+      "maximum_ns": 160571392
+    },
+    "atomic_json/save.json": {
+      "calls": 1,
+      "total_ns": 104035424,
+      "maximum_ns": 104035424
+    }
+  },
+  "tools_sha256": {
+    "continuous_mapping_session.py": "620000c8f33f521857e529bed35b95c002e11478c72461dd710628f0d6d89cc0",
+    "deferred_mapping.py": "562ad769b499e1da26beb258a57dbd80dae5b0bd64466f626d22173ff7b03605",
+    "deferred_tag_observations.py": "414261e9f3895d469793edbe57f0bee52ed751baba1b76e9ef878532029647c4",
+    "render_continuous_entry.py": "fb2a9dc6b896bdadbd63d748471117183b61b77bc9fa28e5609c36076a9b3682",
+    "spool_codec.py": "ee89796f0c29bc26187d79109031e0962ee74147c250359a7c914d245c480b60",
+    "verify_raw_recording.py": "5a603f18d54cd938406999c6e14a7f401718c9256cfa6219026fd786076243f2"
+  },
+  "tools_unchanged": true
+}

@@ -15,6 +15,11 @@ namespace rtabmap {
 class ImageReceiptNativeTestAccess {
 public:
     static std::size_t count(const Rtabmap & core) { return core._crossMapLoopEvidence.size(); }
+    static std::vector<std::pair<int,int> > endpoints(const Rtabmap & core) {
+        std::vector<std::pair<int,int> > result;
+        for(const auto & candidate:core._crossMapLoopEvidence)result.emplace_back(candidate.newId,candidate.oldId);
+        return result;
+    }
     static void clear(Rtabmap & core) { core._crossMapLoopEvidence.clear(); }
     static void guarded(Rtabmap & core,bool enabled) { core._safeRelocalizationGuardEnabled=enabled; }
     static void floor(Rtabmap & core,double linear,double angular) {
@@ -22,12 +27,13 @@ public:
         core._parameters[Parameters::kRtabmapCrossMapLoopMinAngularSigma()]=std::to_string(angular);
     }
     static bool add(Rtabmap & core,int index,double error,double angle,cv::Mat covariance,
-                    int depthCount,int idCount,bool spread,std::string & reason) {
+                    int depthCount,int idCount,bool spread,std::string & reason,
+                    int oldIndex=-1,float sourceX=std::numeric_limits<float>::quiet_NaN()) {
         CameraModel camera(200,200,159.5,119.5,Transform::getIdentity(),0,cv::Size(320,240));
         SensorData data(cv::Mat::zeros(240,320,CV_8UC1),cv::Mat(240,320,CV_32FC1,cv::Scalar(1)),camera);
-        const Transform pose(float(index)*.10f,0,0,0,0,0);
+        const Transform pose(std::isfinite(sourceX)?sourceX:float(index)*.10f,0,0,0,0,0);
         Signature current(100+index,1,0,1000+index,"",pose,Transform(),data);
-        Signature old(10+index,0,0,900+index,"",pose,Transform(),data);
+        Signature old(10+(oldIndex<0?index:oldIndex),0,0,900+index,"",pose,Transform(),data);
         std::multimap<int,int> words;std::vector<cv::KeyPoint> pixels;std::vector<cv::Point3f> points;
         RegistrationInfo info;info.inliers=idCount;info.covariance=covariance;
         for(int i=0;i<25;++i) {
@@ -57,6 +63,18 @@ int main() try {
     require(!add(1,0,0) && A::count(core)==1,"exactly 25 unique inliers should retain one guarded candidate: "+reason);
     require(!add(2,.001998,.285697) && A::count(core)==2,"epsilon covariance still erases small measured discrepancy: "+reason);
     require(!add(3,.003,.35) && A::count(core)==3,"three candidates must be retained without authorizing native addLink: "+reason);
+    const auto retained=A::endpoints(core);
+    require(!A::add(core,4,0,0,covariance,25,25,true,reason,1,.20f) &&
+        reason.find("not independent")!=std::string::npos && A::endpoints(core)==retained,
+        "rejected same-old replacement erased a previously retained candidate");
+    require(!A::add(core,5,0,0,covariance,25,25,true,reason,1,.40f) &&
+        A::endpoints(core)==std::vector<std::pair<int,int> >{{102,12},{103,13},{105,11}},
+        "valid replacement did not retain exactly three distinct old endpoints");
+    const auto replaced=A::endpoints(core);
+    require(!A::add(core,5,0,0,covariance,25,25,true,reason,1,.40f) &&
+        reason.find("duplicate current")!=std::string::npos && A::endpoints(core)==replaced,
+        "duplicate replacement modified candidate evidence");
+    std::cout<<"PASS rejected replacement preserves candidates; valid replacement is atomic and never authorizes addLink\n";
     A::clear(core);A::floor(core,0,0);
     add(1,0,0);add(2,.001998,.285697);
     require(A::count(core)==1 && reason.find("inconsistent fixed-anchor")!=std::string::npos,"zero floor must preserve raw consensus behavior");

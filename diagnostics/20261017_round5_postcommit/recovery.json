@@ -1,0 +1,204 @@
+{
+  "checked_monotonic": 358543.701734752,
+  "counts": {
+    "historical_reference": 1,
+    "geometry": 4,
+    "proposal": 2,
+    "received_status": 3,
+    "terminal": 2,
+    "observing": 1
+  },
+  "recent_proposals": [
+    {
+      "event": "proposal",
+      "monotonic_ns": 358530611368256,
+      "geometry": {
+        "old_ids": [
+          80,
+          108,
+          115
+        ],
+        "current_ids": [
+          136,
+          137,
+          138
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.012998060524830643,
+          "max_rotation_deg": 1.58986293000326,
+          "max_z_m": 0.005143320771125878,
+          "max_tilt_deg": 0.597532237431798
+        },
+        "candidate_only": null,
+        "requires_core_depth_verification": null,
+        "pnp_alignment_certified": null
+      }
+    },
+    {
+      "event": "proposal",
+      "monotonic_ns": 358533352984448,
+      "geometry": {
+        "old_ids": [
+          80,
+          108,
+          115
+        ],
+        "current_ids": [
+          137,
+          138,
+          139
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.01076542117288894,
+          "max_rotation_deg": 1.2562386590253862,
+          "max_z_m": 0.008463720433409816,
+          "max_tilt_deg": 1.0549830394517983
+        },
+        "candidate_only": null,
+        "requires_core_depth_verification": null,
+        "pnp_alignment_certified": null
+      }
+    }
+  ],
+  "observing_or_terminal": [
+    {
+      "event": "terminal",
+      "monotonic_ns": 358533174461312,
+      "status": {
+        "result": "rejected",
+        "reason": "proposal is stale or does not match current epoch and graph revision",
+        "core_reset_epoch": 1,
+        "source_reset_epoch": 1,
+        "core_graph_revision": 141
+      }
+    },
+    {
+      "event": "observing",
+      "monotonic_ns": 358534149808768,
+      "status": {
+        "result": "observing",
+        "reason": "geometry prepared; graph remains uncommitted until five direct old-map observations pass",
+        "core_reset_epoch": 1,
+        "source_reset_epoch": 1,
+        "core_graph_revision": 141
+      }
+    },
+    {
+      "event": "terminal",
+      "monotonic_ns": 358539778871264,
+      "status": {
+        "result": "committed",
+        "reason": "committed current reanchor: epoch=1 registered_nodes=3 archived_prefix_nodes=1 detached_edges=1; three bridges and 3-fold holdout passed (dense plane RMS requires stopped-map validation)",
+        "core_reset_epoch": 1,
+        "source_reset_epoch": 1,
+        "core_graph_revision": 142
+      }
+    }
+  ],
+  "selection_reasons": {
+    "fewer_than_three_current_views": 2,
+    "three_independent_measured_links": 2
+  },
+  "tail": [
+    {
+      "event": "geometry",
+      "monotonic_ns": 358533343896160,
+      "node_id": 139,
+      "epoch": 1,
+      "tag_id": 8,
+      "reason": "three_independent_measured_links",
+      "source_epoch": 0,
+      "preference_rank": 0,
+      "candidate": {
+        "old_ids": [
+          80,
+          108,
+          115
+        ],
+        "current_ids": [
+          137,
+          138,
+          139
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.01076542117288894,
+          "max_rotation_deg": 1.2562386590253862,
+          "max_z_m": 0.008463720433409816,
+          "max_tilt_deg": 1.0549830394517983
+        },
+        "candidate_only": null,
+        "requires_core_depth_verification": null,
+        "pnp_alignment_certified": null
+      }
+    },
+    {
+      "event": "proposal",
+      "monotonic_ns": 358533352984448,
+      "geometry": {
+        "old_ids": [
+          80,
+          108,
+          115
+        ],
+        "current_ids": [
+          137,
+          138,
+          139
+        ],
+        "alignment_consistency": {
+          "max_translation_m": 0.01076542117288894,
+          "max_rotation_deg": 1.2562386590253862,
+          "max_z_m": 0.008463720433409816,
+          "max_tilt_deg": 1.0549830394517983
+        },
+        "candidate_only": null,
+        "requires_core_depth_verification": null,
+        "pnp_alignment_certified": null
+      }
+    },
+    {
+      "event": "received_status",
+      "monotonic_ns": 358534149573760,
+      "status": {
+        "result": "observing",
+        "reason": "geometry prepared; graph remains uncommitted until five direct old-map observations pass",
+        "core_reset_epoch": 1,
+        "source_reset_epoch": 1,
+        "core_graph_revision": 141
+      }
+    },
+    {
+      "event": "observing",
+      "monotonic_ns": 358534149808768,
+      "status": {
+        "result": "observing",
+        "reason": "geometry prepared; graph remains uncommitted until five direct old-map observations pass",
+        "core_reset_epoch": 1,
+        "source_reset_epoch": 1,
+        "core_graph_revision": 141
+      }
+    },
+    {
+      "event": "received_status",
+      "monotonic_ns": 358539778621184,
+      "status": {
+        "result": "committed",
+        "reason": "committed current reanchor: epoch=1 registered_nodes=3 archived_prefix_nodes=1 detached_edges=1; three bridges and 3-fold holdout passed (dense plane RMS requires stopped-map validation)",
+        "core_reset_epoch": 1,
+        "source_reset_epoch": 1,
+        "core_graph_revision": 142
+      }
+    },
+    {
+      "event": "terminal",
+      "monotonic_ns": 358539778871264,
+      "status": {
+        "result": "committed",
+        "reason": "committed current reanchor: epoch=1 registered_nodes=3 archived_prefix_nodes=1 detached_edges=1; three bridges and 3-fold holdout passed (dense plane RMS requires stopped-map validation)",
+        "core_reset_epoch": 1,
+        "source_reset_epoch": 1,
+        "core_graph_revision": 142
+      }
+    }
+  ]
+}

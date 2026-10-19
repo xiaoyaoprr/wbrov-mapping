@@ -1,0 +1,13 @@
+edge and unaligned/tail tests passed
+{"width":32,"round":0,"queries":6000,"before_ms":420.06,"after_ms":428.862,"indices_and_distances_equal":true}
+{"width":32,"round":1,"queries":6000,"before_ms":423.474,"after_ms":427.337,"indices_and_distances_equal":true}
+{"width":32,"round":2,"queries":6000,"before_ms":412.584,"after_ms":448.407,"indices_and_distances_equal":true}
+{"width":32,"round":3,"queries":6000,"before_ms":425.593,"after_ms":422.495,"indices_and_distances_equal":true}
+{"width":32,"round":4,"queries":6000,"before_ms":412.86,"after_ms":435.918,"indices_and_distances_equal":true}
+{"width":32,"round":5,"queries":6000,"before_ms":423.655,"after_ms":429.486,"indices_and_distances_equal":true}
+{"width":64,"round":0,"queries":6000,"before_ms":431.571,"after_ms":437.923,"indices_and_distances_equal":true}
+{"width":64,"round":1,"queries":6000,"before_ms":433.65,"after_ms":438.22,"indices_and_distances_equal":true}
+{"width":64,"round":2,"queries":6000,"before_ms":429.318,"after_ms":440.595,"indices_and_distances_equal":true}
+{"width":64,"round":3,"queries":6000,"before_ms":434.594,"after_ms":437.19,"indices_and_distances_equal":true}
+{"width":64,"round":4,"queries":6000,"before_ms":421.255,"after_ms":440.577,"indices_and_distances_equal":true}
+{"width":64,"round":5,"queries":6000,"before_ms":441.288,"after_ms":438.511,"indices_and_distances_equal":true}

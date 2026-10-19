@@ -32,6 +32,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <rtabmap_slam/JumpQuarantineGate.h>
 #include <rtabmap_slam/GlobalPublicationGate.h>
 #include <rtabmap_slam/MappingContinuityGate.h>
+#include <rtabmap_slam/LocalizationEvidenceGate.h>
 #include <rtabmap_slam/SubmapPublisher.h>
 #include <functional>
 #include <rclcpp/rclcpp.hpp>
@@ -260,6 +261,7 @@ private:
 	void resetQuarantineCameraInfoCallback(
 			const sensor_msgs::msg::CameraInfo::SharedPtr msg,
 			const rclcpp::MessageInfo & messageInfo);
+	std::vector<rclcpp::TopicEndpointInfo> managedPublishersWhileRunning(const std::string & topic);
 	bool validateResetQuarantinePublisher(
 			const std::string & topicName,
 			const char * streamName,
@@ -384,6 +386,14 @@ private:
 	void refreshSubmapVisualization(const rclcpp::Time & stamp,bool localHealthy);
 	void publishMappingContinuityStatus();
 	bool tryMappingVisualRecovery();
+    void updateIndependentLocalization(const rtabmap::SensorData & data,const rtabmap::Transform & odom,
+        const rtabmap::ImageInputIdentity & identity,long long stampNs);
+    LocalizationEvidenceGate localizationEvidenceGate_; // mappingRecoveryReferenceMutex_
+    rtabmap::Transform localizationCorrection_;
+    rtabmap::Rtabmap::RecoveryObservationDiagnostics independentLocalizationDiagnostic_;
+    std::string localizationReason_;
+    rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr independentLocalizationPosePub_;
+    rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr independentLocalizationMarkersPub_;
     void isolateRejectedRecoveryMotion(const rtabmap::Rtabmap::SafeRelocalizationLimits & limits,
         const std::string & reason);
 	bool mappingRecoveryCommitCurrent(MappingContinuityGate::Ticket ticket, unsigned long long epoch, bool requireProposal);

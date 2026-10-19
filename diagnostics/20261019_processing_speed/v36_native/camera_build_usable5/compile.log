@@ -1,0 +1,45 @@
+[  6%] Building CXX object CMakeFiles/zed_rgbd_publisher_rate_ab.dir/zed_rgbd_dual_stream_publisher.cpp.o
+[  6%] Building CXX object CMakeFiles/rgbd_frame_codec_test.dir/rgbd_frame_codec_test.cpp.o
+[ 10%] Linking CXX executable rgbd_frame_codec_test
+[ 10%] Built target rgbd_frame_codec_test
+[ 13%] Building CXX object CMakeFiles/rgbd_spool_test.dir/rgbd_spool_test.cpp.o
+[ 16%] Linking CXX executable rgbd_spool_test
+[ 16%] Built target rgbd_spool_test
+[ 20%] Building CXX object CMakeFiles/async_diagnostics_test.dir/async_diagnostics_test.cpp.o
+[ 23%] Linking CXX executable async_diagnostics_test
+[ 23%] Built target async_diagnostics_test
+[ 26%] Building CXX object CMakeFiles/bounded_async_writer_test.dir/bounded_async_writer_test.cpp.o
+[ 30%] Linking CXX executable bounded_async_writer_test
+[ 30%] Built target bounded_async_writer_test
+[ 33%] Building CXX object CMakeFiles/wbrov_verify_svo.dir/verify_svo.cpp.o
+[ 36%] Linking CXX executable wbrov_verify_svo
+[ 36%] Built target wbrov_verify_svo
+[ 40%] Building CXX object CMakeFiles/raw_calibration_audit_test.dir/raw_calibration_audit_test.cpp.o
+[ 43%] Linking CXX executable raw_calibration_audit_test
+[ 43%] Built target raw_calibration_audit_test
+[ 46%] Building CXX object CMakeFiles/depth_range_filter_test.dir/depth_range_filter_test.cpp.o
+[ 50%] Linking CXX executable depth_range_filter_test
+[ 50%] Built target depth_range_filter_test
+[ 53%] Building CXX object CMakeFiles/dual_stream_schedule_test.dir/dual_stream_schedule_test.cpp.o
+[ 56%] Linking CXX executable dual_stream_schedule_test
+[ 56%] Built target dual_stream_schedule_test
+[ 60%] Building CXX object CMakeFiles/exact_odom_stamp_gate_test.dir/exact_odom_stamp_gate_test.cpp.o
+[ 63%] Linking CXX executable exact_odom_stamp_gate_test
+[ 63%] Built target exact_odom_stamp_gate_test
+[ 66%] Building CXX object CMakeFiles/map_frame_lifecycle_test.dir/map_frame_lifecycle_test.cpp.o
+[ 70%] Linking CXX executable map_frame_lifecycle_test
+[ 70%] Built target map_frame_lifecycle_test
+[ 73%] Building CXX object CMakeFiles/map_stamp_audit_test.dir/map_stamp_audit_test.cpp.o
+[ 76%] Linking CXX executable map_stamp_audit_test
+[ 76%] Built target map_stamp_audit_test
+[ 80%] Building CXX object CMakeFiles/valid_odom_pose_test.dir/valid_odom_pose_test.cpp.o
+[ 83%] Linking CXX executable valid_odom_pose_test
+[ 83%] Built target valid_odom_pose_test
+[ 86%] Building CXX object CMakeFiles/imu_frame_conversion_test.dir/imu_frame_conversion_test.cpp.o
+[ 90%] Linking CXX executable imu_frame_conversion_test
+[ 90%] Built target imu_frame_conversion_test
+[ 93%] Building CXX object CMakeFiles/capture_telemetry_test.dir/capture_telemetry_test.cpp.o
+[ 96%] Linking CXX executable capture_telemetry_test
+[ 96%] Built target capture_telemetry_test
+[100%] Linking CXX executable zed_rgbd_publisher_rate_ab
+[100%] Built target zed_rgbd_publisher_rate_ab

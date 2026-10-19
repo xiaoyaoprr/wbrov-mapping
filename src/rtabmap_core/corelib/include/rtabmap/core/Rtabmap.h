@@ -68,6 +68,7 @@ class RTABMAP_CORE_EXPORT Rtabmap
 	friend class CrossMapPendingTestAccess;
 	friend class ImageReceiptNativeTestAccess;
 	friend class rtabmap_slam::CoreWrapper;
+	friend class DeferredMappingSession;
 public:
 	enum VhStrategy {kVhNone, kVhEpipolar, kVhUndef};
 
@@ -281,6 +282,10 @@ public:
         std::map<int,Transform> poses;
         std::multimap<int,Link> links;
     };
+    // Historical observations retain their original receipt/epoch/map identity.
+    // A successful current reanchor does not register this excluded prefix.
+    bool isRecoveryArchivedNode(int id) const {return _safeRelocalizationArchivedIds.count(id)!=0;}
+    enum class RecoveryScope {FullSegment, CurrentReanchor};
     struct RecoveryLocalMotionFault
     {
         unsigned long long resetEpoch=0;
@@ -314,6 +319,16 @@ public:
 											const std::map<int, float> & likelihood) const;
 
 private:
+    struct RecoveryObservationDiagnostics {
+        int references=0, nearby=0, tested=0, matched=0;
+        int rawRejected=0, predictionRejected=0, baselineRejected=0, agreementRejected=0;
+        int firstAnchor=0, secondAnchor=0;
+        bool globalSearch=false;
+    };
+    // Read-only localization: no link insertion, epoch registration or map correction.
+    bool localizeCurrentObservation(const SafeRelocalizationLimits & limits,
+        Transform & measured, RecoveryObservationDiagnostics & diagnostic, std::string & reason,
+        const SensorData * liveData=nullptr, const ImageInputIdentity * liveIdentity=nullptr) const;
     // Wrapper-owned candidate revalidation; no external transform is accepted.
     // Adds a nonvirtual method only, preserving the existing object layout.
     bool tryVisualRecoveryWithAcceptedImages(const SafeRelocalizationLimits & limits,
@@ -335,13 +350,16 @@ private:
         RecoveryLocalMotionFault & fault) const;
     bool validateObservationAgainstReferences(const SensorData & observation, const Transform & predicted,
         const std::map<int,Transform> & references, int excludedId, int requiredAnchor,
-        const SafeRelocalizationLimits & limits, Transform & measured, std::string & reason) const;
+        const SafeRelocalizationLimits & limits, Transform & measured, std::string & reason,
+        RecoveryObservationDiagnostics * diagnostic=nullptr, const std::vector<int> * rankedIds=nullptr) const;
     bool validateLocalMapObservation(const SensorData & data, const Transform & odomPose,
             int lastLocalNodeId, const SafeRelocalizationLimits & limits,
-            Transform & measuredLocalPose, std::string & reason) const;
+            Transform & measuredLocalPose, std::string & reason,
+            RecoveryObservationDiagnostics * diagnostic=nullptr) const;
     bool validateRegisteredMapObservation(const SensorData & data, const Transform & odomPose,
         int lastTrustedNodeId, const SafeRelocalizationLimits & limits,
-        Transform & measuredMainPose, std::string & reason) const;
+        Transform & measuredMainPose, std::string & reason,
+        RecoveryObservationDiagnostics * diagnostic=nullptr) const;
     bool validateProposedMapObservation(const SensorData & data, const Transform & odomPose,
         int lastTrustedNodeId, const Transform & proposedMapCorrection, const SafeRelocalizationLimits & limits,
         Transform & measuredMainPose, std::string & reason) const;
@@ -432,6 +450,10 @@ private:
 
 	void createGlobalScanMap();
 	void rememberCurrentGraphForSafeRelocalization();
+    bool evaluateCommittedEpochPromotion(const std::map<int, Transform> & livePoses,
+            const std::multimap<int, Link> & candidateConstraints,
+            std::map<int, Transform> & promotedPoses,
+            std::multimap<int, Link> & promotedConstraints, std::string & reason) const;
 	bool promoteCommittedEpochForSafeRelocalization(std::string & reason);
 	bool validateAndFreezeCommittedEpochForSafeRelocalization(std::string & reason);
 	void rebuildSafeRelocalizationTrustedComponents();
@@ -624,6 +646,8 @@ private:
         const ImageInputIdentity & input, std::string & receiptReason);
     std::map<int, AcceptedImageReceipt> _acceptedImageReceipts;
     std::int64_t _lastAcceptedImageStampNs = 0;
+    std::set<int> _safeRelocalizationArchivedIds;
+    std::vector<LocalSubmapSnapshot> _safeRelocalizationArchives;
 
 };
 

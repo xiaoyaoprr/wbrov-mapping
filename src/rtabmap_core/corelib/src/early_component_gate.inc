@@ -43,7 +43,8 @@
                     certificate.alignedMeanMaxDeg=std::max(certificate.alignedMeanMaxDeg,sum/certificate.gravityNodes);
             }
             std::string certificateReason;
-            earlyGravityCertified=certificate.eligible(certificateReason);
+            earlyGravityCertified=certificate.eligible(certificateReason,
+                recoveryScope==RecoveryScope::CurrentReanchor);
             UWARN("single-main-map early certificate eligible=%d nodes=%u gravity=%u span=%.6fs mean=%.6f max=%.6f aligned_mean=%.6f aligned_max=%.6f increase=%.6f reason=%s",
                 earlyGravityCertified?1:0,(unsigned int)certificate.nodes,(unsigned int)certificate.gravityNodes,certificate.sourceSpan,
                 certificate.beforeMeanDeg,certificate.beforeMaxDeg,certificate.alignedMeanMaxDeg,certificate.alignedMaxDeg,

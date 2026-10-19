@@ -12,6 +12,7 @@ SET(SRC_FILES
     DBReader.cpp
     
     Recovery.cpp
+    CanonicalImageDigest.cpp
     
     SensorCapture.cpp
     SensorCaptureThread.cpp
@@ -887,12 +888,14 @@ target_include_directories(rtabmap_core SYSTEM PUBLIC
   "$<BUILD_INTERFACE:${PUBLIC_INCLUDE_DIRS};${INCLUDE_DIRS}>"
   "$<INSTALL_INTERFACE:${PUBLIC_INCLUDE_DIRS}>")
   
+find_package(OpenSSL REQUIRED COMPONENTS Crypto)
 TARGET_LINK_LIBRARIES(rtabmap_core 
   PUBLIC 
     rtabmap_utilite 
     ${PUBLIC_LIBRARIES}
   PRIVATE 
-    ${LIBRARIES})
+    ${LIBRARIES}
+    OpenSSL::Crypto)
 
 SET_TARGET_PROPERTIES(
      rtabmap_core

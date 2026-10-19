@@ -1,0 +1,337 @@
+{
+  "scope": "component only; Hamming and hash buffer changes not adopted; reader remains isolated prototype",
+  "hamming": {
+    "32": {
+      "before_ms": 423.474,
+      "after_ms": 429.486
+    },
+    "64": {
+      "before_ms": 433.65,
+      "after_ms": 438.511
+    }
+  },
+  "hash": {
+    "rounds": [
+      {
+        "round": 0,
+        "mode": 0,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 381.151,
+        "sha256_equal": true
+      },
+      {
+        "round": 0,
+        "mode": 1,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 363.209,
+        "sha256_equal": true
+      },
+      {
+        "round": 0,
+        "mode": 2,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 363.618,
+        "sha256_equal": true
+      },
+      {
+        "round": 1,
+        "mode": 1,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 358.565,
+        "sha256_equal": true
+      },
+      {
+        "round": 1,
+        "mode": 2,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 363.331,
+        "sha256_equal": true
+      },
+      {
+        "round": 1,
+        "mode": 0,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 362.348,
+        "sha256_equal": true
+      },
+      {
+        "round": 2,
+        "mode": 2,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 363.286,
+        "sha256_equal": true
+      },
+      {
+        "round": 2,
+        "mode": 0,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 362.542,
+        "sha256_equal": true
+      },
+      {
+        "round": 2,
+        "mode": 1,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 360.88,
+        "sha256_equal": true
+      },
+      {
+        "round": 3,
+        "mode": 0,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 367.23,
+        "sha256_equal": true
+      },
+      {
+        "round": 3,
+        "mode": 1,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 363.694,
+        "sha256_equal": true
+      },
+      {
+        "round": 3,
+        "mode": 2,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 364.666,
+        "sha256_equal": true
+      },
+      {
+        "round": 4,
+        "mode": 1,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 359.966,
+        "sha256_equal": true
+      },
+      {
+        "round": 4,
+        "mode": 2,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 363.159,
+        "sha256_equal": true
+      },
+      {
+        "round": 4,
+        "mode": 0,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 363.333,
+        "sha256_equal": true
+      },
+      {
+        "round": 5,
+        "mode": 2,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 364.529,
+        "sha256_equal": true
+      },
+      {
+        "round": 5,
+        "mode": 0,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 361.647,
+        "sha256_equal": true
+      },
+      {
+        "round": 5,
+        "mode": 1,
+        "files": 72,
+        "bytes": 300680520,
+        "ms": 360.539,
+        "sha256_equal": true
+      }
+    ],
+    "median_ms_excluding_warmup": {
+      "0": 362.542,
+      "1": 360.539,
+      "2": 363.331
+    }
+  },
+  "reader": {
+    "rounds": [
+      {
+        "round": 0,
+        "mode": 0,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 4063.17,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 0,
+        "mode": 1,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3926.94,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 0,
+        "mode": 2,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3754.71,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 1,
+        "mode": 1,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3797.28,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 1,
+        "mode": 2,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3711.45,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 1,
+        "mode": 0,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 4009.76,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 2,
+        "mode": 2,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3704.46,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 2,
+        "mode": 0,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 4103.69,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 2,
+        "mode": 1,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3923.63,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 3,
+        "mode": 0,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 4154.58,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 3,
+        "mode": 1,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3794.38,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 3,
+        "mode": 2,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3711.52,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 4,
+        "mode": 1,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3796.66,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 4,
+        "mode": 2,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3702.79,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 4,
+        "mode": 0,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 4001.87,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 5,
+        "mode": 2,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3753.09,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 5,
+        "mode": 0,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3994.41,
+        "all_frame_bytes_equal": true
+      },
+      {
+        "round": 5,
+        "mode": 1,
+        "frames": 1581,
+        "bytes": 2176473600,
+        "stamp_xor": 1791653887744966608,
+        "ms": 3786.39,
+        "all_frame_bytes_equal": true
+      }
+    ],
+    "median_ms_excluding_warmup": {
+      "0": 4009.76,
+      "1": 3796.66,
+      "2": 3711.45
+    }
+  }
+}

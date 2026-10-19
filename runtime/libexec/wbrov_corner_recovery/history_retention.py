@@ -7,7 +7,8 @@ distinct Tags, not completed frames or repeated tracking epochs.
 from collections import defaultdict
 
 def ranked_old(rows):
-    return sorted((r for r in rows if r['branches']),key=lambda r:(-r['area'],r['stamp']))[:24]
+    from measured_bridge import reference_reservoir
+    return reference_reservoir(rows)
 
 def current_rows(rows):
     if not rows:return []
@@ -24,7 +25,9 @@ def compact(live,pending_ready):
     if graph.current is None:return
     epoch=graph.current['state']['reset_epoch']
     grouped=defaultdict(list)
-    for key,row in live.rows.items():grouped[(key[0],key[2])].append(row)
+    for key,row in live.rows.items():
+        if graph.has_pose_for_receipt(row['binding']['accepted_image_receipt']):
+            grouped[(key[0],key[2])].append(row)
     keep=set()
     for (e,tag),rows in grouped.items():
         if e==epoch:keep.update((e,r['id'],tag) for r in current_rows(rows))
@@ -57,7 +60,7 @@ def compact(live,pending_ready):
     for p in ([live.pending] if live.pending else [])+[d['proposal'] for d in live.deferred]:
         for edge in p['evidence']:pinned.update((edge['from_id'],edge['to_id']))
     for k,reference in list(live.references.items()):
-        if k[0]!=epoch:del live.references[k]
+        if k[0]!=epoch or any(not graph.has_pose_for_receipt(r['binding']['accepted_image_receipt']) for r in reference[0]):del live.references[k]
         else:pinned.update(r['id'] for r in reference[0])
     keep.update(k for k in live.rows if k[1] in pinned)
     old_counts=(len(live.rows),len(consumer.bindings),len(consumer.receipts))

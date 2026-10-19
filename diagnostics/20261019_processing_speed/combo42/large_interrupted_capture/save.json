@@ -1,0 +1,14 @@
+{
+  "complete": false,
+  "artifacts_saved": true,
+  "recording_complete": false,
+  "partial_reason": "capture interrupted; only sealed segments processed",
+  "historical_only": true,
+  "recovery_acceptance_passed": false,
+  "sha256": {
+    "map.db": "d16eef250737b99e8c836385a2c497816d7d9c7c4ec9dea3fd547cffb33911d0",
+    "main_cloud.ply": "97c31c613daa08eaba655142e2ea70fd98b0d56fb2f55ea6d76454fb04cdf573",
+    "frames.csv": "77e20735acd1eec079d5374adc7f69ef12f2e629c63e6acdf34fdbb32154898f",
+    "tags.json": "34be2f3410d2eec0736512bedc2c070d67bc82040ce76f0ac23d825ab9991e98"
+  }
+}

@@ -1,0 +1,11 @@
+test_all_zstd_and_length_errors_rejected (test_image_reader.ImageReader) ... ok
+test_full_bounds_frame (test_image_reader.ImageReader) ... ok
+test_full_canonical_and_tag_image_are_bit_exact (test_image_reader.ImageReader) ... ok
+test_segment_count_and_suffix_still_checked (test_image_reader.ImageReader) ... ok
+test_unused_depth_corruption_and_both_raster_bounds_still_rejected (test_image_reader.ImageReader) ... ok
+test_validity_and_time_rules_do_not_change (test_image_reader.ImageReader) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 3.574s
+
+OK

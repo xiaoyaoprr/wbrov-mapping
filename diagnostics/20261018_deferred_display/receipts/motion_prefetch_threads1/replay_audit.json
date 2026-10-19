@@ -1,0 +1,62 @@
+{
+  "scope": "closed recording replay, not new field test or production entry acceptance",
+  "frames": 1581,
+  "lost_frames": 25,
+  "lost_frame_main_write_permissions": 1,
+  "recovery_events": [
+    {
+      "source_ns": 1791653868380707000,
+      "nodes_at_recovery": 95,
+      "nodes_final": 101,
+      "continued_seconds": 16.599543,
+      "main_write_permissions_after": 403
+    }
+  ],
+  "database_quick_check": "ok",
+  "trajectory_nodes": 101,
+  "trajectory_edges": 99,
+  "trajectory_edges_within_trusted_epoch": true,
+  "sha256": {
+    "map.db": "d9a1909b1f96821b48b138f5a07ba1ee324cfd70b52c57d6d36086e6dbf5971d",
+    "main_cloud.ply": "d62d2e79a5071d4f88ff3d18946477aa909dc51f2e697f70476934c22572d906",
+    "frames.csv": "4f449bbbbb9540448106cf37754bf788112d6e6d52aeae9a4541bcf8eabacdec",
+    "tags.json": "d635a44ec71d80aa1c9d57d0527cef996b09fcc7db5aa6d68f4d0d7f6ba4d2ec"
+  },
+  "status": {
+    "schema": "wbrov.deferred-queue.v1",
+    "state": "closed",
+    "error": null,
+    "historical_only": true,
+    "navigation_authorized": false,
+    "recorded_source_ns": 1791653884980250000,
+    "recording_state": "closed",
+    "processed_source_ns": 1791653884980250000,
+    "acknowledged_source_ns": 1791653884980250000,
+    "verified_map_source_ns": 1791653884980250000,
+    "backlog_seconds": 0.0,
+    "completed_segments": 61,
+    "mapping": {
+      "schema": "wbrov.deferred-mapping.v1",
+      "state": "closed",
+      "historical_only": true,
+      "navigation_authorized": false,
+      "processed_source_ns": 1791653884980250000,
+      "verified_map_source_ns": 1791653884980250000,
+      "frames": 1581,
+      "input_gaps": 1,
+      "odometry_compute_ms": 82497.6,
+      "mapping_compute_ms": 88831.8,
+      "continuity_state": "NORMAL",
+      "main_map_write_allowed": true,
+      "observation_count": 5,
+      "observation_required": 5,
+      "epoch": 2,
+      "cuts": 25,
+      "recoveries": 1,
+      "main_nodes": 101,
+      "cloud_points": 119387,
+      "database_closed": true
+    }
+  },
+  "passed": false
+}

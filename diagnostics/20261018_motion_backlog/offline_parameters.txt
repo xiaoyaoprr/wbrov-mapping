@@ -1,0 +1,10 @@
+GFTT/MinDistance=3
+Odom/GuessMotion=false
+Odom/ResetCountdown=8
+OdomF2M/BundleAdjustmentMaxFrames=3
+Optimizer/Iterations=5
+Vis/CorGuessMatchToProjection=true
+Vis/GridCols=3
+Vis/GridRows=2
+Vis/MaxDepth=1.50
+Vis/MinInliers=15

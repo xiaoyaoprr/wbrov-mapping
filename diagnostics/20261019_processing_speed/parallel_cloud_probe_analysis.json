@@ -1,0 +1,39 @@
+{
+  "full_recovery_2": {
+    "nodes": 157,
+    "points": 62558,
+    "rounds": 6,
+    "all_point_fields_exact": true,
+    "baseline_median_ms": 269.75701,
+    "parallel_median_ms": 198.57071,
+    "reduction_percent": 26.38904545983809
+  },
+  "large_interrupted_capture_2": {
+    "nodes": 470,
+    "points": 440297,
+    "rounds": 6,
+    "all_point_fields_exact": true,
+    "baseline_median_ms": 1171.9783,
+    "parallel_median_ms": 717.8012,
+    "reduction_percent": 38.75302981292401
+  },
+  "full_recovery_3": {
+    "nodes": 157,
+    "points": 62558,
+    "rounds": 6,
+    "all_point_fields_exact": true,
+    "baseline_median_ms": 278.02209,
+    "parallel_median_ms": 152.46938,
+    "reduction_percent": 45.15925694969057
+  },
+  "large_interrupted_capture_3": {
+    "nodes": 470,
+    "points": 440297,
+    "rounds": 6,
+    "all_point_fields_exact": true,
+    "baseline_median_ms": 1188.865,
+    "parallel_median_ms": 682.0726,
+    "reduction_percent": 42.62825467988376
+  },
+  "scope": "Fixed-map microbenchmark includes copying owned inputs; excludes full mapping, camera and RViz. First round omitted from timing medians."
+}

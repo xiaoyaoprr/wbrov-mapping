@@ -1,0 +1,42 @@
+{
+  "comparison": "immutable v33 versus v35 source bundles",
+  "changed": {
+    "DeferredMappingSession.h": {
+      "v33": "110013e154851d22c8e977cb6ffa75dca65696e9263fb7e62a696ce1e6d885d8",
+      "v35": "fcf6f4d752e2bdedaf3901a28392b19749b29095f567cacacd6606b5afe2ea2f"
+    },
+    "RecordedCloudAssembly.h": {
+      "v33": "6188c5fc123e5d0b72a51f66901c659681e00c8dfdb1fb01a6cd4f408a026f07",
+      "v35": "1e15bfc04a216a6812fe28312fb9184cd92bd97a9e1e151646bb3a686a7093b2"
+    },
+    "RecordedCloudCache.h": {
+      "v33": "4610ca42a7661b2e4acb0362f5c29852861cdaff704370a649f40ca92e61f49c",
+      "v35": "b3a0115727c394e8e3a7891cfeead681928e094905915ef01c5fa0773dde5b84"
+    },
+    "RecordedOrderedPrefetch.h": {
+      "v33": null,
+      "v35": "b6ec6e99ed5ac8be24b499c061c4aa5f520fa96334352477fe964b5642395e9e"
+    },
+    "RecordedTaskPool.h": {
+      "v33": null,
+      "v35": "079df646ba528c6a58c029866051705cdc48fc8f0f24289dedaa2965c6a47dab"
+    },
+    "benchmark_recorded_cloud.cpp": {
+      "v33": "c47952c312407ab91d869f85b9d159f57090a6df2c84cd11748b9c6528f0c0c5",
+      "v35": null
+    },
+    "test_recorded_ordered_prefetch.cpp": {
+      "v33": null,
+      "v35": "6638c46ee704511238845e57be2b7a79cbce62b8787648a356aedf396357d05c"
+    },
+    "test_recorded_task_pool.cpp": {
+      "v33": null,
+      "v35": "7e5f012d0ed75ba83273aba3710abaf62d29b5a20f72630f8169676bf6803a40"
+    }
+  },
+  "supervisor_tools_equal": true,
+  "v35_source_sha256": "bd4999494a45cec554180e4a24358113f05172f3808378e647013d08c0917ad9",
+  "core_library_changed": false,
+  "production_deployment": false,
+  "scope": "two export threads; single-segment odometry lookahead in replay profile"
+}

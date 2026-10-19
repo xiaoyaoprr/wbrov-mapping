@@ -1,0 +1,9 @@
+{
+  "archive": "dirscan43_local_evidence.zip",
+  "bytes": 23939,
+  "sha256": "636b7a0f7b1e4dc8a09cfd5ea5da59a13153d912451acd999ed8dd882f42fdf4",
+  "crc_and_members_verified": true,
+  "repository_source_unchanged": true,
+  "adopted": false,
+  "native_jetson_validation": false
+}
