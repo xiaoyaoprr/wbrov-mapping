@@ -1,0 +1,5 @@
+In file included from /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/tag_speed11_build/proposal/native_probe.cpp:54:
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/tag_speed11_build/proposal/frame_inverse_cache.inc: In function ‘void equivalence()’:
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/tag_speed11_build/proposal/frame_inverse_cache.inc:6:20: warning: variable ‘frameCameraInverse’ set but not used [-Wunused-but-set-variable]
+    6 |         const auto frameCameraInverse = [&](int cameraIndex) -> const Transform & {
+      |                    ^~~~~~~~~~~~~~~~~~

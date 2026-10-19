@@ -2,6 +2,13 @@
 import math
 
 
+def tag_mode_line(status):
+    enabled=status.get('tag_detection_enabled')
+    if enabled is True:return 'Tag 识别 / 辅助重定位：已开启'
+    if enabled is False:return 'Tag 功能：已关闭；仍可尝试视觉恢复'
+    return 'Tag 功能：状态待确认'
+
+
 def recovery_lines(mapping, verified_tags):
     """Explain recorded evidence; absence of a Tag never means visual failure.
 

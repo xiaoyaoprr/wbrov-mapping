@@ -7,7 +7,7 @@ import json
 import cv2
 import numpy as np
 from PIL import Image as PillowImage,ImageDraw,ImageFont
-from deferred_display_state import mapping_label,trajectory_data,pose_axes,recovery_lines
+from deferred_display_state import mapping_label,trajectory_data,pose_axes,recovery_lines,tag_mode_line
 import rclpy
 from rclpy.node import Node
 from rclpy.executors import ExternalShutdownException
@@ -166,6 +166,7 @@ class Display(Node):
                     capture=f"采集/写盘等待 {entry['seconds_without_new_seal']:.0f}s"
             lines=[title,f"{capture}  |  待处理：{lag}",
                    f"主图：{mapping.get('main_nodes',0)} 个节点  |  恢复：{mapping.get('recoveries',0)} 次"]
+            lines.append(tag_mode_line(status))
             lines+=recovery_lines(mapping,tags[1] if tags else None)
             lines+=['青线：可信历史轨迹；黄点：Tag 位置','红X/绿Y/蓝Z：已处理位姿，非实时位姿']
             wrapped=[]

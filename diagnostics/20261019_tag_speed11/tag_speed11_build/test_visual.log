@@ -1,0 +1,41 @@
+PASS independent localization before three-bridge admission, wrong 10m prior, two raw old anchors, no graph mutation
+PASS independent local snapshot: first node identity, real local links only, no main nodes, deep-copy isolation
+PAIR current=0 old=16 ransac_threshold=0.1 tight=0
+forward inliers=628 backend= transform=xyz=0.000039,0.000201,0.000025 rpy=-0.000007,0.000007,-0.000264
+ words=628 side(id=0,image=320x240,cells=9,points=628,span=0.579804,hessian=0.335211) side(id=16,image=320x240,cells=9,points=628,span=0.579711,hessian=0.335082)
+ covariance finite=1 symmetry=0 min=1.66218e-07 max=1.66218e-07 condition=1
+ metric count=628 invalid=0 rms=0.00393788 max=0.0316291 above_025=2
+reverse inliers=630 backend= transform=xyz=0.000007,-0.000139,-0.000016 rpy=0.000006,-0.000008,0.000225
+ words=630 side(id=16,image=320x240,cells=9,points=630,span=0.57898,hessian=0.334876) side(id=0,image=320x240,cells=9,points=630,span=0.57902,hessian=0.334954)
+ covariance finite=1 symmetry=0 min=9.53558e-08 max=9.53558e-08 condition=1
+ metric count=630 invalid=0 rms=0.00399632 max=0.0316037 above_025=3
+ direction_distance=7.77404e-05 direction_angle_deg=0.00223467
+PAIR current=0 old=16 ransac_threshold=0.025 tight=1
+forward inliers=627 backend= transform=xyz=0.000111,0.000154,0.000021 rpy=-0.000008,0.000014,-0.000220
+ words=627 side(id=0,image=320x240,cells=9,points=627,span=0.580963,hessian=0.337065) side(id=16,image=320x240,cells=9,points=627,span=0.580855,hessian=0.336926)
+ covariance finite=1 symmetry=0 min=1.57311e-07 max=1.57311e-07 condition=1
+ metric count=627 invalid=0 rms=0.00356127 max=0.0227449 above_025=0
+reverse inliers=625 backend= transform=xyz=-0.000130,-0.000123,-0.000029 rpy=0.000006,-0.000012,0.000231
+ words=625 side(id=16,image=320x240,cells=9,points=625,span=0.580786,hessian=0.336148) side(id=0,image=320x240,cells=9,points=625,span=0.580855,hessian=0.336261)
+ covariance finite=1 symmetry=0 min=1.61652e-07 max=1.61652e-07 condition=1
+ metric count=625 invalid=0 rms=0.0033591 max=0.0227292 above_025=0
+ direction_distance=3.70293e-05 direction_angle_deg=0.000659308
+PASS strict consensus discards compression-sensitive >2.5cm correspondences while preserving >400 matches per direction; posterior thresholds unchanged
+PASS raw candidate support uses the solved signatures despite unrelated cached word IDs
+PASS trusted-map retrieval without native loop winner: source-bound, three raw candidates, unchanged geometry and registration
+PASS no native candidates: local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=1 registered=0 trusted_snapshot=1)
+PASS recent nonlatest candidate certifies complete suffix; missing continuation and stale source time rejected
+PASS duplicate old endpoint: visual recovery candidate identities are repeated or from a different epoch
+PASS missing accepted anchor image: visual recovery lacks six independent authenticated image receipts
+PASS missing first unanchored local image: submap first receipt missing
+PASS wrong session: image receipt source or session no longer matches the managed context
+PASS zero depth cannot relocalize: visual recovery raw bidirectional RGB-D geometry failed pair=(40,20) forward=(transform_or_inliers valid=0 inliers=0/25 backend=Missing correspondences for registration (40->20). fromWords = 0 fromImageEmpty=0 toWords = 0 toImageEmpty=0) reverse=(transform_or_inliers valid=0 inliers=0/25 backend=Missing correspondences for registration (20->40). fromWords = 680 fromImageEmpty=0 toWords = 0 toImageEmpty=0)
+PASS untrusted interior raw depth cannot be backfilled: submap continuity 29->30 lacks raw evidence; no gap backfill: raw bidirectional RGB-D check failed (f=0,r=0,finliers=0,rinliers=0,fbackend=Missing correspondences for registration (29->30). fromWords = 677 fromImageEmpty=0 toWords = 0 toImageEmpty=0,rbackend=Missing correspondences for registration (30->29). fromWords = 0 fromImageEmpty=0 toWords = 0 toImageEmpty=0)
+PASS disconnected interior neighbor cannot be guessed from late anchors: submap continuity breaks at 30->31: missing measured neighbor; uncertain gap must remain separate
+PASS false interior motion edge cannot be certified by valid late anchors: submap continuity 30->31 raw motion disagrees with its odometry or measured neighbor edge
+PASS continuity loss immediately before first graph mutation: recovery continuity ticket expired or was invalidated before commit
+PASS full historical backfill remains rejected by an earlier motion contradiction: submap continuity 30->31 raw motion disagrees with its odometry or measured neighbor edge
+PASS current reanchor prepares the final three views despite an earlier unregistered motion contradiction
+observation callback rejected sample=2 distance=0.0999399 angle_deg=0.0150163 final_correction=xyz=0.000000,0.000000,-0.000000 rpy=-0.000000,-0.000000,0.000000 measured=xyz=1.509940,-0.000136,-0.000005 rpy=0.000010,-0.000004,0.000262
+PASS read-only post-commit loop preview: consistent closure accepted, conflicting closure rejected before adoption, unchanged state and healthy odometry extension preserved
+PASS native no-Tag raw RGB-D transaction: preparation and observation do not mutate graph, certificate-gated registration, old poses unchanged, negatives unchanged, repeat rejected. Synthetic texture/depth/odometry/IMU and test-selected candidate IDs; no hardware or recorded retrieval proof.

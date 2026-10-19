@@ -360,6 +360,26 @@ Transform OdometryF2M::computeTransform(
 	}
 	UDEBUG("lastFrameModels=%ld", lastFrameModels.size());
 
+	// Camera models are complete above and read-only for this computeTransform.
+	// Compute each requested inverse once, using the original Transform::inverse.
+	// Keep the cache frame-local and lazy: an unused/singular model is never inverted.
+	std::vector<Transform> frameCameraInverses;
+	std::vector<unsigned char> frameCameraInverseReady;
+	const auto frameCameraInverse = [&](int cameraIndex) -> const Transform & {
+		UASSERT(cameraIndex >= 0 && cameraIndex < (int)lastFrameModels.size());
+		if(frameCameraInverseReady.empty())
+		{
+			frameCameraInverses.resize(lastFrameModels.size());
+			frameCameraInverseReady.resize(lastFrameModels.size(), 0);
+		}
+		if(!frameCameraInverseReady[cameraIndex])
+		{
+			frameCameraInverses[cameraIndex] = lastFrameModels[cameraIndex].localTransform().inverse();
+			frameCameraInverseReady[cameraIndex] = 1;
+		}
+		return frameCameraInverses[cameraIndex];
+	};
+
 	// Generate keypoints from the new data
 	if(lastFrame_->sensorData().isValid())
 	{
@@ -546,7 +566,7 @@ Transform OdometryF2M::computeTransform(
 										util3d::isFinite(lastFrame_->getWords3()[iter2D->second]))
 									{
 										//move back point in camera frame (to get depth along z)
-										d = util3d::transformPoint(lastFrame_->getWords3()[iter2D->second], lastFrameModels[cameraIndex].localTransform().inverse()).z;
+										d = util3d::transformPoint(lastFrame_->getWords3()[iter2D->second], frameCameraInverse(cameraIndex)).z;
 									}
 									references.insert(std::make_pair(lastFrame_->id(), FeatureBA(kpt, d, cv::Mat(), cameraIndex)));
 								}
@@ -932,7 +952,7 @@ Transform OdometryF2M::computeTransform(
 									float depth = 0.0f;
 									if(util3d::isFinite(pt))
 									{
-										depth = util3d::transformPoint(pt, lastFrameModels[cameraIndex].localTransform().inverse()).z;
+										depth = util3d::transformPoint(pt, frameCameraInverse(cameraIndex)).z;
 									}
 									if(bundleWordReferences_.find(iter->first) == bundleWordReferences_.end())
 									{
@@ -1001,7 +1021,7 @@ Transform OdometryF2M::computeTransform(
 									float depth = 0.0f;
 									if(util3d::isFinite(iter->second.second.second.first))
 									{
-										depth = util3d::transformPoint(iter->second.second.second.first, lastFrameModels[cameraIndex].localTransform().inverse()).z;
+										depth = util3d::transformPoint(iter->second.second.second.first, frameCameraInverse(cameraIndex)).z;
 									}
 									if(bundleWordReferences_.find(iter->second.first) == bundleWordReferences_.end())
 									{
@@ -1474,7 +1494,7 @@ Transform OdometryF2M::computeTransform(
 										util3d::isFinite(lastFrame_->getWords3()[lastFrame_->getWords().find(iter->first)->second]))
 									{
 										//move back point in camera frame (to get depth along z)
-										d = util3d::transformPoint(lastFrame_->getWords3()[lastFrame_->getWords().find(iter->first)->second], lastFrameModels[cameraIndex].localTransform().inverse()).z;
+										d = util3d::transformPoint(lastFrame_->getWords3()[lastFrame_->getWords().find(iter->first)->second], frameCameraInverse(cameraIndex)).z;
 									}
 
 

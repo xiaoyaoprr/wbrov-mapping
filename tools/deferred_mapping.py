@@ -232,6 +232,7 @@ def run(args):
         done=int(worker.get('processed_source_ns',receipts.source_ns))
         atomic_status_snapshot(out/'status.json',{'schema':'wbrov.deferred-queue.v1','state':state,'error':error,
             'historical_only':True,'navigation_authorized':False,'recorded_source_ns':latest,
+            'tag_detection_enabled':tag_observer is not None,
             'recording_state':capture_state.get('state','waiting'),
             'processed_source_ns':done,'acknowledged_source_ns':receipts.source_ns,
             'verified_map_source_ns':worker.get('verified_map_source_ns',0),

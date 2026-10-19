@@ -1,0 +1,20 @@
+vendor control complete, no candidate cache executed
+=================================================================
+==1354106==ERROR: AddressSanitizer: alloc-dealloc-mismatch (malloc vs operator delete) on 0xffff70a03b90
+==1354106==AddressSanitizer CHECK failed: ../../../../src/libsanitizer/asan/asan_errors.cpp:131 "((dealloc_stack->size)) > ((0))" (0x0, 0x0)
+    #0 0xffff95989454 in AsanCheckFailed ../../../../src/libsanitizer/asan/asan_rtl.cpp:74
+    #1 0xffff959aaa5c in __sanitizer::CheckFailed(char const*, int, char const*, unsigned long long, unsigned long long) ../../../../src/libsanitizer/sanitizer_common/sanitizer_termination.cpp:78
+    #2 0xffff95901230 in __asan::ErrorAllocTypeMismatch::Print() ../../../../src/libsanitizer/asan/asan_errors.cpp:131
+    #3 0xffff95989274 in __asan::ScopedInErrorReport::~ScopedInErrorReport() ../../../../src/libsanitizer/asan/asan_report.cpp:141
+    #4 0xffff959874a8 in __asan::ReportAllocTypeMismatch(unsigned long, __sanitizer::BufferedStackTrace*, __asan::AllocType, __asan::AllocType) ../../../../src/libsanitizer/asan/asan_report.cpp:248
+    #5 0xffff958fd99c in __asan::Allocator::Deallocate(void*, unsigned long, unsigned long, __sanitizer::BufferedStackTrace*, __asan::AllocType) ../../../../src/libsanitizer/asan/asan_allocator.cpp:701
+    #6 0xffff95981e94 in operator delete(void*, unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cpp:172
+    #7 0xffff93a6d384 in __cxa_finalize stdlib/cxa_finalize.c:83
+    #8 0xffff78757764  (/usr/lib/aarch64-linux-gnu/nvidia/libnvfnet.so+0x7764)
+    #9 0xffff963bb394 in _dl_fini elf/dl-fini.c:142
+    #10 0xffff93a6cde4 in __run_exit_handlers stdlib/exit.c:113
+    #11 0xffff93a6cf08 in __GI_exit stdlib/exit.c:143
+    #12 0xffff93a573fc in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:74
+    #13 0xffff93a574c8 in __libc_start_main_impl ../csu/libc-start.c:392
+    #14 0xaaaaca928cac in _start (/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/tag_speed11_build/vendor_control+0x8cac)
+

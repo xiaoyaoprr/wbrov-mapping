@@ -1,9 +1,14 @@
 from pathlib import Path
 import sys,unittest
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'src/visualization'))
-from deferred_display_state import mapping_label,trajectory_data,pose_axes,recovery_lines
+from deferred_display_state import mapping_label,trajectory_data,pose_axes,recovery_lines,tag_mode_line
 
 class DisplayState(unittest.TestCase):
+    def test_tag_mode_distinguishes_disabled_from_no_detection_and_unknown(self):
+        self.assertIn('已开启',tag_mode_line({'tag_detection_enabled':True,'mapping':{'detected_tags_in_processed_frame':0}}))
+        self.assertIn('已关闭',tag_mode_line({'tag_detection_enabled':False}))
+        self.assertIn('状态待确认',tag_mode_line({}))
+
     def test_no_tag_is_not_a_visual_recovery_veto(self):
         lines=recovery_lines({'recovery_route':'visual_keyframes','main_map_write_allowed':False,
                               'detected_tags_in_processed_frame':1},{'tags':[]})
