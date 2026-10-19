@@ -8,7 +8,7 @@ get_filename_component(WBROV_SOURCE_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../.." ABS
 set(WBROV_CORE_SOURCE "${WBROV_SOURCE_ROOT}/src/rtabmap_core/corelib/src")
 set(WBROV_SLAM_INCLUDE "${WBROV_SOURCE_ROOT}/src/rtabmap_ros/rtabmap_slam/include")
 
-foreach(name early_certificate jump_gate global_publication_gate mapping_continuity_gate localization_evidence_gate deferred_processing_lane recorded_cloud_cache recorded_keyframe_schedule recorded_lookahead recorded_lookahead_window recorded_task_pool recorded_ordered_prefetch recorded_cloud_order)
+foreach(name early_certificate jump_gate global_publication_gate mapping_continuity_gate mapping_quality_trace localization_evidence_gate deferred_processing_lane recorded_cloud_cache recorded_keyframe_schedule recorded_lookahead recorded_lookahead_window recorded_task_pool recorded_ordered_prefetch recorded_cloud_order)
   add_executable(test_${name} test_${name}.cpp)
   target_include_directories(test_${name} PRIVATE "${WBROV_CORE_SOURCE}" "${WBROV_SLAM_INCLUDE}" "${WBROV_SOURCE_ROOT}/src/deferred_mapping")
   target_link_libraries(test_${name} PRIVATE Threads::Threads)

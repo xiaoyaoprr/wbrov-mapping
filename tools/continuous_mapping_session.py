@@ -58,6 +58,18 @@ def load_config(path,pin):
     return c
 
 
+def processing_command(c,out,state):
+    command=['/usr/bin/python3','-B',c['supervisor'],'--recording',str(out/'rgbd_spool'),
+        '--output',str(out/'processing'),'--worker',c['worker'],'--verifier',c['verifier'],
+        '--odom-parameters',c['odom_parameters'],'--map-parameters',c['map_parameters'],
+        '--worker-pid-file',str(state/'slam.pid'),'--save-closed-prefix']
+    # argparse's Path('') becomes '.', which is truthy and would import the
+    # Tag observer even though the configuration explicitly disabled it.
+    if c.get('tag_modules'):
+        command+=['--tag-modules',c['tag_modules']]
+    return command
+
+
 class Session:
     def __init__(self,config,state,output,launcher_pid):
         self.config=config;self.state=state;self.output=output;self.launcher_pid=launcher_pid
@@ -148,10 +160,7 @@ class Session:
                 if status.exists() and json.loads(status.read_text()).get('sealed_segments',0)>0:break
                 if time.monotonic()>deadline:raise TimeoutError('camera input did not seal within 90 seconds')
                 time.sleep(.2)
-            proc=self.spawn('processing',['/usr/bin/python3','-B',c['supervisor'],'--recording',str(out/'rgbd_spool'),
-                '--output',str(out/'processing'),'--worker',c['worker'],'--verifier',c['verifier'],
-                '--odom-parameters',c['odom_parameters'],'--map-parameters',c['map_parameters'],
-                '--tag-modules',c['tag_modules'],'--worker-pid-file',str(self.state/'slam.pid'),'--save-closed-prefix'],env)
+            proc=self.spawn('processing',processing_command(c,out,self.state),env)
             deadline=time.monotonic()+15
             while not (out/'processing').is_dir():
                 if proc.poll() is not None or time.monotonic()>deadline:raise RuntimeError('processing did not start')

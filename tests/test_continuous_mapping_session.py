@@ -17,6 +17,22 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
 
 @unittest.skipUnless(sys.platform=='linux','session ownership requires Linux /proc')
 class SessionTest(unittest.TestCase):
+    def test_optional_tag_configuration_reaches_parser_as_disabled(self):
+        from continuous_mapping_session import processing_command
+        import deferred_mapping
+        config={n:'/fixture/'+n for n in ['supervisor','worker','verifier','odom_parameters','map_parameters']}
+        for tag in (None,'','/fixture/tag_modules'):
+            for omitted in (False,True):
+                c=dict(config)
+                if not omitted:c['tag_modules']=tag
+                command=processing_command(c,Path('/out'),Path('/state'))
+                with self.subTest(tag=tag,omitted=omitted),patch.object(sys,'argv',command[2:]),patch.object(deferred_mapping,'run',return_value=0) as run:
+                    self.assertEqual(deferred_mapping.main(),0)
+                    args=run.call_args.args[0]
+                    self.assertEqual(args.tag_modules,Path(tag) if tag and not omitted else None)
+                    self.assertTrue(args.save_closed_prefix)
+                    self.assertEqual(args.worker_pid_file,Path('/state/slam.pid'))
+
     def test_interrupted_capture_drains_sealed_prefix_and_closes_worker(self):
         from deferred_mapping import run,atomic_json
         from argparse import Namespace

@@ -52,6 +52,8 @@ int main() {
     auto producer=std::async(std::launch::async,[&]{return writer.append_wait(3,0ms);});
     assert(producer.wait_for(50ms)==std::future_status::timeout);
     release.set_value();assert(producer.get());writer.close();assert((written==std::vector<int>{1,2,3}));
+    const auto s=writer.snapshot();assert(s.accepted==3 && s.completed==3 && s.queued==0 && s.highWater==1);
+    assert(s.waits==1 && s.waitMs>=0 && s.maxWaitMs==s.waitMs);
   }
   {
     std::promise<void> entered,release;auto released=release.get_future().share();

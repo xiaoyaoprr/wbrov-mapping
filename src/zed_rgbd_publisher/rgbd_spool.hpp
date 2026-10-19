@@ -1,6 +1,9 @@
 #pragma once
 #include "bounded_async_writer.hpp"
 #include "rgbd_frame_codec.hpp"
+#include "spool_file_commit.hpp"
+#include "spool_io_observation.hpp"
+#include "segment_commit_queue.hpp"
 #include <iostream>
 #include <atomic>
 #include <array>
@@ -80,17 +83,12 @@ inline Frame readRecord(std::istream &s,bool compressed) {
     if(raw.peek()!=std::char_traits<char>::eof())throw std::runtime_error("unaccounted decoded frame suffix");
     return f;
 }
-inline void syncFile(const std::filesystem::path &p) {
-    const int fd=::open(p.c_str(),O_RDONLY);if(fd<0)throw std::runtime_error("spool sync open failed");
-    const int rc=::fsync(fd);::close(fd);if(rc)throw std::runtime_error("spool fsync failed");
-}
-inline void atomicText(const std::filesystem::path &p,const std::string &text) {
-    const auto tmp=p.string()+".tmp";
-    {std::ofstream out(tmp);out<<text;out.flush();if(!out)throw std::runtime_error("spool status write failed");}
-    syncFile(tmp);std::filesystem::rename(tmp,p);syncFile(p.parent_path());
-}
 class Writer {
 public:
+    // The hook is for deterministic offline fault tests, not a runtime option.
+    explicit Writer(std::function<void(const char *)> beforeCommit={}):beforeCommit_(std::move(beforeCommit)){}
+    static constexpr std::size_t MAX_PENDING_SEGMENTS=32;
+    static constexpr std::uint64_t MAX_PENDING_BYTES=512ULL*1024*1024;
     void start(const std::string &calibration) {
         const char *dir=std::getenv("WBROV_RGBD_SPOOL_DIR");if(!dir || !*dir)return;
         if(const char *segment=std::getenv("WBROV_RAW_SEGMENT_SECONDS"))if(*segment)
@@ -107,6 +105,8 @@ public:
             std::filesystem::copy_file(std::filesystem::path(raw)/file,root_/file);
         atomicText(root_/"metadata.json","{\"schema\":\"wbrov.rgbd-spool.v1\",\"historical_only\":true,\"depth_units\":\"m\",\"depth_type\":\"float32le\",\"frame_encoding\":\"zstd-depth-byte-planes-v2\",\"body_from_camera_xyzw\":[-0.5,0.5,-0.5,0.5],\"chunk_source_span_ns\":1000000000}\n");
         status("recording",false);
+        telemetry_.open(root_/"seal_latency.jsonl");
+        committer_=std::make_unique<SegmentCommitQueue<Segment>>(MAX_PENDING_SEGMENTS,MAX_PENDING_BYTES,[this](const Segment &s){commit(s);});
         writer_=std::make_unique<BoundedAsyncWriter<Frame>>(64,[this](const Frame &f){consume(f);});
         enabled_=true;
     }
@@ -125,18 +125,29 @@ public:
     }
     void finish(bool clean) {
         if(!enabled_)return;
-        try {writer_->close();seal();status("closed",clean);enabled_=false;}
-        catch(...) {enabled_=false;try {status("failed",false);}catch(...) {}throw;}
+        std::exception_ptr failure;
+        try {writer_->close();seal();}catch(...){failure=std::current_exception();}
+        // Always join BOTH workers before reporting failure or destroying their
+        // state. Prior complete segments may still be safely committed.
+        try {committer_->close();}catch(...){if(!failure)failure=std::current_exception();}
+        enabled_=false;
+        if(failure){try{status("failed",false);}catch(...){}std::rethrow_exception(failure);}
+        status("closed",clean);
     }
     ~Writer(){try {finish(false);}catch(...) {}}
 private:
-    std::string name() const {std::ostringstream s;s<<"segment-"<<std::setw(8)<<std::setfill('0')<<sequence_;return s.str();}
+    struct Segment {
+        std::uint64_t sequence=0,first=0,last=0,count=0,total=0,bytes=0;
+        double flushMs=0;
+    };
+    static std::string name(std::uint64_t sequence) {std::ostringstream s;s<<"segment-"<<std::setw(8)<<std::setfill('0')<<sequence;return s.str();}
     void consume(const Frame &f) {
         stage_=1;
+        committer_->check();
         if(f.sourceNs<=last_)throw std::runtime_error("spool source stamps must increase");
         if(!stream_.is_open()) {
             if(std::filesystem::space(root_).available<4ULL*1024*1024*1024)throw std::runtime_error("spool less than 4 GiB reserve");
-            stream_.open(root_/(name()+".partial"),std::ios::binary);stream_.write("WBROVRGBD2\n",11);first_=f.sourceNs;count_=0;
+            stream_.open(root_/(name(sequence_)+".partial"),std::ios::binary);stream_.write("WBROVRGBD2\n",11);first_=f.sourceNs;count_=0;
         }
         stage_=2;writeRecord(stream_,f);last_=f.sourceNs;++count_;++total_;
         if(last_-first_>=1000000000ULL)seal();
@@ -146,30 +157,68 @@ private:
         if(!stream_.is_open())return;
         const auto begin=std::chrono::steady_clock::now();stage_=3;
         stream_.flush();if(!stream_)throw std::runtime_error("spool flush failed");stream_.close();
-        const auto partial=root_/(name()+".partial"),final=root_/(name()+".frames");
-        const auto flushed=std::chrono::steady_clock::now();stage_=4;
-        syncFile(partial);std::filesystem::rename(partial,final);
-        const auto synced=std::chrono::steady_clock::now();stage_=5;
-        std::ostringstream receipt;receipt<<"{\"schema\":\"wbrov.rgbd-spool-segment.v1\",\"sequence\":"<<sequence_
-            <<",\"frames\":"<<count_<<",\"first_source_ns\":"<<first_<<",\"last_source_ns\":"<<last_
-            <<",\"bytes\":"<<std::filesystem::file_size(final)<<"}\n";
-        atomicText(root_/(name()+".json"),receipt.str());++sequence_;status("recording",false);
+        if(!stream_)throw std::runtime_error("spool close failed");
+        Segment segment;segment.sequence=sequence_;segment.first=first_;segment.last=last_;
+        segment.count=count_;segment.total=total_;segment.bytes=std::filesystem::file_size(root_/(name(sequence_)+".partial"));
+        segment.flushMs=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-begin).count();
+        stage_=4;committer_->append(segment,segment.bytes);++sequence_;stage_=0;
+    }
+    void commit(const Segment &segment) {
+        const auto before=observeIo();const auto begin=std::chrono::steady_clock::now();
+        if(segment.sequence!=durableSegments_)throw std::runtime_error("out-of-order durability commit");
+        const auto stem=name(segment.sequence);
+        std::ostringstream receipt;receipt<<"{\"schema\":\"wbrov.rgbd-spool-segment.v1\",\"sequence\":"<<segment.sequence
+            <<",\"frames\":"<<segment.count<<",\"first_source_ns\":"<<segment.first<<",\"last_source_ns\":"<<segment.last
+            <<",\"bytes\":"<<segment.bytes<<"}\n";
+        const auto times=commitSegment(root_/(stem+".partial"),root_/(stem+".frames"),root_/(stem+".json"),receipt.str(),beforeCommit_);
+        ++durableSegments_;durableLast_=segment.last;durableTotal_=segment.total;
+        // Replaceable telemetry, published only AFTER the durability barrier.
+        // Startup and final status remain durable; no uncommitted input is
+        // advertised, even if the latest recording status is lost on poweroff.
+        status("recording",false,false);
         const auto done=std::chrono::steady_clock::now();
+        const auto after=observeIo();
+        const double totalMs=segment.flushMs+std::chrono::duration<double,std::milli>(done-begin).count();
+        const auto queue=writer_->snapshot();
+        const auto pending=committer_->snapshot();
+        telemetry_<<"{\"sequence\":"<<segment.sequence<<",\"last_source_ns\":"<<segment.last
+            <<",\"flush_ms\":"<<segment.flushMs<<",\"data_fsync_ms\":"<<times.dataSyncMs<<",\"data_rename_ms\":"<<times.dataRenameMs
+            <<",\"receipt_write_ms\":"<<times.receiptWriteMs<<",\"receipt_fsync_ms\":"<<times.receiptSyncMs
+            <<",\"receipt_rename_ms\":"<<times.receiptRenameMs<<",\"directory_fsync_ms\":"<<times.directorySyncMs
+            <<",\"total_ms\":"<<totalMs<<",\"queue_depth\":"<<queue.queued<<",\"queue_high_water\":"<<queue.highWater
+            <<",\"producer_waits\":"<<queue.waits<<",\"producer_wait_ms\":"<<queue.waitMs
+            <<",\"pending_segments\":"<<pending.pending<<",\"pending_bytes\":"<<pending.bytes
+            <<",\"pending_high_water_bytes\":"<<pending.highWaterBytes<<",\"scheduler_thread\":\"segment_committer\""
+            <<",\"scheduler_available\":"<<(before.schedulerAvailable&&after.schedulerAvailable?"true":"false")
+            <<",\"writer_cpu_ns\":"<<counterDelta(before.runtimeNs,after.runtimeNs,before.schedulerAvailable&&after.schedulerAvailable)
+            <<",\"writer_runqueue_wait_ns\":"<<counterDelta(before.runqueueNs,after.runqueueNs,before.schedulerAvailable&&after.schedulerAvailable)
+            <<",\"memory_available\":"<<(before.memoryAvailable&&after.memoryAvailable?"true":"false")
+            <<",\"dirty_kib_before\":"<<before.dirtyKiB<<",\"dirty_kib_after\":"<<after.dirtyKiB
+            <<",\"writeback_kib_before\":"<<before.writebackKiB<<",\"writeback_kib_after\":"<<after.writebackKiB
+            <<",\"io_psi_available\":"<<(before.pressureAvailable&&after.pressureAvailable?"true":"false")
+            <<",\"io_some_us\":"<<counterDelta(before.ioSomeUs,after.ioSomeUs,before.pressureAvailable&&after.pressureAvailable)
+            <<",\"io_full_us\":"<<counterDelta(before.ioFullUs,after.ioFullUs,before.pressureAvailable&&after.pressureAvailable)<<"}\n";
+        telemetry_.flush(); // diagnostics are not part of the input commit
         if(std::chrono::duration<double>(done-begin).count()>.5)
-            std::cerr<<"[RGBD_SPOOL_SEAL_LATENCY] sequence="<<sequence_-1
-                     <<" flush_ms="<<std::chrono::duration<double,std::milli>(flushed-begin).count()
-                     <<" data_sync_ms="<<std::chrono::duration<double,std::milli>(synced-flushed).count()
-                     <<" receipt_sync_ms="<<std::chrono::duration<double,std::milli>(done-synced).count()<<std::endl;
-        stage_=0;
+            std::cerr<<"[RGBD_SPOOL_SEAL_LATENCY] sequence="<<segment.sequence
+                     <<" flush_ms="<<segment.flushMs
+                     <<" data_fsync_ms="<<times.dataSyncMs<<" data_rename_ms="<<times.dataRenameMs
+                     <<" receipt_fsync_ms="<<times.receiptSyncMs<<" directory_fsync_ms="<<times.directorySyncMs<<std::endl;
     }
-    void status(const char *state,bool clean) {
+    void status(const char *state,bool clean,bool durable=true) {
         std::ostringstream s;s<<"{\"schema\":\"wbrov.rgbd-spool.v1\",\"state\":\""<<state
-            <<"\",\"clean_shutdown\":"<<(clean?"true":"false")<<",\"sealed_segments\":"<<sequence_
-            <<",\"last_source_ns\":"<<last_<<",\"frames\":"<<total_<<",\"navigation_authorized\":false}\n";
-        atomicText(root_/"status.json",s.str());
+            <<"\",\"clean_shutdown\":"<<(clean?"true":"false")<<",\"sealed_segments\":"<<durableSegments_
+            <<",\"durable_segments\":"<<durableSegments_<<",\"last_source_ns\":"<<durableLast_<<",\"frames\":"<<durableTotal_<<",\"navigation_authorized\":false";
+        if(writer_) {const auto q=writer_->snapshot();s<<",\"queue_depth\":"<<q.queued<<",\"queue_high_water\":"<<q.highWater
+            <<",\"accepted_frames\":"<<q.accepted<<",\"producer_waits\":"<<q.waits<<",\"producer_wait_ms\":"<<q.waitMs<<",\"producer_max_wait_ms\":"<<q.maxWaitMs;}
+        if(committer_){const auto q=committer_->snapshot();s<<",\"pending_segments\":"<<q.pending<<",\"pending_bytes\":"<<q.bytes
+            <<",\"pending_high_water_bytes\":"<<q.highWaterBytes<<",\"pending_byte_limit\":"<<MAX_PENDING_BYTES<<",\"pending_segment_limit\":"<<MAX_PENDING_SEGMENTS;}
+        s<<"}\n";atomicText(root_/"status.json",s.str(),durable);
     }
-    std::filesystem::path root_;std::ofstream stream_;std::unique_ptr<BoundedAsyncWriter<Frame>> writer_;
+    std::filesystem::path root_;std::ofstream stream_,telemetry_;std::unique_ptr<BoundedAsyncWriter<Frame>> writer_;
+    std::unique_ptr<SegmentCommitQueue<Segment>> committer_;std::function<void(const char *)> beforeCommit_;
     bool enabled_=false;std::uint64_t first_=0,last_=0,count_=0,total_=0,sequence_=0;
+    std::uint64_t durableSegments_=0,durableLast_=0,durableTotal_=0;
     std::atomic<int> stage_{0};
 };
 }

@@ -23,6 +23,27 @@ void mapObservations(Gate &g,long long start,Gate::Epoch epoch=0,Gate::Evidence 
 }
 int main() {
     {
+        // A normal-quality measured pose (e.g. ratio .30) is enough to keep
+        // the registered map running, although it cannot establish recovery.
+        // No Tag or relocalization is involved in this continuous motion.
+        Gate g;normal(g);auto ordinary=visual();ordinary.recoveryGeometry=false;
+        for(int i=3;i<30;++i) {
+            const auto t=T+i*D;observe(g,t,ordinary);
+            assert(g.mainMapAllowed(0,t,t) && g.processAllowed(true,t,t,t));
+            assert(!g.localGeometryReady(t,t,t));
+            assert(g.frameProcessingReady(0,true,t,t,t));
+            assert(!g.frameProcessingReady(1,true,t,t,t));
+            assert(!g.frameProcessingReady(0,false,t,t,t));
+            assert(!g.frameProcessingReady(0,true,t-D*4,t,t));
+        }
+        auto weak=ordinary;weak.visualGeometry=false;observe(g,T+30*D,weak);
+        assert(!g.frameProcessingReady(0,true,T+30*D,T+30*D,T+30*D));
+        observe(g,T+31*D,ordinary);
+        assert(!g.frameProcessingReady(0,true,T+31*D,T+31*D,T+31*D));
+        Gate fresh;for(int i=0;i<8;++i)observe(fresh,T+i*D,ordinary);
+        assert(!fresh.frameProcessingReady(0,true,T+7*D,T+7*D,T+7*D));
+    }
+    {
         Gate g;normal(g);const auto serial=g.localContinuitySerial();
         auto weak=visual();weak.visualGeometry=weak.recoveryGeometry=false;
         observe(g,T+3*D,weak);stable(g,T+4*D);
