@@ -1,0 +1,29 @@
+{
+  "driver": {
+    "entry": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate5_notags/run_continuous_mapping_with_light.sh",
+    "entry_sha256": "164eab8b46d3b243b26e6588002234c48c6f944cf1081610e220cdca4ee3db08",
+    "wrapper_pid": 1159977,
+    "wrapper_ticks": "53549984",
+    "start_monotonic": 535499.84474112,
+    "phase": "closed",
+    "motion_keys_sent": false,
+    "inputs": [
+      "authorized existing entry confirmation: OK"
+    ],
+    "scope": "candidate stationary capture/storage check; Tag disabled; no movement requested or commanded",
+    "tag_detection_enabled": false,
+    "elapsed_s": 68.54380211199168,
+    "wrapper_exit": 1
+  },
+  "processes": [],
+  "latest_run": "/home/exocean/.cache/wbrov_water_mapping/run_20261012_061357.F8QIP4",
+  "teleop.log": "\u001b[H\u001b[2J\u001b[3J水池键盘遥控（启动只连通信/心跳，不发运动包；方向键或H才首次控制）\n\n现场注意：\n  1. 机器人已可靠系留，已确认机身各轴方向；推进器周围无人、无线缆或杂物，人员可随时断电。\n  2. 初始化与通讯就绪后不发送任何运动控制包；不自动前进、下潜、回正或发送零值锁定/解锁。\n  3. W/S、A/D、R/F均为机身BODY直接油门；方向键或H才首次进入飞控运动控制，H关闭时松开最后一个方向键即锁定。\n     R/F使用独立机身Z油门，默认200=20%，不是cm/s；可在自定义参数JSON中设置。\n     H仅开启/关闭主机Roll/Pitch回平，保留3.5°重启阈值和≤0.10°/s请求上限；不复位故障。\n     姿态数据无效时只暂停自动回平，不因IMU预检阻挡方向键；真实通讯失联仍停机。\n     H关且只按平移键时使用欧拉角模式、Roll/Pitch/Yaw锁定位全0；人工转动或H开时才使用角速度模式。\n     Warning 0x01仅显示低压告警，不自动锁定；电量不足请按现场流程停机。\n     失焦立即归零；重新聚焦后用新按键恢复手动，不需要H。长按不设运动事件计时停机。\n     空格、真实断联或控制循环卡死会锁定；确认安全并松开运动键后用Enter恢复手动。\n     x / Ctrl-C / 关闭窗口仍锁定退出。\n\n手动BODY遥控：启动只连通信/心跳，不发送运动控制包；方向键或H才首次控制。\nW/S机身前后，A/D机身左右，R/F机身Z负/正；方向随机体姿态改变。\nH是“姿态回正”开关：只开关旧版主机横滚/俯仰PID；不自动前进/入水，不定深。\nH关闭且只按平移键时，发送厂家欧拉角模式但三轴锁定位全0，不再发送三轴0°/s。\n人工转动键临时使用角速度模式；H开启后才叠加主机横滚/俯仰回正量。\n姿态数据异常时只暂停自动回平；方向键继续可用，人工转动逐轴优先。\n←/→或Z/C横滚，↑/↓或I/K俯仰，Q/E偏航；L、[、]控制同一控制器的灯。\n空格急停；真实断联/程序卡死仍锁定，松开运动键后Enter恢复手动；X/Ctrl-C退出。\n失焦归零，返回后用新按键继续；无长按事件计时停机。\nMANUAL_BODY_Z_THROTTLE/JSON manual_vertical_throttle是独立油门（不是cm/s）。\n注意：H关的纯平移使用厂家明确标注的三轴“不锁定”；这仍需实水确认固件实际响应。\n\n>>> GUI 模式: velocity, 手动BODY：前后油门200、横移油门200、机身Z油门200；H或按钮是姿态回正开关（旧版主机PID），默认关闭；无自动入水/定深, DRY_RUN=False\n自定义参数：/home/exocean/Desktop/机器人键盘遥控/0-自定义遥控参数.json (SHA256 5000208f4c7c)\n键盘实际下发：W/S=200  A/D=200  R/F=12cm/s  Q/E=8°/s  俯仰=5°/s  横滚=5°/s\n地面站截图参考：200/200/40/160/160/160/200/200（原值无单位，机械爪键盘未绑定）\n[SDK] 已连接；启动阶段未发送任何运动控制包；方向键或H才首次进入飞控运动控制\n[姿态日志] /home/exocean/.cache/wbrov_control/attitude_20261012_061404_1160127_535516615420288.csv\n[灯光] 已由同一遥控控制器设置双灯30%，SDK持续20Hz发送（协议无ACK）\n[6DoF/手动BODY待命] 启动零运动包 / 已用后锁定 · H关 · 按方向键或H才进入运动控制\n[安全] 已提交锁定命令，正在退出（协议无 ACK）\n[SDK] 已提交锁定命令、灯光归零并退出（协议无 ACK）\n",
+  "exit_summary.txt": "exit_status=1\nfailure_reason=等待同一遥控控制器灯光就绪超时；查看/home/exocean/.cache/wbrov_water_mapping/run_20261012_061357.F8QIP4/teleop.log\nmapping_exit_status=0\n",
+  "kernel_read": {
+    "exit": 0,
+    "stderr": "",
+    "events": [
+      "[535183.581192] exocean-desktop kernel: nvme nvme0: I/O 669 QID 7 timeout, completion polled"
+    ]
+  }
+}

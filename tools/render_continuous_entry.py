@@ -75,6 +75,25 @@ exit "$result"
     wrapper=wrapper[:start]+'''    "$mapping_launcher" --check-only || fail '连续建图运行文件或配置校验失败。'
 '''+wrapper[end:]
     wrapper=wrapper.replace('count<attempts; count++','attempts == 0 || count<attempts; count++')
+    # cmdline can disappear before /proc/PID during ordinary child exit.
+    # Observe that transient state within the existing 10-second bound; never
+    # send a signal or accept a shutdown receipt using an uncertain identity.
+    start=wrapper.index('wait_same() {');end=wrapper.index('\nwait_mapping_launcher()',start)
+    wrapper=wrapper[:start]+'''wait_same() {
+    local pid="$1" ticks="$2" pattern="$3" attempts="$4" count uncertain=0
+    for ((count=0; count<attempts; count++)); do
+        if ! same_process "$pid" "$ticks" "$pattern"; then
+            if ! pid_may_be_running "$pid"; then return 0; fi
+            uncertain=1
+        else
+            uncertain=0
+        fi
+        sleep 0.1
+    done
+    ((uncertain)) && return 2
+    return 1
+}
+'''+wrapper[end:]
     wrapper=wrapper.replace('if wait_mapping_launcher 1200; then','if wait_mapping_launcher 0; then')
     # Only after the session exited can remainder cleanup run. Never terminate
     # the ordered worker just because drain time exceeded a legacy threshold.

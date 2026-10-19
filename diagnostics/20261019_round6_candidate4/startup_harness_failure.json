@@ -1,0 +1,5 @@
+{
+  "failure": "Expected field phase completed/failed; actual field driver uses closed. Assertion stopped before build. Corrected to closed and wrapper_exit 0, then launched once.",
+  "production_changed": false,
+  "camera_opened": false
+}

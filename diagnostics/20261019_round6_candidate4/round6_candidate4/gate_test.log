@@ -1,0 +1,1 @@
+PASS: bootstrap, measured hysteresis, unique/fresh source, observation before candidate commit, failed K/loss invalidate commit, bounded slow verification, stalled solve/current freshness rejection, unique final commit, same-epoch no-Tag, depth/IMU boundaries

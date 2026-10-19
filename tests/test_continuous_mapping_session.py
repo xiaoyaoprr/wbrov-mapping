@@ -95,6 +95,27 @@ for line in sys.stdin:
             (mapping/'main_cloud.ply').write_bytes(b'changed')
             with self.assertRaisesRegex(ValueError,'identity'):s.verify_save()
 
+    def test_exit_wait_observes_cmdline_disappearance_without_signalling(self):
+        from render_continuous_entry import render
+        repo=Path(__file__).resolve().parents[1]
+        _,wrapper=render(Path('/tmp/frozen-map'),'a'*64,'b'*64,(repo/'launch/candidate_receipt_resume/run_water_mapping_with_light.sh').read_text(),'c'*64)
+        function=wrapper[wrapper.index('wait_same() {'):wrapper.index('\nwait_mapping_launcher()')]
+        cases=[('transient',0,1),('unknown',2,3),('running',1,3),('gone',0,0)]
+        for mode,expected,sleeps in cases:
+            script=function+'''
+n=0
+same_process() { [[ "$mode" == running ]]; }
+pid_may_be_running() { [[ "$mode" == unknown || "$mode" == running || ( "$mode" == transient && "$n" == 0 ) ]]; }
+sleep() { n=$((n+1)); }
+kill() { echo forbidden-signal; exit 88; }
+wait_same 123 456 pattern 3
+result=$?
+printf '%s %s\\n' "$result" "$n"
+'''
+            q=subprocess.run(['/usr/bin/bash','-c',script],env=dict(os.environ,mode=mode),capture_output=True,text=True,timeout=5)
+            self.assertEqual(q.returncode,0,q.stderr)
+            self.assertEqual(q.stdout.strip(),f'{expected} {sleeps}')
+
     def test_renderer_keeps_teleop_exit_before_unbounded_mapping_drain(self):
         from render_continuous_entry import render
         repo=Path(__file__).resolve().parents[1]

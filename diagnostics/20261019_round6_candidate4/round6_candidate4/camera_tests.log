@@ -1,0 +1,38 @@
+Internal ctest changing into directory: /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_candidate4/camera_build
+Test project /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_candidate4/camera_build
+      Start  1: rgbd_frame_codec_offline
+ 1/16 Test  #1: rgbd_frame_codec_offline .........   Passed    0.28 sec
+      Start  2: rgbd_codec_sdk_offline
+ 2/16 Test  #2: rgbd_codec_sdk_offline ...........   Passed    0.21 sec
+      Start  3: rgbd_spool_offline
+ 3/16 Test  #3: rgbd_spool_offline ...............   Passed    0.18 sec
+      Start  4: spool_file_commit_offline
+ 4/16 Test  #4: spool_file_commit_offline ........   Passed    0.24 sec
+      Start  5: async_spool_commit_offline
+ 5/16 Test  #5: async_spool_commit_offline .......   Passed    1.21 sec
+      Start  6: async_diagnostics_offline
+ 6/16 Test  #6: async_diagnostics_offline ........   Passed    0.01 sec
+      Start  7: bounded_async_writer_offline
+ 7/16 Test  #7: bounded_async_writer_offline .....   Passed    0.13 sec
+      Start  8: raw_calibration_audit_offline
+ 8/16 Test  #8: raw_calibration_audit_offline ....   Passed    0.01 sec
+      Start  9: depth_range_filter_offline
+ 9/16 Test  #9: depth_range_filter_offline .......   Passed    0.01 sec
+      Start 10: dual_stream_schedule_offline
+10/16 Test #10: dual_stream_schedule_offline .....   Passed    0.01 sec
+      Start 11: exact_odom_stamp_gate_offline
+11/16 Test #11: exact_odom_stamp_gate_offline ....   Passed    0.01 sec
+      Start 12: map_frame_lifecycle_offline
+12/16 Test #12: map_frame_lifecycle_offline ......   Passed    0.01 sec
+      Start 13: map_stamp_audit_offline
+13/16 Test #13: map_stamp_audit_offline ..........   Passed    0.01 sec
+      Start 14: valid_odom_pose_offline
+14/16 Test #14: valid_odom_pose_offline ..........   Passed    0.00 sec
+      Start 15: imu_frame_conversion_offline
+15/16 Test #15: imu_frame_conversion_offline .....   Passed    0.00 sec
+      Start 16: capture_telemetry_offline
+16/16 Test #16: capture_telemetry_offline ........   Passed    0.01 sec
+
+100% tests passed, 0 tests failed out of 16
+
+Total Test time (real) =   2.32 sec

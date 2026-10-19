@@ -1,0 +1,6 @@
+{
+  "dmesg_exit": 1,
+  "stderr": "dmesg: read kernel buffer failed: Operation not permitted\n",
+  "start_monotonic": 534490.958417984,
+  "storage_or_oom_events": []
+}

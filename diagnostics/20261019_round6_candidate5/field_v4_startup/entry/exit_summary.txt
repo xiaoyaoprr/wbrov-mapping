@@ -1,0 +1,3 @@
+exit_status=1
+failure_reason=等待同一遥控控制器灯光就绪超时；查看/home/exocean/.cache/wbrov_water_mapping/run_20261012_061357.F8QIP4/teleop.log
+mapping_exit_status=0

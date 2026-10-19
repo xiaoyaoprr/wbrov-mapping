@@ -9,8 +9,8 @@
 #include <thread>
 #include <utility>
 
-// Queues CLOSED file descriptors/paths, never image buffers. Both the active
-// commit and waiting commits count against the limits. Backpressure remains
+// Both the active record and waiting records count against the limits. Callers
+// supply owned byte capacity when records contain buffers. Backpressure remains
 // lossless and bounded if storage cannot catch up; this is not unlimited RAM.
 template<class Record> class SegmentCommitQueue {
 public:
@@ -54,6 +54,7 @@ private:
                     item=std::move(queue_.front());queue_.pop_front();
                 }
                 sink_(item.first);
+                item.first=Record{}; // release owned buffers before admitting more
                 {std::lock_guard<std::mutex> lock(mutex_);--stats_.pending;stats_.bytes-=item.second;}
                 space_.notify_all();
             }
