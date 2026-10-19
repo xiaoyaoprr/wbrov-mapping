@@ -1,0 +1,121 @@
+{
+  "phase": "completed",
+  "scope": "offline capture pacing with deterministic fsync delay; no hardware or deployment",
+  "steps": [
+    {
+      "name": "compile_delay",
+      "exit": 0,
+      "seconds": 1.0179153279168531
+    },
+    {
+      "name": "compile_baseline",
+      "exit": 0,
+      "seconds": 5.428218847955577
+    },
+    {
+      "name": "paced_baseline_stall",
+      "exit": 0,
+      "seconds": 79.17398380802479,
+      "measurement": {
+        "scope": "offline RGB-D writer only, no concurrent SVO or camera",
+        "frames": 1581,
+        "byte_exact": true,
+        "source_seconds": 64.9473,
+        "producer_seconds": 64.9482,
+        "closed_seconds": 65.0433,
+        "append_p99_ms": 0.936384,
+        "append_max_ms": 5.06166,
+        "pacing_lag_max_ms": 0.670936,
+        "frames_over_300ms_late": 0,
+        "raw_bytes": 2176745532,
+        "packed_bytes": 1315167008
+      },
+      "spool_status": {
+        "schema": "wbrov.rgbd-spool.v1",
+        "state": "closed",
+        "clean_shutdown": true,
+        "sealed_segments": 61,
+        "durable_segments": 61,
+        "last_source_ns": 1791653884980250000,
+        "frames": 1581,
+        "navigation_authorized": false,
+        "queue_depth": 0,
+        "queue_high_water": 2,
+        "accepted_frames": 1581,
+        "producer_waits": 0,
+        "producer_wait_ms": 0,
+        "producer_max_wait_ms": 0,
+        "pending_segments": 0,
+        "pending_bytes": 0,
+        "pending_high_water_bytes": 308187486,
+        "pending_byte_limit": 536870912,
+        "pending_segment_limit": 32
+      }
+    },
+    {
+      "name": "compile_candidate",
+      "exit": 0,
+      "seconds": 5.584232832072303
+    },
+    {
+      "name": "paced_candidate_stall",
+      "exit": 0,
+      "seconds": 77.11342000006698,
+      "measurement": {
+        "scope": "offline RGB-D writer only, no concurrent SVO or camera",
+        "frames": 1581,
+        "byte_exact": true,
+        "source_seconds": 64.9473,
+        "producer_seconds": 64.9482,
+        "closed_seconds": 65.0561,
+        "append_p99_ms": 0.921248,
+        "append_max_ms": 3.94838,
+        "pacing_lag_max_ms": 0.416,
+        "frames_over_300ms_late": 0,
+        "raw_bytes": 2176745532,
+        "packed_bytes": 1315167008
+      },
+      "spool_status": {
+        "schema": "wbrov.rgbd-spool.v1",
+        "state": "closed",
+        "clean_shutdown": true,
+        "sealed_segments": 61,
+        "durable_segments": 61,
+        "last_source_ns": 1791653884980250000,
+        "frames": 1581,
+        "navigation_authorized": false,
+        "queue_depth": 0,
+        "queue_high_water": 2,
+        "accepted_frames": 1581,
+        "producer_waits": 0,
+        "producer_wait_ms": 0,
+        "producer_max_wait_ms": 0,
+        "pending_segments": 0,
+        "pending_bytes": 0,
+        "pending_high_water_bytes": 308187486,
+        "pending_byte_limit": 536870912,
+        "pending_segment_limit": 32
+      }
+    },
+    {
+      "name": "paced_candidate_normal",
+      "exit": 0,
+      "seconds": 77.27705561602488,
+      "measurement": {
+        "scope": "offline RGB-D writer only, no concurrent SVO or camera",
+        "frames": 1581,
+        "byte_exact": true,
+        "source_seconds": 64.9473,
+        "producer_seconds": 64.9483,
+        "closed_seconds": 65.4763,
+        "append_p99_ms": 0.929056,
+        "append_max_ms": 2.34214,
+        "pacing_lag_max_ms": 0.549152,
+        "frames_over_300ms_late": 0,
+        "raw_bytes": 2176745532,
+        "packed_bytes": 1315167008
+      }
+    }
+  ],
+  "field_acceptance": false
+}

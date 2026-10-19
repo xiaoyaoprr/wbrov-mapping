@@ -1,0 +1,47 @@
+{
+  "package": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate3_notags_v2",
+  "before": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_combo42_camera6",
+  "changed": [
+    "entry.json",
+    "run_continuous_mapping_with_light.sh",
+    "start_rtabmap_continuous.sh",
+    "tests/test_continuous_mapping_session.py",
+    "tests/test_deferred_display_state.py",
+    "tests/test_deferred_mapping.py",
+    "tools/continuous_mapping_session.py",
+    "src/visualization/deferred_display_state.py",
+    "src/visualization/deferred_map_display.py",
+    "bin/wbrov_replay_worker",
+    "bin/zed_rgbd_publisher_rate_ab"
+  ],
+  "camera_sha256": "c546a11c7ccd2e545fda2a02d94d13b32fbc60b11dc44057e79ca9a610bed330",
+  "worker_sha256": "db18f631196d3bb65844b57d74a344d705ed5ffbb39ede3a27e0dd7948633931",
+  "entry_sha256": "dd89fd0fa10a7834ab38356c5f4fb5ce401aeb976c6178b69cf116ff20b48d69",
+  "wrapper_sha256": "3231263d2b9c077dea2a1393652b96719e83a39edb4c472117bf362dca3b4382",
+  "check_only": "{\"checked\": true, \"all_frames\": true, \"profile\": \"continuous_new_map\", \"navigation_authorized\": false}\n",
+  "checks": [
+    {
+      "name": "test_deferred_mapping",
+      "exit": 0,
+      "output": ".............\n----------------------------------------------------------------------\nRan 13 tests in 1.197s\n\nOK\n"
+    },
+    {
+      "name": "test_continuous_mapping_session",
+      "exit": 0,
+      "output": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.673s\n\nOK\n"
+    },
+    {
+      "name": "test_deferred_display_state",
+      "exit": 0,
+      "output": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "name": "test_deferred_recorded_pixels",
+      "exit": 0,
+      "output": ".........\n----------------------------------------------------------------------\nRan 9 tests in 0.282s\n\nOK\n"
+    }
+  ],
+  "tag_detection_enabled": false,
+  "production_changed": false,
+  "field_acceptance": false
+}

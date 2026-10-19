@@ -1,0 +1,45 @@
+{
+  "package": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate3_notags",
+  "before": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_combo42_camera6",
+  "changed": [
+    "entry.json",
+    "run_continuous_mapping_with_light.sh",
+    "start_rtabmap_continuous.sh",
+    "tests/test_deferred_display_state.py",
+    "tests/test_deferred_mapping.py",
+    "src/visualization/deferred_display_state.py",
+    "src/visualization/deferred_map_display.py",
+    "bin/wbrov_replay_worker",
+    "bin/zed_rgbd_publisher_rate_ab"
+  ],
+  "camera_sha256": "c546a11c7ccd2e545fda2a02d94d13b32fbc60b11dc44057e79ca9a610bed330",
+  "worker_sha256": "db18f631196d3bb65844b57d74a344d705ed5ffbb39ede3a27e0dd7948633931",
+  "entry_sha256": "7d4ed853c1150c0fffcfb2fc51538f1f5e9e4e3edf8968407c9a94f9e54618c8",
+  "wrapper_sha256": "0b8c9326df9ba575e4f80e3f99d87e45a986cccc132a68b09eaad76276b4e8f2",
+  "check_only": "{\"checked\": true, \"all_frames\": true, \"profile\": \"continuous_new_map\", \"navigation_authorized\": false}\n",
+  "checks": [
+    {
+      "name": "test_deferred_mapping",
+      "exit": 0,
+      "output": ".............\n----------------------------------------------------------------------\nRan 13 tests in 0.140s\n\nOK\n"
+    },
+    {
+      "name": "test_continuous_mapping_session",
+      "exit": 0,
+      "output": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.654s\n\nOK\n"
+    },
+    {
+      "name": "test_deferred_display_state",
+      "exit": 0,
+      "output": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "name": "test_deferred_recorded_pixels",
+      "exit": 0,
+      "output": ".........\n----------------------------------------------------------------------\nRan 9 tests in 0.269s\n\nOK\n"
+    }
+  ],
+  "tag_detection_enabled": false,
+  "production_changed": false,
+  "field_acceptance": false
+}

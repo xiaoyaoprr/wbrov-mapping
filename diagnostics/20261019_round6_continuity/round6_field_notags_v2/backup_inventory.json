@@ -1,0 +1,3970 @@
+{
+  "root": "/home/exocean/maps/rtabmap_calibration_ab/continuous_20261012_051722_1055871",
+  "files": [
+    {
+      "path": "saved_map.json",
+      "bytes": 533
+    },
+    {
+      "path": "bridge.log",
+      "bytes": 458271
+    },
+    {
+      "path": "processing.log",
+      "bytes": 0
+    },
+    {
+      "path": "recording_verify.log",
+      "bytes": 1784
+    },
+    {
+      "path": "lifecycle.json",
+      "bytes": 408
+    },
+    {
+      "path": "stop_capture",
+      "bytes": 0
+    },
+    {
+      "path": "rviz.log",
+      "bytes": 1145
+    },
+    {
+      "path": "graph_display.log",
+      "bytes": 51597
+    },
+    {
+      "path": "entry_status.json",
+      "bytes": 645
+    },
+    {
+      "path": "raw_recording/verification.json",
+      "bytes": 1932
+    },
+    {
+      "path": "raw_recording/recording.json",
+      "bytes": 240
+    },
+    {
+      "path": "raw_recording/sdk_version.txt",
+      "bytes": 6
+    },
+    {
+      "path": "raw_recording/water_calibration.yml",
+      "bytes": 947
+    },
+    {
+      "path": "raw_recording/capture.jsonl",
+      "bytes": 723542
+    },
+    {
+      "path": "raw_recording/camera_imu_extrinsics.json",
+      "bytes": 286
+    },
+    {
+      "path": "raw_recording/stereo.svo2",
+      "bytes": 1529657948
+    },
+    {
+      "path": "raw_recording/runtime.json",
+      "bytes": 198
+    },
+    {
+      "path": "raw_recording/init.json",
+      "bytes": 1055
+    },
+    {
+      "path": "raw_recording/status.json",
+      "bytes": 398
+    },
+    {
+      "path": "processing/input-00000195.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000071.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000111.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000027.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000083.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000212.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000070.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000015.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000232.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000099.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000169.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000049.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000153.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000213.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000193.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000184.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000094.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000104.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000152.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000130.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000174.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000085.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000215.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000061.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000178.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000200.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000167.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000043.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000051.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000154.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000144.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000127.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000009.json",
+      "bytes": 1061
+    },
+    {
+      "path": "processing/input-00000068.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000078.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000012.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000150.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000138.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000160.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000200.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000032.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000139.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000134.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000000.json",
+      "bytes": 520
+    },
+    {
+      "path": "processing/receipt-00000223.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000004.json",
+      "bytes": 1061
+    },
+    {
+      "path": "processing/receipt-00000039.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000091.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000170.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000211.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000089.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000137.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000126.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000116.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000001.json",
+      "bytes": 520
+    },
+    {
+      "path": "processing/receipt-00000181.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000160.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000020.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000016.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000181.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000149.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000208.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000034.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000113.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000189.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000084.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000037.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000074.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000219.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000225.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000028.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000145.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000183.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000220.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000233.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000063.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000018.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000203.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000071.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000227.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000007.json",
+      "bytes": 520
+    },
+    {
+      "path": "processing/receipt-00000046.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000131.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000166.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000075.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000198.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000003.json",
+      "bytes": 520
+    },
+    {
+      "path": "processing/input-00000222.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000110.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000098.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000213.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000172.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000170.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000081.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000018.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000010.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000206.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000036.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000198.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000048.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000126.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000010.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000035.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000002.json",
+      "bytes": 520
+    },
+    {
+      "path": "processing/input-00000155.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000054.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000144.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000028.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000050.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000066.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000222.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000141.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000097.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000141.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000139.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000147.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000180.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000041.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000035.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000007.json",
+      "bytes": 1061
+    },
+    {
+      "path": "processing/input-00000036.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000176.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000184.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000226.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000191.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000030.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000031.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000173.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000191.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000161.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000187.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000119.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000094.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000013.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000175.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000190.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000092.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000073.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000208.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000177.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000204.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000182.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000011.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000157.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000096.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000159.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000030.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000088.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000065.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000211.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000159.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000229.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000080.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000055.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000194.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/session.json",
+      "bytes": 727
+    },
+    {
+      "path": "processing/receipt-00000008.json",
+      "bytes": 520
+    },
+    {
+      "path": "processing/receipt-00000072.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000008.json",
+      "bytes": 1061
+    },
+    {
+      "path": "processing/input-00000014.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000077.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000206.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000140.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000060.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000070.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000221.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000179.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000146.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000017.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000052.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000037.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000076.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000063.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000217.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000207.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000219.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000172.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000178.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000199.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000080.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000129.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000154.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000003.json",
+      "bytes": 1061
+    },
+    {
+      "path": "processing/receipt-00000127.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000045.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000086.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000189.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000156.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000056.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000132.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000106.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000155.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000201.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000081.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000109.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000006.json",
+      "bytes": 1061
+    },
+    {
+      "path": "processing/input-00000113.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000082.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000164.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000040.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000086.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000001.json",
+      "bytes": 1061
+    },
+    {
+      "path": "processing/input-00000202.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000074.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000021.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000091.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000224.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000066.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000069.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000179.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000135.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000023.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000042.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000171.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000168.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000201.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000090.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/save.json",
+      "bytes": 533
+    },
+    {
+      "path": "processing/receipt-00000040.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000088.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000136.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000065.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000033.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000162.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000121.json",
+      "bytes": 2186
+    },
+    {
+      "path": "processing/input-00000062.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000188.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000210.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000177.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000140.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000121.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000122.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000186.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000082.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000218.json",
+      "bytes": 2186
+    },
+    {
+      "path": "processing/input-00000054.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000068.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000176.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000167.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000192.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000234.json",
+      "bytes": 1063
+    },
+    {
+      "path": "processing/receipt-00000168.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000005.json",
+      "bytes": 520
+    },
+    {
+      "path": "processing/receipt-00000131.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000199.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000220.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000090.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000050.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000204.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000092.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000087.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000048.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000150.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000109.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000112.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000069.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000026.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000230.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000060.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000119.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000044.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000158.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000125.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000038.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000216.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000025.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000004.json",
+      "bytes": 520
+    },
+    {
+      "path": "processing/input-00000033.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000039.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000107.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000142.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000115.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000002.json",
+      "bytes": 1061
+    },
+    {
+      "path": "processing/input-00000231.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000147.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000005.json",
+      "bytes": 1061
+    },
+    {
+      "path": "processing/input-00000103.json",
+      "bytes": 1063
+    },
+    {
+      "path": "processing/input-00000075.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000058.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000197.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000157.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000232.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000174.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000148.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000053.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000158.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000067.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000047.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000105.json",
+      "bytes": 1063
+    },
+    {
+      "path": "processing/receipt-00000047.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000051.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000093.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000023.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000056.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000118.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000188.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000098.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000024.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000076.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000122.json",
+      "bytes": 2186
+    },
+    {
+      "path": "processing/receipt-00000227.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000032.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/worker.log",
+      "bytes": 11381
+    },
+    {
+      "path": "processing/input-00000104.json",
+      "bytes": 1063
+    },
+    {
+      "path": "processing/input-00000182.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000173.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000192.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000012.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000205.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000185.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000217.json",
+      "bytes": 2186
+    },
+    {
+      "path": "processing/receipt-00000143.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000079.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000034.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000095.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000162.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000148.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000057.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000079.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000097.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000132.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000175.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000229.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000164.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000156.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000059.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000187.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000133.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000136.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000171.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000019.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000108.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000197.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000233.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000117.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000011.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000100.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000190.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000124.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000099.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000153.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000089.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000120.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000125.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000029.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000203.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000100.json",
+      "bytes": 1063
+    },
+    {
+      "path": "processing/receipt-00000110.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000085.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000210.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000059.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000026.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000226.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000212.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000042.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000152.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000134.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000114.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000052.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000084.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000135.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000214.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000196.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000195.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000105.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000221.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000043.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000194.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000027.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000025.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000044.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000055.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000115.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000207.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000114.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000151.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000101.json",
+      "bytes": 1063
+    },
+    {
+      "path": "processing/input-00000057.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000046.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000107.json",
+      "bytes": 1063
+    },
+    {
+      "path": "processing/receipt-00000062.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000014.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000041.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000118.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000214.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000116.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000228.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000102.json",
+      "bytes": 1063
+    },
+    {
+      "path": "processing/receipt-00000015.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000165.json",
+      "bytes": 2186
+    },
+    {
+      "path": "processing/input-00000106.json",
+      "bytes": 1063
+    },
+    {
+      "path": "processing/receipt-00000231.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000049.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000117.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000000.json",
+      "bytes": 1061
+    },
+    {
+      "path": "processing/input-00000017.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000038.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000218.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000077.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000169.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000020.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000205.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000130.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000095.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000228.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000045.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000216.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000031.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000067.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000112.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000161.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000072.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000149.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000129.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000123.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000087.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000133.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000124.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000215.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000022.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000137.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000101.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000224.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000093.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000166.json",
+      "bytes": 2186
+    },
+    {
+      "path": "processing/receipt-00000230.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000078.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000143.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000165.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000006.json",
+      "bytes": 520
+    },
+    {
+      "path": "processing/receipt-00000234.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000123.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000128.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000009.json",
+      "bytes": 520
+    },
+    {
+      "path": "processing/receipt-00000202.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000064.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000128.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000120.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000225.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000061.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000016.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/receipt-00000111.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000145.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000013.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000102.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000223.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000151.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000183.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000021.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000073.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000163.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000096.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000196.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000193.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000019.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000142.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000053.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000029.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000186.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/receipt-00000185.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000209.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000108.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000058.json",
+      "bytes": 521
+    },
+    {
+      "path": "processing/input-00000064.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000022.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000103.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000146.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/receipt-00000180.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/input-00000083.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/input-00000209.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/input-00000024.json",
+      "bytes": 1062
+    },
+    {
+      "path": "processing/receipt-00000163.json",
+      "bytes": 522
+    },
+    {
+      "path": "processing/status.json",
+      "bytes": 5085
+    },
+    {
+      "path": "processing/input-00000138.json",
+      "bytes": 2187
+    },
+    {
+      "path": "processing/optimizer_trace/124_before_poses.csv",
+      "bytes": 525
+    },
+    {
+      "path": "processing/optimizer_trace/124_before_links.csv",
+      "bytes": 997
+    },
+    {
+      "path": "processing/optimizer_trace/137_after_links.csv",
+      "bytes": 997
+    },
+    {
+      "path": "processing/optimizer_trace/125_before_poses.csv",
+      "bytes": 532
+    },
+    {
+      "path": "processing/optimizer_trace/137_before_poses.csv",
+      "bytes": 528
+    },
+    {
+      "path": "processing/optimizer_trace/137_after_poses.csv",
+      "bytes": 527
+    },
+    {
+      "path": "processing/optimizer_trace/124_after_links.csv",
+      "bytes": 997
+    },
+    {
+      "path": "processing/optimizer_trace/125_before_links.csv",
+      "bytes": 1001
+    },
+    {
+      "path": "processing/optimizer_trace/125_after_links.csv",
+      "bytes": 1001
+    },
+    {
+      "path": "processing/optimizer_trace/125_after_poses.csv",
+      "bytes": 526
+    },
+    {
+      "path": "processing/optimizer_trace/124_after_poses.csv",
+      "bytes": 526
+    },
+    {
+      "path": "processing/optimizer_trace/137_before_links.csv",
+      "bytes": 997
+    },
+    {
+      "path": "processing/optimizer_trace/calls.csv",
+      "bytes": 510120
+    },
+    {
+      "path": "processing/mapping/frames.csv",
+      "bytes": 1562109
+    },
+    {
+      "path": "processing/mapping/frontend_timings.json",
+      "bytes": 241
+    },
+    {
+      "path": "processing/mapping/map.db",
+      "bytes": 306716672
+    },
+    {
+      "path": "processing/mapping/main_cloud.ply",
+      "bytes": 54806
+    },
+    {
+      "path": "processing/mapping/core.log",
+      "bytes": 14525
+    },
+    {
+      "path": "processing/mapping/tags.json",
+      "bytes": 306
+    },
+    {
+      "path": "processing/mapping/status.json",
+      "bytes": 3750
+    },
+    {
+      "path": "rgbd_spool/segment-00000070.frames",
+      "bytes": 19566777
+    },
+    {
+      "path": "rgbd_spool/segment-00000052.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000171.frames",
+      "bytes": 25592478
+    },
+    {
+      "path": "rgbd_spool/segment-00000093.frames",
+      "bytes": 19224351
+    },
+    {
+      "path": "rgbd_spool/segment-00000019.frames",
+      "bytes": 19569844
+    },
+    {
+      "path": "rgbd_spool/segment-00000133.frames",
+      "bytes": 19609599
+    },
+    {
+      "path": "rgbd_spool/segment-00000033.frames",
+      "bytes": 17223413
+    },
+    {
+      "path": "rgbd_spool/segment-00000021.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000210.frames",
+      "bytes": 24505985
+    },
+    {
+      "path": "rgbd_spool/segment-00000226.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000104.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000035.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000142.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000055.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000071.frames",
+      "bytes": 19242558
+    },
+    {
+      "path": "rgbd_spool/segment-00000003.json",
+      "bytes": 158
+    },
+    {
+      "path": "rgbd_spool/segment-00000227.frames",
+      "bytes": 24555435
+    },
+    {
+      "path": "rgbd_spool/segment-00000140.frames",
+      "bytes": 23133874
+    },
+    {
+      "path": "rgbd_spool/segment-00000066.frames",
+      "bytes": 17542674
+    },
+    {
+      "path": "rgbd_spool/segment-00000031.frames",
+      "bytes": 19576748
+    },
+    {
+      "path": "rgbd_spool/segment-00000013.frames",
+      "bytes": 16924898
+    },
+    {
+      "path": "rgbd_spool/segment-00000228.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000105.frames",
+      "bytes": 19284054
+    },
+    {
+      "path": "rgbd_spool/segment-00000229.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000155.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000084.frames",
+      "bytes": 19281503
+    },
+    {
+      "path": "rgbd_spool/segment-00000139.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000101.frames",
+      "bytes": 17553883
+    },
+    {
+      "path": "rgbd_spool/segment-00000189.frames",
+      "bytes": 25030515
+    },
+    {
+      "path": "rgbd_spool/segment-00000024.frames",
+      "bytes": 18565140
+    },
+    {
+      "path": "rgbd_spool/segment-00000192.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000076.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000030.frames",
+      "bytes": 19220961
+    },
+    {
+      "path": "rgbd_spool/segment-00000069.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000212.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000046.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000177.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000028.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000207.frames",
+      "bytes": 24040124
+    },
+    {
+      "path": "rgbd_spool/segment-00000030.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000202.frames",
+      "bytes": 25244363
+    },
+    {
+      "path": "rgbd_spool/segment-00000209.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000055.frames",
+      "bytes": 17548949
+    },
+    {
+      "path": "rgbd_spool/segment-00000175.frames",
+      "bytes": 25721200
+    },
+    {
+      "path": "rgbd_spool/segment-00000116.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000193.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000086.frames",
+      "bytes": 19270789
+    },
+    {
+      "path": "rgbd_spool/segment-00000128.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000168.frames",
+      "bytes": 26085328
+    },
+    {
+      "path": "rgbd_spool/segment-00000095.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000197.frames",
+      "bytes": 21307680
+    },
+    {
+      "path": "rgbd_spool/segment-00000137.frames",
+      "bytes": 26138111
+    },
+    {
+      "path": "rgbd_spool/segment-00000199.frames",
+      "bytes": 25479014
+    },
+    {
+      "path": "rgbd_spool/segment-00000014.frames",
+      "bytes": 18923551
+    },
+    {
+      "path": "rgbd_spool/segment-00000122.json",
+      "bytes": 158
+    },
+    {
+      "path": "rgbd_spool/segment-00000182.frames",
+      "bytes": 21549010
+    },
+    {
+      "path": "rgbd_spool/segment-00000120.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000080.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000074.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000169.frames",
+      "bytes": 24728567
+    },
+    {
+      "path": "rgbd_spool/segment-00000026.frames",
+      "bytes": 19217570
+    },
+    {
+      "path": "rgbd_spool/segment-00000189.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000018.frames",
+      "bytes": 19565867
+    },
+    {
+      "path": "rgbd_spool/segment-00000148.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000118.frames",
+      "bytes": 19582007
+    },
+    {
+      "path": "rgbd_spool/segment-00000129.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000045.frames",
+      "bytes": 19244886
+    },
+    {
+      "path": "rgbd_spool/segment-00000010.frames",
+      "bytes": 19251772
+    },
+    {
+      "path": "rgbd_spool/segment-00000064.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000166.frames",
+      "bytes": 8816281
+    },
+    {
+      "path": "rgbd_spool/segment-00000160.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000075.frames",
+      "bytes": 19227534
+    },
+    {
+      "path": "rgbd_spool/segment-00000073.frames",
+      "bytes": 19577853
+    },
+    {
+      "path": "rgbd_spool/segment-00000167.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000197.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000183.frames",
+      "bytes": 25023382
+    },
+    {
+      "path": "rgbd_spool/segment-00000113.frames",
+      "bytes": 19563191
+    },
+    {
+      "path": "rgbd_spool/segment-00000111.frames",
+      "bytes": 19523707
+    },
+    {
+      "path": "rgbd_spool/segment-00000176.frames",
+      "bytes": 25614375
+    },
+    {
+      "path": "rgbd_spool/segment-00000125.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000168.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000143.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000096.frames",
+      "bytes": 18919796
+    },
+    {
+      "path": "rgbd_spool/segment-00000017.frames",
+      "bytes": 17228995
+    },
+    {
+      "path": "rgbd_spool/segment-00000131.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000107.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000007.json",
+      "bytes": 158
+    },
+    {
+      "path": "rgbd_spool/segment-00000179.frames",
+      "bytes": 23257913
+    },
+    {
+      "path": "rgbd_spool/segment-00000065.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000209.frames",
+      "bytes": 24828357
+    },
+    {
+      "path": "rgbd_spool/segment-00000028.frames",
+      "bytes": 17196388
+    },
+    {
+      "path": "rgbd_spool/segment-00000170.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000099.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000142.frames",
+      "bytes": 25914641
+    },
+    {
+      "path": "rgbd_spool/segment-00000136.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000115.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000060.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000158.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000039.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000153.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000129.frames",
+      "bytes": 17542153
+    },
+    {
+      "path": "rgbd_spool/segment-00000029.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000229.frames",
+      "bytes": 25202032
+    },
+    {
+      "path": "rgbd_spool/segment-00000003.frames",
+      "bytes": 19233385
+    },
+    {
+      "path": "rgbd_spool/segment-00000203.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000050.frames",
+      "bytes": 17235376
+    },
+    {
+      "path": "rgbd_spool/segment-00000048.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000174.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000005.json",
+      "bytes": 158
+    },
+    {
+      "path": "rgbd_spool/segment-00000113.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000126.frames",
+      "bytes": 19543901
+    },
+    {
+      "path": "rgbd_spool/segment-00000141.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000157.frames",
+      "bytes": 25248687
+    },
+    {
+      "path": "rgbd_spool/segment-00000224.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000011.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000132.frames",
+      "bytes": 17888927
+    },
+    {
+      "path": "rgbd_spool/segment-00000145.frames",
+      "bytes": 26292226
+    },
+    {
+      "path": "rgbd_spool/segment-00000023.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000190.frames",
+      "bytes": 25066031
+    },
+    {
+      "path": "rgbd_spool/segment-00000091.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000084.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000107.frames",
+      "bytes": 19242667
+    },
+    {
+      "path": "rgbd_spool/segment-00000096.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000217.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000144.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000187.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000203.frames",
+      "bytes": 25007530
+    },
+    {
+      "path": "rgbd_spool/segment-00000210.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000021.frames",
+      "bytes": 19231162
+    },
+    {
+      "path": "rgbd_spool/segment-00000231.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000012.frames",
+      "bytes": 18982148
+    },
+    {
+      "path": "rgbd_spool/segment-00000036.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000180.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000215.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000223.frames",
+      "bytes": 24742453
+    },
+    {
+      "path": "rgbd_spool/segment-00000090.frames",
+      "bytes": 19221501
+    },
+    {
+      "path": "rgbd_spool/segment-00000155.frames",
+      "bytes": 22239520
+    },
+    {
+      "path": "rgbd_spool/segment-00000120.frames",
+      "bytes": 19536317
+    },
+    {
+      "path": "rgbd_spool/segment-00000114.frames",
+      "bytes": 19569304
+    },
+    {
+      "path": "rgbd_spool/segment-00000023.frames",
+      "bytes": 19235565
+    },
+    {
+      "path": "rgbd_spool/segment-00000068.frames",
+      "bytes": 18931054
+    },
+    {
+      "path": "rgbd_spool/segment-00000128.frames",
+      "bytes": 19589394
+    },
+    {
+      "path": "rgbd_spool/segment-00000005.frames",
+      "bytes": 19894642
+    },
+    {
+      "path": "rgbd_spool/segment-00000110.frames",
+      "bytes": 19594359
+    },
+    {
+      "path": "rgbd_spool/segment-00000206.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000122.frames",
+      "bytes": 6980735
+    },
+    {
+      "path": "rgbd_spool/segment-00000063.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000086.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000146.frames",
+      "bytes": 26042076
+    },
+    {
+      "path": "rgbd_spool/segment-00000077.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000222.frames",
+      "bytes": 24370460
+    },
+    {
+      "path": "rgbd_spool/segment-00000172.frames",
+      "bytes": 23409235
+    },
+    {
+      "path": "rgbd_spool/segment-00000186.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000060.frames",
+      "bytes": 19221367
+    },
+    {
+      "path": "rgbd_spool/segment-00000214.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000085.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000025.frames",
+      "bytes": 19273000
+    },
+    {
+      "path": "rgbd_spool/segment-00000016.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000207.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000062.frames",
+      "bytes": 19223692
+    },
+    {
+      "path": "rgbd_spool/segment-00000191.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000118.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000178.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000196.frames",
+      "bytes": 22124145
+    },
+    {
+      "path": "rgbd_spool/segment-00000117.frames",
+      "bytes": 17191344
+    },
+    {
+      "path": "rgbd_spool/segment-00000041.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000095.frames",
+      "bytes": 17536489
+    },
+    {
+      "path": "rgbd_spool/segment-00000022.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000232.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000019.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000147.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000031.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000156.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000053.frames",
+      "bytes": 18926609
+    },
+    {
+      "path": "rgbd_spool/segment-00000092.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000027.frames",
+      "bytes": 19882891
+    },
+    {
+      "path": "rgbd_spool/segment-00000199.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000135.frames",
+      "bytes": 22742060
+    },
+    {
+      "path": "rgbd_spool/sdk_version.txt",
+      "bytes": 6
+    },
+    {
+      "path": "rgbd_spool/segment-00000046.frames",
+      "bytes": 19562750
+    },
+    {
+      "path": "rgbd_spool/segment-00000047.frames",
+      "bytes": 17259041
+    },
+    {
+      "path": "rgbd_spool/segment-00000042.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000114.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000204.frames",
+      "bytes": 24561613
+    },
+    {
+      "path": "rgbd_spool/segment-00000186.frames",
+      "bytes": 25930581
+    },
+    {
+      "path": "rgbd_spool/segment-00000201.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000204.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000165.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000039.frames",
+      "bytes": 17248631
+    },
+    {
+      "path": "rgbd_spool/segment-00000149.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000083.frames",
+      "bytes": 17201232
+    },
+    {
+      "path": "rgbd_spool/segment-00000169.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000101.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000081.frames",
+      "bytes": 19220735
+    },
+    {
+      "path": "rgbd_spool/segment-00000027.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000218.frames",
+      "bytes": 11616598
+    },
+    {
+      "path": "rgbd_spool/segment-00000015.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000088.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000205.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000056.frames",
+      "bytes": 18912802
+    },
+    {
+      "path": "rgbd_spool/segment-00000082.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000082.frames",
+      "bytes": 19240276
+    },
+    {
+      "path": "rgbd_spool/segment-00000102.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000029.frames",
+      "bytes": 19233888
+    },
+    {
+      "path": "rgbd_spool/segment-00000036.frames",
+      "bytes": 19298690
+    },
+    {
+      "path": "rgbd_spool/segment-00000162.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000106.frames",
+      "bytes": 19228639
+    },
+    {
+      "path": "rgbd_spool/metadata.json",
+      "bytes": 222
+    },
+    {
+      "path": "rgbd_spool/segment-00000200.frames",
+      "bytes": 25268815
+    },
+    {
+      "path": "rgbd_spool/segment-00000119.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000194.frames",
+      "bytes": 25524817
+    },
+    {
+      "path": "rgbd_spool/segment-00000164.frames",
+      "bytes": 26202981
+    },
+    {
+      "path": "rgbd_spool/segment-00000051.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000038.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000073.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000001.json",
+      "bytes": 158
+    },
+    {
+      "path": "rgbd_spool/segment-00000150.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000144.frames",
+      "bytes": 22889096
+    },
+    {
+      "path": "rgbd_spool/segment-00000212.frames",
+      "bytes": 24423360
+    },
+    {
+      "path": "rgbd_spool/segment-00000232.frames",
+      "bytes": 24632634
+    },
+    {
+      "path": "rgbd_spool/segment-00000034.frames",
+      "bytes": 19261460
+    },
+    {
+      "path": "rgbd_spool/segment-00000136.frames",
+      "bytes": 23486111
+    },
+    {
+      "path": "rgbd_spool/segment-00000225.frames",
+      "bytes": 23692964
+    },
+    {
+      "path": "rgbd_spool/segment-00000200.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000089.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000112.frames",
+      "bytes": 19558780
+    },
+    {
+      "path": "rgbd_spool/segment-00000162.frames",
+      "bytes": 22955193
+    },
+    {
+      "path": "rgbd_spool/segment-00000010.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/water_calibration.yml",
+      "bytes": 947
+    },
+    {
+      "path": "rgbd_spool/segment-00000069.frames",
+      "bytes": 17551681
+    },
+    {
+      "path": "rgbd_spool/segment-00000198.frames",
+      "bytes": 24769010
+    },
+    {
+      "path": "rgbd_spool/segment-00000222.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000018.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000221.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000054.frames",
+      "bytes": 19264487
+    },
+    {
+      "path": "rgbd_spool/segment-00000033.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000043.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000227.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000176.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000126.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000125.frames",
+      "bytes": 17568776
+    },
+    {
+      "path": "rgbd_spool/segment-00000105.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000072.frames",
+      "bytes": 19576533
+    },
+    {
+      "path": "rgbd_spool/segment-00000038.frames",
+      "bytes": 19227180
+    },
+    {
+      "path": "rgbd_spool/segment-00000140.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000147.frames",
+      "bytes": 25494744
+    },
+    {
+      "path": "rgbd_spool/segment-00000188.frames",
+      "bytes": 22901230
+    },
+    {
+      "path": "rgbd_spool/segment-00000184.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000165.frames",
+      "bytes": 26546361
+    },
+    {
+      "path": "rgbd_spool/segment-00000079.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000008.frames",
+      "bytes": 17556195
+    },
+    {
+      "path": "rgbd_spool/segment-00000116.frames",
+      "bytes": 19883598
+    },
+    {
+      "path": "rgbd_spool/segment-00000077.frames",
+      "bytes": 19246496
+    },
+    {
+      "path": "rgbd_spool/segment-00000154.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000123.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000163.frames",
+      "bytes": 25679657
+    },
+    {
+      "path": "rgbd_spool/segment-00000219.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000053.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000115.frames",
+      "bytes": 19559006
+    },
+    {
+      "path": "rgbd_spool/segment-00000090.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000173.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000123.frames",
+      "bytes": 18272203
+    },
+    {
+      "path": "rgbd_spool/segment-00000124.frames",
+      "bytes": 19578269
+    },
+    {
+      "path": "rgbd_spool/segment-00000211.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000057.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000015.frames",
+      "bytes": 19243541
+    },
+    {
+      "path": "rgbd_spool/segment-00000213.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000083.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000100.frames",
+      "bytes": 19555616
+    },
+    {
+      "path": "rgbd_spool/segment-00000181.frames",
+      "bytes": 25470763
+    },
+    {
+      "path": "rgbd_spool/segment-00000061.frames",
+      "bytes": 17513339
+    },
+    {
+      "path": "rgbd_spool/segment-00000228.frames",
+      "bytes": 21197542
+    },
+    {
+      "path": "rgbd_spool/segment-00000124.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000139.frames",
+      "bytes": 25557670
+    },
+    {
+      "path": "rgbd_spool/segment-00000062.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000061.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000048.frames",
+      "bytes": 18911997
+    },
+    {
+      "path": "rgbd_spool/segment-00000076.frames",
+      "bytes": 19219430
+    },
+    {
+      "path": "rgbd_spool/segment-00000043.frames",
+      "bytes": 19221287
+    },
+    {
+      "path": "rgbd_spool/segment-00000081.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000195.frames",
+      "bytes": 12218352
+    },
+    {
+      "path": "rgbd_spool/segment-00000153.frames",
+      "bytes": 24910781
+    },
+    {
+      "path": "rgbd_spool/segment-00000000.json",
+      "bytes": 158
+    },
+    {
+      "path": "rgbd_spool/camera_imu_extrinsics.json",
+      "bytes": 286
+    },
+    {
+      "path": "rgbd_spool/segment-00000085.frames",
+      "bytes": 19237441
+    },
+    {
+      "path": "rgbd_spool/segment-00000141.frames",
+      "bytes": 25531411
+    },
+    {
+      "path": "rgbd_spool/segment-00000231.frames",
+      "bytes": 24223970
+    },
+    {
+      "path": "rgbd_spool/segment-00000154.frames",
+      "bytes": 24972572
+    },
+    {
+      "path": "rgbd_spool/segment-00000103.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000233.frames",
+      "bytes": 21989113
+    },
+    {
+      "path": "rgbd_spool/segment-00000012.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000042.frames",
+      "bytes": 16895039
+    },
+    {
+      "path": "rgbd_spool/segment-00000011.frames",
+      "bytes": 19252961
+    },
+    {
+      "path": "rgbd_spool/segment-00000093.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000206.frames",
+      "bytes": 22744933
+    },
+    {
+      "path": "rgbd_spool/segment-00000025.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000032.frames",
+      "bytes": 19238440
+    },
+    {
+      "path": "rgbd_spool/segment-00000182.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000089.frames",
+      "bytes": 19232487
+    },
+    {
+      "path": "rgbd_spool/segment-00000216.frames",
+      "bytes": 24924033
+    },
+    {
+      "path": "rgbd_spool/segment-00000230.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000087.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000044.frames",
+      "bytes": 19202692
+    },
+    {
+      "path": "rgbd_spool/segment-00000173.frames",
+      "bytes": 26058563
+    },
+    {
+      "path": "rgbd_spool/segment-00000002.frames",
+      "bytes": 19252386
+    },
+    {
+      "path": "rgbd_spool/segment-00000106.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000065.frames",
+      "bytes": 19568169
+    },
+    {
+      "path": "rgbd_spool/segment-00000143.frames",
+      "bytes": 25551406
+    },
+    {
+      "path": "rgbd_spool/segment-00000051.frames",
+      "bytes": 19230934
+    },
+    {
+      "path": "rgbd_spool/segment-00000094.frames",
+      "bytes": 19618676
+    },
+    {
+      "path": "rgbd_spool/segment-00000195.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000196.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000149.frames",
+      "bytes": 25130419
+    },
+    {
+      "path": "rgbd_spool/segment-00000049.frames",
+      "bytes": 19262438
+    },
+    {
+      "path": "rgbd_spool/segment-00000004.frames",
+      "bytes": 17903321
+    },
+    {
+      "path": "rgbd_spool/segment-00000007.frames",
+      "bytes": 19864857
+    },
+    {
+      "path": "rgbd_spool/segment-00000067.frames",
+      "bytes": 18888776
+    },
+    {
+      "path": "rgbd_spool/segment-00000233.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000221.frames",
+      "bytes": 21757028
+    },
+    {
+      "path": "rgbd_spool/segment-00000014.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000057.frames",
+      "bytes": 17243184
+    },
+    {
+      "path": "rgbd_spool/segment-00000006.frames",
+      "bytes": 19570419
+    },
+    {
+      "path": "rgbd_spool/segment-00000230.frames",
+      "bytes": 24641784
+    },
+    {
+      "path": "rgbd_spool/segment-00000234.frames",
+      "bytes": 18081336
+    },
+    {
+      "path": "rgbd_spool/segment-00000064.frames",
+      "bytes": 19228386
+    },
+    {
+      "path": "rgbd_spool/segment-00000108.frames",
+      "bytes": 17865969
+    },
+    {
+      "path": "rgbd_spool/segment-00000094.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000174.frames",
+      "bytes": 25702533
+    },
+    {
+      "path": "rgbd_spool/segment-00000121.frames",
+      "bytes": 19541758
+    },
+    {
+      "path": "rgbd_spool/segment-00000225.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000058.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000045.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000040.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000080.frames",
+      "bytes": 19241222
+    },
+    {
+      "path": "rgbd_spool/segment-00000034.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000179.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000185.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000223.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000009.frames",
+      "bytes": 18922256
+    },
+    {
+      "path": "rgbd_spool/segment-00000214.frames",
+      "bytes": 24476366
+    },
+    {
+      "path": "rgbd_spool/segment-00000171.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000201.frames",
+      "bytes": 21980944
+    },
+    {
+      "path": "rgbd_spool/segment-00000160.frames",
+      "bytes": 25529631
+    },
+    {
+      "path": "rgbd_spool/segment-00000112.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000063.frames",
+      "bytes": 19222579
+    },
+    {
+      "path": "rgbd_spool/segment-00000040.frames",
+      "bytes": 18925371
+    },
+    {
+      "path": "rgbd_spool/segment-00000172.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000219.frames",
+      "bytes": 22676680
+    },
+    {
+      "path": "rgbd_spool/segment-00000159.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000037.frames",
+      "bytes": 18913069
+    },
+    {
+      "path": "rgbd_spool/segment-00000188.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000218.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000181.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000110.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000111.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000148.frames",
+      "bytes": 21975004
+    },
+    {
+      "path": "rgbd_spool/segment-00000133.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000138.frames",
+      "bytes": 24981814
+    },
+    {
+      "path": "rgbd_spool/segment-00000234.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000047.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000041.frames",
+      "bytes": 19555274
+    },
+    {
+      "path": "rgbd_spool/segment-00000044.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000163.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000192.frames",
+      "bytes": 25565461
+    },
+    {
+      "path": "rgbd_spool/segment-00000183.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000220.frames",
+      "bytes": 24469423
+    },
+    {
+      "path": "rgbd_spool/segment-00000213.frames",
+      "bytes": 22311981
+    },
+    {
+      "path": "rgbd_spool/segment-00000078.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000117.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000109.frames",
+      "bytes": 19580196
+    },
+    {
+      "path": "rgbd_spool/segment-00000035.frames",
+      "bytes": 19236128
+    },
+    {
+      "path": "rgbd_spool/segment-00000071.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/runtime.json",
+      "bytes": 198
+    },
+    {
+      "path": "rgbd_spool/segment-00000180.frames",
+      "bytes": 25035392
+    },
+    {
+      "path": "rgbd_spool/segment-00000152.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000097.frames",
+      "bytes": 19262659
+    },
+    {
+      "path": "rgbd_spool/segment-00000208.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000132.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000187.frames",
+      "bytes": 25046357
+    },
+    {
+      "path": "rgbd_spool/segment-00000211.frames",
+      "bytes": 25826042
+    },
+    {
+      "path": "rgbd_spool/segment-00000037.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000198.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000050.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000000.frames",
+      "bytes": 16720392
+    },
+    {
+      "path": "rgbd_spool/segment-00000100.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000175.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000088.frames",
+      "bytes": 19236888
+    },
+    {
+      "path": "rgbd_spool/segment-00000184.frames",
+      "bytes": 25451039
+    },
+    {
+      "path": "rgbd_spool/segment-00000164.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000138.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000078.frames",
+      "bytes": 19241916
+    },
+    {
+      "path": "rgbd_spool/segment-00000167.frames",
+      "bytes": 20744628
+    },
+    {
+      "path": "rgbd_spool/segment-00000067.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000134.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000016.frames",
+      "bytes": 19259725
+    },
+    {
+      "path": "rgbd_spool/segment-00000150.frames",
+      "bytes": 25489969
+    },
+    {
+      "path": "rgbd_spool/segment-00000002.json",
+      "bytes": 158
+    },
+    {
+      "path": "rgbd_spool/segment-00000052.frames",
+      "bytes": 19257797
+    },
+    {
+      "path": "rgbd_spool/segment-00000159.frames",
+      "bytes": 26582607
+    },
+    {
+      "path": "rgbd_spool/segment-00000157.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000079.frames",
+      "bytes": 17228753
+    },
+    {
+      "path": "rgbd_spool/segment-00000224.frames",
+      "bytes": 24433232
+    },
+    {
+      "path": "rgbd_spool/segment-00000130.frames",
+      "bytes": 19931262
+    },
+    {
+      "path": "rgbd_spool/segment-00000193.frames",
+      "bytes": 23364538
+    },
+    {
+      "path": "rgbd_spool/segment-00000032.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000145.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000054.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000097.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000121.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000001.frames",
+      "bytes": 19230511
+    },
+    {
+      "path": "rgbd_spool/segment-00000178.frames",
+      "bytes": 26404630
+    },
+    {
+      "path": "rgbd_spool/segment-00000020.frames",
+      "bytes": 19271977
+    },
+    {
+      "path": "rgbd_spool/segment-00000152.frames",
+      "bytes": 25489663
+    },
+    {
+      "path": "rgbd_spool/segment-00000156.frames",
+      "bytes": 25461938
+    },
+    {
+      "path": "rgbd_spool/segment-00000217.frames",
+      "bytes": 22721228
+    },
+    {
+      "path": "rgbd_spool/segment-00000185.frames",
+      "bytes": 21500194
+    },
+    {
+      "path": "rgbd_spool/segment-00000146.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000008.json",
+      "bytes": 158
+    },
+    {
+      "path": "rgbd_spool/segment-00000059.frames",
+      "bytes": 19238303
+    },
+    {
+      "path": "rgbd_spool/segment-00000208.frames",
+      "bytes": 25420157
+    },
+    {
+      "path": "rgbd_spool/segment-00000091.frames",
+      "bytes": 17235273
+    },
+    {
+      "path": "rgbd_spool/segment-00000119.frames",
+      "bytes": 19552271
+    },
+    {
+      "path": "rgbd_spool/segment-00000108.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000104.frames",
+      "bytes": 17229546
+    },
+    {
+      "path": "rgbd_spool/segment-00000072.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000022.frames",
+      "bytes": 17256203
+    },
+    {
+      "path": "rgbd_spool/segment-00000166.json",
+      "bytes": 158
+    },
+    {
+      "path": "rgbd_spool/segment-00000151.frames",
+      "bytes": 25380712
+    },
+    {
+      "path": "rgbd_spool/segment-00000059.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000161.frames",
+      "bytes": 25954060
+    },
+    {
+      "path": "rgbd_spool/segment-00000226.frames",
+      "bytes": 24935214
+    },
+    {
+      "path": "rgbd_spool/segment-00000194.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000170.frames",
+      "bytes": 25691090
+    },
+    {
+      "path": "rgbd_spool/segment-00000074.frames",
+      "bytes": 17526552
+    },
+    {
+      "path": "rgbd_spool/segment-00000158.frames",
+      "bytes": 25384860
+    },
+    {
+      "path": "rgbd_spool/segment-00000087.frames",
+      "bytes": 16877772
+    },
+    {
+      "path": "rgbd_spool/segment-00000058.frames",
+      "bytes": 19560397
+    },
+    {
+      "path": "rgbd_spool/segment-00000191.frames",
+      "bytes": 25552242
+    },
+    {
+      "path": "rgbd_spool/segment-00000102.frames",
+      "bytes": 19247615
+    },
+    {
+      "path": "rgbd_spool/segment-00000066.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000215.frames",
+      "bytes": 24939629
+    },
+    {
+      "path": "rgbd_spool/segment-00000098.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000056.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/init.json",
+      "bytes": 1055
+    },
+    {
+      "path": "rgbd_spool/segment-00000130.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000070.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000068.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000004.json",
+      "bytes": 158
+    },
+    {
+      "path": "rgbd_spool/segment-00000098.frames",
+      "bytes": 19252084
+    },
+    {
+      "path": "rgbd_spool/segment-00000017.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000205.frames",
+      "bytes": 25452937
+    },
+    {
+      "path": "rgbd_spool/segment-00000009.json",
+      "bytes": 158
+    },
+    {
+      "path": "rgbd_spool/segment-00000075.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000177.frames",
+      "bytes": 26047155
+    },
+    {
+      "path": "rgbd_spool/segment-00000127.frames",
+      "bytes": 19609350
+    },
+    {
+      "path": "rgbd_spool/segment-00000109.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000020.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000190.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000026.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000131.frames",
+      "bytes": 19554489
+    },
+    {
+      "path": "rgbd_spool/segment-00000049.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000006.json",
+      "bytes": 158
+    },
+    {
+      "path": "rgbd_spool/segment-00000135.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000137.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/seal_latency.jsonl",
+      "bytes": 169620
+    },
+    {
+      "path": "rgbd_spool/segment-00000013.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000161.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000099.frames",
+      "bytes": 19270740
+    },
+    {
+      "path": "rgbd_spool/segment-00000202.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000103.frames",
+      "bytes": 18924796
+    },
+    {
+      "path": "rgbd_spool/segment-00000024.json",
+      "bytes": 159
+    },
+    {
+      "path": "rgbd_spool/segment-00000216.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000127.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000220.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000151.json",
+      "bytes": 160
+    },
+    {
+      "path": "rgbd_spool/segment-00000134.frames",
+      "bytes": 21753020
+    },
+    {
+      "path": "rgbd_spool/segment-00000092.frames",
+      "bytes": 19248866
+    },
+    {
+      "path": "rgbd_spool/status.json",
+      "bytes": 470
+    }
+  ],
+  "bytes": 6787871768
+}

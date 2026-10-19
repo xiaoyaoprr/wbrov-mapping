@@ -1,0 +1,3 @@
+[OFFLINE_TEST] injecting one 14000 ms fsync delay: /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_validation3/paced_candidate_stall/segment-00000007.partial
+[RGBD_SPOOL_SEAL_LATENCY] sequence=7 flush_ms=0.113632 data_fsync_ms=14190.8 data_rename_ms=0.183104 receipt_fsync_ms=4.53722 directory_fsync_ms=5.27936
+{"scope":"offline RGB-D writer only, no concurrent SVO or camera","frames":1581,"byte_exact":true,"source_seconds":64.9473,"producer_seconds":64.9482,"closed_seconds":65.0561,"append_p99_ms":0.921248,"append_max_ms":3.94838,"pacing_lag_max_ms":0.416,"frames_over_300ms_late":0,"raw_bytes":2176745532,"packed_bytes":1315167008}

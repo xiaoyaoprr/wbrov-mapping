@@ -1,0 +1,43 @@
+{
+  "phase": "completed",
+  "scope": "corrected baseline header lookup; compare only to named candidate_stall in validation3",
+  "steps": [
+    {
+      "name": "compile",
+      "exit": 0,
+      "seconds": 4.879561695968732
+    },
+    {
+      "name": "paced_baseline_stall",
+      "exit": 0,
+      "seconds": 79.64616134401876,
+      "measurement": {
+        "scope": "offline RGB-D writer only, no concurrent SVO or camera",
+        "frames": 1581,
+        "byte_exact": true,
+        "source_seconds": 64.9473,
+        "producer_seconds": 64.9483,
+        "closed_seconds": 65.0623,
+        "append_p99_ms": 39.9049,
+        "append_max_ms": 11527.9,
+        "pacing_lag_max_ms": 11494.8,
+        "frames_over_300ms_late": 370,
+        "raw_bytes": 2176745532,
+        "packed_bytes": 1315167008
+      },
+      "spool_status": {
+        "schema": "wbrov.rgbd-spool.v1",
+        "state": "closed",
+        "clean_shutdown": true,
+        "sealed_segments": 61,
+        "last_source_ns": 1791653884980250000,
+        "frames": 1581,
+        "navigation_authorized": false
+      }
+    }
+  ],
+  "source_sha256": "ccf5cb94d042a336222506572d7170217bb6397cc2c53aeec55a57326ba9d401",
+  "header_sha256": "2bfff51646703da618e59600b41fa7d332d9505133bfddf5368acd4f20c55f78",
+  "header": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/camera_build_usable6/source/rgbd_spool.hpp",
+  "field_acceptance": false
+}

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate3_notags/tools/deferred_mapping.py", line 358, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+  File "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate3_notags/tools/deferred_mapping.py", line 356, in main
+    return run(p.parse_args())
+  File "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate3_notags/tools/deferred_mapping.py", line 192, in run
+    tag_observer=TagObserver(args.tag_modules)
+  File "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate3_notags/tools/deferred_tag_observations.py", line 52, in __init__
+    from verified_pixel_observer import VerifiedPixelObserver
+ModuleNotFoundError: No module named 'verified_pixel_observer'

@@ -1,0 +1,17 @@
+{
+  "schema": "wbrov.deferred-session.v1",
+  "session_sha256": "063b36e8dd5094970605c769166c03ab4db1d2d58f1f792e970030835eee0e28",
+  "bindings": {
+    "worker": "603e4ad632ddf1f1a806684c8509af494323e63681421538673e2c36d6e50c16",
+    "verifier": "2fc9fd84d442bc3850ba8cc2c76cc4bae64741b565f592c877ea30d83d73b5bc",
+    "odom_parameters": "3ff1aec2301039d44fea47d2a276ecbf25b8de9f8a15c9bd61465e0f98f68158",
+    "map_parameters": "69e1144d14b95fe147f77bfb8d88b9992930c3123625638514b415b754194eed",
+    "cv_threads": 1,
+    "feature_prefetch": false,
+    "lookahead_segments": 1
+  },
+  "historical_only": true,
+  "navigation_authorized": false,
+  "restart_policy": "rebuild_from_first_recorded_frame",
+  "diagnostic_range": false
+}

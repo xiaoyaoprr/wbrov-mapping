@@ -1,0 +1,1 @@
+{"schema":"wbrov.rgbd-spool.v1","historical_only":true,"depth_units":"m","depth_type":"float32le","frame_encoding":"zstd-depth-byte-planes-v2","body_from_camera_xyzw":[-0.5,0.5,-0.5,0.5],"chunk_source_span_ns":1000000000}

@@ -1,0 +1,54 @@
+[  2%] Building CXX object CMakeFiles/rgbd_frame_codec_test.dir/rgbd_frame_codec_test.cpp.o
+[  5%] Building CXX object CMakeFiles/zed_rgbd_publisher_rate_ab.dir/zed_rgbd_dual_stream_publisher.cpp.o
+[  8%] Linking CXX executable rgbd_frame_codec_test
+[  8%] Built target rgbd_frame_codec_test
+[ 11%] Building CXX object CMakeFiles/rgbd_codec_sdk_test.dir/rgbd_codec_sdk_test.cpp.o
+[ 13%] Linking CXX executable rgbd_codec_sdk_test
+[ 13%] Built target rgbd_codec_sdk_test
+[ 16%] Building CXX object CMakeFiles/rgbd_spool_test.dir/rgbd_spool_test.cpp.o
+[ 19%] Linking CXX executable rgbd_spool_test
+[ 19%] Built target rgbd_spool_test
+[ 22%] Building CXX object CMakeFiles/spool_file_commit_test.dir/spool_file_commit_test.cpp.o
+[ 25%] Linking CXX executable spool_file_commit_test
+[ 25%] Built target spool_file_commit_test
+[ 27%] Building CXX object CMakeFiles/async_spool_commit_test.dir/async_spool_commit_test.cpp.o
+[ 30%] Linking CXX executable async_spool_commit_test
+[ 30%] Built target async_spool_commit_test
+[ 33%] Building CXX object CMakeFiles/async_diagnostics_test.dir/async_diagnostics_test.cpp.o
+[ 36%] Linking CXX executable async_diagnostics_test
+[ 36%] Built target async_diagnostics_test
+[ 38%] Building CXX object CMakeFiles/bounded_async_writer_test.dir/bounded_async_writer_test.cpp.o
+[ 41%] Linking CXX executable bounded_async_writer_test
+[ 41%] Built target bounded_async_writer_test
+[ 44%] Building CXX object CMakeFiles/wbrov_verify_svo.dir/verify_svo.cpp.o
+[ 47%] Linking CXX executable wbrov_verify_svo
+[ 47%] Built target wbrov_verify_svo
+[ 50%] Building CXX object CMakeFiles/raw_calibration_audit_test.dir/raw_calibration_audit_test.cpp.o
+[ 52%] Linking CXX executable raw_calibration_audit_test
+[ 52%] Built target raw_calibration_audit_test
+[ 55%] Building CXX object CMakeFiles/depth_range_filter_test.dir/depth_range_filter_test.cpp.o
+[ 58%] Linking CXX executable zed_rgbd_publisher_rate_ab
+[ 58%] Built target zed_rgbd_publisher_rate_ab
+[ 61%] Building CXX object CMakeFiles/dual_stream_schedule_test.dir/dual_stream_schedule_test.cpp.o
+[ 63%] Linking CXX executable dual_stream_schedule_test
+[ 63%] Built target dual_stream_schedule_test
+[ 66%] Building CXX object CMakeFiles/exact_odom_stamp_gate_test.dir/exact_odom_stamp_gate_test.cpp.o
+[ 69%] Linking CXX executable exact_odom_stamp_gate_test
+[ 69%] Built target exact_odom_stamp_gate_test
+[ 72%] Building CXX object CMakeFiles/map_frame_lifecycle_test.dir/map_frame_lifecycle_test.cpp.o
+[ 75%] Linking CXX executable map_frame_lifecycle_test
+[ 75%] Built target map_frame_lifecycle_test
+[ 77%] Building CXX object CMakeFiles/map_stamp_audit_test.dir/map_stamp_audit_test.cpp.o
+[ 80%] Linking CXX executable map_stamp_audit_test
+[ 80%] Built target map_stamp_audit_test
+[ 83%] Building CXX object CMakeFiles/valid_odom_pose_test.dir/valid_odom_pose_test.cpp.o
+[ 86%] Linking CXX executable valid_odom_pose_test
+[ 86%] Built target valid_odom_pose_test
+[ 88%] Linking CXX executable depth_range_filter_test
+[ 91%] Building CXX object CMakeFiles/imu_frame_conversion_test.dir/imu_frame_conversion_test.cpp.o
+[ 91%] Built target depth_range_filter_test
+[ 94%] Building CXX object CMakeFiles/capture_telemetry_test.dir/capture_telemetry_test.cpp.o
+[ 97%] Linking CXX executable imu_frame_conversion_test
+[100%] Linking CXX executable capture_telemetry_test
+[100%] Built target imu_frame_conversion_test
+[100%] Built target capture_telemetry_test
