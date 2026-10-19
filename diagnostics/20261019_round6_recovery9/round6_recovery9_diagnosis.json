@@ -1,0 +1,541 @@
+{
+  "scope": "existing closed v5 field evidence; repeated frame reasons are durations, not independent failures",
+  "core_log_sha256": "e5a71f1629d66ae0763227d256fcf0683437dfad6b09a9de612c6e385eb78b54",
+  "cross_map_candidates": 74,
+  "last_cross_map_candidate": {
+    "line": 545,
+    "current": 392,
+    "old": 157,
+    "retained": 3,
+    "reason": "source view is not independent: d=0.006240m a=2.112207deg minimum=(0.030000m or 3.000000deg)"
+  },
+  "later_same_epoch_rejection_count": 33,
+  "frame_reason_occurrences": {
+    "insufficient_candidates": 570,
+    "raw_geometry_rejection": 551,
+    "three_anchor_disagreement": 125,
+    "stale_candidate": 395
+  },
+  "stale_source_duration_s": 30.548551,
+  "candidate_events": [
+    {
+      "line": 107,
+      "current": 183,
+      "old": 30,
+      "retained": 1,
+      "reason": "retained 1/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 111,
+      "current": 184,
+      "old": 68,
+      "retained": 2,
+      "reason": "retained 2/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 116,
+      "current": 185,
+      "old": 67,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 121,
+      "current": 186,
+      "old": 67,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 126,
+      "current": 187,
+      "old": 67,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 132,
+      "current": 188,
+      "old": 66,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 137,
+      "current": 189,
+      "old": 66,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 142,
+      "current": 190,
+      "old": 66,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 148,
+      "current": 191,
+      "old": 152,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 153,
+      "current": 192,
+      "old": 152,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 159,
+      "current": 193,
+      "old": 154,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 164,
+      "current": 194,
+      "old": 154,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 170,
+      "current": 195,
+      "old": 167,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 175,
+      "current": 196,
+      "old": 167,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 180,
+      "current": 197,
+      "old": 74,
+      "retained": 3,
+      "reason": "source view is not independent: d=0.011398m a=2.684531deg minimum=(0.030000m or 3.000000deg)"
+    },
+    {
+      "line": 186,
+      "current": 198,
+      "old": 74,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 191,
+      "current": 199,
+      "old": 74,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 196,
+      "current": 200,
+      "old": 74,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 201,
+      "current": 201,
+      "old": 74,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 206,
+      "current": 202,
+      "old": 74,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 211,
+      "current": 203,
+      "old": 74,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 216,
+      "current": 204,
+      "old": 74,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 221,
+      "current": 205,
+      "old": 74,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 226,
+      "current": 206,
+      "old": 74,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 231,
+      "current": 207,
+      "old": 74,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 236,
+      "current": 208,
+      "old": 75,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 241,
+      "current": 209,
+      "old": 75,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 246,
+      "current": 210,
+      "old": 75,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 251,
+      "current": 211,
+      "old": 75,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 256,
+      "current": 212,
+      "old": 75,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 261,
+      "current": 213,
+      "old": 75,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 266,
+      "current": 214,
+      "old": 75,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 271,
+      "current": 215,
+      "old": 75,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 276,
+      "current": 216,
+      "old": 75,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 281,
+      "current": 217,
+      "old": 75,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 286,
+      "current": 218,
+      "old": 75,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 291,
+      "current": 219,
+      "old": 75,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 296,
+      "current": 220,
+      "old": 75,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 301,
+      "current": 221,
+      "old": 75,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 306,
+      "current": 222,
+      "old": 75,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 311,
+      "current": 223,
+      "old": 75,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 316,
+      "current": 224,
+      "old": 155,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 321,
+      "current": 225,
+      "old": 155,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 326,
+      "current": 226,
+      "old": 155,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 331,
+      "current": 227,
+      "old": 155,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 336,
+      "current": 228,
+      "old": 155,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 341,
+      "current": 229,
+      "old": 155,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 346,
+      "current": 230,
+      "old": 155,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 351,
+      "current": 231,
+      "old": 75,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 359,
+      "current": 295,
+      "old": 153,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 381,
+      "current": 316,
+      "old": 55,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 387,
+      "current": 317,
+      "old": 57,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 393,
+      "current": 318,
+      "old": 58,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 398,
+      "current": 319,
+      "old": 58,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 404,
+      "current": 320,
+      "old": 59,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 409,
+      "current": 324,
+      "old": 179,
+      "retained": 3,
+      "reason": "raw candidate registration failed: Not enough inliers after bundle adjustment 20/25 (matches=27) between 324 and 179"
+    },
+    {
+      "line": 436,
+      "current": 355,
+      "old": 167,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 442,
+      "current": 356,
+      "old": 52,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 448,
+      "current": 357,
+      "old": 174,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 453,
+      "current": 358,
+      "old": 174,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 458,
+      "current": 359,
+      "old": 174,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 463,
+      "current": 360,
+      "old": 174,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 468,
+      "current": 361,
+      "old": 174,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 473,
+      "current": 362,
+      "old": 174,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 482,
+      "current": 367,
+      "old": 31,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 490,
+      "current": 370,
+      "old": 64,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 510,
+      "current": 385,
+      "old": 156,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 515,
+      "current": 386,
+      "old": 156,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 520,
+      "current": 387,
+      "old": 156,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 525,
+      "current": 388,
+      "old": 156,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 530,
+      "current": 389,
+      "old": 156,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 535,
+      "current": 390,
+      "old": 156,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 540,
+      "current": 391,
+      "old": 156,
+      "retained": 3,
+      "reason": "retained 3/3 independent native visual candidates; raw RGB-D and shadow transaction still required"
+    },
+    {
+      "line": 545,
+      "current": 392,
+      "old": 157,
+      "retained": 3,
+      "reason": "source view is not independent: d=0.006240m a=2.112207deg minimum=(0.030000m or 3.000000deg)"
+    }
+  ],
+  "interpretation": "The native best-loop route stopped proposing trusted-main candidates after node 392 while local same-epoch loop hypotheses continued. A separate trusted-main search avoids depending on that winner; raw geometry/observation and graph authorization must stay unchanged."
+}

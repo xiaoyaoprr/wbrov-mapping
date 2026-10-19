@@ -1,0 +1,394 @@
+{
+  "frames": 6412,
+  "seconds": 165.73921548796352,
+  "source_seconds": 306.052416,
+  "save_verified": true,
+  "complete": true,
+  "stamp_sha256": "a144396c5c4cc65393083d6b441674f26410b4b4e7db530371eeb82312c4972c",
+  "final_state": "PAUSED",
+  "recoveries": 0,
+  "main_nodes": 30,
+  "cut_count": 53,
+  "max_source_gap_s": 14.032396,
+  "source_gaps_over_300ms": 31,
+  "lost_frames": 38,
+  "invalid_main_writes": 0,
+  "cut_increments_by_reason": {
+    "geometry quality insufficient": 2,
+    "unverified measurement gap": 18,
+    "odometry lost": 33
+  },
+  "cut_events": [
+    {
+      "frame": 1,
+      "source_ns": 1791747431527955000,
+      "increment": 1,
+      "reason": "geometry quality insufficient",
+      "lost": "0"
+    },
+    {
+      "frame": 5383,
+      "source_ns": 1791747633935222000,
+      "increment": 1,
+      "reason": "unverified measurement gap",
+      "lost": "0"
+    },
+    {
+      "frame": 5410,
+      "source_ns": 1791747636001798000,
+      "increment": 1,
+      "reason": "unverified measurement gap",
+      "lost": "1"
+    },
+    {
+      "frame": 5411,
+      "source_ns": 1791747636085117000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5412,
+      "source_ns": 1791747636135139000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5413,
+      "source_ns": 1791747636168453000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5414,
+      "source_ns": 1791747636218451000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5415,
+      "source_ns": 1791747636285102000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5416,
+      "source_ns": 1791747636351755000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5417,
+      "source_ns": 1791747636385109000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5449,
+      "source_ns": 1791747638518335000,
+      "increment": 1,
+      "reason": "unverified measurement gap",
+      "lost": "1"
+    },
+    {
+      "frame": 5450,
+      "source_ns": 1791747638585006000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5451,
+      "source_ns": 1791747638651670000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5452,
+      "source_ns": 1791747638701677000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5453,
+      "source_ns": 1791747638751684000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5454,
+      "source_ns": 1791747638818358000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5455,
+      "source_ns": 1791747638868325000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5456,
+      "source_ns": 1791747638901665000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5502,
+      "source_ns": 1791747642518164000,
+      "increment": 1,
+      "reason": "unverified measurement gap",
+      "lost": "1"
+    },
+    {
+      "frame": 5503,
+      "source_ns": 1791747642568142000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5504,
+      "source_ns": 1791747642651680000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5505,
+      "source_ns": 1791747642718311000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5506,
+      "source_ns": 1791747642768360000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5507,
+      "source_ns": 1791747642801489000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5508,
+      "source_ns": 1791747642834898000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5509,
+      "source_ns": 1791747642884816000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5537,
+      "source_ns": 1791747645501386000,
+      "increment": 1,
+      "reason": "unverified measurement gap",
+      "lost": "0"
+    },
+    {
+      "frame": 5568,
+      "source_ns": 1791747648034592000,
+      "increment": 1,
+      "reason": "unverified measurement gap",
+      "lost": "1"
+    },
+    {
+      "frame": 5569,
+      "source_ns": 1791747648117905000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5570,
+      "source_ns": 1791747648151272000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5571,
+      "source_ns": 1791747648217902000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5572,
+      "source_ns": 1791747648251251000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5573,
+      "source_ns": 1791747648317901000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5574,
+      "source_ns": 1791747648367882000,
+      "increment": 1,
+      "reason": "geometry quality insufficient",
+      "lost": "0"
+    },
+    {
+      "frame": 5581,
+      "source_ns": 1791747662650560000,
+      "increment": 1,
+      "reason": "unverified measurement gap",
+      "lost": "1"
+    },
+    {
+      "frame": 5582,
+      "source_ns": 1791747662750550000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5583,
+      "source_ns": 1791747662800789000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5584,
+      "source_ns": 1791747662867349000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5585,
+      "source_ns": 1791747662933882000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5586,
+      "source_ns": 1791747662983873000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5587,
+      "source_ns": 1791747663033859000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5588,
+      "source_ns": 1791747663067257000,
+      "increment": 1,
+      "reason": "odometry lost",
+      "lost": "1"
+    },
+    {
+      "frame": 5603,
+      "source_ns": 1791747664550464000,
+      "increment": 1,
+      "reason": "unverified measurement gap",
+      "lost": "0"
+    },
+    {
+      "frame": 5717,
+      "source_ns": 1791747673816680000,
+      "increment": 1,
+      "reason": "unverified measurement gap",
+      "lost": "0"
+    },
+    {
+      "frame": 6200,
+      "source_ns": 1791747700998728000,
+      "increment": 1,
+      "reason": "unverified measurement gap",
+      "lost": "0"
+    },
+    {
+      "frame": 6288,
+      "source_ns": 1791747710148349000,
+      "increment": 1,
+      "reason": "unverified measurement gap",
+      "lost": "0"
+    },
+    {
+      "frame": 6312,
+      "source_ns": 1791747713964813000,
+      "increment": 1,
+      "reason": "unverified measurement gap",
+      "lost": "0"
+    },
+    {
+      "frame": 6329,
+      "source_ns": 1791747716948004000,
+      "increment": 1,
+      "reason": "unverified measurement gap",
+      "lost": "0"
+    },
+    {
+      "frame": 6346,
+      "source_ns": 1791747719831210000,
+      "increment": 1,
+      "reason": "unverified measurement gap",
+      "lost": "0"
+    },
+    {
+      "frame": 6354,
+      "source_ns": 1791747721697776000,
+      "increment": 1,
+      "reason": "unverified measurement gap",
+      "lost": "0"
+    },
+    {
+      "frame": 6376,
+      "source_ns": 1791747725164281000,
+      "increment": 1,
+      "reason": "unverified measurement gap",
+      "lost": "0"
+    },
+    {
+      "frame": 6395,
+      "source_ns": 1791747735863784000,
+      "increment": 1,
+      "reason": "unverified measurement gap",
+      "lost": "0"
+    },
+    {
+      "frame": 6412,
+      "source_ns": 1791747737580371000,
+      "increment": 1,
+      "reason": "unverified measurement gap",
+      "lost": "0"
+    }
+  ]
+}

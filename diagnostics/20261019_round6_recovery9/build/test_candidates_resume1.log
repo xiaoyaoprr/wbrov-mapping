@@ -1,0 +1,2 @@
+PASS rejected replacement preserves candidates; valid replacement is atomic and never authorizes addLink
+PASS real Core collector: 25 unique inliers; small epsilon-covariance candidates retained without native authorization; strict absolute/depth/coverage/invalid-covariance/parameter/legacy negatives

@@ -181,8 +181,9 @@ private:
                 coreTimings_[stat.first]+=stat.second;
         if(!processed) {reason_=why;return;}
         written_=true;writtenSerial_=serial;writtenEpoch_=core_.getResetEpoch();lastLocal_=core_.getLastLocationId();
-        AcceptedImageReceipt receipt;
+        AcceptedImageReceipt receipt;bool retainedCurrentInput=false;
         if(core_.getAcceptedImageReceipt(lastLocal_,receipt) && receipt.input.headerStampNs==source_) {
+            retainedCurrentInput=true;
             lastAcceptedPose_=pose;
             for(auto tag:currentTags_) {
                 if(tag.imageSha256!=receipt.input.pixelSha256 || !receiptHex(tag.pixelRecordSha256,64) || tag.tagId<0)
@@ -205,7 +206,16 @@ private:
             // Keep both rejection reasons; a Tag-only message must not hide
             // the old-keyframe search that actually ran on this frame.
             bool prepared=pendingTag_;why=tagReason_;
-            if(!prepared)prepared=core_.prepareVisualRecoveryWithAcceptedImages(limits_,context_,[&]{return current(preparation);},proposed,why);
+            if(!prepared) {
+                // A successful Core call may keep its previous keyframe. Its
+                // pixels have not changed, so do not solve the same six pairs
+                // again merely because another incoming frame was processed.
+                if(retainedCurrentInput) {
+                    ++visualSearchCalls_;
+                    core_.collectTrustedVisualRecoveryCandidates(context_,visualSearchReason_);
+                } else ++visualSearchDuplicateSkips_;
+                prepared=core_.prepareVisualRecoveryWithAcceptedImages(limits_,context_,[&]{return current(preparation);},proposed,why);
+            }
             if(prepared &&
                gate_.beginCandidateObservation(preparation,core_.getResetEpoch(),source_,source_)) {
                 pending_=true;pendingTicket_=preparation;pendingSerial_=serial;seed_=lastCorrection_=proposed;observations_.clear();
@@ -509,6 +519,8 @@ private:
             <<",\"quality\":"<<qualityJson_<<",\"last_failed_quality\":"<<lastFailedQualityJson_<<",\"quality_failures\":"<<qualityFailures_
             <<",\"recovery_route\":"<<diagnosticJsonString(recoveryRoute_)<<",\"recovery_attempt_source_ns\":"<<recoveryAttemptNs_
             <<",\"recovery_reason\":"<<diagnosticJsonString(reason_)<<",\"tag_recovery_reason\":"<<diagnosticJsonString(tagReason_)
+            <<",\"visual_candidate_search\":"<<diagnosticJsonString(visualSearchReason_)
+            <<",\"visual_candidate_search_calls\":"<<visualSearchCalls_<<",\"visual_candidate_duplicate_skips\":"<<visualSearchDuplicateSkips_
             <<",\"detected_tags_in_processed_frame\":"<<currentTags_.size()
             <<",\"main_tag_count_at_checkpoint\":"<<mainTagCount_<<",\"ready_tag_count_at_checkpoint\":"<<readyTagCount_
             <<",\"observation_diagnostic\":{\"source_ns\":"<<observationDiagnosticNs_
@@ -533,8 +545,9 @@ private:
     bool currentInputPresent_=false;
     int lastTrusted_=0,lastLocal_=0;Gate::Ticket pendingTicket_{};Transform seed_,lastCorrection_,previousPose_;
     std::vector<std::pair<Transform,Transform>> observations_;std::string reason_;
-    std::string qualityJson_="null",lastFailedQualityJson_="null",recoveryRoute_="none",tagReason_;
+    std::string qualityJson_="null",lastFailedQualityJson_="null",recoveryRoute_="none",tagReason_,visualSearchReason_;
     std::uint64_t qualityFailures_=0,mainTagCount_=0,readyTagCount_=0;
+    std::uint64_t visualSearchCalls_=0,visualSearchDuplicateSkips_=0;
     long long recoveryAttemptNs_=0,observationDiagnosticNs_=0;
     Rtabmap::RecoveryObservationDiagnostics observationDiagnostic_;
     std::vector<AcceptedTagCornerObservation> currentTags_,tagCorners_;

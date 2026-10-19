@@ -152,6 +152,33 @@ public:
         }
         core._crossMapLoopEvidence.clear();
     }
+    static void trustedCandidateSearch(Rtabmap & core,const AcceptedImageSourceContext & context) {
+        const auto saved=core._crossMapLoopEvidence;core._crossMapLoopEvidence.clear();
+        const auto before=snapshot(core);std::string reason;
+        // Native best-loop discovery is disabled in this fixture. Two earlier
+        // raw views exist, but the newest observation has no native candidate.
+        for(int old:{18,19}) {
+            require(!core.collectRawCrossMapLoopEvidence(*core._memory->getSignature(old+20),
+                *core._memory->getSignature(old),1,0,reason),"raw discovery authorized native addLink");
+        }
+        require(core._crossMapLoopEvidence.size()==2,"trusted search fixture requires two independent raw candidates");
+        Transform proposed;
+        require(!prepare(core,context,proposed,reason) && snapshot(core)==before,
+            "two candidates unexpectedly prepared a merge");
+        auto wrong=context;wrong.sessionTokenSha256=std::string(64,'9');
+        require(!core.collectTrustedVisualRecoveryCandidates(wrong,reason) && core._crossMapLoopEvidence.size()==2,
+            "wrong source context changed candidate pool");
+        requireReason(core.collectTrustedVisualRecoveryCandidates(context,reason),"trusted-only retrieval failed: ",reason);
+        require(core._crossMapLoopEvidence.size()==3 && core._crossMapLoopEvidence.back().newId==40 &&
+            core._crossMapLoopEvidence.back().oldId<=20 && !core.isCurrentMapFrameRegistered() && snapshot(core)==before,
+            "trusted retrieval failed to add current candidate or changed map authorization/geometry");
+        require(core.collectTrustedVisualRecoveryCandidates(context,reason) && core._crossMapLoopEvidence.size()==3,
+            "repeated observation duplicated candidates");
+        requireReason(prepare(core,context,proposed,reason),"retrieved candidates did not pass unchanged preparation: ",reason);
+        require(!core.isCurrentMapFrameRegistered() && snapshot(core)==before,"candidate discovery/preparation registered graph");
+        core._crossMapLoopEvidence=saved;
+        std::cout<<"PASS trusted-map retrieval without native loop winner: source-bound, three raw candidates, unchanged geometry and registration\n";
+    }
     static bool sameEpoch(Rtabmap & core,bool wrong,std::string & reason) {
         Transform proposed=core._optimizedPoses.at(40).inverse()*core._optimizedPoses.at(38);
         if(wrong)proposed.x()+=.20f;
@@ -433,6 +460,7 @@ int main(int argc,char ** argv) try {
     }
     Access::rawCandidates(core);
     std::cout<<"PASS raw candidate support uses the solved signatures despite unrelated cached word IDs\n";
+    Access::trustedCandidateSearch(core,context);
     std::string reason;
     auto reject=[&](const AcceptedImageSourceContext & source,const std::string & label) {
         const auto before=Access::snapshot(core);require(!Access::recover(core,source,reason),label+" unexpectedly committed");

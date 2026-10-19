@@ -1,0 +1,7 @@
+{
+  "phase": "failed",
+  "scope": "single preselected complete long recording, Tags disabled; independent case, not a retry of failed short recording, Tags disabled, no hardware/deployment; retain every outcome",
+  "steps": [],
+  "error": "FileNotFoundError(2, 'No such file or directory')",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/validate_round6_recovery10_full.py\", line 54, in <module>\n    replay('candidate_full',r/'compressed_full39/rgbd_spool',True)\n  File \"/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/validate_round6_recovery10_full.py\", line 27, in replay\n    pins={'core':sha(core),'worker':sha(worker),'recording_status':sha(recording/'status.json')}\n  File \"/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/validate_round6_recovery10_full.py\", line 15, in <lambda>\n    sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()\n  File \"/usr/lib/python3.10/pathlib.py\", line 1126, in read_bytes\n    with self.open(mode='rb') as f:\n  File \"/usr/lib/python3.10/pathlib.py\", line 1119, in open\n    return self._accessor.open(self, mode, buffering, encoding, errors,\nFileNotFoundError: [Errno 2] No such file or directory: '/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/compressed_full39/rgbd_spool/status.json'\n"
+}

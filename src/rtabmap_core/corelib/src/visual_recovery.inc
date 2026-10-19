@@ -1,5 +1,58 @@
 #include "recovery_geometry.inc"
 
+bool Rtabmap::collectTrustedVisualRecoveryCandidates(const AcceptedImageSourceContext & context,
+        std::string & reason)
+{
+    if(!_safeRelocalizationGuardEnabled || !_memory || !_memory->isIncremental() ||
+       isCurrentMapFrameRegistered() || !_safeRelocalizationTrustedSnapshotValid || _resetEpoch==0)
+    {reason="trusted candidate search unavailable";return false;}
+    const Signature * current=_memory->getLastWorkingSignature(false);
+    auto sameSource=[&](const AcceptedImageReceipt & receipt) {
+        const auto & input=receipt.input;
+        return input.sessionTokenSha256==context.sessionTokenSha256 && input.databaseSha256==context.databaseSha256 &&
+            input.rgbPublisherGidHex==context.rgbPublisherGidHex && input.infoPublisherGidHex==context.infoPublisherGidHex &&
+            input.provenanceScope==context.provenanceScope;
+    };
+    AcceptedImageReceipt input;
+    if(!current || !getAcceptedImageReceipt(current->id(),input) || input.resetEpoch!=_resetEpoch ||
+       input.mapId!=current->mapId() || !_optimizedPoses.count(current->id()) || !sameSource(input))
+    {reason="trusted candidate search requires current owned source receipt";return false;}
+    for(const auto & candidate:_crossMapLoopEvidence)if(candidate.newId==current->id()) {
+        reason="current observation already has a retained visual candidate";return true;
+    }
+    std::vector<std::pair<float,int>> ranking;
+    std::set<int> retainedOld;
+    for(const auto & candidate:_crossMapLoopEvidence)retainedOld.insert(candidate.oldId);
+    for(const auto & pose:_safeRelocalizationTrustedPoses) {
+        const auto epoch=getSignatureResetEpoch(pose.first);
+        const Signature * old=_memory->getSignature(pose.first);AcceptedImageReceipt receipt;
+        if(pose.first<=0 || !old || epoch>=_resetEpoch || (epoch!=0 && !_safeRelocalizationCommittedEpochs.count(epoch)) ||
+           !getAcceptedImageReceipt(pose.first,receipt) || receipt.resetEpoch!=epoch ||
+           receipt.mapId!=old->mapId() || !sameSource(receipt))continue;
+        const float similarity=current->compareTo(*old);
+        if(std::isfinite(similarity) && similarity>0)ranking.emplace_back(-similarity,pose.first);
+    }
+    std::sort(ranking.begin(),ranking.end());
+    // The dictionary only ranks raw checks. Prefer unused old endpoints among
+    // the best twelve so one repeated best match cannot monopolize the pool.
+    // Six actual solves per retained current keyframe bound added work.
+    const auto references=ranking.size();if(ranking.size()>12)ranking.resize(12);
+    std::stable_partition(ranking.begin(),ranking.end(),[&](const auto & item){return !retainedOld.count(item.second);});
+    unsigned tested=0;std::string detail;
+    for(const auto & item:ranking) {
+        if(tested==6)break;
+        const Signature * old=_memory->getSignature(item.second);++tested;
+        collectRawCrossMapLoopEvidence(*current,*old,_resetEpoch,getSignatureResetEpoch(old->id()),detail);
+        if(std::any_of(_crossMapLoopEvidence.begin(),_crossMapLoopEvidence.end(),
+                [&](const CrossMapLoopEvidence & candidate){return candidate.newId==current->id();})) {
+            reason=uFormat("trusted candidate search current=%d references=%u tested=%u selected=%d retained=%u; candidate only",
+                current->id(),unsigned(references),tested,old->id(),unsigned(_crossMapLoopEvidence.size()));return true;
+        }
+    }
+    reason=uFormat("trusted candidate search current=%d references=%u tested=%u retained=%u rejected=%s",
+        current->id(),unsigned(references),tested,unsigned(_crossMapLoopEvidence.size()),detail.c_str());return false;
+}
+
 // Preserve the existing Tag transaction symbol. The candidate wrapper uses
 // this overload so a late odometry loss/timeout rejects after shadow solving.
 bool Rtabmap::addDepthCornerLinksWithAcceptedImagesAtomically(

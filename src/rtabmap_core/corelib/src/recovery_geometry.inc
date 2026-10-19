@@ -192,7 +192,10 @@ bool Rtabmap::validateRecoveryCache(const std::set<int> & ids,const std::vector<
     for(size_t i=0;i<firstAlignments.size();++i)for(size_t j=0;j<i;++j)
         if(!strictRecoveryPoseAgreement(firstAlignments[i],firstAlignments[j],limits) ||
            !strictRecoveryPoseAgreement(lastAlignments[i],lastAlignments[j],limits))
-        {reason="submap raw trajectory yields inconsistent main-map alignments from the three independent anchors";return false;}
+        {reason=uFormat("submap raw trajectory yields inconsistent main-map alignments from the three independent anchors: pairs=(%d,%d),(%d,%d) first_d=%.6fm first_a=%.6fdeg last_d=%.6fm last_a=%.6fdeg caps=(0.025m,2deg;z=0.02m,tilt=2deg)",
+            evidence[i].from(),evidence[i].to(),evidence[j].from(),evidence[j].to(),
+            firstAlignments[i].getDistance(firstAlignments[j]),firstAlignments[i].getAngle(firstAlignments[j])*180./M_PI,
+            lastAlignments[i].getDistance(lastAlignments[j]),lastAlignments[i].getAngle(lastAlignments[j])*180./M_PI);return false;}
     const Transform mainFirst=firstAlignments.front(),mainLast=lastAlignments.back();
     for(size_t index=0;index<sequence.size();++index) {
         if(!strictRecoveryPoseAgreement(mainFirst*forward[index],mainLast*backward[index],limits))

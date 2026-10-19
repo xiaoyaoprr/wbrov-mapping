@@ -1,0 +1,141 @@
+{
+  "scope": "single fixed-order pair on complete saved input, Tags disabled, not hardware acceptance",
+  "replays": [
+    {
+      "name": "baseline_motion",
+      "frames": 1581,
+      "seconds": 91.90494940790813,
+      "source_seconds": 64.947313,
+      "final_state": "RECOVERING",
+      "main_nodes": 90,
+      "cuts": 19,
+      "recoveries": 0,
+      "events": [],
+      "lost_frames": 18,
+      "invalid_main_writes": 0,
+      "save_verified": true,
+      "complete": true,
+      "stamp_sha256": "b631ff88b2d2e37c97c34079d87561a98071c658016f0d2d82cfc4ffa3fd28b3",
+      "final_reason": "local-submap alignment waiting for three independent trusted-map candidates (retained=2 epoch=2 registered=0 trusted_snapshot=1)",
+      "final_search": null,
+      "reason_frame_counts": [
+        [
+          "registered visual geometry; ",
+          1014
+        ],
+        [
+          "waiting for stable geometry and Core registration; local-submap alignment waiting for three independent trusted-map candidates (retained=2 epoch=2 registered=0 trusted_snapshot=1)",
+          258
+        ],
+        [
+          "private recovery observations only; local-submap alignment waiting for three independent trusted-map candidates (retained=2 epoch=2 registered=0 trusted_snapshot=1)",
+          58
+        ],
+        [
+          "waiting for stable geometry and Core registration; local-submap alignment waiting for three independent trusted-map candidates (retained=1 epoch=1 registered=0 trusted_snapshot=1)",
+          36
+        ],
+        [
+          "waiting for stable geometry and Core registration; ",
+          31
+        ],
+        [
+          "odometry lost; ",
+          16
+        ],
+        [
+          "private recovery observations only; local-submap alignment waiting for three independent trusted-map candidates (retained=1 epoch=1 registered=0 trusted_snapshot=1)",
+          6
+        ],
+        [
+          "waiting for stable geometry and Core registration; visual recovery raw bidirectional RGB-D geometry failed pair=(152 72) forward=(side=to unique=51 cells=3/4 depth=51/25 geometry=1 span=0.038686/0.020000 hessian=0.00149901322/0.0001) reverse=(metric_count=62/25 rms=0.004384/0.018000 max=0.009074/0.025000)",
+          6
+        ],
+        [
+          "waiting for stable geometry and Core registration; local-submap alignment waiting for three independent trusted-map candidates (retained=2 epoch=1 registered=0 trusted_snapshot=1)",
+          5
+        ],
+        [
+          "waiting for stable geometry and Core registration; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=1 registered=0 trusted_snapshot=1)",
+          5
+        ],
+        [
+          "waiting for stable geometry and Core registration; three anchor alignments disagree in SE3  z or tilt pairs=(145 69)/(146 70) translation=0.032190m/0.080000 rotation=5.301230deg/8.000000 z=0.032067m/0.020000 tilt=5.294569deg/2.000000",
+          5
+        ],
+        [
+          "waiting for stable geometry and Core registration; three anchor alignments disagree in SE3  z or tilt pairs=(145 69)/(146 70) translation=0.030421m/0.080000 rotation=4.961265deg/8.000000 z=0.029956m/0.020000 tilt=4.928625deg/2.000000",
+          5
+        ]
+      ]
+    },
+    {
+      "name": "candidate_motion",
+      "frames": 1581,
+      "seconds": 218.0772686720593,
+      "source_seconds": 64.947313,
+      "final_state": "RECOVERING",
+      "main_nodes": 90,
+      "cuts": 19,
+      "recoveries": 0,
+      "events": [],
+      "lost_frames": 18,
+      "invalid_main_writes": 0,
+      "save_verified": true,
+      "complete": true,
+      "stamp_sha256": "b631ff88b2d2e37c97c34079d87561a98071c658016f0d2d82cfc4ffa3fd28b3",
+      "final_reason": "temporary recovery segment has not passed source-time/measured-gravity stability (6 nodes); main map remains frozen",
+      "final_search": "trusted candidate search current=199 references=40 tested=6 retained=3 rejected=raw candidate registration failed: Not enough inliers 10/25 (matches=55) between 199 and 82",
+      "reason_frame_counts": [
+        [
+          "registered visual geometry; ",
+          1012
+        ],
+        [
+          "waiting for stable geometry and Core registration; temporary recovery segment has not passed source-time/measured-gravity stability (6 nodes); main map remains frozen",
+          151
+        ],
+        [
+          "waiting for stable geometry and Core registration; temporary recovery segment has not passed source-time/measured-gravity stability (4 nodes); main map remains frozen",
+          68
+        ],
+        [
+          "waiting for stable geometry and Core registration; temporary recovery segment has not passed source-time/measured-gravity stability (3 nodes); main map remains frozen",
+          63
+        ],
+        [
+          "waiting for stable geometry and Core registration; temporary recovery segment has not passed source-time/measured-gravity stability (5 nodes); main map remains frozen",
+          56
+        ],
+        [
+          "private recovery observations only; temporary recovery segment has not passed source-time/measured-gravity stability (6 nodes); main map remains frozen",
+          35
+        ],
+        [
+          "waiting for stable geometry and Core registration; ",
+          33
+        ],
+        [
+          "waiting for stable geometry and Core registration; local-submap alignment waiting for three independent trusted-map candidates (retained=2 epoch=1 registered=0 trusted_snapshot=1)",
+          18
+        ],
+        [
+          "odometry lost; ",
+          16
+        ],
+        [
+          "waiting for stable geometry and Core registration; local-submap alignment waiting for three independent trusted-map candidates (retained=1 epoch=1 registered=0 trusted_snapshot=1)",
+          16
+        ],
+        [
+          "private recovery observations only; temporary recovery segment has not passed source-time/measured-gravity stability (4 nodes); main map remains frozen",
+          15
+        ],
+        [
+          "private recovery observations only; temporary recovery segment has not passed source-time/measured-gravity stability (3 nodes); main map remains frozen",
+          14
+        ]
+      ]
+    }
+  ]
+}
