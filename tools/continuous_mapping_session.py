@@ -113,13 +113,20 @@ class Session:
         if p is None:return
         if p.poll() is None:
             p.send_signal(signal.SIGINT)
-            try:p.wait(timeout=seconds)
-            except subprocess.TimeoutExpired:
-                self.errors.append(name+' did not stop cleanly')
-                p.terminate()
-                try:p.wait(timeout=10)
+            if seconds is None:
+                # Capture owns accepted frames in RAM until its writer drains.
+                # A slow disk is not permission to discard them. Keep the
+                # stopping lifecycle visible while teleop exits independently.
+                while p.poll() is None:
+                    self.progress();time.sleep(.5)
+            else:
+                try:p.wait(timeout=seconds)
                 except subprocess.TimeoutExpired:
-                    p.kill();p.wait()
+                    self.errors.append(name+' did not stop cleanly')
+                    p.terminate()
+                    try:p.wait(timeout=10)
+                    except subprocess.TimeoutExpired:
+                        p.kill();p.wait()
         if p.returncode not in (0,-signal.SIGINT):self.errors.append(name+' exit='+str(p.returncode))
 
     def verify_save(self,require_complete=True):
@@ -183,7 +190,7 @@ class Session:
             # The outer wrapper sees stopping immediately and closes teleop.
             # Camera closure seals the final segment. NEVER signal the queue to
             # implement normal stop, even if it has many minutes of backlog.
-            self.close_child('bridge',60)
+            self.close_child('bridge',None)
             proc=self.children.get('processing')
             if proc is not None:
                 capture=out/'rgbd_spool/status.json'

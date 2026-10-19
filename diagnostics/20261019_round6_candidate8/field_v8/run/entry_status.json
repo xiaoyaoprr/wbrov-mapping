@@ -1,0 +1,28 @@
+{
+  "schema": "wbrov.continuous-entry-status.v1",
+  "phase": "saved",
+  "elapsed_s": 297.11510166409425,
+  "stop_requested": false,
+  "saved": true,
+  "partial_saved": false,
+  "capture_state": "closed",
+  "sealed_source_ns": 1791760378561616000,
+  "seconds_without_new_seal": 43.86428019194864,
+  "errors": [],
+  "pids": {
+    "bridge": 1250358,
+    "processing": 1251340,
+    "graph_display": 1251347,
+    "rviz": 1251349,
+    "recording_verify": 1282900
+  },
+  "exits": {
+    "bridge": 0,
+    "processing": 0,
+    "graph_display": 0,
+    "rviz": 0,
+    "recording_verify": 0
+  },
+  "historical_only": true,
+  "navigation_authorized": false
+}

@@ -1,0 +1,3 @@
+exit_status=0
+failure_reason=未记录显式拒绝原因；请查看mapping.log和teleop.log
+mapping_exit_status=0

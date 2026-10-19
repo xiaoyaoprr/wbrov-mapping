@@ -1,0 +1,92 @@
+{
+  "scope": "stationary candidate capture and save check with Tag disabled; no new operator movement requested and no assistant movement command",
+  "run_dir": "/home/exocean/maps/rtabmap_calibration_ab/continuous_20261012_070921_1249954",
+  "startup_seconds": 32.38993088004645,
+  "wrapper_exit": 0,
+  "entry_errors": [],
+  "child_exits": {
+    "bridge": 0,
+    "processing": 0,
+    "graph_display": 0,
+    "rviz": 0,
+    "recording_verify": 0
+  },
+  "all_frames": 5404,
+  "source_seconds": 207.907125,
+  "all_input_stamps_equal": true,
+  "save_hashes_match": true,
+  "database_check": "ok",
+  "raw_svo_verified": true,
+  "tag_detection_enabled": false,
+  "source_gap_max_ms": 133.325,
+  "source_gaps_over_300ms": 0,
+  "spool": {
+    "schema": "wbrov.rgbd-spool.v1",
+    "state": "closed",
+    "clean_shutdown": true,
+    "sealed_segments": 196,
+    "durable_segments": 196,
+    "last_source_ns": 1791760378561616000,
+    "frames": 5404,
+    "navigation_authorized": false,
+    "queue_depth": 0,
+    "queue_high_water": 1,
+    "accepted_frames": 5404,
+    "producer_waits": 0,
+    "producer_wait_ms": 0,
+    "producer_max_wait_ms": 0,
+    "pending_segments": 0,
+    "pending_bytes": 0,
+    "pending_high_water_bytes": 967018759,
+    "pending_byte_limit": 2147483648,
+    "pending_segment_limit": 128,
+    "pending_storage": "compressed_ram",
+    "pending_bytes_accounting": "capacity_including_inflight"
+  },
+  "fsync_max_ms": 9973.92,
+  "commit_max_ms": 14473.8,
+  "final_continuity": "NORMAL",
+  "final_main_write": true,
+  "main_nodes": 1,
+  "cloud_points": 7282,
+  "cuts": 1,
+  "recoveries": 0,
+  "pauses_and_cuts": [],
+  "controller_socket_released": true,
+  "topic_probe.json": {
+    "duration_s": 30.044834975968115,
+    "topics": {
+      "rgb": {
+        "count": 586,
+        "first_arrival_s": 0.06096755200996995,
+        "first_stamp": 1791760214.752766,
+        "last_arrival_s": 30.0447641920764,
+        "last_stamp": 1791760244.73449,
+        "frame": "zed_left_camera_optical_frame",
+        "width": 384,
+        "height": 240,
+        "bytes": 276480,
+        "encoding": "bgr8",
+        "sample_sha256": "6ecf6e788e3b22c640138d981610a741553a82316af2e4705e8fd18ce85e8819",
+        "mean_pixel": 126.16888020833333,
+        "std_pixel": 54.90414767594094
+      },
+      "cloud": {
+        "count": 28,
+        "first_arrival_s": 0.6460185600444674,
+        "first_stamp": 1791760210.919373,
+        "last_arrival_s": 29.813474431983195,
+        "last_stamp": 1791760240.868028,
+        "frame": "deferred_map",
+        "width": 7255,
+        "height": 1,
+        "bytes": 116080,
+        "points": 7255
+      }
+    },
+    "publishers": {
+      "rgb": 1,
+      "cloud": 1
+    }
+  }
+}

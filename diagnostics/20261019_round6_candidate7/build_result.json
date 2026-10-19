@@ -1,0 +1,92 @@
+{
+  "phase": "passed",
+  "production_changed": false,
+  "hardware_opened": false,
+  "steps": [
+    {
+      "name": "camera_configure",
+      "exit": 0,
+      "seconds": 3.023437791969627
+    },
+    {
+      "name": "camera_compile",
+      "exit": 0,
+      "seconds": 57.032072640024126
+    },
+    {
+      "name": "camera_tests",
+      "exit": 0,
+      "seconds": 3.5235538879642263
+    },
+    {
+      "name": "camera_ldd",
+      "exit": 0,
+      "seconds": 0.06516969599761069
+    },
+    {
+      "name": "sdk_runtime",
+      "exit": 0,
+      "seconds": 0.2651508159469813
+    }
+  ],
+  "archive_sha256": "3ce3f06f7b3f10db655f7527ff28168c744439d32cedd5d8f73958a43cd55c40",
+  "sources": {
+    "display/deferred_display_state.py": "b68bab0551283233751fabd6f8fcfa966d1c64d0b2c20dbb36f18c9fe029bc4e",
+    "display/test_deferred_display_state.py": "998ba7264afb111a0fa7fa55ad53398783609fcdf783053337f1a7e890307077",
+    "display/deferred_map_display.py": "8e0619e9c623011c9a92e4e0f262ef758e1c5655e529919eb5f1ca1d1de7bb3d",
+    "include/rtabmap_slam/MappingContinuityGate.h": "722d93cf30ac878bf9de79818629dbd22bb885e48330577782ed0d999050ec77",
+    "camera/map_frame_lifecycle.hpp": "12a3919885440580650d86f70c1c2dc1499553f9899366d635a84a9ae5da7665",
+    "camera/capture_telemetry_test.cpp": "3033aa56c1cd8f96cbf1ad2c4a391095b0cee1c24f32452ede2c91e4a2cbfdb2",
+    "camera/exact_odom_stamp_gate_test.cpp": "f34f61651f144498b229032acbf5e3272f1e4a968f9d842bb8a341a2bb974c69",
+    "camera/map_frame_lifecycle_test.cpp": "a01e2d005b3184eb3d65c1fa3ce2411978eeab61d8bed9154ea4a4e1e67a7957",
+    "camera/raw_svo_recording.hpp": "fe626f6790cd585c5a28eb48ed27c36638f1e163260b32a2110798e227c776f7",
+    "camera/zed_rgbd_dual_stream_publisher.cpp": "9f80afb9cbaf123e16baad5543d68594d061266010a460f2ef998ec72ed60e6d",
+    "camera/segment_commit_queue.hpp": "30a234c6ab76df948f18c6941bf82c74c4a2788487b8e07419d8a1ddfe306efa",
+    "camera/imu_frame_conversion_test.cpp": "243834b51ecbefcb0476e3316514df481113c4beb0f32b9c220d52868fed5d88",
+    "camera/raw_calibration_audit.hpp": "1700307b2f40ef750040685942933e52653fec5da0d3200a886727280846d730",
+    "camera/depth_range_filter_test.cpp": "3bb025bc5361bbb3ee544eb33e124deb2f3a2b18d473998ae1779761aca844c2",
+    "camera/map_stamp_audit_test.cpp": "2a63c9d2deaa532defc089df430acbbf39be350c4922d3c68c48e7f9b311bae3",
+    "camera/capture_telemetry.hpp": "f33db42697111889c45a29c2d7cb7db90d3a89e5e2a74c9ecee970807120e9f6",
+    "camera/dual_stream_schedule.hpp": "673c03f48137f0f570ea3e5cecb77b0c5b224a85fc3040f0d5900772fd21ba9a",
+    "camera/BUILDING.md": "c6461fa9d8dd3b4b1d5f81bd7764732df670ab4f85f5b3a599d3dbea45e4b3b7",
+    "camera/bounded_async_writer.hpp": "679a4234821592e26628cff9151fd869534e5033b93c851de9a0ecff245b3992",
+    "camera/valid_odom_pose_test.cpp": "fbee5ad0c6770638d40f1cc39ae68b1a97553a67a3e49fa09a244c5036c1008f",
+    "camera/rgbd_frame_codec.hpp": "25411834db310b661cf40b8f697ad81e59894b39721b83ac63f72a44f2d95e71",
+    "camera/bounded_async_writer_test.cpp": "b646c1425593bda6d371b9a592b1b5387a7139d0cb052702879911faf438b630",
+    "camera/recording_journal_limits.hpp": "be8c7b1f575bfd988a90d657c35e1ed9d0ece53ad2f3637ed2af1cf5c8ea3519",
+    "camera/rgbd_frame_codec_test.cpp": "8a401392fd2d3b84715ceb94107590256260cd6100b1d8af7b0253fbb8fcc68e",
+    "camera/CMakeLists.txt": "1d8d7a18fd61da3b026197c0cdf499c11200332e90cb8b704461b50ebb0139a1",
+    "camera/map_stamp_audit.hpp": "cdac256295120c5870ac595da8f15174cb09af256a0efe2726c9010da3e6ea0f",
+    "camera/async_diagnostics_test.cpp": "9f54146d51be27f3499b23597d95efcf42747b5a2c18de45e7443031167b9ae6",
+    "camera/valid_odom_pose.hpp": "efc9ebe6671d974b91fb0f3302a8fb64ea05f231c4f142fb7d8ecceb39b103ab",
+    "camera/raw_calibration_audit_test.cpp": "93ae0019de923b8df1afa5be9de1d26d204352fa2ed8dd063427cfb9efc1f159",
+    "camera/rgbd_spool_test.cpp": "ad18e97617d8057c91b64f05b82f141cb5bfba62ab79a6f2b6ccfd10c0d4f2dd",
+    "camera/verify_svo.cpp": "bdcf9b464056634f336fb30825c7c86b2113db324f961fe51fd6b8e17c5932e6",
+    "camera/depth_range_filter.hpp": "57c5c1f18d180ff5718163a775b51d8d8bf20fd1f81b4cd8bbb6a3834a23f2d4",
+    "camera/rgbd_spool.hpp": "0950b20d1bca8de225a2df2cfb5a42003f0fbbeb797f831e6f14fca780c014ce",
+    "camera/rgbd_codec_sdk_test.cpp": "bdf50c7cd1c86ddbcb545466ac6b425dfedcbfd2a224faf8a7269110943bda8d",
+    "camera/async_spool_commit_test.cpp": "3a5455863694e4964c8a2e9c0b20cae1f281962a128a937c154d09decfc6b3e0",
+    "camera/dual_stream_schedule_test.cpp": "7bf1035a1e384888b5c10ffe6f62640e722161a01d703e208c437b5f2cf8c43c",
+    "camera/spool_file_commit_test.cpp": "55e46284debbe3ea77029f7a517f14d209e938087a16b15832562ee2fedd1d5a",
+    "camera/spool_io_observation.hpp": "48cea6473af155518c9854d5371ee002d14d0614e09b0bb85468da3a97b2693a",
+    "camera/async_diagnostics.hpp": "b62367f0e6c36859625669dfe1d1d1e4d71681a81cd9f8d4298e024145f5a343",
+    "camera/imu_frame_conversion.hpp": "c0042b7c47751e60af4dc47e6c710934305040a0d745f4c4399b31002e554de6",
+    "camera/exact_odom_stamp_gate.hpp": "444005822b8374f45ffad3bd02e17d64f4390a5a1d154c6bf6471b92ddac4d71",
+    "camera/spool_file_commit.hpp": "c815c644a456beaebeba5232185b18156207eae335aabcbcb6388cb10f14b561",
+    "worker/inject_spool_fsync_delay.cpp": "a03c2c2285fe052448e2c94e4894acc9d33d9d738718a26fb76470b90698ebd2",
+    "worker/segment_commit_queue.hpp": "30a234c6ab76df948f18c6941bf82c74c4a2788487b8e07419d8a1ddfe306efa",
+    "worker/test_mapping_continuity_gate.cpp": "80a4575060c5862ca8b40d7d4159360db7ea5fab10d75bf007ae3dd36b4897e8",
+    "worker/bounded_async_writer.hpp": "679a4234821592e26628cff9151fd869534e5033b93c851de9a0ecff245b3992",
+    "worker/test_mapping_quality_trace.cpp": "1dcc55db0acfff236830fc0ea4f6089218c3dfa5c92fd7b9835687fa72f1169b",
+    "worker/MappingQualityTrace.h": "786cc77f6eb073af57999d402433b16da31aacba0d30b6cef7e2c0ad7f2ef19a",
+    "worker/DeferredMappingSession.h": "0da6e01a486af099ee24c4d3e097d20f6a6343e4067cd05ea9b543e415ee264e",
+    "worker/rgbd_spool.hpp": "0950b20d1bca8de225a2df2cfb5a42003f0fbbeb797f831e6f14fca780c014ce",
+    "worker/spool_io_observation.hpp": "48cea6473af155518c9854d5371ee002d14d0614e09b0bb85468da3a97b2693a",
+    "worker/pace_rgbd_spool_writer.cpp": "ccf5cb94d042a336222506572d7170217bb6397cc2c53aeec55a57326ba9d401",
+    "worker/spool_file_commit.hpp": "c815c644a456beaebeba5232185b18156207eae335aabcbcb6388cb10f14b561"
+  },
+  "camera_sha256": "a74d9969aa6c3380524830b7ddca0026c10e77ea0164288414709619ce17ec06",
+  "worker_sha256": "9ab4da1500e5d79f4f32ff511ee23ede1c7024ebed4a9f54e34f4f96efa07bf8",
+  "core_sha256": "0e68b8fe830df0c60b23d0043d94f2cf20a27ea61795e83726ed40a67eb6b14b",
+  "worker_reused_from": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_candidate5/wbrov_replay_worker"
+}

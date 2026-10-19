@@ -1,0 +1,13 @@
+{
+  "monotonic_s": 537712.907605184,
+  "source": {
+    "stamp_ns": 1791759040852864000,
+    "ingested": 2100,
+    "encoded": 2098,
+    "write_ok": true,
+    "recording": true,
+    "paused": false
+  },
+  "request": "ordinary slow translation 5-10 cm then tilt up about 10 degrees over 10-15 seconds; no Tag, occlusion, or exact return-view requirement",
+  "assistant_motion_commands": false
+}

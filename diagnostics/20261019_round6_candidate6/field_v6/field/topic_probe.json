@@ -1,0 +1,36 @@
+{
+  "duration_s": 30.058899007970467,
+  "topics": {
+    "cloud": {
+      "count": 25,
+      "first_arrival_s": 1.0277886079857126,
+      "first_stamp": 1791758961.106127,
+      "last_arrival_s": 29.073238271987066,
+      "last_stamp": 1791758988.888233,
+      "frame": "deferred_map",
+      "width": 21700,
+      "height": 1,
+      "bytes": 347200,
+      "points": 21700
+    },
+    "rgb": {
+      "count": 550,
+      "first_arrival_s": 1.8351022719871253,
+      "first_stamp": 1791758966.622538,
+      "last_arrival_s": 30.058807648019865,
+      "last_stamp": 1791758994.837935,
+      "frame": "zed_left_camera_optical_frame",
+      "width": 384,
+      "height": 240,
+      "bytes": 276480,
+      "encoding": "bgr8",
+      "sample_sha256": "fe0b3892bd761dd0cdb0eba1b867589087d56f92b3f5def4892c9c9038b97675",
+      "mean_pixel": 117.12723162615741,
+      "std_pixel": 80.40378574544928
+    }
+  },
+  "publishers": {
+    "rgb": 1,
+    "cloud": 1
+  }
+}

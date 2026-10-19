@@ -1,0 +1,8 @@
+[INFO] [1791760175.849129728] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [1791760175.849385984] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[INFO] [1791760175.957460128] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [1791760176.359070944] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [1791760176.393032800] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [1791760178.311782720] [rviz2]: [WBROV_RVIZ_RENDER_READY] attempt=0
+[rviz_rendering:info] Forcing Stereo OFF, at ./src/rviz_rendering/render_system.cpp:155
+[INFO] [1791760461.133943136] [rclcpp]: signal_handler(SIGINT/SIGTERM)
