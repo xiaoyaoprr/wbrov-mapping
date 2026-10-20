@@ -1,0 +1,8 @@
+{
+  "exit": -6,
+  "stderr": "test: /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_candidate7/journal_negative/bounded_async_writer_test.cpp:23: int main(): Assertion `accepted && pending.highWater==1800 && written==expected' failed.\n",
+  "old_capacity": 512,
+  "new_capacity": 8192,
+  "same_new_test_sha256": "b646c1425593bda6d371b9a592b1b5387a7139d0cb052702879911faf438b630",
+  "expected_failure": true
+}

@@ -1,0 +1,22 @@
+{
+  "phase": "failed",
+  "steps": [
+    {
+      "name": "compile",
+      "seconds": 25.001015039975755,
+      "exit": 0
+    },
+    {
+      "name": "link",
+      "seconds": 3.7313289920566604,
+      "exit": 0
+    },
+    {
+      "name": "fallback_test",
+      "seconds": 2.0731889279559255,
+      "exit": 1
+    }
+  ],
+  "error": "AssertionError('fallback_test')",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/validate_repair147_reference_verified.py\", line 35, in <module>\n    run('fallback_test',[str(out/'test_visual'),str(out/'fixture'),'--candidate-reference-fallback'],300)\n  File \"/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/validate_repair147_reference_verified.py\", line 26, in run\n    assert p.returncode==0,name\nAssertionError: fallback_test\n"
+}

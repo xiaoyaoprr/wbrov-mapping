@@ -1,0 +1,19 @@
+{
+  "entry": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate4_notags/run_continuous_mapping_with_light.sh",
+  "entry_sha256": "22528e9ae61cb00c949d4030657915b2341106dc6296b09bd8f6a49aa74829f4",
+  "wrapper_pid": 1108739,
+  "wrapper_ticks": "53449095",
+  "start_monotonic": 534490.958417984,
+  "phase": "closed",
+  "motion_keys_sent": false,
+  "inputs": [
+    "authorized existing entry confirmation: OK"
+  ],
+  "scope": "candidate ordinary movement; tag detection disabled; no motion commands",
+  "tag_detection_enabled": false,
+  "elapsed_s": 421.7691456320463,
+  "mapping_run": "/home/exocean/maps/rtabmap_calibration_ab/continuous_20261012_055711_1110036",
+  "ready_elapsed_s": 16.78070707200095,
+  "normal_stop_requested": true,
+  "wrapper_exit": 1
+}

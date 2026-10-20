@@ -1,0 +1,22 @@
+{
+  "build_round6_candidate4.py": "5c2b6b80a5996274d50bcb83d363fbd42747f35a88bffa2e1388575be4d0f2ae",
+  "package_round6_candidate4_result.json": "9fcc8f2239ebe1bdf1f6f96ae427c9de12dab7aa6c6dfb760eee97b3893c2560",
+  "round6_candidate4/camera_compile.log": "35b1aebbb91aece27e053f65adf56c985632697610e1df6f74d96179cb1e4374",
+  "round6_candidate4/camera_configure.log": "6ffe1d0adc259662ddfd3102aa431699c18144c21e5fbcd58f412d3e8f102578",
+  "round6_candidate4/camera_ldd.log": "a629317eefb7aa0edd6e53958fa4667a21e0ea2964edefe2ee4a9fbd4053f97c",
+  "round6_candidate4/camera_tests.log": "e5686785d46c504e2e1f732c4bdbe10a4dfc179452b0af0296445401bbd23a72",
+  "round6_candidate4/gate_compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "round6_candidate4/gate_test.log": "49b04865f4634ca6f1b9b6bfc5528851d4b987e3788f674908422a38186ad5af",
+  "round6_candidate4/quality_compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "round6_candidate4/quality_test.log": "b65d123d4fa277c14c18147c21db65522554006eab4f42328d093f4b5b53a0c6",
+  "round6_candidate4/result.json": "9c61af1f0b4d11463f4cd967fec4c34522cc3a4ea9e25982d5ac91d9b8ebdca2",
+  "round6_candidate4/sdk_runtime.log": "da082451e8a4e4cb105ef2e4b98dde2ad35ded1492611ba60347d25ae085410a",
+  "round6_candidate4/worker_compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "round6_candidate4/worker_ldd.log": "1fec5362c5abd34c80a425e4fcf7cb78d0fceff2632ae1ef967be9e92f94360e",
+  "round6_candidate4/worker_link.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "round6_candidate4_negative/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "round6_candidate4_negative/dependencies.txt": "8e372b387e05a52e8138cc947b46c1bfb3809811fb30dbfbc12a88655bda649e",
+  "round6_candidate4_negative/expected_failure.log": "7dde6ce7472efbf8ccb9cfd408937466c78c0291198279cfdd674bacd416abbf",
+  "round6_candidate4_negative/result.json": "85898a6312e4a618c8f0699afc3962d0b85817c44b76c1557dc6a4549b018cb1",
+  "round6_candidate4_source.zip": "f42fa71556306fdd9fdbad497ddb97e65235c5593402143c7ab1da1dd3b6ec5a"
+}

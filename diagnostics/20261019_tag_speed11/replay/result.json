@@ -1,0 +1,477 @@
+{
+  "phase": "completed",
+  "scope": "fixed four all-frame replays, tags enabled in both controls and candidate; no hardware or deployment; no retry-until-pass",
+  "steps": [
+    {
+      "name": "baseline_short",
+      "seconds": 86.84618806408253,
+      "exit": 0,
+      "recording": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/motion_spool1",
+      "pins": {
+        "core": "a6b4397cd6a5ed4cf06e54cad95d4205734297f2da31f07684b517e17cc17db4",
+        "worker": "f0f70bed93c81f678a71a2aae45c11481ab4e7ae548c2b466e498fae11e61d9b",
+        "recording_status": "ed2ea4d063beaff2f97caaff19f0bca6dad00a5d229c41e8f02022b009cdc1cb"
+      },
+      "frames": 1581,
+      "source_seconds": 64.947313,
+      "stamp_sha256": "b631ff88b2d2e37c97c34079d87561a98071c658016f0d2d82cfc4ffa3fd28b3",
+      "save_verified": true,
+      "database_check": "ok",
+      "main_nodes": 98,
+      "cuts": 18,
+      "recoveries": 1,
+      "final_continuity": "NORMAL",
+      "cloud_points": 103946,
+      "detected_observations": 235,
+      "detected_ids": [
+        8,
+        13
+      ],
+      "exported_tags": [
+        {
+          "tag_id": 8,
+          "distinct_main_nodes": 69,
+          "independent_references": 3,
+          "required_references": 3,
+          "position": [
+            0.336317,
+            0.259838,
+            -0.133787
+          ]
+        },
+        {
+          "tag_id": 13,
+          "distinct_main_nodes": 6,
+          "independent_references": 3,
+          "required_references": 3,
+          "position": [
+            -0.19296,
+            0.287338,
+            -0.854695
+          ]
+        }
+      ],
+      "timings": {
+        "odometry_compute_ms": 60904,
+        "mapping_compute_ms": 54302.6,
+        "odometry_estimation_ms": 60584,
+        "odometry_bundle_ms": 13821.9,
+        "core_process_ms": 46674.3,
+        "frozen_graph_check_ms": 41.386,
+        "recovery_observation_ms": 3702.98,
+        "tag_preparation_ms": 480.389,
+        "cloud_export_ms": 3629.78,
+        "tag_export_ms": 490.763,
+        "cloud_node_build_ms": 4743.58,
+        "cloud_decode_ms": 550.558,
+        "cloud_prepare_ms": 1139.48,
+        "cloud_transform_cpu_ms": 3604.1,
+        "cloud_serialize_ms": 572.002,
+        "core_timings_ms": {
+          "Timing/Add_loop_closure_link/ms": 28006.2,
+          "Timing/Cleaning_neighbors/ms": 0,
+          "Timing/Emptying_trash/ms": 1482.15,
+          "Timing/Finalizing_statistics/ms": 217.615,
+          "Timing/Forgetting/ms": 1.2567,
+          "Timing/Hypotheses_creation/ms": 2.45523,
+          "Timing/Hypotheses_validation/ms": 0.349998,
+          "Timing/Joining_trash/ms": 1.08433,
+          "Timing/Likelihood_computation/ms": 123.686,
+          "Timing/Map_optimization/ms": 642.437,
+          "Timing/Memory_cleanup/ms": 95.1858,
+          "Timing/Memory_update/ms": 16635.7,
+          "Timing/Neighbor_link_refining/ms": 0,
+          "Timing/Posterior_computation/ms": 66.1221,
+          "Timing/Proximity_by_space/ms": 0.0667572,
+          "Timing/Proximity_by_space_search/ms": 0,
+          "Timing/Proximity_by_space_visual/ms": 0,
+          "Timing/Proximity_by_time/ms": 10.8242,
+          "Timing/Reactivation/ms": 0.191689,
+          "Timing/Statistics_creation/ms": 35.4199,
+          "Timing/Total/ms": 45620,
+          "TimingMem/Add_new_words/ms": 6572.83,
+          "TimingMem/Compressing_data/ms": 1160.88,
+          "TimingMem/Descriptors_extraction/ms": 920.601,
+          "TimingMem/Joining_dictionary_update/ms": 430.316,
+          "TimingMem/Keypoints_3D/ms": 83.1587,
+          "TimingMem/Keypoints_detection/ms": 2961.43,
+          "TimingMem/Occupancy_grid/ms": 4408.06,
+          "TimingMem/Pre_update/ms": 0.700951,
+          "TimingMem/Rehearsal/ms": 4.4241,
+          "TimingMem/Signature_creation/ms": 16622.6
+        }
+      },
+      "saved_sha256": {
+        "map.db": "6adba1a5dcc1129b4bf307e0f7b3016bf4180408348edaa82c9ee02e82e88765",
+        "main_cloud.ply": "6a20948679520c7b4a84ca8e397fe20a6c407d160b2b6b0ba0a6dc64385d4d1a",
+        "frames.csv": "7d231a7dc001c09d0cf4a40e5f4644ef87e182c4fffa056f462a24ad64386347",
+        "tags.json": "6a7c199ca2859ba9a92893a02d553536c24292dcdfc7f1afd9c9905bb32189ce"
+      }
+    },
+    {
+      "name": "candidate_short",
+      "seconds": 83.23781289590988,
+      "exit": 0,
+      "recording": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/motion_spool1",
+      "pins": {
+        "core": "5ad5ca0cb6d90ead1d1632697958b7ae9c6f7cc17141b8a37b5d0c68844974ea",
+        "worker": "f0f70bed93c81f678a71a2aae45c11481ab4e7ae548c2b466e498fae11e61d9b",
+        "recording_status": "ed2ea4d063beaff2f97caaff19f0bca6dad00a5d229c41e8f02022b009cdc1cb"
+      },
+      "frames": 1581,
+      "source_seconds": 64.947313,
+      "stamp_sha256": "b631ff88b2d2e37c97c34079d87561a98071c658016f0d2d82cfc4ffa3fd28b3",
+      "save_verified": true,
+      "database_check": "ok",
+      "main_nodes": 99,
+      "cuts": 19,
+      "recoveries": 1,
+      "final_continuity": "NORMAL",
+      "cloud_points": 89679,
+      "detected_observations": 235,
+      "detected_ids": [
+        8,
+        13
+      ],
+      "exported_tags": [
+        {
+          "tag_id": 8,
+          "distinct_main_nodes": 68,
+          "independent_references": 3,
+          "required_references": 3,
+          "position": [
+            0.320582,
+            0.279643,
+            -0.144241
+          ]
+        },
+        {
+          "tag_id": 13,
+          "distinct_main_nodes": 6,
+          "independent_references": 3,
+          "required_references": 3,
+          "position": [
+            -0.223245,
+            0.265907,
+            -0.874047
+          ]
+        }
+      ],
+      "timings": {
+        "odometry_compute_ms": 61083.4,
+        "mapping_compute_ms": 51556.3,
+        "odometry_estimation_ms": 60751,
+        "odometry_bundle_ms": 13844,
+        "core_process_ms": 44424.3,
+        "frozen_graph_check_ms": 48.77,
+        "recovery_observation_ms": 5176.02,
+        "tag_preparation_ms": 391.766,
+        "cloud_export_ms": 3567.1,
+        "tag_export_ms": 457.034,
+        "cloud_node_build_ms": 4770.15,
+        "cloud_decode_ms": 557.912,
+        "cloud_prepare_ms": 1158.71,
+        "cloud_transform_cpu_ms": 3611.44,
+        "cloud_serialize_ms": 509.868,
+        "core_timings_ms": {
+          "Timing/Add_loop_closure_link/ms": 25116.1,
+          "Timing/Cleaning_neighbors/ms": 0,
+          "Timing/Emptying_trash/ms": 1544.69,
+          "Timing/Finalizing_statistics/ms": 227.295,
+          "Timing/Forgetting/ms": 1.34254,
+          "Timing/Hypotheses_creation/ms": 2.40278,
+          "Timing/Hypotheses_validation/ms": 0.345707,
+          "Timing/Joining_trash/ms": 1.0407,
+          "Timing/Likelihood_computation/ms": 122.19,
+          "Timing/Map_optimization/ms": 683.98,
+          "Timing/Memory_cleanup/ms": 106.423,
+          "Timing/Memory_update/ms": 17212.5,
+          "Timing/Neighbor_link_refining/ms": 0,
+          "Timing/Posterior_computation/ms": 69.6058,
+          "Timing/Proximity_by_space/ms": 0.0777245,
+          "Timing/Proximity_by_space_search/ms": 0,
+          "Timing/Proximity_by_space_visual/ms": 0,
+          "Timing/Proximity_by_time/ms": 11.0993,
+          "Timing/Reactivation/ms": 0.194073,
+          "Timing/Statistics_creation/ms": 38.0638,
+          "Timing/Total/ms": 43364.3,
+          "TimingMem/Add_new_words/ms": 6766.81,
+          "TimingMem/Compressing_data/ms": 1217.83,
+          "TimingMem/Descriptors_extraction/ms": 939.26,
+          "TimingMem/Joining_dictionary_update/ms": 413.322,
+          "TimingMem/Keypoints_3D/ms": 87.1549,
+          "TimingMem/Keypoints_detection/ms": 3069.22,
+          "TimingMem/Occupancy_grid/ms": 4614.6,
+          "TimingMem/Pre_update/ms": 0.669003,
+          "TimingMem/Rehearsal/ms": 4.72307,
+          "TimingMem/Signature_creation/ms": 17198.5
+        }
+      },
+      "saved_sha256": {
+        "map.db": "77fefa87f451a15bf269a90b3f352dbcee5cd299323be1060968a800cd6a5674",
+        "main_cloud.ply": "199d4d5f47b7295a087cbe7800fdcc65abeb7b4cbf2a11b7b3ea21f209ec17f8",
+        "frames.csv": "b7a56a924a7eff9c7b918957b8d25339f81736261264fe799b046441ffa484bc",
+        "tags.json": "683e8cab7046445d45200e11a79b89909dda2669997131863f1e9d06b494fb2a"
+      }
+    },
+    {
+      "name": "candidate_field",
+      "seconds": 300.89362969598733,
+      "exit": 0,
+      "recording": "/home/exocean/maps/rtabmap_calibration_ab/continuous_20261012_083050_1300795/rgbd_spool",
+      "pins": {
+        "core": "5ad5ca0cb6d90ead1d1632697958b7ae9c6f7cc17141b8a37b5d0c68844974ea",
+        "worker": "f0f70bed93c81f678a71a2aae45c11481ab4e7ae548c2b466e498fae11e61d9b",
+        "recording_status": "fdb5459de2c9bad88c674eb47daf652cd0a0ff91ab1623a306c09b7c682ae743"
+      },
+      "frames": 7490,
+      "source_seconds": 294.753277,
+      "stamp_sha256": "c27ff7db7661ca4a6ccfafd0a535b64f2f413caaaf60d3a990cca13039cca064",
+      "save_verified": true,
+      "database_check": "ok",
+      "main_nodes": 119,
+      "cuts": 1,
+      "recoveries": 0,
+      "final_continuity": "NORMAL",
+      "cloud_points": 101657,
+      "detected_observations": 654,
+      "detected_ids": [
+        7,
+        8,
+        13
+      ],
+      "exported_tags": [
+        {
+          "tag_id": 7,
+          "distinct_main_nodes": 1,
+          "independent_references": 1,
+          "required_references": 3,
+          "position": [
+            -0.118793,
+            0.495033,
+            0.0662249
+          ]
+        },
+        {
+          "tag_id": 8,
+          "distinct_main_nodes": 87,
+          "independent_references": 3,
+          "required_references": 3,
+          "position": [
+            0.229791,
+            -0.266398,
+            0.0336103
+          ]
+        },
+        {
+          "tag_id": 13,
+          "distinct_main_nodes": 19,
+          "independent_references": 3,
+          "required_references": 3,
+          "position": [
+            -0.247461,
+            0.0218927,
+            -0.700419
+          ]
+        }
+      ],
+      "timings": {
+        "odometry_compute_ms": 257513,
+        "mapping_compute_ms": 109831,
+        "odometry_estimation_ms": 257121,
+        "odometry_bundle_ms": 63729.4,
+        "core_process_ms": 105648,
+        "frozen_graph_check_ms": 0.400736,
+        "recovery_observation_ms": 0,
+        "tag_preparation_ms": 0,
+        "cloud_export_ms": 14603,
+        "tag_export_ms": 1093.47,
+        "cloud_node_build_ms": 21693.1,
+        "cloud_decode_ms": 981.533,
+        "cloud_prepare_ms": 2818.4,
+        "cloud_transform_cpu_ms": 18874.7,
+        "cloud_serialize_ms": 1656.25,
+        "core_timings_ms": {
+          "Timing/Add_loop_closure_link/ms": 51126.1,
+          "Timing/Cleaning_neighbors/ms": 0,
+          "Timing/Emptying_trash/ms": 4976.69,
+          "Timing/Finalizing_statistics/ms": 644.449,
+          "Timing/Forgetting/ms": 7.11823,
+          "Timing/Hypotheses_creation/ms": 4.71115,
+          "Timing/Hypotheses_validation/ms": 0.466824,
+          "Timing/Joining_trash/ms": 3.07155,
+          "Timing/Likelihood_computation/ms": 259.444,
+          "Timing/Map_optimization/ms": 2307.04,
+          "Timing/Memory_cleanup/ms": 384.027,
+          "Timing/Memory_update/ms": 48387.3,
+          "Timing/Neighbor_link_refining/ms": 0,
+          "Timing/Posterior_computation/ms": 103.95,
+          "Timing/Proximity_by_space/ms": 0.211477,
+          "Timing/Proximity_by_space_search/ms": 0,
+          "Timing/Proximity_by_space_visual/ms": 0,
+          "Timing/Proximity_by_time/ms": 27.8413,
+          "Timing/Reactivation/ms": 0.551462,
+          "Timing/Statistics_creation/ms": 96.138,
+          "Timing/Total/ms": 102701,
+          "TimingMem/Add_new_words/ms": 17017.7,
+          "TimingMem/Compressing_data/ms": 3446.4,
+          "TimingMem/Descriptors_extraction/ms": 2924.9,
+          "TimingMem/Joining_dictionary_update/ms": 358.638,
+          "TimingMem/Keypoints_3D/ms": 250.141,
+          "TimingMem/Keypoints_detection/ms": 9453.54,
+          "TimingMem/Occupancy_grid/ms": 14670.4,
+          "TimingMem/Pre_update/ms": 2.02084,
+          "TimingMem/Rehearsal/ms": 12.9766,
+          "TimingMem/Signature_creation/ms": 48350.2
+        }
+      },
+      "saved_sha256": {
+        "map.db": "328d199fb552d490093c806a8eee80f22f43038eec1ee548b8da88b4cf8dd28e",
+        "main_cloud.ply": "69e75a364ce67cc2283dc907a4e21da7baa2a747a3fb5fe3641547783154d8f7",
+        "frames.csv": "93a989ebc7c156b369b9758599a2e163a6b297c0e1f2ab4396f0d9b1c63a9a5d",
+        "tags.json": "69fac6a8a41a74e9f5d514e236aad78092eaba40f15f4714b0527cb30a1b7083"
+      }
+    },
+    {
+      "name": "baseline_field",
+      "seconds": 298.8206068800064,
+      "exit": 0,
+      "recording": "/home/exocean/maps/rtabmap_calibration_ab/continuous_20261012_083050_1300795/rgbd_spool",
+      "pins": {
+        "core": "a6b4397cd6a5ed4cf06e54cad95d4205734297f2da31f07684b517e17cc17db4",
+        "worker": "f0f70bed93c81f678a71a2aae45c11481ab4e7ae548c2b466e498fae11e61d9b",
+        "recording_status": "fdb5459de2c9bad88c674eb47daf652cd0a0ff91ab1623a306c09b7c682ae743"
+      },
+      "frames": 7490,
+      "source_seconds": 294.753277,
+      "stamp_sha256": "c27ff7db7661ca4a6ccfafd0a535b64f2f413caaaf60d3a990cca13039cca064",
+      "save_verified": true,
+      "database_check": "ok",
+      "main_nodes": 123,
+      "cuts": 1,
+      "recoveries": 0,
+      "final_continuity": "NORMAL",
+      "cloud_points": 104283,
+      "detected_observations": 654,
+      "detected_ids": [
+        7,
+        8,
+        13
+      ],
+      "exported_tags": [
+        {
+          "tag_id": 7,
+          "distinct_main_nodes": 1,
+          "independent_references": 1,
+          "required_references": 3,
+          "position": [
+            -0.105891,
+            0.496007,
+            0.0684721
+          ]
+        },
+        {
+          "tag_id": 8,
+          "distinct_main_nodes": 92,
+          "independent_references": 3,
+          "required_references": 3,
+          "position": [
+            0.239001,
+            -0.248645,
+            0.0483142
+          ]
+        },
+        {
+          "tag_id": 13,
+          "distinct_main_nodes": 20,
+          "independent_references": 3,
+          "required_references": 3,
+          "position": [
+            -0.245647,
+            0.0192547,
+            -0.698623
+          ]
+        }
+      ],
+      "timings": {
+        "odometry_compute_ms": 258891,
+        "mapping_compute_ms": 99470.6,
+        "odometry_estimation_ms": 258501,
+        "odometry_bundle_ms": 64249.3,
+        "core_process_ms": 95239.8,
+        "frozen_graph_check_ms": 0.444864,
+        "recovery_observation_ms": 0,
+        "tag_preparation_ms": 0,
+        "cloud_export_ms": 15062.9,
+        "tag_export_ms": 1095.63,
+        "cloud_node_build_ms": 22841.4,
+        "cloud_decode_ms": 686.814,
+        "cloud_prepare_ms": 2699.08,
+        "cloud_transform_cpu_ms": 20142.3,
+        "cloud_serialize_ms": 1688.41,
+        "core_timings_ms": {
+          "Timing/Add_loop_closure_link/ms": 36800.5,
+          "Timing/Cleaning_neighbors/ms": 0,
+          "Timing/Emptying_trash/ms": 4615.13,
+          "Timing/Finalizing_statistics/ms": 700.24,
+          "Timing/Forgetting/ms": 6.29044,
+          "Timing/Hypotheses_creation/ms": 4.72164,
+          "Timing/Hypotheses_validation/ms": 0.307083,
+          "Timing/Joining_trash/ms": 3.40962,
+          "Timing/Likelihood_computation/ms": 248.017,
+          "Timing/Map_optimization/ms": 2424.32,
+          "Timing/Memory_cleanup/ms": 406.456,
+          "Timing/Memory_update/ms": 51957.8,
+          "Timing/Neighbor_link_refining/ms": 0,
+          "Timing/Posterior_computation/ms": 112.19,
+          "Timing/Proximity_by_space/ms": 0.253677,
+          "Timing/Proximity_by_space_search/ms": 0,
+          "Timing/Proximity_by_space_visual/ms": 0,
+          "Timing/Proximity_by_time/ms": 29.8097,
+          "Timing/Reactivation/ms": 0.581264,
+          "Timing/Statistics_creation/ms": 101.117,
+          "Timing/Total/ms": 92090.1,
+          "TimingMem/Add_new_words/ms": 18282.1,
+          "TimingMem/Compressing_data/ms": 3635.42,
+          "TimingMem/Descriptors_extraction/ms": 3180.21,
+          "TimingMem/Joining_dictionary_update/ms": 383.302,
+          "TimingMem/Keypoints_3D/ms": 265.88,
+          "TimingMem/Keypoints_detection/ms": 10084.8,
+          "TimingMem/Occupancy_grid/ms": 15845.1,
+          "TimingMem/Pre_update/ms": 2.26927,
+          "TimingMem/Rehearsal/ms": 13.6888,
+          "TimingMem/Signature_creation/ms": 51918.2
+        }
+      },
+      "saved_sha256": {
+        "map.db": "640e1e7503caf92246b38ddda5f07571d51a3defc44e989c96901abe18fde588",
+        "main_cloud.ply": "8a27c91c6cacd87a391dd201c93b970ab38263cc46d4e393542b52bb065cfd79",
+        "frames.csv": "79cc760eaccbc314bcc7614516a3631b4b68434a0e7a86518e1c8f551485993b",
+        "tags.json": "2882a41add26e9ba26e1f80d36d32f676d18dc53891f4985873056cf99a08988"
+      }
+    }
+  ],
+  "comparisons": {
+    "short": {
+      "baseline_seconds": 86.84618806408253,
+      "candidate_seconds": 83.23781289590988,
+      "fraction_time_saved": 0.04154903339580174,
+      "same_frames_csv": false,
+      "same_cloud": false,
+      "same_detected_ids": true,
+      "same_main_nodes": false,
+      "same_recoveries": true
+    },
+    "field": {
+      "baseline_seconds": 298.8206068800064,
+      "candidate_seconds": 300.89362969598733,
+      "fraction_time_saved": -0.006937348925247999,
+      "same_frames_csv": false,
+      "same_cloud": false,
+      "same_detected_ids": true,
+      "same_main_nodes": false,
+      "same_recoveries": true
+    }
+  },
+  "hardware_acceptance": false
+}

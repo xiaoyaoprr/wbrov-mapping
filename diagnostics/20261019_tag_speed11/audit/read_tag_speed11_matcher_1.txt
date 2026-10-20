@@ -1,0 +1,66 @@
+odom_parameters GFTT/MinDistance=3
+Odom/GuessMotion=false
+Odom/ResetCountdown=8
+OdomF2M/BundleAdjustmentMaxFrames=3
+Optimizer/Iterations=5
+Vis/CorGuessMatchToProjection=true
+Vis/GridCols=3
+Vis/GridRows=2
+Vis/MaxDepth=1.50
+Vis/MinInliers=15
+
+map_parameters Grid/CellSize=0.03
+Grid/DepthDecimation=2
+Grid/NoiseFilteringMinNeighbors=3
+Grid/NoiseFilteringRadius=0.05
+Grid/RangeMax=1.00
+Grid/RangeMin=0.20
+Mem/IncrementalMemory=true
+Mem/InitWMWithAllNodes=true
+Mem/ReduceGraph=false
+Mem/RehearsalIdUpdatedToNewOne=false
+Mem/RehearsalSimilarity=1.0
+Mem/SaveDepth16Format=true
+Mem/UseOdomGravity=false
+Optimizer/GravitySigma=0.3
+Optimizer/Iterations=20
+Optimizer/LandmarksIgnored=true
+Optimizer/PriorsIgnored=true
+Optimizer/Strategy=1
+Optimizer/VarianceIgnored=false
+RGBD/AngularUpdate=0.05
+RGBD/CreateOccupancyGrid=true
+RGBD/LinearUpdate=0.05
+RGBD/NeighborLinkRefining=false
+RGBD/OptimizeMaxError=1.0
+RGBD/OptimizeMaxErrorRepairRadius=0
+RGBD/ProximityBySpace=false
+Reg/Force3DoF=false
+Rtabmap/CreateIntermediateNodes=false
+Rtabmap/CrossMapLoopMinAngularSigma=3.0
+Rtabmap/CrossMapLoopMinLinearSigma=0.02
+Rtabmap/CrossMapLoopPending=false
+Rtabmap/DetectionRate=5.0
+Rtabmap/LoopGPS=false
+Rtabmap/MemoryThr=0
+Rtabmap/StartNewMapOnLoopClosure=false
+Rtabmap/TimeThr=0
+Vis/MaxDepth=1.50
+Vis/MinInliers=25
+
+native LSH /home/exocean/.cache/wbrov_mapping_builds/gravity_core_20260908/source/rtabmap_core/corelib/src/rtflann/util/lsh_table.h ocate the mask
+    mask_ = std::vector<size_t>((size_t)ceil((float)(feature_size * sizeof(char)) / (float)sizeof(size_t)), 0);
+
+    // A bit brutal but fast to code
+    std::vector<size_t> indices(feature_size * CHAR_BIT);
+    for (size_t i = 0; i < feature_size * CHAR_BIT; ++i) indices[i] = i;
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(indices.begin(), indices.end(), g);
+
+    // Generate a random set of order of subsignature_size_ bits
+    for (unsigned int i = 0; i < key_size_; ++i) {
+        size_t index = indices[i];
+
+        // Set that bit in the mask
+        s

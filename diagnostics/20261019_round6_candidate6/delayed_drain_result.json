@@ -1,0 +1,1 @@
+{"elapsed_s": 80.97478326398414, "child_exit": 0, "errors": [], "sealed": {"synthetic_frames": 100, "sealed_frames": 100, "closed": true}, "scope": "75-second synthetic child drain with real SIGINT; no camera/SDK or robot control"}

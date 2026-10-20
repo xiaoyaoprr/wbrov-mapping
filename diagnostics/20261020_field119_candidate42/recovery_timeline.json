@@ -1,0 +1,809 @@
+{
+  "start_source_ns": 1791850235644213000,
+  "first_lost_s": 259.988036,
+  "first_good_after_loss_s": 267.33772,
+  "first_long_gap_from_s": 272.07084,
+  "first_long_gap_to_s": 282.287022,
+  "first_lost_row": {
+    "source_ns": "1791850495632249000",
+    "lost": "1",
+    "inliers": "12",
+    "matches": "28",
+    "usable": "0",
+    "epoch": "0",
+    "cuts": "2",
+    "main_write": "0",
+    "main_nodes": "85",
+    "local_nodes": "85",
+    "recoveries": "0",
+    "input_present": "1",
+    "reason": "odometry lost; ",
+    "quality_reason": "inliers=12 matches=28 dimensions=0 covariance=0 visual=0 depth=0 ",
+    "finite_motion": "0",
+    "dimensions_valid": "0",
+    "covariance_finite_pd": "1",
+    "covariance_valid": "0",
+    "visual_geometry": "0",
+    "depth_geometry": "0",
+    "measured_registration": "0",
+    "recovery_geometry": "0",
+    "recovery_route": "none"
+  },
+  "first_good_after_loss_row": {
+    "source_ns": "1791850502981933000",
+    "lost": "0",
+    "inliers": "94",
+    "matches": "109",
+    "usable": "1",
+    "epoch": "0",
+    "cuts": "190",
+    "main_write": "0",
+    "main_nodes": "85",
+    "local_nodes": "85",
+    "recoveries": "0",
+    "input_present": "1",
+    "reason": "waiting for stable geometry and Core registration; ",
+    "quality_reason": "inliers=94 matches=109 dimensions=1 covariance=1 visual=1 depth=0 ",
+    "finite_motion": "1",
+    "dimensions_valid": "1",
+    "covariance_finite_pd": "1",
+    "covariance_valid": "1",
+    "visual_geometry": "1",
+    "depth_geometry": "0",
+    "measured_registration": "1",
+    "recovery_geometry": "1",
+    "recovery_route": "none"
+  },
+  "cut_increments_after_warmup": {
+    "odometry lost": 179,
+    "geometry quality insufficient": 10,
+    "unverified measurement gap": 27
+  },
+  "warmup_cuts": 1,
+  "epochs": {
+    "0": {
+      "first_s": 0.0,
+      "frames": 7103,
+      "usable": 6913,
+      "lost": 179,
+      "last_s": 267.521046
+    },
+    "1": {
+      "first_s": 267.554376,
+      "frames": 125,
+      "usable": 125,
+      "lost": 0,
+      "last_s": 282.520572
+    },
+    "2": {
+      "first_s": 282.587016,
+      "frames": 485,
+      "usable": 485,
+      "lost": 0,
+      "last_s": 307.902505
+    },
+    "3": {
+      "first_s": 307.969173,
+      "frames": 56,
+      "usable": 56,
+      "lost": 0,
+      "last_s": 312.05231
+    },
+    "4": {
+      "first_s": 312.085657,
+      "frames": 66,
+      "usable": 66,
+      "lost": 0,
+      "last_s": 317.668702
+    },
+    "5": {
+      "first_s": 317.718725,
+      "frames": 24,
+      "usable": 24,
+      "lost": 0,
+      "last_s": 320.318647
+    },
+    "6": {
+      "first_s": 320.36865,
+      "frames": 22,
+      "usable": 22,
+      "lost": 0,
+      "last_s": 329.368206
+    },
+    "7": {
+      "first_s": 329.435186,
+      "frames": 11,
+      "usable": 11,
+      "lost": 0,
+      "last_s": 331.168325
+    },
+    "8": {
+      "first_s": 331.268362,
+      "frames": 111,
+      "usable": 111,
+      "lost": 0,
+      "last_s": 338.017797
+    },
+    "9": {
+      "first_s": 338.08444,
+      "frames": 11,
+      "usable": 11,
+      "lost": 0,
+      "last_s": 339.567957
+    },
+    "10": {
+      "first_s": 339.617738,
+      "frames": 42,
+      "usable": 42,
+      "lost": 0,
+      "last_s": 342.884232
+    },
+    "11": {
+      "first_s": 342.934231,
+      "frames": 60,
+      "usable": 60,
+      "lost": 0,
+      "last_s": 346.484071
+    },
+    "12": {
+      "first_s": 346.550984,
+      "frames": 66,
+      "usable": 66,
+      "lost": 0,
+      "last_s": 350.867209
+    },
+    "13": {
+      "first_s": 350.917189,
+      "frames": 39,
+      "usable": 39,
+      "lost": 0,
+      "last_s": 354.283746
+    },
+    "14": {
+      "first_s": 354.350558,
+      "frames": 47,
+      "usable": 47,
+      "lost": 0,
+      "last_s": 366.149826
+    },
+    "15": {
+      "first_s": 366.199961,
+      "frames": 20,
+      "usable": 20,
+      "lost": 0,
+      "last_s": 368.666351
+    },
+    "16": {
+      "first_s": 368.733018,
+      "frames": 374,
+      "usable": 374,
+      "lost": 0,
+      "last_s": 394.015189
+    },
+    "17": {
+      "first_s": 394.081818,
+      "frames": 87,
+      "usable": 87,
+      "lost": 0,
+      "last_s": 399.598227
+    },
+    "18": {
+      "first_s": 399.664897,
+      "frames": 114,
+      "usable": 114,
+      "lost": 0,
+      "last_s": 405.698363
+    },
+    "19": {
+      "first_s": 405.731302,
+      "frames": 49,
+      "usable": 49,
+      "lost": 0,
+      "last_s": 410.214422
+    },
+    "20": {
+      "first_s": 410.264428,
+      "frames": 41,
+      "usable": 41,
+      "lost": 0,
+      "last_s": 415.531185
+    },
+    "21": {
+      "first_s": 415.580807,
+      "frames": 47,
+      "usable": 47,
+      "lost": 0,
+      "last_s": 429.163528
+    },
+    "22": {
+      "first_s": 429.21353,
+      "frames": 19,
+      "usable": 19,
+      "lost": 0,
+      "last_s": 430.930095
+    },
+    "23": {
+      "first_s": 430.980096,
+      "frames": 24,
+      "usable": 24,
+      "lost": 0,
+      "last_s": 432.879981
+    },
+    "24": {
+      "first_s": 432.929983,
+      "frames": 23,
+      "usable": 23,
+      "lost": 0,
+      "last_s": 434.696578
+    },
+    "25": {
+      "first_s": 434.763251,
+      "frames": 20,
+      "usable": 20,
+      "lost": 0,
+      "last_s": 436.713157
+    },
+    "26": {
+      "first_s": 436.763139,
+      "frames": 219,
+      "usable": 219,
+      "lost": 0,
+      "last_s": 448.262661
+    },
+    "27": {
+      "first_s": 448.329281,
+      "frames": 27,
+      "usable": 27,
+      "lost": 0,
+      "last_s": 450.479189
+    },
+    "28": {
+      "first_s": 450.545815,
+      "frames": 439,
+      "usable": 439,
+      "lost": 0,
+      "last_s": 469.128316
+    }
+  },
+  "tag_selection_by_epoch": [
+    {
+      "epoch": 1,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 3,
+      "calls": 19
+    },
+    {
+      "epoch": 1,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 19
+    },
+    {
+      "epoch": 2,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 2,
+      "calls": 86
+    },
+    {
+      "epoch": 2,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 86
+    },
+    {
+      "epoch": 3,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 1,
+      "calls": 8
+    },
+    {
+      "epoch": 3,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 8
+    },
+    {
+      "epoch": 4,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 1,
+      "calls": 10
+    },
+    {
+      "epoch": 4,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 10
+    },
+    {
+      "epoch": 5,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 1,
+      "calls": 2
+    },
+    {
+      "epoch": 5,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 2
+    },
+    {
+      "epoch": 6,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 1,
+      "calls": 2
+    },
+    {
+      "epoch": 6,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 2
+    },
+    {
+      "epoch": 8,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 3,
+      "calls": 18
+    },
+    {
+      "epoch": 8,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 18
+    },
+    {
+      "epoch": 10,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 2,
+      "calls": 6
+    },
+    {
+      "epoch": 10,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 6
+    },
+    {
+      "epoch": 11,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 1,
+      "calls": 10
+    },
+    {
+      "epoch": 11,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 10
+    },
+    {
+      "epoch": 12,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 1,
+      "calls": 10
+    },
+    {
+      "epoch": 12,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 10
+    },
+    {
+      "epoch": 13,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 1,
+      "calls": 5
+    },
+    {
+      "epoch": 13,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 5
+    },
+    {
+      "epoch": 14,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 1,
+      "calls": 7
+    },
+    {
+      "epoch": 14,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 7
+    },
+    {
+      "epoch": 15,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 1,
+      "calls": 2
+    },
+    {
+      "epoch": 15,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 2
+    },
+    {
+      "epoch": 16,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 2,
+      "calls": 67
+    },
+    {
+      "epoch": 16,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 67
+    },
+    {
+      "epoch": 17,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 13
+    },
+    {
+      "epoch": 17,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 13
+    },
+    {
+      "epoch": 18,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 19
+    },
+    {
+      "epoch": 18,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 19
+    },
+    {
+      "epoch": 19,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 7
+    },
+    {
+      "epoch": 19,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 7
+    },
+    {
+      "epoch": 20,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 6
+    },
+    {
+      "epoch": 20,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 6
+    },
+    {
+      "epoch": 21,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 7
+    },
+    {
+      "epoch": 21,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 7
+    },
+    {
+      "epoch": 22,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 2
+    },
+    {
+      "epoch": 22,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 2
+    },
+    {
+      "epoch": 23,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 2
+    },
+    {
+      "epoch": 23,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 2
+    },
+    {
+      "epoch": 24,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 2
+    },
+    {
+      "epoch": 24,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 2
+    },
+    {
+      "epoch": 25,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 1
+    },
+    {
+      "epoch": 25,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 1
+    },
+    {
+      "epoch": 26,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 37
+    },
+    {
+      "epoch": 26,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 37
+    },
+    {
+      "epoch": 27,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 3
+    },
+    {
+      "epoch": 27,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 3
+    },
+    {
+      "epoch": 28,
+      "tag": 8,
+      "old_max": 3,
+      "current_max": 1,
+      "calls": 82
+    },
+    {
+      "epoch": 28,
+      "tag": 13,
+      "old_max": 3,
+      "current_max": 0,
+      "calls": 82
+    }
+  ],
+  "native_candidate_retained_counts": {
+    "1": 100,
+    "2": 1,
+    "3": 3
+  },
+  "tag_triplet_attempts": 20,
+  "tag_backend_preparations": 20,
+  "tag_preparations": [
+    {
+      "source_ns": 1791850505498461000,
+      "elapsed_source_s": 269.854248,
+      "epoch": 1,
+      "tag": 8,
+      "accepted": 0,
+      "reason": "shared gravity-constrained depth-corner alignment exceeds metric residual limits"
+    },
+    {
+      "source_ns": 1791850505698518000,
+      "elapsed_source_s": 270.054305,
+      "epoch": 1,
+      "tag": 8,
+      "accepted": 0,
+      "reason": "shared gravity-constrained depth-corner alignment exceeds metric residual limits"
+    },
+    {
+      "source_ns": 1791850505915200000,
+      "elapsed_source_s": 270.270987,
+      "epoch": 1,
+      "tag": 8,
+      "accepted": 0,
+      "reason": "shared gravity-constrained depth-corner alignment exceeds metric residual limits"
+    },
+    {
+      "source_ns": 1791850506165105000,
+      "elapsed_source_s": 270.520892,
+      "epoch": 1,
+      "tag": 8,
+      "accepted": 0,
+      "reason": "shared gravity-constrained depth-corner alignment exceeds metric residual limits"
+    },
+    {
+      "source_ns": 1791850506398463000,
+      "elapsed_source_s": 270.75425,
+      "epoch": 1,
+      "tag": 8,
+      "accepted": 0,
+      "reason": "shared gravity-constrained depth-corner alignment exceeds metric residual limits"
+    },
+    {
+      "source_ns": 1791850506615110000,
+      "elapsed_source_s": 270.970897,
+      "epoch": 1,
+      "tag": 8,
+      "accepted": 0,
+      "reason": "shared gravity-constrained depth-corner alignment exceeds metric residual limits"
+    },
+    {
+      "source_ns": 1791850506831729000,
+      "elapsed_source_s": 271.187516,
+      "epoch": 1,
+      "tag": 8,
+      "accepted": 0,
+      "reason": "submap continuity 412->414 raw motion disagrees with its odometry or measured neighbor edge"
+    },
+    {
+      "source_ns": 1791850507031761000,
+      "elapsed_source_s": 271.387548,
+      "epoch": 1,
+      "tag": 8,
+      "accepted": 0,
+      "reason": "submap continuity 412->414 raw motion disagrees with its odometry or measured neighbor edge"
+    },
+    {
+      "source_ns": 1791850507265063000,
+      "elapsed_source_s": 271.62085,
+      "epoch": 1,
+      "tag": 8,
+      "accepted": 0,
+      "reason": "submap continuity 412->414 raw motion disagrees with its odometry or measured neighbor edge"
+    },
+    {
+      "source_ns": 1791850507481723000,
+      "elapsed_source_s": 271.83751,
+      "epoch": 1,
+      "tag": 8,
+      "accepted": 0,
+      "reason": "submap continuity 412->414 raw motion disagrees with its odometry or measured neighbor edge"
+    },
+    {
+      "source_ns": 1791850507715053000,
+      "elapsed_source_s": 272.07084,
+      "epoch": 1,
+      "tag": 8,
+      "accepted": 0,
+      "reason": "submap continuity 412->414 raw motion disagrees with its odometry or measured neighbor edge"
+    },
+    {
+      "source_ns": 1791850570179064000,
+      "elapsed_source_s": 334.534851,
+      "epoch": 8,
+      "tag": 8,
+      "accepted": 0,
+      "reason": "submap continuity 537->544 lacks raw evidence; no gap backfill: raw bidirectional RGB-D check failed (f=0,r=0,finliers=437,rinliers=427,fbackend=,rbackend=)"
+    },
+    {
+      "source_ns": 1791850570395706000,
+      "elapsed_source_s": 334.751493,
+      "epoch": 8,
+      "tag": 8,
+      "accepted": 0,
+      "reason": "submap continuity 537->544 lacks raw evidence; no gap backfill: raw bidirectional RGB-D check failed (f=0,r=0,finliers=428,rinliers=428,fbackend=,rbackend=)"
+    },
+    {
+      "source_ns": 1791850570645464000,
+      "elapsed_source_s": 335.001251,
+      "epoch": 8,
+      "tag": 8,
+      "accepted": 0,
+      "reason": "submap continuity 537->544 lacks raw evidence; no gap backfill: raw bidirectional RGB-D check failed (f=0,r=0,finliers=434,rinliers=430,fbackend=,rbackend=)"
+    },
+    {
+      "source_ns": 1791850570845468000,
+      "elapsed_source_s": 335.201255,
+      "epoch": 8,
+      "tag": 8,
+      "accepted": 0,
+      "reason": "submap continuity 537->544 lacks raw evidence; no gap backfill: raw bidirectional RGB-D check failed (f=0,r=0,finliers=438,rinliers=429,fbackend=,rbackend=)"
+    },
+    {
+      "source_ns": 1791850571078832000,
+      "elapsed_source_s": 335.434619,
+      "epoch": 8,
+      "tag": 8,
+      "accepted": 0,
+      "reason": "submap continuity 537->544 lacks raw evidence; no gap backfill: raw bidirectional RGB-D check failed (f=0,r=0,finliers=434,rinliers=425,fbackend=,rbackend=)"
+    },
+    {
+      "source_ns": 1791850571295437000,
+      "elapsed_source_s": 335.651224,
+      "epoch": 8,
+      "tag": 8,
+      "accepted": 0,
+      "reason": "submap continuity 537->544 lacks raw evidence; no gap backfill: raw bidirectional RGB-D check failed (f=0,r=0,finliers=433,rinliers=434,fbackend=,rbackend=)"
+    },
+    {
+      "source_ns": 1791850571962062000,
+      "elapsed_source_s": 336.317849,
+      "epoch": 8,
+      "tag": 8,
+      "accepted": 0,
+      "reason": "submap continuity 537->544 lacks raw evidence; no gap backfill: raw bidirectional RGB-D check failed (f=0,r=0,finliers=425,rinliers=436,fbackend=,rbackend=)"
+    },
+    {
+      "source_ns": 1791850572178721000,
+      "elapsed_source_s": 336.534508,
+      "epoch": 8,
+      "tag": 8,
+      "accepted": 0,
+      "reason": "submap continuity 537->544 lacks raw evidence; no gap backfill: raw bidirectional RGB-D check failed (f=0,r=0,finliers=433,rinliers=423,fbackend=,rbackend=)"
+    },
+    {
+      "source_ns": 1791850572379066000,
+      "elapsed_source_s": 336.734853,
+      "epoch": 8,
+      "tag": 8,
+      "accepted": 0,
+      "reason": "submap continuity 537->544 lacks raw evidence; no gap backfill: raw bidirectional RGB-D check failed (f=0,r=0,finliers=433,rinliers=433,fbackend=,rbackend=)"
+    }
+  ],
+  "tag_preparation_reason_counts": {
+    "shared gravity-constrained depth-corner alignment exceeds metric residual limits": 6,
+    "submap continuity 412->414 raw motion disagrees with its odometry or measured neighbor edge": 5,
+    "submap continuity 537->544 lacks raw evidence; no gap backfill": 9
+  },
+  "interpretation": "Tag and native visual candidates DID reach three before the first long acquisition gap. Tag preparation was rejected by metric alignment and local edge consistency; later source gaps repeatedly interrupted epochs. Neither missing references nor disk alone explains this run. Preserve exact geometry gates and investigate rejected measurements."
+}

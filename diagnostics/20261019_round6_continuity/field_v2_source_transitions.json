@@ -1,0 +1,110 @@
+{
+  "cuts": [
+    {
+      "t": 145.677,
+      "cuts": 2,
+      "lost": "0",
+      "quality": "inliers=190 matches=244 dimensions=1 covariance=1 visual=1 depth=0 ",
+      "reason": "unverified measurement gap; "
+    },
+    {
+      "t": 161.709,
+      "cuts": 3,
+      "lost": "1",
+      "quality": "inliers=0 matches=31 dimensions=0 covariance=0 visual=0 depth=0 ",
+      "reason": "unverified measurement gap; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=1 registered=0 trusted_snapshot=1)"
+    },
+    {
+      "t": 161.776,
+      "cuts": 4,
+      "lost": "1",
+      "quality": "inliers=0 matches=40 dimensions=0 covariance=0 visual=0 depth=0 ",
+      "reason": "odometry lost; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=1 registered=0 trusted_snapshot=1)"
+    },
+    {
+      "t": 161.826,
+      "cuts": 5,
+      "lost": "1",
+      "quality": "inliers=0 matches=31 dimensions=0 covariance=0 visual=0 depth=0 ",
+      "reason": "odometry lost; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=1 registered=0 trusted_snapshot=1)"
+    },
+    {
+      "t": 161.859,
+      "cuts": 6,
+      "lost": "1",
+      "quality": "inliers=0 matches=28 dimensions=0 covariance=0 visual=0 depth=0 ",
+      "reason": "odometry lost; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=1 registered=0 trusted_snapshot=1)"
+    },
+    {
+      "t": 161.909,
+      "cuts": 7,
+      "lost": "1",
+      "quality": "inliers=0 matches=40 dimensions=0 covariance=0 visual=0 depth=0 ",
+      "reason": "odometry lost; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=1 registered=0 trusted_snapshot=1)"
+    },
+    {
+      "t": 161.976,
+      "cuts": 8,
+      "lost": "1",
+      "quality": "inliers=0 matches=27 dimensions=0 covariance=0 visual=0 depth=0 ",
+      "reason": "odometry lost; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=1 registered=0 trusted_snapshot=1)"
+    },
+    {
+      "t": 162.059,
+      "cuts": 9,
+      "lost": "1",
+      "quality": "inliers=0 matches=38 dimensions=0 covariance=0 visual=0 depth=0 ",
+      "reason": "odometry lost; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=1 registered=0 trusted_snapshot=1)"
+    },
+    {
+      "t": 162.093,
+      "cuts": 10,
+      "lost": "1",
+      "quality": "inliers=0 matches=0 dimensions=1 covariance=0 visual=0 depth=0 ",
+      "reason": "odometry lost; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=1 registered=0 trusted_snapshot=1)"
+    },
+    {
+      "t": 199.224,
+      "cuts": 11,
+      "lost": "0",
+      "quality": "inliers=201 matches=259 dimensions=1 covariance=1 visual=1 depth=0 ",
+      "reason": "unverified measurement gap; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=2 registered=0 trusted_snapshot=1)"
+    },
+    {
+      "t": 232.206,
+      "cuts": 12,
+      "lost": "0",
+      "quality": "inliers=84 matches=147 dimensions=1 covariance=1 visual=1 depth=0 ",
+      "reason": "unverified measurement gap; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=3 registered=0 trusted_snapshot=1)"
+    },
+    {
+      "t": 285.92,
+      "cuts": 13,
+      "lost": "0",
+      "quality": "inliers=80 matches=163 dimensions=1 covariance=1 visual=1 depth=0 ",
+      "reason": "unverified measurement gap; local-submap alignment waiting for three independent trusted-map candidates (retained=0 epoch=4 registered=0 trusted_snapshot=1)"
+    }
+  ],
+  "gaps": [
+    {
+      "t": 145.677,
+      "gap_ms": 16015.904
+    },
+    {
+      "t": 161.709,
+      "gap_ms": 3283.168
+    },
+    {
+      "t": 199.224,
+      "gap_ms": 4233.108
+    },
+    {
+      "t": 232.206,
+      "gap_ms": 2849.889
+    },
+    {
+      "t": 285.92,
+      "gap_ms": 29915.284
+    }
+  ]
+}

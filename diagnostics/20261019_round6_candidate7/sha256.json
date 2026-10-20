@@ -1,0 +1,11 @@
+{
+  "source.zip": "3ce3f06f7b3f10db655f7527ff28168c744439d32cedd5d8f73958a43cd55c40",
+  "package_result.json": "c602ad238b9742b70c2a5844158e56f439a5b1091a45c0e1b217a663fbf6a0cf",
+  "build_result.json": "ab78ccdfa7fb60b351c83f607a81c3c7bc1bdd167fc098b1197bd7046e9919ab",
+  "negative_result.json": "a6934690f60c78de1b8f6109d9737ba62ae9074c662fb7a426b277a3188ede00",
+  "negative_dependencies.txt": "9aa12b71d8fa088ec409e77728d88904782461e73f59b7e00c545b39a0e87a9b",
+  "camera_compile.log": "bc47b67f704d555a4c11e2e0e9de638083f0d4b718b00455b4dcf2d33511857e",
+  "camera_tests.log": "0027c63f8f0b2d4f3e2f118f7e79ead6e56e641cea0b1639a903096d406ae63a",
+  "camera_ldd.log": "ab16e8b139c47873e9babf033e3273991c145538ea880d657104a5e852166092",
+  "sdk_runtime.log": "da082451e8a4e4cb105ef2e4b98dde2ad35ded1492611ba60347d25ae085410a"
+}

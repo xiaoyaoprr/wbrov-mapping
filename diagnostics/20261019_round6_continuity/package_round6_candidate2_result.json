@@ -1,0 +1,43 @@
+{
+  "package": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate2",
+  "before": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_combo42_camera6",
+  "changed": [
+    "entry.json",
+    "run_continuous_mapping_with_light.sh",
+    "start_rtabmap_continuous.sh",
+    "tests/test_deferred_display_state.py",
+    "src/visualization/deferred_display_state.py",
+    "src/visualization/deferred_map_display.py",
+    "bin/wbrov_replay_worker",
+    "bin/zed_rgbd_publisher_rate_ab"
+  ],
+  "camera_sha256": "a8788fe5ebd45d90f797cb4c22dab8ba8efac19936a3fd82a5ccd59cffba8d68",
+  "worker_sha256": "2086c194052fdd254fb98da442ae4a49badbb065553e3486b0ee2b8f052c502b",
+  "entry_sha256": "1ff5111950371332d30cd714bbafd6b318afb585a82007f4cdaac5d91b9d5c03",
+  "wrapper_sha256": "82eb956d8d2a849365cebbe87026307ff5319fbce58f221781df8fe995d16a0d",
+  "check_only": "{\"checked\": true, \"all_frames\": true, \"profile\": \"continuous_new_map\", \"navigation_authorized\": false}\n",
+  "checks": [
+    {
+      "name": "test_deferred_mapping",
+      "exit": 0,
+      "output": ".............\n----------------------------------------------------------------------\nRan 13 tests in 0.128s\n\nOK\n"
+    },
+    {
+      "name": "test_continuous_mapping_session",
+      "exit": 0,
+      "output": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.659s\n\nOK\n"
+    },
+    {
+      "name": "test_deferred_display_state",
+      "exit": 0,
+      "output": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "name": "test_deferred_recorded_pixels",
+      "exit": 0,
+      "output": ".........\n----------------------------------------------------------------------\nRan 9 tests in 0.268s\n\nOK\n"
+    }
+  ],
+  "production_changed": false,
+  "field_acceptance": false
+}

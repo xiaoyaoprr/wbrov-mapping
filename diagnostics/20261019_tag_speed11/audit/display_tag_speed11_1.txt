@@ -1,0 +1,1 @@
+{"scope": "RViz display of Tag-enabled candidate11 saved recovery replay; historical data only, no live camera or robot control", "hardware_started": false, "render_ready": true, "screenshot_exit": 0, "screenshot_error": "", "subprocess_exit_codes": [0, 0]}

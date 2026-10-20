@@ -1,0 +1,619 @@
+{
+  "phase": "completed",
+  "scope": "fixed four ordinary all-frame replays, no entropy preload or timing wrapper; candidate22 supervisor and Core20 unchanged; only original worker10 vs narrow voxel index worker41 differs; PASSIVE wait for both; no hardware/deployment",
+  "steps": [
+    {
+      "name": "candidate_short",
+      "seconds": 83.28667731198948,
+      "exit_code": 0,
+      "resources_before": {
+        "loadavg": "0.72 1.83 1.88 1/786 1541898",
+        "free_gib": 34.86085891723633,
+        "cpu_freq_khz": {
+          "/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq": "1984000",
+          "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": "729600"
+        },
+        "temperature_mC": {
+          "cv0-thermal": "70781",
+          "cpu-thermal": "74531",
+          "soc2-thermal": "68500",
+          "soc0-thermal": "71593",
+          "cv1-thermal": "70875",
+          "gpu-thermal": "72468",
+          "tj-thermal": "74531",
+          "soc1-thermal": "70687",
+          "cv2-thermal": "66875"
+        }
+      },
+      "resources_after": {
+        "loadavg": "2.00 1.98 1.93 1/788 1544392",
+        "free_gib": 34.77123260498047,
+        "cpu_freq_khz": {
+          "/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq": "729600",
+          "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": "729600"
+        },
+        "temperature_mC": {
+          "cv0-thermal": "70875",
+          "cpu-thermal": "74718",
+          "soc2-thermal": "68875",
+          "soc0-thermal": "71750",
+          "cv1-thermal": "71375",
+          "gpu-thermal": "73218",
+          "tj-thermal": "74718",
+          "soc1-thermal": "71156",
+          "cv2-thermal": "67343"
+        }
+      },
+      "frames": 1581,
+      "source_seconds": 64.947313,
+      "stamp_sha256": "b631ff88b2d2e37c97c34079d87561a98071c658016f0d2d82cfc4ffa3fd28b3",
+      "main_nodes": 100,
+      "cloud_points": 93130,
+      "cuts": 18,
+      "recoveries": 1,
+      "recovery_events": [
+        {
+          "nodes_at_recovery": 94,
+          "nodes_at_end": 100
+        }
+      ],
+      "final_continuity": "NORMAL",
+      "save_verified": true,
+      "database_check": "ok",
+      "saved_sha256": {
+        "map.db": "6570f9cfd94b37754274c4b210d87cee1e7ab24d6037fd3cabc77d33447fc27d",
+        "main_cloud.ply": "f8a3ea0dd5625078b01eddc03f60702cef465e41dc80869712c5b5a87c6b06cd",
+        "frames.csv": "8ced267b73da4febd0de00f8a7125c5be1fec4cd0429aed90c1b5bade336ff4a",
+        "tags.json": "a46e75103b54920e1135f0b262b9a2bf212fd2220e78068858b504e51caa1007"
+      },
+      "tag_observations": 235,
+      "tag_observations_sha256": "a90f5c431e88968cd9509e02d7d9093d21d37467f76a052b6b2b8989afde40a2",
+      "tag_ids": [
+        8,
+        13
+      ],
+      "tags": [
+        {
+          "tag_id": 8,
+          "distinct_main_nodes": 69,
+          "independent_references": 3,
+          "required_references": 3,
+          "position": [
+            0.291583,
+            0.274715,
+            -0.187868
+          ]
+        },
+        {
+          "tag_id": 13,
+          "distinct_main_nodes": 6,
+          "independent_references": 3,
+          "required_references": 3,
+          "position": [
+            -0.251478,
+            0.278081,
+            -0.906208
+          ]
+        }
+      ],
+      "timings": {
+        "odometry_compute_ms": 55002.5,
+        "mapping_compute_ms": 54939.2,
+        "odometry_estimation_ms": 54665.2,
+        "odometry_bundle_ms": 14229.6,
+        "core_process_ms": 44502.4,
+        "frozen_graph_check_ms": 46.1816,
+        "recovery_observation_ms": 8034.04,
+        "tag_preparation_ms": 470.227,
+        "cloud_export_ms": 3487.47,
+        "tag_export_ms": 464.31,
+        "cloud_node_build_ms": 4595.05,
+        "cloud_decode_ms": 555.544,
+        "cloud_prepare_ms": 1137.38,
+        "cloud_transform_cpu_ms": 3457.67,
+        "cloud_serialize_ms": 519.366,
+        "core_timings_ms": {
+          "Timing/Add_loop_closure_link/ms": 25520.3,
+          "Timing/Cleaning_neighbors/ms": 0,
+          "Timing/Emptying_trash/ms": 1498.66,
+          "Timing/Finalizing_statistics/ms": 218.647,
+          "Timing/Forgetting/ms": 1.22595,
+          "Timing/Hypotheses_creation/ms": 2.496,
+          "Timing/Hypotheses_validation/ms": 0.390291,
+          "Timing/Joining_trash/ms": 1.08171,
+          "Timing/Likelihood_computation/ms": 129.878,
+          "Timing/Map_optimization/ms": 636.083,
+          "Timing/Memory_cleanup/ms": 105.265,
+          "Timing/Memory_update/ms": 16958.2,
+          "Timing/Neighbor_link_refining/ms": 0,
+          "Timing/Posterior_computation/ms": 58.5084,
+          "Timing/Proximity_by_space/ms": 0.0798702,
+          "Timing/Proximity_by_space_search/ms": 0,
+          "Timing/Proximity_by_space_visual/ms": 0,
+          "Timing/Proximity_by_time/ms": 11.4014,
+          "Timing/Reactivation/ms": 0.193119,
+          "Timing/Statistics_creation/ms": 37.2531,
+          "Timing/Total/ms": 43461.4,
+          "TimingMem/Add_new_words/ms": 6691.72,
+          "TimingMem/Compressing_data/ms": 1167.32,
+          "TimingMem/Descriptors_extraction/ms": 913.378,
+          "TimingMem/Joining_dictionary_update/ms": 423.652,
+          "TimingMem/Keypoints_3D/ms": 85.9413,
+          "TimingMem/Keypoints_detection/ms": 3033.26,
+          "TimingMem/Occupancy_grid/ms": 4537.52,
+          "TimingMem/Pre_update/ms": 0.673532,
+          "TimingMem/Rehearsal/ms": 5.39804,
+          "TimingMem/Signature_creation/ms": 16944.1
+        }
+      }
+    },
+    {
+      "name": "baseline_short",
+      "seconds": 85.99282812792808,
+      "exit_code": 0,
+      "resources_before": {
+        "loadavg": "2.00 1.98 1.93 1/788 1544399",
+        "free_gib": 34.771202087402344,
+        "cpu_freq_khz": {
+          "/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq": "1984000",
+          "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": "1728000"
+        },
+        "temperature_mC": {
+          "cv0-thermal": "70843",
+          "cpu-thermal": "74687",
+          "soc2-thermal": "68906",
+          "soc0-thermal": "71781",
+          "cv1-thermal": "71406",
+          "gpu-thermal": "73218",
+          "tj-thermal": "74687",
+          "soc1-thermal": "70812",
+          "cv2-thermal": "67281"
+        }
+      },
+      "resources_after": {
+        "loadavg": "2.08 2.02 1.95 1/784 1546999",
+        "free_gib": 34.67634963989258,
+        "cpu_freq_khz": {
+          "/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq": "729600",
+          "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": "729600"
+        },
+        "temperature_mC": {
+          "cv0-thermal": "70718",
+          "cpu-thermal": "74718",
+          "soc2-thermal": "68750",
+          "soc0-thermal": "71718",
+          "cv1-thermal": "71250",
+          "gpu-thermal": "72875",
+          "tj-thermal": "75218",
+          "soc1-thermal": "71031",
+          "cv2-thermal": "67250"
+        }
+      },
+      "frames": 1581,
+      "source_seconds": 64.947313,
+      "stamp_sha256": "b631ff88b2d2e37c97c34079d87561a98071c658016f0d2d82cfc4ffa3fd28b3",
+      "main_nodes": 99,
+      "cloud_points": 97877,
+      "cuts": 18,
+      "recoveries": 1,
+      "recovery_events": [
+        {
+          "nodes_at_recovery": 94,
+          "nodes_at_end": 99
+        }
+      ],
+      "final_continuity": "NORMAL",
+      "save_verified": true,
+      "database_check": "ok",
+      "saved_sha256": {
+        "map.db": "20eac5ab21e6f2f3914813733b9a64c01c73871e9343c83efce980ded255bf79",
+        "main_cloud.ply": "17edbd65e8e2553637c9e214f723689ac56a94f685d646d28f6480f3dc5eaad7",
+        "frames.csv": "602274d7b42e8bade9409d0a19f32b443a8ae8c6800579791bda40102f88d1f2",
+        "tags.json": "259c18eec38e91076a1630de0e20357531e93e3dd2d72ee99594036863fc37a2"
+      },
+      "tag_observations": 235,
+      "tag_observations_sha256": "a90f5c431e88968cd9509e02d7d9093d21d37467f76a052b6b2b8989afde40a2",
+      "tag_ids": [
+        8,
+        13
+      ],
+      "tags": [
+        {
+          "tag_id": 8,
+          "distinct_main_nodes": 69,
+          "independent_references": 3,
+          "required_references": 3,
+          "position": [
+            0.319263,
+            0.24579,
+            -0.196051
+          ]
+        },
+        {
+          "tag_id": 13,
+          "distinct_main_nodes": 6,
+          "independent_references": 3,
+          "required_references": 3,
+          "position": [
+            -0.223183,
+            0.282418,
+            -0.882916
+          ]
+        }
+      ],
+      "timings": {
+        "odometry_compute_ms": 55193.1,
+        "mapping_compute_ms": 58256.1,
+        "odometry_estimation_ms": 54871.2,
+        "odometry_bundle_ms": 14052,
+        "core_process_ms": 45644.7,
+        "frozen_graph_check_ms": 43.2395,
+        "recovery_observation_ms": 8104.5,
+        "tag_preparation_ms": 668.693,
+        "cloud_export_ms": 4035.81,
+        "tag_export_ms": 483.239,
+        "cloud_node_build_ms": 5443.75,
+        "cloud_decode_ms": 567.655,
+        "cloud_prepare_ms": 1229.49,
+        "cloud_transform_cpu_ms": 4214.27,
+        "cloud_serialize_ms": 568.154,
+        "core_timings_ms": {
+          "Timing/Add_loop_closure_link/ms": 25688.4,
+          "Timing/Cleaning_neighbors/ms": 0,
+          "Timing/Emptying_trash/ms": 1606,
+          "Timing/Finalizing_statistics/ms": 232.235,
+          "Timing/Forgetting/ms": 1.28388,
+          "Timing/Hypotheses_creation/ms": 2.41351,
+          "Timing/Hypotheses_validation/ms": 0.363827,
+          "Timing/Joining_trash/ms": 1.07861,
+          "Timing/Likelihood_computation/ms": 130.407,
+          "Timing/Map_optimization/ms": 676.452,
+          "Timing/Memory_cleanup/ms": 113.586,
+          "Timing/Memory_update/ms": 17842.7,
+          "Timing/Neighbor_link_refining/ms": 0,
+          "Timing/Posterior_computation/ms": 52.1855,
+          "Timing/Proximity_by_space/ms": 0.064373,
+          "Timing/Proximity_by_space_search/ms": 0,
+          "Timing/Proximity_by_space_visual/ms": 0,
+          "Timing/Proximity_by_time/ms": 11.3969,
+          "Timing/Reactivation/ms": 0.198603,
+          "Timing/Statistics_creation/ms": 39.2272,
+          "Timing/Total/ms": 44558.7,
+          "TimingMem/Add_new_words/ms": 6915.2,
+          "TimingMem/Compressing_data/ms": 1257.9,
+          "TimingMem/Descriptors_extraction/ms": 948.588,
+          "TimingMem/Joining_dictionary_update/ms": 446.392,
+          "TimingMem/Keypoints_3D/ms": 86.8089,
+          "TimingMem/Keypoints_detection/ms": 3227.73,
+          "TimingMem/Occupancy_grid/ms": 4852.58,
+          "TimingMem/Pre_update/ms": 0.730753,
+          "TimingMem/Rehearsal/ms": 4.94194,
+          "TimingMem/Signature_creation/ms": 17828.3
+        }
+      }
+    },
+    {
+      "name": "baseline_field",
+      "seconds": 279.73865155200474,
+      "exit_code": 0,
+      "resources_before": {
+        "loadavg": "2.08 2.02 1.95 1/784 1547006",
+        "free_gib": 34.67631912231445,
+        "cpu_freq_khz": {
+          "/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq": "1984000",
+          "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": "883200"
+        },
+        "temperature_mC": {
+          "cv0-thermal": "70906",
+          "cpu-thermal": "74875",
+          "soc2-thermal": "68906",
+          "soc0-thermal": "71781",
+          "cv1-thermal": "71375",
+          "gpu-thermal": "73125",
+          "tj-thermal": "74625",
+          "soc1-thermal": "71187",
+          "cv2-thermal": "67375"
+        }
+      },
+      "resources_after": {
+        "loadavg": "2.63 2.48 2.17 1/787 1551333",
+        "free_gib": 34.42821502685547,
+        "cpu_freq_khz": {
+          "/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq": "729600",
+          "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": "729600"
+        },
+        "temperature_mC": {
+          "cv0-thermal": "71343",
+          "cpu-thermal": "75156",
+          "soc2-thermal": "69406",
+          "soc0-thermal": "72187",
+          "cv1-thermal": "71750",
+          "gpu-thermal": "73812",
+          "tj-thermal": "75156",
+          "soc1-thermal": "71625",
+          "cv2-thermal": "67687"
+        }
+      },
+      "frames": 7490,
+      "source_seconds": 294.753277,
+      "stamp_sha256": "c27ff7db7661ca4a6ccfafd0a535b64f2f413caaaf60d3a990cca13039cca064",
+      "main_nodes": 121,
+      "cloud_points": 101684,
+      "cuts": 1,
+      "recoveries": 0,
+      "recovery_events": [],
+      "final_continuity": "NORMAL",
+      "save_verified": true,
+      "database_check": "ok",
+      "saved_sha256": {
+        "map.db": "0532ec682f996733f4628a3f476ba879f82aacf0c138f63c78721677dfac8306",
+        "main_cloud.ply": "ca15fd5b2d94552710abfa9241a7c8e21d5accdd90c61a6e30dde7ee12eae604",
+        "frames.csv": "b35a2b9e3e55c7184d3313aaf5e4a3aed3086008c100a22f1321ed8d998fe940",
+        "tags.json": "320bc71c96c217754c6daaab63b4f8bcaf512f21a19c2b0057385032179ba522"
+      },
+      "tag_observations": 654,
+      "tag_observations_sha256": "1f8c4d39b7632ffde99573629f9628a43fb3a89ebf7d666fed64458fa67a3769",
+      "tag_ids": [
+        7,
+        8,
+        13
+      ],
+      "tags": [
+        {
+          "tag_id": 7,
+          "distinct_main_nodes": 1,
+          "independent_references": 1,
+          "required_references": 3,
+          "position": [
+            -0.134465,
+            0.487463,
+            0.0555438
+          ]
+        },
+        {
+          "tag_id": 8,
+          "distinct_main_nodes": 90,
+          "independent_references": 3,
+          "required_references": 3,
+          "position": [
+            0.231216,
+            -0.259771,
+            0.02471
+          ]
+        },
+        {
+          "tag_id": 13,
+          "distinct_main_nodes": 22,
+          "independent_references": 3,
+          "required_references": 3,
+          "position": [
+            -0.245203,
+            0.00867623,
+            -0.704139
+          ]
+        }
+      ],
+      "timings": {
+        "odometry_compute_ms": 233121,
+        "mapping_compute_ms": 87091.3,
+        "odometry_estimation_ms": 232730,
+        "odometry_bundle_ms": 65089.7,
+        "core_process_ms": 82974.8,
+        "frozen_graph_check_ms": 0.397472,
+        "recovery_observation_ms": 0,
+        "tag_preparation_ms": 0,
+        "cloud_export_ms": 16475.5,
+        "tag_export_ms": 1087.9,
+        "cloud_node_build_ms": 24698.3,
+        "cloud_decode_ms": 687.447,
+        "cloud_prepare_ms": 2888.06,
+        "cloud_transform_cpu_ms": 21810.2,
+        "cloud_serialize_ms": 1928.16,
+        "core_timings_ms": {
+          "Timing/Add_loop_closure_link/ms": 29548.7,
+          "Timing/Cleaning_neighbors/ms": 0,
+          "Timing/Emptying_trash/ms": 4259.55,
+          "Timing/Finalizing_statistics/ms": 644.169,
+          "Timing/Forgetting/ms": 6.5217,
+          "Timing/Hypotheses_creation/ms": 3.80492,
+          "Timing/Hypotheses_validation/ms": 0.276089,
+          "Timing/Joining_trash/ms": 3.04031,
+          "Timing/Likelihood_computation/ms": 199.398,
+          "Timing/Map_optimization/ms": 2623.57,
+          "Timing/Memory_cleanup/ms": 384.867,
+          "Timing/Memory_update/ms": 47139,
+          "Timing/Neighbor_link_refining/ms": 0,
+          "Timing/Posterior_computation/ms": 107.291,
+          "Timing/Proximity_by_space/ms": 0.199318,
+          "Timing/Proximity_by_space_search/ms": 0,
+          "Timing/Proximity_by_space_visual/ms": 0,
+          "Timing/Proximity_by_time/ms": 27.8478,
+          "Timing/Reactivation/ms": 0.537157,
+          "Timing/Statistics_creation/ms": 103.401,
+          "Timing/Total/ms": 80142.6,
+          "TimingMem/Add_new_words/ms": 16635.3,
+          "TimingMem/Compressing_data/ms": 3282.55,
+          "TimingMem/Descriptors_extraction/ms": 2723.56,
+          "TimingMem/Joining_dictionary_update/ms": 375.201,
+          "TimingMem/Keypoints_3D/ms": 239.519,
+          "TimingMem/Keypoints_detection/ms": 9197.06,
+          "TimingMem/Occupancy_grid/ms": 14425.1,
+          "TimingMem/Pre_update/ms": 2.05159,
+          "TimingMem/Rehearsal/ms": 12.7819,
+          "TimingMem/Signature_creation/ms": 47102
+        }
+      }
+    },
+    {
+      "name": "candidate_field",
+      "seconds": 266.3889411839191,
+      "exit_code": 0,
+      "resources_before": {
+        "loadavg": "2.58 2.47 2.16 1/787 1551340",
+        "free_gib": 34.42818069458008,
+        "cpu_freq_khz": {
+          "/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq": "883200",
+          "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": "1984000"
+        },
+        "temperature_mC": {
+          "cv0-thermal": "71437",
+          "cpu-thermal": "75375",
+          "soc2-thermal": "69187",
+          "soc0-thermal": "72250",
+          "cv1-thermal": "72031",
+          "gpu-thermal": "73593",
+          "tj-thermal": "75375",
+          "soc1-thermal": "71718",
+          "cv2-thermal": "67562"
+        }
+      },
+      "resources_after": {
+        "loadavg": "2.35 2.46 2.24 1/786 1555748",
+        "free_gib": 34.1767463684082,
+        "cpu_freq_khz": {
+          "/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq": "1984000",
+          "/sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq": "729600"
+        },
+        "temperature_mC": {
+          "cv0-thermal": "72000",
+          "cpu-thermal": "75812",
+          "soc2-thermal": "69375",
+          "soc0-thermal": "72468",
+          "cv1-thermal": "72062",
+          "gpu-thermal": "73656",
+          "tj-thermal": "75812",
+          "soc1-thermal": "71593",
+          "cv2-thermal": "67781"
+        }
+      },
+      "frames": 7490,
+      "source_seconds": 294.753277,
+      "stamp_sha256": "c27ff7db7661ca4a6ccfafd0a535b64f2f413caaaf60d3a990cca13039cca064",
+      "main_nodes": 117,
+      "cloud_points": 106589,
+      "cuts": 1,
+      "recoveries": 0,
+      "recovery_events": [],
+      "final_continuity": "NORMAL",
+      "save_verified": true,
+      "database_check": "ok",
+      "saved_sha256": {
+        "map.db": "7b7411de9a9ee0b5bb1867e6aff94cf85c37acc90c9770e9a36bf61eef15f272",
+        "main_cloud.ply": "0c7e4304c4e41fe8fcb1c38eb336ba8800d063773b114f703e54ccc1c715a20c",
+        "frames.csv": "a062f335b335717ef173e56ff342d294eb6c5e21a0b74f6356619dd46a7d540c",
+        "tags.json": "a6fe6ac84a300eedf53a91aa29c66cc8892fcfbc947dfb6e2b063d80cc4a59b3"
+      },
+      "tag_observations": 654,
+      "tag_observations_sha256": "1f8c4d39b7632ffde99573629f9628a43fb3a89ebf7d666fed64458fa67a3769",
+      "tag_ids": [
+        7,
+        8,
+        13
+      ],
+      "tags": [
+        {
+          "tag_id": 8,
+          "distinct_main_nodes": 85,
+          "independent_references": 3,
+          "required_references": 3,
+          "position": [
+            0.246111,
+            -0.259085,
+            0.0469703
+          ]
+        },
+        {
+          "tag_id": 13,
+          "distinct_main_nodes": 21,
+          "independent_references": 3,
+          "required_references": 3,
+          "position": [
+            -0.235613,
+            0.0285963,
+            -0.701075
+          ]
+        }
+      ],
+      "timings": {
+        "odometry_compute_ms": 232447,
+        "mapping_compute_ms": 90004.9,
+        "odometry_estimation_ms": 232048,
+        "odometry_bundle_ms": 64837.9,
+        "core_process_ms": 85924.4,
+        "frozen_graph_check_ms": 0.414016,
+        "recovery_observation_ms": 0,
+        "tag_preparation_ms": 0,
+        "cloud_export_ms": 14504.2,
+        "tag_export_ms": 1007.75,
+        "cloud_node_build_ms": 20584.9,
+        "cloud_decode_ms": 659.878,
+        "cloud_prepare_ms": 2734.59,
+        "cloud_transform_cpu_ms": 17850.3,
+        "cloud_serialize_ms": 1935.24,
+        "core_timings_ms": {
+          "Timing/Add_loop_closure_link/ms": 31377.5,
+          "Timing/Cleaning_neighbors/ms": 0,
+          "Timing/Emptying_trash/ms": 4405.84,
+          "Timing/Finalizing_statistics/ms": 641.508,
+          "Timing/Forgetting/ms": 7.01666,
+          "Timing/Hypotheses_creation/ms": 4.45437,
+          "Timing/Hypotheses_validation/ms": 0.33474,
+          "Timing/Joining_trash/ms": 3.28326,
+          "Timing/Likelihood_computation/ms": 240.281,
+          "Timing/Map_optimization/ms": 2289.26,
+          "Timing/Memory_cleanup/ms": 383.496,
+          "Timing/Memory_update/ms": 48539,
+          "Timing/Neighbor_link_refining/ms": 0,
+          "Timing/Posterior_computation/ms": 99.0386,
+          "Timing/Proximity_by_space/ms": 0.219107,
+          "Timing/Proximity_by_space_search/ms": 0,
+          "Timing/Proximity_by_space_visual/ms": 0,
+          "Timing/Proximity_by_time/ms": 27.7131,
+          "Timing/Reactivation/ms": 0.555754,
+          "Timing/Statistics_creation/ms": 101.734,
+          "Timing/Total/ms": 83067.5,
+          "TimingMem/Add_new_words/ms": 16895.5,
+          "TimingMem/Compressing_data/ms": 3392.26,
+          "TimingMem/Descriptors_extraction/ms": 2765.9,
+          "TimingMem/Joining_dictionary_update/ms": 390.194,
+          "TimingMem/Keypoints_3D/ms": 240.656,
+          "TimingMem/Keypoints_detection/ms": 9776.67,
+          "TimingMem/Occupancy_grid/ms": 14809.7,
+          "TimingMem/Pre_update/ms": 1.9455,
+          "TimingMem/Rehearsal/ms": 13.1922,
+          "TimingMem/Signature_creation/ms": 48502.3
+        }
+      }
+    }
+  ],
+  "pins": {
+    "baseline_worker": "f0f70bed93c81f678a71a2aae45c11481ab4e7ae548c2b466e498fae11e61d9b",
+    "candidate_worker": "489980de6f910aacd4319d400ffa6b1a7796955ed860cb2d57d496334efe165f",
+    "core": "7bed7a7da1178a2f33121408091cc789fbcc085be51108d8bf22c2ad065a310a",
+    "supervisor": "f30361079325f336a80c0999dbca22c1a65de15f14c401394f0d498a6d6b8b53"
+  },
+  "comparisons": {
+    "short": {
+      "baseline_seconds": 85.99282812792808,
+      "candidate_seconds": 83.28667731198948,
+      "time_saved_fraction": 0.03146949431541857,
+      "same_recorded_frames": true,
+      "same_tag_observations": true,
+      "same_frames_csv": false,
+      "same_cloud": false
+    },
+    "field": {
+      "baseline_seconds": 279.73865155200474,
+      "candidate_seconds": 266.3889411839191,
+      "time_saved_fraction": 0.047722080213158824,
+      "same_recorded_frames": true,
+      "same_tag_observations": true,
+      "same_frames_csv": false,
+      "same_cloud": false
+    }
+  },
+  "recovery_continuation_passed": true,
+  "all_inputs_and_tags_equal": true,
+  "ordinary_timing_qualifies": true,
+  "free_gib": 34.17674255371094
+}

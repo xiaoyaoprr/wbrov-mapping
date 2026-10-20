@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "launcher_pid": 1055871,
+  "process_start_ticks": 53211424,
+  "boot_id": "d12a8759-0cf1-4fe9-9064-feea661c2763",
+  "phase": "stopped",
+  "exit_code": 0,
+  "nodes_stopped": true,
+  "export_succeeded": true,
+  "cleanup_succeeded": true,
+  "run_dir": "/home/exocean/maps/rtabmap_calibration_ab/continuous_20261012_051722_1055871",
+  "entry": "continuous_all_frames",
+  "errors": []
+}

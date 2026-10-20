@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/preview_repair155_saved_rgb.py", line 16, in <module>
+    assert images and images[-1][0]==int(receipt['last_source_ns'])
+AssertionError

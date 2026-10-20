@@ -1,0 +1,7 @@
+equivalence_passed frames=100 observations=90000
+round=0 baseline_ms=68.9095 candidate_ms=4.47469 checksum=43959
+round=1 baseline_ms=68.8713 candidate_ms=4.4945 checksum=43959
+round=2 baseline_ms=68.6991 candidate_ms=4.49613 checksum=43959
+round=3 baseline_ms=68.5693 candidate_ms=4.49958 checksum=43959
+round=4 baseline_ms=68.2959 candidate_ms=4.48774 checksum=43959
+round=5 baseline_ms=68.7304 candidate_ms=4.48106 checksum=43959

@@ -1,0 +1,8 @@
+{
+  "scope": "model using measured commit durations and saved segment sizes; removes observed producer gaps; NOT hardware acceptance and does not recreate missing images",
+  "segments": 235,
+  "service_seconds": 189.17463949999998,
+  "modeled_peak_pending_bytes": 1173566455,
+  "modeled_peak_segments": 49,
+  "model_complete_seconds": 299.8808817000001
+}

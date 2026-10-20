@@ -1,0 +1,8 @@
+{
+  "startup_observations.jsonl": "2d8bc4da4ef7c3e39558056fda02011ec3c9695a8516e10c1b8d6e33293d2d0a",
+  "result.json": "38fdf04aa1c8b578614477c864abd1dc6a6961befa4787b8a5b9f4da21c221c9",
+  "terminal.log": "4c1fc0408307f73b2b924a56a3090826370157479fa5671bee67376b9a445b80",
+  "wrapper/launch_manifest.txt": "908ff4a67c0aedaf9578e352f61fada940b6f0bd524e3126d40ce8e76300cbde",
+  "wrapper/teleop.log": "3e65c332e4e468dcac3bf9f4d68440a227362b1fc975492061111bcd32e5981f",
+  "wrapper/exit_summary.txt": "eea97ad4972877eca7f0b950cc51ed651c07c5332d7d25cd7502fe7ae55e66ef"
+}

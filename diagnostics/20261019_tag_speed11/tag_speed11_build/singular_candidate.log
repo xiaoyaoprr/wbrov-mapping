@@ -1,0 +1,6 @@
+terminate called after throwing an instance of 'UException'
+  what():  [FATAL] (2026-10-12 10:57:36.148) Transform.cpp:204::inverse() Condition (invertible) not met! [This transform is not invertible! xyz=0.000000,0.000000,0.000000 rpy=0.000000,-0.000000,0.000000 
+[1.000000 0.000000 0.000000 0.000000;
+ 0.000000 1.000000 0.000000 0.000000;
+ 0.000000 0.000000 0.000000 0.000000;
+ 0 0 0 1]]

@@ -1,0 +1,30 @@
+{
+  "schema": "wbrov.continuous-entry-status.v1",
+  "phase": "failed",
+  "elapsed_s": 191.0910643520765,
+  "stop_requested": false,
+  "saved": false,
+  "partial_saved": true,
+  "capture_state": "closed",
+  "sealed_source_ns": 1791759070468056000,
+  "seconds_without_new_seal": 47.279655808000825,
+  "errors": [
+    "bridge exited unexpectedly",
+    "bridge exit=1",
+    "capture interrupted; sealed observations saved, recording incomplete"
+  ],
+  "pids": {
+    "bridge": 1218698,
+    "processing": 1220462,
+    "graph_display": 1220464,
+    "rviz": 1220465
+  },
+  "exits": {
+    "bridge": 1,
+    "processing": 2,
+    "graph_display": 0,
+    "rviz": 0
+  },
+  "historical_only": true,
+  "navigation_authorized": false
+}

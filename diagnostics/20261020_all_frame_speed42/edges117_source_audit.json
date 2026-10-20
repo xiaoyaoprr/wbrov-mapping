@@ -1,0 +1,76 @@
+{
+  "phase": "completed_source_audit_only",
+  "scope": "Read existing100 samples, actual Core20 assembly, source and installed g2o headers; no replay or algorithm change",
+  "hypothesis": "Replace optimizeBA local edge pointer list with vector",
+  "decision": "deprioritized_small_observed_target_no_candidate",
+  "total_cpu_samples": 45165,
+  "list_allocate_and_clear_samples": 55,
+  "list_allocate_and_clear_fraction": 0.0012177571128085907,
+  "classified_allocation_sites": [
+    {
+      "pc_minus_one": "0x66b2bb",
+      "kind": "local_edge_list_node_allocate",
+      "samples": 38,
+      "fraction_all_cpu_samples": 0.0008413594597586626
+    },
+    {
+      "pc_minus_one": "0x66bd13",
+      "kind": "local_edge_list_clear",
+      "samples": 17,
+      "fraction_all_cpu_samples": 0.00037639765304992804
+    },
+    {
+      "pc_minus_one": "0x66b59f",
+      "kind": "nested_solver_optimize_allocations",
+      "samples": 201,
+      "fraction_all_cpu_samples": 0.004450348721355032
+    },
+    {
+      "pc_minus_one": "0x66bd2f",
+      "kind": "whole_optimizer_destructor_allocations",
+      "samples": 181,
+      "fraction_all_cpu_samples": 0.0040075279530609985
+    },
+    {
+      "pc_minus_one": "0x66b2b3",
+      "kind": "graph_addEdge_allocations",
+      "samples": 51,
+      "fraction_all_cpu_samples": 0.0011291929591497841
+    },
+    {
+      "pc_minus_one": "0x66b39f",
+      "kind": "initial_initializeOptimization_allocations",
+      "samples": 50,
+      "fraction_all_cpu_samples": 0.0011070519207350825
+    },
+    {
+      "pc_minus_one": "0x66b84f",
+      "kind": "after_outlier_initializeOptimization_allocations",
+      "samples": 49,
+      "fraction_all_cpu_samples": 0.0010849108823203807
+    }
+  ],
+  "ordering_findings": {
+    "local_list_insertion_order_consumption_only": true,
+    "hyper_graph_edges_are_pointer_ordered_set": true,
+    "active_edges_declared_sorted_by_internal_id": true,
+    "compiled_sort_reads_edge_field_at_offset72_instead_of_pointer_compare": true,
+    "all_execution_paths_and_numerical_equivalence_proven": false
+  },
+  "limitations": [
+    "Sampling proportions are observed CPU, not wall time, a hard upper bound or measured speedup.",
+    "55 counts only observed allocator leaves at list allocation/clear callers, not all iteration/cache effects.",
+    "Broader optimizeBA allocation counts include solver and graph work and cannot all be assigned to local list.",
+    "No candidate was built, so no correctness or performance acceptance is claimed."
+  ],
+  "evidence_sha256": {
+    "callchain100_analysis.json": "fbafa66cf3ebc4c2812b76c25dbea89b30f399ae98129a32818402e0f220a58d",
+    "inspect_edges117_1.txt": "30a0b72405ae962fc6f8e62a30c0a7d93b89fa51f772dad18584bc74bb781357",
+    "inspect_edges117_assembly_1.txt": "c0d54b2fa697339c11f072f129a6cb2a6a2e8786bc12a9172f37805a2f9e7d60",
+    "inspect_edges117.py": "9f45d3d6548c96e6a6e3f38011e5e0e23de34e9010528e0815192d1a32ec3846",
+    "inspect_edges117_assembly.py": "595d26e7a7034175dca5641cfdb6f886e2509c716176660eba742a434a7e72ed"
+  },
+  "candidate_created": false,
+  "heavy_job_started": false,
+  "adopted": false
+}

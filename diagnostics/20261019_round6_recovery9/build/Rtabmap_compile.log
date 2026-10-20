@@ -1,0 +1,50 @@
+In file included from /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/Rtabmap.cpp:97:
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/optimizer_trace.inc: In function ‘void {anonymous}::traceOptimizer(long unsigned int, const char*, int, const TracePoses&, const TraceLinks&, const rtabmap::Optimizer*)’:
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/optimizer_trace.inc:35:11: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+   35 |           for(int i=0;i<12;++i)e<<','<<l.transform()[i];for(int i=0;i<36;++i)e<<','<<l.infMatrix().at<double>(i/6,i%6);e<<'\n';}
+      |           ^~~
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/optimizer_trace.inc:35:57: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+   35 |           for(int i=0;i<12;++i)e<<','<<l.transform()[i];for(int i=0;i<36;++i)e<<','<<l.infMatrix().at<double>(i/6,i%6);e<<'\n';}
+      |                                                         ^~~
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/Rtabmap.cpp: In member function ‘bool rtabmap::Rtabmap::acceptCrossMapLoopEvidence(const rtabmap::Signature&, const rtabmap::Signature&, long long unsigned int, long long unsigned int, const rtabmap::Transform&, const rtabmap::RegistrationInfo&, std::string&)’:
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/Rtabmap.cpp:1669:5: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 1669 |     if(_safeRelocalizationGuardEnabled)
+      |     ^~
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/Rtabmap.cpp:1674:9: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 1674 |         if(currentCells < _crossMapLoopMinGridCells || oldCells < _crossMapLoopMinGridCells)
+      |         ^~
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/Rtabmap.cpp: In member function ‘std::map<int, rtabmap::Transform> rtabmap::Rtabmap::optimizeGraph(int, const std::set<int>&, const std::map<int, rtabmap::Transform>&, bool, cv::Mat&, std::multimap<int, rtabmap::Link>*, double*, int*) const’:
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/Rtabmap.cpp:7026:25: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 7026 |                         if(error)*error=0.;if(iterationsDone)*iterationsDone=0;
+      |                         ^~
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/Rtabmap.cpp:7026:44: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 7026 |                         if(error)*error=0.;if(iterationsDone)*iterationsDone=0;
+      |                                            ^~
+In file included from /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/visual_recovery.inc:1,
+                 from /home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/Rtabmap.cpp:9053:
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/recovery_geometry.inc: In member function ‘bool rtabmap::Rtabmap::findRecoveryLocalMotionFault(const rtabmap::Rtabmap::SafeRelocalizationLimits&, rtabmap::Rtabmap::RecoveryLocalMotionFault&) const’:
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/recovery_geometry.inc:230:17: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  230 |                 if(forward)return false;forward=&edge.second;
+      |                 ^~
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/recovery_geometry.inc:230:41: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  230 |                 if(forward)return false;forward=&edge.second;
+      |                                         ^~~~~~~
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/recovery_geometry.inc:233:17: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  233 |                 if(reverse)return false;reverse=&edge.second;
+      |                 ^~
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/recovery_geometry.inc:233:41: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  233 |                 if(reverse)return false;reverse=&edge.second;
+      |                                         ^~~~~~~
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/Rtabmap.cpp: In member function ‘bool rtabmap::Rtabmap::addLinksAtomicallyImpl(const std::vector<rtabmap::Link>&, long long unsigned int, const rtabmap::Rtabmap::SafeRelocalizationLimits&, const std::vector<rtabmap::AcceptedImageReceipt>*, const rtabmap::AcceptedImageSourceContext*, std::string&, const std::function<bool()>*, rtabmap::Transform*, const std::function<bool(const rtabmap::Transform&)>*)’:
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/Rtabmap.cpp:9288:5: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 9288 |     if(receipts && (!context || !validateAcceptedImagesForTransaction(evidence, *receipts, sourceResetEpoch, *context, reason)))
+      |     ^~
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/Rtabmap.cpp:9290:9: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 9290 |         if(!_rgbdSlamMode || !_memory || !_memory->isIncremental())
+      |         ^~
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/Rtabmap.cpp:9862:5: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 9862 |     if(receipts && (!context || !validateAcceptedImagesForTransaction(evidence, *receipts, sourceResetEpoch, *context, reason)))
+      |     ^~
+/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/core/Rtabmap.cpp:9870:9: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 9870 |         for(std::map<int, Transform>::const_iterator iter=finalPoses.begin();
+      |         ^~~

@@ -1,0 +1,9 @@
+{
+  "core_sha256": "5ad5ca0cb6d90ead1d1632697958b7ae9c6f7cc17141b8a37b5d0c68844974ea",
+  "f2m_compiled_source_sha256": "acb93915ad8d2e40ba93547375904978826f18a19d9a75efd9c2083462bfa47b",
+  "f2m_repository_source_sha256": "acb93915ad8d2e40ba93547375904978826f18a19d9a75efd9c2083462bfa47b",
+  "diagnostic_randomness_not_shipped": true,
+  "production8_changed": false,
+  "native_math_cache_adopted": true,
+  "overall_speedup_proven": false
+}

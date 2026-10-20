@@ -1,0 +1,18 @@
+{
+  "build_round6_candidate5.py": "5e4e29ecffaeb1018b75c2e96e168b463b379a8beadcea90821ebfef57d543c6",
+  "package_round6_candidate5_result.json": "cae528e898d3fa5b223532ab56125ac105aa88de3a12a4307d44ed0d904bb8db",
+  "round6_candidate5/camera_compile.log": "02711c51d78b80a0e1956229695c6d17788121e7976ffe098d3bb0475241d464",
+  "round6_candidate5/camera_configure.log": "52366b6c92967caea81ac34ec30ea3687478edc3d8b4a69084eaf2bd88685c67",
+  "round6_candidate5/camera_ldd.log": "eda36bbc900daa0192c3a2db248f0ee62917d5aaa0e73cd189c86713433c7dd5",
+  "round6_candidate5/camera_tests.log": "6c0afb977ecea87d1d9c87d11a401c2182db18e14460c65e6d77859a52509457",
+  "round6_candidate5/gate_compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "round6_candidate5/gate_test.log": "49b04865f4634ca6f1b9b6bfc5528851d4b987e3788f674908422a38186ad5af",
+  "round6_candidate5/quality_compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "round6_candidate5/quality_test.log": "b65d123d4fa277c14c18147c21db65522554006eab4f42328d093f4b5b53a0c6",
+  "round6_candidate5/result.json": "dbf2032443f280d8ec0baf64ba40643f988ae34cfc3eb183394ff2b1725f4035",
+  "round6_candidate5/sdk_runtime.log": "da082451e8a4e4cb105ef2e4b98dde2ad35ded1492611ba60347d25ae085410a",
+  "round6_candidate5/worker_compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "round6_candidate5/worker_ldd.log": "4659f00f37b2472be4ae70234273f3c8be0ee0edc2cb0e36f8ce1e7a8072598d",
+  "round6_candidate5/worker_link.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "round6_candidate5_source.zip": "6388bae13759a00872456854484df0065f4320af99fec4b97682bb0aa766a813"
+}

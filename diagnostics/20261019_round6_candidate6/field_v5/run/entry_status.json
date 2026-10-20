@@ -1,0 +1,31 @@
+{
+  "schema": "wbrov.continuous-entry-status.v1",
+  "phase": "failed",
+  "elapsed_s": 378.1324990079738,
+  "stop_requested": false,
+  "saved": false,
+  "partial_saved": false,
+  "capture_state": "recording",
+  "sealed_source_ns": 1791758433712541000,
+  "seconds_without_new_seal": 1.1470008959295228,
+  "errors": [
+    "bridge did not stop cleanly",
+    "bridge exit=-9",
+    "capture did not seal; partial input retained",
+    "processing exit=-15"
+  ],
+  "pids": {
+    "bridge": 1167929,
+    "processing": 1168434,
+    "graph_display": 1168440,
+    "rviz": 1168441
+  },
+  "exits": {
+    "bridge": -9,
+    "processing": -15,
+    "graph_display": 0,
+    "rviz": 0
+  },
+  "historical_only": true,
+  "navigation_authorized": false
+}

@@ -1,0 +1,11 @@
+{
+  "scope": "post-deployment read-only verification; no new live acceptance",
+  "dispatcher_sha256": "cb9909f1d112ca83b415f25475eae0998760078e4b243e24c9a2aaf53dd34081",
+  "package_entry_sha256": "6a3f5675da088ff6f2d5b27ab081a353d2d899c9c2856ac600867e1a27f1e104",
+  "protected_files_unchanged": true,
+  "package_pins_verified": 74,
+  "active_mapping_or_control": [],
+  "udp3333": "",
+  "serial_lock_free": true,
+  "free_bytes": 144272846848
+}

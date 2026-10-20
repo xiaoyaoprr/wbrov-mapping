@@ -1,0 +1,1 @@
+{"scope":"offline RGB-D writer only, no concurrent SVO or camera","frames":1581,"byte_exact":true,"source_seconds":64.9473,"producer_seconds":64.9483,"closed_seconds":65.0541,"append_p99_ms":0.956864,"append_max_ms":3.64829,"pacing_lag_max_ms":0.416232,"frames_over_300ms_late":0,"raw_bytes":2176745532,"packed_bytes":1315167008}

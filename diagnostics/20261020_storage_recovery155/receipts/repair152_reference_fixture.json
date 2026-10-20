@@ -1,0 +1,22 @@
+{
+  "phase": "completed",
+  "steps": [
+    {
+      "name": "compile",
+      "seconds": 23.495725151966326,
+      "exit": 0
+    },
+    {
+      "name": "link",
+      "seconds": 3.728834079927765,
+      "exit": 0
+    },
+    {
+      "name": "fallback_test",
+      "seconds": 10.454787648050115,
+      "exit": 0
+    }
+  ],
+  "core_sha256": "dda5a860e2ee485531b06af3a00c4a980472bbd5508076987171a637f0b292dd",
+  "source_sha256": "29efa1489dbc9d18840b0e7194924ceeeeae2f4e499c5a84061aba2f2ab2584f"
+}

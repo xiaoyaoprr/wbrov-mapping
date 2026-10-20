@@ -1,0 +1,67 @@
+{
+  "phase": "validation_failed",
+  "scope": "one complete saved field119 replay; Core124, worker127 unsearched first-private-keyframe fix; same parameters, Tags, density, complete original input and quality gates; no live hardware",
+  "steps": [],
+  "core_sha256": "8427c13ba0728d8c7961129571ae74d8f6e5707ae3a2c67d36f91456550345a7",
+  "command": [
+    "/usr/bin/python3",
+    "-B",
+    "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate42_voxel/tools/deferred_mapping.py",
+    "--recording",
+    "/home/exocean/maps/rtabmap_calibration_ab/continuous_20261013_081030_1824640/rgbd_spool",
+    "--output",
+    "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/repair128_replay/field",
+    "--worker",
+    "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/repair127_build/wbrov_replay_worker",
+    "--verifier",
+    "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate42_voxel/bin/wbrov_verify_svo",
+    "--odom-parameters",
+    "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate42_voxel/config/odom_parameters.txt",
+    "--map-parameters",
+    "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate42_voxel/config/map_parameters.txt",
+    "--tag-modules",
+    "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate42_voxel/runtime/libexec/wbrov_corner_recovery",
+    "--cv-threads",
+    "1",
+    "--lookahead-segments",
+    "1"
+  ],
+  "source_status_sha256": "1eff66b12a39ae49b2906ea569688b5ad2420cc73523a58179314a8ad28979b0",
+  "worker_sha256": "9431c5fa9d3702605bd8976d498ae4fa18ac3798fed247a5e8a3c22fa7a7fe7a",
+  "seconds": 391.2706035199808,
+  "exit": 0,
+  "prior_storage_evidence": {
+    "summary": {
+      "complete": true,
+      "segments": 375,
+      "bytes": 8042695245,
+      "seconds": 99.50541168,
+      "byte_exact": true
+    },
+    "max_segment_s": 0.191945056,
+    "passed": true
+  },
+  "frames": 9771,
+  "all_input_stamps_equal": true,
+  "save_verified": true,
+  "database_check": "ok",
+  "final_continuity": "RECOVERING",
+  "main_nodes": 87,
+  "cloud_points": 72279,
+  "recoveries": 1,
+  "cuts": 219,
+  "recovery_events": [
+    {
+      "source_ns": 1791850571295437000,
+      "main_nodes": 87
+    }
+  ],
+  "isolated_motion_faults": 1,
+  "saved_sha256": {
+    "map.db": "d41e31153cc9877243fd2b71bdc9faf5a746148ef2b6a39c4581e9143e0ffe56",
+    "main_cloud.ply": "f4f313cf1850a1cffbd3da471db662df3fa751d588cf2143dd8341b86b1617ce",
+    "frames.csv": "e409a0d0f9d10f332dae4849711f28399c19f8998fdf3e56e03f9f3516443ff8",
+    "tags.json": "1ec9145194fb80c126667d91d5f0f3328d2d206bf80190e32438e2133cfb7845"
+  },
+  "recovery_continuation_passed": false
+}

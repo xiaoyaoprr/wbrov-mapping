@@ -1,0 +1,2 @@
+PASS reference fallback: same current raw view, different valid old endpoint; unchanged full preparation; all-inconsistent references fail closed; graph never registered
+PASS local gravity cache: healthy original raw+fused chain accepted; missing and contradictory measured gravity rejected; no graph mutation

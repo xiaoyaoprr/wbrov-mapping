@@ -14,6 +14,7 @@
 #include <sstream>
 #include <chrono>
 #include "bounded_async_writer.hpp"
+#include "recording_journal_limits.hpp"
 
 // Recording branches before IMU, depth, odometry and map acceptance. The SDK
 // records stereo images and sensor data, not the computed depth/point cloud.
@@ -65,7 +66,7 @@ public:
     }
     enabled_=true;
     write_status("recording",false);
-    journal_=std::make_unique<BoundedAsyncWriter<JournalRecord>>(512,[this](const JournalRecord &record) {
+    journal_=std::make_unique<BoundedAsyncWriter<JournalRecord>>(wbrov_recording::journal_capacity,[this](const JournalRecord &record) {
       ledger_<<record.line;
       if(!ledger_)throw std::runtime_error("recording ledger write failed");
       if(!record.status.empty()) {
@@ -100,7 +101,12 @@ public:
            <<",\"paused\":"<<(status.is_paused?"true":"false")<<"}\n";
     // No filesystem operation runs on this capture path. Keep SDK calls on
     // the camera thread; only immutable strings cross to the journal worker.
-    try {journal_->append({line.str(),grabs_%30==0?status_text("recording",false):std::string()});}
+    try {
+      JournalRecord record{line.str(),grabs_%30==0?status_text("recording",false):std::string()};
+      if(record.line.size()+record.status.size()>wbrov_recording::journal_record_byte_limit)
+        throw std::runtime_error("recording journal record size limit reached");
+      journal_->append(std::move(record));
+    }
     catch(...) {++writeErrors_;throw;}
 
   }
@@ -115,6 +121,7 @@ public:
     camera_->disableRecording();enabled_=false;
     std::exception_ptr failure;
     try {if(journal_)journal_->close();}catch(...) {failure=std::current_exception();++writeErrors_;}
+    if(journal_)journalFinal_=journal_->snapshot();
     journal_.reset();
     ledger_.flush();
     if(!ledger_)++writeErrors_;
@@ -130,6 +137,7 @@ private:
   }
   struct JournalRecord {std::string line,status;};
   std::string status_text(const char *state,bool clean) const {
+    const auto journal=journal_?journal_->snapshot():journalFinal_;
     std::ostringstream f;
       f<<"{\"schema\":\"wbrov.raw-recording.v1\",\"state\":\""<<state
        <<"\",\"clean_shutdown\":"<<(clean?"true":"false")
@@ -138,7 +146,10 @@ private:
        <<",\"grab_calls\":"<<grabs_<<",\"unique_computed_stamps\":"<<uniqueStamps_
        <<",\"sdk_frames_ingested\":"<<ingested_<<",\"sdk_frames_encoded_before_close\":"<<encoded_
        <<",\"status_false_samples\":"<<statusFalseSamples_<<",\"duplicate_grabs\":"<<duplicateGrabs_
-       <<",\"grab_errors\":"<<grabErrors_<<",\"write_errors\":"<<writeErrors_<<"}\n";
+       <<",\"grab_errors\":"<<grabErrors_<<",\"write_errors\":"<<writeErrors_
+       <<",\"journal_queued\":"<<journal.queued<<",\"journal_high_water\":"<<journal.highWater
+       <<",\"journal_accepted\":"<<journal.accepted<<",\"journal_completed\":"<<journal.completed
+       <<",\"journal_capacity\":"<<wbrov_recording::journal_capacity<<"}\n";
     if(!f)throw std::runtime_error("recording status serialization failed");
     return f.str();
   }
@@ -159,6 +170,7 @@ private:
   std::filesystem::path root_;
   std::ofstream ledger_;
   std::unique_ptr<BoundedAsyncWriter<JournalRecord>> journal_;
+  BoundedAsyncWriter<JournalRecord>::Snapshot journalFinal_;
   double lastSdkStatusMs_=0.;
   bool enabled_=false;
   std::uint64_t firstStamp_=0,lastStamp_=0,grabs_=0,uniqueStamps_=0,grabErrors_=0,writeErrors_=0;

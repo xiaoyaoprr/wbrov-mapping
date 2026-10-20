@@ -52,6 +52,21 @@ exit "$result"
 '''.replace('PACKAGE',q(str(package))).replace('CONFIGPIN',q(config_pin)).replace('RUNNERPIN',q(runner_pin))
     launcher_pin=hashlib.sha256(launcher.encode()).hexdigest()
     wrapper=base
+    # A boot/PID-bound handoff is runtime state. Publishing it on the recording
+    # NVMe can spend its entire two-second freshness budget inside fsync.
+    # Keep all admission checks, but put this small state on owned tmpfs.
+    wrapper=wrapper.replace('control_state_dir="$HOME/.cache/wbrov_control/mapping_light"',
+        'control_runtime_root="/run/user/$(id -u)"\ncontrol_state_dir="$control_runtime_root/wbrov_mapping_light"')
+    insertion=wrapper.index('check_directory_readonly() {')
+    wrapper=wrapper[:insertion]+'''check_runtime_light_root() {
+    [[ -d "$control_runtime_root" && ! -L "$control_runtime_root" ]] || fail '灯光运行目录不存在或是符号链接。'
+    [[ "$(stat -f -c %T -- "$control_runtime_root")" == tmpfs ]] || fail '灯光就绪状态需要独立内存文件系统。'
+    check_directory_readonly "$control_runtime_root"
+}
+
+'''+wrapper[insertion:]
+    wrapper=wrapper.replace('    check_directory_readonly "$control_state_dir"',
+        '    check_runtime_light_root\n    check_directory_readonly "$control_state_dir"')
     old='/home/exocean/.cache/rtabmap_dense/calib_ab_20260826/start_rtabmap_calib_ab.sh'
     wrapper=wrapper.replace(old,str(package/'start_rtabmap_continuous.sh'))
     wrapper=wrapper.replace("start_rtabmap_calib_ab\\.sh","start_rtabmap_continuous\\.sh")
@@ -75,6 +90,25 @@ exit "$result"
     wrapper=wrapper[:start]+'''    "$mapping_launcher" --check-only || fail '连续建图运行文件或配置校验失败。'
 '''+wrapper[end:]
     wrapper=wrapper.replace('count<attempts; count++','attempts == 0 || count<attempts; count++')
+    # cmdline can disappear before /proc/PID during ordinary child exit.
+    # Observe that transient state within the existing 10-second bound; never
+    # send a signal or accept a shutdown receipt using an uncertain identity.
+    start=wrapper.index('wait_same() {');end=wrapper.index('\nwait_mapping_launcher()',start)
+    wrapper=wrapper[:start]+'''wait_same() {
+    local pid="$1" ticks="$2" pattern="$3" attempts="$4" count uncertain=0
+    for ((count=0; count<attempts; count++)); do
+        if ! same_process "$pid" "$ticks" "$pattern"; then
+            if ! pid_may_be_running "$pid"; then return 0; fi
+            uncertain=1
+        else
+            uncertain=0
+        fi
+        sleep 0.1
+    done
+    ((uncertain)) && return 2
+    return 1
+}
+'''+wrapper[end:]
     wrapper=wrapper.replace('if wait_mapping_launcher 1200; then','if wait_mapping_launcher 0; then')
     # Only after the session exited can remainder cleanup run. Never terminate
     # the ordered worker just because drain time exceeded a legacy threshold.

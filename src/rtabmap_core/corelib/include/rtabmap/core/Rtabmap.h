@@ -331,6 +331,10 @@ private:
         const SensorData * liveData=nullptr, const ImageInputIdentity * liveIdentity=nullptr) const;
     // Wrapper-owned candidate revalidation; no external transform is accepted.
     // Adds a nonvirtual method only, preserving the existing object layout.
+    // Candidate discovery only, independent of the native best-loop winner.
+    // Never inserts links, registers an epoch or changes a map correction.
+    bool collectTrustedVisualRecoveryCandidates(const AcceptedImageSourceContext & context,
+        std::string & reason);
     bool tryVisualRecoveryWithAcceptedImages(const SafeRelocalizationLimits & limits,
         const AcceptedImageSourceContext & context, const std::function<bool()> & commitAllowed,
         std::string & reason);

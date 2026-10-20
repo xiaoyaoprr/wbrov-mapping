@@ -160,6 +160,18 @@ public:
         return stableLocked() && freshLocked(steadyNs,rosNs) && frameNs>=goodStartNs_ &&
             frameNs>0 && frameNs<=sourceNs_ && sourceNs_-frameNs<=MAX_AGE_NS;
     }
+    // Ongoing, registered tracking uses the normal measured-geometry limits.
+    // The stricter recovery evidence is for establishing/re-establishing a
+    // frame, not an extra per-frame veto on an already authorized main map.
+    // Loss, weak geometry, stale input, epoch mismatch and an observation
+    // window cannot take this branch, and still need stable recovery evidence.
+    bool frameProcessingReady(Epoch epoch,bool coreRegistered,long long frameNs,long long steadyNs,long long rosNs) const {
+        std::lock_guard<std::mutex> l(mutex_);
+        if(!freshLocked(steadyNs,rosNs) || !evidence_.usable() || frameNs<=0 ||
+           frameNs>sourceNs_ || sourceNs_-frameNs>MAX_AGE_NS)return false;
+        if(coreRegistered && allowedLocked(epoch,steadyNs,rosNs))return true;
+        return stableLocked() && frameNs>=goodStartNs_;
+    }
     void invalidate(const char * reason="continuity invalidated") {
         std::lock_guard<std::mutex> l(mutex_);cutLocked(reason);
     }

@@ -7,7 +7,7 @@ import json
 import cv2
 import numpy as np
 from PIL import Image as PillowImage,ImageDraw,ImageFont
-from deferred_display_state import mapping_label,trajectory_data,pose_axes
+from deferred_display_state import mapping_label,trajectory_data,pose_axes,recovery_lines,tag_mode_line
 import rclpy
 from rclpy.node import Node
 from rclpy.executors import ExternalShutdownException
@@ -71,7 +71,7 @@ class Display(Node):
         self.status_image=self.create_publisher(Image,'/wbrov/deferred/status_image',qos)
         font=next((p for p in [Path('/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc'),Path('/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf')] if p.exists()),None)
         if font is None:raise RuntimeError('Chinese display font is required')
-        self.font=ImageFont.truetype(str(font),27)
+        self.font=ImageFont.truetype(str(font),24)
         self.create_timer(.5,self.update)
 
     def update(self):
@@ -153,7 +153,6 @@ class Display(Node):
             lag=status.get('backlog_seconds');lag='--' if lag is None else f'{lag:.1f}s'
             marker.text=f"Recorded map | backlog {lag}\n{status['state']} | source time, not current robot pose"
             self.label.publish(marker)
-            canvas=PillowImage.new('RGB',(680,270),(25,27,30));draw=ImageDraw.Draw(canvas)
             mapping=status.get('mapping',{})
             title,color=mapping_label(status)
             capture='采集已关闭' if status.get('recording_state')=='closed' else '持续采集'
@@ -167,12 +166,20 @@ class Display(Node):
                     capture=f"采集/写盘等待 {entry['seconds_without_new_seal']:.0f}s"
             lines=[title,f"{capture}  |  待处理：{lag}",
                    f"主图：{mapping.get('main_nodes',0)} 个节点  |  恢复：{mapping.get('recoveries',0)} 次"]
-            for tag in (tags[1]['tags'] if tags else [])[:2]:
-                lines.append(f"Tag {tag['tag_id']}：{tag['independent_references']}/3 组参考，{tag['distinct_main_nodes']} 个节点")
+            lines.append(tag_mode_line(status))
+            lines+=recovery_lines(mapping,tags[1] if tags else None)
             lines+=['青线：可信历史轨迹；黄点：Tag 位置','红X/绿Y/蓝Z：已处理位姿，非实时位姿']
-            for i,line in enumerate(lines):draw.text((12,5+37*i),line,font=self.font,fill=color if i==0 else (235,235,235))
-            message=Image();message.header.stamp=self.get_clock().now().to_msg();message.height=270;message.width=680
-            message.encoding='rgb8';message.step=2040;message.data=canvas.tobytes();self.status_image.publish(message)
+            wrapped=[]
+            for line in lines:
+                row=''
+                for char in line:
+                    if row and self.font.getlength(row+char)>736:wrapped.append(row);row=''
+                    row+=char
+                wrapped.append(row)
+            canvas=PillowImage.new('RGB',(760,12+33*len(wrapped)),(25,27,30));draw=ImageDraw.Draw(canvas)
+            for i,line in enumerate(wrapped):draw.text((12,5+33*i),line,font=self.font,fill=color if i==0 else (235,235,235))
+            message=Image();message.header.stamp=self.get_clock().now().to_msg();message.height=canvas.height;message.width=canvas.width
+            message.encoding='rgb8';message.step=canvas.width*3;message.data=canvas.tobytes();self.status_image.publish(message)
         except (OSError,ValueError,KeyError,TypeError) as error:
             self.get_logger().warning(str(error),throttle_duration_sec=5.)
 

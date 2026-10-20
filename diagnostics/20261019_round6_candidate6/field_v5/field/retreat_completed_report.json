@@ -1,0 +1,40 @@
+{
+  "monotonic_s": 537161.447102688,
+  "user_report": "已退开并停住",
+  "driver_phase_at_receipt": "draining",
+  "entry": {
+    "schema": "wbrov.continuous-entry-status.v1",
+    "phase": "draining",
+    "elapsed_s": 306.3450653119944,
+    "stop_requested": false,
+    "saved": false,
+    "partial_saved": false,
+    "capture_state": "recording",
+    "sealed_source_ns": 1791758384781452000,
+    "seconds_without_new_seal": 1.9584083929657936e-05,
+    "errors": [],
+    "pids": {
+      "bridge": 1167929,
+      "processing": 1168434,
+      "graph_display": 1168440,
+      "rviz": 1168441
+    },
+    "exits": {
+      "bridge": null,
+      "processing": null,
+      "graph_display": null,
+      "rviz": null
+    },
+    "historical_only": true,
+    "navigation_authorized": false
+  },
+  "capture_last": {
+    "stamp_ns": 1791758436045844000,
+    "ingested": 7770,
+    "encoded": 7767,
+    "write_ok": true,
+    "recording": true,
+    "paused": false
+  },
+  "qualification": "Reply received after automatic capture-stop; movement capture timing unverified. Do not claim retreat acceptance."
+}

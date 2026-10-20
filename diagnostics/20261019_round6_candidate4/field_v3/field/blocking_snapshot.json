@@ -1,0 +1,323 @@
+{
+  "monotonic": 534795.2701008,
+  "driver": {
+    "entry": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate4_notags/run_continuous_mapping_with_light.sh",
+    "entry_sha256": "22528e9ae61cb00c949d4030657915b2341106dc6296b09bd8f6a49aa74829f4",
+    "wrapper_pid": 1108739,
+    "wrapper_ticks": "53449095",
+    "start_monotonic": 534490.958417984,
+    "phase": "running",
+    "motion_keys_sent": false,
+    "inputs": [
+      "authorized existing entry confirmation: OK"
+    ],
+    "scope": "candidate ordinary movement; tag detection disabled; no motion commands",
+    "tag_detection_enabled": false,
+    "elapsed_s": 294.03918832005,
+    "mapping_run": "/home/exocean/maps/rtabmap_calibration_ab/continuous_20261012_055711_1110036",
+    "ready_elapsed_s": 16.78070707200095
+  },
+  "processes": [
+    {
+      "role": "bridge",
+      "pid": 1110107,
+      "threads": [
+        {
+          "tid": 1110107,
+          "comm": "zed_rgbd_publis",
+          "wchan": "dma_fence_default_wait"
+        },
+        {
+          "tid": 1110116,
+          "comm": "zed_rgbd_publis",
+          "wchan": "futex_wait_queue_me"
+        },
+        {
+          "tid": 1110117,
+          "comm": "zed_rgbd_publis",
+          "wchan": "futex_wait_queue_me"
+        },
+        {
+          "tid": 1110118,
+          "comm": "zed_rgbd_publis",
+          "wchan": "futex_wait_queue_me"
+        },
+        {
+          "tid": 1110119,
+          "comm": "zed_rgbd_publis",
+          "wchan": "futex_wait_queue_me"
+        },
+        {
+          "tid": 1110120,
+          "comm": "zed_rgbd_publis",
+          "wchan": "futex_wait_queue_me"
+        },
+        {
+          "tid": 1110122,
+          "comm": "zed_rgbd_publis",
+          "wchan": "0"
+        },
+        {
+          "tid": 1110124,
+          "comm": "zed_rgbd_publis",
+          "wchan": "__skb_wait_for_more_packets"
+        },
+        {
+          "tid": 1110125,
+          "comm": "zed_rgbd_publis",
+          "wchan": "__skb_wait_for_more_packets"
+        },
+        {
+          "tid": 1110126,
+          "comm": "zed_rgbd_publis",
+          "wchan": "__skb_wait_for_more_packets"
+        },
+        {
+          "tid": 1110127,
+          "comm": "zed_rgbd_publis",
+          "wchan": "__skb_wait_for_more_packets"
+        },
+        {
+          "tid": 1110128,
+          "comm": "zed_rgbd_publis",
+          "wchan": "futex_wait_queue_me"
+        },
+        {
+          "tid": 1110129,
+          "comm": "zed_rgbd_publis",
+          "wchan": "futex_wait_queue_me"
+        },
+        {
+          "tid": 1110130,
+          "comm": "zed_rgbd_publis",
+          "wchan": "futex_wait_queue_me"
+        },
+        {
+          "tid": 1110132,
+          "comm": "cuda-EvtHandlr",
+          "wchan": "do_sys_poll"
+        },
+        {
+          "tid": 1110146,
+          "comm": "zed_rgbd_publis",
+          "wchan": "do_sys_poll"
+        },
+        {
+          "tid": 1110390,
+          "comm": "zed_rgbd_publis",
+          "wchan": "futex_wait_queue_me"
+        },
+        {
+          "tid": 1110392,
+          "comm": "zed_rgbd_publis",
+          "wchan": "futex_wait_queue_me"
+        },
+        {
+          "tid": 1110393,
+          "comm": "zed_rgbd_publis",
+          "wchan": "hrtimer_nanosleep"
+        },
+        {
+          "tid": 1110394,
+          "comm": "ZMQbg/Reaper",
+          "wchan": "do_epoll_wait"
+        },
+        {
+          "tid": 1110395,
+          "comm": "ZMQbg/IO/0",
+          "wchan": "do_epoll_wait"
+        },
+        {
+          "tid": 1110396,
+          "comm": "ZMQbg/Reaper",
+          "wchan": "do_epoll_wait"
+        },
+        {
+          "tid": 1110397,
+          "comm": "ZMQbg/IO/0",
+          "wchan": "do_epoll_wait"
+        },
+        {
+          "tid": 1110402,
+          "comm": "zed_rgbd_publis",
+          "wchan": "futex_wait_queue_me"
+        },
+        {
+          "tid": 1110458,
+          "comm": "zed_rgbd_publis",
+          "wchan": "do_sys_poll"
+        },
+        {
+          "tid": 1110459,
+          "comm": "zed_rgbd_publis",
+          "wchan": "hrtimer_nanosleep"
+        },
+        {
+          "tid": 1110461,
+          "comm": "zed_rgbd_publis",
+          "wchan": "futex_wait_queue_me"
+        },
+        {
+          "tid": 1110462,
+          "comm": "V4L2_EncThread",
+          "wchan": "futex_wait_queue_me"
+        },
+        {
+          "tid": 1110463,
+          "comm": "Capture Plane",
+          "wchan": "futex_wait_queue_me"
+        },
+        {
+          "tid": 1110464,
+          "comm": "zed_rgbd_publis",
+          "wchan": "futex_wait_queue_me"
+        },
+        {
+          "tid": 1110465,
+          "comm": "zed_rgbd_publis",
+          "wchan": "futex_wait_queue_me"
+        },
+        {
+          "tid": 1110466,
+          "comm": "V4L2_EncThread",
+          "wchan": "futex_wait_queue_me"
+        },
+        {
+          "tid": 1110467,
+          "comm": "V4L2_EncThread",
+          "wchan": "futex_wait_queue_me"
+        },
+        {
+          "tid": 1110468,
+          "comm": "zed_rgbd_publis",
+          "wchan": "wait_on_page_bit_common"
+        },
+        {
+          "tid": 1110470,
+          "comm": "zed_rgbd_publis",
+          "wchan": "jbd2_log_wait_commit"
+        },
+        {
+          "tid": 1110471,
+          "comm": "zed_rgbd_publis",
+          "wchan": "0"
+        }
+      ],
+      "io": "[Errno 2] No such file or directory: '/proc/1110107/io'",
+      "status": "Name:\tzed_rgbd_publis\nUmask:\t0077\nState:\tR (running)\nTgid:\t1110107\nNgid:\t0\nPid:\t1110107\nPPid:\t1110044\nTracerPid:\t0\nUid:\t1000\t1000\t1000\t1000\nGid:\t1000\t1000\t1000\t1000\nFDSize:\t128\nGroups:\t4 24 27 29 30 44 46 104 116 120 135 136 994 996 999 1000 1001 1003 1004 \nNStgid:\t1110107\nNSpid:\t1110107\nNSpgid:\t1110036\nNSsid:\t1110036\nVmPeak:\t18372592 kB\nVmSize:\t18367288 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t  556856 kB\nVmRSS:\t  555424 kB\nRssAnon:\t  375940 kB\nRssFile:\t  178932 kB\nRssShmem:\t     552 kB\nVmData:\t 1038356 kB\nVmStk:\t     132 kB\nVmExe:\t    1152 kB\nVmLib:\t  511920 kB\nVmPTE:\t    2252 kB\nVmSwap:\t    3752 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nThreads:\t36\nSigQ:\t1/61504\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000000000004\nSigCgt:\t0000000100004002\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t000001ffffffffff\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t0\nSeccomp_filters:\t0\nSpeculation_Store_Bypass:\tthread vulnerable\nSpeculationIndirectBranch:\tunknown\nCpus_allowed:\tff\nCpus_allowed_list:\t0-7\nMems_allowed:\t0001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t113943\nnonvoluntary_ctxt_switches:\t263634\n"
+    },
+    {
+      "role": "processing",
+      "pid": 1110587,
+      "threads": [
+        {
+          "tid": 1110587,
+          "comm": "python3",
+          "wchan": "wait_on_page_bit_common"
+        },
+        {
+          "tid": 1110631,
+          "comm": "python3",
+          "wchan": "pipe_read"
+        }
+      ],
+      "io": "[Errno 2] No such file or directory: '/proc/1110587/io'",
+      "status": "Name:\tpython3\nUmask:\t0077\nState:\tD (disk sleep)\nTgid:\t1110587\nNgid:\t0\nPid:\t1110587\nPPid:\t1110044\nTracerPid:\t0\nUid:\t1000\t1000\t1000\t1000\nGid:\t1000\t1000\t1000\t1000\nFDSize:\t64\nGroups:\t4 24 27 29 30 44 46 104 116 120 135 136 994 996 999 1000 1001 1003 1004 \nNStgid:\t1110587\nNSpid:\t1110587\nNSpgid:\t1110036\nNSsid:\t1110036\nVmPeak:\t  246520 kB\nVmSize:\t  180644 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   20832 kB\nVmRSS:\t   18960 kB\nRssAnon:\t   11416 kB\nRssFile:\t    7544 kB\nRssShmem:\t       0 kB\nVmData:\t   29552 kB\nVmStk:\t     132 kB\nVmExe:\t    5260 kB\nVmLib:\t    6508 kB\nVmPTE:\t     104 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nThreads:\t3\nSigQ:\t1/61504\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000001001004\nSigCgt:\t0000000100000002\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t000001ffffffffff\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t0\nSeccomp_filters:\t0\nSpeculation_Store_Bypass:\tthread vulnerable\nSpeculationIndirectBranch:\tunknown\nCpus_allowed:\tff\nCpus_allowed_list:\t0-7\nMems_allowed:\t0001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t3186\nnonvoluntary_ctxt_switches:\t10241\n"
+    },
+    {
+      "role": "graph_display",
+      "pid": 1110625,
+      "threads": [
+        {
+          "tid": 1110829,
+          "comm": "python3",
+          "wchan": "__skb_wait_for_more_packets"
+        },
+        {
+          "tid": 1110830,
+          "comm": "python3",
+          "wchan": "__skb_wait_for_more_packets"
+        },
+        {
+          "tid": 1110831,
+          "comm": "python3",
+          "wchan": "__skb_wait_for_more_packets"
+        },
+        {
+          "tid": 1110832,
+          "comm": "python3",
+          "wchan": "__skb_wait_for_more_packets"
+        }
+      ],
+      "io": "[Errno 2] No such file or directory: '/proc/1110625/io'",
+      "status": "Name:\tpython3\nUmask:\t0077\nState:\tR (running)\nTgid:\t1110625\nNgid:\t0\nPid:\t1110625\nPPid:\t1110044\nTracerPid:\t0\nUid:\t1000\t1000\t1000\t1000\nGid:\t1000\t1000\t1000\t1000\nFDSize:\t64\nGroups:\t4 24 27 29 30 44 46 104 116 120 135 136 994 996 999 1000 1001 1003 1004 \nNStgid:\t1110625\nNSpid:\t1110625\nNSpgid:\t1110036\nNSsid:\t1110036\nVmPeak:\t 1043724 kB\nVmSize:\t 1043132 kB\nVmLck:\t      16 kB\nVmPin:\t       0 kB\nVmHWM:\t  143148 kB\nVmRSS:\t  134968 kB\nRssAnon:\t   58648 kB\nRssFile:\t   75704 kB\nRssShmem:\t     616 kB\nVmData:\t  175304 kB\nVmStk:\t     132 kB\nVmExe:\t    5260 kB\nVmLib:\t  336588 kB\nVmPTE:\t     888 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nThreads:\t12\nSigQ:\t1/61504\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000001001004\nSigCgt:\t0000000100004002\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t000001ffffffffff\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t0\nSeccomp_filters:\t0\nSpeculation_Store_Bypass:\tthread vulnerable\nSpeculationIndirectBranch:\tunknown\nCpus_allowed:\tff\nCpus_allowed_list:\t0-7\nMems_allowed:\t0001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t1032\nnonvoluntary_ctxt_switches:\t61355\n"
+    },
+    {
+      "role": "rviz",
+      "pid": 1110627,
+      "threads": [
+        {
+          "tid": 1110627,
+          "comm": "rviz2",
+          "wchan": "do_sys_poll"
+        },
+        {
+          "tid": 1110635,
+          "comm": "QXcbEventQueue",
+          "wchan": "do_sys_poll"
+        },
+        {
+          "tid": 1110653,
+          "comm": "rviz2",
+          "wchan": "__skb_wait_for_more_packets"
+        },
+        {
+          "tid": 1110654,
+          "comm": "rviz2",
+          "wchan": "__skb_wait_for_more_packets"
+        },
+        {
+          "tid": 1110655,
+          "comm": "rviz2",
+          "wchan": "__skb_wait_for_more_packets"
+        },
+        {
+          "tid": 1110656,
+          "comm": "rviz2",
+          "wchan": "__skb_wait_for_more_packets"
+        },
+        {
+          "tid": 1110665,
+          "comm": "QDBusConnection",
+          "wchan": "do_sys_poll"
+        }
+      ],
+      "io": "[Errno 2] No such file or directory: '/proc/1110627/io'",
+      "status": "Name:\trviz2\nUmask:\t0077\nState:\tS (sleeping)\nTgid:\t1110627\nNgid:\t0\nPid:\t1110627\nPPid:\t1110044\nTracerPid:\t0\nUid:\t1000\t1000\t1000\t1000\nGid:\t1000\t1000\t1000\t1000\nFDSize:\t64\nGroups:\t4 24 27 29 30 44 46 104 116 120 135 136 994 996 999 1000 1001 1003 1004 \nNStgid:\t1110627\nNSpid:\t1110627\nNSpgid:\t1110036\nNSsid:\t1110036\nVmPeak:\t 1067456 kB\nVmSize:\t 1066988 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t  123388 kB\nVmRSS:\t  116344 kB\nRssAnon:\t   34068 kB\nRssFile:\t   76908 kB\nRssShmem:\t    5368 kB\nVmData:\t  156580 kB\nVmStk:\t     132 kB\nVmExe:\t      24 kB\nVmLib:\t  157912 kB\nVmPTE:\t     636 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nThreads:\t15\nSigQ:\t1/61504\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000000000004\nSigCgt:\t0000000100004002\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t000001ffffffffff\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t0\nSeccomp_filters:\t0\nSpeculation_Store_Bypass:\tthread vulnerable\nSpeculationIndirectBranch:\tunknown\nCpus_allowed:\tff\nCpus_allowed_list:\t0-7\nMems_allowed:\t0001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t71462\nnonvoluntary_ctxt_switches:\t886730\n"
+    }
+  ],
+  "kernel_events": [],
+  "meminfo": {
+    "MemAvailable": "12111524 kB",
+    "SwapFree": "6676832 kB",
+    "Dirty": "474420 kB",
+    "Writeback": "106524 kB"
+  },
+  "latency_tail": [
+    "{\"sequence\":213,\"last_source_ns\":1791756071896381000,\"flush_ms\":0.067104,\"data_fsync_ms\":1192.52,\"data_rename_ms\":0.06544,\"receipt_write_ms\":0.11552,\"receipt_fsync_ms\":14.1193,\"receipt_rename_ms\":0.395232,\"directory_fsync_ms\":35.6784,\"total_ms\":1243.46,\"queue_depth\":0,\"queue_high_water\":64,\"producer_waits\":3,\"producer_wait_ms\":13018.2,\"pending_segments\":15,\"pending_bytes\":312361500,\"pending_high_water_bytes\":312361500,\"scheduler_thread\":\"segment_committer\",\"scheduler_available\":true,\"writer_cpu_ns\":7491936,\"writer_runqueue_wait_ns\":1663840,\"memory_available\":true,\"dirty_kib_before\":318748,\"dirty_kib_after\":330860,\"writeback_kib_before\":132,\"writeback_kib_after\":68,\"io_psi_available\":false,\"io_some_us\":0,\"io_full_us\":0}",
+    "{\"sequence\":214,\"last_source_ns\":1791756072963137000,\"flush_ms\":0.081184,\"data_fsync_ms\":1144.13,\"data_rename_ms\":0.103968,\"receipt_write_ms\":0.303488,\"receipt_fsync_ms\":21.4471,\"receipt_rename_ms\":0.239072,\"directory_fsync_ms\":15.1718,\"total_ms\":1181.91,\"queue_depth\":0,\"queue_high_water\":64,\"producer_waits\":3,\"producer_wait_ms\":13018.2,\"pending_segments\":15,\"pending_bytes\":312441516,\"pending_high_water_bytes\":312441516,\"scheduler_thread\":\"segment_committer\",\"scheduler_available\":true,\"writer_cpu_ns\":8400896,\"writer_runqueue_wait_ns\":880896,\"memory_available\":true,\"dirty_kib_before\":330860,\"dirty_kib_after\":338000,\"writeback_kib_before\":68,\"writeback_kib_after\":124,\"io_psi_available\":false,\"io_some_us\":0,\"io_full_us\":0}",
+    "{\"sequence\":215,\"last_source_ns\":1791756074046436000,\"flush_ms\":0.062848,\"data_fsync_ms\":2010.28,\"data_rename_ms\":0.1296,\"receipt_write_ms\":1.24928,\"receipt_fsync_ms\":29.3497,\"receipt_rename_ms\":0.411072,\"directory_fsync_ms\":42.4191,\"total_ms\":2087.98,\"queue_depth\":16,\"queue_high_water\":64,\"producer_waits\":3,\"producer_wait_ms\":13018.2,\"pending_segments\":15,\"pending_bytes\":310711105,\"pending_high_water_bytes\":312441516,\"scheduler_thread\":\"segment_committer\",\"scheduler_available\":true,\"writer_cpu_ns\":10124704,\"writer_runqueue_wait_ns\":10385248,\"memory_available\":true,\"dirty_kib_before\":338000,\"dirty_kib_after\":354116,\"writeback_kib_before\":124,\"writeback_kib_after\":116,\"io_psi_available\":false,\"io_some_us\":0,\"io_full_us\":0}",
+    "{\"sequence\":216,\"last_source_ns\":1791756075112890000,\"flush_ms\":0.078336,\"data_fsync_ms\":1944.61,\"data_rename_ms\":0.295008,\"receipt_write_ms\":0.133568,\"receipt_fsync_ms\":28.9415,\"receipt_rename_ms\":0.304096,\"directory_fsync_ms\":36.6048,\"total_ms\":2011.46,\"queue_depth\":0,\"queue_high_water\":64,\"producer_waits\":3,\"producer_wait_ms\":13018.2,\"pending_segments\":17,\"pending_bytes\":353841056,\"pending_high_water_bytes\":353841056,\"scheduler_thread\":\"segment_committer\",\"scheduler_available\":true,\"writer_cpu_ns\":8722944,\"writer_runqueue_wait_ns\":1148832,\"memory_available\":true,\"dirty_kib_before\":354376,\"dirty_kib_after\":396116,\"writeback_kib_before\":116,\"writeback_kib_after\":180,\"io_psi_available\":false,\"io_some_us\":0,\"io_full_us\":0}",
+    "{\"sequence\":217,\"last_source_ns\":1791756076162908000,\"flush_ms\":0.088064,\"data_fsync_ms\":1835.67,\"data_rename_ms\":18.2954,\"receipt_write_ms\":1.54509,\"receipt_fsync_ms\":19.3542,\"receipt_rename_ms\":0.162272,\"directory_fsync_ms\":4.91837,\"total_ms\":1880.6,\"queue_depth\":0,\"queue_high_water\":64,\"producer_waits\":3,\"producer_wait_ms\":13018.2,\"pending_segments\":17,\"pending_bytes\":354299034,\"pending_high_water_bytes\":354299034,\"scheduler_thread\":\"segment_committer\",\"scheduler_available\":true,\"writer_cpu_ns\":8207776,\"writer_runqueue_wait_ns\":3561184,\"memory_available\":true,\"dirty_kib_before\":396116,\"dirty_kib_after\":421984,\"writeback_kib_before\":180,\"writeback_kib_after\":44,\"io_psi_available\":false,\"io_some_us\":0,\"io_full_us\":0}",
+    "{\"sequence\":218,\"last_source_ns\":1791756077212777000,\"flush_ms\":0.061312,\"data_fsync_ms\":1862.07,\"data_rename_ms\":0.300512,\"receipt_write_ms\":0.149856,\"receipt_fsync_ms\":23.1582,\"receipt_rename_ms\":0.21872,\"directory_fsync_ms\":29.8385,\"total_ms\":1916.56,\"queue_depth\":0,\"queue_high_water\":64,\"producer_waits\":3,\"producer_wait_ms\":13018.2,\"pending_segments\":18,\"pending_bytes\":373725159,\"pending_high_water_bytes\":373725159,\"scheduler_thread\":\"segment_committer\",\"scheduler_available\":true,\"writer_cpu_ns\":8949440,\"writer_runqueue_wait_ns\":2394848,\"memory_available\":true,\"dirty_kib_before\":421984,\"dirty_kib_after\":449520,\"writeback_kib_before\":44,\"writeback_kib_after\":48,\"io_psi_available\":false,\"io_some_us\":0,\"io_full_us\":0}",
+    "{\"sequence\":219,\"last_source_ns\":1791756078279451000,\"flush_ms\":0.077728,\"data_fsync_ms\":1385.2,\"data_rename_ms\":0.479488,\"receipt_write_ms\":0.635488,\"receipt_fsync_ms\":28.992,\"receipt_rename_ms\":0.594912,\"directory_fsync_ms\":18.8651,\"total_ms\":1435.39,\"queue_depth\":0,\"queue_high_water\":64,\"producer_waits\":3,\"producer_wait_ms\":13018.2,\"pending_segments\":19,\"pending_bytes\":395660192,\"pending_high_water_bytes\":395660192,\"scheduler_thread\":\"segment_committer\",\"scheduler_available\":true,\"writer_cpu_ns\":8058976,\"writer_runqueue_wait_ns\":507712,\"memory_available\":true,\"dirty_kib_before\":449520,\"dirty_kib_after\":464844,\"writeback_kib_before\":48,\"writeback_kib_after\":148,\"io_psi_available\":false,\"io_some_us\":0,\"io_full_us\":0}",
+    "{\"sequence\":220,\"last_source_ns\":1791756079362693000,\"flush_ms\":0.056032,\"data_fsync_ms\":1469.52,\"data_rename_ms\":0.135264,\"receipt_write_ms\":0.204576,\"receipt_fsync_ms\":16.1053,\"receipt_rename_ms\":0.176928,\"directory_fsync_ms\":27.7543,\"total_ms\":1514.46,\"queue_depth\":0,\"queue_high_water\":64,\"producer_waits\":3,\"producer_wait_ms\":13018.2,\"pending_segments\":19,\"pending_bytes\":393522809,\"pending_high_water_bytes\":395660192,\"scheduler_thread\":\"segment_committer\",\"scheduler_available\":true,\"writer_cpu_ns\":7842624,\"writer_runqueue_wait_ns\":1399520,\"memory_available\":true,\"dirty_kib_before\":464844,\"dirty_kib_after\":481716,\"writeback_kib_before\":148,\"writeback_kib_after\":0,\"io_psi_available\":false,\"io_some_us\":0,\"io_full_us\":0}",
+    "{\"sequence\":221,\"last_source_ns\":1791756080395991000,\"flush_ms\":0.063072,\"data_fsync_ms\":1580.32,\"data_rename_ms\":0.450272,\"receipt_write_ms\":0.196448,\"receipt_fsync_ms\":37.1615,\"receipt_rename_ms\":0.324896,\"directory_fsync_ms\":34.6173,\"total_ms\":1653.73,\"queue_depth\":0,\"queue_high_water\":64,\"producer_waits\":3,\"producer_wait_ms\":13018.2,\"pending_segments\":20,\"pending_bytes\":414294335,\"pending_high_water_bytes\":414294335,\"scheduler_thread\":\"segment_committer\",\"scheduler_available\":true,\"writer_cpu_ns\":11381888,\"writer_runqueue_wait_ns\":4778944,\"memory_available\":true,\"dirty_kib_before\":481716,\"dirty_kib_after\":502028,\"writeback_kib_before\":0,\"writeback_kib_after\":0,\"io_psi_available\":false,\"io_some_us\":0,\"io_full_us\":0}",
+    "{\"sequence\":222,\"last_source_ns\":1791756081446129000,\"flush_ms\":0.074912,\"data_fsync_ms\":1384.89,\"data_rename_ms\":0.146592,\"receipt_write_ms\":0.182784,\"receipt_fsync_ms\":60.3858,\"receipt_rename_ms\":0.15712,\"directory_fsync_ms\":8.05398,\"total_ms\":1454.37,\"queue_depth\":0,\"queue_high_water\":64,\"producer_waits\":3,\"producer_wait_ms\":13018.2,\"pending_segments\":20,\"pending_bytes\":414702106,\"pending_high_water_bytes\":414702106,\"scheduler_thread\":\"segment_committer\",\"scheduler_available\":true,\"writer_cpu_ns\":9074112,\"writer_runqueue_wait_ns\":1187360,\"memory_available\":true,\"dirty_kib_before\":502028,\"dirty_kib_after\":522116,\"writeback_kib_before\":0,\"writeback_kib_after\":44,\"io_psi_available\":false,\"io_some_us\":0,\"io_full_us\":0}",
+    "{\"sequence\":223,\"last_source_ns\":1791756082512559000,\"flush_ms\":0.068032,\"data_fsync_ms\":1622.87,\"data_rename_ms\":0.10592,\"receipt_write_ms\":0.389376,\"receipt_fsync_ms\":39.3163,\"receipt_rename_ms\":0.501312,\"directory_fsync_ms\":35.2765,\"total_ms\":1699.09,\"queue_depth\":0,\"queue_high_water\":64,\"producer_waits\":3,\"producer_wait_ms\":13018.2,\"pending_segments\":21,\"pending_bytes\":437629943,\"pending_high_water_bytes\":437629943,\"scheduler_thread\":\"segment_committer\",\"scheduler_available\":true,\"writer_cpu_ns\":10469056,\"writer_runqueue_wait_ns\":2479584,\"memory_available\":true,\"dirty_kib_before\":522116,\"dirty_kib_after\":542508,\"writeback_kib_before\":44,\"writeback_kib_after\":12,\"io_psi_available\":false,\"io_some_us\":0,\"io_full_us\":0}",
+    "{\"sequence\":224,\"last_source_ns\":1791756083562484000,\"flush_ms\":0.058912,\"data_fsync_ms\":1732.74,\"data_rename_ms\":0.533888,\"receipt_write_ms\":0.165056,\"receipt_fsync_ms\":39.0937,\"receipt_rename_ms\":0.124864,\"directory_fsync_ms\":10.3034,\"total_ms\":1783.63,\"queue_depth\":0,\"queue_high_water\":64,\"producer_waits\":3,\"producer_wait_ms\":13018.2,\"pending_segments\":21,\"pending_bytes\":436888945,\"pending_high_water_bytes\":437629943,\"scheduler_thread\":\"segment_committer\",\"scheduler_available\":true,\"writer_cpu_ns\":8834048,\"writer_runqueue_wait_ns\":1033312,\"memory_available\":true,\"dirty_kib_before\":542508,\"dirty_kib_after\":567320,\"writeback_kib_before\":12,\"writeback_kib_after\":16,\"io_psi_available\":false,\"io_some_us\":0,\"io_full_us\":0}",
+    "{\"sequence\":225,\"last_source_ns\":1791756086979011000,\"flush_ms\":0.068256,\"data_fsync_ms\":1620.4,\"data_rename_ms\":0.288864,\"receipt_write_ms\":0.268032,\"receipt_fsync_ms\":38.6732,\"receipt_rename_ms\":0.350112,\"directory_fsync_ms\":29.3571,\"total_ms\":1690.23,\"queue_depth\":0,\"queue_high_water\":64,\"producer_waits\":3,\"producer_wait_ms\":13018.2,\"pending_segments\":22,\"pending_bytes\":457615818,\"pending_high_water_bytes\":457615818,\"scheduler_thread\":\"segment_committer\",\"scheduler_available\":true,\"writer_cpu_ns\":9606848,\"writer_runqueue_wait_ns\":1053536,\"memory_available\":true,\"dirty_kib_before\":567320,\"dirty_kib_after\":589088,\"writeback_kib_before\":16,\"writeback_kib_after\":260,\"io_psi_available\":false,\"io_some_us\":0,\"io_full_us\":0}",
+    "{\"sequence\":226,\"last_source_ns\":1791756088112279000,\"flush_ms\":0.115104,\"data_fsync_ms\":1478.1,\"data_rename_ms\":0.15408,\"receipt_write_ms\":0.182336,\"receipt_fsync_ms\":30.7965,\"receipt_rename_ms\":0.125088,\"directory_fsync_ms\":9.2839,\"total_ms\":1519.2,\"queue_depth\":0,\"queue_high_water\":64,\"producer_waits\":3,\"producer_wait_ms\":13018.2,\"pending_segments\":22,\"pending_bytes\":456122092,\"pending_high_water_bytes\":457615818,\"scheduler_thread\":\"segment_committer\",\"scheduler_available\":true,\"writer_cpu_ns\":7744352,\"writer_runqueue_wait_ns\":4059040,\"memory_available\":true,\"dirty_kib_before\":589088,\"dirty_kib_after\":608332,\"writeback_kib_before\":260,\"writeback_kib_after\":76,\"io_psi_available\":false,\"io_some_us\":0,\"io_full_us\":0}",
+    "{\"sequence\":227,\"last_source_ns\":1791756089178927000,\"flush_ms\":0.113056,\"data_fsync_ms\":1545.72,\"data_rename_ms\":0.182624,\"receipt_write_ms\":0.188256,\"receipt_fsync_ms\":20.1885,\"receipt_rename_ms\":0.597664,\"directory_fsync_ms\":33.2627,\"total_ms\":1600.98,\"queue_depth\":0,\"queue_high_water\":64,\"producer_waits\":3,\"producer_wait_ms\":13018.2,\"pending_segments\":23,\"pending_bytes\":480127697,\"pending_high_water_bytes\":480127697,\"scheduler_thread\":\"segment_committer\",\"scheduler_available\":true,\"writer_cpu_ns\":8953216,\"writer_runqueue_wait_ns\":566656,\"memory_available\":true,\"dirty_kib_before\":608332,\"dirty_kib_after\":627752,\"writeback_kib_before\":76,\"writeback_kib_after\":232,\"io_psi_available\":false,\"io_some_us\":0,\"io_full_us\":0}"
+  ]
+}

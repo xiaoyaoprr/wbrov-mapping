@@ -1,9 +1,39 @@
 from pathlib import Path
 import sys,unittest
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'src/visualization'))
-from deferred_display_state import mapping_label,trajectory_data,pose_axes
+from deferred_display_state import mapping_label,trajectory_data,pose_axes,recovery_lines,tag_mode_line
 
 class DisplayState(unittest.TestCase):
+    def test_tag_mode_distinguishes_disabled_from_no_detection_and_unknown(self):
+        self.assertIn('已开启',tag_mode_line({'tag_detection_enabled':True,'mapping':{'detected_tags_in_processed_frame':0}}))
+        self.assertIn('已关闭',tag_mode_line({'tag_detection_enabled':False}))
+        self.assertIn('状态待确认',tag_mode_line({}))
+
+    def test_no_tag_is_not_a_visual_recovery_veto(self):
+        lines=recovery_lines({'recovery_route':'visual_keyframes','main_map_write_allowed':False,
+                              'detected_tags_in_processed_frame':1},{'tags':[]})
+        self.assertIn('主图 Tag：0 个，参考齐备：0 个',lines)
+        self.assertIn('主图无 Tag，仍可用旧关键帧尝试恢复',lines)
+        self.assertTrue(any('不等于已绑定' in line for line in lines))
+        self.assertTrue(any('不要求 Tag' in line for line in lines))
+        self.assertNotIn('主图 Tag：0 个，参考齐备：0 个',recovery_lines({},None))
+
+    def test_all_tag_reference_counts_and_current_diagnostic(self):
+        tags=[dict(tag_id=i,independent_references=min(i,3),distinct_main_nodes=5) for i in range(5)]
+        mapping={'recovery_attempt_source_ns':10,'observation_diagnostic':{'source_ns':10,'baseline_rejected':1}}
+        lines=recovery_lines(mapping,{'tags':tags})
+        self.assertIn('主图 Tag：5 个，参考齐备：2 个',lines)
+        self.assertEqual(sum(line.startswith('Tag ') for line in lines),5)
+        self.assertTrue(any('旧参考视角不够独立' in line for line in lines))
+        mapping['recovery_attempt_source_ns']=11
+        self.assertFalse(any('旧参考视角不够独立' in line for line in recovery_lines(mapping,{'tags':tags})))
+
+    def test_failure_subitem_survives_presentation(self):
+        mapping={'quality':{'input_present':True,'usable':False,'covariance_valid':False}}
+        self.assertTrue(any('位姿不确定度' in line for line in recovery_lines(mapping,{'tags':[]})))
+        mapping['main_map_write_allowed']=True
+        self.assertFalse(any('位姿不确定度' in line for line in recovery_lines(mapping,{'tags':[]})))
+
     def test_body_axes_rotate_with_pose(self):
         from math import sqrt
         node={'position':[1.,2.,3.],'orientation_xyzw':[0.,0.,sqrt(.5),sqrt(.5)]}

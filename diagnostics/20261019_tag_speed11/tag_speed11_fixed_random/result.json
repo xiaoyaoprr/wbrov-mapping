@@ -1,0 +1,13 @@
+{
+  "phase": "failed",
+  "scope": "offline native engine comparison with diagnostic-only fixed entropy; original captured frames and Tag observations; not end-to-end timing or production randomness",
+  "steps": [
+    {
+      "name": "baseline",
+      "exit": 1,
+      "seconds": 2.9784109439933673
+    }
+  ],
+  "error": "AssertionError()",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/validate_tag_speed11_fixed.py\", line 20, in <module>\n    step={'name':name,'exit':q.returncode,'seconds':time.monotonic()-start};v['steps'].append(step);save();assert q.returncode==0\nAssertionError\n"
+}

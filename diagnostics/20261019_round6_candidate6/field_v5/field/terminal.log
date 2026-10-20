@@ -1,0 +1,30 @@
+{"checked": true, "all_frames": true, "profile": "continuous_new_map", "navigation_authorized": false}
+
+水下遥控＋自动开灯＋持续采集建图
+灯光: 30%；稳定等待: 4秒；水下YAML: /home/exocean/calibration/zedx_charuco/water_calib_trial_20260827_from_unique86/results/run_c2ce22daf28d/zed_opencv_calibration_40408468.yml
+请确认：机器人已可靠系留、推进器附近无人/线缆/杂物；现场人员能立即物理断电；厂家地面站已关闭。
+相机窗口清洁、灯向两侧斜照；不会启动ChArUco采集。
+初始化及可信通讯就绪后，以零运动请求进入纯手动BODY起步；请先确认机身各轴方向与周围安全条件。
+H仅开关主机R/P（横滚/俯仰）回正，无自动入水；本入口不自动按H。
+W/S、A/D、R/F是机身轴向油门；人工转动输入逐轴优先于主机R/P回正。
+实际断联、急停或退出仍执行停机流程；需要时立即现场物理断电。
+mode0不承诺固件姿态内环OFF；零运动请求不等于物理零运动保证。
+EXLink无灯光/锁定ACK；请现场看见灯亮后再移动。改变灯开关/亮度会停止本次建图。
+确认后输入 OK：OK
+{"checked": true, "all_frames": true, "profile": "continuous_new_map", "navigation_authorized": false}
+已确认遥控PID=1166697、UDP3333唯一属主、10ms心跳和30%双灯提交；等待4秒。
+正在持续采集建图：画面实时、点云按处理进度更新；关闭RViz或遥控会停止采集，处理完积压帧后保存。
+正在核验运行库并启动建图节点（启动检查最多等待180秒，启动后不限制建图时长）；完成前请保持静止。
+建图各必需子进程身份（含最终Core inode/SHA）已确认；请先目视确认灯亮和深度图，再用遥控移动。
+已发送停止采集与遥控退出请求；遥控先锁定关灯，后台处理完全部积压帧再保存，请勿断开Jetson电源。
+mapping lifecycle: mapping nodes_stopped is not True
+[保存未确认] 缺少本次stopped完整成功结果，或节点/导出/清理失败。
+[建图失败] 建图自然退出状态码=1，不能当作成功。
+注意：EXLink没有这些命令的协议ACK；状态文件只证明本机提交路径，物理灯光和推进器状态仍需现场确认。
+联合启动日志: /home/exocean/.cache/wbrov_water_mapping/run_20261012_063519.S5nq0M
+
+[建图故障详情] 本次 mapping.log 最后80行：
+
+启动/运行失败（状态码1）。建图进程退出（状态码1）；具体原因见本次建图日志。
+本次日志目录：/home/exocean/.cache/wbrov_water_mapping/run_20261012_063519.S5nq0M
+按回车关闭此窗口：

@@ -1,0 +1,67 @@
+{
+  "phase": "completed",
+  "scope": "independent complete movement-occlusion saved recording regression; Core134 shared final metric support, worker130 actual retained-keyframe identity scheduling fix; same parameters, Tags, density, complete original input and quality gates; no live hardware",
+  "steps": [],
+  "core_sha256": "0a1405beb95f4bc919a4e9d0215fb8336e7cf395236e79c135964e72d77a80fe",
+  "command": [
+    "/usr/bin/python3",
+    "-B",
+    "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate42_voxel/tools/deferred_mapping.py",
+    "--recording",
+    "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/motion_spool1",
+    "--output",
+    "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/repair136_regression/field",
+    "--worker",
+    "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/repair130_build/wbrov_replay_worker",
+    "--verifier",
+    "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate42_voxel/bin/wbrov_verify_svo",
+    "--odom-parameters",
+    "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate42_voxel/config/odom_parameters.txt",
+    "--map-parameters",
+    "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate42_voxel/config/map_parameters.txt",
+    "--tag-modules",
+    "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate42_voxel/runtime/libexec/wbrov_corner_recovery",
+    "--cv-threads",
+    "1",
+    "--lookahead-segments",
+    "1"
+  ],
+  "source_status_sha256": "ed2ea4d063beaff2f97caaff19f0bca6dad00a5d229c41e8f02022b009cdc1cb",
+  "worker_sha256": "b4e7e925a9b41fe788e5b63684fcf110fd882109d719a8e04c81a9ff1838f561",
+  "seconds": 83.99992815998849,
+  "exit": 0,
+  "prior_storage_evidence": {
+    "summary": {
+      "complete": true,
+      "segments": 375,
+      "bytes": 8042695245,
+      "seconds": 99.50541168,
+      "byte_exact": true
+    },
+    "max_segment_s": 0.191945056,
+    "passed": true
+  },
+  "frames": 1581,
+  "all_input_stamps_equal": true,
+  "save_verified": true,
+  "database_check": "ok",
+  "final_continuity": "NORMAL",
+  "main_nodes": 100,
+  "cloud_points": 97848,
+  "recoveries": 1,
+  "cuts": 26,
+  "recovery_events": [
+    {
+      "source_ns": 1791653868380707000,
+      "main_nodes": 94
+    }
+  ],
+  "isolated_motion_faults": 0,
+  "saved_sha256": {
+    "map.db": "dcaaf1e18ebf7026b63917f1daf9527a5903ae2727261081b526929fd437db92",
+    "main_cloud.ply": "c1e6a3f687286bc8c39673dcdc6f0350e98272630ef3be472242f90cf9c9e385",
+    "frames.csv": "03b3cc68ac56163121b3fc41f23a3f74fe7574fd6b949d0df751f48f5a2ecbfa",
+    "tags.json": "0c9f61627fdf49b7868257ebf414ced9f51be3c6a4f27914b9013ba6fb46935a"
+  },
+  "recovery_continuation_passed": true
+}

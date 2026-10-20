@@ -1,0 +1,14 @@
+{
+  "complete": true,
+  "artifacts_saved": true,
+  "recording_complete": true,
+  "partial_reason": null,
+  "historical_only": true,
+  "recovery_acceptance_passed": false,
+  "sha256": {
+    "map.db": "9f7e21dd00d18456a04939652973ed2cc82d481a5494cf57dea73911c5da107a",
+    "main_cloud.ply": "f6aeb02ef867a4d1c6a5608d6c73c96aa8aa6e7921c31c40f50b4efe0264f750",
+    "frames.csv": "20b456683884e3f7726b6a057d72d51550d2aeb3b21cc5de6e2a5b9e2c165df5",
+    "tags.json": "c11de6e71f6bbc81ff3617410f0c226592953a58799434fe7535574402e7c0cd"
+  }
+}

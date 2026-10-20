@@ -1,4 +1,5 @@
 #include "bounded_async_writer.hpp"
+#include "recording_journal_limits.hpp"
 #include <cassert>
 #include <chrono>
 #include <future>
@@ -6,6 +7,22 @@
 
 int main() {
   using namespace std::chrono_literals;
+  {
+    // A stalled metadata sink must retain the 30 Hz * 28 s field burst,
+    // including its headroom, and close must preserve exact ordered records.
+    std::promise<void> entered,release;auto released=release.get_future().share();
+    std::vector<std::string> written,expected;
+    BoundedAsyncWriter<std::string> journal(wbrov_recording::journal_capacity,[&](const std::string &row) {
+      if(written.empty()){entered.set_value();released.wait();}written.push_back(row);
+    });
+    expected.push_back("source=0\n");journal.append(expected.back());entered.get_future().wait();
+    bool accepted=true;
+    try {for(int i=1;i<=1800;++i){expected.push_back("source="+std::to_string(i)+"\n");journal.append(expected.back());}}
+    catch(...){accepted=false;}
+    const auto pending=journal.snapshot();release.set_value();journal.close();
+    assert(accepted && pending.highWater==1800 && written==expected);
+    const auto closed=journal.snapshot();assert(closed.accepted==1801 && closed.completed==1801 && closed.queued==0);
+  }
   {
     // Block the disk sink deliberately; accepted capture records must still
     // enqueue promptly, then be drained in order when disk service returns.
@@ -52,6 +69,8 @@ int main() {
     auto producer=std::async(std::launch::async,[&]{return writer.append_wait(3,0ms);});
     assert(producer.wait_for(50ms)==std::future_status::timeout);
     release.set_value();assert(producer.get());writer.close();assert((written==std::vector<int>{1,2,3}));
+    const auto s=writer.snapshot();assert(s.accepted==3 && s.completed==3 && s.queued==0 && s.highWater==1);
+    assert(s.waits==1 && s.waitMs>=0 && s.maxWaitMs==s.waitMs);
   }
   {
     std::promise<void> entered,release;auto released=release.get_future().share();

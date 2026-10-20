@@ -107,6 +107,14 @@ class DeferredQueueTest(unittest.TestCase):
             with self.assertRaises(ValueError):closed_inputs(root)
             (root/'segment-00000000.json').write_text('{}')
             self.assertEqual(closed_inputs(root)[:2],([root/'segment-00000000.json'],False))
+            # A staged committer can leave later files/receipts visible before
+            # the directory barrier and published high-water mark advance.
+            # Their presence alone must not make them eligible for mapping.
+            for n in range(1,8):
+                (root/f'segment-{n:08d}.partial').write_bytes(b'pending')
+                (root/f'segment-{n:08d}.frames').write_bytes(b'not advertised')
+                (root/f'segment-{n:08d}.json').write_text('{}')
+            self.assertEqual(closed_inputs(root)[:2],([root/'segment-00000000.json'],False))
             state['state']='failed';atomic_json(root/'status.json',state)
             with self.assertRaises(ValueError):closed_inputs(root)
 

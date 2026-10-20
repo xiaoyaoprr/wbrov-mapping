@@ -17,6 +17,22 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
 
 @unittest.skipUnless(sys.platform=='linux','session ownership requires Linux /proc')
 class SessionTest(unittest.TestCase):
+    def test_optional_tag_configuration_reaches_parser_as_disabled(self):
+        from continuous_mapping_session import processing_command
+        import deferred_mapping
+        config={n:'/fixture/'+n for n in ['supervisor','worker','verifier','odom_parameters','map_parameters']}
+        for tag in (None,'','/fixture/tag_modules'):
+            for omitted in (False,True):
+                c=dict(config)
+                if not omitted:c['tag_modules']=tag
+                command=processing_command(c,Path('/out'),Path('/state'))
+                with self.subTest(tag=tag,omitted=omitted),patch.object(sys,'argv',command[2:]),patch.object(deferred_mapping,'run',return_value=0) as run:
+                    self.assertEqual(deferred_mapping.main(),0)
+                    args=run.call_args.args[0]
+                    self.assertEqual(args.tag_modules,Path(tag) if tag and not omitted else None)
+                    self.assertTrue(args.save_closed_prefix)
+                    self.assertEqual(args.worker_pid_file,Path('/state/slam.pid'))
+
     def test_interrupted_capture_drains_sealed_prefix_and_closes_worker(self):
         from deferred_mapping import run,atomic_json
         from argparse import Namespace
@@ -78,6 +94,106 @@ for line in sys.stdin:
             self.assertTrue(s.verify_save()['complete'])
             (mapping/'main_cloud.ply').write_bytes(b'changed')
             with self.assertRaisesRegex(ValueError,'identity'):s.verify_save()
+
+    def test_exit_wait_observes_cmdline_disappearance_without_signalling(self):
+        from render_continuous_entry import render
+        repo=Path(__file__).resolve().parents[1]
+        _,wrapper=render(Path('/tmp/frozen-map'),'a'*64,'b'*64,(repo/'launch/candidate_receipt_resume/run_water_mapping_with_light.sh').read_text(),'c'*64)
+        function=wrapper[wrapper.index('wait_same() {'):wrapper.index('\nwait_mapping_launcher()')]
+        cases=[('transient',0,1),('unknown',2,3),('running',1,3),('gone',0,0)]
+        for mode,expected,sleeps in cases:
+            script=function+'''
+n=0
+same_process() { [[ "$mode" == running ]]; }
+pid_may_be_running() { [[ "$mode" == unknown || "$mode" == running || ( "$mode" == transient && "$n" == 0 ) ]]; }
+sleep() { n=$((n+1)); }
+kill() { echo forbidden-signal; exit 88; }
+wait_same 123 456 pattern 3
+result=$?
+printf '%s %s\\n' "$result" "$n"
+'''
+            q=subprocess.run(['/usr/bin/bash','-c',script],env=dict(os.environ,mode=mode),capture_output=True,text=True,timeout=5)
+            self.assertEqual(q.returncode,0,q.stderr)
+            self.assertEqual(q.stdout.strip(),f'{expected} {sleeps}')
+
+    def test_capture_stop_keeps_pending_input_until_writer_exits(self):
+        from continuous_mapping_session import Session
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);state=root/'state';state.mkdir();out=root/'run';out.mkdir()
+            ready=root/'ready';stopping=root/'stopping';release=root/'release';saved=root/'saved'
+            child=subprocess.Popen([sys.executable,'-c','''
+from pathlib import Path
+import signal,sys,time
+ready,stopping,release,saved=map(Path,sys.argv[1:])
+def stop(*_):stopping.touch()
+signal.signal(signal.SIGINT,stop)
+signal.signal(signal.SIGTERM,lambda *_:sys.exit(91))
+ready.touch()
+while not stopping.exists():time.sleep(.01)
+while not release.exists():time.sleep(.01)
+saved.write_text('all accepted input sealed')
+''',str(ready),str(stopping),str(release),str(saved)])
+            s=Session({},state,out,os.getpid());s.children['bridge']=child
+            done=[]
+            try:
+                deadline=time.monotonic()+5
+                while not ready.exists() and time.monotonic()<deadline:time.sleep(.01)
+                self.assertTrue(ready.exists())
+                # Waiting for a fixed deadline would be the regression. The
+                # real child owns a pending segment until explicitly released.
+                with patch.object(child,'wait',side_effect=AssertionError('capture must poll without deadline')),patch.object(s,'progress',wraps=s.progress) as progress:
+                    thread=threading.Thread(target=lambda:(s.close_child('bridge',None),done.append(True)))
+                    thread.start()
+                    deadline=time.monotonic()+5
+                    while (not stopping.exists() or progress.call_count<2) and time.monotonic()<deadline:time.sleep(.01)
+                    self.assertTrue(stopping.exists());self.assertGreaterEqual(progress.call_count,2)
+                    s.request_stop();s.request_stop()
+                    self.assertIsNone(child.poll());self.assertFalse(saved.exists());self.assertFalse(done)
+                    release.touch();thread.join(timeout=5)
+                    self.assertFalse(thread.is_alive());self.assertEqual(child.returncode,0)
+                    self.assertEqual(done,[True])
+                    self.assertEqual(saved.read_text(),'all accepted input sealed');self.assertFalse(s.errors)
+            finally:
+                release.touch(exist_ok=True)
+                if child.poll() is None:child.send_signal(signal.SIGINT)
+                child.wait(timeout=5)
+
+    def test_capture_drain_reports_actual_writer_failure(self):
+        from continuous_mapping_session import Session
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);state=root/'state';state.mkdir();out=root/'run';out.mkdir()
+            s=Session({},state,out,os.getpid())
+            child=subprocess.Popen([sys.executable,'-c','raise SystemExit(7)']);child.wait(timeout=5)
+            s.children['bridge']=child;s.close_child('bridge',None)
+            self.assertEqual(s.errors,['bridge exit=7'])
+
+    def test_session_shutdown_selects_unbounded_capture_drain(self):
+        from continuous_mapping_session import Session
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);state=root/'state';state.mkdir();out=root/'run';out.mkdir()
+            s=Session({'environment':{},'calibration':'unused','camera':'unused'},state,out,os.getpid())
+            s.request_stop()
+            with patch.object(s,'spawn'),patch.object(s,'close_child') as close,patch('continuous_mapping_session.shutil.disk_usage',return_value=type('Usage',(),{'free':100*1024**3})()):
+                s.run()
+            self.assertEqual(close.call_args_list[0].args,('bridge',None))
+
+    def test_light_handoff_requires_runtime_tmpfs_without_relaxing_freshness(self):
+        from render_continuous_entry import render
+        repo=Path(__file__).resolve().parents[1]
+        _,wrapper=render(Path('/tmp/frozen-map'),'a'*64,'b'*64,(repo/'launch/candidate_receipt_resume/run_water_mapping_with_light.sh').read_text(),'c'*64)
+        self.assertIn('check_light_state startup --max-age 2 --quiet',wrapper)
+        self.assertIn('control_state_dir="$control_runtime_root/wbrov_mapping_light"',wrapper)
+        function=wrapper[wrapper.index('check_runtime_light_root() {'):wrapper.index('check_directory_readonly() {')]
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp);link=path/'link';link.symlink_to(path,target_is_directory=True)
+            for root,fs,owner,expected in [(path,'tmpfs',True,0),(path,'ext4',True,7),(path,'tmpfs',False,7),(link,'tmpfs',True,7),(path/'missing','tmpfs',True,7)]:
+                script=function+'''\nfail() { exit 7; }
+stat() { printf '%s\\n' "$fs"; }
+check_directory_readonly() { [[ "$owner" == yes ]] || fail; }
+check_runtime_light_root
+'''
+                q=subprocess.run(['/usr/bin/bash','-c',script],env=dict(os.environ,control_runtime_root=str(root),fs=fs,owner='yes' if owner else 'no'),capture_output=True,text=True,timeout=5)
+                self.assertEqual(q.returncode,expected,(root,fs,owner,q.stderr))
 
     def test_renderer_keeps_teleop_exit_before_unbounded_mapping_drain(self):
         from render_continuous_entry import render

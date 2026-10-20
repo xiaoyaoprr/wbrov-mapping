@@ -1,0 +1,1 @@
+{"source_ns":123,"input_present":true,"usable":false,"lost":false,"finite_motion":true,"dimensions_valid":true,"covariance_finite_pd":true,"covariance_valid":false,"visual_geometry":true,"depth_geometry":false,"measured_registration":false,"recovery_geometry":false,"measured_interval_ns":0,"reason":"covariance, invalid \"axis\"\u000anext"}

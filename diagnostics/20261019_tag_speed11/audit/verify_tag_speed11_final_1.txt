@@ -1,0 +1,24 @@
+{"candidate_pins_verified": true, "tag_detection_enabled": true, "diagnostic_preload_absent": true, "production_dispatcher_sha256": "d1581976c17bc6a68b32aa45ff4eac73c7ec3930b392b79e04c82b6061a6436a", "production_pins_unchanged": true, "active_mapping_processes": [], "controller_socket": "", "free_gib": 43.53715515136719, "field_acceptance": false}
+result.json {
+  "scope": "RViz display of Tag-enabled candidate11 saved recovery replay; historical data only, no live camera or robot control",
+  "hardware_started": false,
+  "render_ready": true,
+  "screenshot_exit": 0,
+  "screenshot_error": "",
+  "subprocess_exit_codes": [
+    0,
+    0
+  ]
+}
+publisher.log [INFO] [1791775388.896509984] [wbrov_deferred_map_display]: verified recorded cloud published: points=89679 sha256=199d4d5f47b7295a087cbe7800fdcc65abeb7b4cbf2a11b7b3ea21f209ec17f8
+[INFO] [1791775388.907009312] [wbrov_deferred_map_display]: verified overlays published: tags=2 trajectory_edges=97 recorded_pose=168
+
+rviz.log [INFO] [1791775388.028920832] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [1791775388.029528608] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[INFO] [1791775388.091946976] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [1791775388.435632608] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [1791775388.457452736] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [1791775390.377682848] [rviz2]: [WBROV_RVIZ_RENDER_READY] attempt=0
+[rviz_rendering:info] Forcing Stereo OFF, at ./src/rviz_rendering/render_system.cpp:155
+[INFO] [1791775395.279157024] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+

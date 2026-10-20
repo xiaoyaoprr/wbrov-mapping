@@ -4,6 +4,7 @@
 #include <rtabmap/core/Memory.h>
 #include <rtabmap/core/Odometry.h>
 #include "NativeMappingEvidence.h"
+#include "MappingQualityTrace.h"
 #include "RecordedCloudCache.h"
 #include "RecordedCloudAssembly.h"
 #include "RecordedCloudSamples.h"
@@ -50,14 +51,14 @@ public:
         limits_.maxNewRigidZError=.02f;limits_.maxNewRigidTiltError=2;
         limits_.maxGravityResidualIncrease=.5f;limits_.maxInformationCondition=1e8;
         trace_.open(output_/"frames.csv");
-        trace_<<"source_ns,lost,inliers,matches,usable,epoch,cuts,main_write,main_nodes,local_nodes,recoveries,input_present,reason\n";
+        trace_<<"source_ns,lost,inliers,matches,usable,epoch,cuts,main_write,main_nodes,local_nodes,recoveries,input_present,reason,quality_reason,finite_motion,dimensions_valid,covariance_finite_pd,covariance_valid,visual_geometry,depth_geometry,measured_registration,recovery_geometry,recovery_route\n";
     }
     ~DeferredMappingSession(){try {close();}catch(...) {}}
     // Missing input is not a measured odometry failure. Write no point/pose for
     // it. Let the SAME source-gap/freshness rules and next measured VO interval
     // decide continuity, just as the live camera's missing-IMU return does.
     void missing(long long source,const std::string &reason) {
-        currentInputPresent_=false;advance(source);Gate::Evidence e;e.qualityReason=reason;
+        currentInputPresent_=false;currentTags_.clear();advance(source);Gate::Evidence e;e.qualityReason=reason;
         gate_.tick(source,source);++missing_;reason_=reason;
         trace({},e);writeStatus("processing");
     }
@@ -100,7 +101,7 @@ public:
             pending_=false;observations_.clear();gate_.rejectAlignment("recorded candidate lost its source chain");
         }
         if(e.usable() && !pose.isNull() && (!jumpUntil_ || (source>=jumpUntil_ && jumpSamples_>=3)) &&
-           gate_.localGeometryReady(source,source,source)) {
+           gate_.frameProcessingReady(core_.getResetEpoch(),core_.isCurrentMapFrameRegistered(),source,source,source)) {
             jumpUntil_=0;
             if(written_ && serial!=writtenSerial_ && writtenEpoch_==core_.getResetEpoch()) {
                 pending_=false;observations_.clear();
@@ -181,7 +182,9 @@ private:
         if(!processed) {reason_=why;return;}
         written_=true;writtenSerial_=serial;writtenEpoch_=core_.getResetEpoch();lastLocal_=core_.getLastLocationId();
         AcceptedImageReceipt receipt;
-        if(core_.getAcceptedImageReceipt(lastLocal_,receipt) && receipt.input.headerStampNs==source_) {
+        const bool ownedRetainedInput=core_.getAcceptedImageReceipt(lastLocal_,receipt) &&
+            receipt.resetEpoch==core_.getResetEpoch();
+        if(ownedRetainedInput && receipt.input.headerStampNs==source_) {
             lastAcceptedPose_=pose;
             for(auto tag:currentTags_) {
                 if(tag.imageSha256!=receipt.input.pixelSha256 || !receiptHex(tag.pixelRecordSha256,64) || tag.tagId<0)
@@ -197,13 +200,65 @@ private:
             lastTrusted_=lastLocal_;verifiedThrough_=source_;
         } else if(!core_.isCurrentMapFrameRegistered() && current(gate_.ticket(source_))) {
             const auto preparation=gate_.ticket(source_);Transform proposed;
-            pendingTag_=prepareTag(preparation,proposed,why);
-            if((pendingTag_ || core_.prepareVisualRecoveryWithAcceptedImages(limits_,context_,[&]{return current(preparation);},proposed,why)) &&
+            tagReason_="no Tag has three independent main and current references";
+            pendingTag_=prepareTag(preparation,proposed,tagReason_);
+            if(serial!=gate_.localContinuitySerial()) {reason_=tagReason_;return;}
+            recoveryRoute_=pendingTag_?"tag_depth_corners":"visual_keyframes";recoveryAttemptNs_=source_;
+            // Tag absence/insufficient binding NEVER gates visual recovery.
+            // Keep both rejection reasons; a Tag-only message must not hide
+            // the old-keyframe search that actually ran on this frame.
+            bool prepared=pendingTag_;why=tagReason_;
+            if(!prepared) {
+                // A private epoch's first keyframe can be retained before its
+                // continuity ticket becomes ready. Search that owned keyframe
+                // once when ready, even if this frame kept the same pixels.
+                // Only an actual search marks it visited; frame arrival does not.
+                // Core rechecks the receipt, epoch and source context itself.
+                // getLastLocationId() is the newest GENERATED id; small-motion
+                // nodes may already be removed. Use the actual retained image,
+                // exactly as Core's candidate search does.
+                const Signature * search=core_.getMemory()->getLastWorkingSignature(false);
+                AcceptedImageReceipt searchReceipt;
+                if(search && search->id()!=lastVisualSearchId_ &&
+                   core_.getAcceptedImageReceipt(search->id(),searchReceipt) &&
+                   searchReceipt.resetEpoch==core_.getResetEpoch()) {
+                    ++visualSearchCalls_;
+                    core_.collectTrustedVisualRecoveryCandidates(context_,visualSearchReason_);
+                    lastVisualSearchId_=search->id();
+                    if(searchReceipt.input.headerStampNs!=source_) {
+                        ++visualSearchDeferredRetained_;
+                        UWARN("recorded deferred retained-keyframe search source_ns=%lld image_ns=%lld epoch=%llu node=%d reason=%s",
+                            source_,(long long)searchReceipt.input.headerStampNs,(unsigned long long)core_.getResetEpoch(),
+                            search->id(),visualSearchReason_.c_str());
+                    }
+                } else ++visualSearchDuplicateSkips_;
+                prepared=core_.prepareVisualRecoveryWithAcceptedImages(limits_,context_,[&]{return current(preparation);},proposed,why);
+                if(!prepared && isolateRejectedRecoveryMotion(why)) {reason_=why;return;}
+            }
+            if(prepared &&
                gate_.beginCandidateObservation(preparation,core_.getResetEpoch(),source_,source_)) {
                 pending_=true;pendingTicket_=preparation;pendingSerial_=serial;seed_=lastCorrection_=proposed;observations_.clear();
             }
         }
         reason_=why;
+    }
+    bool isolateRejectedRecoveryMotion(const std::string &reason) {
+        // Match the live adapter: text only requests an independent raw check.
+        // A failed loop/Tag match cannot authorize a reset or a main-map write.
+        if(reason.find("submap continuity ")!=0 ||
+           reason.find(" raw motion disagrees with its odometry or measured neighbor edge")==std::string::npos)
+            return false;
+        Rtabmap::RecoveryLocalMotionFault fault;
+        if(!core_.findRecoveryLocalMotionFault(limits_,fault) ||
+           fault.resetEpoch!=core_.getResetEpoch() || fault.fromId<=0 ||
+           fault.toId<=fault.fromId || core_.isCurrentMapFrameRegistered())return false;
+        pending_=false;observations_.clear();
+        gate_.invalidate("raw RGB-D confirms inconsistent local motion; isolate segment before retry");
+        UWARN("recorded recovery local motion fault source_ns=%lld epoch=%llu from=%d to=%d; old segment retained isolated",
+            source_,(unsigned long long)fault.resetEpoch,fault.fromId,fault.toId);
+        // consume() opens the next isolated epoch only on a fresh usable frame.
+        // Keep all prior graph/receipts, the frozen main map and strict gates.
+        return true;
     }
     std::vector<int> independentTagNodes(const std::map<int,AcceptedTagCornerObservation> &nodes,
             const std::map<int,Transform> &poses,bool currentEpoch) const {
@@ -249,6 +304,7 @@ private:
                tagReceipts_,tagCorners_,context_,[&]{return current(ticket);},proposed,why);
             UWARN("recorded Tag preparation source_ns=%lld epoch=%llu tag=%d accepted=%d reason=%s",source_,(unsigned long long)core_.getResetEpoch(),tag.first,prepared?1:0,why.c_str());
             if(prepared)return true;
+            if(isolateRejectedRecoveryMotion(why))return false;
         }
         return false;
     }
@@ -268,6 +324,8 @@ private:
         const bool ok=core_.isCurrentMapFrameRegistered() ?
             core_.validateRegisteredMapObservation(data,pose,lastTrusted_,limits_,measured,why,&d):
             core_.validateLocalMapObservation(data,pose,lastLocal_,limits_,measured,why,&d);
+        recoveryRoute_="visual_keyframes";recoveryAttemptNs_=source_;
+        observationDiagnostic_=d;observationDiagnosticNs_=source_;
         reason_=why;
         if(!ok && d.tested>0 && !d.predictionRejected && !d.agreementRejected && !d.firstAnchor && !d.secondAnchor) {
             gate_.waitForRegisteredMapObservation(ticket,epoch,source_,source_);return;
@@ -304,7 +362,10 @@ private:
             core_.commitVisualRecoveryWithObservedAlignment(limits_,context_,certificate,why);
         if(committed) {
             gate_.candidateCommitted(pendingTicket_,epoch,core_.isCurrentMapFrameRegistered(),source_,source_);++recoveries_;
-        } else gate_.rejectAlignment(why.c_str());
+        } else {
+            gate_.rejectAlignment(why.c_str());
+            isolateRejectedRecoveryMotion(why);
+        }
         pending_=false;observations_.clear();reason_=why;
     }
     std::map<int,Transform> mainPoses() const {
@@ -316,12 +377,14 @@ private:
     }
     void exportTags() {
         const auto poses=mainPoses();std::ofstream out(output_/"tags.tmp");
-        out<<"{\"historical_only\":true,\"frame_id\":\"deferred_map\",\"tags\":[";
+        out<<"{\"historical_only\":true,\"frame_id\":\"deferred_map\",\"processed_source_ns\":"<<source_<<",\"tags\":[";
+        mainTagCount_=0;readyTagCount_=0;
         bool comma=false;
         for(const auto &tag:tags_) {
             const auto independent=independentTagNodes(tag.second,poses,false);
             int count=0;for(const auto &node:tag.second)if(poses.count(node.first))++count;
             if(!count)continue;
+            ++mainTagCount_;if(independent.size()>=3)++readyTagCount_;
             if(comma)out<<',';
             comma=true;
             out<<"{\"tag_id\":"<<tag.first<<",\"distinct_main_nodes\":"<<count<<",\"independent_references\":"<<independent.size()<<",\"required_references\":3";
@@ -464,10 +527,15 @@ private:
     }
     void trace(const OdometryInfo &info,const Gate::Evidence &e) {
         const auto s=gate_.snapshot(source_,source_);
+        qualityJson_=mappingQualityJson(source_,currentInputPresent_,e);
+        if(currentInputPresent_ && !e.usable()){lastFailedQualityJson_=qualityJson_;++qualityFailures_;}
         std::string why=s.reason+"; "+reason_;for(char &c:why)if(c==',' || c=='\n' || c=='\r')c=' ';
         trace_<<source_<<','<<info.lost<<','<<info.reg.inliers<<','<<info.reg.matches<<','<<e.usable()<<','<<core_.getResetEpoch()<<','
             <<s.cutCount<<','<<(currentInputPresent_ && s.mainMapWriteAllowed)<<','<<mainPoses().size()<<','<<core_._optimizedPoses.size()<<','<<recoveries_
-            <<','<<currentInputPresent_<<','<<why<<'\n';
+            <<','<<currentInputPresent_<<','<<why<<','<<diagnosticCsvString(e.qualityReason)
+            <<','<<e.finiteMotion<<','<<e.dimensionsValid<<','<<e.covarianceFinitePD<<','<<e.covarianceValid
+            <<','<<e.visualGeometry<<','<<e.depthGeometry<<','<<e.measuredRegistration<<','<<e.recoveryGeometry
+            <<','<<recoveryRoute_<<'\n';
     }
     void writeStatus(const char *state) {
         const auto s=gate_.snapshot(source_,source_);const auto temporary=output_/"status.tmp";
@@ -489,6 +557,20 @@ private:
             <<",\"redundant_core_frames_deferred\":"<<redundantCoreFrames_
             <<",\"continuity_state\":\""<<Gate::stateName(s.state)<<"\",\"main_map_write_allowed\":"<<(currentInputPresent_ && s.mainMapWriteAllowed?"true":"false")
             <<",\"input_present\":"<<(currentInputPresent_?"true":"false")
+            <<",\"quality\":"<<qualityJson_<<",\"last_failed_quality\":"<<lastFailedQualityJson_<<",\"quality_failures\":"<<qualityFailures_
+            <<",\"recovery_route\":"<<diagnosticJsonString(recoveryRoute_)<<",\"recovery_attempt_source_ns\":"<<recoveryAttemptNs_
+            <<",\"recovery_reason\":"<<diagnosticJsonString(reason_)<<",\"tag_recovery_reason\":"<<diagnosticJsonString(tagReason_)
+            <<",\"visual_candidate_search\":"<<diagnosticJsonString(visualSearchReason_)
+            <<",\"visual_candidate_deferred_retained_searches\":"<<visualSearchDeferredRetained_
+            <<",\"visual_candidate_search_calls\":"<<visualSearchCalls_<<",\"visual_candidate_duplicate_skips\":"<<visualSearchDuplicateSkips_
+            <<",\"detected_tags_in_processed_frame\":"<<currentTags_.size()
+            <<",\"main_tag_count_at_checkpoint\":"<<mainTagCount_<<",\"ready_tag_count_at_checkpoint\":"<<readyTagCount_
+            <<",\"observation_diagnostic\":{\"source_ns\":"<<observationDiagnosticNs_
+            <<",\"references\":"<<observationDiagnostic_.references<<",\"nearby\":"<<observationDiagnostic_.nearby
+            <<",\"tested\":"<<observationDiagnostic_.tested<<",\"matched\":"<<observationDiagnostic_.matched
+            <<",\"raw_rejected\":"<<observationDiagnostic_.rawRejected<<",\"baseline_rejected\":"<<observationDiagnostic_.baselineRejected
+            <<",\"prediction_rejected\":"<<observationDiagnostic_.predictionRejected<<",\"agreement_rejected\":"<<observationDiagnostic_.agreementRejected
+            <<",\"global_search\":"<<(observationDiagnostic_.globalSearch?"true":"false")<<'}'
             <<",\"observation_count\":"<<s.mapObservationCount<<",\"observation_required\":"<<Gate::MAP_OBSERVATIONS
             <<",\"epoch\":"<<(closed_?closedEpoch_:core_.getResetEpoch())<<",\"cuts\":"<<s.cutCount<<",\"recoveries\":"<<recoveries_
             <<",\"main_nodes\":"<<(closed_?closedMainNodes_:mainPoses().size())<<",\"cloud_points\":"<<points_<<",\"database_closed\":"<<(closed_?"true":"false")<<",\"core_timings_ms\":{";
@@ -505,6 +587,12 @@ private:
     bool currentInputPresent_=false;
     int lastTrusted_=0,lastLocal_=0;Gate::Ticket pendingTicket_{};Transform seed_,lastCorrection_,previousPose_;
     std::vector<std::pair<Transform,Transform>> observations_;std::string reason_;
+    std::string qualityJson_="null",lastFailedQualityJson_="null",recoveryRoute_="none",tagReason_,visualSearchReason_;
+    std::uint64_t qualityFailures_=0,mainTagCount_=0,readyTagCount_=0;
+    int lastVisualSearchId_=0;
+    std::uint64_t visualSearchCalls_=0,visualSearchDuplicateSkips_=0,visualSearchDeferredRetained_=0;
+    long long recoveryAttemptNs_=0,observationDiagnosticNs_=0;
+    Rtabmap::RecoveryObservationDiagnostics observationDiagnostic_;
     std::vector<AcceptedTagCornerObservation> currentTags_,tagCorners_;
     std::map<int,std::map<int,AcceptedTagCornerObservation>> tags_;
     std::vector<AcceptedImageReceipt> tagReceipts_;std::vector<Link> tagLinks_;
