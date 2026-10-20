@@ -1,0 +1,128 @@
+{
+  "phase": "completed",
+  "scope": "independent candidate package only; same Core20/Tag+visual recovery, narrow export index worker41; no hardware or production switch",
+  "steps": [
+    {
+      "name": "worker_ldd",
+      "seconds": 1.5681124480906874,
+      "exit_code": 0,
+      "command": [
+        "ldd",
+        "-r",
+        "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate42_voxel/bin/wbrov_replay_worker"
+      ]
+    },
+    {
+      "name": "test_deferred_mapping",
+      "seconds": 0.36536688008345664,
+      "exit_code": 0,
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_deferred_mapping.py"
+      ]
+    },
+    {
+      "name": "test_continuous_mapping_session",
+      "seconds": 2.170593791990541,
+      "exit_code": 0,
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_continuous_mapping_session.py"
+      ]
+    },
+    {
+      "name": "test_deferred_display_state",
+      "seconds": 0.11511033598799258,
+      "exit_code": 0,
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_deferred_display_state.py"
+      ]
+    },
+    {
+      "name": "test_deferred_recorded_pixels",
+      "seconds": 0.4161624319385737,
+      "exit_code": 0,
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_deferred_recorded_pixels.py"
+      ]
+    },
+    {
+      "name": "entry_check_only",
+      "seconds": 0.26600278401747346,
+      "exit_code": 0,
+      "command": [
+        "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate42_voxel/start_rtabmap_continuous.sh",
+        "--check-only"
+      ]
+    },
+    {
+      "name": "test_ldd",
+      "seconds": 0.06535564793739468,
+      "exit_code": 0,
+      "command": [
+        "ldd",
+        "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/test_visual"
+      ]
+    },
+    {
+      "name": "core_visual",
+      "seconds": 44.44134278409183,
+      "exit_code": 0,
+      "command": [
+        "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/test_visual",
+        "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/candidate42_package_validation/fixture_visual"
+      ]
+    },
+    {
+      "name": "core_tag",
+      "seconds": 5.531740608043037,
+      "exit_code": 0,
+      "command": [
+        "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/round6_recovery9_build/test_visual",
+        "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/candidate42_package_validation/fixture_tag",
+        "--tag-depth-proposal"
+      ]
+    }
+  ],
+  "package": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate42_voxel",
+  "core_sha256": "7bed7a7da1178a2f33121408091cc789fbcc085be51108d8bf22c2ad065a310a",
+  "entry_sha256": "506f49ff77c0e68623a03d07c688aa52405237e975f04be2bc9cc316912ad908",
+  "worker_sha256": "489980de6f910aacd4319d400ffa6b1a7796955ed860cb2d57d496334efe165f",
+  "camera_sha256": "a74d9969aa6c3380524830b7ddca0026c10e77ea0164288414709619ce17ec06",
+  "wrapper_sha256": "857be9849043d5201d8d3180a4c7c38ee4fef83b2d3997261f9659ff7b0f8501",
+  "tag_detection_enabled": true,
+  "source_file_content_preserved": true,
+  "production_changed": false,
+  "field_acceptance": false,
+  "free_gib": 34.152565002441406
+}

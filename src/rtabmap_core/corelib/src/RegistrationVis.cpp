@@ -1092,7 +1092,9 @@ Transform RegistrationVis::computeTransformationImpl(
 							std::vector<cv::Point2f> pointsTo;
 							cv::KeyPoint::convert(kptsTo, pointsTo);
 							rtflann::Matrix<float> pointsToMat((float*)pointsTo.data(), pointsTo.size(), 2);
-							index.radiusSearch(pointsToMat, indices, dists, radius*radius, rtflann::SearchParams());
+							rtflann::SearchParams projectionSearch(32, 0, true);
+							projectionSearch.cores = 2;
+							index.radiusSearch(pointsToMat, indices, dists, radius*radius, projectionSearch);
 
 							UASSERT(indices.size() == pointsToMat.rows);
 							UASSERT(descriptorsFrom.cols == descriptorsTo.cols);
@@ -1237,7 +1239,9 @@ Transform RegistrationVis::computeTransformationImpl(
 							std::vector<std::vector<float> > dists;
 							float radius = (float)_guessWinSize; // pixels
 							rtflann::Matrix<float> cornersProjectedMat((float*)cornersProjected.data(), cornersProjected.size(), 2);
-							index.radiusSearch(cornersProjectedMat, indices, dists, radius*radius, rtflann::SearchParams(32, 0, false));
+							rtflann::SearchParams projectionSearch(32, 0, false);
+							projectionSearch.cores = 2;
+							index.radiusSearch(cornersProjectedMat, indices, dists, radius*radius, projectionSearch);
 
 							UASSERT(indices.size() == cornersProjectedMat.rows);
 							UASSERT(descriptorsFrom.cols == descriptorsTo.cols);

@@ -1,0 +1,44 @@
+{
+  "schema": "wbrov.tested-speed42-source-binding.v1",
+  "core_sha256": "7bed7a7da1178a2f33121408091cc789fbcc085be51108d8bf22c2ad065a310a",
+  "worker_sha256": "489980de6f910aacd4319d400ffa6b1a7796955ed860cb2d57d496334efe165f",
+  "entry_sha256": "506f49ff77c0e68623a03d07c688aa52405237e975f04be2bc9cc316912ad908",
+  "source_changes": [
+    {
+      "source": "core/RegistrationVis.cpp",
+      "target": "src/rtabmap_core/corelib/src/RegistrationVis.cpp",
+      "new_sha256": "efd310136c61bf10482edec079322379d904416db9fbb3bea059c788b6e8aa82",
+      "old_sha256": "4d32b793662ad69f6240aca7f8c9addb5e271edfbf8c90dac93c688db36d4ddc",
+      "only_line_endings": false,
+      "repository_sha256": "46b6efb024ffef2b7ae7fded4f67b23580ee1a16f7e8975c3dee700a1382ec93",
+      "compiled_source_sha256": "efd310136c61bf10482edec079322379d904416db9fbb3bea059c788b6e8aa82",
+      "repository_uses_original_line_endings": true
+    },
+    {
+      "source": "worker/NarrowVoxel40.h",
+      "target": "src/deferred_mapping/NarrowVoxel40.h",
+      "new_sha256": "845948a67c329af532837b9d5ef107d4dcb8c79759a96ae9a7c0f4ded5e8c8ae",
+      "old_sha256": null,
+      "only_line_endings": false,
+      "repository_sha256": "845948a67c329af532837b9d5ef107d4dcb8c79759a96ae9a7c0f4ded5e8c8ae",
+      "compiled_source_sha256": "845948a67c329af532837b9d5ef107d4dcb8c79759a96ae9a7c0f4ded5e8c8ae",
+      "repository_uses_original_line_endings": false
+    },
+    {
+      "source": "worker/RecordedVoxelCloud.h",
+      "target": "src/deferred_mapping/RecordedVoxelCloud.h",
+      "new_sha256": "0e9661bc83a5f97f671197c4880ce38f2842ece7518be488a5d8ac601ff0ca4d",
+      "old_sha256": "f87fca3d89c234ac754417c6445ce0264c495963da3c4b38bd2c03490096e33d",
+      "only_line_endings": false,
+      "repository_sha256": "0e9661bc83a5f97f671197c4880ce38f2842ece7518be488a5d8ac601ff0ca4d",
+      "compiled_source_sha256": "0e9661bc83a5f97f671197c4880ce38f2842ece7518be488a5d8ac601ff0ca4d",
+      "repository_uses_original_line_endings": false
+    }
+  ],
+  "other_exact_repository_source_matches": 80,
+  "source_archive_sha256": "56936caa4d7017983075ad8d85bb2d8fdf1b5ecdf208168c7baab33245fb1bac",
+  "source_archive_scope": "actual candidate42 scripts/config, Core20 RegVis and worker41 build directory sources; not a reproducible full dependency bundle",
+  "worker_auxiliary_raw_svo_header_not_applied": "raw_svo_recording.hpp in copied worker source directory is older and is not included by replay_worker.cpp; preserve current camera7 source and journal limits",
+  "field_acceptance": false,
+  "production_switch_record": "pending"
+}

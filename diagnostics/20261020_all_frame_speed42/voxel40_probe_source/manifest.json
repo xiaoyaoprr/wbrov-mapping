@@ -1,0 +1,9 @@
+{
+  "scope": "export-only narrow index microprobe; full signed keys/point bits/winner/iteration/hash/load factor retained; automatic size_t fallback; original mapping runtime unchanged",
+  "original_voxel_sha256": "f87fca3d89c234ac754417c6445ce0264c495963da3c4b38bd2c03490096e33d",
+  "files": {
+    "benchmark.cpp": "253a5684387152360e837005841d69d2a4949f552de3ea1bdbc44b0c99b60a30",
+    "NarrowVoxel40.h": "845948a67c329af532837b9d5ef107d4dcb8c79759a96ae9a7c0f4ded5e8c8ae",
+    "voxel40_correctness.cpp": "b28fa0d180287086d2de8d7b306fee25140001a7e4d05da11a4854da7af00819"
+  }
+}
