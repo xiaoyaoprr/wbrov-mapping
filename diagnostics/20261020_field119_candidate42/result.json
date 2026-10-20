@@ -1,0 +1,82 @@
+{
+  "startup_seconds": 20.11053820804227,
+  "wrapper_exit": 0,
+  "entry_errors": [],
+  "child_exits": {
+    "bridge": 0,
+    "processing": 0,
+    "graph_display": 0,
+    "rviz": 0,
+    "recording_verify": 0
+  },
+  "all_frames": 9771,
+  "source_seconds": 469.128316,
+  "all_input_stamps_equal": true,
+  "save_hashes_match": true,
+  "database_check": "ok",
+  "raw_svo_verified": true,
+  "tag_detection_enabled": true,
+  "source_gap_max_ms": 11649.451,
+  "source_gaps_over_300ms": 43,
+  "spool": {
+    "schema": "wbrov.rgbd-spool.v1",
+    "state": "closed",
+    "clean_shutdown": true,
+    "sealed_segments": 375,
+    "durable_segments": 375,
+    "last_source_ns": 1791850704772529000,
+    "frames": 9771,
+    "navigation_authorized": false,
+    "queue_depth": 0,
+    "queue_high_water": 64,
+    "accepted_frames": 9771,
+    "producer_waits": 54,
+    "producer_wait_ms": 87265,
+    "producer_max_wait_ms": 11607.6,
+    "pending_segments": 0,
+    "pending_bytes": 0,
+    "pending_high_water_bytes": 2147286078,
+    "pending_byte_limit": 2147483648,
+    "pending_segment_limit": 128,
+    "pending_storage": "compressed_ram",
+    "pending_bytes_accounting": "capacity_including_inflight"
+  },
+  "fsync_max_ms": 14311.2,
+  "commit_max_ms": 22383.3,
+  "final_continuity": "RECOVERING",
+  "final_main_write": false,
+  "main_nodes": 85,
+  "cloud_points": 66796,
+  "cuts": 217,
+  "recoveries": 0,
+  "controller_socket_released": true,
+  "tags": [
+    {
+      "tag_id": 8,
+      "distinct_main_nodes": 57,
+      "independent_references": 3,
+      "required_references": 3,
+      "position": [
+        -0.260992,
+        0.155644,
+        0.00677159
+      ]
+    },
+    {
+      "tag_id": 13,
+      "distinct_main_nodes": 7,
+      "independent_references": 3,
+      "required_references": 3,
+      "position": [
+        -0.395745,
+        -0.389279,
+        -0.746891
+      ]
+    }
+  ],
+  "recovery_and_continuation_passed": false,
+  "scope": "Real candidate42 camera, operator motion and one occlusion. No assistant propulsion command. Not underwater accuracy or navigation validation.",
+  "field_passed": false,
+  "deployed_to_entry8": false,
+  "important_boundary": "Every captured frame was consumed; acquisition itself had 43 long gaps. These are distinct completeness conditions."
+}
