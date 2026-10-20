@@ -1,0 +1,30 @@
+{
+  "phase": "completed",
+  "steps": [
+    {
+      "label": "compile",
+      "exit": 0,
+      "seconds": 47.84386342403013
+    },
+    {
+      "label": "link",
+      "exit": 0,
+      "seconds": 3.9783711039926857
+    },
+    {
+      "label": "bindings",
+      "exit": 0,
+      "seconds": 0.5667617599247023
+    },
+    {
+      "label": "two_named_pairs",
+      "exit": 0,
+      "seconds": 0.9174646720057353
+    }
+  ],
+  "scope": "two named failing closed-map pairs, one fresh solve each; read only; no production change",
+  "database_sha256": "340585eb12389fc436e432be5f9ea073efffdb745d86756aafd2d0f97e8591a5",
+  "source_unchanged": true,
+  "production_changed": false,
+  "important_boundary": "One fresh solve per named pair in the closed field map. This is not the same random state as the live run, and is not end-to-end field acceptance."
+}

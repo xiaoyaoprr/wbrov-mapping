@@ -16,5 +16,15 @@
   "cleanup_released_bytes": 160701583360,
   "data_fsync_max_ms": 14311.2,
   "receipt_fsync_max_ms": 19435.6,
-  "no_trim_repair_or_reboot_performed": true
+  "no_trim_repair_or_reboot_performed": true,
+  "after_capture_stopped": {
+    "critical_warning": 0,
+    "temperature": 327,
+    "temperature_sensor_1": 327,
+    "temperature_sensor_2": 353,
+    "media_errors": 2,
+    "num_err_log_entries": 0
+  },
+  "fan_rpm_verified": false,
+  "fan_power_or_clock_settings_changed": false
 }
