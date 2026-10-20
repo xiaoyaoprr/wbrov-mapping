@@ -1,0 +1,8 @@
+CASE 0 accepted=1 reason=final_metric_count=100/25 original_count=100 original_rms=0.000000/0.018000 rms=0.000000/0.018000 max=0.000000/0.025000
+CASE 1 accepted=1 reason=final_metric_count=100/25 original_count=100 original_rms=0.000000/0.018000 rms=0.000000/0.018000 max=0.000000/0.025000
+CASE 2 accepted=0 reason=gravity-aligned fit has no observable yaw
+CASE 3 accepted=0 reason=insufficient_original_unique_support
+CASE 4 accepted=0 reason=final_metric_count=70/25 original_count=100 original_rms=0.041715/0.018000 rms=0.004212/0.018000 max=0.004407/0.025000
+CASE 5 accepted=0 reason=gravity-aligned fit disagrees with raw six-axis registration
+CASE 6 accepted=0 reason=invalid gravity-aligned fit frame
+PASS 7 gravity-aligned metric cases

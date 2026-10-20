@@ -181,9 +181,10 @@ private:
                 coreTimings_[stat.first]+=stat.second;
         if(!processed) {reason_=why;return;}
         written_=true;writtenSerial_=serial;writtenEpoch_=core_.getResetEpoch();lastLocal_=core_.getLastLocationId();
-        AcceptedImageReceipt receipt;bool retainedCurrentInput=false;
-        if(core_.getAcceptedImageReceipt(lastLocal_,receipt) && receipt.input.headerStampNs==source_) {
-            retainedCurrentInput=true;
+        AcceptedImageReceipt receipt;
+        const bool ownedRetainedInput=core_.getAcceptedImageReceipt(lastLocal_,receipt) &&
+            receipt.resetEpoch==core_.getResetEpoch();
+        if(ownedRetainedInput && receipt.input.headerStampNs==source_) {
             lastAcceptedPose_=pose;
             for(auto tag:currentTags_) {
                 if(tag.imageSha256!=receipt.input.pixelSha256 || !receiptHex(tag.pixelRecordSha256,64) || tag.tagId<0)
@@ -201,20 +202,38 @@ private:
             const auto preparation=gate_.ticket(source_);Transform proposed;
             tagReason_="no Tag has three independent main and current references";
             pendingTag_=prepareTag(preparation,proposed,tagReason_);
+            if(serial!=gate_.localContinuitySerial()) {reason_=tagReason_;return;}
             recoveryRoute_=pendingTag_?"tag_depth_corners":"visual_keyframes";recoveryAttemptNs_=source_;
             // Tag absence/insufficient binding NEVER gates visual recovery.
             // Keep both rejection reasons; a Tag-only message must not hide
             // the old-keyframe search that actually ran on this frame.
             bool prepared=pendingTag_;why=tagReason_;
             if(!prepared) {
-                // A successful Core call may keep its previous keyframe. Its
-                // pixels have not changed, so do not solve the same six pairs
-                // again merely because another incoming frame was processed.
-                if(retainedCurrentInput) {
+                // A private epoch's first keyframe can be retained before its
+                // continuity ticket becomes ready. Search that owned keyframe
+                // once when ready, even if this frame kept the same pixels.
+                // Only an actual search marks it visited; frame arrival does not.
+                // Core rechecks the receipt, epoch and source context itself.
+                // getLastLocationId() is the newest GENERATED id; small-motion
+                // nodes may already be removed. Use the actual retained image,
+                // exactly as Core's candidate search does.
+                const Signature * search=core_.getMemory()->getLastWorkingSignature(false);
+                AcceptedImageReceipt searchReceipt;
+                if(search && search->id()!=lastVisualSearchId_ &&
+                   core_.getAcceptedImageReceipt(search->id(),searchReceipt) &&
+                   searchReceipt.resetEpoch==core_.getResetEpoch()) {
                     ++visualSearchCalls_;
                     core_.collectTrustedVisualRecoveryCandidates(context_,visualSearchReason_);
+                    lastVisualSearchId_=search->id();
+                    if(searchReceipt.input.headerStampNs!=source_) {
+                        ++visualSearchDeferredRetained_;
+                        UWARN("recorded deferred retained-keyframe search source_ns=%lld image_ns=%lld epoch=%llu node=%d reason=%s",
+                            source_,(long long)searchReceipt.input.headerStampNs,(unsigned long long)core_.getResetEpoch(),
+                            search->id(),visualSearchReason_.c_str());
+                    }
                 } else ++visualSearchDuplicateSkips_;
                 prepared=core_.prepareVisualRecoveryWithAcceptedImages(limits_,context_,[&]{return current(preparation);},proposed,why);
+                if(!prepared && isolateRejectedRecoveryMotion(why)) {reason_=why;return;}
             }
             if(prepared &&
                gate_.beginCandidateObservation(preparation,core_.getResetEpoch(),source_,source_)) {
@@ -222,6 +241,24 @@ private:
             }
         }
         reason_=why;
+    }
+    bool isolateRejectedRecoveryMotion(const std::string &reason) {
+        // Match the live adapter: text only requests an independent raw check.
+        // A failed loop/Tag match cannot authorize a reset or a main-map write.
+        if(reason.find("submap continuity ")!=0 ||
+           reason.find(" raw motion disagrees with its odometry or measured neighbor edge")==std::string::npos)
+            return false;
+        Rtabmap::RecoveryLocalMotionFault fault;
+        if(!core_.findRecoveryLocalMotionFault(limits_,fault) ||
+           fault.resetEpoch!=core_.getResetEpoch() || fault.fromId<=0 ||
+           fault.toId<=fault.fromId || core_.isCurrentMapFrameRegistered())return false;
+        pending_=false;observations_.clear();
+        gate_.invalidate("raw RGB-D confirms inconsistent local motion; isolate segment before retry");
+        UWARN("recorded recovery local motion fault source_ns=%lld epoch=%llu from=%d to=%d; old segment retained isolated",
+            source_,(unsigned long long)fault.resetEpoch,fault.fromId,fault.toId);
+        // consume() opens the next isolated epoch only on a fresh usable frame.
+        // Keep all prior graph/receipts, the frozen main map and strict gates.
+        return true;
     }
     std::vector<int> independentTagNodes(const std::map<int,AcceptedTagCornerObservation> &nodes,
             const std::map<int,Transform> &poses,bool currentEpoch) const {
@@ -267,6 +304,7 @@ private:
                tagReceipts_,tagCorners_,context_,[&]{return current(ticket);},proposed,why);
             UWARN("recorded Tag preparation source_ns=%lld epoch=%llu tag=%d accepted=%d reason=%s",source_,(unsigned long long)core_.getResetEpoch(),tag.first,prepared?1:0,why.c_str());
             if(prepared)return true;
+            if(isolateRejectedRecoveryMotion(why))return false;
         }
         return false;
     }
@@ -324,7 +362,10 @@ private:
             core_.commitVisualRecoveryWithObservedAlignment(limits_,context_,certificate,why);
         if(committed) {
             gate_.candidateCommitted(pendingTicket_,epoch,core_.isCurrentMapFrameRegistered(),source_,source_);++recoveries_;
-        } else gate_.rejectAlignment(why.c_str());
+        } else {
+            gate_.rejectAlignment(why.c_str());
+            isolateRejectedRecoveryMotion(why);
+        }
         pending_=false;observations_.clear();reason_=why;
     }
     std::map<int,Transform> mainPoses() const {
@@ -520,6 +561,7 @@ private:
             <<",\"recovery_route\":"<<diagnosticJsonString(recoveryRoute_)<<",\"recovery_attempt_source_ns\":"<<recoveryAttemptNs_
             <<",\"recovery_reason\":"<<diagnosticJsonString(reason_)<<",\"tag_recovery_reason\":"<<diagnosticJsonString(tagReason_)
             <<",\"visual_candidate_search\":"<<diagnosticJsonString(visualSearchReason_)
+            <<",\"visual_candidate_deferred_retained_searches\":"<<visualSearchDeferredRetained_
             <<",\"visual_candidate_search_calls\":"<<visualSearchCalls_<<",\"visual_candidate_duplicate_skips\":"<<visualSearchDuplicateSkips_
             <<",\"detected_tags_in_processed_frame\":"<<currentTags_.size()
             <<",\"main_tag_count_at_checkpoint\":"<<mainTagCount_<<",\"ready_tag_count_at_checkpoint\":"<<readyTagCount_
@@ -547,7 +589,8 @@ private:
     std::vector<std::pair<Transform,Transform>> observations_;std::string reason_;
     std::string qualityJson_="null",lastFailedQualityJson_="null",recoveryRoute_="none",tagReason_,visualSearchReason_;
     std::uint64_t qualityFailures_=0,mainTagCount_=0,readyTagCount_=0;
-    std::uint64_t visualSearchCalls_=0,visualSearchDuplicateSkips_=0;
+    int lastVisualSearchId_=0;
+    std::uint64_t visualSearchCalls_=0,visualSearchDuplicateSkips_=0,visualSearchDeferredRetained_=0;
     long long recoveryAttemptNs_=0,observationDiagnosticNs_=0;
     Rtabmap::RecoveryObservationDiagnostics observationDiagnostic_;
     std::vector<AcceptedTagCornerObservation> currentTags_,tagCorners_;

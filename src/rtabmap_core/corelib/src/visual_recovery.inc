@@ -1,5 +1,50 @@
 #include "recovery_geometry.inc"
 
+namespace {
+bool screenVisualRecoveryReference(SensorData currentData,SensorData oldData,
+        const Transform & currentPose,const Transform & oldPose,
+        const ParametersMap & parameters,std::string & reason)
+{
+    currentData.uncompressData();oldData.uncompressData();
+    if(!safeRigidTransform(currentPose) || !safeRigidTransform(oldPose) ||
+       currentData.imageRaw().empty() || currentData.depthRaw().empty() ||
+       oldData.imageRaw().empty() || oldData.depthRaw().empty() ||
+       currentData.cameraModels().size()!=1 || oldData.cameraModels().size()!=1)
+    {reason="candidate screen lacks raw observations or poses";return false;}
+    int minimum=25,configured=Parameters::defaultVisMinInliers();
+    Parameters::parse(parameters,Parameters::kRtabmapCrossMapLoopMinInliers(),minimum);
+    Parameters::parse(parameters,Parameters::kVisMinInliers(),configured);
+    minimum=std::max(25,std::max(minimum,configured));
+    float cap=Parameters::defaultVisInlierDistance();
+    Parameters::parse(parameters,Parameters::kVisInlierDistance(),cap);
+    if(!std::isfinite(cap) || cap<=0){reason="candidate screen invalid metric cap";return false;}
+    const double metricCap=std::min(.025,double(cap));
+    ParametersMap p=parameters;
+    p[Parameters::kRegStrategy()]="0";p[Parameters::kRegForce3DoF()]="false";
+    p[Parameters::kVisEstimationType()]="0";p[Parameters::kVisMinInliers()]=uNumber2Str(minimum);
+    p[Parameters::kVisInlierDistance()]=uNumber2Str(metricCap);
+    currentData.setFeatures({}, {},cv::Mat());oldData.setFeatures({}, {},cv::Mat());
+    Transform measured[2];
+    for(int direction=0;direction<2;++direction) {
+        Signature from(direction?oldData:currentData),to(direction?currentData:oldData);
+        std::unique_ptr<Registration> registration(Registration::create(p));
+        if(!registration || !registration->isImageRequired())
+        {reason="candidate screen raw registration unavailable";return false;}
+        RegistrationInfo info;
+        const Transform raw=registration->computeTransformationMod(from,to,Transform(),&info);
+        if(!safeRigidTransform(raw) || info.inliers<minimum)
+        {reason="candidate screen raw registration rejected: "+info.rejectedMsg;return false;}
+        if(!gravityAlignedMetricFit(from,to,direction?oldPose:currentPose,
+            direction?currentPose:oldPose,raw,info,minimum,metricCap,measured[direction],reason))return false;
+    }
+    if(measured[0].getDistance(measured[1].inverse())>.025 ||
+       measured[0].getAngle(measured[1].inverse())>2.0*M_PI/180.0)
+    {reason="candidate screen bidirectional fits disagree";return false;}
+    reason="raw metric/gravity candidate screen passed; not authorization";
+    return true;
+}
+}
+
 bool Rtabmap::collectTrustedVisualRecoveryCandidates(const AcceptedImageSourceContext & context,
         std::string & reason)
 {
@@ -17,40 +62,90 @@ bool Rtabmap::collectTrustedVisualRecoveryCandidates(const AcceptedImageSourceCo
     if(!current || !getAcceptedImageReceipt(current->id(),input) || input.resetEpoch!=_resetEpoch ||
        input.mapId!=current->mapId() || !_optimizedPoses.count(current->id()) || !sameSource(input))
     {reason="trusted candidate search requires current owned source receipt";return false;}
-    for(const auto & candidate:_crossMapLoopEvidence)if(candidate.newId==current->id()) {
-        reason="current observation already has a retained visual candidate";return true;
+    // Coarse native loop candidates may have entered the pool before raw
+    // bidirectional/gravity checks. Do not let one rejected old endpoint pin
+    // a valid current view forever. Reconsider that SAME authenticated current
+    // observation against bounded distinct references; never retry one pair
+    // until it passes and never grant registration here.
+    std::map<int,std::set<int>> failedPairs;
+    std::vector<int> searchSources;
+    auto ownedCurrent=[&](int id)->bool {
+        const Signature * signature=_memory->getSignature(id);AcceptedImageReceipt receipt;
+        return signature && _optimizedPoses.count(id) && getAcceptedImageReceipt(id,receipt) &&
+            receipt.resetEpoch==_resetEpoch && receipt.mapId==current->mapId() &&
+            receipt.mapId==signature->mapId() && sameSource(receipt);
+    };
+    auto screen=[&](int sourceId,int oldId,std::string & why)->bool {
+        const Signature * old=_memory->getSignature(oldId);AcceptedImageReceipt receipt;
+        const auto epoch=getSignatureResetEpoch(oldId);
+        if(!ownedCurrent(sourceId) || !old || !_safeRelocalizationTrustedPoses.count(oldId) ||
+           epoch>=_resetEpoch || (epoch!=0 && !_safeRelocalizationCommittedEpochs.count(epoch)) ||
+           !getAcceptedImageReceipt(oldId,receipt) || receipt.resetEpoch!=epoch ||
+           receipt.mapId!=old->mapId() || !sameSource(receipt))
+        {why="candidate screen endpoint ownership mismatch";return false;}
+        return screenVisualRecoveryReference(_memory->getNodeData(sourceId,true,false,false,false),
+            _memory->getNodeData(oldId,true,false,false,false),_optimizedPoses.at(sourceId),
+            _safeRelocalizationTrustedPoses.at(oldId),_parameters,why);
+    };
+    // At most three retained pairs and six distinct alternatives per source.
+    for(auto it=_crossMapLoopEvidence.begin();it!=_crossMapLoopEvidence.end();) {
+        std::string why;
+        if(screen(it->newId,it->oldId,why)){++it;continue;}
+        UWARN("visual candidate endpoint rejected current=%d old=%d reason=%s; searching distinct old references, candidate only",
+            it->newId,it->oldId,why.c_str());
+        failedPairs[it->newId].insert(it->oldId);
+        if(ownedCurrent(it->newId))searchSources.push_back(it->newId);
+        it=_crossMapLoopEvidence.erase(it);
     }
-    std::vector<std::pair<float,int>> ranking;
-    std::set<int> retainedOld;
-    for(const auto & candidate:_crossMapLoopEvidence)retainedOld.insert(candidate.oldId);
-    for(const auto & pose:_safeRelocalizationTrustedPoses) {
-        const auto epoch=getSignatureResetEpoch(pose.first);
-        const Signature * old=_memory->getSignature(pose.first);AcceptedImageReceipt receipt;
-        if(pose.first<=0 || !old || epoch>=_resetEpoch || (epoch!=0 && !_safeRelocalizationCommittedEpochs.count(epoch)) ||
-           !getAcceptedImageReceipt(pose.first,receipt) || receipt.resetEpoch!=epoch ||
-           receipt.mapId!=old->mapId() || !sameSource(receipt))continue;
-        const float similarity=current->compareTo(*old);
-        if(std::isfinite(similarity) && similarity>0)ranking.emplace_back(-similarity,pose.first);
-    }
-    std::sort(ranking.begin(),ranking.end());
-    // The dictionary only ranks raw checks. Prefer unused old endpoints among
-    // the best twelve so one repeated best match cannot monopolize the pool.
-    // Six actual solves per retained current keyframe bound added work.
-    const auto references=ranking.size();if(ranking.size()>12)ranking.resize(12);
-    std::stable_partition(ranking.begin(),ranking.end(),[&](const auto & item){return !retainedOld.count(item.second);});
-    unsigned tested=0;std::string detail;
-    for(const auto & item:ranking) {
-        if(tested==6)break;
-        const Signature * old=_memory->getSignature(item.second);++tested;
-        collectRawCrossMapLoopEvidence(*current,*old,_resetEpoch,getSignatureResetEpoch(old->id()),detail);
-        if(std::any_of(_crossMapLoopEvidence.begin(),_crossMapLoopEvidence.end(),
-                [&](const CrossMapLoopEvidence & candidate){return candidate.newId==current->id();})) {
-            reason=uFormat("trusted candidate search current=%d references=%u tested=%u selected=%d retained=%u; candidate only",
-                current->id(),unsigned(references),tested,old->id(),unsigned(_crossMapLoopEvidence.size()));return true;
+    if(std::none_of(_crossMapLoopEvidence.begin(),_crossMapLoopEvidence.end(),
+        [&](const CrossMapLoopEvidence & candidate){return candidate.newId==current->id();}))
+        searchSources.push_back(current->id());
+    std::sort(searchSources.begin(),searchSources.end());
+    searchSources.erase(std::unique(searchSources.begin(),searchSources.end()),searchSources.end());
+    unsigned totalTested=0;std::string detail;
+    for(int sourceId:searchSources) {
+        const Signature * source=_memory->getSignature(sourceId);
+        if(!source || !ownedCurrent(sourceId))continue;
+        std::set<int> retainedOld;
+        for(const auto & candidate:_crossMapLoopEvidence)retainedOld.insert(candidate.oldId);
+        std::vector<std::pair<float,int>> ranking;
+        for(const auto & pose:_safeRelocalizationTrustedPoses) {
+            const auto epoch=getSignatureResetEpoch(pose.first);
+            const Signature * old=_memory->getSignature(pose.first);AcceptedImageReceipt receipt;
+            if(pose.first<=0 || !old || failedPairs[sourceId].count(pose.first) ||
+               epoch>=_resetEpoch || (epoch!=0 && !_safeRelocalizationCommittedEpochs.count(epoch)) ||
+               !getAcceptedImageReceipt(pose.first,receipt) || receipt.resetEpoch!=epoch ||
+               receipt.mapId!=old->mapId() || !sameSource(receipt))continue;
+            const float similarity=source->compareTo(*old);
+            if(std::isfinite(similarity) && similarity>0)ranking.emplace_back(-similarity,pose.first);
+        }
+        std::sort(ranking.begin(),ranking.end());
+        const auto references=ranking.size();if(ranking.size()>12)ranking.resize(12);
+        std::stable_partition(ranking.begin(),ranking.end(),[&](const auto & item){return !retainedOld.count(item.second);});
+        unsigned tested=0;
+        for(const auto & item:ranking) {
+            if(tested==6)break;
+            ++tested;++totalTested;
+            if(!screen(sourceId,item.second,detail)) {
+                UWARN("visual candidate alternative rejected current=%d old=%d reason=%s; candidate only",
+                    sourceId,item.second,detail.c_str());continue;
+            }
+            const Signature * old=_memory->getSignature(item.second);
+            collectRawCrossMapLoopEvidence(*source,*old,_resetEpoch,getSignatureResetEpoch(old->id()),detail);
+            // Replacing a historical endpoint must not make it appear newer
+            // than the newest bridge used by the source-age admission check.
+            std::sort(_crossMapLoopEvidence.begin(),_crossMapLoopEvidence.end(),
+                [](const CrossMapLoopEvidence & a,const CrossMapLoopEvidence & b){return a.newId<b.newId;});
+            if(std::any_of(_crossMapLoopEvidence.begin(),_crossMapLoopEvidence.end(),
+                    [&](const CrossMapLoopEvidence & candidate){return candidate.newId==sourceId;})) {
+                UWARN("trusted candidate search current=%d references=%u tested=%u selected=%d retained=%u; candidate only",
+                    sourceId,unsigned(references),tested,old->id(),unsigned(_crossMapLoopEvidence.size()));break;
+            }
         }
     }
-    reason=uFormat("trusted candidate search current=%d references=%u tested=%u retained=%u rejected=%s",
-        current->id(),unsigned(references),tested,unsigned(_crossMapLoopEvidence.size()),detail.c_str());return false;
+    reason=uFormat("trusted candidate search latest=%d replaced_sources=%u tested=%u retained=%u detail=%s; candidate only",
+        current->id(),unsigned(failedPairs.size()),totalTested,unsigned(_crossMapLoopEvidence.size()),detail.c_str());
+    return !_crossMapLoopEvidence.empty();
 }
 
 // Preserve the existing Tag transaction symbol. The candidate wrapper uses
@@ -199,7 +294,9 @@ bool Rtabmap::tryVisualRecoveryImpl(const SafeRelocalizationLimits & limits,
         observations.emplace(item.first,data);
     }
 
-    const int minimumInliers=std::max(25,_crossMapLoopMinInliers);
+    int configuredInliers=Parameters::defaultVisMinInliers();
+    Parameters::parse(_parameters,Parameters::kVisMinInliers(),configuredInliers);
+    const int minimumInliers=std::max(25,std::max(_crossMapLoopMinInliers,configuredInliers));
     const int minimumCells=std::max(4,_crossMapLoopMinGridCells);
     const double minimumSpan=std::max(0.02,double(_crossMapLoopMin3DSpan));
     const double minimumHessian=std::max(0.0001,double(_crossMapLoopMinHessianRatio));
@@ -207,8 +304,6 @@ bool Rtabmap::tryVisualRecoveryImpl(const SafeRelocalizationLimits & limits,
     registrationParameters[Parameters::kRegStrategy()]="0";
     registrationParameters[Parameters::kRegForce3DoF()]="false";
     registrationParameters[Parameters::kVisEstimationType()]="0";
-    int configuredInliers=Parameters::defaultVisMinInliers();
-    Parameters::parse(_parameters,Parameters::kVisMinInliers(),configuredInliers);
     registrationParameters[Parameters::kVisMinInliers()]=uNumber2Str(std::max(minimumInliers,configuredInliers));
     float correspondenceDistance=Parameters::defaultVisInlierDistance();
     Parameters::parse(_parameters,Parameters::kVisInlierDistance(),correspondenceDistance);
@@ -220,9 +315,9 @@ bool Rtabmap::tryVisualRecoveryImpl(const SafeRelocalizationLimits & limits,
             const Transform & transform,const RegistrationInfo & info,std::string & diagnostic)->bool {
         if(!safeRigidTransform(transform) || info.inliers<minimumInliers)
         { diagnostic=uFormat("transform_or_inliers valid=%d inliers=%d/%d backend=%s",safeRigidTransform(transform)?1:0,info.inliers,minimumInliers,info.rejectedMsg.c_str()); return false; }
-        const std::set<int> words(info.inliersIDs.begin(),info.inliersIDs.end());
-        if(int(words.size())<minimumInliers)
-        { diagnostic=uFormat("unique_inliers=%u/%d",unsigned(words.size()),minimumInliers); return false; }
+        std::set<int> words;
+        if(!finalRecoveryMetricSupport(from,to,transform,info,minimumInliers,
+            std::min(.025,double(correspondenceDistance)),words,diagnostic))return false;
         for(const Signature * signature:{&from,&to})
         {
             int width=0,height=0;
@@ -246,29 +341,7 @@ bool Rtabmap::tryVisualRecoveryImpl(const SafeRelocalizationLimits & limits,
            !cv::eigen(info.covariance,covarianceEigenvalues) || covarianceEigenvalues.at<double>(5)<=0.0 ||
            covarianceEigenvalues.at<double>(0)/covarianceEigenvalues.at<double>(5)>limits.maxInformationCondition)
         { diagnostic="invalid_covariance_spectrum"; return false; }
-        double squared=0.0,maximum=0.0;
-        int count=0;
-        for(int word:words)
-        {
-            const auto a=from.getWords().equal_range(word),b=to.getWords().equal_range(word);
-            if(std::distance(a.first,a.second)!=1 || std::distance(b.first,b.second)!=1)
-            { diagnostic="ambiguous_word_correspondence"; return false; }
-            const int ai=a.first->second,bi=b.first->second;
-            if(ai<0 || bi<0 || ai>=int(from.getWords3().size()) || bi>=int(to.getWords3().size()))
-            { diagnostic="invalid_3d_word_index"; return false; }
-            const cv::Point3f & p=from.getWords3()[ai];
-            const cv::Point3f & q=to.getWords3()[bi];
-            if(!finitePoint(p) || !finitePoint(q))
-            { diagnostic="nonfinite_3d_correspondence"; return false; }
-            const double residual=cv::norm(cv::Point3d(p.x,p.y,p.z)-
-                transformPoint(transform,cv::Point3d(q.x,q.y,q.z)));
-            if(!std::isfinite(residual))
-            { diagnostic="nonfinite_metric_residual"; return false; }
-            squared+=residual*residual;maximum=std::max(maximum,residual);++count;
-        }
-        const double rms=count?std::sqrt(squared/double(count)):std::numeric_limits<double>::infinity();
-        diagnostic=uFormat("metric_count=%d/%d rms=%.6f/0.018000 max=%.6f/0.025000",count,minimumInliers,rms,maximum);
-        return count>=minimumInliers && rms<=0.018 && maximum<=0.025;
+        return true; // same final-transform metric support as local-chain/observation checks
     };
 
     std::vector<Link> measuredEvidence;
@@ -297,6 +370,44 @@ bool Rtabmap::tryVisualRecoveryImpl(const SafeRelocalizationLimits & limits,
         if(currentFromOld.getDistance(reversePrediction)>std::min(0.025,double(limits.maxHoldoutTranslation)) ||
            currentFromOld.getAngle(reversePrediction)>std::min(2.0,double(limits.maxHoldoutRotation))*M_PI/180.0)
         { reason="visual recovery bidirectional RGB-D transformations disagree"; return false; }
+        // Both map frames are required to have measured gravity below. Fit
+        // each direction separately from its own raw metric support, constraining
+        // the world-frame correction to yaw+translation as on the Tag path.
+        // A visual tilt conflicting with gravity is not allowed to rotate the
+        // whole current map. Never bypass the original six-axis raw checks.
+        const Transform & currentPose=_optimizedPoses.at(endpoint.from());
+        const Transform & oldPose=_safeRelocalizationTrustedPoses.at(endpoint.to());
+        auto measuredGravity=[&](int id,const Transform & pose,const std::multimap<int,Link> & links)->bool {
+            int count=0;
+            for(const auto & row:links) {
+                const Link & link=row.second;
+                if(link.type()!=Link::kGravity || link.from()!=id || link.to()!=id)continue;
+                ++count;
+                if(!safeRigidTransform(link.transform()) || !safeInformationMatrix(link.infMatrix(),
+                    limits.maxInformationCondition,reason,false))return false;
+                const double error=safeGravityDirectionError(pose,link.transform());
+                if(!std::isfinite(error) || error>5.0*M_PI/180.0)return false;
+            }
+            return count==1;
+        };
+        if(!measuredGravity(endpoint.from(),currentPose,_constraints) ||
+           !measuredGravity(endpoint.to(),oldPose,_safeRelocalizationTrustedConstraints))
+        {reason="visual recovery gravity-aligned fit requires both measured gravity frames";return false;}
+        Transform fittedForward,fittedReverse;
+        if(!gravityAlignedMetricFit(forwardCurrent,forwardOld,currentPose,oldPose,currentFromOld,
+                forwardInfo,minimumInliers,std::min(.025,double(correspondenceDistance)),fittedForward,forwardDiagnostic) ||
+           !gravityAlignedMetricFit(reverseOld,reverseCurrent,oldPose,currentPose,oldFromCurrent,
+                reverseInfo,minimumInliers,std::min(.025,double(correspondenceDistance)),fittedReverse,reverseDiagnostic) ||
+           !geometricEvidence(forwardCurrent,forwardOld,fittedForward,forwardInfo,forwardDiagnostic) ||
+           !geometricEvidence(reverseOld,reverseCurrent,fittedReverse,reverseInfo,reverseDiagnostic) ||
+           !strictRecoveryPoseAgreement(fittedForward,currentFromOld,limits) ||
+           !strictRecoveryPoseAgreement(fittedReverse,oldFromCurrent,limits) ||
+           !strictRecoveryPoseAgreement(fittedForward,fittedReverse.inverse(),limits))
+        {reason=uFormat("visual recovery gravity-aligned metric fit failed pair=(%d,%d) forward=(%s) reverse=(%s)",
+            endpoint.from(),endpoint.to(),forwardDiagnostic.c_str(),reverseDiagnostic.c_str());return false;}
+        UWARN("visual recovery gravity-aligned raw fit pair=(%d,%d) forward_change_m=%.6f deg=%.6f reverse_change_m=%.6f deg=%.6f; original and constrained raw gates passed",
+            endpoint.from(),endpoint.to(),currentFromOld.getDistance(fittedForward),currentFromOld.getAngle(fittedForward)*180.0/M_PI,
+            oldFromCurrent.getDistance(fittedReverse),oldFromCurrent.getAngle(fittedReverse)*180.0/M_PI);
         // Conservative covariance floor, at least the established 2cm/3deg
         // bridge floor and no stronger than either measured direction.
         double fLinear=0.0,fAngular=0.0,rLinear=0.0,rAngular=0.0;
@@ -307,7 +418,7 @@ bool Rtabmap::tryVisualRecoveryImpl(const SafeRelocalizationLimits & limits,
         cv::Mat information=cv::Mat::eye(6,6,CV_64FC1);
         for(int axis=0;axis<3;++axis) information.at<double>(axis,axis)=1.0/linear;
         for(int axis=3;axis<6;++axis) information.at<double>(axis,axis)=1.0/angular;
-        measuredEvidence.push_back(Link(endpoint.from(),endpoint.to(),Link::kUserClosure,currentFromOld,information));
+        measuredEvidence.push_back(Link(endpoint.from(),endpoint.to(),Link::kUserClosure,fittedForward,information));
     }
     if(!addLinksAtomicallyImpl(measuredEvidence,_resetEpoch,limits,&receipts,&context,reason,&commitAllowed,
         preparedMapCorrection,observedAlignmentAllowed)) return false;

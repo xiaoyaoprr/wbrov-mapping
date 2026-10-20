@@ -9,8 +9,94 @@ struct RecoveryPairResult {
 // internal consistency, not independent sensor evidence or proof that either
 // this estimate or the separately recorded odometry is ground truth.
 
+// Metric RANSAC labels precede reprojection BA. Reclassify only that
+// original support under the FINAL transform, once, for every raw recovery
+// path. Original-support RMS is also required, so trimming cannot conceal
+// broadly inconsistent depth. This does not add matches or refine the pose.
+bool finalRecoveryMetricSupport(const Signature & from,const Signature & to,
+        const Transform & transform,const RegistrationInfo & info,int minimum,
+        double metricCap,std::set<int> & words,std::string & diagnostic)
+{
+    words.clear();
+    if(!std::isfinite(metricCap) || metricCap<=0.0 || metricCap>.025 || minimum<25)
+    { diagnostic="invalid_metric_support_limits"; return false; }
+    const std::set<int> proposed(info.inliersIDs.begin(),info.inliersIDs.end());
+    if(int(proposed.size())<minimum)
+    { diagnostic="insufficient_original_unique_support"; return false; }
+    double originalSquared=0.0,squared=0.0,maximum=0.0;
+    for(int word:proposed) {
+        const auto a=from.getWords().equal_range(word),b=to.getWords().equal_range(word);
+        if(std::distance(a.first,a.second)!=1 || std::distance(b.first,b.second)!=1)
+        { diagnostic="ambiguous_word_correspondence"; return false; }
+        const int ai=a.first->second,bi=b.first->second;
+        if(ai<0 || bi<0 || ai>=int(from.getWords3().size()) || bi>=int(to.getWords3().size()))
+        { diagnostic="invalid_3d_word_index"; return false; }
+        const auto & p=from.getWords3()[ai];const auto & q=to.getWords3()[bi];
+        if(!finitePoint(p) || !finitePoint(q))
+        { diagnostic="nonfinite_3d_correspondence"; return false; }
+        const double residual=cv::norm(cv::Point3d(p.x,p.y,p.z)-
+            transformPoint(transform,cv::Point3d(q.x,q.y,q.z)));
+        if(!std::isfinite(residual))
+        { diagnostic="nonfinite_metric_residual"; return false; }
+        originalSquared+=residual*residual;
+        if(residual<=metricCap) {
+            words.insert(word);squared+=residual*residual;maximum=std::max(maximum,residual);
+        }
+    }
+    const double originalRms=std::sqrt(originalSquared/proposed.size());
+    const double rms=words.empty()?std::numeric_limits<double>::infinity():std::sqrt(squared/words.size());
+    diagnostic=uFormat("final_metric_count=%u/%d original_count=%u original_rms=%.6f/0.018000 rms=%.6f/0.018000 max=%.6f/%.6f",
+        unsigned(words.size()),minimum,unsigned(proposed.size()),originalRms,rms,maximum,metricCap);
+    return int(words.size())>=minimum && originalRms<=.018 && rms<=.018 && maximum<=metricCap;
+}
+
+// Fit translation and yaw from metric correspondences in gravity-aligned
+// local/main frames. Does not reuse an inverted solve as reverse evidence.
+// Caller must still validate full raw registration, both directions, measured
+// gravity coverage, three independent bridges and every shadow/holdout gate.
+bool gravityAlignedMetricFit(const Signature & from,const Signature & to,
+        const Transform & fromPose,const Transform & toPose,
+        const Transform & raw,const RegistrationInfo & info,int minimum,
+        double metricCap,Transform & measured,std::string & reason)
+{
+    measured.setNull();
+    if(!safeRigidTransform(fromPose) || !safeRigidTransform(toPose) || !safeRigidTransform(raw))
+    {reason="invalid gravity-aligned fit frame";return false;}
+    std::set<int> words;
+    if(!finalRecoveryMetricSupport(from,to,raw,info,minimum,metricCap,words,reason))return false;
+    std::vector<cv::Point3d> a,b;
+    cv::Point3d ca(0,0,0),cb(0,0,0);
+    for(int word:words) {
+        const auto pa=from.getWords3().at(from.getWords().find(word)->second);
+        const auto pb=to.getWords3().at(to.getWords().find(word)->second);
+        a.push_back(transformPoint(fromPose,cv::Point3d(pa.x,pa.y,pa.z)));
+        b.push_back(transformPoint(toPose,cv::Point3d(pb.x,pb.y,pb.z)));
+        ca+=a.back();cb+=b.back();
+    }
+    ca*=1.0/a.size();cb*=1.0/b.size();
+    double dot=0,cross=0;
+    for(std::size_t i=0;i<a.size();++i) {
+        const auto p=a[i]-ca,q=b[i]-cb;
+        dot+=p.x*q.x+p.y*q.y;cross+=q.x*p.y-q.y*p.x;
+    }
+    if(!std::isfinite(dot) || !std::isfinite(cross) || std::hypot(dot,cross)<1e-12)
+    {reason="gravity-aligned fit has no observable yaw";return false;}
+    const double yaw=std::atan2(cross,dot),c=std::cos(yaw),s=std::sin(yaw);
+    const cv::Point3d t=ca-cv::Point3d(c*cb.x-s*cb.y,s*cb.x+c*cb.y,cb.z);
+    const Transform world(float(t.x),float(t.y),float(t.z),0.0f,0.0f,float(yaw));
+    measured=fromPose.inverse()*world*toPose;
+    if(!safeRigidTransform(measured) || measured.getDistance(raw)>.025 ||
+       measured.getAngle(raw)>2.0*M_PI/180.0)
+    {reason="gravity-aligned fit disagrees with raw six-axis registration";return false;}
+    // Recheck the complete original support RMS, final metric support count,
+    // and the original maximum error cap under the constrained solution.
+    return finalRecoveryMetricSupport(from,to,measured,info,minimum,metricCap,words,reason);
+}
+
 bool strictRecoveryPair(SensorData fromData,SensorData toData,const ParametersMap & parameters,
-        double maximumCondition,RecoveryPairResult & result,std::string & reason)
+        double maximumCondition,RecoveryPairResult & result,std::string & reason,
+        const Transform * fromGravity=nullptr,const Transform * toGravity=nullptr,
+        RecoveryPairResult * gravityResult=nullptr)
 {
     fromData.uncompressData();toData.uncompressData();
     if(fromData.imageRaw().empty() || toData.imageRaw().empty() || fromData.depthRaw().empty() ||
@@ -62,8 +148,9 @@ bool strictRecoveryPair(SensorData fromData,SensorData toData,const ParametersMa
     }
     auto validate=[&](const Signature & a,const Signature & b,const Transform & transform,const RegistrationInfo & info)->bool {
         if(!safeRigidTransform(transform) || info.inliers<minimum) return false;
-        std::set<int> words(info.inliersIDs.begin(),info.inliersIDs.end());
-        if(int(words.size())<minimum) return false;
+        std::set<int> words;std::string diagnostic;
+        if(!finalRecoveryMetricSupport(a,b,transform,info,minimum,
+            std::min(.025,double(correspondenceDistance)),words,diagnostic))return false;
         for(const Signature * s:{&a,&b}) {
             int width=0,height=0;double extent=0.0,conditioning=0.0;
             const auto points=validInlierPoints(*s,words);
@@ -77,19 +164,7 @@ bool strictRecoveryPair(SensorData fromData,SensorData toData,const ParametersMa
            cv::norm(info.covariance-info.covariance.t(),cv::NORM_INF)>1e-9 ||
            !cv::eigen(info.covariance,eigenvalues) || eigenvalues.at<double>(5)<=0 ||
            eigenvalues.at<double>(0)/eigenvalues.at<double>(5)>maximumCondition) return false;
-        double squared=0.0,maximum=0.0;int count=0;
-        for(int word:words) {
-            const auto x=a.getWords().equal_range(word),y=b.getWords().equal_range(word);
-            if(std::distance(x.first,x.second)!=1 || std::distance(y.first,y.second)!=1) return false;
-            const int i=x.first->second,j=y.first->second;
-            if(i<0 || j<0 || i>=int(a.getWords3().size()) || j>=int(b.getWords3().size())) return false;
-            const auto & q=a.getWords3()[i];const auto & r=b.getWords3()[j];
-            if(!finitePoint(q) || !finitePoint(r)) return false;
-            double error=cv::norm(cv::Point3d(q.x,q.y,q.z)-transformPoint(transform,cv::Point3d(r.x,r.y,r.z)));
-            if(!std::isfinite(error)) return false;
-            squared+=error*error;maximum=std::max(maximum,error);++count;
-        }
-        return count>=minimum && std::sqrt(squared/count)<=.018 && maximum<=.025;
+        return true; // shared final metric support, coverage and covariance all passed
     };
     // Refinement may replace feature storage. Reverse matching owns its own
     // descriptors and cannot observe mutations made by the forward solve.
@@ -109,6 +184,30 @@ bool strictRecoveryPair(SensorData fromData,SensorData toData,const ParametersMa
        result.forward.getAngle(result.reverse.inverse())>2.0*M_PI/180.0)
     {reason=uFormat("raw bidirectional RGB-D check failed (f=%d,r=%d,finliers=%d,rinliers=%d,fbackend=%s,rbackend=%s)",
         forwardValid?1:0,reverseValid?1:0,f.inliers,r.inliers,f.rejectedMsg.c_str(),r.rejectedMsg.c_str());return false;}
+    if(fromGravity || toGravity || gravityResult) {
+        if(!fromGravity || !toGravity || !gravityResult ||
+           !safeRigidTransform(*fromGravity) || !safeRigidTransform(*toGravity))
+        {reason="local metric/gravity fit requires both measured gravity orientations";return false;}
+        // Keep the original six-axis result for the caller's unchanged raw
+        // odometry/neighbor checks. The additional result independently fits
+        // both RGB-D directions under measured roll/pitch, leaving yaw and
+        // translation to the image/depth correspondences.
+        RecoveryPairResult constrained;
+        if(!gravityAlignedMetricFit(a,b,*fromGravity,*toGravity,result.forward,f,minimum,
+                std::min(.025,double(correspondenceDistance)),constrained.forward,reason) ||
+           !gravityAlignedMetricFit(reverseB,reverseA,*toGravity,*fromGravity,result.reverse,r,minimum,
+                std::min(.025,double(correspondenceDistance)),constrained.reverse,reason) ||
+           !validate(a,b,constrained.forward,f) || !validate(reverseB,reverseA,constrained.reverse,r))
+        {reason="local raw RGB-D/gravity metric fit rejected: "+reason;return false;}
+        auto agree=[](const Transform & x,const Transform & y) {
+            return x.getDistance(y)<=.025 && x.getAngle(y)<=2.0*M_PI/180.0 &&
+                std::fabs(x.z()-y.z())<=.02 && safeTiltError(x,y)<=2.0*M_PI/180.0;
+        };
+        if(!agree(constrained.forward,result.forward) || !agree(constrained.reverse,result.reverse) ||
+           !agree(constrained.forward,constrained.reverse.inverse()))
+        {reason="local metric/gravity fit contradicts raw motion or reverse solve";return false;}
+        *gravityResult=constrained;
+    }
     return true;
 }
 
@@ -153,6 +252,28 @@ bool Rtabmap::validateRecoveryCache(const std::set<int> & ids,const std::vector<
         {reason=uFormat("submap node %d has missing, reordered, cross-epoch/map or changed-source observations",id);return false;}
         lastStamp=signature->getStamp();lastInputStamp=receipt.input.headerStampNs;
     }
+    // A pure visual six-axis chain discards the independently measured
+    // gravity that the mapping poses and bridge solve already use. Reconstruct
+    // each direction with RGB-D + that same physical gravity measurement.
+    // Never use the optimized poses as the gravity measurement.
+    std::map<int,Transform> measuredGravity;
+    for(int id:sequence) {
+        int count=0;
+        for(const auto & row:_constraints) {
+            const Link & link=row.second;
+            if(link.type()!=Link::kGravity || link.from()!=id || link.to()!=id)continue;
+            ++count;
+            if(!safeRigidTransform(link.transform()) ||
+               !safeInformationMatrix(link.infMatrix(),limits.maxInformationCondition,reason,false) ||
+               !_optimizedPoses.count(id) || !safeRigidTransform(_optimizedPoses.at(id)))
+            {reason=uFormat("submap node %d has invalid or incompatible measured gravity",id);return false;}
+            const double error=safeGravityDirectionError(_optimizedPoses.at(id),link.transform());
+            if(!std::isfinite(error) || error>5.0*M_PI/180.0)
+            {reason=uFormat("submap node %d has incompatible measured gravity",id);return false;}
+            measuredGravity[id]=link.transform();
+        }
+        if(count!=1){reason=uFormat("submap node %d requires one measured gravity constraint",id);return false;}
+    }
     for(size_t index=1;index<sequence.size();++index) {
         const int before=sequence[index-1],after=sequence[index];
         const Signature * a=_memory->getSignature(before),*b=_memory->getSignature(after);
@@ -165,9 +286,10 @@ bool Rtabmap::validateRecoveryCache(const std::set<int> & ids,const std::vector<
         }
         if(!recordedForward || !recordedReverse)
         {reason=uFormat("submap continuity breaks at %d->%d: missing measured neighbor; uncertain gap must remain separate",before,after);return false;}
-        RecoveryPairResult pair;
+        RecoveryPairResult pair,constrained;
         if(!strictRecoveryPair(_memory->getNodeData(before,true,false,false,false),
-            _memory->getNodeData(after,true,false,false,false),_parameters,limits.maxInformationCondition,pair,reason)) {
+            _memory->getNodeData(after,true,false,false,false),_parameters,limits.maxInformationCondition,pair,reason,
+            &measuredGravity.at(before),&measuredGravity.at(after),&constrained)) {
             reason=uFormat("submap continuity %d->%d lacks raw evidence; no gap backfill: %s",before,after,reason.c_str());return false;
         }
         const Transform odomRelative=a->getPose().inverse()*b->getPose();
@@ -175,7 +297,11 @@ bool Rtabmap::validateRecoveryCache(const std::set<int> & ids,const std::vector<
            !strictRecoveryPoseAgreement(pair.forward,recordedForward->transform(),limits) ||
            !strictRecoveryPoseAgreement(pair.reverse,recordedReverse->transform(),limits))
         {reason=uFormat("submap continuity %d->%d raw motion disagrees with its odometry or measured neighbor edge",before,after);return false;}
-        pairs.push_back(pair);forward[index]=forward[index-1]*pair.forward;
+        if(!strictRecoveryPoseAgreement(constrained.forward,odomRelative,limits) ||
+           !strictRecoveryPoseAgreement(constrained.forward,recordedForward->transform(),limits) ||
+           !strictRecoveryPoseAgreement(constrained.reverse,recordedReverse->transform(),limits))
+        {reason=uFormat("submap continuity %d->%d metric/gravity motion disagrees with odometry or neighbor",before,after);return false;}
+        pairs.push_back(constrained);forward[index]=forward[index-1]*constrained.forward;
     }
     for(size_t index=sequence.size()-1;index>0;--index)backward[index-1]=backward[index]*pairs[index-1].reverse;
     std::vector<Transform> firstAlignments,lastAlignments;

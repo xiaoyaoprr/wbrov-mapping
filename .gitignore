@@ -45,3 +45,6 @@ __pycache__/
 !diagnostics/20261018_usable_mapping/offline_v30/short_compressed_recovery/mapping/main_cloud.ply
 !diagnostics/20261018_usable_mapping/offline_v30/full_recovery/mapping/main_cloud.ply
 !diagnostics/20261018_usable_mapping/offline_v30/large_interrupted_capture/mapping/main_cloud.ply
+
+!diagnostics/20261020_storage_recovery155/runs/
+!diagnostics/20261020_storage_recovery155/runs/repair153_replay/main_cloud.ply

@@ -1,0 +1,45 @@
+{
+  "phase": "completed",
+  "scope": "isolated package of verified saved-data repair; no hardware or production switch",
+  "steps": [
+    {
+      "name": "worker_bindings",
+      "seconds": 0.5170419840142131,
+      "exit": 0
+    },
+    {
+      "name": "test_deferred_mapping",
+      "seconds": 0.3663127040490508,
+      "exit": 0
+    },
+    {
+      "name": "test_continuous_mapping_session",
+      "seconds": 2.2264159359037876,
+      "exit": 0
+    },
+    {
+      "name": "test_deferred_display_state",
+      "seconds": 0.11635596805717796,
+      "exit": 0
+    },
+    {
+      "name": "test_deferred_recorded_pixels",
+      "seconds": 0.46711990400217474,
+      "exit": 0
+    },
+    {
+      "name": "entry_check_only",
+      "seconds": 0.26604304008651525,
+      "exit": 0
+    }
+  ],
+  "package": "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/mapping_round6_candidate155_recovery",
+  "core_sha256": "dda5a860e2ee485531b06af3a00c4a980472bbd5508076987171a637f0b292dd",
+  "worker_sha256": "b4e7e925a9b41fe788e5b63684fcf110fd882109d719a8e04c81a9ff1838f561",
+  "entry_sha256": "6a3f5675da088ff6f2d5b27ab081a353d2d899c9c2856ac600867e1a27f1e104",
+  "wrapper_sha256": "49e1ee7fc2894e02695c7239789a8e35cf266bfa501610fe15dfe45f439f277b",
+  "camera_sha256": "a74d9969aa6c3380524830b7ddca0026c10e77ea0164288414709619ce17ec06",
+  "tag_detection_enabled": true,
+  "production_changed": false,
+  "field_acceptance": false
+}

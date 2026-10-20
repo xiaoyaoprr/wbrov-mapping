@@ -1,0 +1,38 @@
+{
+  "phase": "completed",
+  "scope": "combined saved-recording coverage; not new field acceptance",
+  "core_sha256": "dda5a860e2ee485531b06af3a00c4a980472bbd5508076987171a637f0b292dd",
+  "worker_sha256": "b4e7e925a9b41fe788e5b63684fcf110fd882109d719a8e04c81a9ff1838f561",
+  "long_recording": {
+    "route": "visual_keyframes",
+    "remaining_frames": 22,
+    "remaining_seconds": 0.916633,
+    "main_nodes_at_recovery": 86,
+    "final_main_nodes": 86,
+    "all_remaining_frames_qualified": true,
+    "no_cut_after_recovery": true,
+    "frames_sha256": "4c5716b25e762dfa48b6005d60bfaa6b93193852b8d2b6419c35c06b05342c6d"
+  },
+  "independent_movement_recording": {
+    "route": "tag_depth_corners",
+    "remaining_frames": 402,
+    "remaining_seconds": 16.599543,
+    "main_nodes_at_recovery": 91,
+    "final_main_nodes": 97,
+    "all_remaining_frames_qualified": true,
+    "no_cut_after_recovery": true,
+    "frames_sha256": "69cc67a4ad23b07907d0a209f027282ff811245cbcd26e6a707d6650bf2ce8fd"
+  },
+  "receipt_sha256": {
+    "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/repair152_build/result.json": "df92e1774338c709e236a4a4df310af0d0284e90505c34641707791d01cbd5fa",
+    "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/repair152_reference_fixture/result.json": "7643ecf64946310c87d145f27706706d0a54955a934f61160a2fafef7a4bd553",
+    "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/repair153_replay/result.json": "acb8830307d5dae50df29168c6ede473101cc26ec27145866e8aed113da17d78",
+    "/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/repair154_regression/result.json": "2d0db567c135861e47d71ce28c47e2c8b4effe74f0ea8ecf24b13aa22939b019"
+  },
+  "original_long_standalone_verdict": "validation_failed: no post-recovery keyframe growth; preserved",
+  "coverage_basis": "Long recording verifies visual recovery, 22 qualified remaining frames and durable save; independent recording verifies Tag recovery plus >15 seconds, >=5 added main nodes and durable save. Native no-Tag test additionally verifies post-commit graph extension and save/reopen. No recorded visual movement continuation is claimed.",
+  "quality_gates_changed_for_acceptance": false,
+  "runtime_parameters_changed": false,
+  "field_acceptance": false,
+  "hardware_health_permanently_resolved": false
+}

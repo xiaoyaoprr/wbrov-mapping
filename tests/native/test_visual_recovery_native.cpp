@@ -179,6 +179,71 @@ public:
         core._crossMapLoopEvidence=saved;
         std::cout<<"PASS trusted-map retrieval without native loop winner: source-bound, three raw candidates, unchanged geometry and registration\n";
     }
+    static void candidateReferenceFallback(Rtabmap & core,const AcceptedImageSourceContext & context) {
+        const auto savedCandidates=core._crossMapLoopEvidence;
+        const auto savedPoses=core._safeRelocalizationTrustedPoses;
+        core._crossMapLoopEvidence.clear();std::string reason;
+        for(int old:{18,19}) {
+            core.collectRawCrossMapLoopEvidence(*core._memory->getSignature(old+20),
+                *core._memory->getSignature(old),1,0,reason);
+        }
+        require(core._crossMapLoopEvidence.size()==2,"fallback fixture lacks initial coarse candidates");
+        // Only the old reference is incompatible with measured gravity. The
+        // same current raw image can match other unmodified old references.
+        core._safeRelocalizationTrustedPoses.at(18)=Transform(0,0,0,.1f,0,0)*savedPoses.at(18);
+        const auto before=snapshot(core);
+        requireReason(core.collectTrustedVisualRecoveryCandidates(context,reason),"bounded fallback failed: ",reason);
+        auto found=std::find_if(core._crossMapLoopEvidence.begin(),core._crossMapLoopEvidence.end(),
+            [](const Rtabmap::CrossMapLoopEvidence & e){return e.newId==38;});
+        require(found!=core._crossMapLoopEvidence.end() && found->oldId!=18,
+            "rejected reference pinned the same current view");
+        require(core._crossMapLoopEvidence.size()==3 && core._crossMapLoopEvidence.back().newId==40,
+            "fallback lost independence or newest-candidate ordering");
+        require(snapshot(core)==before && !core.isCurrentMapFrameRegistered(),
+            "candidate replacement mutated/registered graph");
+        core._safeRelocalizationTrustedPoses=savedPoses;
+        Transform proposed;
+        requireReason(prepare(core,context,proposed,reason),"fallback failed unchanged full preparation: ",reason);
+        require(!core.isCurrentMapFrameRegistered(),"fallback preparation authorized map");
+        for(auto & pose:core._safeRelocalizationTrustedPoses)
+            pose.second=Transform(0,0,0,.1f,0,0)*pose.second;
+        const auto invalidBefore=snapshot(core);
+        core.collectTrustedVisualRecoveryCandidates(context,reason);
+        require(core._crossMapLoopEvidence.empty() && !core.isCurrentMapFrameRegistered() &&
+            snapshot(core)==invalidBefore,"all-inconsistent old references accepted or graph changed");
+        core._safeRelocalizationTrustedPoses=savedPoses;core._crossMapLoopEvidence=savedCandidates;
+        std::cout<<"PASS reference fallback: same current raw view, different valid old endpoint; unchanged full preparation; all-inconsistent references fail closed; graph never registered\n";
+    }
+    static void localGravityCacheNegatives(Rtabmap & core,const AcceptedImageSourceContext & context) {
+        const auto savedCandidates=core._crossMapLoopEvidence;
+        const auto savedLinks=core._constraints;
+        candidates(core);Transform proposed;std::string reason;
+        const auto before=snapshot(core);
+        requireReason(prepare(core,context,proposed,reason),"healthy measured-gravity local chain rejected: ",reason);
+        for(int invalid=0;invalid<2;++invalid) {
+            core._constraints=savedLinks;bool changed=false;
+            for(auto it=core._constraints.begin();it!=core._constraints.end();) {
+                const Link original=it->second;
+                if(original.type()==Link::kGravity && original.from()==38 && original.to()==38) {
+                    changed=true;
+                    if(invalid==0){it=core._constraints.erase(it);continue;}
+                    // Below the 5 degree stored-pose sanity cap, but exceeds
+                    // the unchanged 2 degree raw/fused agreement requirement.
+                    it->second=Link(38,38,Link::kGravity,Transform(0,0,0,.045f,0,0)*original.transform(),original.infMatrix());
+                }
+                ++it;
+            }
+            require(changed,"gravity fixture did not change a measured current constraint");
+            const auto invalidBefore=snapshot(core);
+            require(!prepare(core,context,proposed,reason) && reason.find("gravity")!=std::string::npos,
+                "missing/contradictory measured gravity did not fail closed: "+reason);
+            require(snapshot(core)==invalidBefore && !core.isCurrentMapFrameRegistered(),
+                "bad gravity modified or registered graph");
+        }
+        core._constraints=savedLinks;core._crossMapLoopEvidence=savedCandidates;
+        require(snapshot(core)==before,"gravity negative fixture failed to restore original graph");
+        std::cout<<"PASS local gravity cache: healthy original raw+fused chain accepted; missing and contradictory measured gravity rejected; no graph mutation\n";
+    }
     static bool sameEpoch(Rtabmap & core,bool wrong,std::string & reason) {
         Transform proposed=core._optimizedPoses.at(40).inverse()*core._optimizedPoses.at(38);
         if(wrong)proposed.x()+=.20f;
@@ -359,9 +424,10 @@ int main(int argc,char ** argv) try {
     const bool prepareCloseOnly=argc==3 && std::string(argv[2])=="--prepare-close-only";
     const bool diagnoseObservation=argc==3 && std::string(argv[2])=="--diagnose-observation";
     const bool reseedPrivateOnly=argc==3 && std::string(argv[2])=="--reseed-private-only";
+    const bool referenceFallback=argc==3 && std::string(argv[2])=="--candidate-reference-fallback";
     const bool candidateLifecycle=argc==3 && std::string(argv[2])=="--candidate-lifecycle";
     const bool tagDepthProposal=argc==3 && std::string(argv[2])=="--tag-depth-proposal";
-    require(argc==2 || prepareCloseOnly || diagnoseObservation || reseedPrivateOnly || candidateLifecycle || tagDepthProposal,"invalid native fixture arguments");
+    require(argc==2 || prepareCloseOnly || diagnoseObservation || reseedPrivateOnly || candidateLifecycle || referenceFallback || tagDepthProposal,"invalid native fixture arguments");
     require(std::filesystem::create_directory(argv[1]),"work directory must be new");
     cv::setNumThreads(1);cv::setRNGSeed(81015);ULogger::setLevel(ULogger::kWarning);
     ParametersMap p;
@@ -399,6 +465,7 @@ int main(int argc,char ** argv) try {
         std::string reason;require(Access::process(core,data,Transform(.05f+(tagDepthProposal?.02f:.08f)*view,0,0,0,0,0),input,reason),"input: "+reason);
         AcceptedImageReceipt receipt;require(core.getLastLocationId()==index+1 && core.getAcceptedImageReceipt(index+1,receipt),"receipt missing: "+reason);
     }
+    if(referenceFallback){Access::candidateReferenceFallback(core,context);Access::localGravityCacheNegatives(core,context);core.close(false);return 0;}
     if(tagDepthProposal) {Access::depthProposal(core,context);core.close(false);return 0;}
     if(candidateLifecycle) {
         const auto before=Access::candidateIds(core);

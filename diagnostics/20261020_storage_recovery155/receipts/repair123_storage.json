@@ -1,0 +1,18 @@
+{
+  "phase": "completed",
+  "scope": "same 375-segment sustained original-protocol write after one free-extent trim; no camera or SDK; byte-exact output check; temperature/concurrency not controlled",
+  "exit": 0,
+  "wall_seconds": 93.0944097279571,
+  "summary": {
+    "complete": true,
+    "segments": 375,
+    "bytes": 8042695245,
+    "seconds": 93.087248032,
+    "byte_exact": true
+  },
+  "max_segment_s": 0.208004352,
+  "over_1s": 0,
+  "over_300ms": 0,
+  "data_fsync_max_ms": 156.874816,
+  "receipt_fsync_max_ms": 14.274624
+}

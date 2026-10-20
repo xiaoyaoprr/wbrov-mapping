@@ -1,0 +1,293 @@
+{
+  "schema": "wbrov.repair155-source-deployment.v1",
+  "changes": [
+    {
+      "source": "source/DeferredMappingSession.h",
+      "target": "src/deferred_mapping/DeferredMappingSession.h",
+      "before_sha256": "d262a0caafa624bdbae89ba0771d9c937ba3f4ac371233f9fc3cd167bec95376",
+      "after_sha256": "489ec5a7cb725908cabfe0769f27d7212ff21dcb69070b8fb9cf7ea5abfdde19"
+    },
+    {
+      "source": "source/recovery_geometry.inc",
+      "target": "src/rtabmap_core/corelib/src/recovery_geometry.inc",
+      "before_sha256": "bef59c5315c22220943c49c67f91ba87c942c9aec9485205b2ceaa8b976d7bb5",
+      "after_sha256": "2a983e6992eb56c61f2756b581991ffb31179f36ee828890b7119644beaf14dd"
+    },
+    {
+      "source": "source/visual_recovery.inc",
+      "target": "src/rtabmap_core/corelib/src/visual_recovery.inc",
+      "before_sha256": "4f309224d28faef74618511debdfc21cb8cc64382db950f6d5393cefd3fff9c2",
+      "after_sha256": "4cf94491f932152b8d7bf567d30460fd7ae16d64031a9a94788e51162d5ab1d1"
+    },
+    {
+      "source": "native/test_visual_reference152.cpp",
+      "target": "tests/native/test_visual_recovery_native.cpp",
+      "before_sha256": "234873058814349dd486a209f10d2edb1226d8a6fdeee888ffddc98f4860cdee",
+      "after_sha256": "29efa1489dbc9d18840b0e7194924ceeeeae2f4e499c5a84061aba2f2ab2584f"
+    }
+  ],
+  "unchanged_build_source_matches": [
+    {
+      "path": "src/rtabmap_core/corelib/src/Recovery.cpp",
+      "sha256": "9c5740edd00056c9d7df16296ef8348a660f2e29adaaf4bc3122d80386fd80a2"
+    },
+    {
+      "path": "src/rtabmap_core/corelib/src/optimizer_trace.inc",
+      "sha256": "ca20901de5d2856aa0e45586c7f9e4cbfdd595ed84dd435d9d0bcd66518adc53"
+    },
+    {
+      "path": "tests/native/ObservationDiagnostic.h",
+      "sha256": "5f5d886ced53f78669f481422e1a5101597c48f1552fc8bf40431f3c8b792c60"
+    },
+    {
+      "path": "src/rtabmap_core/corelib/src/CanonicalImageDigest.cpp",
+      "sha256": "cf9a4d62a1276f0add12d93dad5d8bef4112482ceb18fd7107935a4b17c4e207"
+    },
+    {
+      "path": "src/rtabmap_core/corelib/src/Rtabmap.cpp",
+      "sha256": "1b20415ec0193214089d27e35615eb44b608a663c04e12ac93e8f8d99e6b516c"
+    },
+    {
+      "path": "src/rtabmap_core/corelib/src/EarlyGravityCertificate.h",
+      "sha256": "42886156608c0f4455f62cef2a32d719eac1f77b1febd992c1b8dc51542015c6"
+    },
+    {
+      "path": "src/rtabmap_core/corelib/src/early_shadow_guard.inc",
+      "sha256": "240682e319bc57cb45f840c874e02b7d737e2d87fbd429f11941bace1a2192d4"
+    },
+    {
+      "path": "src/rtabmap_core/corelib/src/Parameters.cpp",
+      "sha256": "fcf545c4e92742ee89517b4c6f69c930e593f46745c24b84a1571a8c8af8cc7b"
+    },
+    {
+      "path": "src/rtabmap_core/corelib/src/safe_gravity_residual.inc",
+      "sha256": "ac88ab9dbfcfb934a32ee840ad1a793d1282c195a44a949274801e110b070a24"
+    },
+    {
+      "path": "src/rtabmap_core/corelib/src/early_component_gate.inc",
+      "sha256": "378b074aac2f56b8f44fb5cff767063a49b74a95590988834bf8568421ddc633"
+    },
+    {
+      "path": "src/rtabmap_core/corelib/src/odometry/DepthGeometryRecovery.h",
+      "sha256": "ac904ee5a0e3c9c6de35c4b049f39828f79636a92a3d4b0c81f59bd2cb17c76a"
+    },
+    {
+      "path": "src/rtabmap_core/corelib/include/rtabmap/core/Parameters.h",
+      "sha256": "7b67106cdc48ae11ac025cb08e29ef976682bb98cf8018d986e76c224b58e94b"
+    },
+    {
+      "path": "src/rtabmap_core/corelib/include/rtabmap/core/ImageInputReceipt.h",
+      "sha256": "05b5d7788f1dde813e7394ef049c7fd37ef7436776e6535ca1d8fb3cafec6f93"
+    },
+    {
+      "path": "src/rtabmap_core/corelib/include/rtabmap/core/DBDriverSqlite3.h",
+      "sha256": "0a0c42db53cbeaffe4af958a0e6eb0d092108274f1425998628ac2b15de8862c"
+    },
+    {
+      "path": "src/rtabmap_core/corelib/include/rtabmap/core/Memory.h",
+      "sha256": "99a6c1d70cfcc6f8f0537040440962b0625bead8d4eb51677219443d56510c23"
+    },
+    {
+      "path": "src/rtabmap_core/corelib/include/rtabmap/core/DBDriver.h",
+      "sha256": "b356683ffbd4201721e10a6665880862cc699d37794bb9527abbd2ec44b933eb"
+    },
+    {
+      "path": "src/rtabmap_core/corelib/include/rtabmap/core/Rtabmap.h",
+      "sha256": "ec83b68c681571bf0966e355bb85bce2dfb7df574679d06d3653a52de1de9800"
+    },
+    {
+      "path": "src/rtabmap_core/corelib/include/rtabmap/core/optimizer/OptimizerG2O.h",
+      "sha256": "75ff6492cb7016e1f3f1a4d0012ad33000d9334da5eb9b2a1ba1da0e9cf4f752"
+    },
+    {
+      "path": "src/deferred_mapping/RecordedFeaturePreparation.h",
+      "sha256": "55bfac2738793eac363d0d4bb2c58ef8e9e6e61c5cab56e1afc5a07deb084c20"
+    },
+    {
+      "path": "src/zed_rgbd_publisher/map_frame_lifecycle.hpp",
+      "sha256": "12a3919885440580650d86f70c1c2dc1499553f9899366d635a84a9ae5da7665"
+    },
+    {
+      "path": "src/deferred_mapping/RecordedLookahead.h",
+      "sha256": "40a9d188f68957c5ede1beaf07fd08b4d52bcee0fffa2c9526a0e414b22d19a5"
+    },
+    {
+      "path": "src/deferred_mapping/RecordedOrderedPrefetch.h",
+      "sha256": "b6ec6e99ed5ac8be24b499c061c4aa5f520fa96334352477fe964b5642395e9e"
+    },
+    {
+      "path": "src/deferred_mapping/RecordedCloudPly.h",
+      "sha256": "d49526dcd226a4e0fe0baddcb987216e8b0ff2dbe706a301de54625852fb10b7"
+    },
+    {
+      "path": "src/deferred_mapping/extract_recorded_rgbd.cpp",
+      "sha256": "02b01c1ac433182d001b8e7c188a2b5a44500b8da7cc300ddf546082d9f7ff3a"
+    },
+    {
+      "path": "tests/native/inject_spool_fsync_delay.cpp",
+      "sha256": "a03c2c2285fe052448e2c94e4894acc9d33d9d738718a26fb76470b90698ebd2"
+    },
+    {
+      "path": "src/zed_rgbd_publisher/segment_commit_queue.hpp",
+      "sha256": "30a234c6ab76df948f18c6941bf82c74c4a2788487b8e07419d8a1ddfe306efa"
+    },
+    {
+      "path": "src/deferred_mapping/RecordedCloudAssembly.h",
+      "sha256": "1e15bfc04a216a6812fe28312fb9184cd92bd97a9e1e151646bb3a686a7093b2"
+    },
+    {
+      "path": "tests/native/test_recorded_lookahead_window.cpp",
+      "sha256": "825367fce10c5607d5bd9360273a5e49a0150906df427ca3bf256fd0a090fdb6"
+    },
+    {
+      "path": "src/zed_rgbd_publisher/raw_calibration_audit.hpp",
+      "sha256": "1700307b2f40ef750040685942933e52653fec5da0d3200a886727280846d730"
+    },
+    {
+      "path": "tests/native/test_recorded_cloud_order.cpp",
+      "sha256": "700a874e92d5f9205fc740ec0001e68c1c87be82b925f962e71133fc111cf9c2"
+    },
+    {
+      "path": "tests/native/test_mapping_continuity_gate.cpp",
+      "sha256": "80a4575060c5862ca8b40d7d4159360db7ea5fab10d75bf007ae3dd36b4897e8"
+    },
+    {
+      "path": "tests/native/test_recorded_lookahead.cpp",
+      "sha256": "ec214e95e24998e756cdfc9c387641959f043ff6d9c02df8459e84a50bea781e"
+    },
+    {
+      "path": "tests/native/test_recorded_cloud_cache.cpp",
+      "sha256": "91d2697c368eeb43d5a0951179c487bbac06bfb12b3a4b407b982216da013a58"
+    },
+    {
+      "path": "src/deferred_mapping/RecordedTaskPool.h",
+      "sha256": "079df646ba528c6a58c029866051705cdc48fc8f0f24289dedaa2965c6a47dab"
+    },
+    {
+      "path": "src/zed_rgbd_publisher/capture_telemetry.hpp",
+      "sha256": "f33db42697111889c45a29c2d7cb7db90d3a89e5e2a74c9ecee970807120e9f6"
+    },
+    {
+      "path": "src/deferred_mapping/NativeMappingEvidence.h",
+      "sha256": "056e0e7814f6244f810707390fe6060f2d14adb8ac6489fb67f60d1f99d20449"
+    },
+    {
+      "path": "src/zed_rgbd_publisher/dual_stream_schedule.hpp",
+      "sha256": "673c03f48137f0f570ea3e5cecb77b0c5b224a85fc3040f0d5900772fd21ba9a"
+    },
+    {
+      "path": "src/zed_rgbd_publisher/bounded_async_writer.hpp",
+      "sha256": "679a4234821592e26628cff9151fd869534e5033b93c851de9a0ecff245b3992"
+    },
+    {
+      "path": "src/deferred_mapping/RecordedCloudSamples.h",
+      "sha256": "452e382ca8a889cfa6ebfb47897cb8c0603ccb86673d2a874962330931f49863"
+    },
+    {
+      "path": "src/zed_rgbd_publisher/rgbd_frame_codec.hpp",
+      "sha256": "25411834db310b661cf40b8f697ad81e59894b39721b83ac63f72a44f2d95e71"
+    },
+    {
+      "path": "tests/native/verify_rgbd_spool_codec.cpp",
+      "sha256": "8bf3e591835a6d84a19d8151ee917c822d5b983250e7154898c8835f9e0c8ae9"
+    },
+    {
+      "path": "src/zed_rgbd_publisher/rgbd_frame_codec_test.cpp",
+      "sha256": "8a401392fd2d3b84715ceb94107590256260cd6100b1d8af7b0253fbb8fcc68e"
+    },
+    {
+      "path": "src/deferred_mapping/RecordedLookaheadWindow.h",
+      "sha256": "9aaecb5ec55f9524792f19b0f4c55103b0159d73b541d9486dd67d0ec842a986"
+    },
+    {
+      "path": "src/zed_rgbd_publisher/map_stamp_audit.hpp",
+      "sha256": "cdac256295120c5870ac595da8f15174cb09af256a0efe2726c9010da3e6ea0f"
+    },
+    {
+      "path": "src/zed_rgbd_publisher/valid_odom_pose.hpp",
+      "sha256": "efc9ebe6671d974b91fb0f3302a8fb64ea05f231c4f142fb7d8ecceb39b103ab"
+    },
+    {
+      "path": "tests/native/test_mapping_quality_trace.cpp",
+      "sha256": "1dcc55db0acfff236830fc0ea4f6089218c3dfa5c92fd7b9835687fa72f1169b"
+    },
+    {
+      "path": "src/deferred_mapping/RecordedKeyframeSchedule.h",
+      "sha256": "30e5fed53ca755bef48f50c8e128ce0233d68e585e3f78cad94987f47b3c5b12"
+    },
+    {
+      "path": "src/deferred_mapping/MappingQualityTrace.h",
+      "sha256": "786cc77f6eb073af57999d402433b16da31aacba0d30b6cef7e2c0ad7f2ef19a"
+    },
+    {
+      "path": "src/zed_rgbd_publisher/rgbd_spool_test.cpp",
+      "sha256": "ad18e97617d8057c91b64f05b82f141cb5bfba62ab79a6f2b6ccfd10c0d4f2dd"
+    },
+    {
+      "path": "src/deferred_mapping/RecordedVoxelCloud.h",
+      "sha256": "0e9661bc83a5f97f671197c4880ce38f2842ece7518be488a5d8ac601ff0ca4d"
+    },
+    {
+      "path": "tests/native/test_recorded_ordered_prefetch.cpp",
+      "sha256": "6638c46ee704511238845e57be2b7a79cbce62b8787648a356aedf396357d05c"
+    },
+    {
+      "path": "src/zed_rgbd_publisher/depth_range_filter.hpp",
+      "sha256": "57c5c1f18d180ff5718163a775b51d8d8bf20fd1f81b4cd8bbb6a3834a23f2d4"
+    },
+    {
+      "path": "src/zed_rgbd_publisher/rgbd_spool.hpp",
+      "sha256": "0950b20d1bca8de225a2df2cfb5a42003f0fbbeb797f831e6f14fca780c014ce"
+    },
+    {
+      "path": "src/deferred_mapping/RecordedCloudCache.h",
+      "sha256": "b3a0115727c394e8e3a7891cfeead681928e094905915ef01c5fa0773dde5b84"
+    },
+    {
+      "path": "src/deferred_mapping/OrderedProcessingLane.h",
+      "sha256": "1495f7f2eddbf08a52180467c2974a7eaf7fcc3678dfcd335e22b52292ba2e53"
+    },
+    {
+      "path": "src/deferred_mapping/replay_worker.cpp",
+      "sha256": "cfd8352879238b27e352a8ce4376d26473f72e5d6af0237aa6e97864e78260e2"
+    },
+    {
+      "path": "src/zed_rgbd_publisher/spool_io_observation.hpp",
+      "sha256": "48cea6473af155518c9854d5371ee002d14d0614e09b0bb85468da3a97b2693a"
+    },
+    {
+      "path": "src/zed_rgbd_publisher/async_diagnostics.hpp",
+      "sha256": "b62367f0e6c36859625669dfe1d1d1e4d71681a81cd9f8d4298e024145f5a343"
+    },
+    {
+      "path": "tests/native/pace_rgbd_spool_writer.cpp",
+      "sha256": "ccf5cb94d042a336222506572d7170217bb6397cc2c53aeec55a57326ba9d401"
+    },
+    {
+      "path": "tests/native/test_recorded_task_pool.cpp",
+      "sha256": "7e5f012d0ed75ba83273aba3710abaf62d29b5a20f72630f8169676bf6803a40"
+    },
+    {
+      "path": "src/zed_rgbd_publisher/imu_frame_conversion.hpp",
+      "sha256": "c0042b7c47751e60af4dc47e6c710934305040a0d745f4c4399b31002e554de6"
+    },
+    {
+      "path": "src/deferred_mapping/NarrowVoxel40.h",
+      "sha256": "845948a67c329af532837b9d5ef107d4dcb8c79759a96ae9a7c0f4ded5e8c8ae"
+    },
+    {
+      "path": "src/zed_rgbd_publisher/exact_odom_stamp_gate.hpp",
+      "sha256": "444005822b8374f45ffad3bd02e17d64f4390a5a1d154c6bf6471b92ddac4d71"
+    },
+    {
+      "path": "src/zed_rgbd_publisher/spool_file_commit.hpp",
+      "sha256": "c815c644a456beaebeba5232185b18156207eae335aabcbcb6388cb10f14b561"
+    }
+  ],
+  "core_sha256": "dda5a860e2ee485531b06af3a00c4a980472bbd5508076987171a637f0b292dd",
+  "worker_sha256": "b4e7e925a9b41fe788e5b63684fcf110fd882109d719a8e04c81a9ff1838f561",
+  "production_dispatcher_sha256": "cb9909f1d112ca83b415f25475eae0998760078e4b243e24c9a2aaf53dd34081",
+  "source_export_sha256": "b7a338e4b2f712fad1d8e48417a17134a2e36ec96bb1442209dff5eab3aef41a",
+  "scope": "Selected actual compiled source changes plus prior exact unchanged source comparison; not a reproducible full SDK dependency bundle.",
+  "field_acceptance": false
+}

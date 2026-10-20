@@ -1,0 +1,18 @@
+{
+  "phase": "completed",
+  "scope": "one sustained baseline write of all 375 saved encoded segments, no camera or SDK; original barriers unchanged; byte-exact output check",
+  "exit": 0,
+  "wall_seconds": 243.80080076807644,
+  "summary": {
+    "complete": true,
+    "segments": 375,
+    "bytes": 8042695245,
+    "seconds": 243.78932048,
+    "byte_exact": true
+  },
+  "max_segment_s": 1.660426816,
+  "over_1s": 31,
+  "over_300ms": 218,
+  "data_fsync_max_ms": 1612.991808,
+  "receipt_fsync_max_ms": 25.498368
+}

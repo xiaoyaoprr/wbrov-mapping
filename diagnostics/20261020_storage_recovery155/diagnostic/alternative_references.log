@@ -1,0 +1,53 @@
+OPTIMIZED_COUNT 88
+DIAGNOSTIC_ONLY_GRAVITY_LEVELED_ODOMETRY_COMPONENT
+ALTERNATIVE 170 similarity=0.0120000001043
+ALTERNATIVE 172 similarity=0.0120000001043
+ALTERNATIVE 198 similarity=0.0120000001043
+ALTERNATIVE 302 similarity=0.0120000001043
+ALTERNATIVE 217 similarity=0.00999999977648
+ALTERNATIVE 218 similarity=0.00999999977648
+FIT 741 219 reverse=0 accepted=0 reason=gravity-aligned fit disagrees with raw six-axis registration
+CHANGE m=0.0207972433418 deg=2.51910703048
+FIT 741 219 reverse=1 accepted=0 reason=gravity-aligned fit disagrees with raw six-axis registration
+CHANGE m=0.0204321015626 deg=2.40613676408
+BIDIRECTIONAL m=0.000412220979342 deg=0.0193492037684
+FIT 798 171 reverse=0 accepted=0 reason=gravity-aligned fit disagrees with raw six-axis registration
+CHANGE m=0.0195326749235 deg=2.18457104334
+FIT 798 171 reverse=1 accepted=1 reason=final_metric_count=192/25 original_count=192 original_rms=0.006955/0.018000 rms=0.006955/0.018000 max=0.021285/0.025000
+CHANGE m=0.0209566876292 deg=1.96821007853
+BIDIRECTIONAL m=0.00209297216497 deg=0.272002057385
+FIT 814 299 reverse=0 accepted=1 reason=final_metric_count=291/25 original_count=291 original_rms=0.004990/0.018000 rms=0.004990/0.018000 max=0.010862/0.025000
+CHANGE m=0.0159927811474 deg=1.38507008023
+FIT 814 299 reverse=1 accepted=1 reason=final_metric_count=290/25 original_count=290 original_rms=0.004870/0.018000 rms=0.004870/0.018000 max=0.010993/0.025000
+CHANGE m=0.0141959218308 deg=1.38391623361
+BIDIRECTIONAL m=0.00017519047833 deg=0.0327523175787
+FIT 741 170 reverse=0 accepted=1 reason=final_metric_count=286/25 original_count=286 original_rms=0.003544/0.018000 rms=0.003544/0.018000 max=0.011906/0.025000
+CHANGE m=0.00747413933277 deg=0.557069052396
+FIT 741 170 reverse=1 accepted=1 reason=final_metric_count=265/25 original_count=265 original_rms=0.003446/0.018000 rms=0.003446/0.018000 max=0.011791/0.025000
+CHANGE m=0.00788497459143 deg=0.609144236012
+BIDIRECTIONAL m=0.00086300476687 deg=0.125341759583
+FIT 741 172 reverse=0 accepted=1 reason=final_metric_count=292/25 original_count=292 original_rms=0.003785/0.018000 rms=0.003785/0.018000 max=0.010170/0.025000
+CHANGE m=0.0115112150088 deg=1.34565487992
+FIT 741 172 reverse=1 accepted=1 reason=final_metric_count=281/25 original_count=281 original_rms=0.003792/0.018000 rms=0.003792/0.018000 max=0.010317/0.025000
+CHANGE m=0.0139018725604 deg=1.40524585191
+BIDIRECTIONAL m=0.000354987103492 deg=0.0154112392297
+FIT 741 198 reverse=0 accepted=1 reason=final_metric_count=190/25 original_count=190 original_rms=0.004599/0.018000 rms=0.004599/0.018000 max=0.012436/0.025000
+CHANGE m=0.00797831080854 deg=0.479218594182
+FIT 741 198 reverse=1 accepted=1 reason=final_metric_count=192/25 original_count=192 original_rms=0.004637/0.018000 rms=0.004637/0.018000 max=0.012804/0.025000
+CHANGE m=0.0076326536946 deg=0.646912487992
+BIDIRECTIONAL m=0.0014270740794 deg=0.142465869146
+FIT 741 302 reverse=0 accepted=1 reason=final_metric_count=311/25 original_count=311 original_rms=0.002478/0.018000 rms=0.002478/0.018000 max=0.006213/0.025000
+CHANGE m=0.00680731423199 deg=0.663787684592
+FIT 741 302 reverse=1 accepted=1 reason=final_metric_count=288/25 original_count=288 original_rms=0.002426/0.018000 rms=0.002426/0.018000 max=0.006300/0.025000
+CHANGE m=0.00729310978204 deg=0.767264215717
+BIDIRECTIONAL m=0.000131248743855 deg=0.0018815843071
+FIT 741 217 reverse=0 accepted=1 reason=final_metric_count=209/25 original_count=209 original_rms=0.003053/0.018000 rms=0.003053/0.018000 max=0.006989/0.025000
+CHANGE m=0.00833588186651 deg=1.12016362179
+FIT 741 217 reverse=1 accepted=1 reason=final_metric_count=213/25 original_count=213 original_rms=0.003166/0.018000 rms=0.003166/0.018000 max=0.008914/0.025000
+CHANGE m=0.00616608839482 deg=0.949892849384
+BIDIRECTIONAL m=0.000624910695478 deg=0.0545795910548
+FIT 741 218 reverse=0 accepted=1 reason=final_metric_count=169/25 original_count=169 original_rms=0.003347/0.018000 rms=0.003347/0.018000 max=0.010278/0.025000
+CHANGE m=0.0113699510694 deg=1.41671404309
+FIT 741 218 reverse=1 accepted=1 reason=final_metric_count=178/25 original_count=178 original_rms=0.003313/0.018000 rms=0.003313/0.018000 max=0.010448/0.025000
+CHANGE m=0.0119679626077 deg=1.44515980782
+BIDIRECTIONAL m=0.000540899753105 deg=0.0452718124248

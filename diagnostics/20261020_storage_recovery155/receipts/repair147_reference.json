@@ -1,0 +1,6 @@
+{
+  "phase": "failed",
+  "steps": [],
+  "error": "AssertionError()",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/exocean/.cache/wbrov_repairs/20260923_tag_recovery/submap_tag_20261015/round7_deferred_20261018/validate_repair147_reference.py\", line 16, in <module>\n    assert sha(source)=='cc1db744251ab4e75907516e0ebbb497aa65430a1989501d426cac12676ea43d'\nAssertionError\n"
+}
